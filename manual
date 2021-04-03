@@ -1,0 +1,23 @@
+1. Creating an alias with drac2 to register via Avrae collection:
+```embed
+{{args=&ARGS&}}
+<drac2>
+</drac2>
+-title "{{t}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-f "{f}"' if f else ""}}
+{{f'-f "{f2}"' if f2 else ""}}```
+
+2. Creating an alias with drac2 to register via gvar:
+```!alias hunt tembed {{f'''{'{'*2}args=&ARGS&{'}'*2}'''}}
+{{get_gvar("480331d2-ee4a-46b1-95dd-58f68c7f0374")}}```
+
+Then, on the gvar:
+```<drac2>
+</drac2>
+-title "{{t}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-f "{f}"' if f else ""}}
+{{f'-f "{f2}"' if f2 else ""}}```
