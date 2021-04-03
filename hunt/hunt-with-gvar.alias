@@ -1,2 +1,2 @@
-!alias hunt tembed {{f'''{'{'*2}args=&ARGS&{'}'*2}'''}}
+tembed {{f'''{'{'*2}args=&ARGS&{'}'*2}'''}}
 {{get_gvar("480331d2-ee4a-46b1-95dd-58f68c7f0374")}}

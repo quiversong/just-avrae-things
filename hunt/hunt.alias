@@ -1,5 +1,3 @@
-embed
-{{args=&ARGS&}}
 <drac2>
 c = character()
 cv, cs = c.cvars, c.skills
