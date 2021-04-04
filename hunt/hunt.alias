@@ -16,7 +16,7 @@ if "_h_vars" in cv:
   pid = hvars[0]
   stage = hvars[1]
 
-if len(args) > 0 and args[0] == "___reset":
+if len(args) > 0 and args[0] == "reset":
   c.delete_cvar("_h_vars")
   t = "Resetting hunting state..."
   return 0
