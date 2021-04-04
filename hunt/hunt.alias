@@ -1,5 +1,6 @@
 <drac2>
 data_var = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
+timeout = 300
 
 c = character()
 cv, cs = c.cvars, c.skills
@@ -19,6 +20,7 @@ if "_h_vars" in cv:
 
 if len(args) > 0 and args[0] == "reset":
   c.delete_cvar("_h_vars")
+  c.delete_cvar("_h_ts")
   t = "Resetting hunting state..."
   return 0
 
@@ -47,6 +49,18 @@ if (len(args) == 0 or (not stage and args[0] not in b_ids)):
 p = args[0]
 
 if p in b_ids:
+  if "_h_ts" in cv:
+    ttime = float(cv["_h_ts"]) + timeout
+    now = time()
+    if now < ttime:
+      diff = ttime - now
+      diff = f'{ceil(diff / 60)} minutes' if diff > 60 else f'{diff} seconds'
+      f = f'{c.name} is still tracking a new prey...|You have to wait {diff} before you can try again.'
+      thumb = image
+      return 1
+
+  c.set_cvar("_h_ts", time())
+
   b = biomes[p]
   img = b["img"]
   nop_m = f'{c.name} could not find any prey.|Better luck next time!'
