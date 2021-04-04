@@ -20,20 +20,28 @@ if len(args) > 0 and args[0] == "___reset":
   return 0
 
 data = load_json(get_gvar("73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"))
-animals = data["animals"]
+
 biomes = data["biomes"]
 b_ids = [k for k, v in biomes.items()]
+
+animals = data["animals"]
+
+in_wrong_stage = stage and (len(args) == 0 or (len(args) > 0 and stage != args[0]))
+if (in_wrong_stage):
+  anm = animals[pid]
+  anm_name = anm["name"]
+  add_n = "n" if anm["name"][0] in "AEIOU" else ""
+  f = f'Oops! You are already hunting a{add_n} {anm_name}!|Use `!hunt {stage}` to continue.'
+  thumb = image
+  return 1
 
 if (len(args) == 0 or (not stage and args[0] not in b_ids)):
   b_list_cmd = "  `!hunt " + "`\n  `!hunt ".join(b_ids) + "`"
   f = f'Where do you want to go hunting?|Use one of the following:\n{b_list_cmd}'
-  return 1
+  thumb = image
+  return 0
 
 p = args[0]
-
-if stage != None and (stage != p or not args[0] in ["sneak", "attack", "clean"]):
-  f = f'Oops! You are already hunting!|Use `!hunt {stage}` to continue.'
-  return 1
 
 if p in b_ids:
   b = biomes[p]
