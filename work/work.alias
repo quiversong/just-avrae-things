@@ -1,0 +1,62 @@
+!alias work embed
+<drac2>
+dc = 14
+
+c = character()
+t, f, f2, footer = None, None, None, None
+thumb = image
+pargs = argparse(%*%.split(' ')[1:])
+
+skill_name = "%1%"
+skill = [s for sn, s in c.skills if sn.lower() == skill_name.lower()]
+
+if len(skill) == 0:
+  t = f'{c.name} is looking to earn some cash...'
+  f = "Please specify a valid skill you would like to use.|Use `!work <skill> -rp '<role play text>'`"
+  return 1
+
+t = f'{c.name} uses their knowledge in {skill_name.lower()} to earn some cash...'
+
+skill = skill[0]
+
+f = f'But... how?|{pargs.get("rp")[0]}'
+
+skill_roll = vroll(skill.d20())
+success = skill_roll.total > dc
+
+sl = '**Success!**\nYour coins were added to your Coin Pouch.'
+fl = '**Failure!**'
+f2 = f'Did {c.name} succeed?|**Skill check:** {skill_roll.full}\n{sl if success else fl}'
+
+if success:
+  _bag_name = "Coin Pouch"
+  _content = {
+    "cp": 0,
+    "sp": 0,
+    "ep": 0,
+    "pp": 0
+  }
+  _content["gp"] = skill_roll.total
+
+  _cv = character().cvars
+  _bags = load_json(_cv["bags"]) if "bags" in _cv else []
+  _bag_index = [i for i, x in enumerate(_bags) if x[0] == _bag_name]
+  _bag_index = _bag_index[0] if len(_bag_index) > 0 else -1
+  if _bag_index == -1:
+    _bags.append([_bag_name, {}])
+    _bag_index = len(_bags) - 1
+  _bag_content = _bags[_bag_index][1]
+  for _key in _content:
+    if _key in _bag_content:
+      _bag_content[_key] = _bag_content[_key] + _content[_key]
+    else:
+      _bag_content[_key] = _content[_key]
+  _bags[_bag_index] = [_bag_name, _bag_content]
+  character().set_cvar('bags', dump_json(_bags))
+
+</drac2>
+-title "{{t}}"
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-f "{f}"' if f else ""}}
+{{f'-f "{f2}"' if f2 else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
