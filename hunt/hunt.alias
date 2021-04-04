@@ -1,4 +1,6 @@
 <drac2>
+data_var = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
+
 c = character()
 cv, cs = c.cvars, c.skills
 
@@ -19,7 +21,7 @@ if len(args) > 0 and args[0] == "___reset":
   t = "Resetting hunting state..."
   return 0
 
-data = load_json(get_gvar("73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"))
+data = load_json(get_gvar(data_var))
 
 biomes = data["biomes"]
 b_ids = [k for k, v in biomes.items()]
