@@ -23,8 +23,11 @@ f = f'But... how?|{pargs.get("rp")[0]}'
 
 skill_roll = vroll(skill.d20())
 success = skill_roll.total > dc
+critical = skill_roll.total == 20 + skill.value
 
-sl = '**Success!**\nYour coins were added to your Coin Pouch.'
+sl = f'{skill.value}**Success!**'
+if critical: sl += '\nYou got twice as much money with a critical check!'
+sl += '\nYour coins were added to your Coin Pouch.'
 fl = '**Failure!**'
 f2 = f'Did {c.name} succeed?|**Skill check:** {skill_roll.full}\n{sl if success else fl}'
 
@@ -36,7 +39,7 @@ if success:
     "ep": 0,
     "pp": 0
   }
-  _content["gp"] = skill_roll.total
+  _content["gp"] = skill_roll.total * 2 if critical else skill_roll.total
 
   _cv = character().cvars
   _bags = load_json(_cv["bags"]) if "bags" in _cv else []
