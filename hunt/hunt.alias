@@ -9,6 +9,7 @@ f, f2 = None, None
 img = None
 thumb = None
 sl, fl = "**Success!**", "**Failure!**"
+footer = "Seventra: Exodus of Heroes | Hunt v1.0 | Created by quiversong aka Adrienne"
 
 hvars, pid, stage = None, None, None
 if "_h_vars" in cv:
@@ -142,3 +143,4 @@ if p == 'clean':
 {{f'-thumb "{thumb}"' if thumb else ""}}
 {{f'-f "{f}"' if f else ""}}
 {{f'-f "{f2}"' if f2 else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
