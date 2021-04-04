@@ -135,18 +135,22 @@ if p == 'attack':
   a_die = f'{a_die} + {a_bonus}' if a_bonus > 0 else a_die
   a_roll = vroll(a_die)
   crit = a_roll.total == (20 + weapon['a_bonus'] + a_bonus if weapon != None else 20 + dexterityMod + proficiencyBonus + a_bonus)
-  crit_l = "\n**Critical Hit!**" if crit else ""
 
   d_die = f'{weapon["d_die"]}' if weapon != None else f'1d8+{dexterityMod}'
   d_die = f'{d_die}+{d_bonus}' if d_bonus > 0 else d_die
   d_roll = vroll(d_die)
 
   a_hit = crit or a_roll.total > anm["ac"]
-  dead = a_hit and d_roll.total > anm["hp"]
+  dead = crit or (a_hit and d_roll.total > anm["hp"])
   injured = a_hit and not dead
 
   t = f'{c.name} attacks their prey{" with their " + weapon["name"] if weapon != None else ""}!'
-  f = f'Was {c.name} able to kill the {anm_name}?|**Attack roll:** {a_roll.full}\n**Damage roll:** {d_roll.full}\n{sl if dead else fl}{crit_l}'
+
+  crit_l = "\n**Critical Hit!**" if crit else ""
+  dmg_l = ("\n**Damage roll:**" + d_roll.full) if not crit else ""
+
+  f = f'Was {c.name} able to kill the {anm_name}?|**Attack roll:** {a_roll.full}{dmg_l}\n{sl if dead else fl}{crit_l}'
+
   if dead:
     thumb = anm["img"]
     c.set_cvar("_h_vars", f'{pid}:clean')
