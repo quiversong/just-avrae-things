@@ -21,7 +21,8 @@ skill = skill[0]
 
 f = f'But... how?|{pargs.get("rp")[0]}'
 
-skill_roll = vroll(skill.d20())
+adv = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
+skill_roll = vroll(skill.d20(base_adv = adv))
 success = skill_roll.total > dc
 critical = skill_roll.total == 20 + skill.value
 
