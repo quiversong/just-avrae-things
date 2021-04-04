@@ -48,19 +48,24 @@ p = args[0]
 if p in b_ids:
   b = biomes[p]
   img = b["img"]
+  nop_m = f'{c.name} could not find any prey.|Better luck next time!'
 
   a_roll = roll("1d100")
   if not "animal_chance" in b:
-    f = f'{c.name} could not find any prey.|Better luck next time!'
+    f = nop_m
     return 0
 
   b_anms = [(k, v) for k, v in b["animal_chance"].items()]
   anm_id = [k for k, v in b_anms if (a_roll == v[0] if len(v) == 1 else a_roll >= v[0] and a_roll <= v[1])]
-  anm_id = anm_id[0] if len(anm_id) > 0 else b_anms[0][0]
+  if len(anm_id) == 0:
+    f = nop_m
+    return 0
 
+  anm_id = anm_id[0]
   anm = animals[anm_id]
   add_n = "n" if anm["name"][0] in "AEIOU" else ""
   c.set_cvar("_h_vars", f'{anm_id}:sneak')
+
   f = f'{c.name} found a{add_n} {anm["name"]} in the {b["name"]}!|Use `!hunt sneak` to try and get the jump on it.'
   return 0
 
