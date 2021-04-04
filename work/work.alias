@@ -1,36 +1,44 @@
-!alias work embed
+embed
 <drac2>
 dc = 14
 
+pargs = argparse(&ARGS&)
 c = character()
 t, f, f2, footer = None, None, None, None
 thumb = image
-pargs = argparse(&ARGS&)
+sl = '**Success!**'
+fl = '**Failure!**'
 
-skill_name = pargs.get("s")[0]
-skill = [s for sn, s in c.skills if sn.lower() == skill_name.lower()]
+skill_name, skill, rp_desc = None, None, None
 
-if len(skill) == 0:
+to_exclude = ["initiative", "strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"]
+valid_skills = [(sn, s) for sn, s in c.skills if sn not in to_exclude]
+
+if len(pargs.get("s")) > 0:
+  skill_name = pargs.get("s")[0]
+  skill = [s for sn, s in valid_skills if sn.lower() == skill_name.lower()]
+
+if len(pargs.get("rp")) > 0 and pargs.get("rp")[0] != 'True':
+  rp_desc = pargs.get("rp")[0]
+
+if skill == None or rp_desc == None or len(skill) == 0 or len(rp_desc) == 0:
   t = f'{c.name} is looking to earn some cash...'
-  f = "Please specify a valid skill you would like to use.|Use `!work <skill> -rp '<role play text>'`"
+  f = "Please specify a valid skill and role playing description.|Use `!work -s <skill> -rp '<role play text>'`"
+  skill_list = '\n'.join([f'`{sn}`' for sn, s in valid_skills])
+  f2 = f'Valid skills|{skill_list}'
   return 1
 
 t = f'{c.name} uses their knowledge in {skill_name.lower()} to earn some cash...'
 
 skill = skill[0]
 
-f = f'But... how?|{pargs.get("rp")[0]}'
+f = f'But... how?|{rp_desc}'
 
 adv = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
 skill_roll = vroll(skill.d20(base_adv = adv))
 success = skill_roll.total > dc
 critical = skill_roll.total == 20 + skill.value
-
-sl = '**Success!**'
-if critical: sl += '\nYou got twice as much money with a critical check!'
-sl += '\nYour coins were added to your Coin Pouch.'
-fl = '**Failure!**'
-f2 = f'Did {c.name} succeed?|**Skill check:** {skill_roll.full}\n{sl if success else fl}'
+to_add = skill_roll.total * 2 if critical else skill_roll.total
 
 if success:
   _bag_name = "Coin Pouch"
@@ -40,7 +48,7 @@ if success:
     "ep": 0,
     "pp": 0
   }
-  _content["gp"] = skill_roll.total * 2 if critical else skill_roll.total
+  _content["gp"] = to_add
 
   _cv = character().cvars
   _bags = load_json(_cv["bags"]) if "bags" in _cv else []
@@ -57,6 +65,12 @@ if success:
       _bag_content[_key] = _content[_key]
   _bags[_bag_index] = [_bag_name, _bag_content]
   character().set_cvar('bags', dump_json(_bags))
+
+  if critical: sl += '\nYou got twice as much money with a critical check!'
+  sl += '\n\n'
+  sl += f'{to_add} gold coins were added to your Coin Pouch to a total of {_bag_content["gp"]} gold coins!'
+
+f2 = f'Did {c.name} succeed?|**Skill check:** {skill_roll.full}\n{sl if success else fl}'
 
 </drac2>
 -title "{{t}}"
