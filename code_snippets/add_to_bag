@@ -1,0 +1,18 @@
+_bag_name = "Hunting"
+_content = { "Rations": 2, "Deer Pelt": 1 }
+
+_cv = character().cvars
+_bags = load_json(_cv["bags"]) if "bags" in _cv else []
+_bag_index = [i for i, x in enumerate(_bags) if x[0] == _bag_name]
+_bag_index = _bag_index[0] if len(_bag_index) > 0 else -1
+if _bag_index == -1:
+  _bags.append([_bag_name, {}])
+  _bag_index = len(_bags) - 1
+_bag_content = _bags[_bag_index][1]
+for _key in _content:
+  if _key in _bag_content:
+    _bag_content[_key] = _bag_content[_key] + _content[_key]
+  else:
+    _bag_content[_key] = _content[_key]
+_bags[_bag_index] = [_bag_name, _bag_content]
+character().set_cvar('bags', dump_json(_bags))

@@ -182,19 +182,26 @@ if p == 'clean':
     suffix = suffix + '\nThey have already been added to your "Hunting" bag!'
     f2 = f'Well done!|You gained {rations} rations{suffix}'
 
-    bags = load_json(cv["bags"]) if "bags" in cv else []
-    bag_idx = [i for i, x in enumerate(bags) if x[0] == "Hunting"]
-    bag_idx = bag_idx[0] if len(bag_idx) > 0 else -1
-    if bag_idx == -1:
-      bags.append(["Hunting", {"Rations": 0}])
-      bag_idx = len(bags) - 1
-    content = bags[bag_idx][1]
-    content["Rations"] = content["Rations"] + rations
+    _bag_name = "Hunting"
+    _content = { "Rations": rations }
     if pelt_count > 0:
-      pelt_label = f'{anm_name} pelts'
-      content[pelt_label] = content[pelt_label] + pelt_count if pelt_label in content else pelt_count
-    bags[bag_idx] = ["Hunting", content]
-    c.set_cvar('bags', dump_json(bags))
+      _content[f'{anm_name} Pelt'] = pelt_count
+
+    _cv = character().cvars
+    _bags = load_json(_cv["bags"]) if "bags" in _cv else []
+    _bag_index = [i for i, x in enumerate(_bags) if x[0] == _bag_name]
+    _bag_index = _bag_index[0] if len(_bag_index) > 0 else -1
+    if _bag_index == -1:
+      _bags.append([_bag_name, {}])
+      _bag_index = len(_bags) - 1
+    _bag_content = _bags[_bag_index][1]
+    for _key in _content:
+      if _key in _bag_content:
+        _bag_content[_key] = _bag_content[_key] + _content[_key]
+      else:
+        _bag_content[_key] = _content[_key]
+    _bags[_bag_index] = [_bag_name, _bag_content]
+    character().set_cvar('bags', dump_json(_bags))
   else:
     f2 = f'You ended up wasting the prey you caught...|Better luck next time!'
   return 0
