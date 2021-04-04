@@ -2,6 +2,7 @@
 data_var = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
 timeout = 300
 
+pargs = argparse(args)
 c = character()
 cv, cs = c.cvars, c.skills
 
@@ -103,10 +104,27 @@ if p == "sneak":
   return 0
 
 if p == 'attack':
-  a_die = f'1d20 + {dexterityMod + proficiencyBonus}'
+  a_bonus = pargs.get('b', default='0')[0]
+  if not a_bonus.isnumeric():
+    f = 'Oops! The hunt script rolled a 1!|Did you specify a valid attack bonus? Only numbers are accepted!'
+    return 1
+
+  d_bonus = pargs.get('d', default='0')[0]
+  if not d_bonus.isnumeric():
+    f = 'Oops! The hunt script rolled a 1!Did you specify a valid damage bonus? Only numbers are accepted!'
+    return 1
+
+  a_bonus = int(a_bonus)
+  d_bonus = int(d_bonus)
+
+  a_die = '2d20kh1' if pargs.adv() else '2d20kl1' if pargs.dis() else '1d20'
+  a_die = f'{a_die} + {dexterityMod + proficiencyBonus + a_bonus}'
   a_roll = vroll(a_die)
-  d_die = f'1d8 + {dexterityMod}'
+
+  d_die = '2d8' if a_roll.total == 20 + dexterityMod + proficiencyBonus + a_bonus else '1d8'
+  d_die = f'1d8 + {dexterityMod + d_bonus}'
   d_roll = vroll(d_die)
+
   dead = a_roll.total > anm["ac"] and d_roll.total > anm["hp"]
   t = f'{c.name} attacks their prey!'
   f = f'Was {c.name} able to kill the {anm_name}?|**Attack roll:** {a_roll.full}\n**Damage roll:** {d_roll.full}\n{sl if dead else fl}'
