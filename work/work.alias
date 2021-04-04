@@ -8,6 +8,7 @@ t, f, f2, footer = None, None, None, None
 thumb = image
 sl = '**Success!**'
 fl = '**Failure!**'
+footer = "Seventra: Exodus of Heroes | Hunt v1.0 | Created by quiversong aka Adrienne"
 
 skill_name, skill, rp_desc = None, None, None
 
