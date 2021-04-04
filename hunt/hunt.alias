@@ -54,9 +54,9 @@ if p in b_ids:
     f = f'{c.name} could not find any prey.|Better luck next time!'
     return 0
 
-  b_anms = b["animal_chance"].items()
-  anm_id = [k for k, v in b_anms if a_roll >= v[0] and a_roll <= v[1]]
-  anm_id = anm_id[0] if len(anm_id) > 0 else b_anms[len(b_anms) - 1][0]
+  b_anms = [(k, v) for k, v in b["animal_chance"].items()]
+  anm_id = [k for k, v in b_anms if (a_roll == v[0] if len(v) == 1 else a_roll >= v[0] and a_roll <= v[1])]
+  anm_id = anm_id[0] if len(anm_id) > 0 else b_anms[0][0]
 
   anm = animals[anm_id]
   add_n = "n" if anm["name"][0] in "AEIOU" else ""
