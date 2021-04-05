@@ -2,6 +2,7 @@ embed
 <drac2>
 dc = 14
 
+var_name = "_w_t_"
 pargs = argparse(&ARGS&)
 c = character()
 t, f, f2, footer = None, None, None, None
@@ -14,6 +15,11 @@ skill_name, skill, rp_desc = None, None, None
 
 to_exclude = ["initiative", "strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"]
 valid_skills = [(sn, s) for sn, s in c.skills if sn not in to_exclude]
+
+if pargs.get("reset"):
+  t = "Cleaning work internal state."
+  c.delete_cvar(var_name)
+  return 0
 
 if len(pargs.get("s")) > 0:
   skill_name = pargs.get("s")[0]
@@ -43,6 +49,24 @@ skill_roll = vroll(skill.d20(base_adv = adv) + (f'+{proficiencyBonus}' if prof e
 success = skill_roll.total > dc
 critical = skill_roll.total == 20 + skill.value
 to_add = skill_roll.total * 2 if critical else skill_roll.total
+
+now = time() - 4 * 60 * 60
+if (var_name in c.cvars):
+  last_work = float(c.cvars[var_name])
+  passed_in_day = now % 86400
+  next_midnight = now + (86400 - passed_in_day)
+  if next_midnight > last_work:
+    wait = next_midnight - last_work
+    hours = ceil(wait / 3600)
+    minutes = 0
+    if hours == 0:
+      minutes = ceil(wait / 60)
+    else:
+      minutes = ceil((wait % 3600) / 60)
+    wait_text = (str(hours) + ' hours and ' if hours > 0 else '') + str(minutes) + ' minutes'
+    f = f'You have to wait {wait_text} until you can work again!'
+    return 1
+c.set_cvar(var_name, now)
 
 if success:
   _bag_name = "Coin Pouch"
