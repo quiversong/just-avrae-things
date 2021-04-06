@@ -87,6 +87,7 @@ if p in b_ids:
 
 anm = animals[pid]
 anm_name = anm["name"]
+add_to_bag = None
 
 if p == "sneak":
   s_roll = vroll(cs.stealth.d20())
@@ -101,9 +102,8 @@ if p == "sneak":
     thumb = image
     f2 = f'You lost sight of the {anm_name}...|Better luck next time!'
     c.delete_cvar("_h_vars")
-  return 0
 
-if p == 'attack':
+elif p == 'attack':
   weapon = None
   if len(args) > 1 and args[1] not in ["adv", "dis", "-b", "-d"]:
     weapon_arg = args[1].lower()
@@ -147,7 +147,7 @@ if p == 'attack':
   t = f'{c.name} attacks their prey{" with their " + weapon["name"] if weapon != None else ""}!'
 
   crit_l = "\n**Critical Hit!**" if crit else ""
-  dmg_l = ("\n**Damage roll:**" + d_roll.full) if not crit else ""
+  dmg_l = ("\n**Damage roll:** " + d_roll.full) if not crit else ""
 
   f = f'Was {c.name} able to kill the {anm_name}?|**Attack roll:** {a_roll.full}{dmg_l}\n{sl if dead else fl}{crit_l}'
 
@@ -166,9 +166,8 @@ if p == 'attack':
     else:
       f2 = f'The {anm_name} managed to escape your attack and flee...|Better luck next time!'
     c.delete_cvar("_h_vars")
-  return 0
 
-if p == 'clean':
+elif p == 'clean':
   c.delete_cvar("_h_vars")
   t = f'{c.name} attempts to clean their hunting prize!'
   s_roll = vroll(cs.survival.d20())
@@ -177,34 +176,33 @@ if p == 'clean':
   img = data["images"]["campfire"]
   if succ:
     rations = anm["rations"]
-    pelt_count = anm["pelt"]
-    suffix = f' and {pelt_count} {anm_name} pelts!' if pelt_count and pelt_count > 0 else '!'
-    suffix = suffix + '\nThey have already been added to your "Hunting" bag!'
+    suffix = '\nThey have already been added to your "Hunting" bag!'
     f2 = f'Well done!|You gained {rations} rations{suffix}'
 
-    _bag_name = "Hunting"
-    _content = { "Rations": rations }
-    if pelt_count > 0:
-      _content[f'{anm_name} Pelt'] = pelt_count
-
-    _cv = character().cvars
-    _bags = load_json(_cv["bags"]) if "bags" in _cv else []
-    _bag_index = [i for i, x in enumerate(_bags) if x[0] == _bag_name]
-    _bag_index = _bag_index[0] if len(_bag_index) > 0 else -1
-    if _bag_index == -1:
-      _bags.append([_bag_name, {}])
-      _bag_index = len(_bags) - 1
-    _bag_content = _bags[_bag_index][1]
-    for _key in _content:
-      if _key in _bag_content:
-        _bag_content[_key] = _bag_content[_key] + _content[_key]
-      else:
-        _bag_content[_key] = _content[_key]
-    _bags[_bag_index] = [_bag_name, _bag_content]
-    character().set_cvar('bags', dump_json(_bags))
+    add_to_bag = { "Rations": rations }
   else:
     f2 = f'You ended up wasting the prey you caught...|Better luck next time!'
-  return 0
+
+
+if add_to_bag != None:
+  _bag_name = "Hunting"
+  _content = add_to_bag
+
+  _cv = character().cvars
+  _bags = load_json(_cv["bags"]) if "bags" in _cv else []
+  _bag_index = [i for i, x in enumerate(_bags) if x[0] == _bag_name]
+  _bag_index = _bag_index[0] if len(_bag_index) > 0 else -1
+  if _bag_index == -1:
+    _bags.append([_bag_name, {}])
+    _bag_index = len(_bags) - 1
+  _bag_content = _bags[_bag_index][1]
+  for _key in _content:
+    if _key in _bag_content:
+      _bag_content[_key] = _bag_content[_key] + _content[_key]
+    else:
+      _bag_content[_key] = _content[_key]
+  _bags[_bag_index] = [_bag_name, _bag_content]
+  character().set_cvar('bags', dump_json(_bags))
 
 </drac2>
 -title "{{t}}"

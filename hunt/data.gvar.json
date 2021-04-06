@@ -48,36 +48,40 @@
       "ac": 3,
       "hp": 3,
       "name": "Rabbit",
-      "pelt": 0,
       "pp": 3,
+      "cha": 3,
       "rations": 1,
+      "prizes": [],
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827944537053724712/unknown.png"
     },
     "a2": {
       "ac": 3,
       "hp": 12,
       "name": "Elk",
-      "pelt": 3,
       "pp": 3,
+      "cha": 3,
       "rations": 4,
+      "prizes": [{"name": "Elk pelt", "qt": 3}],
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827944154789183508/unknown.png"
     },
     "a3": {
       "ac": 12,
       "hp": 3,
       "name": "Tiger",
-      "pelt": 4,
       "pp": 3,
+      "cha": 3,
       "rations": 2,
+      "prizes": [{"name": "Tiger pelt", "qt": 1}, {"name": "Tiger claw", "qt": 1}],
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827944055169875978/unknown.png"
     },
     "a4": {
       "ac": 3,
       "hp": 3,
       "name": "Deer",
-      "pelt": 4,
       "pp": 12,
+      "cha": 3,
       "rations": 2,
+      "prizes": [{"name": "Deer pelt", "qt": 2}],
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827952699965964308/whitetail-deer-painting-fall-flame-crista-forest.jpeg"
     }
   },
