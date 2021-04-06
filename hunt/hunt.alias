@@ -8,7 +8,7 @@ c = character()
 cv, cs = c.cvars, c.skills
 
 t = f'{c.name} goes hunting!'
-f, f2 = None, None
+f, f2, color = None, None, '128c2f'
 
 img = None
 thumb = None
@@ -110,6 +110,7 @@ if p in b_ids:
   c.set_cvar("_h_vars", f'{anm_id}:sneak')
 
   if "commune" in anm and anm["commune"] == True:
+    color = 'f0b330'
     f = f'{c.name} found a ***VERY RARE*** {anm["name"]}!|Use `!hunt sneak` to try to approach it without being noticed.'
   else:
     f = f'{c.name} found a{add_n} {anm["name"]} in the {b["name"]}!|Use `!hunt sneak` to try and get the jump on it.'
@@ -118,6 +119,8 @@ if p in b_ids:
 anm = animals[pid]
 anm_name = anm["name"]
 add_to_bag = None
+if "commune" in anm and anm["commune"] == True:
+  color = 'f0b330'
 
 if p == "sneak":
   s_roll = vroll(cs.stealth.d20())
@@ -280,4 +283,5 @@ if add_to_bag != None:
 {{f'-thumb "{thumb}"' if thumb else ""}}
 {{f'-f "{f}"' if f else ""}}
 {{f'-f "{f2}"' if f2 else ""}}
+{{f'-color "{color}"' if color else ""}}
 {{f'-footer "{footer}"' if footer else ""}}
