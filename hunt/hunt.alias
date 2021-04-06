@@ -13,8 +13,16 @@ f, f2 = None, None
 img = None
 thumb = None
 sl, fl = "**Success!**", "**Failure!**"
+
+hunt_count = 0
+first_hunt_time = None
+if "_h_dhc_" in cv:
+  var_parts = cv["_h_dhc_"].split(':')
+  hunt_count = int(var_parts[0])
+  first_hunt_time = float(var_parts[1])
+
 footer = "Don't forget to role-play your hunting actions!\n"
-footer += f'Be mindful that there is a limit of {hunt_daily_cap} hunts per day.'
+footer += f'There is a limit of {hunt_daily_cap} hunts per day. You have gone hunting {hunt_count}x today.'
 footer += "\nSeventra: Exodus of Heroes | Hunt v1.0 | Created by quiversong aka Adrienne"
 
 hvars, pid, stage = None, None, None
@@ -54,14 +62,8 @@ if (len(args) == 0 or (not stage and args[0] not in b_ids)):
 p = args[0]
 
 if p in b_ids:
-  hunt_count = 0
-  first_hunt_time = None
   now = time()
-
-  if "_h_dhc_" in cv:
-    var_parts = cv["_h_dhc_"].split(':')
-    hunt_count = int(var_parts[0])
-    first_hunt_time = float(var_parts[1])
+  if first_hunt_time != None:
     passed_in_day_of_first_hunt = first_hunt_time % 86400
     next_midnight_after_first_hunt = first_hunt_time + (86400 - passed_in_day_of_first_hunt)
     if now > next_midnight_after_first_hunt:
@@ -82,7 +84,10 @@ if p in b_ids:
       c.set_cvar("_h_dhc_", f'{hunt_count}:{first_hunt_time}')
 
   if not "_h_dhc_" in cv:
-    c.set_cvar("_h_dhc_", f'1:{now}')
+    hunt_count = 1
+    c.set_cvar("_h_dhc_", f'{hunt_count}:{now}')
+
+  footer = footer.replace(f'{hunt_count - 1}x today', f'{hunt_count}x today')
 
   b = biomes[p]
   img = b["img"]
