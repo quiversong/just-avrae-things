@@ -101,13 +101,41 @@ if p == "sneak":
     thumb = anm["img"]
     if "commune" in anm and anm["commune"] == True:
       f2 = f'The {anm_name} has seen you, but they do not seem scared.|Use `!hunt commune` to try to commune with the {anm_name}.'
+      c.set_cvar("_h_vars", f'{pid}:commune')
     else:
       f2 = f'The {anm_name} has not seen you!|Now use `!hunt attack` to attack your prey!'
-    c.set_cvar("_h_vars", f'{pid}:attack')
+      c.set_cvar("_h_vars", f'{pid}:attack')
   else:
     thumb = image
     f2 = f'You lost sight of the {anm_name}...|Better luck next time!'
     c.delete_cvar("_h_vars")
+
+elif p == 'commune':
+  if not "commune" in anm or anm["commune"] == False:
+    f = "!hunt script rolled a 1 and failed flat on its head! Please report to a Server Administrator."
+    return 1
+  c.delete_cvar("_h_vars")
+  s_roll = vroll(cs.animalHandling.d20())
+  succ = s_roll.total > anm["cha"]
+  t = f'{c.name} tries to commune with the {anm_name}...'
+  f = f'{c.name} approaches the {anm_name}...|**Animal Handling roll:** {s_roll.full}\n{sl if succ else fl}'
+  if succ:
+    thumb = anm["img"]
+    add_to_bag = {}
+    prize_list = ''
+    if "prizes" in anm:
+      for prize in anm["prizes"]:
+        prize_n, prize_qt = prize["name"], prize["qt"]
+        add_to_bag[prize_n] = prize_qt
+        prize_list += f'{prize_qt}x {prize_n}, '
+    prize_list = prize_list[:len(prize_list) - 2]
+
+    f2 = f'The {anm_name} runs away, but the experience enlightens you...|'
+    f2 += "\nYou gained: " + prize_list + '.\nThey have been added to your "Hunting" bag!'
+
+  else:
+    thumb = image
+    f2 = f'The {anm_name} ran away unexpectedly!|Better luck next time!'
 
 elif p == 'attack':
   weapon = None
@@ -194,7 +222,7 @@ elif p == 'clean':
         prize_list += f'{prize_qt}x {prize_n}, '
     prize_list = prize_list[:len(prize_list) - 2]
 
-    f2 = f'You gained {prize_list}.|They have been added to your "Hunting" bag!'
+    f2 = f'You gained: {prize_list}.|They have been added to your "Hunting" bag!'
   else:
     f2 = f'You ended up wasting the prey you caught...|Better luck next time!'
 
