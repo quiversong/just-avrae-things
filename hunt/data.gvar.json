@@ -2,6 +2,9 @@
   "biomes": {
     "desert": {
       "name": "Desert",
+      "animal_chance": {
+        "a5": [11, 100]
+      },
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827949533438279730/latest.png"
     },
     "mountain": {
@@ -83,6 +86,17 @@
       "rations": 2,
       "prizes": [{"name": "Deer pelt", "qt": 2}],
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827952699965964308/whitetail-deer-painting-fall-flame-crista-forest.jpeg"
+    },
+    "a5": {
+      "ac": 3,
+      "hp": 3,
+      "name": "White Stag",
+      "pp": 3,
+      "cha": 3,
+      "rations": 0,
+      "commune": true,
+      "prizes": [{"name": "White Stag token", "qt": 1}],
+      "img": "https://cdn.discordapp.com/attachments/820095740679290890/828847218466226176/White-Stag-website.jpeg"
     }
   },
   "images": {
