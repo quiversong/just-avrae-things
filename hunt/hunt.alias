@@ -1,6 +1,7 @@
 <drac2>
 data_var = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
 timeout = 300
+hunt_daily_cap = 6
 
 pargs = argparse(args)
 c = character()
@@ -8,10 +9,13 @@ cv, cs = c.cvars, c.skills
 
 t = f'{c.name} goes hunting!'
 f, f2 = None, None
+
 img = None
 thumb = None
 sl, fl = "**Success!**", "**Failure!**"
-footer = "Seventra: Exodus of Heroes | Hunt v1.0 | Created by quiversong aka Adrienne"
+footer = "Don't forget to role-play your hunting actions!\n"
+footer += f'Be mindful that there is a limit of {hunt_daily_cap} hunts per day.'
+footer += "\nSeventra: Exodus of Heroes | Hunt v1.0 | Created by quiversong aka Adrienne"
 
 hvars, pid, stage = None, None, None
 if "_h_vars" in cv:
@@ -21,7 +25,7 @@ if "_h_vars" in cv:
 
 if len(args) > 0 and args[0] == "reset":
   c.delete_cvar("_h_vars")
-  c.delete_cvar("_h_ts")
+  c.delete_cvar("_h_dhc_")
   t = "Resetting hunting state..."
   return 0
 
@@ -50,17 +54,35 @@ if (len(args) == 0 or (not stage and args[0] not in b_ids)):
 p = args[0]
 
 if p in b_ids:
-  if "_h_ts" in cv:
-    ttime = float(cv["_h_ts"]) + timeout
-    now = time()
-    if now < ttime:
-      diff = ttime - now
-      diff = f'{ceil(diff / 60)} minutes' if diff > 60 else f'{diff} seconds'
-      f = f'{c.name} is still tracking a new prey...|You have to wait {diff} before you can try again.'
-      thumb = image
-      return 1
+  hunt_count = 0
+  first_hunt_time = None
+  now = time()
 
-  c.set_cvar("_h_ts", time())
+  if "_h_dhc_" in cv:
+    var_parts = cv["_h_dhc_"].split(':')
+    hunt_count = int(var_parts[0])
+    first_hunt_time = float(var_parts[1])
+    passed_in_day_of_first_hunt = first_hunt_time % 86400
+    next_midnight_after_first_hunt = first_hunt_time + (86400 - passed_in_day_of_first_hunt)
+    if now > next_midnight_after_first_hunt:
+      c.delete_cvar("_h_dhc_")
+    elif hunt_count >= hunt_daily_cap:
+      wait = next_midnight_after_first_hunt - now
+      hours = ceil(wait / 3600)
+      minutes = 0
+      if hours == 0:
+        minutes = ceil(wait / 60)
+      else:
+        minutes = ceil((wait % 3600) / 60)
+      wait_text = (str(hours) + ' hours and ' if hours > 0 else '') + str(minutes) + ' minutes'
+      f = f'{c.name} is exhausted of so much hunting today...|You have to wait {wait_text} until you can hunt again.'
+      return 1
+    else:
+      hunt_count += 1
+      c.set_cvar("_h_dhc_", f'{hunt_count}:{first_hunt_time}')
+
+  if not "_h_dhc_" in cv:
+    c.set_cvar("_h_dhc_", f'1:{now}')
 
   b = biomes[p]
   img = b["img"]
