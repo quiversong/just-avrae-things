@@ -16,10 +16,30 @@ sl, fl = "**Success!**", "**Failure!**"
 
 hunt_count = 0
 first_hunt_time = None
+wait_time = None
+wait_text = None
+
 if "_h_dhc_" in cv:
   var_parts = cv["_h_dhc_"].split(':')
   hunt_count = int(var_parts[0])
   first_hunt_time = float(var_parts[1])
+
+  now = time()
+  if hunt_count > 0 and first_hunt_time != None:
+    passed_in_day_of_first_hunt = first_hunt_time % 86400
+    next_midnight_after_first_hunt = first_hunt_time + (86400 - passed_in_day_of_first_hunt)
+    if now > next_midnight_after_first_hunt:
+      c.delete_cvar("_h_dhc_")
+      hunt_count, first_hunt_time = 0, None
+    elif hunt_count >= hunt_daily_cap:
+      wait_time = next_midnight_after_first_hunt - now
+      hours = ceil(wait_time / 3600)
+      minutes = 0
+      if hours == 0:
+        minutes = ceil(wait_time / 60)
+      else:
+        minutes = ceil((wait_time % 3600) / 60)
+      wait_text = (str(hours) + ' hours and ' if hours > 0 else '') + str(minutes) + ' minutes'
 
 footer = "Don't forget to role-play your hunting actions!\n"
 footer += f'There is a limit of {hunt_daily_cap} hunts per day. You have gone hunting {hunt_count}x today.'
@@ -62,31 +82,14 @@ if (len(args) == 0 or (not stage and args[0] not in b_ids)):
 p = args[0]
 
 if p in b_ids:
-  now = time()
-  if first_hunt_time != None:
-    passed_in_day_of_first_hunt = first_hunt_time % 86400
-    next_midnight_after_first_hunt = first_hunt_time + (86400 - passed_in_day_of_first_hunt)
-    if now > next_midnight_after_first_hunt:
-      c.delete_cvar("_h_dhc_")
-    elif hunt_count >= hunt_daily_cap:
-      wait = next_midnight_after_first_hunt - now
-      hours = ceil(wait / 3600)
-      minutes = 0
-      if hours == 0:
-        minutes = ceil(wait / 60)
-      else:
-        minutes = ceil((wait % 3600) / 60)
-      wait_text = (str(hours) + ' hours and ' if hours > 0 else '') + str(minutes) + ' minutes'
-      f = f'{c.name} is exhausted of so much hunting today...|You have to wait {wait_text} until you can hunt again.'
-      return 1
-    else:
-      hunt_count += 1
-      c.set_cvar("_h_dhc_", f'{hunt_count}:{first_hunt_time}')
+  if wait_time != None:
+    f = f'{c.name} is exhausted of so much hunting today...|You have to wait {wait_text} until you can hunt again.'
+    f += '\n(Hunting resets at midnight UTC)'
+    return 1
 
-  if not "_h_dhc_" in cv:
-    hunt_count = 1
-    c.set_cvar("_h_dhc_", f'{hunt_count}:{now}')
-
+  hunt_count += 1
+  first_hunt_time = time() if hunt_count == 1 else first_hunt_time
+  c.set_cvar("_h_dhc_", f'{hunt_count}:{first_hunt_time}')
   footer = footer.replace(f'{hunt_count - 1}x today', f'{hunt_count}x today')
 
   b = biomes[p]
