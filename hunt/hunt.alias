@@ -82,7 +82,10 @@ if p in b_ids:
   add_n = "n" if anm["name"][0] in "AEIOU" else ""
   c.set_cvar("_h_vars", f'{anm_id}:sneak')
 
-  f = f'{c.name} found a{add_n} {anm["name"]} in the {b["name"]}!|Use `!hunt sneak` to try and get the jump on it.'
+  if "commune" in anm and anm["commune"] == True:
+    f = f'{c.name} found a ***VERY RARE*** {anm["name"]}!|Use `!hunt sneak` to try to approach it without being noticed.'
+  else:
+    f = f'{c.name} found a{add_n} {anm["name"]} in the {b["name"]}!|Use `!hunt sneak` to try and get the jump on it.'
   return 0
 
 anm = animals[pid]
@@ -96,7 +99,10 @@ if p == "sneak":
   f = f'{c.name} closes on the {anm_name}...|**Stealth roll:** {s_roll.full}\n{sl if succ else fl}'
   if succ:
     thumb = anm["img"]
-    f2 = f'The {anm_name} has not seen you!|Now use `!hunt attack` to attack your prey!'
+    if "commune" in anm and anm["commune"] == True:
+      f2 = f'The {anm_name} has seen you, but they do not seem scared.|Use `!hunt commune` to try to commune with the {anm_name}.'
+    else:
+      f2 = f'The {anm_name} has not seen you!|Now use `!hunt attack` to attack your prey!'
     c.set_cvar("_h_vars", f'{pid}:attack')
   else:
     thumb = image
