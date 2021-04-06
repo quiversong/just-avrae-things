@@ -3,7 +3,7 @@
     "desert": {
       "name": "Desert",
       "animal_chance": {
-        "a5": [10, 100]
+        "a5": [11, 100]
       },
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827949533438279730/latest.png"
     },
