@@ -175,11 +175,20 @@ elif p == 'clean':
   f = f'{c.name} cleans and extracts the goods from the {anm_name}...|**Survival roll:** {s_roll.full}\n{sl if succ else fl}'
   img = data["images"]["campfire"]
   if succ:
-    rations = anm["rations"]
-    suffix = '\nThey have already been added to your "Hunting" bag!'
-    f2 = f'Well done!|You gained {rations} rations{suffix}'
+    add_to_bag = {}
+    prize_list = ''
+    if "rations" in anm and anm["rations"] > 0:
+      rations = anm["rations"]
+      add_to_bag["Rations"] = rations
+      prize_list += f'{rations}x Rations, '
+    if "prizes" in anm:
+      for prize in anm["prizes"]:
+        prize_n, prize_qt = prize["name"], prize["qt"]
+        add_to_bag[prize_n] = prize_qt
+        prize_list += f'{prize_qt}x {prize_n}, '
+    prize_list = prize_list[:len(prize_list) - 2]
 
-    add_to_bag = { "Rations": rations }
+    f2 = f'You gained {prize_list}.|They have been added to your "Hunting" bag!'
   else:
     f2 = f'You ended up wasting the prey you caught...|Better luck next time!'
 
