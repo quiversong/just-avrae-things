@@ -1,5 +1,5 @@
-_bag_name = "Hunting"
-_content = { "Rations": 2, "Deer Pelt": 1 }
+_bag_name = __p0__
+_content = __p1__
 
 _cv = character().cvars
 _bags = load_json(_cv["bags"]) if "bags" in _cv else []

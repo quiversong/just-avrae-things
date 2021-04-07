@@ -1,8 +1,10 @@
+tembed
 <drac2>
 data_var = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
 timeout = 300
 hunt_daily_cap = 6
 
+args = &ARGS&
 pargs = argparse(args)
 c = character()
 cv, cs = c.cvars, c.skills
@@ -264,6 +266,13 @@ if add_to_bag != None:
   _bag_name = "Hunting"
   _content = add_to_bag
 
+
+  ##### devrae function insert #####
+  __p0__ = "Hunting"
+  __p1__ = add_to_bag
+  _bag_name = __p0__
+  _content = __p1__
+  
   _cv = character().cvars
   _bags = load_json(_cv["bags"]) if "bags" in _cv else []
   _bag_index = [i for i, x in enumerate(_bags) if x[0] == _bag_name]
@@ -279,6 +288,9 @@ if add_to_bag != None:
       _bag_content[_key] = _content[_key]
   _bags[_bag_index] = [_bag_name, _bag_content]
   character().set_cvar('bags', dump_json(_bags))
+
+  ##### devrae function end #####
+
 
 </drac2>
 -title "{{t}}"

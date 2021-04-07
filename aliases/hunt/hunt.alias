@@ -1,0 +1,277 @@
+tembed
+<drac2>
+data_var = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
+timeout = 300
+hunt_daily_cap = 6
+
+args = &ARGS&
+pargs = argparse(args)
+c = character()
+cv, cs = c.cvars, c.skills
+
+t = f'{c.name} goes hunting!'
+f, f2, color = None, None, '128c2f'
+
+img = None
+thumb = None
+sl, fl = "**Success!**", "**Failure!**"
+
+hunt_count = 0
+first_hunt_time = None
+wait_time = None
+wait_text = None
+
+if "_h_dhc_" in cv:
+  var_parts = cv["_h_dhc_"].split(':')
+  hunt_count = int(var_parts[0])
+  first_hunt_time = float(var_parts[1])
+
+  now = time()
+  if hunt_count > 0 and first_hunt_time != None:
+    passed_in_day_of_first_hunt = first_hunt_time % 86400
+    next_midnight_after_first_hunt = first_hunt_time + (86400 - passed_in_day_of_first_hunt)
+    if now > next_midnight_after_first_hunt:
+      c.delete_cvar("_h_dhc_")
+      hunt_count, first_hunt_time = 0, None
+    elif hunt_count >= hunt_daily_cap:
+      wait_time = next_midnight_after_first_hunt - now
+      hours = ceil(wait_time / 3600)
+      minutes = 0
+      if hours == 0:
+        minutes = ceil(wait_time / 60)
+      else:
+        minutes = ceil((wait_time % 3600) / 60)
+      wait_text = (str(hours) + ' hours and ' if hours > 0 else '') + str(minutes) + ' minutes'
+
+footer = "Don't forget to role-play your hunting actions!\n"
+footer += f'There is a limit of {hunt_daily_cap} hunts per day. You have gone hunting {hunt_count}x today.'
+footer += "\nSeventra: Exodus of Heroes | Hunt v1.0 | Created by quiversong aka Adrienne"
+
+hvars, pid, stage = None, None, None
+if "_h_vars" in cv:
+  hvars = cv["_h_vars"].split(":")
+  pid = hvars[0]
+  stage = hvars[1]
+
+if len(args) > 0 and args[0] == "reset":
+  c.delete_cvar("_h_vars")
+  c.delete_cvar("_h_dhc_")
+  t = "Resetting hunting state..."
+  return 0
+
+data = load_json(get_gvar(data_var))
+
+biomes = data["biomes"]
+b_ids = [k for k, v in biomes.items()]
+
+animals = data["animals"]
+
+in_wrong_stage = stage and (len(args) == 0 or (len(args) > 0 and stage != args[0]))
+if (in_wrong_stage):
+  anm = animals[pid]
+  anm_name = anm["name"]
+  add_n = "n" if anm["name"][0] in "AEIOU" else ""
+  f = f'Oops! You are already hunting a{add_n} {anm_name}!|Use `!hunt {stage}` to continue.'
+  thumb = image
+  return 1
+
+if (len(args) == 0 or (not stage and args[0] not in b_ids)):
+  b_list_cmd = "  `!hunt " + "`\n  `!hunt ".join(b_ids) + "`"
+  f = f'Where do you want to go hunting?|Use one of the following:\n{b_list_cmd}'
+  thumb = image
+  return 0
+
+p = args[0]
+
+if p in b_ids:
+  if wait_time != None:
+    f = f'{c.name} is exhausted of so much hunting today...|You have to wait {wait_text} until you can hunt again.'
+    f += '\n(Hunting resets at midnight UTC)'
+    return 1
+
+  hunt_count += 1
+  first_hunt_time = time() if hunt_count == 1 else first_hunt_time
+  c.set_cvar("_h_dhc_", f'{hunt_count}:{first_hunt_time}')
+  footer = footer.replace(f'{hunt_count - 1}x today', f'{hunt_count}x today')
+
+  b = biomes[p]
+  img = b["img"]
+  nop_m = f'{c.name} could not find any prey.|Better luck next time!'
+
+  a_roll = roll("1d100")
+  if not "animal_chance" in b:
+    f = nop_m
+    return 0
+
+  b_anms = [(k, v) for k, v in b["animal_chance"].items()]
+  anm_id = [k for k, v in b_anms if (a_roll == v[0] if len(v) == 1 else a_roll >= v[0] and a_roll <= v[1])]
+  if len(anm_id) == 0:
+    f = nop_m
+    return 0
+
+  anm_id = anm_id[0]
+  anm = animals[anm_id]
+  add_n = "n" if anm["name"][0] in "AEIOU" else ""
+  c.set_cvar("_h_vars", f'{anm_id}:sneak')
+
+  if "commune" in anm and anm["commune"] == True:
+    color = 'f0b330'
+    f = f'{c.name} found a ***VERY RARE*** {anm["name"]}!|Use `!hunt sneak` to try to approach it without being noticed.'
+  else:
+    f = f'{c.name} found a{add_n} {anm["name"]} in the {b["name"]}!|Use `!hunt sneak` to try and get the jump on it.'
+  return 0
+
+anm = animals[pid]
+anm_name = anm["name"]
+add_to_bag = None
+if "commune" in anm and anm["commune"] == True:
+  color = 'f0b330'
+
+if p == "sneak":
+  s_roll = vroll(cs.stealth.d20())
+  succ = s_roll.total > anm["pp"]
+  t = f'{c.name} tries to sneaks on their prey!'
+  f = f'{c.name} closes on the {anm_name}...|**Stealth roll:** {s_roll.full}\n{sl if succ else fl}'
+  if succ:
+    thumb = anm["img"]
+    if "commune" in anm and anm["commune"] == True:
+      f2 = f'The {anm_name} has seen you, but they do not seem scared.|Use `!hunt commune` to try to commune with the {anm_name}.'
+      c.set_cvar("_h_vars", f'{pid}:commune')
+    else:
+      f2 = f'The {anm_name} has not seen you!|Now use `!hunt attack` to attack your prey!'
+      c.set_cvar("_h_vars", f'{pid}:attack')
+  else:
+    thumb = image
+    f2 = f'You lost sight of the {anm_name}...|Better luck next time!'
+    c.delete_cvar("_h_vars")
+
+elif p == 'commune':
+  if not "commune" in anm or anm["commune"] == False:
+    f = "!hunt script rolled a 1 and failed flat on its head! Please report to a Server Administrator."
+    return 1
+  c.delete_cvar("_h_vars")
+  s_roll = vroll(cs.animalHandling.d20())
+  succ = s_roll.total > anm["cha"]
+  t = f'{c.name} tries to commune with the {anm_name}...'
+  f = f'{c.name} approaches the {anm_name}...|**Animal Handling roll:** {s_roll.full}\n{sl if succ else fl}'
+  if succ:
+    thumb = anm["img"]
+    add_to_bag = {}
+    prize_list = ''
+    if "prizes" in anm:
+      for prize in anm["prizes"]:
+        prize_n, prize_qt = prize["name"], prize["qt"]
+        add_to_bag[prize_n] = prize_qt
+        prize_list += f'{prize_qt}x {prize_n}, '
+    prize_list = prize_list[:len(prize_list) - 2]
+
+    f2 = f'The {anm_name} runs away, but the experience enlightens you...|'
+    f2 += "\nYou gained: " + prize_list + '.\nThey have been added to your "Hunting" bag!'
+
+  else:
+    thumb = image
+    f2 = f'The {anm_name} ran away unexpectedly!|Better luck next time!'
+
+elif p == 'attack':
+  weapon = None
+  if len(args) > 1 and args[1] not in ["adv", "dis", "-b", "-d"]:
+    weapon_arg = args[1].lower()
+    weapon_str = [a for a in c.attacks if str(a).lower().split(':')[0].strip().replace('*', '') == weapon_arg]
+    if len(weapon_str) > 0:
+      weapon_str = str(weapon_str[0])
+      weapon = {
+        'name': weapon_str.split(':')[0].strip(),
+        'a_bonus': int(weapon_str.split('Attack:')[1].strip().split(' ')[0]),
+        'd_die': weapon_str.split('Hit:')[1].strip().split(' ')[0].split('[')[0]
+      }
+
+  a_bonus = pargs.get('b', default='0')[0]
+  if not a_bonus.isnumeric():
+    f = 'Oops! The hunt script rolled a 1!|Did you specify a valid attack bonus? Only numbers are accepted!'
+    return 1
+
+  d_bonus = pargs.get('d', default='0')[0]
+  if not d_bonus.isnumeric():
+    f = 'Oops! The hunt script rolled a 1!Did you specify a valid damage bonus? Only numbers are accepted!'
+    return 1
+
+  a_bonus = int(a_bonus)
+  d_bonus = int(d_bonus)
+
+  a_mod = weapon['a_bonus'] if weapon != None else dexterityMod + proficiencyBonus
+  a_die = '2d20kh1' if pargs.adv() == 1 else '2d20kl1' if pargs.adv() == -1 else '1d20'
+  a_die = f'{a_die} + {a_mod}'
+  a_die = f'{a_die} + {a_bonus}' if a_bonus > 0 else a_die
+  a_roll = vroll(a_die)
+  crit = a_roll.total == (20 + weapon['a_bonus'] + a_bonus if weapon != None else 20 + dexterityMod + proficiencyBonus + a_bonus)
+
+  d_die = f'{weapon["d_die"]}' if weapon != None else f'1d8+{dexterityMod}'
+  d_die = f'{d_die}+{d_bonus}' if d_bonus > 0 else d_die
+  d_roll = vroll(d_die)
+
+  a_hit = crit or a_roll.total > anm["ac"]
+  dead = crit or (a_hit and d_roll.total > anm["hp"])
+  injured = a_hit and not dead
+
+  t = f'{c.name} attacks their prey{" with their " + weapon["name"] if weapon != None else ""}!'
+
+  crit_l = "\n**Critical Hit!**" if crit else ""
+  dmg_l = ("\n**Damage roll:** " + d_roll.full) if not crit else ""
+
+  f = f'Was {c.name} able to kill the {anm_name}?|**Attack roll:** {a_roll.full}{dmg_l}\n{sl if dead else fl}{crit_l}'
+
+  if dead:
+    thumb = anm["img"]
+    c.set_cvar("_h_vars", f'{pid}:clean')
+    if crit:
+      f2 = f'{c.name} hit a critical hit killing {anm_name} on the spot!'
+    else:
+      f2 = f'{c.name} manages to kill the {anm_name}.'
+    f2 += '|Use `!hunt clean` to clean your prize and collect the goods!'
+  else:
+    thumb = image
+    if injured:
+      f2 = f'{c.name} successfully hit {anm_name}, but it was not enough to kill it, and it ran away...|Better luck next time!'
+    else:
+      f2 = f'The {anm_name} managed to escape your attack and flee...|Better luck next time!'
+    c.delete_cvar("_h_vars")
+
+elif p == 'clean':
+  c.delete_cvar("_h_vars")
+  t = f'{c.name} attempts to clean their hunting prize!'
+  s_roll = vroll(cs.survival.d20())
+  succ = s_roll.total > anm["ac"]
+  f = f'{c.name} cleans and extracts the goods from the {anm_name}...|**Survival roll:** {s_roll.full}\n{sl if succ else fl}'
+  img = data["images"]["campfire"]
+  if succ:
+    add_to_bag = {}
+    prize_list = ''
+    if "rations" in anm and anm["rations"] > 0:
+      rations = anm["rations"]
+      add_to_bag["Rations"] = rations
+      prize_list += f'{rations}x Rations, '
+    if "prizes" in anm:
+      for prize in anm["prizes"]:
+        prize_n, prize_qt = prize["name"], prize["qt"]
+        add_to_bag[prize_n] = prize_qt
+        prize_list += f'{prize_qt}x {prize_n}, '
+    prize_list = prize_list[:len(prize_list) - 2]
+
+    f2 = f'You gained: {prize_list}.|They have been added to your "Hunting" bag!'
+  else:
+    f2 = f'You ended up wasting the prey you caught...|Better luck next time!'
+
+
+if add_to_bag != None:
+  _bag_name = "Hunting"
+  _content = add_to_bag
+
+  #!devrae_f add_to_bag (#P "Hunting" #P add_to_bag)!#
+</drac2>
+-title "{{t}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-f "{f}"' if f else ""}}
+{{f'-f "{f2}"' if f2 else ""}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}

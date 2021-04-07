@@ -1,0 +1,108 @@
+embed
+<drac2>
+dc = 14
+
+var_name = "_w_t_"
+pargs = argparse(&ARGS&)
+c = character()
+t, f, f2, footer = None, None, None, None
+thumb = image
+sl = '**Success!**'
+fl = '**Failure!**'
+footer = "Seventra: Exodus of Heroes | Work v1.0 | Created by quiversong aka Adrienne"
+
+skill_name, skill, rp_desc = None, None, None
+
+to_exclude = ["initiative", "strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"]
+valid_skills = [(sn, s) for sn, s in c.skills if sn not in to_exclude]
+
+if pargs.get("reset"):
+  t = "Cleaning work internal state."
+  c.delete_cvar(var_name)
+  return 0
+
+if len(pargs.get("s")) > 0:
+  skill_name = pargs.get("s")[0]
+  skill = [s for sn, s in valid_skills if sn.lower() == skill_name.lower()]
+
+if len(pargs.get("rp")) > 0 and pargs.get("rp")[0] != 'True':
+  rp_desc = pargs.get("rp")[0]
+
+if skill == None or rp_desc == None or len(skill) == 0 or len(rp_desc) == 0:
+  t = f'{c.name} is looking to earn some cash...'
+  f = "Please specify a valid skill and role playing description.|Use `!work -s <skill> [-prof] -rp '<role play text>'`"
+  f += "\nDo not add any spaces to the skill name.\nUse `-prof` if you are using a tool that you have proficiency."
+  f += "\nAnd do not forget to role play your hard day of work!"
+  skill_list = '\n'.join([f'`{sn}`' for sn, s in valid_skills])
+  f2 = f'Valid skills|{skill_list}'
+  return 1
+
+t = f'{c.name} uses their knowledge in {skill_name.lower()} to earn some cash...'
+
+skill = skill[0]
+
+f = f'But... how?|{rp_desc}'
+
+adv = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
+prof = True if pargs.get("prof") else False
+skill_roll = vroll(skill.d20(base_adv = adv) + (f'+{proficiencyBonus}' if prof else ''))
+success = skill_roll.total > dc
+critical = skill_roll.total == 20 + skill.value
+to_add = skill_roll.total * 2 if critical else skill_roll.total
+
+now = time() - 4 * 60 * 60
+if (var_name in c.cvars):
+  last_work = float(c.cvars[var_name])
+  passed_in_day = now % 86400
+  next_midnight = now + (86400 - passed_in_day)
+  if next_midnight > last_work:
+    wait = next_midnight - last_work
+    hours = ceil(wait / 3600)
+    minutes = 0
+    if hours == 0:
+      minutes = ceil(wait / 60)
+    else:
+      minutes = ceil((wait % 3600) / 60)
+    wait_text = (str(hours) + ' hours and ' if hours > 0 else '') + str(minutes) + ' minutes'
+    f = f'You have to wait {wait_text} until you can work again!'
+    return 1
+c.set_cvar(var_name, now)
+
+if success:
+  _bag_name = "Coin Pouch"
+  _content = {
+    "cp": 0,
+    "sp": 0,
+    "ep": 0,
+    "pp": 0
+  }
+  _content["gp"] = to_add
+
+  _cv = character().cvars
+  _bags = load_json(_cv["bags"]) if "bags" in _cv else []
+  _bag_index = [i for i, x in enumerate(_bags) if x[0] == _bag_name]
+  _bag_index = _bag_index[0] if len(_bag_index) > 0 else -1
+  if _bag_index == -1:
+    _bags.append([_bag_name, {}])
+    _bag_index = len(_bags) - 1
+  _bag_content = _bags[_bag_index][1]
+  for _key in _content:
+    if _key in _bag_content:
+      _bag_content[_key] = _bag_content[_key] + _content[_key]
+    else:
+      _bag_content[_key] = _content[_key]
+  _bags[_bag_index] = [_bag_name, _bag_content]
+  character().set_cvar('bags', dump_json(_bags))
+
+  if critical: sl += '\nYou got twice as much money with a critical check!'
+  sl += '\n\n'
+  sl += f'{to_add} gold coins were added to your Coin Pouch to a total of {_bag_content["gp"]} gold coins!'
+
+f2 = f'Did {c.name} succeed?|**Skill check:** {skill_roll.full}\n{sl if success else fl}'
+
+</drac2>
+-title "{{t}}"
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-f "{f}"' if f else ""}}
+{{f'-f "{f2}"' if f2 else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
