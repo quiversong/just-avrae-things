@@ -11,7 +11,7 @@
     "mountain": {
       "name": "Mountain",
       "animal_chance": {
-        "a4": [1, 1]
+        "a4": [1, 1],
         "M3": [2,100]
       },
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827949913794936872/mountain-clip-art-9.png"
