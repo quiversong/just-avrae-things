@@ -3,45 +3,52 @@
     "desert": {
       "name": "Desert",
       "animal_chance": {
-        "a5": [10, 100]
+        "M1": [1, 1],
+        "M7": [2,100]
       },
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827949533438279730/latest.png"
     },
     "mountain": {
       "name": "Mountain",
       "animal_chance": {
-        "a4": [1, 100]
+        "a4": [1, 1]
+        "M3": [2,100]
       },
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827949913794936872/mountain-clip-art-9.png"
     },
     "forest": {
       "name": "Forest",
       "animal_chance": {
-        "a1": [1, 50],
-        "a2": [51, 60],
-        "a3": [61, 70],
-        "a4": [71, 100]
+        "a1": [1, 2],
+        "a2": [3, 4],
+        "a3": [5, 6],
+        "a4": [7, 8],
+        "M4": [9,98],
+        "M1": [99,100]
       },
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827950400531333152/Hot-photo-backdrop-enchanted-forest-photo-booth-props-nature-scenery-photography-background-travel-v.png"
     },
     "grassland": {
       "name": "Grassland",
       "animal_chance": {
-        "a1": [1, 100]
+        "a1": [1, 1],
+        "M5": [2,100]
       },
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827950573826473984/50e70f33f5409f4ebb0fdc40414f4cda.png"
     },
     "swamp": {
       "name": "Swamp",
       "animal_chance": {
-        "a3": [1, 100]
+        "a3": [1, 1],
+        "M6": [2,100]
       },
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827950927582986270/Cb2wMeI0mNs2Dv8BLLwpeynqDsEXErHNN8G5YtvGy5Y.png"
     },
     "coastline": {
       "name": "Coastline",
       "animal_chance": {
-        "a2": [1, 100]
+        "a2": [1, 1],
+        "M7": [2,100]
       },
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827951208521269288/unknown.png"
     }
@@ -52,7 +59,6 @@
       "hp": 3,
       "name": "Rabbit",
       "pp": 3,
-      "cha": 3,
       "rations": 1,
       "prizes": [],
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827944537053724712/unknown.png"
@@ -62,7 +68,6 @@
       "hp": 12,
       "name": "Elk",
       "pp": 3,
-      "cha": 3,
       "rations": 4,
       "prizes": [{"name": "Elk pelt", "qt": 3}],
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827944154789183508/unknown.png"
@@ -72,7 +77,6 @@
       "hp": 3,
       "name": "Tiger",
       "pp": 3,
-      "cha": 3,
       "rations": 2,
       "prizes": [{"name": "Tiger pelt", "qt": 1}, {"name": "Tiger claw", "qt": 1}],
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827944055169875978/unknown.png"
@@ -82,21 +86,65 @@
       "hp": 3,
       "name": "Deer",
       "pp": 12,
-      "cha": 3,
       "rations": 2,
       "prizes": [{"name": "Deer pelt", "qt": 2}],
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827952699965964308/whitetail-deer-painting-fall-flame-crista-forest.jpeg"
     },
-    "a5": {
-      "ac": 3,
-      "hp": 3,
+    "M1": {
       "name": "White Stag",
-      "pp": 3,
-      "cha": 3,
-      "rations": 0,
+      "pp": 14,
+      "cha": 13,
       "commune": true,
-      "prizes": [{"name": "White Stag token", "qt": 1}],
+      "prizes": [{"name": "White Stag Token", "qt": 1}],
       "img": "https://cdn.discordapp.com/attachments/820095740679290890/828847218466226176/White-Stag-website.jpeg"
+    },
+    "M2": {
+      "name": "Pale Oak of the Desert",
+      "pp": 1,
+      "cha": 1,
+      "commune": true,
+      "prizes": [{"name": "Pale Acorn of the Desert", "qt": 1}],
+      "img": "https://cdn.discordapp.com/attachments/827581981452795975/829222711741382656/unknown.png"
+    },
+    "M3": {
+      "name": "Pale Oak of the Mountain",
+      "pp": 1,
+      "cha": 1,
+      "commune": true,
+      "prizes": [{"name": "Pale Acorn of the Mountain", "qt": 1}],
+      "img": "https://cdn.discordapp.com/attachments/827581981452795975/829222775209066506/cb2e6d77-5829-4d78-a906-9c567ebf26ea_570.png"
+    },
+    "M4": {
+      "name": "Pale Oak of the Forest",
+      "pp": 1,
+      "cha": 1,
+      "commune": true,
+      "prizes": [{"name": "Pale Acorn of the Forest", "qt": 1}],
+      "img": "https://cdn.discordapp.com/attachments/827581981452795975/829222852644831232/55a68be7799a7c7a918237bd41d79686.png"
+    },
+    "M5": {
+      "name": "Pale Oak of the Grassland",
+      "pp": 1,
+      "cha": 1,
+      "commune": true,
+      "prizes": [{"name": "Pale Acorn of the Grassland", "qt": 1}],
+      "img": "https://cdn.discordapp.com/attachments/827581981452795975/829222913848639498/3b8be09287718b976f3c4015a7fe115f.png"
+    },
+    "M6": {
+      "name": "Pale Oak of the Swamp",
+      "pp": 1,
+      "cha": 1,
+      "commune": true,
+      "prizes": [{"name": "Pale Oak of the Swamp", "qt": 1}],
+      "img": "https://cdn.discordapp.com/attachments/827581981452795975/829224074957815808/latest.png"
+    },
+    "M7": {
+      "name": "Pale Oak of the Coastline",
+      "pp": 1,
+      "cha": 1,
+      "commune": true,
+      "prizes": [{"name": "Pale Oak of the Coastline", "qt": 1}],
+      "img": "https://cdn.discordapp.com/attachments/827581981452795975/829224656484827136/70cf6ffd8370e4753fd8162d740b7c33.png"
     }
   },
   "images": {
