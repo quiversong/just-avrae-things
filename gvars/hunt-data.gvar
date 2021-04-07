@@ -103,8 +103,6 @@
       "pp": 1,
       "cha": 1,
       "commune": true,
-      "sneak_succ": "{char_name} approaches the Pale Oak...|There is a strange glow about it.",
-      "commune_succ": "{char_name} has communed with the Pale Oak.|You feel enlightened by the experience.",
       "prizes": [{"name": "Pale Acorn of the Desert", "qt": 1}],
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/829222711741382656/unknown.png"
     },
@@ -137,7 +135,7 @@
       "pp": 1,
       "cha": 1,
       "commune": true,
-      "prizes": [{"name": "Pale Oak of the Swamp", "qt": 1}],
+      "prizes": [{"name": "Pale Acorn of the Swamp", "qt": 1}],
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/829224074957815808/latest.png"
     },
     "M7": {
@@ -145,9 +143,7 @@
       "pp": 1,
       "cha": 1,
       "commune": true,
-      "sneak_succ": "{char_name} approaches the Pale Oak...|There is a strange glow about it.",
-      "commune_succ": "{char_name} has communed with the Pale Oak.|You feel enlightened by the experience.",
-      "prizes": [{"name": "Pale Oak of the Coastline", "qt": 1}],
+      "prizes": [{"name": "Pale Acorn of the Coastline", "qt": 1}],
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/829224656484827136/70cf6ffd8370e4753fd8162d740b7c33.png"
     }
   },
