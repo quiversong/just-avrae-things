@@ -103,6 +103,8 @@
       "pp": 1,
       "cha": 1,
       "commune": true,
+      "sneak_succ": "{char_name} approaches the Pale Oak...|There is a strange glow about it.",
+      "commune_succ": "{char_name} has communed with the Pale Oak.|You feel enlightened by the experience.",
       "prizes": [{"name": "Pale Acorn of the Desert", "qt": 1}],
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/829222711741382656/unknown.png"
     },
