@@ -134,11 +134,16 @@ if p == "sneak":
   f = f'{c.name} closes on the {anm_name}...|**Stealth roll:** {s_roll.full}\n{sl if succ else fl}'
   if succ:
     thumb = anm["img"]
-    if "commune" in anm and anm["commune"] == True:
+    if "sneak_succ" in anm:
+      f2 = anm["sneak_succ"].format(char_name = c.name)
+    elif "commune" in anm and anm["commune"] == True:
       f2 = f'The {anm_name} has seen you, but they do not seem scared.|Use `!hunt commune` to try to commune with the {anm_name}.'
       c.set_cvar("_h_vars", f'{pid}:commune')
     else:
-      f2 = f'The {anm_name} has not seen you!|Now use `!hunt attack` to attack your prey!'
+      if "sneak_fail" in anm:
+        f2 = anm["sneak_fail"].format(char_name = c.name)
+      else:
+        f2 = f'The {anm_name} has not seen you!|Now use `!hunt attack` to attack your prey!'
       c.set_cvar("_h_vars", f'{pid}:attack')
   else:
     thumb = image
@@ -165,12 +170,18 @@ elif p == 'commune':
         prize_list += f'{prize_qt}x {prize_n}, '
     prize_list = prize_list[:len(prize_list) - 2]
 
-    f2 = f'The {anm_name} runs away, but the experience enlightens you...|'
+    if "commune_succ" in anm:
+      f2 = anm["commune_succ"].format(char_name = c.name)
+    else:
+      f2 = f'The {anm_name} runs away, but the experience enlightens you...|'
     f2 += "\nYou gained: " + prize_list + '.\nThey have been added to your "Hunting" bag!'
 
   else:
     thumb = image
-    f2 = f'The {anm_name} ran away unexpectedly!|Better luck next time!'
+    if "commune_fail" in anm:
+      f2 = anm["commune_fail"].format(char_name = c.name)
+    else:
+      f2 = f'The {anm_name} ran away unexpectedly!|Better luck next time!'
 
 elif p == 'attack':
   weapon = None
