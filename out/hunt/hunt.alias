@@ -134,20 +134,23 @@ if p == "sneak":
   f = f'{c.name} closes on the {anm_name}...|**Stealth roll:** {s_roll.full}\n{sl if succ else fl}'
   if succ:
     thumb = anm["img"]
-    if "sneak_succ" in anm:
-      f2 = anm["sneak_succ"].format(char_name = c.name)
-    elif "commune" in anm and anm["commune"] == True:
-      f2 = f'The {anm_name} has seen you, but they do not seem scared.|Use `!hunt commune` to try to commune with the {anm_name}.'
+    if "commune" in anm and anm["commune"] == True:
+      if "sneak_succ" in anm:
+        f2 = anm["sneak_succ"].format(char_name = c.name)
+      else:
+        f2 = f'The {anm_name} has seen you, but they do not seem scared.'
+      f2 += '' if '|' in f2 else ''
+      f2 += 'Use `!hunt commune` to try to commune with the {anm_name}.'
       c.set_cvar("_h_vars", f'{pid}:commune')
     else:
-      if "sneak_fail" in anm:
-        f2 = anm["sneak_fail"].format(char_name = c.name)
-      else:
-        f2 = f'The {anm_name} has not seen you!|Now use `!hunt attack` to attack your prey!'
+      f2 = f'The {anm_name} has not seen you!|Now use `!hunt attack` to attack your prey!'
       c.set_cvar("_h_vars", f'{pid}:attack')
   else:
     thumb = image
-    f2 = f'You lost sight of the {anm_name}...|Better luck next time!'
+    if "sneak_fail" in anm:
+      f2 = anm["sneak_fail"].format(char_name = c.name)
+    else:
+      f2 = f'You lost sight of the {anm_name}...|Better luck next time!'
     c.delete_cvar("_h_vars")
 
 elif p == 'commune':
