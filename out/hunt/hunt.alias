@@ -35,7 +35,7 @@ if "_h_dhc_" in cv:
       hunt_count, first_hunt_time = 0, None
     elif hunt_count >= hunt_daily_cap:
       wait_time = next_midnight_after_first_hunt - now
-      hours = ceil(wait_time / 3600)
+      hours = floor(wait_time / 3600)
       minutes = 0
       if hours == 0:
         minutes = ceil(wait_time / 60)
