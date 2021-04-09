@@ -183,7 +183,7 @@
     "a2": {
       "name": "Elk",
       "ac": 10,
-      "hp": 13,
+      "hp": 10,
       "rations": 3,
       "pp": 10,
       "prizes": [{"name": "Elk Pelt (20gp)", "qt": 1},{"name": "Elk Antler (20gp)", "qt": 2}],
@@ -254,7 +254,7 @@
 "c6": {
       "name": "Sea Turtle",
       "ac": 15,
-      "hp": 7,
+      "hp": 2,
       "rations": 2,
       "pp": 2,
       "prizes": [{"name": "Large Turtle Shell (12gp)", "qt": 1}],
@@ -316,7 +316,7 @@
 "d6": {
       "name": "Basilisk",
       "ac": 15,
-      "hp": 17,
+      "hp": 13,
       "rations": 4,
       "pp": 10,
       "prizes": [{"name": "Basilisk Hide (15gp)", "qt": 1}],
@@ -360,7 +360,7 @@
 "f13": {
       "name": "Bobcat",
       "ac": 12,
-      "hp": 6,
+      "hp": 5,
       "rations": 2,
       "pp": 13,
       "prizes": [{"name": "Bobcat Pelt (5gp)", "qt": 1},{"name": "Bobcat Claw (1sp)", "qt": 4}],
@@ -378,7 +378,7 @@
 "f15": {
       "name": "Giant Wolf Spider",
       "ac": 13,
-      "hp": 11,
+      "hp": 6,
       "rations": 3,
       "pp": 13,
       "prizes": [{"name": "Venom Gland (1gp)", "qt": 6}],
@@ -387,7 +387,7 @@
 "f16": {
       "name": "Mountain Lion",
       "ac": 12,
-      "hp": 13,
+      "hp": 12,
       "rations": 3,
       "pp": 14,
       "prizes": [{"name": "Cougar Pelt (45gp)", "qt": 1},{"name": "Cougar Claw (2sp)", "qt": 4}],
@@ -396,7 +396,7 @@
 "f17": {
       "name": "Black Bear",
       "ac": 11,
-      "hp": 19,
+      "hp": 10,
       "rations": 4,
       "pp": 13,
       "prizes": [{"name": "Black Bear Pelt (45gp)", "qt": 1},{"name": "Bear Claw (5sp)", "qt": 4}],
@@ -405,7 +405,7 @@
 "f18": {
       "name": "Owlbear",
       "ac": 13,
-      "hp": 20,
+      "hp": 10,
       "rations": 4,
       "pp": 13,
       "prizes": [{"name": "Owlbear Claw (5gp)", "qt": 8},{"name": "Large Feathers (3sp)", "qt": 8}],
@@ -432,7 +432,7 @@
 "f20": {
       "name": "Brown Bear",
       "ac": 11,
-      "hp": 34,
+      "hp": 15,
       "rations": 6,
       "pp": 13,
       "prizes": [{"name": "Brown Bear Pelt (45gp)", "qt": 1},{"name": "Bear Claw (5sp)", "qt": 4}],
@@ -585,7 +585,7 @@
 "g6": {
       "name": "Ostritch",
       "ac": 13,
-      "hp": 14,
+      "hp": 10,
       "rations": 3,
       "pp": 13,
       "prizes": [{"name": "Large Feathers (3sp)", "qt": 20}],
@@ -594,7 +594,7 @@
 "g7": {
       "name": "Rhino",
       "ac": 16,
-      "hp": 19,
+      "hp": 13,
       "rations": 3,
       "pp": 4,
       "prizes": [{"name": "Rhino Hide (45gp)", "qt": 1},{"name": "Rhino Horn (30gp)", "qt": 1}],
@@ -603,7 +603,7 @@
 "g8": {
       "name": "Bison",
       "ac": 14,
-      "hp": 16,
+      "hp": 7,
       "rations": 4,
       "pp": 10,
       "prizes": [{"name": "Bison Pelt (35gp)", "qt": 1},{"name": "Bison Horn (8sp)", "qt": 2}],
@@ -612,7 +612,7 @@
 "g9": {
       "name": "Leopard",
       "ac": 13,
-      "hp": 18,
+      "hp": 12,
       "rations": 4,
       "pp": 14,
       "prizes": [{"name": "Leopard Pelt (40gp)", "qt": 1},{"name": "Leopard Claw (2sp)", "qt": 4}],
@@ -639,10 +639,10 @@
 "m11": {
       "name": "Roc",
       "ac": 12,
-      "hp": 13,
+      "hp": 12,
       "rations": 3,
       "pp": 11,
-      "prizes": [{"name": "Large Feathers (3sp)", "qt": 16}],
+      "prizes": [{"name": "Large Feathers (3sp)", "qt": 16},{"name": "Roc Claw (4gp)", "qt": 6}],
       "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813148466544721/Roc.jpeg"
     },
 "m12": {
@@ -720,7 +720,7 @@
 "m7": {
       "name": "Mountain Goat",
       "ac": 12,
-      "hp": 8,
+      "hp": 7,
       "rations": 2,
       "pp": 10,
       "prizes": [{"name": "Goat Pelt (25gp)", "qt": 1},{"name": "Goat Horn (5sp)", "qt": 2}],
@@ -738,7 +738,7 @@
 "m9": {
       "name": "Bald Eagle",
       "ac": 10,
-      "hp": 10,
+      "hp": 8,
       "rations": 3,
       "pp": 10,
       "prizes": [{"name": "Large Feathers (3sp)", "qt": 10}],
@@ -924,7 +924,7 @@
 "s4": {
       "name": "Capybara",
       "ac": 12,
-      "hp": 6,
+      "hp": 4,
       "rations": 2,
       "pp": 8,
       "prizes": [{"name": "Capybara Pelt (10gp)", "qt": 1}],
