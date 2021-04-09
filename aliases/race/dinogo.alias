@@ -80,6 +80,9 @@ if obstacle != None:
   else:
     f2 += '\nYou managed to avoid the obstacle! Great job!'
 
+  if dino_critical:
+    f2 += '\nYou also get advantage on your next turn due to a critical roll!'
+
 current_pos += moved
 new_pos_text = f'Nice going!|You advanced {moved}ft and are now at the {current_pos}ft mark!'
 
