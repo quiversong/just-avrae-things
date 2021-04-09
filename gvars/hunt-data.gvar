@@ -25,7 +25,7 @@
       "name": "Mountain",
       "animal_chance": {
         "a4": [1, 1],
-        "M3": [2,100]
+        "My3": [2,100]
       },
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827949913794936872/mountain-clip-art-9.png"
     },
@@ -37,7 +37,7 @@
         "a3": [5, 6],
         "a4": [7, 8],
         "M4": [9,98],
-        "M1": [99,100]
+        "My1": [99,100]
       },
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827950400531333152/Hot-photo-backdrop-enchanted-forest-photo-booth-props-nature-scenery-photography-background-travel-v.png"
     },
@@ -45,7 +45,7 @@
       "name": "Grassland",
       "animal_chance": {
         "a1": [1, 1],
-        "M5": [2,100]
+        "My5": [2,100]
       },
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827950573826473984/50e70f33f5409f4ebb0fdc40414f4cda.png"
     },
@@ -53,7 +53,7 @@
       "name": "Swamp",
       "animal_chance": {
         "a3": [1, 1],
-        "M6": [2,100]
+        "My6": [2,100]
       },
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827950927582986270/Cb2wMeI0mNs2Dv8BLLwpeynqDsEXErHNN8G5YtvGy5Y.png"
     },
@@ -61,7 +61,7 @@
       "name": "Coastline",
       "animal_chance": {
         "a2": [1, 1],
-        "M7": [2,100]
+        "My7": [2,100]
       },
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827951208521269288/unknown.png"
     }
