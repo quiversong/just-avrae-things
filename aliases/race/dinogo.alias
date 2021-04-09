@@ -1,0 +1,108 @@
+embed
+<drac2>
+finish = 400
+obstacle_dc = 14
+
+var_name = "_dr_vars_"
+args = &ARGS&
+pargs = argparse(args)
+c = character()
+cv, cs = c.cvars, c.skills
+t, f, f2, f3, footer, thumb, img = None, None, None, None, None, None, None
+dino_img = 'https://cdn.discordapp.com/attachments/808062130996641832/808062789952077844/dinorace.jpg'
+
+footer = "Don't forget to role-play your race turns!"
+footer += "\nSeventra: Exodus of Heroes | Dino Go! v1.0 | Created by quiversong#2772 aka Adrienne"
+
+if len(args) > 0 and args[0] == 'reset':
+    t = 'Resetting race participation...'
+    c.delete_cvar(var_name)
+    return 0
+
+if len(args) > 0 and args[0] == 'start':
+    t = f'{c.name} wants to join a race in the Dash\'n\'Bash circuit'
+    if not 'heat' in pargs or len(pargs.get('heat')) == 0 or not pargs.get('heat')[0] in ['30', '40'] or not 'dinodex' in pargs:
+        f = 'Oops, what heat do you want to join?|Use `!dinogo start -heat <30|40> -dinodex <your mount dex mod>`'
+        thumb = image
+        return 1
+
+    heat = pargs.get('heat')[0]
+    dino_dex = int(pargs.get('dinodex')[0])
+    c.set_cvar(var_name, f'{heat}:0:{dino_dex}:-')
+    t = f'{c.name} joins a race in the Dash\'n\'Bash circuit!'
+    thumb = image
+    img = dino_img
+    f = 'You are all set on the tracks!|Roll initiative with `!init join` and do not forget to RP!'
+    f += '\nWhen it is your turn, run `!dinogo` to advance on the track!'
+    return 0
+
+if not var_name in cv:
+    t = f'{c.name} wants to join a race in the Dash\'n\'Bash circuit!'
+    f = 'Oops, it looks like you are not racing yet.|Use `!dinogo start -heat <30|40> -dinodex <your mount dex mod>` to start racing!'
+    thumb = image
+    return 1
+
+thumb = image
+var_values = cv[var_name].split(':')
+heat = int(var_values[0])
+current_pos = int(var_values[1])
+dino_dex = int(var_values[2])
+adv_status = var_values[3]
+
+ah_skill = c.skills.animalHandling
+adv = True if adv_status == 'adv' else False if adv_status == 'dis' else None
+ah_roll = vroll(ah_skill.d20(base_adv = adv))
+crit = ah_roll.total == 20 + ah_skill.value
+
+t = f'{c.name} is racing in the Dash\'n\'Bash circuit!'
+f = f'{c.name} spurs their mount forward!|**Animal Handling roll:** {ah_roll.full}'
+
+moved = ah_roll.total + int(heat) + (10 if crit else 0)
+
+obstacles = [75, 175, 275, 375]
+obstacle = [x for x in obstacles if current_pos < x and current_pos + moved >= x]
+obstacle = obstacle[0] if len(obstacle) > 0 else None
+stuck_at_obstacle = False
+
+f2 = ''
+dino_critical = None
+if obstacle != None:
+  dino_dex_str = '+' + str(dino_dex) if dino_dex > 0 else '' if dino_dex == 0 else str(dino_dex)
+  dino_roll = vroll(f'1d20{dino_dex_str}')
+  dino_critical = dino_roll.total == 20 + dino_dex
+  f2 = f'{c.name} reaches the track obstacles at the {obstacle}ft mark!|**Dino dexterity roll:** {dino_roll.full}'
+
+  if dino_roll.total < obstacle_dc:
+    f2 += '\nYou and your dino did not manage to avoid the obstacle!\n'
+    f2 += f'You are now stuck at the {obstacle}ft mark and have disadvantage on your next turn...'
+    c.set_cvar(var_name, f'{heat}:{obstacle}:{dino_dex}:dis')
+    return 0
+  else:
+    f2 += '\nYou managed to avoid the obstacle! Great job!'
+
+current_pos += moved
+new_pos_text = f'Nice going!|You advanced {moved}ft and are now at the {current_pos}ft mark!'
+
+if f2 == '':
+  f2 = new_pos_text
+else:
+  f3 = new_pos_text
+
+adv_var = 'adv' if dino_critical else '-'
+c.set_cvar(var_name, f'{heat}:{current_pos}:{dino_dex}:{adv_var}')
+
+if current_pos >= finish:
+  finish_text = f'Congratulations!|You have finished the race! You covered {current_pos}ft in total!'
+  c.delete_cvar(var_name)
+  if f2 == '':
+    f2 = finish_text
+  else:
+    f3 = finish_text
+</drac2>
+-title "{{t}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-f "{f}"' if f else ""}}
+{{f'-f "{f2}"' if f2 else ""}}
+{{f'-f "{f3}"' if f3 else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
