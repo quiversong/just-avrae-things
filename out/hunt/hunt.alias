@@ -57,6 +57,7 @@ if len(args) > 0 and args[0] == "reset":
   c.delete_cvar("_h_vars")
   c.delete_cvar("_h_dhc_")
   t = "Resetting hunting state..."
+  footer = footer.replace(f'{hunt_count}x today', '0x today')
   return 0
 
 data = load_json(get_gvar(data_var))
