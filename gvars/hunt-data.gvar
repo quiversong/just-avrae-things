@@ -834,7 +834,7 @@
       "pp": 16,
       "prizes": [{"name": "Hydra Hide (180gp)", "qt": 1},{"name": "Hydra Head (30gp)", "qt": 5}],
       "img": "https://cdn.discordapp.com/attachments/829536903140343828/829814051873226762/Hydra.jpeg"
-    },
+    }
   },
   "images": {
     "campfire": "https://cdn.discordapp.com/attachments/827581981452795975/827949160514191400/unknown.png"
