@@ -750,6 +750,8 @@
       "commune": true,
       "pp": 14,
       "prizes": [{"name": "Token of the Forest", "qt": 3}],
+      "commune_succ": "The {anm_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
+      "commune_fail": "The {anm_name} seems dissatisfied. It turns and walks away.",
       "img": "https://cdn.discordapp.com/attachments/820095740679290890/828847218466226176/White-Stag-website.jpeg"
     },
 "My10": {
@@ -758,6 +760,10 @@
       "commune": true,
       "pp": 16,
       "prizes": [{"name": "Token of the Forest", "qt": 4}],
+      "sneak_succ": "The {anm_name} appears behind you. It seems you were not the hunter in this scenario, but you don't feel threatened.",
+      "sneak_fail": "The {anm_name} eludes your skills. You are unable to find the trail.",
+      "commune_succ": "The {anm_name} nods to you and lays a gift at your feet. You feel enlightened by the time spent with the creature.",
+      "commune_fail": "The {anm_name} seems dissatisfied. It turns and walks away.",
       "img": "https://cdn.discordapp.com/attachments/829536903140343828/829838485346713623/unknown.png"
     },
 "My11": {
@@ -766,6 +772,8 @@
       "commune": true,
       "pp": 14,
       "prizes": [{"name": "Token of the Swamp", "qt": 3}],
+      "commune_succ": "The {anm_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
+      "commune_fail": "The {anm_name} seems dissatisfied. It turns and walks away.",
       "img": "https://f4.bcbits.com/img/a0177977609_10.jpg"
     },
 "My12": {
@@ -774,6 +782,10 @@
       "commune": true,
       "pp": 16,
       "prizes": [{"name": "Token of the Mountain", "qt": 4}],
+      "sneak_succ": "The {anm_name} appears behind you. It seems you were not the hunter in this scenario, but you don't feel threatened.",
+      "sneak_fail": "The {anm_name} eludes your skills. You are unable to find the trail.",
+      "commune_succ": "The {anm_name} nods to you and lays a gift at your feet. You feel enlightened by the time spent with the creature.",
+      "commune_fail": "The {anm_name} seems dissatisfied. It turns and walks away.",
       "img": "https://cdn.discordapp.com/attachments/829536903140343828/829840999785168957/unknown.jpeg"
     },
 "My13": {
@@ -782,6 +794,8 @@
       "commune": true,
       "pp": 13,
       "prizes": [{"name": "Token of the Grassland", "qt": 3}],
+      "commune_succ": "The {anm_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
+      "commune_fail": "The {anm_name} seems dissatisfied. It turns and walks away.",
       "img": "https://i1.sndcdn.com/avatars-000054377072-xode6v-t500x500.jpg"
     },
 "My14": {
@@ -798,6 +812,8 @@
       "commune": true,
       "pp": 16,
       "prizes": [{"name": "Token of the Mountain", "qt": 4}],
+      "commune_succ": "The {anm_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
+      "commune_fail": "The {anm_name} seems dissatisfied. It turns and flies away.",
       "img": "https://i.pinimg.com/474x/c5/97/c2/c597c2cd270805d55f4494d3fe87842a.jpg"
     },
 "My16": {
@@ -822,6 +838,8 @@
       "commune": true,
       "pp": 10,
       "prizes": [{"name": "Token of the Grassland", "qt": 3}],
+      "commune_succ": "The {anm_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
+      "commune_fail": "The {anm_name} seems dissatisfied. It turns and walks away.",
       "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812052918534144/Elephant.jpg"
     },
 "My19": {
@@ -838,10 +856,10 @@
       "commune": true,
       "pp": 15,
       "prizes": [{"name": "Pale Acorn of the Desert", "qt": 1}],
-      "sneak_succ": "The light-colored leaves on the {anm_name} stands out in the scenery and catches your eye. You feel drawn to its presence.",
-      "sneak_fail": "Strange... You swear you saw the {anm_name} just a moment ago...|Better luck next time!Use `!hunt` to try again.",
-      "commune_succ": "The {anm_name} sways against the wind. It seems to acknowledge your presence and rewards you...|",
-      "commune_fail": "The {anm_name} stands tall and unmoving. Its majesty leaves an impression on you, but nothing happens...|Better luck next time!Use `!hunt` to try again.",
+      "sneak_succ": "The light-colored leaves on the Pale Oak of the Desert stands out in the scenery and catches your eye. You feel drawn to its presence.",
+      "sneak_fail": "Strange... You swear you saw the {anm_name} just a moment ago...",
+      "commune_succ": "The {anm_name} sways against the wind. It seems to acknowledge your presence and rewards you...",
+      "commune_fail": "The {anm_name} stands tall and unmoving. Its majesty leaves an impression on you, but nothing happens...",
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/829222711741382656/unknown.png"
     },
 "My3": {
@@ -851,9 +869,9 @@
       "pp": 15,
       "prizes": [{"name": "Pale Acorn of the Mountain", "qt": 1}],
       "sneak_succ": "The light-colored leaves on the {anm_name} stands out in the scenery and catches your eye. You feel drawn to its presence.",
-      "sneak_fail": "Strange... You swear you saw the {anm_name} just a moment ago...|Better luck next time!Use `!hunt` to try again.",
-      "commune_succ": "The {anm_name} sways against the wind. It seems to acknowledge your presence and rewards you...|",
-      "commune_fail": "The {anm_name} stands tall and unmoving. Its majesty leaves an impression on you, but nothing happens...|Better luck next time!Use `!hunt` to try again.",
+      "sneak_fail": "Strange... You swear you saw the {anm_name} just a moment ago...",
+      "commune_succ": "The {anm_name} sways against the wind. It seems to acknowledge your presence and rewards you...",
+      "commune_fail": "The {anm_name} stands tall and unmoving. Its majesty leaves an impression on you, but nothing happens...",
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/829222775209066506/cb2e6d77-5829-4d78-a906-9c567ebf26ea_570.png"
     },
 "My4": {
@@ -863,9 +881,9 @@
       "pp": 15,
       "prizes": [{"name": "Pale Acorn of the Forest", "qt": 1}],
       "sneak_succ": "The light-colored leaves on the {anm_name} stands out in the scenery and catches your eye. You feel drawn to its presence.",
-      "sneak_fail": "Strange... You swear you saw the {anm_name} just a moment ago...|Better luck next time!Use `!hunt` to try again.",
-      "commune_succ": "The {anm_name} sways against the wind. It seems to acknowledge your presence and rewards you...|",
-      "commune_fail": "The {anm_name} stands tall and unmoving. Its majesty leaves an impression on you, but nothing happens...|Better luck next time!Use `!hunt` to try again.",
+      "sneak_fail": "Strange... You swear you saw the {anm_name} just a moment ago...",
+      "commune_succ": "The {anm_name} sways against the wind. It seems to acknowledge your presence and rewards you...",
+      "commune_fail": "The {anm_name} stands tall and unmoving. Its majesty leaves an impression on you, but nothing happens...",
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/829222852644831232/55a68be7799a7c7a918237bd41d79686.png"
     },
 "My5": {
@@ -875,9 +893,9 @@
       "pp": 15,
       "prizes": [{"name": "Pale Acorn of the Grassland", "qt": 1}],
       "sneak_succ": "The light-colored leaves on the {anm_name} stands out in the scenery and catches your eye. You feel drawn to its presence.",
-      "sneak_fail": "Strange... You swear you saw the {anm_name} just a moment ago...|Better luck next time!Use `!hunt` to try again.",
-      "commune_succ": "The {anm_name} sways against the wind. It seems to acknowledge your presence and rewards you...|",
-      "commune_fail": "The {anm_name} stands tall and unmoving. Its majesty leaves an impression on you, but nothing happens...|Better luck next time!Use `!hunt` to try again.",
+      "sneak_fail": "Strange... You swear you saw the {anm_name} just a moment ago...",
+      "commune_succ": "The {anm_name} sways against the wind. It seems to acknowledge your presence and rewards you...",
+      "commune_fail": "The {anm_name} stands tall and unmoving. Its majesty leaves an impression on you, but nothing happens...",
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/829222913848639498/3b8be09287718b976f3c4015a7fe115f.png"
     },
 "My6": {
@@ -887,9 +905,9 @@
       "pp": 15,
       "prizes": [{"name": "Pale Acorn of the Swamp", "qt": 1}],
       "sneak_succ": "The light-colored leaves on the {anm_name} stands out in the scenery and catches your eye. You feel drawn to its presence.",
-      "sneak_fail": "Strange... You swear you saw the {anm_name} just a moment ago...|Better luck next time!Use `!hunt` to try again.",
-      "commune_succ": "The {anm_name} sways against the wind. It seems to acknowledge your presence and rewards you...|",
-      "commune_fail": "The {anm_name} stands tall and unmoving. Its majesty leaves an impression on you, but nothing happens...|Better luck next time!Use `!hunt` to try again.",
+      "sneak_fail": "Strange... You swear you saw the {anm_name} just a moment ago...",
+      "commune_succ": "The {anm_name} sways against the wind. It seems to acknowledge your presence and rewards you...",
+      "commune_fail": "The {anm_name} stands tall and unmoving. Its majesty leaves an impression on you, but nothing happens...",
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/829224074957815808/latest.png"
     },
 "My7": {
@@ -899,9 +917,9 @@
       "pp": 15,
       "prizes": [{"name": "Pale Oak of the Coastline", "qt": 1}],
       "sneak_succ": "The light-colored leaves on the {anm_name} stands out in the scenery and catches your eye. You feel drawn to its presence.",
-      "sneak_fail": "Strange... You swear you saw the {anm_name} just a moment ago...|Better luck next time!Use `!hunt` to try again.",
-      "commune_succ": "The {anm_name} sways against the wind. It seems to acknowledge your presence and rewards you...|",
-      "commune_fail": "The {anm_name} stands tall and unmoving. Its majesty leaves an impression on you, but nothing happens...|Better luck next time!Use `!hunt` to try again.",
+      "sneak_fail": "Strange... You swear you saw the {anm_name} just a moment ago...",
+      "commune_succ": "The {anm_name} sways against the wind. It seems to acknowledge your presence and rewards you...",
+      "commune_fail": "The {anm_name} stands tall and unmoving. Its majesty leaves an impression on you, but nothing happens...",
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/829224656484827136/70cf6ffd8370e4753fd8162d740b7c33.png"
     },
 "My8": {
@@ -910,6 +928,8 @@
       "commune": true,
       "pp": 12,
       "prizes": [{"name": "Token of the Desert", "qt": 3}],
+      "commune_succ": "The {anm_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
+      "commune_fail": "The {anm_name} seems dissatisfied. It turns and walks away.",
       "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJjyeMO6SUbmo8QJYMG2_mXXPuKDwhApeGAQ&usqp=CAU"
     },
 "My9": {
@@ -918,6 +938,8 @@
       "commune": true,
       "pp": 15,
       "prizes": [{"name": "Token of the Coast", "qt": 1}],
+      "commune_succ": "The {anm_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
+      "commune_fail": "The {anm_name} seems dissatisfied. It turns and flies away.",
       "img": "https://i.pinimg.com/originals/b4/33/c1/b433c15cc6b89ebec1801241931a3371.jpg"
     },
 "s1": {
