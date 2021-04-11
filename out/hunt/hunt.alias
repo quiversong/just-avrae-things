@@ -80,7 +80,19 @@ if (len(args) == 0 or (not stage and args[0] not in b_ids)):
   b_list_cmd = "  `!hunt " + "`\n  `!hunt ".join(b_ids) + "`"
   f = f'Where do you want to go hunting?|Use one of the following:\n{b_list_cmd}'
   thumb = image
-  img = 'https://cdn.discordapp.com/attachments/827581981452795975/830670258897158174/ranger-bow.png'
+  hunt_images = [
+    'https://cdn.discordapp.com/attachments/827581981452795975/830670258897158174/ranger-bow.png',
+    'https://cdn.discordapp.com/attachments/827581981452795975/830676686537228328/colrathisle.png',
+    'https://cdn.discordapp.com/attachments/827581981452795975/830676464062955560/dnd-ranger-5e.png',
+    'https://cdn.discordapp.com/attachments/827581981452795975/830676245288714290/Ranger-1-548x403.png',
+    'https://cdn.discordapp.com/attachments/827581981452795975/830677100431671316/Blue_Bear_Barbarian_and_Cave_Bear.png',
+    'https://cdn.discordapp.com/attachments/827581981452795975/830674739688243220/7934d073b0f81ff62c673d68a2c41709.png',
+    'https://cdn.discordapp.com/attachments/827581981452795975/830674397358325811/sJd_IiQBEXsFPg4dkzonDt7zwFvDOO_sI2_02qRMJGFeBK8RWOOz5XnG-_tBEt_LhHVADSbqctdm9rQfb8A7pQeEh_GJ2ZbtHNd3.png',
+    'https://cdn.discordapp.com/attachments/827581981452795975/830677484688375828/tumblr_nxew19kDvy1qhttpto5_1280.jpeg',
+    'https://cdn.discordapp.com/attachments/827581981452795975/830677489247453204/daujf32-19437d94-de54-4522-9f9b-e7bc985098b9.jpeg',
+    'https://cdn.discordapp.com/attachments/827581981452795975/830677491408437279/pyxbh3nvnur11.jpeg'
+  ]
+  img = hunt_images[roll(f'1d{len(hunt_images)}') - 1]
   return 0
 
 p = args[0]
