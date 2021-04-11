@@ -45,7 +45,7 @@ if "_h_dhc_" in cv:
 
 footer = "Don't forget to role-play your hunting actions!\n"
 footer += f'There is a limit of {hunt_daily_cap} hunts per day. You have gone hunting {hunt_count}x today.'
-footer += "\nSeventra: Exodus of Heroes | Hunt v1.0 | Created by quiversong#2772 aka Adrienne"
+footer += "\nSeventra: Exodus of Heroes | Hunt v1.01 | Created by quiversong#2772 aka Adrienne"
 
 hvars, pid, stage = None, None, None
 if "_h_vars" in cv:
@@ -250,10 +250,9 @@ elif p == 'attack':
 
   t = f'{c.name} attacks their prey{" with their " + weapon["name"] if weapon != None else ""}!'
 
-  crit_l = "\n**Critical Hit!**" if crit else ""
-  dmg_l = ("\n**Damage roll:** " + d_roll.full) if (a_hit and not crit) else ""
+  dmg_l = "\n**Miss!**" if not a_hit else "\n**Critical Hit!**" if crit else "\n**Damage roll:** " + d_roll.full
 
-  f = f'Was {c.name} able to kill the {anm_name}?|**Attack roll:** {a_roll.full}{dmg_l}\n{sl if dead else fl}{crit_l}'
+  f = f'Was {c.name} able to kill the {anm_name}?|**Attack roll:** {a_roll.full}{dmg_l}'
 
   if dead:
     thumb = anm["img"]
