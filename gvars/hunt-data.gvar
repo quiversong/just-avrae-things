@@ -937,7 +937,7 @@
       "cha": 9,
       "commune": true,
       "pp": 15,
-      "prizes": [{"name": "Token of the Coast", "qt": 1}],
+      "prizes": [{"name": "Token of the Coast", "qt": 3}],
       "commune_succ": "The {anm_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
       "commune_fail": "The {anm_name} seems dissatisfied. It turns and flies away.",
       "img": "https://i.pinimg.com/originals/b4/33/c1/b433c15cc6b89ebec1801241931a3371.jpg"
