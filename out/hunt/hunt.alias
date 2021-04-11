@@ -157,7 +157,7 @@ if p == "sneak":
       f2 += f'Use `!hunt commune` to try to commune with the {anm_name}.'
       c.set_cvar("_h_vars", f'{pid}:commune')
     else:
-      f2 = f'The {anm_name} has not seen you!|Now use `!hunt attack` or `!hunt attack <weapon>` to attack your prey!'
+      f2 = f'The {anm_name} has not seen you!|Now use `!hunt attack` or `!hunt attack [weapon]` to attack your prey!'
       c.set_cvar("_h_vars", f'{pid}:attack')
   else:
     thumb = image
