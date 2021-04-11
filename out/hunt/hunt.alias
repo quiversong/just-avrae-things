@@ -250,7 +250,7 @@ elif p == 'attack':
 
   t = f'{c.name} attacks their prey{" with their " + weapon["name"] if weapon != None else ""}!'
 
-  dmg_l = "\n**Miss!**" if not a_hit else "\n**Critical Hit!**" if crit else "\n**Damage roll:** " + d_roll.full
+  dmg_l = "\n**Miss!**" if not a_hit else "\n**Critical Hit!**" if crit else "\n**Damage roll:** " + d_roll.full + "\n" + sl
 
   f = f'Was {c.name} able to kill the {anm_name}?|**Attack roll:** {a_roll.full}{dmg_l}'
 
