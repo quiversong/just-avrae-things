@@ -137,10 +137,10 @@ if p == "sneak":
     thumb = anm["img"]
     if "commune" in anm and anm["commune"] == True:
       if "sneak_succ" in anm:
-        f2 = anm["sneak_succ"].replace('{char_name}', c.name)
+        f2 = anm["sneak_succ"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
       else:
         f2 = f'The {anm_name} has seen you, but they do not seem scared.'
-      f2 += '' if '|' in f2 else '|'
+      f2 += '\n' if '|' in f2 else '|'
       f2 += f'Use `!hunt commune` to try to commune with the {anm_name}.'
       c.set_cvar("_h_vars", f'{pid}:commune')
     else:
@@ -149,9 +149,11 @@ if p == "sneak":
   else:
     thumb = image
     if "sneak_fail" in anm:
-      f2 = anm["sneak_fail"].replace('{char_name}', c.name)
+      f2 = anm["sneak_fail"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
     else:
-      f2 = f'You lost sight of the {anm_name}...|Better luck next time!'
+      f2 = f'You lost sight of the {anm_name}...'
+    f2 += '\n' if '|' in f2 else '|'
+    f2 += 'Better luck next time! Use `!hunt` to try again.'
     c.delete_cvar("_h_vars")
 
 elif p == 'commune':
@@ -175,17 +177,20 @@ elif p == 'commune':
     prize_list = prize_list[:len(prize_list) - 2]
 
     if "commune_succ" in anm:
-      f2 = anm["commune_succ"].replace('{char_name}', c.name)
+      f2 = anm["commune_succ"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
     else:
-      f2 = f'The {anm_name} runs away, but the experience enlightens you...|'
-    f2 += "\nYou gained: " + prize_list + '.\nThey have been added to your "Hunting" bag!'
+      f2 = f'The {anm_name} runs away, but the experience enlightens you...'
+    f2 += '\n' if '|' in f2 else '|'
+    f2 += "You gained: " + prize_list + '.\nThey have been added to your "Hunting" bag!'
 
   else:
     thumb = image
     if "commune_fail" in anm:
-      f2 = anm["commune_fail"].replace('{char_name}', c.name)
+      f2 = anm["commune_fail"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
     else:
-      f2 = f'The {anm_name} ran away unexpectedly!|Better luck next time!'
+      f2 = f'The {anm_name} ran away unexpectedly!'
+    f2 += '\n' if '|' in f2 else '|'
+    f2 += "Better luck next time! Use `!hunt` to try again."
 
 elif p == 'attack':
   weapon = None
