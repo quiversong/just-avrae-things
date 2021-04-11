@@ -80,6 +80,7 @@ if (len(args) == 0 or (not stage and args[0] not in b_ids)):
   b_list_cmd = "  `!hunt " + "`\n  `!hunt ".join(b_ids) + "`"
   f = f'Where do you want to go hunting?|Use one of the following:\n{b_list_cmd}'
   thumb = image
+  img = 'https://cdn.discordapp.com/attachments/827581981452795975/830670258897158174/ranger-bow.png'
   return 0
 
 p = args[0]
