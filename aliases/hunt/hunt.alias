@@ -220,17 +220,17 @@ elif p == 'attack':
         'd_die': weapon_str.split('Hit:')[1].strip().split(' ')[0].split('[')[0]
       }
 
-  a_bonus_param = pargs.get('b', default='')[0]
+  a_bonus_param = '+'.join(pargs.get('b', default=[''])).strip()
   a_mod = weapon['a_bonus'] if weapon != None else dexterityMod + proficiencyBonus
   a_die = '2d20kh1' if pargs.adv() == 1 else '2d20kl1' if pargs.adv() == -1 else '1d20'
   a_die = f'{a_die} + {a_mod}'
-  a_die = f'{a_die} + {a_bonus_param}' if len(a_bonus_param) > 0 else a_die
+  a_die = f'{a_die} + {a_bonus_param}' if a_bonus_param != '' else a_die
   a_roll = vroll(a_die)
   crit = a_roll.result.crit == 1
 
-  d_bonus_param = pargs.get('d', default='')[0]
+  d_bonus_param = '+'.join(pargs.get('d', default=[''])).strip()
   d_die = f'{weapon["d_die"]}' if weapon != None else f'1d8+{dexterityMod}'
-  d_die = f'{d_die}+{d_bonus_param}' if len(d_bonus_param) > 0 else d_die
+  d_die = f'{d_die}+{d_bonus_param}' if d_bonus_param != '' else d_die
   d_roll = vroll(d_die)
 
   a_hit = crit or a_roll.total > anm["ac"]
