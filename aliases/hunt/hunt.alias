@@ -217,7 +217,7 @@ elif p == 'attack':
       weapon = {
         'name': weapon_str.split(':')[0].strip(),
         'a_bonus': int(weapon_str.split('Attack:')[1].strip().split(' ')[0]),
-        'd_die': weapon_str.split('Hit:')[1].strip().split(' ')[0].split('[')[0]
+        'd_die': weapon_str.split('Hit:')[1].strip().split('[')[0].strip()
       }
 
   a_bonus_param = '+'.join(pargs.get('b', default=[''])).strip()
@@ -229,7 +229,7 @@ elif p == 'attack':
   crit = a_roll.result.crit == 1
 
   d_bonus_param = '+'.join(pargs.get('d', default=[''])).strip()
-  d_die = f'{weapon["d_die"]}' if weapon != None else f'1d8+{dexterityMod}'
+  d_die = weapon["d_die"] if weapon != None else f'1d8+{dexterityMod}'
   d_die = f'{d_die}+{d_bonus_param}' if d_bonus_param != '' else d_die
   d_roll = vroll(d_die)
 
@@ -247,7 +247,7 @@ elif p == 'attack':
     thumb = anm["img"]
     c.set_cvar("_h_vars", f'{pid}:clean')
     if crit:
-      f2 = f'{c.name} hit a critical hit killing {anm_name} on the spot!'
+      f2 = f'{c.name} hit a critical hit killing the {anm_name} on the spot!'
     else:
       f2 = f'{c.name} manages to kill the {anm_name}.'
     f2 += '|Use `!hunt clean` to clean your prize and collect the goods!'
