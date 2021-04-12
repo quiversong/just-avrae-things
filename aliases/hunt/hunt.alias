@@ -45,8 +45,8 @@ if "_h_dhc_" in cv:
 
 footer = "Don't forget to role-play your hunting actions!\n"
 footer += f'There is a limit of {hunt_daily_cap} hunts per day. You have gone hunting {hunt_count}x today.'
-footer += "\n!hunt attack [weaponname] [adv/dis/-b/-d] | !hunt help"
-footer += "\nSeventra: Exodus of Heroes|Hunt v1.04|Creator: quiversong#2772 aka Adrienne"
+footer += "\nSeventra: Exodus of Heroes | Hunt v1.04 | !hunt help"
+footer += "\nCreators: Archaias06#6633 (Rorik) and quiversong#2772 (Adrienne)"
 
 hvars, pid, stage = None, None, None
 if "_h_vars" in cv:
