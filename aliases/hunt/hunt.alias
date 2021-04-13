@@ -68,8 +68,9 @@ b_ids = [k for k, v in biomes.items()]
 
 animals = data["animals"]
 
-in_wrong_stage = stage and (len(args) == 0 or (len(args) > 0 and stage != args[0]))
-if (in_wrong_stage):
+in_wrong_stage = stage and (len(args) == 0 or (len(args) > 0 and (stage != args[0]))
+quitting_hunt = stage == 'attack' and len(args) > 0 and args[0] == 'quit'
+if (in_wrong_stage and not quitting_hunt):
   anm = animals[pid]
   anm_name = anm["name"]
   add_n = "n" if anm["name"][0] in "AEIOU" else ""
@@ -159,6 +160,7 @@ if p == "sneak":
       c.set_cvar("_h_vars", f'{pid}:commune')
     else:
       f2 = f'The {anm_name} has not seen you!|Now use `!hunt attack` or `!hunt attack [weapon]` to attack your prey!'
+      f2 += "\nAlternatively use `!hunt quit` if you would rather not hunt this prey."
       c.set_cvar("_h_vars", f'{pid}:attack')
   else:
     thumb = image
@@ -169,6 +171,12 @@ if p == "sneak":
     f2 += '\n' if '|' in f2 else '|'
     f2 += 'Better luck next time! Use `!hunt` to try again.'
     c.delete_cvar("_h_vars")
+
+elif p == 'quit':
+  t = f'{c.name} quits hunting the {anm_name}!'
+  f = f'You lose sight of the {anm_name}.|But you spend some time admiring the beauty of the nature around you.'
+  f += '\nIt is magnificent!'
+  c.delete_cvar("_h_vars")
 
 elif p == 'commune':
   if not "commune" in anm or anm["commune"] == False:
