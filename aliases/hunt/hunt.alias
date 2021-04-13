@@ -1,13 +1,20 @@
 tembed
 <drac2>
-data_var = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
-timeout = 300
-hunt_daily_cap = 6
+# Configuration Variables
+IS_LIVE = False
 
+BETA_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
+LIVE_VAR = "e93be9b6-b00f-47bb-8d63-a8c5efd8d32a"
+DAILY_CAP = 6
+
+# Code
 args = &ARGS&
 pargs = argparse(args)
 c = character()
 cv, cs = c.cvars, c.skills
+
+data_var = LIVE_VAR if IS_LIVE else BETA_VAR
+hunt_daily_cap = DAILY_CAP
 
 t = f'{c.name} goes hunting!'
 f, f2, color = None, None, '128c2f'
