@@ -75,7 +75,7 @@ b_ids = [k for k, v in biomes.items()]
 
 animals = data["animals"]
 
-in_wrong_stage = stage and (len(args) == 0 or (len(args) > 0 and (stage != args[0]))
+in_wrong_stage = stage and (len(args) == 0 or (len(args) > 0 and stage != args[0]))
 quitting_hunt = stage == 'attack' and len(args) > 0 and args[0] == 'quit'
 if (in_wrong_stage and not quitting_hunt):
   anm = animals[pid]
