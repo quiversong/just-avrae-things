@@ -38,3 +38,4 @@ f2 = f'Spell slots of level {slot_level}| ' + sb.slots_str(slot_level)
 -title "{{t}}"
 -f "{{f}}"
 {{f'-f "{f2}"' if f2 else ''}}
+-thumb "{{thumb}}"
