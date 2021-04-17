@@ -29,8 +29,12 @@ first_hunt_time = None
 wait_time = None
 wait_text = None
 
-if "_h_dhc_" in cv:
-  var_parts = cv["_h_dhc_"].split(':')
+HUNT_TIME_VAR = "_h_dhc_"
+HUNT_STAGE_VAR = "_h_vars"
+HUNT_STATS_VAR = "_h_st_"
+
+if HUNT_TIME_VAR in cv:
+  var_parts = cv[HUNT_TIME_VAR].split(':')
   hunt_count = int(var_parts[0])
   first_hunt_time = float(var_parts[1])
 
@@ -39,7 +43,7 @@ if "_h_dhc_" in cv:
     passed_in_day_of_first_hunt = first_hunt_time % 86400
     next_midnight_after_first_hunt = first_hunt_time + (86400 - passed_in_day_of_first_hunt)
     if now > next_midnight_after_first_hunt:
-      c.delete_cvar("_h_dhc_")
+      c.delete_cvar(HUNT_TIME_VAR)
       hunt_count, first_hunt_time = 0, None
     elif hunt_count >= hunt_daily_cap:
       wait_time = next_midnight_after_first_hunt - now
@@ -57,14 +61,14 @@ footer += "\n" + f'Seventra: Exodus of Heroes | Hunt v{VERSION} | !hunt help'
 footer += "\nCreators: Archaias06#6633 (Rorik) and quiversong#2772 (Adrienne)"
 
 hvars, pid, stage = None, None, None
-if "_h_vars" in cv:
-  hvars = cv["_h_vars"].split(":")
+if HUNT_STAGE_VAR in cv:
+  hvars = cv[HUNT_STAGE_VAR].split(":")
   pid = hvars[0]
   stage = hvars[1]
 
 if len(args) > 0 and args[0] == "reset":
-  c.delete_cvar("_h_vars")
-  c.delete_cvar("_h_dhc_")
+  c.delete_cvar(HUNT_STAGE_VAR)
+  c.delete_cvar(HUNT_TIME_VAR)
   t = "Resetting hunting state..."
   footer = footer.replace(f'{hunt_count}x today', '0x today')
   return 0
@@ -115,7 +119,7 @@ if p in b_ids:
 
   hunt_count += 1
   first_hunt_time = time() if hunt_count == 1 else first_hunt_time
-  c.set_cvar("_h_dhc_", f'{hunt_count}:{first_hunt_time}')
+  c.set_cvar(HUNT_TIME_VAR, f'{hunt_count}:{first_hunt_time}')
   footer = footer.replace(f'{hunt_count - 1}x today', f'{hunt_count}x today')
 
   b = biomes[p]
@@ -136,7 +140,7 @@ if p in b_ids:
   anm_id = anm_id[0]
   anm = animals[anm_id]
   add_n = "n" if anm["name"][0] in "AEIOU" else ""
-  c.set_cvar("_h_vars", f'{anm_id}:sneak')
+  c.set_cvar(HUNT_STAGE_VAR, f'{anm_id}:sneak')
 
   if "commune" in anm and anm["commune"] == True:
     color = 'f0b330'
@@ -165,11 +169,11 @@ if p == "sneak":
         f2 = f'The {anm_name} has seen you, but they do not seem scared.'
       f2 += '\n' if '|' in f2 else '|'
       f2 += f'Use `!hunt commune` to try to commune with the {anm_name}.'
-      c.set_cvar("_h_vars", f'{pid}:commune')
+      c.set_cvar(HUNT_STAGE_VAR, f'{pid}:commune')
     else:
       f2 = f'The {anm_name} has not seen you!|Now use `!hunt attack` or `!hunt attack [weapon]` to attack your prey!'
       f2 += "\nAlternatively use `!hunt quit` if you would rather not hunt this prey."
-      c.set_cvar("_h_vars", f'{pid}:attack')
+      c.set_cvar(HUNT_STAGE_VAR, f'{pid}:attack')
   else:
     thumb = image
     if "sneak_fail" in anm:
@@ -178,19 +182,19 @@ if p == "sneak":
       f2 = f'You lost sight of the {anm_name}...'
     f2 += '\n' if '|' in f2 else '|'
     f2 += 'Better luck next time! Use `!hunt` to try again.'
-    c.delete_cvar("_h_vars")
+    c.delete_cvar(HUNT_STAGE_VAR)
 
 elif p == 'quit':
   t = f'{c.name} quits hunting the {anm_name}!'
   f = f'You lose sight of the {anm_name}.|But you spend some time admiring the beauty of the nature around you.'
   f += '\nIt is magnificent!'
-  c.delete_cvar("_h_vars")
+  c.delete_cvar(HUNT_STAGE_VAR)
 
 elif p == 'commune':
   if not "commune" in anm or anm["commune"] == False:
     f = "!hunt script rolled a 1 and failed flat on its head! Please report to a Server Administrator."
     return 1
-  c.delete_cvar("_h_vars")
+  c.delete_cvar(HUNT_STAGE_VAR)
   s_roll = vroll(cs.animalHandling.d20())
   succ = s_roll.total > anm["cha"]
   t = f'{c.name} tries to commune with the {anm_name}...'
@@ -262,7 +266,7 @@ elif p == 'attack':
 
   if dead:
     thumb = anm["img"]
-    c.set_cvar("_h_vars", f'{pid}:clean')
+    c.set_cvar(HUNT_STAGE_VAR, f'{pid}:clean')
     if crit:
       f2 = f'{c.name} hit a critical hit killing the {anm_name} on the spot!'
     else:
@@ -274,10 +278,10 @@ elif p == 'attack':
       f2 = f'{c.name} successfully hit {anm_name}, but it was not enough to kill it, and it ran away...|Better luck next time!'
     else:
       f2 = f'The {anm_name} managed to escape your attack and flee...|Better luck next time!'
-    c.delete_cvar("_h_vars")
+    c.delete_cvar(HUNT_STAGE_VAR)
 
 elif p == 'clean':
-  c.delete_cvar("_h_vars")
+  c.delete_cvar(HUNT_STAGE_VAR)
   t = f'{c.name} attempts to clean their hunting prize!'
   s_roll = vroll(cs.survival.d20())
   succ = s_roll.total > anm["ac"]
