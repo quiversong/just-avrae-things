@@ -79,6 +79,11 @@ if len(args) > 0 and args[0] == "reset":
   footer = footer.replace(f'{hunt_count}x today', '0x today')
   return 0
 
+if len(args) > 0 and args[0] == "resetstats":
+  c.delete_cvar(HUNT_STATS_VAR)
+  t = "Resetting hunt statistics..."
+  return 0
+
 data = load_json(get_gvar(data_var))
 
 biomes = data["biomes"]
