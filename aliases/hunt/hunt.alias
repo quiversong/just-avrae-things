@@ -2,6 +2,7 @@ tembed
 <drac2>
 # Configuration Variables
 IS_LIVE = False
+VERSION = '1.04'
 
 BETA_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
 LIVE_VAR = "e93be9b6-b00f-47bb-8d63-a8c5efd8d32a"
@@ -52,7 +53,7 @@ if "_h_dhc_" in cv:
 
 footer = "Don't forget to role-play your hunting actions!\n"
 footer += f'There is a limit of {hunt_daily_cap} hunts per day. You have gone hunting {hunt_count}x today.'
-footer += "\nSeventra: Exodus of Heroes | Hunt v1.04 | !hunt help"
+footer += "\n" + f'Seventra: Exodus of Heroes | Hunt v{VERSION} | !hunt help'
 footer += "\nCreators: Archaias06#6633 (Rorik) and quiversong#2772 (Adrienne)"
 
 hvars, pid, stage = None, None, None
