@@ -66,6 +66,12 @@ if HUNT_STAGE_VAR in cv:
   pid = hvars[0]
   stage = hvars[1]
 
+if not HUNT_STATS_VAR in cv:
+  c.set_cvar(HUNT_STATS_VAR, dump_json("{}"))
+  stats = {}
+else:
+  stats = load_json(cv["_h_st_"])
+
 if len(args) > 0 and args[0] == "reset":
   c.delete_cvar(HUNT_STAGE_VAR)
   c.delete_cvar(HUNT_TIME_VAR)
@@ -162,6 +168,7 @@ if p == "sneak":
   f = f'{c.name} closes on the {anm_name}...|**Stealth roll:** {s_roll.full}\n{sl if succ else fl}'
   if succ:
     thumb = anm["img"]
+    stats["s_sneak"] = stats["s_sneak"] + 1 if "s_sneak" in stats else 1
     if "commune" in anm and anm["commune"] == True:
       if "sneak_succ" in anm:
         f2 = anm["sneak_succ"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
@@ -200,6 +207,7 @@ elif p == 'commune':
   t = f'{c.name} tries to commune with the {anm_name}...'
   f = f'{c.name} approaches the {anm_name}...|**Animal Handling roll:** {s_roll.full}\n{sl if succ else fl}'
   if succ:
+    stats["s_commune"] = stats["s_commune"] + 1 if "s_commune" in stats else 1
     thumb = anm["img"]
     add_to_bag = {}
     prize_list = ''
@@ -265,6 +273,7 @@ elif p == 'attack':
   f = f'Was {c.name} able to kill the {anm_name}?|**Attack roll:** {a_roll.full}{dmg_l}'
 
   if dead:
+    stats["s_attack"] = stats["s_attack"] + 1 if "s_attack" in stats else 1
     thumb = anm["img"]
     c.set_cvar(HUNT_STAGE_VAR, f'{pid}:clean')
     if crit:
@@ -288,6 +297,7 @@ elif p == 'clean':
   f = f'{c.name} cleans and extracts the goods from the {anm_name}...|**Survival roll:** {s_roll.full}\n{sl if succ else fl}'
   img = data["images"]["campfire"]
   if succ:
+    stats["s_clean"] = stats["s_clean"] + 1 if "s_clean" in stats else 1
     add_to_bag = {}
     prize_list = ''
     if "rations" in anm and anm["rations"] > 0:
@@ -305,6 +315,8 @@ elif p == 'clean':
   else:
     f2 = f'You ended up wasting the prey you caught...|Better luck next time!'
 
+
+c.set_cvar(HUNT_STATS_VAR, stats)
 
 if add_to_bag != None:
   _bag_name = "Hunting"
