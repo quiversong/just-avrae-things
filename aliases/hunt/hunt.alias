@@ -67,8 +67,8 @@ if HUNT_STAGE_VAR in cv:
   stage = hvars[1]
 
 if not HUNT_STATS_VAR in cv:
-  c.set_cvar(HUNT_STATS_VAR, dump_json("{}"))
   stats = {}
+  c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
 else:
   stats = load_json(cv["_h_st_"])
 
@@ -137,17 +137,19 @@ if p in b_ids:
 
   b = biomes[p]
   img = b["img"]
-  nop_m = f'{c.name} could not find any prey.|Better luck next time!'
+  noprey_message = f'{c.name} could not find any prey.|Better luck next time!'
 
   a_roll = roll("1d100")
   if not "animal_chance" in b:
-    f = nop_m
+    f = noprey_message
+    c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
     return 0
 
   b_anms = [(k, v) for k, v in b["animal_chance"].items()]
   anm_id = [k for k, v in b_anms if (a_roll == v[0] if len(v) == 1 else a_roll >= v[0] and a_roll <= v[1])]
   if len(anm_id) == 0:
-    f = nop_m
+    f = noprey_message
+    c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
     return 0
 
   anm_id = anm_id[0]
@@ -160,6 +162,7 @@ if p in b_ids:
     f = f'{c.name} found a ***VERY RARE*** {anm["name"]}!|Use `!hunt sneak` to try to approach it without being noticed.'
   else:
     f = f'{c.name} found a{add_n} {anm["name"]} in the {b["name"]}!|Use `!hunt sneak` to try and get the jump on it.'
+  c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
   return 0
 
 anm = animals[pid]
@@ -272,7 +275,7 @@ elif p == 'attack':
   a_hit = crit or a_roll.total > anm["ac"]
   dead = crit or (a_hit and d_roll.total > anm["hp"])
   injured = a_hit and not dead
-  damage_dealt = d_roll if a_hit and not crit else anm["hp"] if crit else 0
+  damage_dealt = d_roll.total if a_hit and not crit else anm["hp"] if crit else 0
 
   t = f'{c.name} attacks their prey{" with their " + weapon["name"] if weapon != None else ""}!'
 
@@ -326,7 +329,7 @@ elif p == 'clean':
     f2 = f'You ended up wasting the prey you caught...|Better luck next time!'
 
 
-c.set_cvar(HUNT_STATS_VAR, stats)
+c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
 
 if add_to_bag != None:
   _bag_name = "Hunting"
