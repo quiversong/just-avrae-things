@@ -1,0 +1,42 @@
+embed
+<drac2>
+  c = character()
+  cv = c.cvars
+  t = f'{c.name} wants to sell all their trash!'
+  f, f2, img, thumb, color, footer = None, None, None, None, None, None
+
+  bags = load_json(cv['bags'])
+
+  coin_pouch_index = [i for i, bag in enumerate(bags) if bag[0] == 'Coin Pouch']
+  if len(coin_pouch_index) <= 0:
+    f = 'Oops! You don\'t have a coin pouch!|Make sure you have one and try again.'
+    return 1
+  coin_pouch_index = coin_pouch_index[0]
+  coin_pouch_content = bags[coin_pouch_index][1]
+
+  fish_bag_index = [i for i, bag in enumerate(bags) if bag[0] == 'Fish']
+  if len(fish_bag_index) > 0:
+    fish_bag_index = fish_bag_index[0]
+    fish_content = bags[fish_bag_index][1]
+    fish_count = sum(fish_content.values())
+    new_fish_content = {}
+    if fish_count % 2 != 0:
+      new_fish_content[list(fish_content.keys())[0]] = 1
+      fish_count -= 1
+    if fish_count == 0:
+      f = f'{c.name} tries to selll their fish...|Oops... You need at least 2 fish to dump sell your catches!'
+    else:
+      money_made = int(fish_count / 2)
+      f = f'{c.name} sells {fish_count} fish!|You made {money_made} gold coin(s).'
+      coin_pouch_content['gp'] += money_made
+      bags[fish_bag_index] = ['Fish', new_fish_content]
+      bags[coin_pouch_index] = ['Coin Pouch', coin_pouch_content]
+      c.set_cvar('bags', dump_json(bags))
+</drac2>
+-title "{{t}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-f "{f}"' if f else ""}}
+{{f'-f "{f2}"' if f2 else ""}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
