@@ -182,7 +182,8 @@ if "commune" in anm and anm["commune"] == True:
   color = 'f0b330'
 
 if p == "sneak":
-  s_roll = vroll(cs.stealth.d20())
+  adv_status = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
+  s_roll = vroll(cs.stealth.d20(base_adv = adv_status))
   succ = s_roll.total > anm["pp"]
   t = f'{c.name} tries to sneak on their prey!'
   f = f'{c.name} closes on the {anm_name}...|**Stealth roll:** {s_roll.full}\n{sl if succ else fl}'
