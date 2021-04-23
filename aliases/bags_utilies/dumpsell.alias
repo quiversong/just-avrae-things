@@ -3,7 +3,8 @@ embed
   c = character()
   cv = c.cvars
   t = f'{c.name} wants to sell all their trash!'
-  f, f2, img, thumb, color, footer = None, None, None, None, None, None
+  f, f2, f3, img, thumb, color, footer = None, None, None, None, None, None, None
+  thumb = image
 
   bags = load_json(cv['bags'])
 
@@ -13,6 +14,8 @@ embed
     return 1
   coin_pouch_index = coin_pouch_index[0]
   coin_pouch_content = bags[coin_pouch_index][1]
+
+  sold_fish_or_hunting_prizes = False
 
   fish_bag_index = [i for i, bag in enumerate(bags) if bag[0] == 'Fish']
   if len(fish_bag_index) > 0:
@@ -27,16 +30,85 @@ embed
       f = f'{c.name} tries to selll their fish...|Oops... You need at least 2 fish to dump sell your catches!'
     else:
       money_made = int(fish_count / 2)
-      f = f'{c.name} sells {fish_count} fish!|You made {money_made} gold coin(s).'
+      f = f'{c.name} sells {fish_count} fish!|You made **{money_made}gp** with the fish you sold.'
       coin_pouch_content['gp'] += money_made
       bags[fish_bag_index] = ['Fish', new_fish_content]
       bags[coin_pouch_index] = ['Coin Pouch', coin_pouch_content]
-      c.set_cvar('bags', dump_json(bags))
+      sold_fish_or_hunting_prizes = True
+
+  hunting_bag_index = [i for i, bag in enumerate(bags) if bag[0] == 'Hunting']
+  if len(hunting_bag_index) > 0:
+    hunting_bag_index = hunting_bag_index[0]
+    hunt_content = bags[hunting_bag_index][1]
+    new_hunt_content = {}
+    sp_total, gp_total = 0, 0
+
+    odd_sp = None
+    odd_gp = None
+    sold_list = []
+    for k in hunt_content.keys():
+      if k.lower().endswith('sp)'):
+        value = int(k.split('(')[1].lower().split('sp')[0])
+        qty = hunt_content[k]
+        sp_total += qty * value
+        if value % 2 != 0 and odd_sp == None:
+          odd_sp = (k, value, qty)
+        else:
+          sold_list.append(f'{qty}x {k}')
+      elif k.lower().endswith('gp)'):
+        value = int(k.split('(')[1].lower().split('gp')[0])
+        qty = hunt_content[k]
+        gp_total += qty * value
+        if value % 2 != 0 and odd_gp == None:
+          odd_gp = (k, value, qty)
+        else:
+          sold_list.append(f'{qty}x {k}')
+      else:
+        new_hunt_content[k] = hunt_content[k]
+    if sp_total > 0:
+      if sp_total % 2 != 0:
+        new_hunt_content[odd_sp[0]] = odd_sp[1]
+        sp_total -= odd_sp[1]
+        if odd_sp[2] > 1:
+          sold_list.append(f'{odd_sp[2] - 1}x {odd_sp[0]}')
+      else:
+        sold_list.append(f'{odd_sp[2]}x {odd_sp[0]}')
+    if gp_total > 0:
+      if gp_total % 2 != 0:
+        new_hunt_content[odd_gp[0]] = odd_gp[1]
+        gp_total -= odd_gp[1]
+        if odd_gp[2] > 1:
+          sold_list.append(f'{odd_gp[2] - 1}x {odd_gp[0]}')
+      else:
+        sold_list.append(f'{odd_gp[2]}x {odd_gp[0]}')
+    gp_total = floor(gp_total / 2)
+    sp_total = floor(sp_total / 2)
+    if sp_total >= 10:
+      gp_total += floor(sp_total / 10)
+      sp_total = sp_total % 10
+    gp_text = f'**{gp_total}gp**' if gp_total > 0 else ''
+    sp_text = f'**{sp_total}sp**' if sp_total > 0 else ''
+    connector = ' and ' if gp_total > 0 and sp_total > 0 else ''
+    anything_sold = gp_total > 0 or sp_total > 0
+    sold_fish_or_hunting_prizes = True if anything_sold else sold_fish_or_hunting_prizes
+    text = f'{c.name} sells their hunting prizes!|You made {gp_text}{connector}{sp_text} worth of hunting prizes.' if anything_sold else f'{c.name} tries to sell their hunting prizes...|Oops... You do not have enough hunting prizes to sell (we only accept the ones with an assigned monetary value)!'
+    text += "\n" + "\n".join(sold_list) if anything_sold else ''
+    f = text if f == None else f
+    f2 = text if f != None else f2
+
+    coin_pouch_content['gp'] += gp_total
+    coin_pouch_content['sp'] += sp_total
+    bags[hunting_bag_index] = ['Hunting', new_hunt_content]
+    bags[coin_pouch_index] = ['Coin Pouch', coin_pouch_content]
+
+  f3 = 'Well done!|Your coins have been added to your Coin Pouch' if sold_fish_or_hunting_prizes else None
+  c.set_cvar('bags', dump_json(bags))
 </drac2>
 -title "{{t}}"
 {{f'-image "{img}"' if img else ""}}
 {{f'-thumb "{thumb}"' if thumb else ""}}
 {{f'-f "{f}"' if f else ""}}
 {{f'-f "{f2}"' if f2 else ""}}
+{{f'-f "{f3}"' if f3 else ""}}
 {{f'-color "{color}"' if color else ""}}
 {{f'-footer "{footer}"' if footer else ""}}
