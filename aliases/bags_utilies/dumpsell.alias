@@ -30,7 +30,7 @@ embed
       f = f'{c.name} tries to selll their fish...|Oops... You need at least 2 fish to dump sell your catches!'
     else:
       money_made = int(fish_count / 2)
-      f = f'{c.name} sells {fish_count} fish!|You made **{money_made}gp** with the fish you sold.'
+      f = f'{c.name} sells {fish_count} fish!|You sold **{money_made}gp** worth of fish.'
       coin_pouch_content['gp'] += money_made
       bags[fish_bag_index] = ['Fish', new_fish_content]
       bags[coin_pouch_index] = ['Coin Pouch', coin_pouch_content]
@@ -91,7 +91,7 @@ embed
     connector = ' and ' if gp_total > 0 and sp_total > 0 else ''
     anything_sold = gp_total > 0 or sp_total > 0
     sold_fish_or_hunting_prizes = True if anything_sold else sold_fish_or_hunting_prizes
-    text = f'{c.name} sells their hunting prizes!|You made {gp_text}{connector}{sp_text} worth of hunting prizes.' if anything_sold else f'{c.name} tries to sell their hunting prizes...|Oops... You do not have enough hunting prizes to sell (we only accept the ones with an assigned monetary value)!'
+    text = f'{c.name} sells their hunting prizes!|You sold {gp_text}{connector}{sp_text} worth of hunting prizes.' if anything_sold else f'{c.name} tries to sell their hunting prizes...|Oops... You do not have enough hunting prizes to sell (we only accept the ones with an assigned monetary value)!'
     text += "\n" + "\n".join(sold_list) if anything_sold else ''
     f = text if f == None else f
     f2 = text if f != None else f2
