@@ -257,7 +257,7 @@ elif p == 'commune':
 
 elif p == 'attack':
   weapon = None
-  if len(args) > 1 and len(args[1]) > 3 and args[1] not in ["adv", "dis", "-b", "-d"]:
+  if len(args) > 1 and len(args[1]) >= 3 and args[1] not in ["adv", "dis", "-b", "-d"]:
     weapon_arg = args[1].lower()
     weapon_str = [a for a in c.attacks
       if str(a).lower().split(':')[0].strip().replace('*', '').startswith(weapon_arg)
