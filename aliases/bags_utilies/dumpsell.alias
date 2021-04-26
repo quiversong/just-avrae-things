@@ -15,94 +15,106 @@ embed
   coin_pouch_index = coin_pouch_index[0]
   coin_pouch_content = bags[coin_pouch_index][1]
 
-  sold_fish_or_hunting_prizes = False
+  total_cp = 0
+  total_sp = 0
+  total_gp = 0
+
+  sold_fish = []
+  sold_hunt = []
 
   fish_bag_index = [i for i, bag in enumerate(bags) if bag[0] == 'Fish']
-  if len(fish_bag_index) > 0:
-    fish_bag_index = fish_bag_index[0]
-    fish_content = bags[fish_bag_index][1]
-    fish_count = sum(fish_content.values())
-    new_fish_content = {}
-    if fish_count % 2 != 0:
-      new_fish_content[list(fish_content.keys())[0]] = 1
-      fish_count -= 1
-    if fish_count == 0:
-      f = f'{c.name} tries to selll their fish...|Oops... You need at least 2 fish to dump sell your catches!'
-    else:
-      money_made = int(fish_count / 2)
-      f = f'{c.name} sells {fish_count} fish!|You sold **{money_made}gp** worth of fish.'
-      coin_pouch_content['gp'] += money_made
-      bags[fish_bag_index] = ['Fish', new_fish_content]
-      bags[coin_pouch_index] = ['Coin Pouch', coin_pouch_content]
-      sold_fish_or_hunting_prizes = True
+  fish_bag_index = fish_bag_index[0] if len(fish_bag_index) > 0 else None
 
   hunting_bag_index = [i for i, bag in enumerate(bags) if bag[0] == 'Hunting']
-  if len(hunting_bag_index) > 0:
-    hunting_bag_index = hunting_bag_index[0]
-    hunt_content = bags[hunting_bag_index][1]
-    new_hunt_content = {}
-    sp_total, gp_total = 0, 0
+  hunting_bag_index = hunting_bag_index[0] if len(hunting_bag_index) > 0 else None
+  new_hunt_content = {}
 
-    odd_sp = None
-    odd_gp = None
-    sold_list = []
+  fish_gp, fish_sp = 0, 0
+  if fish_bag_index != None:
+    fish_content = bags[fish_bag_index][1]
+    fish_count = sum(fish_content.values())
+    sold_fish = [f'{fish_content[fish]}x {fish}' for fish in fish_content.keys()]
+    fish_sp = fish_count * 5
+    if fish_sp >= 10:
+      fish_gp = floor(fish_sp / 10)
+      fish_sp = fish_sp % 10
+
+  hunt_gp, hunt_sp, hunt_cp = 0, 0, 0
+  if hunting_bag_index != None:
+    hunt_content = bags[hunting_bag_index][1]
+    prizes_sp_value, prizes_gp_value = 0, 0
     for k in hunt_content.keys():
       if k.lower().endswith('sp)'):
         value = int(k.split('(')[1].lower().split('sp')[0])
         qty = hunt_content[k]
-        sp_total += qty * value
-        if value % 2 != 0 and odd_sp == None:
-          odd_sp = (k, value, qty)
-        else:
-          sold_list.append(f'{qty}x {k}')
+        prizes_sp_value += qty * value
+        sold_hunt.append(f'{qty}x {k}')
       elif k.lower().endswith('gp)'):
         value = int(k.split('(')[1].lower().split('gp')[0])
         qty = hunt_content[k]
-        gp_total += qty * value
-        if value % 2 != 0 and odd_gp == None:
-          odd_gp = (k, value, qty)
-        else:
-          sold_list.append(f'{qty}x {k}')
+        prizes_gp_value += qty * value
+        sold_hunt.append(f'{qty}x {k}')
       else:
         new_hunt_content[k] = hunt_content[k]
-    if sp_total > 0:
-      if sp_total % 2 != 0:
-        new_hunt_content[odd_sp[0]] = odd_sp[1]
-        sp_total -= odd_sp[1]
-        if odd_sp[2] > 1:
-          sold_list.append(f'{odd_sp[2] - 1}x {odd_sp[0]}')
-      else:
-        sold_list.append(f'{odd_sp[2]}x {odd_sp[0]}')
-    if gp_total > 0:
-      if gp_total % 2 != 0:
-        new_hunt_content[odd_gp[0]] = odd_gp[1]
-        gp_total -= odd_gp[1]
-        if odd_gp[2] > 1:
-          sold_list.append(f'{odd_gp[2] - 1}x {odd_gp[0]}')
-      else:
-        sold_list.append(f'{odd_gp[2]}x {odd_gp[0]}')
-    gp_total = floor(gp_total / 2)
-    sp_total = floor(sp_total / 2)
-    if sp_total >= 10:
-      gp_total += floor(sp_total / 10)
-      sp_total = sp_total % 10
-    gp_text = f'**{gp_total}gp**' if gp_total > 0 else ''
-    sp_text = f'**{sp_total}sp**' if sp_total > 0 else ''
-    connector = ' and ' if gp_total > 0 and sp_total > 0 else ''
-    anything_sold = gp_total > 0 or sp_total > 0
-    sold_fish_or_hunting_prizes = True if anything_sold else sold_fish_or_hunting_prizes
-    text = f'{c.name} sells their hunting prizes!|You sold {gp_text}{connector}{sp_text} worth of hunting prizes.' if anything_sold else f'{c.name} tries to sell their hunting prizes...|Oops... You do not have enough hunting prizes to sell (we only accept the ones with an assigned monetary value)!'
-    text += "\n" + "\n".join(sold_list) if anything_sold else ''
-    f = text if f == None else f
-    f2 = text if f != None else f2
+    hunt_gp = floor(prizes_gp_value / 2)
+    prizes_sp_value += prizes_gp_value % 2 * 5
+    hunt_sp = floor(prizes_sp_value / 2)
+    hunt_cp = prizes_sp_value % 2 * 5
+    if hunt_sp >= 10:
+      hunt_gp += floor(hunt_sp / 10)
+      hunt_sp = hunt_sp % 10
 
-    coin_pouch_content['gp'] += gp_total
-    coin_pouch_content['sp'] += sp_total
+  total_gp += hunt_gp + fish_gp
+  total_sp += hunt_sp + fish_sp
+  total_cp += hunt_cp
+
+  if total_cp >= 10:
+    total_sp += floor(total_cp / 10)
+    total_cp = total_cp % 10
+  if total_sp >= 10:
+    total_gp += floor(total_sp / 10)
+    total_sp = total_sp % 10
+
+  bag_cp = coin_pouch_content['cp'] + total_cp
+  bag_sp = coin_pouch_content['sp'] + total_sp
+  bag_gp = coin_pouch_content['gp'] + total_gp
+
+  if bag_cp >= 10:
+    bag_sp += floor(bag_cp / 10)
+    bag_cp = bag_cp % 10
+  if bag_sp >= 10:
+    bag_gp += floor(bag_sp / 10)
+    bag_sp = bag_sp % 10
+
+  coin_pouch_content['gp'] = bag_gp
+  coin_pouch_content['sp'] = bag_sp
+  coin_pouch_content['cp'] = bag_cp
+
+  bags[coin_pouch_index] = ['Coin Pouch', coin_pouch_content]
+
+  hunt_text = None
+  if len(sold_hunt) > 0:
     bags[hunting_bag_index] = ['Hunting', new_hunt_content]
-    bags[coin_pouch_index] = ['Coin Pouch', coin_pouch_content]
+    hunt_gp_text = (hunt_gp + 'gp' + (', ' if hunt_sp > 0 and hunt_cp > 0 else ' and ' if hunt_sp > 0 or hunt_cp > 0 else '')) if hunt_gp > 0 else ''
+    hunt_sp_text = (hunt_sp + 'sp' + (' and ' if hunt_cp > 0 else '')) if hunt_sp > 0 else ''
+    hunt_cp_text = hunt_cp + 'cp' if hunt_cp > 0 else ''
+    hunt_text = f'{c.name} sells their hunting prizes!|You made **{hunt_gp_text}{hunt_sp_text}{hunt_cp_text}** by selling:'
+    hunt_text += '\n' + '\n'.join(sold_hunt)
+    f = hunt_text
 
-  f3 = 'Well done!|Your coins have been added to your Coin Pouch' if sold_fish_or_hunting_prizes else None
-  c.set_cvar('bags', dump_json(bags))
+  if len(sold_fish) > 0:
+    bags[fish_bag_index] = ['Fish', {}]
+    fish_gp_text = fish_gp + 'gp' + (' and ' if fish_sp > 0 else '') if fish_gp > 0 else ''
+    fish_sp_text = fish_sp + 'sp' if fish_sp > 0 else ''
+    fish_text = f'{c.name} sells their fish!|You made **{fish_gp_text}{fish_sp_text}** by selling:'
+    fish_text += '\n' + '\n'.join(sold_fish)
+    f2 = fish_text
+
+  if len(sold_fish) == 0 and len(sold_hunt) == 0:
+    f = f'{c.name} tries to sell their fish or hunting prizes...|But you have none! Come back later.'
+  else:
+    f3 = 'Well done!|Your coins have been added to your Coin Pouch' if len(sold_hunt) > 0 or len(sold_fish) > 0 else None
+    c.set_cvar('bags', dump_json(bags))
 </drac2>
 -title "{{t}}"
 {{f'-image "{img}"' if img else ""}}
