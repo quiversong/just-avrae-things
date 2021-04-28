@@ -2,7 +2,7 @@ embed
 <drac2>
   c = character()
   cv = c.cvars
-  t = f'{c.name} wants to sell all their trash!'
+  t = f'{c.name} wants to cash-in and sell their goods!'
   f, f2, f3, img, thumb, color, footer = None, None, None, None, None, None, None
   thumb = image
 
