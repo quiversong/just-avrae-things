@@ -1,0 +1,12 @@
+{
+  "golden-glass": {
+    "keywords": ["tavern", "arbarax", "ale"],
+    "name": "The Golden Glass",
+    "desc": "Finley's cool tavern in Arbarax!"
+  },
+  "respite-inn": {
+    "keywords": ["tavern", "mossfort", "ale"],
+    "name": "The Drunken Respite Inn",
+    "desc": "The most popular inn in Mossfort!"
+  }
+}
