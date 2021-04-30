@@ -30,7 +30,7 @@ else:
         f = f'Unfortunately the book has no entries for "{key}"|Try searching for an entry with `!lore search <keyword>`'
     else:
         item = data[key]
-        t = f'{character().name} wants to know more about "{item["name"]}"'
+        t = f'{character().name} wants to know more about \"{item["name"]}\"'
         desc = item["desc"]
 
 </drac2>
