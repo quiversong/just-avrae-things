@@ -2,15 +2,29 @@ embed
 <drac2>
   c = character()
   cv = c.cvars
+
   t = f'{c.name} wants to cash-in and sell their goods!'
-  f, f2, f3, img, thumb, color, footer = None, None, None, None, None, None, None
+  footer = 'Don\'t forget to role-play your transaction!\n'
+  footer += 'Seventra: Exodus of Heroes | Cash-in your goods!'
+
+  f, f2, f3, img, thumb, color = None, None, None, None, None, None
   thumb = image
 
   bags = load_json(cv['bags'])
 
+  args = &ARGS&
+  pargs = argparse(args)
+
   coin_pouch_index = [i for i, bag in enumerate(bags) if bag[0] == 'Coin Pouch']
   if len(coin_pouch_index) <= 0:
     f = 'Oops! You don\'t have a coin pouch!|Make sure you have one and try again.'
+    return 1
+
+  if not (pargs.get('f') or pargs.get('h') or pargs.get('fh') or pargs.get('hf')):
+    f = 'Oops! What do you want to sell?|'
+    f += 'Use `!cashin -fh` to sell your fish AND hunting loot\n'
+    f += 'Use `!cashin -f` to sell ONLY your fish\n'
+    f += 'Use `!cashin -h` to sell ONLY your hunting loot'
     return 1
   coin_pouch_index = coin_pouch_index[0]
   coin_pouch_content = bags[coin_pouch_index][1]
@@ -29,8 +43,11 @@ embed
   hunting_bag_index = hunting_bag_index[0] if len(hunting_bag_index) > 0 else None
   new_hunt_content = {}
 
+  want_to_sell_fish = pargs.get('f') or pargs.get('fh') or pargs.get('hf')
+  want_to_sell_hunt = pargs.get('h') or pargs.get('fh') or pargs.get('hf')
+
   fish_gp, fish_sp = 0, 0
-  if fish_bag_index != None:
+  if fish_bag_index != None and want_to_sell_fish:
     fish_content = bags[fish_bag_index][1]
     fish_count = sum(fish_content.values())
     sold_fish = [f'{fish_content[fish]}x {fish}' for fish in fish_content.keys()]
@@ -40,7 +57,7 @@ embed
       fish_sp = fish_sp % 10
 
   hunt_gp, hunt_sp, hunt_cp = 0, 0, 0
-  if hunting_bag_index != None:
+  if hunting_bag_index != None and want_to_sell_hunt:
     hunt_content = bags[hunting_bag_index][1]
     prizes_sp_value, prizes_gp_value = 0, 0
     for k in hunt_content.keys():
@@ -98,7 +115,7 @@ embed
     hunt_gp_text = (hunt_gp + 'gp' + (', ' if hunt_sp > 0 and hunt_cp > 0 else ' and ' if hunt_sp > 0 or hunt_cp > 0 else '')) if hunt_gp > 0 else ''
     hunt_sp_text = (hunt_sp + 'sp' + (' and ' if hunt_cp > 0 else '')) if hunt_sp > 0 else ''
     hunt_cp_text = hunt_cp + 'cp' if hunt_cp > 0 else ''
-    hunt_text = f'{c.name} sells their hunting prizes!|You made **{hunt_gp_text}{hunt_sp_text}{hunt_cp_text}** by selling:'
+    hunt_text = f'{c.name} sells their hunting loot!|You made **{hunt_gp_text}{hunt_sp_text}{hunt_cp_text}** by selling:'
     hunt_text += '\n' + '\n'.join(sold_hunt)
     f = hunt_text
 
@@ -110,9 +127,11 @@ embed
     fish_text += '\n' + '\n'.join(sold_fish)
     f2 = fish_text
 
-  if len(sold_fish) == 0 and len(sold_hunt) == 0:
-    f = f'{c.name} tries to sell their fish or hunting prizes...|But you have none! Come back later.'
-  else:
+  if len(sold_hunt) == 0 and want_to_sell_hunt:
+    f = f'{c.name} tries to sell their hunting loot...|But you have none! Come back later.'
+  if len(sold_fish) == 0 and want_to_sell_fish:
+    f2 = f'{c.name} tries to sell their fish...|But you have none! Come back later.'
+  if len(sold_fish) > 0 or len(sold_hunt) > 0:
     f3 = 'Well done!|Your coins have been added to your Coin Pouch' if len(sold_hunt) > 0 or len(sold_fish) > 0 else None
     c.set_cvar('bags', dump_json(bags))
 </drac2>
