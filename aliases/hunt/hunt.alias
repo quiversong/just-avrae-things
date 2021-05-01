@@ -134,7 +134,7 @@ p = args[0]
 
 if p in b_ids:
   if wait_time != None:
-    f = f'{c.name} is exhausted of so much hunting today...|You have to wait {wait_text} until you can hunt again.'
+    f = f'{c.name} is exhausted from so much hunting today...|You have to wait {wait_text} until you can hunt again.'
     f += '\n(Hunting resets at midnight UTC)'
     return 1
 
