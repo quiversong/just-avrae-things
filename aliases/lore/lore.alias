@@ -32,6 +32,7 @@ else:
         item = data[key]
         t = f'{character().name} wants to know more about \'{item["name"]}\''
         desc = item["desc"]
+        img = item["img"] if "img" in item else None
 
 </drac2>
 -title "{{t}}"

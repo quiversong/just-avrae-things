@@ -2,7 +2,8 @@
   "golden-glass": {
     "keywords": ["tavern", "arbarax", "ale"],
     "name": "The Golden Glass",
-    "desc": "Finley's cool tavern in Arbarax!"
+    "desc": "Finley's cool tavern in Arbarax!",
+    "img": "https://cdn.discordapp.com/attachments/841769300095533067/841769790347804682/Bard-wallpaper.jpg"
   },
   "respite-inn": {
     "keywords": ["tavern", "mossfort", "ale"],
