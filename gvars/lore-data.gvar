@@ -1,4 +1,7 @@
 {
+  "metadata": {
+    "footer": "Seventra: Exodus of Heroes | GVAR Footer"
+  },
   "golden-glass": {
     "keywords": ["tavern", "arbarax", "ale"],
     "name": "The Golden Glass",
@@ -8,6 +11,7 @@
   "respite-inn": {
     "keywords": ["tavern", "mossfort", "ale"],
     "name": "The Drunken Respite Inn",
-    "desc": "The most popular inn in Mossfort!"
+    "desc": "The most popular inn in Mossfort!",
+    "thumb": "https://cdn.discordapp.com/attachments/841769300095533067/841769790347804682/Bard-wallpaper.jpg"
   }
 }

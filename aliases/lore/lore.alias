@@ -4,11 +4,13 @@ data_var = "e6475c4c-3cd2-4d75-8902-08176174a4f7"
 
 args = &ARGS&
 data = load_json(get_gvar(data_var))
+data["metadata"] = data["metadata"] if "metadata" in data else {}
 
 t, f, f2, img, thumb, color, footer, desc = None, None, None, None, None, None, None, None
 
 default_footer = "Seventra: Exodus of Heroes"
-footer = data["footer"] if "footer" in data else default_footer
+
+footer = data["metadata"]["footer"] if "footer" in data["metadata"] else default_footer
 
 if len(args) == 0:
     t = f'{character().name} wants to use the Seventra lorebook.'
@@ -28,7 +30,7 @@ elif args[0] == "search":
         f += '\n'.join(output)
 else:
     key = args[0].lower().strip()
-    if not key in data:
+    if not key in data or key == "metadata":
         t = f'{character().name} queries the Seventra lorebook...'
         f = f'Unfortunately the book has no entries for "{key}"|Try searching for an entry with `!lore search <keyword>`'
     else:
