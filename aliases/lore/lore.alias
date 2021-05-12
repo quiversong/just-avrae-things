@@ -7,6 +7,9 @@ data = load_json(get_gvar(data_var))
 
 t, f, f2, img, thumb, color, footer, desc = None, None, None, None, None, None, None, None
 
+default_footer = "Seventra: Exodus of Heroes"
+footer = data["footer"] if "footer" in data else default_footer
+
 if len(args) == 0:
     t = f'{character().name} wants to use the Seventra lorebook.'
     f = 'What do you want to know more about?|Use `!lore search <keyword>` to search for a topic.'
