@@ -1,0 +1,39 @@
+tembed
+<drac2>
+t, desc, img, thumb, f, f2, f3, color, footer = None, None, None, None, None, None, None, None, None
+
+t = "Crafting with Artisans Tools"
+
+desc = "This is a guideline of which tools can be used to craft items. There are thousands of items, so we can\'t list them all specifically. Think about how you might make an item and consider whether the tools you\'re proficient in would be used to make that item."
+
+f = "**Alchemist\’s supplies:** alcohol, bullets, food, poisons, potions\n\n"
+f += "**Brewer\’s supplies:** alcohol, food, poisons, potions\n\n"
+f += "**Calligrapher\’s Supplies:** documents, letters, maps, tattoos\n\n"
+f += "**Carpenter\’s tools:** arrows, bolts, buildings, clubs, crossbows, furniture, mechanisms, staffs, utensils, vehicles, wands, wooden weapons\n\n"
+f += "**Cartographer\’s tools:** documents, firearms, letters, maps\n\n"
+f += "**Cobbler\’s tools:** cltoh armor, clothing, fine clothing, leather armor, light armor, saddles & tack, slings, whips\n\n"
+f += "**Cook\’s utensils:** food, poisons, potions"
+
+f2 = "**Glassblower\’s tools:** fine clothing, glasses, telescopes, utensils, vials\n\n"
+f2 += "**Jeweler\’s tools:** fine clothing, jewelry, utensils\n\n"
+f2 += "**Leatherworker\’s tools:** belts, cloth armor, clothing, fine clothing, leather armor, light armor, saddles & tack, slings, whips\n\n"
+f2 += "**Mason\’s tools:** buildings, utensils\n\n"
+f2 += "**Painter\’s supplies:** documents, letters, maps\n\n"
+f2 += "**Potter\’s tools:** jars, utensils\n\n"
+f2 += "**Smith\’s tools:** ammunition, any armor, arrows, belts, bolts, bullets, crossbows, firearms, jewelry, metal armor, metal weapons, saddles & tack, utensils"
+
+f3 = "**Tinker\’s tools:** ammunition, any armor, arrows, bolts, buildings, bullets, crossbows, firearms, furniture, jewelry, leather armor, machines, mechanisms, saddles & tack, tattoos, telescopes, utensils, vehicles\n\n"
+f3 += "**Weaver\’s tools:** baskets, belts, cloth armor, clothing, fine clothing, jewelry, light armor, whips\n\n"
+f3 += "**Woodcarver\’s tools:** arrows, bolts, buildings, clubs, crossbows, firearms, furniture, mechanisms, staffs, utensils, vehicles, wands, wooden weapons"
+
+</drac2>
+-title "{{t}}"
+{{f'-desc "{desc}"' if desc else ""}}
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-f "{f}"' if f else ""}}
+{{f'-f "{f2}"' if f2 else ""}}
+{{f'-f "{f3}"' if f3 else ""}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
+-footer "{{f'Seventra: Exodus of Heroes | Downtime v2.0\nAuthors: ChemistryEternal(Mara), ShadowChild(Dihiri), Archaias06(Rorik)'}}"
