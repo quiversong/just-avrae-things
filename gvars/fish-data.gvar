@@ -1,11 +1,11 @@
 {
   "trinket_chance": 20,
-  "fish": {
+  "fish": [
     ["Shark", 18],
     ["White whale", 19],
     ["Salmon", 5],
     ["Tilapia", 4]
-  },
+  ],
   "trinkets": [
     "a chocolate",
     "a bottle of rum"
