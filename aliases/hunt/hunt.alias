@@ -346,7 +346,7 @@ if add_to_bag != None:
   _bag_name = "Hunting"
   _content = add_to_bag
 
-
+  #! devrae_f add_to_bag (#P "Hunting" #P add_to_bag) !#
   ##### devrae function insert #####
   __p0__ = "Hunting"
   __p1__ = add_to_bag
@@ -370,8 +370,6 @@ if add_to_bag != None:
   character().set_cvar('bags', dump_json(_bags))
 
   ##### devrae function end #####
-
-
 </drac2>
 -title "{{t}}"
 {{f'-image "{img}"' if img else ""}}
