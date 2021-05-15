@@ -4,6 +4,8 @@
     },
     "gvars": {
         "hunt-data": "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a",
-        "fish-data": "0e5e6d64-406c-45f6-98c6-86cd68d95386"
+        "fish-sea-data": "cc71bac6-72f1-4750-a2a9-499ff7e71210",
+        "fish-river-data": "836c9cc0-faa2-4880-8986-6b240ced9a66",
+        "fish-trinkets-data": "fbd058bc-7c49-46f7-af3f-c018a88443dc"
     }
 }

@@ -1,0 +1,8 @@
+{
+  "type": "sea",
+  "fish": [
+    ["Shark", 10],
+    ["White whale", 14],
+    ["Salmon", 5]
+  ]
+}
