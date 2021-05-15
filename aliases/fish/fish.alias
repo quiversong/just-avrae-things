@@ -68,7 +68,7 @@ c.set_cvar(FISH_TIME_VAR, f'{fish_count}:{first_fish_time}')
 
 footer += f'\nThere is a limit of {DAILY_CAP} fish attempts per day. You have fished {fish_count}x today.'
 
-trinket_chance = 20
+trinket_chance = int(get_svar("fish_trinket_chance", "20"))
 is_trinket = roll("1d100") <= trinket_chance
 
 data_var = TRINKETS_VAR if is_trinket else \
