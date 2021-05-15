@@ -34,37 +34,62 @@ if len(args) > 0 and args[0] == "reset":
   footer = footer.replace(f'{fish_count}x today', '0x today')
   return 0
 
-if FISH_TIME_VAR in cv:
-  var_parts = cv[FISH_TIME_VAR].split(':')
-  fish_count = int(var_parts[0])
-  first_fish_time = float(var_parts[1])
-  wait_time = None
+#! daily_control = devrae_f daily_activity_control(#P FISH_TIME_VAR #P DAILY_CAP) !#
+##### devrae function insert [daily_activity_control] #####
+daily_control = None
+__p0__ = FISH_TIME_VAR
+__p1__ = DAILY_CAP
+# increments counter and returns current counter and wait time text if any
+_var_name = __p0__
+_daily_limit = __p1__
+_cvars = character().cvars
 
-  now = time()
-  if fish_count > 0 and first_fish_time != None:
-    passed_in_day_of_first_fish = first_fish_time % 86400
-    next_midnight_after_first_fish = first_fish_time + (86400 - passed_in_day_of_first_fish)
-    if now > next_midnight_after_first_fish:
-      c.delete_cvar(FISH_TIME_VAR)
-      fish_count, first_fish_time = 0, None
-    elif fish_count >= DAILY_CAP:
-      wait_time = next_midnight_after_first_fish - now
-      hours = floor(wait_time / 3600)
-      minutes = 0
-      if hours == 0:
-        minutes = ceil(wait_time / 60)
+_now = time()
+if _var_name not in _cvars:
+  __result__ = { "count": 1, "wait_time": None }
+  character().set_cvar(_var_name, f'1:{_now}')
+else:
+  _var_parts = _cvars[_var_name].split(':')
+  _count = int(_var_parts[0])
+  _first_time = float(_var_parts[1])
+  _wait_time = None
+  _is_next_day = False
+
+  if _count > 0 and _first_time != None:
+    _passed_in_day_since_first_time = _first_time % 86400
+    _next_midnight_after_first_time = _first_time + (86400 - _passed_in_day_since_first_time)
+    if _now > _next_midnight_after_first_time:
+      _is_next_day = True
+    elif _count >= _daily_limit:
+      _wait_time = _next_midnight_after_first_time - _now
+      _hours = floor(_wait_time / 3600)
+      _minutes = 0
+      if _hours == 0:
+        _minutes = ceil(_wait_time / 60)
       else:
-        minutes = ceil((wait_time % 3600) / 60)
-      wait_text = (str(hours) + ' hours and ' if hours > 0 else '') + str(minutes) + ' minutes'
+        _minutes = ceil((_wait_time % 3600) / 60)
+      _wait_text = (str(_hours) + ' hours and ' if _hours > 0 else '') + str(_minutes) + ' minutes'
 
-  if wait_time != None:
-    f = f'{c.name} is exhausted from so much fishing today...|You have to wait {wait_text} until you can fish again.'
-    f += '\n(Fishing resets at midnight UTC)'
-    return 1
+  if _is_next_day:
+    _count = 1
+    character().set_cvar(_var_name, f'{_count}:{_now}')
+    __result__ = { "count": _count, "wait_time": None }
+  elif _count < _daily_limit:
+    _count += 1
+    character().set_cvar(_var_name, f'{_count}:{_first_time}')
+    __result__ = { "count": _count, "wait_time": None }
+  else:
+    __result__ = { "count": _count, "wait_time": _wait_text }
+daily_control = __result__
+##### devrae function end [daily_activity_control] #####
 
-fish_count += 1
-first_fish_time = time() if fish_count == 1 else first_fish_time
-c.set_cvar(FISH_TIME_VAR, f'{fish_count}:{first_fish_time}')
+fish_count = daily_control["count"]
+wait_time = daily_control["wait_time"]
+
+if wait_time != None:
+  f = f'{c.name} is exhausted from so much fishing today...|You have to wait {wait_time} until you can fish again.'
+  f += '\n(Fishing resets at midnight UTC)'
+  return 1
 
 footer += f'\nThere is a limit of {DAILY_CAP} fish attempts per day. You have fished {fish_count}x today.'
 
