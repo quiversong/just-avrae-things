@@ -1,0 +1,50 @@
+tembed
+<drac2>
+# Configuration Variables
+IS_LIVE = False
+VERSION = '1.00'
+
+BETA_VAR = "0e5e6d64-406c-45f6-98c6-86cd68d95386"
+LIVE_VAR = "0e5e6d64-406c-45f6-98c6-86cd68d95386"
+DAILY_CAP = 6
+
+# Code
+args = &ARGS&
+pargs = argparse(args)
+c = character()
+cv, cs = c.cvars, c.skills
+
+data_var = LIVE_VAR if IS_LIVE else BETA_VAR
+title, img, thumb, f, f2, f3, f4, color, footer = None, None, None, None, None, None, None, None, None
+
+FISH_TIME_VAR = "_f_dfc_"
+FISH_STATS_VAR = "_f_st_"
+
+data = load_json(get_gvar(data_var))
+
+is_trinket = roll("1d100") <= (data["trinket_chance"] if "trinket_chance" in data else 20)
+array = data["trinkets"] if is_trinket else data["fish"]
+found = array[roll(f'1d{len(array)}') - 1]
+
+survival_roll = vroll(cs.survival.d20())
+caught = None if is_trinket else survival_roll >= found[1]
+
+t = f'{c.name} begins fishing! :tropical_fish:'
+
+if is_trinket:
+  f = f'You found {found}'
+else:
+  f = f'You found a {found[0]}! You need a **DC{found[1]}** SURVIVAL check to catch it!'
+  f2 = f'Your survival check: {survival_roll.full}'
+  f2 = f'**Yay! You caught the {found[0]}!**' if caught else '**Unfortunately, the fish slips away!'
+
+</drac2>
+-title "{{t}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-f "{f}"' if f else ""}}
+{{f'-f "{f2}"' if f2 else ""}}
+{{f'-f "{f3}"' if f3 else ""}}
+{{f'-f "{f4}"' if f4 else ""}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
