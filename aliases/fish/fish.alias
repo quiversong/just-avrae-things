@@ -89,7 +89,6 @@ color = '#96cce8'
 
 if is_trinket:
   desc = f'You found {found}.'
-  desc += '\n\n' + f':school_satchel: `{found}` has been added to your "Trinkets" bag!'
 else:
   desc = f'You found a {found[0]}! You need a **DC{found[1]}** SURVIVAL check to catch it!'
   desc += '\n\n' + f'Your survival check: {survival_roll.full}'
@@ -97,8 +96,8 @@ else:
   if caught:
     desc += '\n\n' + f':school_satchel: `{found[0]}` has been added to your "Fish" bag!'
 
-add_to_bag = is_trinket or caught
-bag_item_key = found if is_trinket else found[0]
+add_to_bag = caught
+bag_item_key = found[0]
 
 if add_to_bag:
   _bag_name = "Trinkets" if is_trinket else "Fish"
