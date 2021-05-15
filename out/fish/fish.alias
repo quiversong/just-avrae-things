@@ -1,0 +1,142 @@
+tembed
+<drac2>
+# Configuration Variables
+IS_LIVE = False
+VERSION = '1.00'
+
+SEA_VAR = "cc71bac6-72f1-4750-a2a9-499ff7e71210"
+RIVER_VAR = "836c9cc0-faa2-4880-8986-6b240ced9a66"
+TRINKETS_VAR = "fbd058bc-7c49-46f7-af3f-c018a88443dc"
+DAILY_CAP = 6
+
+# Code
+args = &ARGS&
+pargs = argparse(args)
+c = character()
+cv, cs = c.cvars, c.skills
+
+title, desc, img, thumb = None, None, None, None
+f, f2, f3, f4, color, footer = None, None, None, None, None, None
+
+FISH_TIME_VAR = "_f_dfc_"
+FISH_STATS_VAR = "_f_st_"
+
+fish_count = 0
+first_fish_time = None
+
+t = f'{c.name} begins fishing! :tropical_fish:'
+footer = f'Seventra: Exodus of Heroes | Fish v{VERSION} | !fish help'
+
+
+if len(args) > 0 and args[0] == "reset":
+  c.delete_cvar(FISH_TIME_VAR)
+  t = "Resetting fishing state..."
+  footer = footer.replace(f'{fish_count}x today', '0x today')
+  return 0
+
+if FISH_TIME_VAR in cv:
+  var_parts = cv[FISH_TIME_VAR].split(':')
+  fish_count = int(var_parts[0])
+  first_fish_time = float(var_parts[1])
+  wait_time = None
+
+  now = time()
+  if fish_count > 0 and first_fish_time != None:
+    passed_in_day_of_first_fish = first_fish_time % 86400
+    next_midnight_after_first_fish = first_fish_time + (86400 - passed_in_day_of_first_fish)
+    if now > next_midnight_after_first_fish:
+      c.delete_cvar(FISH_TIME_VAR)
+      fish_count, first_fish_time = 0, None
+    elif fish_count >= DAILY_CAP:
+      wait_time = next_midnight_after_first_fish - now
+      hours = floor(wait_time / 3600)
+      minutes = 0
+      if hours == 0:
+        minutes = ceil(wait_time / 60)
+      else:
+        minutes = ceil((wait_time % 3600) / 60)
+      wait_text = (str(hours) + ' hours and ' if hours > 0 else '') + str(minutes) + ' minutes'
+
+  if wait_time != None:
+    f = f'{c.name} is exhausted from so much fishing today...|You have to wait {wait_text} until you can fish again.'
+    f += '\n(Fishing resets at midnight UTC)'
+    return 1
+
+fish_count += 1
+first_fish_time = time() if fish_count == 1 else first_fish_time
+c.set_cvar(FISH_TIME_VAR, f'{fish_count}:{first_fish_time}')
+
+footer += f'\nThere is a limit of {DAILY_CAP} fish attempts per day. You have fished {fish_count}x today.'
+
+trinket_chance = int(get_svar("fish_trinket_chance", "20"))
+is_trinket = roll("1d100") <= trinket_chance
+
+data_var = TRINKETS_VAR if is_trinket else \
+  SEA_VAR if pargs.get('sea') else \
+  RIVER_VAR
+
+data = load_json(get_gvar(data_var))
+
+array = data["trinkets"] if is_trinket else data["fish"]
+found = array[roll(f'1d{len(array)}') - 1]
+
+adv_status = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
+survival_roll = vroll(cs.survival.d20(base_adv = adv_status))
+caught = None if is_trinket else survival_roll.total >= found[1]
+
+thumb = image
+color = '#96cce8'
+
+if is_trinket:
+  desc = f'You found {found}.'
+else:
+  desc = f'You found a {found[0]}! You need a **DC{found[1]}** SURVIVAL check to catch it!'
+  desc += '\n\n' + f'Your survival check: {survival_roll.full}'
+  desc += '\n\n' + (f'**Yay! You caught the {found[0]}!**' if caught else '**Unfortunately, the fish slips away!**')
+  if caught:
+    desc += '\n\n' + f':school_satchel: `{found[0]}` has been added to your "Fish" bag!'
+
+add_to_bag = caught
+bag_item_key = found[0]
+
+if add_to_bag:
+  _bag_name = "Trinkets" if is_trinket else "Fish"
+  _content = {}
+  _content[bag_item_key] = 1
+
+
+  ##### devrae function insert #####
+  __p0__ = _bag_name
+  __p1__ = _content
+  _bag_name = __p0__
+  _content = __p1__
+
+  _cv = character().cvars
+  _bags = load_json(_cv["bags"]) if "bags" in _cv else []
+  _bag_index = [i for i, x in enumerate(_bags) if x[0] == _bag_name]
+  _bag_index = _bag_index[0] if len(_bag_index) > 0 else -1
+  if _bag_index == -1:
+    _bags.append([_bag_name, {}])
+    _bag_index = len(_bags) - 1
+  _bag_content = _bags[_bag_index][1]
+  for _key in _content:
+    if _key in _bag_content:
+      _bag_content[_key] = _bag_content[_key] + _content[_key]
+    else:
+      _bag_content[_key] = _content[_key]
+  _bags[_bag_index] = [_bag_name, _bag_content]
+  character().set_cvar('bags', dump_json(_bags))
+
+  ##### devrae function end #####
+
+</drac2>
+-title "{{t}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-desc "{desc}"' if desc else ""}}
+{{f'-f "{f}"' if f else ""}}
+{{f'-f "{f2}"' if f2 else ""}}
+{{f'-f "{f3}"' if f3 else ""}}
+{{f'-f "{f4}"' if f4 else ""}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}

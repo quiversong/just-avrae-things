@@ -1,0 +1,41 @@
+embed <drac2>
+args = &ARGS&
+c, sb, cc_name, f, f2 = character(), character().spellbook, 'Pearl of Power', None, None
+t = f'{c.name} uses their Pearl of Power!'
+desc = "**Pearl of Power:** while this pearl is on your person, you can use an action to speak its Command Word and regain one expended spell slot. If the expended slot is of 4th Level or higher, the new slot is 3rd Level. Once you have used the pearl, it can't be used again until the next dawn."
+
+thumb = 'https://cdn.discordapp.com/attachments/827581981452795975/831781045908799498/michael-malkin-nw-powerstone4.jpeg'
+
+if len(args) == 0 or not args[0].isnumeric():
+  f = f'Oops, usage: `!pp <slot level>`|' + desc; return 1
+
+slot_level = int(args[0])
+slot_level = 3 if slot_level > 3 else slot_level
+
+create_cc_nx(cc_name, dispType = 'bubble' , maxVal = 1, minVal = 0, reset = 'long')
+
+current = sb.get_slots(slot_level)
+smax = sb.get_max_slots(slot_level)
+
+if smax == 0:
+  f = f'Oops, {c.name} does not have slots of level {slot_level}!|' + desc
+  return 1
+
+f2 = f'Spell slots of level {slot_level}| ' + sb.slots_str(slot_level)
+if c.get_cc(cc_name) == 0:
+  f = f'Oops, {c.name} already used their Pearl of Power today!|' + desc
+  return 1
+
+if current == smax:
+  f = f'Oops, {c.name} is already at the maximum number of slots for spells of level {slot_level}!|' + desc
+  return 1
+
+sb.set_slots(slot_level, current + 1)
+c.mod_cc(cc_name, -1)
+f = f'{c.name} recovers one spell slot of level {slot_level}!|' + desc
+f2 = f'Spell slots of level {slot_level}| ' + sb.slots_str(slot_level)
+</drac2>
+-title "{{t}}"
+-f "{{f}}"
+{{f'-f "{f2}"' if f2 else ''}}
+-thumb "{{thumb}}"

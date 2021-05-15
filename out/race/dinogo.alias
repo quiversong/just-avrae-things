@@ -12,7 +12,7 @@ t, f, f2, f3, footer, thumb, img = None, None, None, None, None, None, None
 dino_img = 'https://cdn.discordapp.com/attachments/808062130996641832/808062789952077844/dinorace.jpg'
 
 footer = "Don't forget to role-play your race turns!"
-footer += "\nSeventra: Exodus of Heroes | Dino Go! v1.0 | Created by quiversong#2772 aka Adrienne"
+footer += "\nSeventra: Exodus of Heroes | Dino Go! v1.01 | Created by quiversong#2772 aka Adrienne"
 
 if len(args) > 0 and args[0] == 'reset':
     t = 'Resetting race participation...'
@@ -60,6 +60,9 @@ f = f'{c.name} spurs their mount forward!|**Animal Handling roll:** {ah_roll.ful
 moved = ah_roll.total + int(heat) + (10 if crit else 0)
 
 obstacles = [75, 175, 275, 375]
+obstacles_names = {}
+obstacles_names[75] = obstacles_names[275] = 'Geysers'
+obstacles_names[175] = obstacles_names[375] = 'Quicksand pits'
 obstacle = [x for x in obstacles if current_pos < x and current_pos + moved >= x]
 obstacle = obstacle[0] if len(obstacle) > 0 else None
 stuck_at_obstacle = False
@@ -70,15 +73,17 @@ if obstacle != None:
   dino_dex_str = '+' + str(dino_dex) if dino_dex > 0 else '' if dino_dex == 0 else str(dino_dex)
   dino_roll = vroll(f'1d20{dino_dex_str}')
   dino_critical = dino_roll.total == 20 + dino_dex
-  f2 = f'{c.name} reaches the track obstacles at the {obstacle}ft mark!|**Dino dexterity roll:** {dino_roll.full}'
+  f2 = f'{c.name} reaches the track obstacles at the {obstacle}ft mark!|'
+  f2 += f'It is the dangerous **{obstacles_names[obstacle]}**!' + '\n'
+  f2 += f'**Dino dexterity roll:** {dino_roll.full}'
 
   if dino_roll.total < obstacle_dc:
-    f2 += '\nYou and your dino did not manage to avoid the obstacle!\n'
+    f2 += '\n' + f'**You and your dino do not manage to avoid the {obstacles_names[obstacle]}!**\n'
     f2 += f'You are now stuck at the {obstacle}ft mark and have disadvantage on your next turn...'
     c.set_cvar(var_name, f'{heat}:{obstacle}:{dino_dex}:dis')
     return 0
   else:
-    f2 += '\nYou managed to avoid the obstacle! Great job!'
+    f2 += '\n' + f'**You managed to avoid the {obstacles_names[obstacle]}!**' + '\nGreat job!'
 
   if dino_critical:
     f2 += '\nYou also get advantage on your next turn due to a critical roll!'
