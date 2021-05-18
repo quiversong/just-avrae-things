@@ -3,9 +3,10 @@
         "hunt": "60679c3b6485235880091773"
     },
     "gvars": {
-        "hunt-data": "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a",
         "fish-sea-data": "cc71bac6-72f1-4750-a2a9-499ff7e71210",
         "fish-river-data": "836c9cc0-faa2-4880-8986-6b240ced9a66",
-        "fish-trinkets-data": "fbd058bc-7c49-46f7-af3f-c018a88443dc"
+        "fish-trinkets-data": "fbd058bc-7c49-46f7-af3f-c018a88443dc",
+        "hunt-data": "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a",
+        "lore-data": "e6475c4c-3cd2-4d75-8902-08176174a4f7"
     }
 }
