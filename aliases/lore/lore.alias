@@ -4,35 +4,58 @@ data_var = "e6475c4c-3cd2-4d75-8902-08176174a4f7"
 
 args = &ARGS&
 data = load_json(get_gvar(data_var))
-data["metadata"] = data["metadata"] if "metadata" in data else {}
+metadata = data.pop("metadata") if "metadata" in data else {}
 
 t, f, f2, img, thumb, color, footer, desc = None, None, None, None, None, None, None, None
 
 default_footer = "Seventra: Exodus of Heroes"
 
-footer = data["metadata"]["footer"] if "footer" in data["metadata"] else default_footer
+footer = metadata["footer"] if "footer" in metadata else default_footer
 
 if len(args) == 0:
     t = f'{character().name} wants to use the Seventra lorebook.'
-    f = 'What do you want to know more about?|Use `!lore search <keyword>` to search for a topic.'
+    f = 'What do you want to know more about?|Use `!lore search <keyword(s)>` to search for a topic.'
 
 elif args[0] == "search":
-    t = f'{character().name} wants to know more about "{args[1]}"'
+    search_params = ' '.join(args[1:len(args)])
+    t = f'{character().name} wants to know more about [{search_params}]'
 
+    if len(args) < 2:
+        f = f'You must specify a search term! Use `!lore search <search keywords(s)>`!'
+        return 1
+
+    results = []
+
+    # first attempt a simple fuzzy search by name
+    search_term = ''.join(args[1:len(args)]).lower()
+    search_term_as_list = list(search_term)
+    for key in data.keys():
+        matching_letters = []
+        for l in search_term_as_list:
+            if l in list(data[key]["name"]):
+                matching_letters.append(l)
+        if float(len(matching_letters))/len(search_term) > 0.7:
+            results.append(key)
+
+    # then searches by keyword
     keyword = args[1].lower().strip()
-    results = [key for key in data.keys() if keyword in data[key]["keywords"]]
+    results += [key for key in data.keys() if keyword in data[key]["keywords"]]
+
+    unique_results = []
+    [unique_results.append(key) for key in results if key not in unique_results]
+    results = unique_results
 
     if len(results) == 0:
-        f = f'Search results for "{args[1]}"...|Nothing found! Sorry...'
+        f = f'Search results for [{search_params}]...|Nothing found! Sorry...'
     else:
         f = 'This is what I found:|Use the command specified to know more about them.\n'
         output = [data[key]["name"] + ': `!lore ' + key + '`' for key in results]
         f += '\n'.join(output)
 else:
     key = args[0].lower().strip()
-    if not key in data or key == "metadata":
+    if not key in data:
         t = f'{character().name} queries the Seventra lorebook...'
-        f = f'Unfortunately the book has no entries for "{key}"|Try searching for an entry with `!lore search <keyword>`'
+        f = f'Unfortunately the book has no entries for "{key}"|Try searching for an entry with `!lore search <keyword(s)>`'
     else:
         item = data[key]
         t = f'{character().name} wants to know more about \'{item["name"]}\''

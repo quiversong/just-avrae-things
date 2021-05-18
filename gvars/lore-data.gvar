@@ -13,5 +13,11 @@
     "name": "The Drunken Respite Inn",
     "desc": "The most popular inn in Mossfort!",
     "thumb": "https://cdn.discordapp.com/attachments/841769300095533067/841769790347804682/Bard-wallpaper.jpg"
+  },
+  "last-drop": {
+    "keywords": ["tavern", "valinor", "ale"],
+    "name": "The Last Drop Tavern",
+    "desc": "Valinor's place to be!",
+    "thumb": "https://cdn.discordapp.com/attachments/841769300095533067/841769790347804682/Bard-wallpaper.jpg"
   }
 }
