@@ -264,10 +264,12 @@ elif p == 'attack':
     ]
     if len(weapon_str) > 0:
       weapon_str = str(weapon_str[0])
+      damage_substring = weapon_str.split('Hit:')[1].strip()
+      damage_substring = damage_substring[1:damage_substring.rindex(']') + 1]
       weapon = {
         'name': weapon_str.split(':')[0].strip(),
         'a_bonus': int(weapon_str.split('Attack:')[1].strip().split(' ')[0]),
-        'd_die': weapon_str.split('Hit:')[1].strip().split('[')[0].strip()
+        'd_die': damage_substring
       }
 
   a_bonus_param = '+'.join(pargs.get('b', default=[''])).strip()
@@ -352,7 +354,7 @@ if add_to_bag != None:
   __p1__ = add_to_bag
   _bag_name = __p0__
   _content = __p1__
-  
+
   _cv = character().cvars
   _bags = load_json(_cv["bags"]) if "bags" in _cv else []
   _bag_index = [i for i, x in enumerate(_bags) if x[0] == _bag_name]
