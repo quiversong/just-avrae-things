@@ -1,0 +1,70 @@
+embed <drac2>
+args = &ARGS&
+CVAR_NAME = "_outfits_"
+command = 'sw'
+
+title, f, image_url, thumb = None, None, None, None
+c = character()
+cv = c.cvars
+
+thumb = image
+
+outfits = load_json(cv[CVAR_NAME]) if CVAR_NAME in cv else {}
+valid_options = ['add', 'remove', 'show']
+
+if len(args) == 0 or args[0].lower() == 'help' or not args[0] in valid_options:
+    title = "Need help with your Shiftweave?"
+    f = "Use one of these commands:|"
+    f += f'`!{command} add <outfit code> \\\"<outfit name>\\\" \\\"<outfit url>\\\"`:'
+    f += '\nTo add a new shiftware. Please use quotes, and ensure the outfit code is one single word.'
+
+    f += '\n\n' + f'`!{command} remove <outfit code>`:'
+    f += '\nTo remove an existing outfit.'
+
+    if len(outfits) > 0:
+        f += '\n\n' + '\n'.join([f'`!{command} show {ocode}` to display the \'{outfits[ocode][0]}\' outfit.' for ocode in outfits.keys()])
+    return 1
+
+if args[0].lower() == 'add':
+    if len(outfits) >= 5:
+        title = f'{c.name} already has 5 outfits on their Shiftweave!'
+        f = 'A Shiftweave can only hold 5 different outfits|Time to buy a new one?'
+        return 1
+
+    code = args[1]
+    name = args[2]
+    url = args[3]
+    outfits[code] = [name, url]
+    c.set_cvar(CVAR_NAME, dump_json(outfits))
+    title = f'{c.name} sets the \'{name}\' outfit onto their Shiftweave!'
+    f = f'Usage|Use `!{command} show {code}`: to display your outfit.'
+    f += '\nRemember that one Shiftweave allows at most 5 outfits!'
+    thumb = None
+    image_url = url
+    return 0
+
+if args[0].lower() == 'remove':
+    code = args[1]
+    if not code in outfits:
+        title = f'{c.name} tries to remove an outfit from their Shiftweave!'
+        f = f'But an outfit named \'{code}\' does not exist!|Please remember the outfits registered in a Shiftweave can not be changed on the Shiftweave is created.'
+        return 1
+
+    name = outfits[code][0]
+    thumb = outfits[code][1]
+    outfits.pop(code)
+    c.set_cvar(CVAR_NAME, dump_json(outfits))
+    title = f'{c.name} removes the {name} outfit to their Shiftweave!'
+    f = f'Outfit named \'{code}\' removed!|Please remember the outfits registered in a Shiftweave can not be changed on the Shiftweave is created.'
+    return 0
+
+code = args[1]
+name = outfits[code][0]
+image_url = outfits[code][1]
+title = f'{c.name}\'s {name} Outfit!'
+thumb = None
+</drac2>
+{{f'-title "{title}"' if title else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-image "{image_url}"' if image_url else ""}}
+{{f'-f "{f}"' if f else ""}}
