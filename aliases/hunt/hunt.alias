@@ -2,7 +2,7 @@ tembed
 <drac2>
 # Configuration Variables
 IS_LIVE = False
-VERSION = '1.06'
+VERSION = '1.05'
 
 BETA_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
 LIVE_VAR = "e93be9b6-b00f-47bb-8d63-a8c5efd8d32a"
@@ -265,7 +265,7 @@ elif p == 'attack':
     if len(weapon_str) > 0:
       weapon_str = str(weapon_str[0])
       damage_substring = weapon_str.split('Hit:')[1].strip()
-      damage_substring = damage_substring[1:damage_substring.rindex(']') + 1]
+      damage_substring = damage_substring[0:damage_substring.rindex(']') + 1]
       weapon = {
         'name': weapon_str.split(':')[0].strip(),
         'a_bonus': int(weapon_str.split('Attack:')[1].strip().split(' ')[0]),
