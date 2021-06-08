@@ -1,7 +1,8 @@
 {
     "gvars/hunt-data.gvar": "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a",
     "gvars/lore-data.gvar": "e6475c4c-3cd2-4d75-8902-08176174a4f7",
-    "gvars/fish-sea-data": "cc71bac6-72f1-4750-a2a9-499ff7e71210",
-    "gvars/fish-river-data": "836c9cc0-faa2-4880-8986-6b240ced9a66",
-    "gvars/fish-trinkets-data": "fbd058bc-7c49-46f7-af3f-c018a88443dc"
+    "gvars/fish-sea-data.gvar": "cc71bac6-72f1-4750-a2a9-499ff7e71210",
+    "gvars/fish-river-data.gvar": "836c9cc0-faa2-4880-8986-6b240ced9a66",
+    "gvars/fish-trinkets-data.gvar": "fbd058bc-7c49-46f7-af3f-c018a88443dc",
+    "gvars/research-data.gvar": "05788227-fe82-4006-98f2-5e9ec50d2a7e"
 }
