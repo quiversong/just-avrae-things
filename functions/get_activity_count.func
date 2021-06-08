@@ -1,0 +1,7 @@
+_var_name = __p0__
+_cvars = character().cvars
+_count = 0
+if _var_name in _cvars:
+  _var_parts = _cvars[_var_name].split(':')
+  _count = int(_var_parts[0])
+__result__ = _count

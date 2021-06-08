@@ -4,8 +4,8 @@ tembed
 IS_LIVE = False
 VERSION = '1.06'
 
-BETA_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
-LIVE_VAR = "e93be9b6-b00f-47bb-8d63-a8c5efd8d32a"
+BETA_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
+LIVE_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
 DAILY_CAP = 6
 
 # Code
@@ -15,130 +15,105 @@ c = character()
 cv, cs = c.cvars, c.skills
 
 data_var = LIVE_VAR if IS_LIVE else BETA_VAR
-hunt_daily_cap = DAILY_CAP
 
-t = f'{c.name} goes hunting!'
-f, f2, color = None, None, '128c2f'
+t = f'{c.name} enters the Aldahen Research Chamber!'
+f, f2, color = None, None, 'f200ff'
 
 img = None
 thumb = None
 sl, fl = "**Success!**", "**Failure!**"
 
-hunt_count = 0
-first_hunt_time = None
-wait_time = None
-wait_text = None
+R_TIME_VAR = "_r_tc_"
+R_STAGE_VAR = "_r_sc_"
+R_STATS_VAR = "_r_st_"
 
-HUNT_TIME_VAR = "_h_dhc_"
-HUNT_STAGE_VAR = "_h_vars"
-HUNT_STATS_VAR = "_h_st_"
+research_count = -1
+#! research_count = devrae_f get_activity_count(#P R_TIME_VAR) !#
 
-if HUNT_TIME_VAR in cv:
-  var_parts = cv[HUNT_TIME_VAR].split(':')
-  hunt_count = int(var_parts[0])
-  first_hunt_time = float(var_parts[1])
+footer = "Don't forget to role-play your research!\n"
+footer += f'There is a limit of {DAILY_CAP} researches per day. You have attempted {research_count} researches today.'
+footer += "\n" + f'Seventra: Exodus of Heroes | Research v{VERSION} | !hunt help'
+footer += "\nCreators: quiversong#2772 (Adrienne)"
 
-  now = time()
-  if hunt_count > 0 and first_hunt_time != None:
-    passed_in_day_of_first_hunt = first_hunt_time % 86400
-    next_midnight_after_first_hunt = first_hunt_time + (86400 - passed_in_day_of_first_hunt)
-    if now > next_midnight_after_first_hunt:
-      c.delete_cvar(HUNT_TIME_VAR)
-      hunt_count, first_hunt_time = 0, None
-    elif hunt_count >= hunt_daily_cap:
-      wait_time = next_midnight_after_first_hunt - now
-      hours = floor(wait_time / 3600)
-      minutes = 0
-      if hours == 0:
-        minutes = ceil(wait_time / 60)
-      else:
-        minutes = ceil((wait_time % 3600) / 60)
-      wait_text = (str(hours) + ' hours and ' if hours > 0 else '') + str(minutes) + ' minutes'
-
-footer = "Don't forget to role-play your hunting actions!\n"
-footer += f'There is a limit of {hunt_daily_cap} hunts per day. You have gone hunting {hunt_count}x today.'
-footer += "\n" + f'Seventra: Exodus of Heroes | Hunt v{VERSION} | !hunt help'
-footer += "\nCreators: Archaias06#6633 (Rorik) and quiversong#2772 (Adrienne)"
-
-hvars, pid, stage = None, None, None
-if HUNT_STAGE_VAR in cv:
-  hvars = cv[HUNT_STAGE_VAR].split(":")
-  pid = hvars[0]
-  stage = hvars[1]
-
-if not HUNT_STATS_VAR in cv:
-  stats = {}
-  c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
+# Stats
+stats = {}
+if not R_STATS_VAR in cv:
+  c.set_cvar(R_STATS_VAR, dump_json(stats))
 else:
-  stats = load_json(cv["_h_st_"])
+  stats = load_json(cv[R_STATS_VAR])
 
 if len(args) > 0 and args[0] == "stats":
-  t = f'{c.name}\'s hunting statistics...'
+  t = f'{c.name}\'s research statistics...'
   if stats == {}:
-    f = f'You have no statistics!|Go hunt!'
+    f = f'You have no statistics!|Go do some research!'
     return 0
   stats_list = [key.split('_')[1] + (' successes' if key.startswith('s_') else ' total') +
       f': {value}' for key, value in stats.items()]
-  f = 'Your hunt history shows:|' + '\n'.join(stats_list)
-  return 0
-
-if len(args) > 0 and args[0] == "reset":
-  c.delete_cvar(HUNT_STAGE_VAR)
-  c.delete_cvar(HUNT_TIME_VAR)
-  t = "Resetting hunting state..."
-  footer = footer.replace(f'{hunt_count}x today', '0x today')
+  f = 'Your research history shows:|' + '\n'.join(stats_list)
   return 0
 
 if len(args) > 0 and args[0] == "resetstats":
-  c.delete_cvar(HUNT_STATS_VAR)
-  t = "Resetting hunt statistics..."
+  c.delete_cvar(R_STATS_VAR)
+  t = "Resetting research statistics..."
   return 0
 
-data = load_json(get_gvar(data_var))
+# Reset
+if len(args) > 0 and args[0] == "reset":
+  c.delete_cvar(R_TIME_VAR)
+  c.delete_cvar(R_STAGE_VAR)
+  t = "Resetting research state..."
+  footer = footer.replace(f'{research_count}x today', '0x today')
+  return 0
 
-biomes = data["biomes"]
-b_ids = [k for k, v in biomes.items()]
+stage_vars, stage_topic, current_stage = None, None, None
 
-animals = data["animals"]
+if R_STAGE_VAR in cv:
+    stage_vars = cv[R_STAGE_VAR].split(":")
+    current_entry_id = stage_vars[0]
+    current_stage = stage_vars[1]
 
-in_wrong_stage = stage and (len(args) == 0 or (len(args) > 0 and stage != args[0]))
-quitting_hunt = stage == 'attack' and len(args) > 0 and args[0] == 'quit'
-if (in_wrong_stage and not quitting_hunt):
-  anm = animals[pid]
-  anm_name = anm["name"]
-  add_n = "n" if anm["name"][0] in "AEIOU" else ""
-  f = f'Oops! You are already hunting a{add_n} {anm_name}!|Use `!hunt {stage}` to continue.'
+data = get_gvar(data_var)
+data_lines = data.split('\n')
+entries = {data_lines[i][0]: {
+    'rarity': data_lines[i][1],
+    'name': data_lines[i][2],
+    'type': data_lines[i][3],
+    'check': data_lines[i][4],
+    'dc': data_lines[i][5]
+} for i in range(1, len(data_lines))}
+
+in_wrong_stage = current_stage and (len(args) == 0 or (len(args) > 0 and current_stage != args[0]))
+if in_wrong_stage:
+  name = entries[current_entry_id]['name']
+  add_n = "n" if name[0].upper() in "AEIOU" else ""
+  f = f'Oops! You are already researching a{add_n} {name}!|Use `!research {current_stage}` to continue.'
   thumb = image
   return 1
 
 if (len(args) == 0 or (not stage and args[0] not in b_ids)):
-  b_list_cmd = "  `!hunt " + "`\n  `!hunt ".join(b_ids) + "`"
-  f = f'Where do you want to go hunting?|Use one of the following:\n{b_list_cmd}'
-  thumb = image
-  hunt_images = [
-    'https://cdn.discordapp.com/attachments/827581981452795975/830670258897158174/ranger-bow.png',
-    'https://cdn.discordapp.com/attachments/827581981452795975/830676686537228328/colrathisle.png',
-    'https://cdn.discordapp.com/attachments/827581981452795975/830676464062955560/dnd-ranger-5e.png',
-    'https://cdn.discordapp.com/attachments/827581981452795975/830676245288714290/Ranger-1-548x403.png',
-    'https://cdn.discordapp.com/attachments/827581981452795975/830677100431671316/Blue_Bear_Barbarian_and_Cave_Bear.png',
-    'https://cdn.discordapp.com/attachments/827581981452795975/830674739688243220/7934d073b0f81ff62c673d68a2c41709.png',
-    'https://cdn.discordapp.com/attachments/827581981452795975/830674397358325811/sJd_IiQBEXsFPg4dkzonDt7zwFvDOO_sI2_02qRMJGFeBK8RWOOz5XnG-_tBEt_LhHVADSbqctdm9rQfb8A7pQeEh_GJ2ZbtHNd3.png',
-    'https://cdn.discordapp.com/attachments/827581981452795975/830677484688375828/tumblr_nxew19kDvy1qhttpto5_1280.jpeg',
-    'https://cdn.discordapp.com/attachments/827581981452795975/830677489247453204/daujf32-19437d94-de54-4522-9f9b-e7bc985098b9.jpeg',
-    'https://cdn.discordapp.com/attachments/827581981452795975/830677491408437279/pyxbh3nvnur11.jpeg'
+  f = f'Ready to start researtching?|Type `!research start` to enter the Aldahen Research Center.'
+  research_images = [
+    'https://cdn.discordapp.com/attachments/827581981452795975/851694263058432040/BookGen.jpeg',
+    'https://cdn.discordapp.com/attachments/827581981452795975/851694419753041960/d8294928b89f344318e248ee809853c8.jpeg',
+    'https://cdn.discordapp.com/attachments/827581981452795975/851694727874478090/the_library_of_babel_by_owen_c-d3gvei32.jpeg',
+    'https://cdn.discordapp.com/attachments/827581981452795975/851694928282779668/Library.jpeg',
+    'https://cdn.discordapp.com/attachments/827581981452795975/851695083829198889/d0beea47-7fd5-4af9-b514-efd8838c5378-candlekeep-mysteries-_-key-art_-artist-credit_-clint-cear...jpg',
+    'https://cdn.discordapp.com/attachments/827581981452795975/851695815604437013/226.png'
   ]
-  img = hunt_images[roll(f'1d{len(hunt_images)}') - 1]
+  img = research_images[roll(f'1d{len(research_images)}') - 1]
   return 0
 
-p = args[0]
+#! daily_control = devrae_f daily_activity_control(#P R_TIME_VAR #P DAILY_CAP) !#
+research_count = daily_control["count"]
+wait_time = daily_control["wait_time"]
+action = args[0]
 
-if p in b_ids:
+if action == "start":
   if wait_time != None:
-    f = f'{c.name} is exhausted from so much hunting today...|You have to wait {wait_text} until you can hunt again.'
-    f += '\n(Hunting resets at midnight UTC)'
+    f = f'{c.name} is exhausted from so much research today...|You have to wait {wait_time} until you can research again.'
+    f += '\n(Research resets at midnight UTC)'
     return 1
 
-  hunt_count += 1
   stats["t_hunts"] = stats["t_hunts"] + 1 if "t_hunts" in stats else 1
 
   first_hunt_time = time() if hunt_count == 1 else first_hunt_time

@@ -1,1 +1,3 @@
-empty
+key,rarity,name,type,check,dc
+r1,2,"Anatomy of Tieflings","anatomy","medicine",14
+r2,8,"Weather Trends in Valinor","geography","survival",12
