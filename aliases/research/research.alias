@@ -203,7 +203,8 @@ if action == "identify":
         "medicine": cs.medicine,
         "survival": cs.survival
     }
-    check_type = entry["check"]
+    entry_type = data["types"][entry["type"]]
+    check_type = entry_type["check"]
     skill = skills_by_check_type[check_type]
 
     adv_status = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
@@ -212,17 +213,18 @@ if action == "identify":
 
     t = f"{c.name} tries to identify and understand the chamber\\\'s knowledge!"
     f = f'{c.name} uses their knowledge in {check_type}...|**{check_type.capitalize()} roll:** {s_roll.full}\n{sl if succ else fl}'
+
     if succ:
-      #thumb = anm["img"]
-      stats["s_identify"] = stats["s_identify"] + 1 if "s_identify" in stats else 1
-      f2 = f'{c.name} has successfully acquired the knowledge about {entry_name}!|'
-      f2 += 'Now use `!research catalogue` to catalogue the knowledge you acquired.'
-      c.set_cvar(R_STAGE_VAR, f'{entry_id}:catalogue')
+        thumb = entry["img"] if "img" in entry else entry_type["img"] if entry_type["img"] != "" else None
+        stats["s_identify"] = stats["s_identify"] + 1 if "s_identify" in stats else 1
+        f2 = f'{c.name} has successfully acquired the knowledge about {entry_name}!|'
+        f2 += 'Now use `!research catalogue` to catalogue the knowledge you acquired.'
+        c.set_cvar(R_STAGE_VAR, f'{entry_id}:catalogue')
     else:
-      thumb = image
-      f2 = f'The information about {entry_name} was too complex for you to grasp...|'
-      f2 += 'Better luck next time! Use `!research start` to try again.'
-      c.delete_cvar(R_STAGE_VAR)
+        thumb = image
+        f2 = f'The information about {entry_name} was too complex for you to grasp...|'
+        f2 += 'Better luck next time! Use `!research start` to try again.'
+        c.delete_cvar(R_STAGE_VAR)
 
 elif action == 'catalogue':
     c.delete_cvar(R_STAGE_VAR)
@@ -232,11 +234,22 @@ elif action == 'catalogue':
     t = f'{c.name} tries to catalogue their knowledge about {entry_name}...'
     f = f'{c.name} has to maintain the knowledge while it is extracted by the Aldahen...|**Constitution save:** {s_roll.full}\n{sl if succ else fl}'
     if succ:
+        entry_type = data["types"][entry["type"]]
+        thumb = entry["img"] if "img" in entry else entry_type["img"] if entry_type["img"] != "" else None
         stats["s_catalogue"] = stats["s_catalogue"] + 1 if "s_catalogue" in stats else 1
         add_to_bag = {}
+        loot_list = ""
+        if "loot" in entry:
+              for loot_entry in entry["loot"]:
+                    loot_n, loot_qt = loot_entry["name"], loot_entry["qt"]
+                    add_to_bag[loot_n] = loot_qt
+                    loot_list += f'{loot_qt}x {loot_n}, '
+        loot_list = loot_list[:len(loot_list) - 2]
         f2 = f'{c.name} is able to transfer the knowledge to the Aldahen and receives a bounty in return.|'
         f2 += 'Unfortunately most of the knowledge is lost once you exit the chamber, but you keep the loot!'
+        f3 = f'You gained: {loot_list}.|They have been added to your "Research" bag!'
     else:
+        thumb = image
         f2 = f'{c.name} was not able to hold onto the knowledge long enough to transfer it to the Aldahen!|'
         f2 += "Better luck next time! Use `!research start` to try again."
 

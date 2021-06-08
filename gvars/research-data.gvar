@@ -17,12 +17,14 @@
     "r1": {
       "name": "Anatomy of Tieflings",
       "type": "anatomy",
-      "dc": 7
+      "dc": 7,
+      "loot": [{"name": "Aldahen Coin (1gp)", "qt": 4}]
     },
     "r2": {
       "name": "Weather Trends in Valinor",
       "type": "geography",
-      "dc": 6
+      "dc": 6,
+      "loot": [{"name": "Aldahen Coin (1gp)", "qt": 5}]
     }
   }
 }
