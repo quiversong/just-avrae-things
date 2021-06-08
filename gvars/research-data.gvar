@@ -1,3 +1,28 @@
-key,rarity,name,type,check,dc
-r1,2,"Anatomy of Tieflings","anatomy","medicine",14
-r2,8,"Weather Trends in Valinor","geography","survival",12
+{
+  "chances": {
+    "r1": [1,80],
+    "r2": [81, 100]
+  },
+  "types": {
+    "anatomy": {
+      "img": "",
+      "check": "medicine"
+    },
+    "geography": {
+      "img": "",
+      "check": "survival"
+    }
+  },
+  "entries": {
+    "r1": {
+      "name": "Anatomy of Tieflings",
+      "type": "anatomy",
+      "dc": 7
+    },
+    "r2": {
+      "name": "Weather Trends in Valinor",
+      "type": "geography",
+      "dc": 6
+    }
+  }
+}
