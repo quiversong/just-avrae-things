@@ -49,6 +49,15 @@ if not var_name in cv:
     thumb = image
     return 1
 
+if len(args) == 0 or args[0].lower() != 'row':
+    t = f'{c.name} is already on boat race!'
+    f = 'Oops, it looks like you are already on a race!|'
+    f += 'Use `!boatrace row [prof] [bonus]` to start rowing!'
+    f += '\nUse `prof` if you are proficient with water vehicles.'
+    f += '\nUse `bonus` if you are using a spell to boost your speed.'
+    thumb = image
+    return 1
+
 thumb = image
 var_values = cv[var_name].split(':')
 current_pos = int(var_values[0])
