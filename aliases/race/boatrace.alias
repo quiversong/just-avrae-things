@@ -1,0 +1,126 @@
+embed
+<drac2>
+finish = 400
+obstacle_dc = 14
+
+var_name = "_gg_br_vars_"
+args = &ARGS&
+pargs = argparse(args)
+c = character()
+cv, cs = c.cvars, c.skills
+t, f, f2, f3, footer, thumb, img = None, None, None, None, None, None, None
+
+img_speed = {
+    7: 'https://cdn.discordapp.com/attachments/823837966027718716/851602754405007390/R00f6ec8c61d875b6b6770bdb09a1c251.png',
+    14: 'https://cdn.discordapp.com/attachments/823837966027718716/851580033771634688/10-traditional-clinker-rowing-boat-C2A9Jenny-Steer-Photography-Dec-2013-129-1.png',
+    21: 'https://cdn.discordapp.com/attachments/823837966027718716/851580094722867240/R52cd76dcd46afdd99d70435a7885c855.png',
+    28: 'https://cdn.discordapp.com/attachments/823837966027718716/851600754728763402/dsn-row.png',
+    35: 'https://cdn.discordapp.com/attachments/823837966027718716/851579918403502141/Rowboat20rough20seas.png',
+    999: 'https://cdn.discordapp.com/attachments/823837966027718716/852289872471130122/930063a0e5462d83b70172707aa4a27c.png'
+}
+
+img_start = 'https://cdn.discordapp.com/attachments/823837966027718716/851579507936854038/R4a95d3993f610da59334a14c7853e52d.png'
+img_stuck = 'https://cdn.discordapp.com/attachments/823837966027718716/851579606804856852/Ra24241e88362d5fa5d6e828bf613608b.png'
+
+footer = "Don't forget to role-play your race turns!"
+footer += "\nSeventra: Exodus of Heroes"
+
+if len(args) > 0 and args[0] == 'reset':
+    t = 'Resetting race participation...'
+    c.delete_cvar(var_name)
+    return 0
+
+if len(args) > 0 and args[0] == 'start':
+    t = f'{c.name} is participating on the Greengrass Boat Race!'
+    c.set_cvar(var_name, '0:0:0')
+    thumb = image
+    f = f'{c.name} has gotten into their boat and rowed to the start line|'
+    f += 'When you are ready, give the time keeper the signal and start to row.\nGood luck!'
+    f2 = 'Use `!boatrace row [prof] [bonus]` to start rowing!|'
+    f2 += 'Use `prof` if you are proficient with water vehicles.'
+    f2 += '\nUse `bonus` if you are using a spell to boost your speed.'
+    f2 += '\nRP your progress and watch the sandbars!'
+    img = img_start
+    return 0
+
+if not var_name in cv:
+    t = f'{c.name} wants to join a boat race in the Greengrass festival!'
+    f = 'Oops, it looks like you are not racing yet.|Use `!boatrace start` to start racing!'
+    thumb = image
+    return 1
+
+thumb = image
+var_values = cv[var_name].split(':')
+current_pos = int(var_values[0])
+momentum = int(var_values[1])
+this_round = int(var_values[2]) + 1
+
+has_bonus = 'bonus' in pargs
+has_prof = 'prof' in pargs
+a_skill = c.skills.athletics
+suffix = '+' + str(momentum) + '[momentum]' if momentum > 0 else ''
+suffix += '+' + proficiencyBonus + '[water vehicles prof]' if has_prof else ''
+suffix += '+5[spell bonus]' if has_bonus else ''
+a_roll = vroll(a_skill.d20() + suffix)
+
+moved = a_roll.total
+new_pos = current_pos + moved
+
+obstacles = [50, 100, 150]
+obstacle = [x for x in obstacles if current_pos < x and current_pos + moved >= x]
+obstacle = obstacle[0] if len(obstacle) > 0 else None
+is_buoy = obstacle == 100
+
+avoided_obstacle = a_roll.total - momentum >= 15
+finished = new_pos >= 200
+
+img_speed_limits = img_speed.keys()
+img_speed_limits = [x for x in img_speed_limits]
+img_speed_limits.sort()
+img_key = [x for x in img_speed_limits if moved <= x]
+img_key = img_key[0] if len(img_key) > 0 else img_speed_limits[img_speed_limits.keys()[0]]
+img = img_speed[img_key]
+
+t = f'{c.name} has progressed {moved}ft.'
+f = f'{c.name} is now at the {new_pos}ft. mark!|**Athletics roll:** {a_roll.full}'
+f2 = 'Use `!boatrace row [prof] [bonus]` to keep rowing!|'
+f2 += 'Use `prof` if you are proficient with water vehicles.'
+f2 += '\nUse `bonus` if you are using a spell to boost your speed.'
+
+if finished:
+    t += ' and reached the finish line!'
+    f2 = f'Good job!|You finished in **{this_round} rounds** with **{new_pos} ft**!'
+    f3 = 'You must be famished from the exertion!|You should see Birgid at The Drunken Respite to sate your hunger!'
+    c.delete_cvar(var_name)
+    return 0
+
+next_momentum = floor(moved / 2)
+
+if obstacle != None:
+    if is_buoy:
+        t += 'and rounded the buoy that signals the halfway point!'
+        f3 = "It's all downhill from here!|"
+        next_momentum = 0
+    elif avoided_obstacle:
+        t += ' and avoided the sandbar! Good job!'
+        f3 = 'Do not forget to RP and ignore the seagulls!|**They squawk at everyone!**\n'
+    else:
+        t += ' and gotten stuck on the sandbar!'
+        f += '\nTake a quick rest and wait for a wave to knock you free.|'
+        f3 = 'Grab a few clams while you are at it!|'
+        img = img_stuck
+        next_momentum = 0
+else:
+    f3 = 'And do not listen to the stories of sea monsters!|**They are all made up!**\n'
+
+f3 += f'Your current position is: `{new_pos}`\n'
+f3 += f'Your momentum is: `{next_momentum}`'
+c.set_cvar(var_name, f'{new_pos}:{next_momentum}:{this_round}')
+</drac2>
+-title "{{t}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-f "{f}"' if f else ""}}
+{{f'-f "{f2}"' if f2 else ""}}
+{{f'-f "{f3}"' if f3 else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
