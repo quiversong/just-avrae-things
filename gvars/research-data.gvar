@@ -1,30 +1,1594 @@
 {
-  "chances": {
-    "r1": [1,80],
-    "r2": [81, 100]
-  },
-  "types": {
-    "anatomy": {
-      "img": "",
-      "check": "medicine"
+  "categories": {
+    "personality": {
+      "chance_int": [1,10],
+      "chance_cha": [1,30],
+      "img_url": [""]
+    },
+    "arts": {
+      "chance_int": [11,20],
+      "chance_cha": [31,60],
+      "img_url": [""]
+    },
+    "alchemy": {
+      "chance_int": [21,34],
+      "chance_cha": [61,66],
+      "img_url": [""]
+    },
+    "arcana_domain": {
+      "chance_int": [35,48],
+      "chance_cha": [67,72],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855996399656501278/5734dbf8ddf89cfa8b7f0d881d7c5201.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/855996402685050890/ccd340e557921452871ae67e19cd2ade.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/855996857942671370/03a983c8456757418bec6dac3b0e4b52.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/855996409010192414/55b65a59594ea4443724715283ff4080.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/855996412382806026/a149d8f0436983327630c5fc0c7aceb7.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/855996415515033620/7fc83e9c1668c9c0f08de7ff2d548533.jpeg"]
+    },
+    "magic_items": {
+      "chance_int": [49,62],
+      "chance_cha": [72,78],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/856006616809209856/magic_ring.jpeg"]
     },
     "geography": {
-      "img": "",
-      "check": "survival"
+      "chance_int": [63,76],
+      "chance_cha": [79,84],
+      "img_url": ["https://cdn.discordapp.com/attachments/814855674059030601/841793655316283402/Seventra_7.jpg"]
+    },
+    "history": {
+      "chance_int": [77,90],
+      "chance_cha": [85,90],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/856007135124652052/aed8ba98307851f74ebccbac95765a01.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/856007137876377640/bf96061a2c2997c4003533761f87a0be.jpeg"]
+    },
+    "medicine": {
+      "chance_int": [91,100],
+      "chance_cha": [91,100],
+      "img_url": ["https://cdn.discordapp.com/attachments/838716777320022016/852025051884027954/the_primordial_by_schneerf_d6olmr8-fullview.jpeg"]
     }
   },
   "entries": {
-    "r1": {
-      "name": "Anatomy of Tieflings",
-      "type": "anatomy",
-      "dc": 7,
-      "loot": [{"name": "Aldahen Coin (1gp)", "qt": 4}]
+    "R1": {
+      "name": "Nafel Graives, farmer and Valinor personality",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855924991912837180/Capture.PNG"]
     },
-    "r2": {
+    "R2": {
+      "name": "Capa Mariosa, leader of Bastion Bay",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855925304530042880/Capture.PNG"]
+    },
+    "R3": {
+      "name": "Zef, Merchant of Exotic Wonders",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855927186287886336/Capture.PNG"]
+    },
+    "R4": {
+      "name": "General Octavian Rector",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855927352378916914/Capture.PNG"]
+    },
+    "R5": {
+      "name": "O'livia Rector",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855927953325162516/Capture.PNG"]
+    },
+    "R6": {
+      "name": "Kareestah, barmaid at The Sandpit in Nephix",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855928189900554260/Capture.PNG"]
+    },
+    "R7": {
+      "name": "Sandpit Solomon, owner of the Sandpit in Nephix",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855928332340559962/Capture.PNG"]
+    },
+    "R8": {
+      "name": "Birgid, barmaid at the Drunken Respite in Mossfort",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855958678204448788/2adf7df871e29dd9eafcbcdacf04c115.jpg"]
+    },
+    "R9": {
+      "name": "Dope, Donkey Mail Delivery",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/804225935309537320/unknown.png"]
+    },
+    "R10": {
+      "name": "Father Whiskers, Orphanage Guardian in Nephix",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://i.pinimg.com/originals/af/44/33/af443335eafa5117ff929b546771fbc7.jpg"]
+    },
+    "R11": {
+      "name": "Stacy, Valinor Barmaid",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/805305927400947732/unknown.png"]
+    },
+    "R12": {
+      "name": "The Oak Queen, Mysterious Leader of the Order of the Pale Oak",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/805571354391740466/805583180752486411/d15a7bddd14011d9eb32d95c6d7b181e.png"]
+    },
+    "R13": {
+      "name": "The Sister of the Pale Oak",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/831572839626440724/3-FB3462-A-270-C-4702-A057-52-F2-B0945-BDB.png"]
+    },
+    "R14": {
+      "name": "Iris the Reseer, seer of faiths in Nephix",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://i.pinimg.com/originals/22/ca/6b/22ca6bcb3fb6fa3bbb5a4012a62d1197.jpg"]
+    },
+    "R15": {
+      "name": "Riley Rosegold",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://i.pinimg.com/736x/40/80/ea/4080ea5c08cb308161e62a0f06424a25--character-concept-character-ideas.jpg"]
+    },
+    "R16": {
+      "name": "Bianca Fangryd",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://media.discordapp.net/attachments/802200320326893609/808463122687066112/Bianca_Fangryd.jpg?width=670&height=670"]
+    },
+    "R17": {
+      "name": "Falad al Naveen al Jarran",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://media.discordapp.net/attachments/802200320326893609/808463313075437578/unknown.png"]
+    },
+    "R18": {
+      "name": "Lowana Tealblade",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://media.discordapp.net/attachments/802200320326893609/808463475969753188/unknown.png"]
+    },
+    "R19": {
+      "name": "Telenar Duskspar, the leader of Arbarax",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://media.discordapp.net/attachments/802200320326893609/808463684715806770/unknown.png?width=756&height=670"]
+    },
+    "R20": {
+      "name": "Astrid, Blue Fang deserter",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://i.imgur.com/jO4aryv.jpg"]
+    },
+    "R21": {
+      "name": "Christina Eair, Nephix Alchemist",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/813437308044312576/unknown.png"]
+    },
+    "R22": {
+      "name": "Finley, barman at The Golden Glass in Arbarax",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://media.discordapp.net/attachments/798678462768480305/821073929237823498/Capture2.PNG"]
+    },
+    "R23": {
+      "name": "Willow, Tattoo Artist in Arbarax",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/821771801717637120/8c383eb3a761146e5597f036cd937c7a.jpg"]
+    },
+    "R24": {
+      "name": "Captain Jade Singeburn",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://i.pinimg.com/originals/17/10/7b/17107b5640519d496ca5d920d3beb993.jpg"]
+    },
+    "R25": {
+      "name": "Verenestra, the Pale Oak Princess",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/807265971496419348/824459738145882122/azata_final_by_miguelregodon-d7c9fmb.png"]
+    },
+    "R26": {
+      "name": "Ignacio, the late lover",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/825139038892589116/Wj6E4FZh-1.jpg"]
+    },
+    "R27": {
+      "name": "Uzana, Scrolls Master in Arbarax",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://media.discordapp.net/attachments/798678462768480305/825893558619209748/ooo.PNG"]
+    },
+    "R28": {
+      "name": "Aleas, Arbarax Alchemist",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://media.discordapp.net/attachments/798678462768480305/825906730289725450/Capture.PNG"]
+    },
+    "R29": {
+      "name": "Karketh, the Sable Despoiler",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/799362765059129374/826039478308175942/d205hns-efaac44b-dc1a-41c0-9ea2-0d0a29812c07.png"]
+    },
+    "R30": {
+      "name": "Krahl the Bronze, Priest of the Scaled Gods",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://media.discordapp.net/attachments/798678462768480305/828423778438479892/Screenshots_2021-03-30-17-56-37.png"]
+    },
+    "R31": {
+      "name": "Keshya the Copper, Priest of the Scaled Gods",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828397523935952916/Screenshots_2021-04-04-16-28-59.png"]
+    },
+    "R32": {
+      "name": "Amelie the Silver, Priest of the Scaled Gods",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828396491185192970/Screenshots_2021-04-04-16-30-48.png"]
+    },
+    "R33": {
+      "name": "Veika the Brass, Priest of the Scaled Gods",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828399764625555496/Screenshots_2021-03-30-18-11-12.png"]
+    },
+    "R34": {
+      "name": "Solias the Gold, Priest of the Scaled Gods",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828392058891796551/Screenshots_2021-03-30-17-37-23.png"]
+    },
+    "R35": {
+      "name": "Frost the White, Priest of the Scaled Gods",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828391357675733042/Screenshots_2021-03-30-17-36-28.png"]
+    },
+    "R36": {
+      "name": "Briar the Green, Priest of the Scaled Gods",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828390088861679666/Screenshots_2021-03-30-17-42-16.png"]
+    },
+    "R37": {
+      "name": "Tempest the Blue, Priest of the Scaled Gods",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828389445886541884/Screenshots_2021-03-30-17-38-27.png"]
+    },
+    "R38": {
+      "name": "Kvothe the Black, Priest of the Scaled Gods",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828388428860620811/Screenshots_2021-03-30-17-40-30.png"]
+    },
+    "R39": {
+      "name": "Inigo the Red, Priest of the Scaled Gods",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828387198038048838/Screenshots_2021-03-30-17-51-27.png"]
+    },
+    "R40": {
+      "name": "Eydis, leader of the Blue Fang",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/815658757308547072/Eydis.jpg"]
+    },
+    "R41": {
+      "name": "Yrsa Bearblood, Blue Fang cultist",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/816447953387520030/832825203763052584/6718af3f514109818925c09ed3a1ed77.png"]
+    },
+    "R42": {
+      "name": "Markus, barman at the Ice Palms Lodge in Snowcrest",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/820115277966606337/839267674285408256/markus2.jpg"]
+    },
+    "R43": {
+      "name": "Lady Zaelia, arcana master at the Magic Emporium in Arbarax",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/842416035411787796/852248122248003594/E0vP75sWEAEMVhg_1.jpeg"]
+    },
+    "R44": {
+      "name": "Madam Va'shtra, leader of The Aldahen Syndicate",
+      "type": "personality",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/842416035411787796/852246754950774795/tttumblr_orcbnkqUnL1tx1lfio1_1280.jpeg"]
+    },
+    "R45": {
+      "name": "Music Theory and Popular Chord Progression",
+      "type": "arts",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855962838224732200/music.jpg"]
+    },
+    "R46": {
+      "name": "Lute Playing and Musical Techniques",
+      "type": "arts",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855962838224732200/music.jpg"]
+    },
+    "R47": {
+      "name": "Flute Playing and Musical Techniques",
+      "type": "arts",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855962838224732200/music.jpg"]
+    },
+    "R48": {
+      "name": "Bagpipes Playing and Musical Techniques",
+      "type": "arts",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855962838224732200/music.jpg"]
+    },
+    "R49": {
+      "name": "Drum Playing and Musical Techniques",
+      "type": "arts",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855962838224732200/music.jpg"]
+    },
+    "R50": {
+      "name": "Dulcimer Playing and Musical Techniques",
+      "type": "arts",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855962838224732200/music.jpg"]
+    },
+    "R51": {
+      "name": "Horn Playing and Musical Techniques",
+      "type": "arts",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855962838224732200/music.jpg"]
+    },
+    "R52": {
+      "name": "Lyre Playing and Musical Techniques",
+      "type": "arts",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855962838224732200/music.jpg"]
+    },
+    "R53": {
+      "name": "Pan Flute Playing and Musical Techniques",
+      "type": "arts",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855962838224732200/music.jpg"]
+    },
+    "R54": {
+      "name": "Shawm Playing and Musical Techniques",
+      "type": "arts",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855962838224732200/music.jpg"]
+    },
+    "R55": {
+      "name": "Viol Playing and Musical Techniques",
+      "type": "arts",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855962838224732200/music.jpg"]
+    },
+    "R56": {
+      "name": "The Art of Acting, Drama and Comedy",
+      "type": "arts",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855963784702066688/theater.jpg"]
+    },
+    "R57": {
+      "name": "The Art of Make-up and Costumes",
+      "type": "arts",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855963784702066688/theater.jpg"]
+    },
+    "R58": {
+      "name": "The Art of Paiting and Capturing Color",
+      "type": "arts",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855964214928867328/f02f95fc38289f43e1bf992990460543.jpeg"]
+    },
+    "R59": {
+      "name": "Styles of Dance and Body Expression",
+      "type": "arts",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855965144119115796/dancing.jpg"]
+    },
+    "R60": {
+      "name": "The Art of Public Speaking and Declamation",
+      "type": "arts",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855965685632729088/4067242d3b8b0d77dd527a0f0739d9c2.jpeg"]
+    },
+    "R61": {
+      "name": "Potion of Healing Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855968910774763570/dcmksdy-ebc420bf-4c46-4aaa-95cf-6a1d451f7fe4.jpeg"]
+    },
+    "R62": {
+      "name": "Elixir of Health Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855969076450689085/tumblr_pmblalNUiC1r03qmqo1_640.jpeg"]
+    },
+    "R63": {
+      "name": "Potion of Poison Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855969273079005184/56309583c78aee5ea1120d5bb6b13708.jpeg"]
+    },
+    "R64": {
+      "name": "Philter of Love Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855969872588177428/veronika-vasileva-banka-1.jpeg"]
+    },
+    "R65": {
+      "name": "Potion of Fire Breath Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970556461842452/c00548fca5e88b4b1a90b4350b7c6949.jpeg"]
+    },
+    "R66": {
+      "name": "Potion of Climbing Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
+    },
+    "R67": {
+      "name": "Potion of Heroism Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
+    },
+    "R68": {
+      "name": "Potion of Invisibility Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855972491113529354/2d3bdf52c033c18bd42e642cc8f682a1.jpeg"]
+    },
+    "R69": {
+      "name": "Potion of Mind Reading Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855972757925003284/0823f20101c5294f2d385bf8ef7e11d4.jpeg"]
+    },
+    "R70": {
+      "name": "Potion of Water Breathing Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855981431780278314/39a89312f1ee924621eedd559d34d055.jpeg"]
+    },
+    "R71": {
+      "name": "Potion of Animal Friendship Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855972481226637332/84f1790b62726ae9f1b918b812f991c2.jpeg"]
+    },
+    "R72": {
+      "name": "Potion of Diminution Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
+    },
+    "R73": {
+      "name": "Potion of Growth Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
+    },
+    "R74": {
+      "name": "Potion of Gaseous Form Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855973309221306379/31d4d3adb3a39fbd09a523db2144b133.jpeg"]
+    },
+    "R75": {
+      "name": "Potion of Resistance Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
+    },
+    "R76": {
+      "name": "Potion of Speed Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
+    },
+    "R77": {
+      "name": "Potion of Flying Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
+    },
+    "R78": {
+      "name": "Potion of Clairvoyance Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
+    },
+    "R79": {
+      "name": "Potion of Vitality Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
+    },
+    "R80": {
+      "name": "Potion of Invulnerability Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
+    },
+    "R81": {
+      "name": "Oil of Etherealness Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855973309221306379/31d4d3adb3a39fbd09a523db2144b133.jpeg"]
+    },
+    "R82": {
+      "name": "Oil of Sharpness Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
+    },
+    "R83": {
+      "name": "Oil of Slipperiness Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
+    },
+    "R84": {
+      "name": "Potion of Longevity Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
+    },
+    "R85": {
+      "name": "Potion of Hill Giant Strength Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
+    },
+    "R86": {
+      "name": "Potion of Frost Giant Strength Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
+    },
+    "R87": {
+      "name": "Potion of Fire Giant Strength Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
+    },
+    "R88": {
+      "name": "Potion of Cloud Giant Strength Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
+    },
+    "R89": {
+      "name": "Potion of Storm Giant Strength Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855971127636262972/day8n0n-c3305023-3665-4f68-9aea-234117af58cb.png"]
+    },
+    "R90": {
+      "name": "Assassin's Blood Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855976972055478272/4f6fc65aacd6eadce01035be920a7ca5.jpeg"]
+    },
+    "R91": {
+      "name": "Blue Lotus Extract Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970931277299732/862816a114ebce84e5a81bcfb9f43048.jpeg"]
+    },
+    "R92": {
+      "name": "Truth serum Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855978343123124244/be1cfb02ab9e8d34ade0e8610899a146.jpeg"]
+    },
+    "R93": {
+      "name": "Carrion Crawler Mucus Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855978701698367528/4fd9b269736f9ef948355d9edaa9b8a6.jpeg"]
+    },
+    "R94": {
+      "name": "Drow Poison Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855981434493075456/43759fbf6903453f55d9eac1c2109bbb.jpeg"]
+    },
+    "R95": {
+      "name": "Serpent Venom Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855976983146004501/27cb166b10e56e11d34872aff2a05adb.jpeg"]
+    },
+    "R96": {
+      "name": "Pale Tincture Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855981437752311838/a411bbab9c181cf46263d18c3ad466d3.jpeg"]
+    },
+    "R97": {
+      "name": "Essence of Ether Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855976980889600021/gabriela-marchioro-pot-3.jpeg"]
+    },
+    "R98": {
+      "name": "Oil of Taggit Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855981424883662858/214f56fabfdbe9cf92445def6324c870.jpeg"]
+    },
+    "R99": {
+      "name": "Burnt Othur Fumes Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855982842554613760/cce5af50b2c7ef559fb454a4f12e090d.jpeg"]
+    },
+    "R100": {
+      "name": "Torpor Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855972488142913556/2ef7023353d5f0269c7b195100db394f.jpeg"]
+    },
+    "R101": {
+      "name": "Wyvern Poison Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855981443607035914/fd2713b8174d3c1c201f98f9d0cf25fc.jpeg"]
+    },
+    "R102": {
+      "name": "Midnight Tears Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855983277897940992/db51d111930c1a58b5cdda4e5bc145d3.jpeg"]
+    },
+    "R103": {
+      "name": "Purple Worm Poison Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855976987196915732/3ccb84a7f4c2f9b163f2efa6874c2e1a.jpeg"]
+    },
+    "R104": {
+      "name": "Antitoxin Recipe Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855972494577500170/2632b53a581ed0d29d5332673ffec517.jpeg"]
+    },
+    "R105": {
+      "name": "Basic Poison Recipe",
+      "type": "alchemy",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855972485442961429/03f42e5e4b725d881f86340bc637495a.jpeg"]
+    },
+    "R106": {
+      "name": "Spellweaving",
+      "type": "arcana_domain",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R107": {
+      "name": "Influence of Somatic Components on Divination Spell",
+      "type": "arcana_domain",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R108": {
+      "name": "Influence of Verbal Components on Enchantments",
+      "type": "arcana_domain",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R109": {
+      "name": "Influence of Costly Material Components on High Level Spells",
+      "type": "arcana_domain",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R110": {
+      "name": "The Science of Abjuration Spells",
+      "type": "arcana_domain",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R111": {
+      "name": "The Science of Conjuration Spells",
+      "type": "arcana_domain",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R112": {
+      "name": "The Science of Divination Spells",
+      "type": "arcana_domain",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R113": {
+      "name": "The Science of Enchantment Spells",
+      "type": "arcana_domain",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R114": {
+      "name": "The Science of Evocation Spells",
+      "type": "arcana_domain",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R115": {
+      "name": "The Science of Illusion Spells",
+      "type": "arcana_domain",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R116": {
+      "name": "The Science of Necromancy Spells",
+      "type": "arcana_domain",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R117": {
+      "name": "The Science of Transmutation Spells",
+      "type": "arcana_domain",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R118": {
+      "name": "The Different Types of Ink and Their Influence on Spell Transcription",
+      "type": "arcana_domain",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R119": {
+      "name": "Spell Infusion and Pre-casting Techniques",
+      "type": "arcana_domain",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R120": {
+      "name": "The Process of Enchanting Items with Magical Properties",
+      "type": "arcana_domain",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R121": {
+      "name": "Unidentified Magic Bracelet",
+      "type": "magic_items",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R122": {
+      "name": "Unidentified Magic Bracers",
+      "type": "magic_items",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R123": {
+      "name": "Unidentified Magic Sword",
+      "type": "magic_items",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/856001001919741952/c43df044d16f83c3ffcdfc812d9d086a.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/856001129140715550/401bc0141b0951594887e871d7824acc.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/856001048546902027/d32ef0d824267dcefd6cd86945c42750.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/856001163090198588/2367b21bc3ebdf0b48a49b718be0751a.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/856001726623252489/4211ae116f19f1ff7e5fdba50b7235c5.jpeg"]
+    },
+    "R124": {
+      "name": "Unidentified Magic Axe",
+      "type": "magic_items",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R125": {
+      "name": "Unidentified Magic Heavy Armor",
+      "type": "magic_items",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R126": {
+      "name": "Unidentified Magic Cloak",
+      "type": "magic_items",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R127": {
+      "name": "Unidentified Magic Helmet",
+      "type": "magic_items",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R128": {
+      "name": "Unidentified Magic Ring",
+      "type": "magic_items",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R129": {
+      "name": "Unidentified Magic Amulet",
+      "type": "magic_items",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R130": {
+      "name": "Unidentified Magic Longbow",
+      "type": "magic_items",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R131": {
+      "name": "Unidentified Magic Crossbow",
+      "type": "magic_items",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R132": {
+      "name": "Unidentified Magic Dagger",
+      "type": "magic_items",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R133": {
+      "name": "Unidentified Magic Shield",
+      "type": "magic_items",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R134": {
+      "name": "Unidentified Spell Scroll",
+      "type": "magic_items",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R135": {
+      "name": "Unidentified Magic Gloves",
+      "type": "magic_items",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R136": {
       "name": "Weather Trends in Valinor",
       "type": "geography",
-      "dc": 6,
-      "loot": [{"name": "Aldahen Coin (1gp)", "qt": 5}]
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R137": {
+      "name": "River Kor'aku Pomabi Fauna and Flow",
+      "type": "geography",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R138": {
+      "name": "Bastion Bay Geography and Fauna",
+      "type": "geography",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R139": {
+      "name": "Seventra Coastal Currents",
+      "type": "geography",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R140": {
+      "name": "Weather Trends in Nephix",
+      "type": "geography",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R141": {
+      "name": "The role of Magic waste in Seventra Continental Warming",
+      "type": "geography",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R142": {
+      "name": "The Foundation of the Order of the Pale Oak",
+      "type": "history",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R143": {
+      "name": "Noteable Families of Mossfort ",
+      "type": "history",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R144": {
+      "name": "Construction of the Portal System in Seventra",
+      "type": "history",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R145": {
+      "name": "Founding of the Arcanium",
+      "type": "history",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R146": {
+      "name": "Salthold Bay's Trading Routes",
+      "type": "history",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R147": {
+      "name": "Construction of the Parthenon ",
+      "type": "history",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R148": {
+      "name": "Nephix's War against the Frogmen",
+      "type": "history",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R149": {
+      "name": "History of Nephison's Lineage",
+      "type": "history",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R150": {
+      "name": "Founding of Nephix's Orphanage",
+      "type": "history",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R151": {
+      "name": "Domestication of the Dinosaurs in Nephix",
+      "type": "history",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R152": {
+      "name": "The Last Great War against the Baron",
+      "type": "history",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R153": {
+      "name": "Anatomy of Elves",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R154": {
+      "name": "Anatomy of Tieflings",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R155": {
+      "name": "Anatomy of Dwarves",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R156": {
+      "name": "Anatomy of Halflings",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R157": {
+      "name": "Anatomy of Humans",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R158": {
+      "name": "Anatomy of Minotaurs",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R159": {
+      "name": "Anatomy of Gnomes",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R160": {
+      "name": "Anatomy of Orcs",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R161": {
+      "name": "Anatomy of Goliaths",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R162": {
+      "name": "Anatomy of Goblins",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R163": {
+      "name": "Anatomy of Leonins",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R164": {
+      "name": "Anatomy of Centaurs",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R165": {
+      "name": "Anatomy of Tortles",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R166": {
+      "name": "Anatomy of Grungs",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R167": {
+      "name": "Anatomy of Vedalkens",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R168": {
+      "name": "Anatomy of Eladrin",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R169": {
+      "name": "Anatomy of Aasimar",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R170": {
+      "name": "Anatomy of the Kenku",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R171": {
+      "name": "Anatomy of Aaracrokas",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
+    },
+    "R172": {
+      "name": "Anatomy of Lizardfolk",
+      "type": "medicine",
+      "arcana_dc": 14,
+      "check_dc": 10,
+      "concentration_dc": 10,
+      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2}],
+      "img_url": [""]
     }
   }
 }
