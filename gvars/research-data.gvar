@@ -1,41 +1,49 @@
 {
   "categories": {
     "personality": {
+      "name": "Seventra Personality",
       "chance_int": [1,10],
       "chance_cha": [1,30],
       "img_url": [""]
     },
     "arts": {
+      "name": "Arts",
       "chance_int": [11,20],
       "chance_cha": [31,60],
       "img_url": [""]
     },
     "alchemy": {
+      "name": "Alchemy",
       "chance_int": [21,34],
       "chance_cha": [61,66],
       "img_url": [""]
     },
     "arcana_domain": {
+      "name": "Arcana Domain",
       "chance_int": [35,48],
       "chance_cha": [67,72],
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855996399656501278/5734dbf8ddf89cfa8b7f0d881d7c5201.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/855996402685050890/ccd340e557921452871ae67e19cd2ade.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/855996857942671370/03a983c8456757418bec6dac3b0e4b52.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/855996409010192414/55b65a59594ea4443724715283ff4080.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/855996412382806026/a149d8f0436983327630c5fc0c7aceb7.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/855996415515033620/7fc83e9c1668c9c0f08de7ff2d548533.jpeg"]
     },
     "magic_items": {
+      "name": "Magic Items",
       "chance_int": [49,62],
       "chance_cha": [72,78],
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/856006616809209856/magic_ring.jpeg"]
     },
     "geography": {
+      "name": "Geography",
       "chance_int": [63,76],
       "chance_cha": [79,84],
       "img_url": ["https://cdn.discordapp.com/attachments/814855674059030601/841793655316283402/Seventra_7.jpg"]
     },
     "history": {
+      "name": "History",
       "chance_int": [77,90],
       "chance_cha": [85,90],
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/856007135124652052/aed8ba98307851f74ebccbac95765a01.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/856007137876377640/bf96061a2c2997c4003533761f87a0be.jpeg"]
     },
     "medicine": {
+      "name": "Medicine",
       "chance_int": [91,100],
       "chance_cha": [91,100],
       "img_url": ["https://cdn.discordapp.com/attachments/838716777320022016/852025051884027954/the_primordial_by_schneerf_d6olmr8-fullview.jpeg"]
