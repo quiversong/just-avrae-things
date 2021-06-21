@@ -2,7 +2,7 @@ embed
 <drac2>
 # Configuration Variables
 IS_LIVE = False
-VERSION = '1.06'
+VERSION = '1.0'
 
 BETA_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
 LIVE_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
@@ -32,6 +32,7 @@ R_TIME_VAR = "_r_tc_"
 R_STAGE_VAR = "_r_sc_"
 R_STATS_VAR = "_r_st_"
 R_AREAS_VISITED_VAR = "_r_av_"
+R_IMG_VAR = "_r_img_"
 
 research_count = -1
 #! research_count = devrae_f get_activity_count(#P R_TIME_VAR) !#
@@ -50,7 +51,7 @@ research_count = __result__
 
 footer = "Don't forget to role-play your research!\n"
 footer += f'There is a limit of {DAILY_CAP} researches per day. You have researched {research_count}x today.'
-footer += "\n" + f'Seventra: Exodus of Heroes | Research v{VERSION} | !hunt help'
+footer += "\n" + f'Seventra: Exodus of Heroes | Research v{VERSION} | !research help'
 footer += "\nCreators: quiversong#2772 (Adrienne)"
 
 # Stats
@@ -204,25 +205,28 @@ if action == "start":
         c.set_cvar(R_AREAS_VISITED_VAR, dump_json(areas_visited))
 
         area = areas[new_area_index]
+
+        t = f'{c.name} enters the Aldahen Research Chamber!'
+        f = f"Reality warps around you, and you find yourself {area['name']}|"
+        f += area["intro"]
+
+        f2 = ""
     else:
         area = areas[areas_visited[len(areas_visited) - 1]]
 
+        t = f'{c.name} continues researching in the Aldahen Research Chamber!'
+        f2 = f"Still {area['name']} "
+
     thumb = area['url']
 
-    t = f'{c.name} enters the Aldahen Research Chamber!'
-
-    f = f"You find yourself {area['name']}|"
-    f += area["intro"]
-
-    f2 = f"You feel your mind being probed, and some new, unknown knowledge enter your mind...|"
-    f2 += "Something or someone is trying to understand you before choosing a knowledge piece that suits your background... \nCan you unveil its secrets?\n\n"
+    f2 += f"You feel your mind being probed...|"
+    f2 += "The Aldahen request your help to decypher the knowledge stored in the Foundation... Can you unveil its secrets?\n"
     f2 += f"**Arcana roll:** {arcana_roll.full}"
 
     if arcana_roll.total >= entry['arcana_dc']:
         c.set_cvar(R_STAGE_VAR, f'{entry_id}:identify')
-        f3 = f"The Research Chamber has chosen a topic for you to research!|"
-        f3 += "The topic is about: **\\\'" + category_name + "\\\'**!"
-        f3 += "\nUse `!research identify` to identify the mysteries about this piece of knowledge."
+        f3 = f"The Research Chamber has chosen a topic about {category_name.upper()} for you to research!|"
+        f3 += "Use `!research identify` to identify the mysteries about this piece of knowledge."
     else:
         f3 = "Everything stops, and the chamber goes dark...|"
         f3 += "There is no knowledge suitable for you at this time.\nMaybe they will deem you worthy next time?"
@@ -238,13 +242,6 @@ category_id = entry['type']
 category = categories[category_id]
 category_name = category['name']
 add_to_bag = None
-
-entry_images = entry['img_url']
-entry_img = entry_images[roll(f'1d{len(entry_images)}') - 1] if len(entry_images) > 0 else ""
-if img == "":
-    category_images = category['img_url']
-    entry_img = category_images[roll(f'1d{len(category_images)}') - 1]
-thumb = entry_img
 
 if action == "identify":
     skills_by_category = {
@@ -275,9 +272,18 @@ if action == "identify":
         "arts": "uses their experience with Art and Performance to unveil the secrets of the Foundation...",
         "geography": "uses their knowledge about Nature to unveil the geography secrets stored in the Foundation...",
         "history": "uses their knowledge about History to unveil the secrets kept by the Foundation...",
+        "magic_items": "uses their Arcana expertise to identify the Foundation database of Magic Items...",
         "medicine": "uses their experience with Medicine to understand and transcribe the knowledge kept by the Foundation...",
         "personality": "uses their Persusasion skills to understand the motivations of a Seventra personality..."
     }
+
+    images = entry['img_url']
+    entry_img = images[roll(f'1d{len(images)}') - 1] if len(images) > 0 else ""
+    if entry_img == "":
+        category_images = category['img_url']
+        entry_img = category_images[roll(f'1d{len(category_images)}') - 1]
+    c.set_cvar(R_IMG_VAR, entry_img)
+    thumb = entry_img
 
     skill = skills_by_category[category_id]
     skill_name = skill_name_by_category[category_id]
@@ -287,8 +293,8 @@ if action == "identify":
     succ = s_roll.total > entry["check_dc"]
 
     t = f"{c.name} tries to identify and understand the secrets of the Foundation!"
-    f = f"The Research Chamber has selected a topic about '{category_name}'...|"
-    f += f"The topic is: **{entry_name}**"
+    f = f"The Research Chamber has selected a topic about **'{category_name}'**...|"
+    f += f"The topic is: **'{entry_name}'**"
 
     f2 = f"{c.name} {skill_text[category_id]}|"
     f2 += f"**{skill_name} roll:** {s_roll.full}" + "\n" + f"{sl if succ else fl}"
@@ -306,14 +312,20 @@ if action == "identify":
 
 elif action == 'catalogue':
     c.delete_cvar(R_STAGE_VAR)
-    constitution_check = 10
     s_roll = vroll(f'1d20 + {constitutionMod}')
-    succ = s_roll.total > 10
+    succ = s_roll.total >= entry["concentration_dc"]
+
     t = f'{c.name} tries to catalogue their knowledge about {entry_name}...'
     f = f'{c.name} has to maintain the knowledge while it is extracted by the Aldahen...|**Constitution save:** {s_roll.full}\n{sl if succ else fl}'
+
+
+    if R_IMG_VAR in cv:
+        thumb = cv[R_IMG_VAR]
+        c.delete_cvar(R_IMG_VAR)
+    else:
+        thumb = image
+
     if succ:
-        entry_type = data["types"][entry["type"]]
-        thumb = entry["img"] if "img" in entry else entry_type["img"] if entry_type["img"] != "" else None
         stats["s_catalogue"] = stats["s_catalogue"] + 1 if "s_catalogue" in stats else 1
         add_to_bag = {}
         loot_list = ""
@@ -323,8 +335,9 @@ elif action == 'catalogue':
                     add_to_bag[loot_n] = loot_qt
                     loot_list += f'{loot_qt}x {loot_n}, '
         loot_list = loot_list[:len(loot_list) - 2]
+
         f2 = f'{c.name} is able to transfer the knowledge to the Aldahen and receives a bounty in return.|'
-        f2 += 'Unfortunately most of the knowledge is lost once you exit the chamber, but you keep the loot!'
+        f2 += 'When you exit the chamber, you feel tired, and can not think straight. Most of the knowledge you acquired is gone from your memories... but you keep the loot!'
         f3 = f'You gained: {loot_list}.|They have been added to your "Research" bag!'
     else:
         thumb = image
@@ -337,9 +350,9 @@ if add_to_bag != None:
   _bag_name = "Research"
   _content = add_to_bag
 
-  #! devrae_f add_to_bag (#P "Hunting" #P add_to_bag) !#
+  #! devrae_f add_to_bag (#P "Research" #P add_to_bag) !#
   ##### devrae function insert [add_to_bag] #####
-  __p0__ = "Hunting"
+  __p0__ = "Research"
   __p1__ = add_to_bag
   _bag_name = __p0__
   _content = __p1__
