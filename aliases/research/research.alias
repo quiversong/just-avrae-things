@@ -6,6 +6,10 @@ VERSION = '1.06'
 
 BETA_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
 LIVE_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
+
+BETA_AREAS_VAR = "a5d585d6-92d2-4961-adfa-f475f4b4d737"
+LIVE_AREAS_VAR = "a5d585d6-92d2-4961-adfa-f475f4b4d737"
+
 DAILY_CAP = 6
 
 # Code
@@ -15,9 +19,10 @@ c = character()
 cv, cs = c.cvars, c.skills
 
 data_var = LIVE_VAR if IS_LIVE else BETA_VAR
+areas_var = LIVE_AREAS_VAR if IS_LIVE else BETA_AREAS_VAR
 
 t = f'{c.name} wants to aid The Aldahen Syndicate with their research!'
-f, f2, f3, color = None, None, None, 'f200ff'
+f, f2, f3, f4, color = None, None, None, None, 'f200ff'
 
 img = None
 thumb = None
@@ -26,6 +31,7 @@ sl, fl = "**Success!**", "**Failure!**"
 R_TIME_VAR = "_r_tc_"
 R_STAGE_VAR = "_r_sc_"
 R_STATS_VAR = "_r_st_"
+R_AREAS_VISITED_VAR = "_r_av_"
 
 research_count = -1
 #! research_count = devrae_f get_activity_count(#P R_TIME_VAR) !#
@@ -85,13 +91,17 @@ if R_STAGE_VAR in cv:
     current_stage = stage_vars[1]
 
 data = load_json(get_gvar(data_var))
+areas = load_json(get_gvar(areas_var))
+areas_visited = load_json(cv[R_AREAS_VISITED_VAR]) if R_AREAS_VISITED_VAR in cv else []
+categories = data["categories"]
 entries = data["entries"]
+spell_attr = 'INT' if intelligenceMod >= charismaMod else 'CHA'
+spell_mod = charismaMod if spell_attr == 'CHA' else intelligenceMod
 
 in_wrong_stage = current_stage and (len(args) == 0 or (len(args) > 0 and current_stage != args[0]))
 if in_wrong_stage:
   name = entries[entry_id]['name']
-  add_n = "n" if name[0].upper() in "AEIOU" else ""
-  f = f'Oops! You are already researching a{add_n} {name}!|Use `!research {current_stage}` to continue.'
+  f = f'Oops! You are already researching \'{name}\'!|Use `!research {current_stage}` to continue.'
   thumb = image
   return 1
 
@@ -167,63 +177,131 @@ if action == "start":
         f += '\n(Research resets at midnight UTC)'
         return 1
 
-    stats["t_researches"] = stats["t_researches"] + 1 if "t_researches" in stats else 1
-
     a_roll = roll("1d100")
-    chances_as_tuples = [(k, v) for k, v in data["chances"].items()]
-    entry_id = [k for k, v in chances_as_tuples if (a_roll == v if not 'List' in typeof(v) else a_roll == v[0] if len(v) == 1 else a_roll >= v[0] and a_roll <= v[1])]
-    entry_id = entry_id[0]
+    category_chances = [(k, v['chance_cha']) if spell_attr == 'CHA' else (k, v['chance_int']) for k, v in categories.items()]
+    category_id = [k for k, v in category_chances if (a_roll == v if not 'List' in typeof(v) else a_roll == v[0] if len(v) == 1 else a_roll >= v[0] and a_roll <= v[1])]
+    category_id = category_id[0]
+    category_name = categories[category_id]['name']
 
+    category_entries = [k for k, v in entries.items() if v['type'] == category_id]
+    entry_id = category_entries[roll(f'1d{len(category_entries)}') - 1]
     entry = entries[entry_id]
     entry_name = entry['name']
-    c.set_cvar(R_STAGE_VAR, f'{entry_id}:identify')
+
+    check_mod = f'{spell_mod} [Spell Mod]'
+    arcana_skill = [s[1] for s in character().skills if s[0] == 'arcana'][0]
+    if arcana_skill.prof > 0:
+        check_mod += f' + {arcana_skill.prof * proficiencyBonus} [Arcana prof]'
+
+    arcana_roll = vroll(f'1d20 + {check_mod}')
+
+    if research_count == 1:
+        if len(areas_visited) >= len(areas):
+            areas_visited = []
+        indexes_not_visited = [x for x in range(0, len(areas)) if x not in areas_visited]
+        new_area_index = indexes_not_visited[roll(f'1d{len(indexes_not_visited) - 1}')]
+        areas_visited.append(new_area_index)
+        c.set_cvar(R_AREAS_VISITED_VAR, dump_json(areas_visited))
+
+        area = areas[new_area_index]
+    else:
+        area = areas[areas_visited[len(areas_visited) - 1]]
+
+    thumb = area['url']
 
     t = f'{c.name} enters the Aldahen Research Chamber!'
 
-    f = f"The chamber is an empty room that seems to have no end.|"
-    f += "Stars shine up above you and below, reflected in the glass smooth floor."
-    f += " The only thing inside the chamber is the faint image of a tree, standing alone and invintingly."
+    f = f"You find yourself {area['name']}|"
+    f += area["intro"]
 
-    f2 = f"{c.name} places their hand on the chamber's tree!|"
-    f2 += f"{c.name} feels the tree channeling knowledge into their mind..."
+    f2 = f"You feel your mind being probed, and some new, unknown knowledge enter your mind...|"
+    f2 += "Something or someone is trying to understand you before choosing a knowledge piece that suits your background... \nCan you unveil its secrets?\n\n"
+    f2 += f"**Arcana roll:** {arcana_roll.full}"
 
-    f3 = f"The Research Chamber has chosen a topic for {c.name} to research!|"
-    f3 += "The chosen topic is **\\\'" + entry_name + "\\\'**!"
-    f3 += "\nUse `!research identify` to identify the mysteries about this piece of knowledge."
-    img = 'https://cdn.discordapp.com/attachments/827581981452795975/851843046365462558/wp2776980-starry-sky-wallpaper.jpg'
+    if arcana_roll.total >= entry['arcana_dc']:
+        c.set_cvar(R_STAGE_VAR, f'{entry_id}:identify')
+        f3 = f"The Research Chamber has chosen a topic for you to research!|"
+        f3 += "The topic is about: **\\\'" + category_name + "\\\'**!"
+        f3 += "\nUse `!research identify` to identify the mysteries about this piece of knowledge."
+    else:
+        f3 = "Everything stops, and the chamber goes dark...|"
+        f3 += "There is no knowledge suitable for you at this time.\nMaybe they will deem you worthy next time?"
+
+    stats["t_researches"] = stats["t_researches"] + 1 if "t_researches" in stats else 1
+    stats["s_research_start"] = stats["s_research_start"] + 1 if "s_research_start" in stats else 1
     c.set_cvar(R_STATS_VAR, dump_json(stats))
     return 0
 
 entry = entries[entry_id]
 entry_name = entry["name"]
+category_id = entry['type']
+category = categories[category_id]
+category_name = category['name']
 add_to_bag = None
 
+entry_images = entry['img_url']
+entry_img = entry_images[roll(f'1d{len(entry_images)}') - 1] if len(entry_images) > 0 else ""
+if img == "":
+    category_images = category['img_url']
+    entry_img = category_images[roll(f'1d{len(category_images)}') - 1]
+thumb = entry_img
+
 if action == "identify":
-    skills_by_check_type = {
+    skills_by_category = {
+        "alchemy": cs.arcana,
+        "arcana_domain": cs.arcana,
+        "arts": cs.performance,
+        "geography": cs.nature,
+        "history": cs.history,
+        "magic_items": cs.arcana,
         "medicine": cs.medicine,
-        "survival": cs.survival
+        "personality": cs.persuasion
     }
-    entry_type = data["types"][entry["type"]]
-    check_type = entry_type["check"]
-    skill = skills_by_check_type[check_type]
+
+    skill_name_by_category = {
+        "alchemy": "Arcana",
+        "arcana_domain": "Arcana",
+        "arts": "Performance",
+        "geography": "Nature",
+        "history": "History",
+        "magic_items": "Arcana",
+        "medicine": "Medicine",
+        "personality": "Persuasion"
+    }
+
+    skill_text = {
+        "alchemy": "uses their knowledge in Arcana to unveil the alchemy secrets of the Foundation...",
+        "arcana_domain": "uses their Arcana knowledge to unveil the secrets of the Foundation...",
+        "arts": "uses their experience with Art and Performance to unveil the secrets of the Foundation...",
+        "geography": "uses their knowledge about Nature to unveil the geography secrets stored in the Foundation...",
+        "history": "uses their knowledge about History to unveil the secrets kept by the Foundation...",
+        "medicine": "uses their experience with Medicine to understand and transcribe the knowledge kept by the Foundation...",
+        "personality": "uses their Persusasion skills to understand the motivations of a Seventra personality..."
+    }
+
+    skill = skills_by_category[category_id]
+    skill_name = skill_name_by_category[category_id]
 
     adv_status = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
     s_roll = vroll(skill.d20(base_adv = adv_status))
-    succ = s_roll.total > entry["dc"]
+    succ = s_roll.total > entry["check_dc"]
 
-    t = f"{c.name} tries to identify and understand the chamber\\\'s knowledge!"
-    f = f'{c.name} uses their knowledge in {check_type}...|**{check_type.capitalize()} roll:** {s_roll.full}\n{sl if succ else fl}'
+    t = f"{c.name} tries to identify and understand the secrets of the Foundation!"
+    f = f"The Research Chamber has selected a topic about '{category_name}'...|"
+    f += f"The topic is: **{entry_name}**"
+
+    f2 = f"{c.name} {skill_text[category_id]}|"
+    f2 += f"**{skill_name} roll:** {s_roll.full}" + "\n" + f"{sl if succ else fl}"
 
     if succ:
-        thumb = entry["img"] if "img" in entry else entry_type["img"] if entry_type["img"] != "" else None
         stats["s_identify"] = stats["s_identify"] + 1 if "s_identify" in stats else 1
-        f2 = f'{c.name} has successfully acquired the knowledge about {entry_name}!|'
-        f2 += 'Now use `!research catalogue` to catalogue the knowledge you acquired.'
+        f3 = f'{c.name} has successfully acquired the knowledge about {entry_name}!|'
+        f3 += 'Now use `!research catalogue` to catalogue the knowledge you acquired.'
         c.set_cvar(R_STAGE_VAR, f'{entry_id}:catalogue')
     else:
         thumb = image
-        f2 = f'The information about {entry_name} was too complex for you to grasp...|'
-        f2 += 'Better luck next time! Use `!research start` to try again.'
+        f3 = f'The information about {entry_name} was too complex for you to grasp...|'
+        f3 += 'Better luck next time! Use `!research start` to try again.'
         c.delete_cvar(R_STAGE_VAR)
 
 elif action == 'catalogue':
@@ -291,5 +369,6 @@ if add_to_bag != None:
 {{f'-f "{f}"' if f else ""}}
 {{f'-f "{f2}"' if f2 else ""}}
 {{f'-f "{f3}"' if f3 else ""}}
+{{f'-f "{f4}"' if f4 else ""}}
 {{f'-color "{color}"' if color else ""}}
 {{f'-footer "{footer}"' if footer else ""}}
