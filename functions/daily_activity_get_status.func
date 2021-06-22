@@ -1,0 +1,38 @@
+# returns current counter and wait time text if any
+_var_name = __p0__
+_daily_limit = __p1__
+_cvars = character().cvars
+
+_now = time()
+if _var_name not in _cvars:
+  __result__ = { "count": 0, "wait_time": None }
+else:
+  _var_parts = _cvars[_var_name].split(':')
+  _count = int(_var_parts[0])
+  _first_time = float(_var_parts[1])
+  _wait_time = None
+  _is_next_day = False
+
+  if _count > 0 and _first_time != None:
+    _passed_in_day_since_first_time = _first_time % 86400
+    _next_midnight_after_first_time = _first_time + (86400 - _passed_in_day_since_first_time)
+    if _now > _next_midnight_after_first_time:
+      _is_next_day = True
+    elif _count >= _daily_limit:
+      _wait_time = _next_midnight_after_first_time - _now
+      _hours = floor(_wait_time / 3600)
+      _minutes = 0
+      if _hours == 0:
+        _minutes = ceil(_wait_time / 60)
+      else:
+        _minutes = ceil((_wait_time % 3600) / 60)
+      _wait_text = (str(_hours) + ' hours and ' if _hours > 0 else '') + str(_minutes) + ' minutes'
+
+  if _is_next_day:
+    _count = 0
+    __result__ = { "count": _count, "wait_time": None }
+  elif _count < _daily_limit:
+    __result__ = { "count": _count, "wait_time": None }
+  else:
+    __result__ = { "count": _count, "wait_time": _wait_text }
+

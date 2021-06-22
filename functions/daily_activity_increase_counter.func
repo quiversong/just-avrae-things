@@ -1,0 +1,13 @@
+# returns current counter and wait time text if any
+_var_name = __p0__
+_cvars = character().cvars
+if not _var_name in _cvars:
+  _now = time()
+  character().set_cvar(_var_name, f'1:{_now}')
+  __result__ = 1
+else:
+  _var_parts = _cvars[_var_name].split(':')
+  _count = int(_var_parts[0]) + 1
+  _time = _var_parts[1]
+  character().set_cvar(_var_name, f'{_count}:{_time}')
+  __result__ = _count

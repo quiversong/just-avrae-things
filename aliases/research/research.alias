@@ -101,38 +101,37 @@ spell_mod = charismaMod if spell_attr == 'CHA' else intelligenceMod
 
 in_wrong_stage = current_stage and (len(args) == 0 or (len(args) > 0 and current_stage != args[0]))
 if in_wrong_stage:
-  name = entries[entry_id]['name']
-  f = f'Oops! You are already researching \'{name}\'!|Use `!research {current_stage}` to continue.'
-  thumb = image
-  return 1
+    name = entries[entry_id]['name']
+    f = f'Oops! You are already researching \'{name}\'!|Use `!research {current_stage}` to continue.'
+    thumb = image
+    return 1
 
-if len(args) == 0 or not args[0].lower() in ['start', 'identify', 'catalogue']:
-  f = f'Ready to start researtching?|Type `!research start` to enter the Aldahen Research Center.'
-  research_images = [
-    'https://cdn.discordapp.com/attachments/827581981452795975/851694263058432040/BookGen.jpeg',
-    'https://cdn.discordapp.com/attachments/827581981452795975/851694419753041960/d8294928b89f344318e248ee809853c8.jpeg',
-    'https://cdn.discordapp.com/attachments/827581981452795975/851694727874478090/the_library_of_babel_by_owen_c-d3gvei32.jpeg',
-    'https://cdn.discordapp.com/attachments/827581981452795975/851694928282779668/Library.jpeg',
-    'https://cdn.discordapp.com/attachments/827581981452795975/851695083829198889/d0beea47-7fd5-4af9-b514-efd8838c5378-candlekeep-mysteries-_-key-art_-artist-credit_-clint-cear...jpg',
-    'https://cdn.discordapp.com/attachments/827581981452795975/851695815604437013/226.png'
-  ]
-  img = research_images[roll(f'1d{len(research_images)}') - 1]
-  return 0
+if len(args) == 0 or (not current_stage and args[0].lower() != 'start'):
+    f = f'Ready to start researtching?|Type `!research start` to enter the Aldahen Research Center.'
+    research_images = [
+        'https://cdn.discordapp.com/attachments/827581981452795975/851694263058432040/BookGen.jpeg',
+        'https://cdn.discordapp.com/attachments/827581981452795975/851694419753041960/d8294928b89f344318e248ee809853c8.jpeg',
+        'https://cdn.discordapp.com/attachments/827581981452795975/851694727874478090/the_library_of_babel_by_owen_c-d3gvei32.jpeg',
+        'https://cdn.discordapp.com/attachments/827581981452795975/851694928282779668/Library.jpeg',
+        'https://cdn.discordapp.com/attachments/827581981452795975/851695083829198889/d0beea47-7fd5-4af9-b514-efd8838c5378-candlekeep-mysteries-_-key-art_-artist-credit_-clint-cear...jpg',
+        'https://cdn.discordapp.com/attachments/827581981452795975/851695815604437013/226.png'
+    ]
+    img = research_images[roll(f'1d{len(research_images)}') - 1]
+    return 0
 
-#! daily_control = devrae_f daily_activity_control(#P R_TIME_VAR #P DAILY_CAP) !#
-##### devrae function insert [daily_activity_control] #####
-daily_control = None
+#! daily_status = devrae_f daily_activity_get_status(#P R_TIME_VAR #P DAILY_CAP) !#
+##### devrae function insert [daily_activity_get_status] #####
+daily_status = None
 __p0__ = R_TIME_VAR
 __p1__ = DAILY_CAP
-# increments counter and returns current counter and wait time text if any
+# returns current counter and wait time text if any
 _var_name = __p0__
 _daily_limit = __p1__
 _cvars = character().cvars
 
 _now = time()
 if _var_name not in _cvars:
-  __result__ = { "count": 1, "wait_time": None }
-  character().set_cvar(_var_name, f'1:{_now}')
+  __result__ = { "count": 0, "wait_time": None }
 else:
   _var_parts = _cvars[_var_name].split(':')
   _count = int(_var_parts[0])
@@ -156,20 +155,18 @@ else:
       _wait_text = (str(_hours) + ' hours and ' if _hours > 0 else '') + str(_minutes) + ' minutes'
 
   if _is_next_day:
-    _count = 1
-    character().set_cvar(_var_name, f'{_count}:{_now}')
+    _count = 0
     __result__ = { "count": _count, "wait_time": None }
   elif _count < _daily_limit:
-    _count += 1
-    character().set_cvar(_var_name, f'{_count}:{_first_time}')
     __result__ = { "count": _count, "wait_time": None }
   else:
     __result__ = { "count": _count, "wait_time": _wait_text }
-daily_control = __result__
-##### devrae function end [daily_activity_control] #####
 
-research_count = daily_control["count"]
-wait_time = daily_control["wait_time"]
+daily_status = __result__
+##### devrae function end [daily_activity_get_status] #####
+
+research_count = daily_status["count"]
+wait_time = daily_status["wait_time"]
 action = args[0]
 
 if action == "start":
@@ -177,6 +174,28 @@ if action == "start":
         f = f'{c.name} is exhausted from so much research today...|You have to wait {wait_time} until you can research again.'
         f += '\n(Research resets at midnight UTC)'
         return 1
+
+    #! research_count = devrae_f daily_activity_increase_counter(#P R_TIME_VAR) !#
+    ##### devrae function insert [daily_activity_increase_counter] #####
+    research_count = None
+    __p0__ = R_TIME_VAR
+    # returns current counter and wait time text if any
+    _var_name = __p0__
+    _cvars = character().cvars
+    if not _var_name in _cvars:
+      _now = time()
+      character().set_cvar(_var_name, f'1:{_now}')
+      __result__ = 1
+    else:
+      _var_parts = _cvars[_var_name].split(':')
+      _count = int(_var_parts[0]) + 1
+      _time = _var_parts[1]
+      character().set_cvar(_var_name, f'{_count}:{_time}')
+      __result__ = _count
+    research_count = __result__
+    ##### devrae function end [daily_activity_increase_counter] #####
+
+    footer = footer.replace(f'{research_count - 1}x today', f'{research_count}x today')
 
     a_roll = roll("1d100")
     category_chances = [(k, v['chance_cha']) if spell_attr == 'CHA' else (k, v['chance_int']) for k, v in categories.items()]
@@ -205,6 +224,7 @@ if action == "start":
         c.set_cvar(R_AREAS_VISITED_VAR, dump_json(areas_visited))
 
         area = areas[new_area_index]
+        img = area['url']
 
         t = f'{c.name} enters the Aldahen Research Chamber!'
         f = f"Reality warps around you, and you find yourself {area['name']}|"
@@ -213,14 +233,14 @@ if action == "start":
         f2 = ""
     else:
         area = areas[areas_visited[len(areas_visited) - 1]]
+        thumb = area['url']
 
         t = f'{c.name} continues researching in the Aldahen Research Chamber!'
         f2 = f"Still {area['name']} "
 
-    thumb = area['url']
 
     f2 += f"You feel your mind being probed...|"
-    f2 += "The Aldahen request your help to decypher the knowledge stored in the Foundation... Can you unveil its secrets?\n"
+    f2 += "Do you have what it takes to help The Aldahen catalogue the knowledge stored in the Foundation?\n"
     f2 += f"**Arcana roll:** {arcana_roll.full}"
 
     if arcana_roll.total >= entry['arcana_dc']:
@@ -228,8 +248,10 @@ if action == "start":
         f3 = f"The Research Chamber has chosen a topic about {category_name.upper()} for you to research!|"
         f3 += "Use `!research identify` to identify the mysteries about this piece of knowledge."
     else:
+        c.delete_cvar(R_STAGE_VAR)
         f3 = "Everything stops, and the chamber goes dark...|"
         f3 += "There is no knowledge suitable for you at this time.\nMaybe they will deem you worthy next time?"
+        f3 += "\nTo try again, use `!research start`."
 
     stats["t_researches"] = stats["t_researches"] + 1 if "t_researches" in stats else 1
     stats["s_research_start"] = stats["s_research_start"] + 1 if "s_research_start" in stats else 1
@@ -315,8 +337,8 @@ elif action == 'catalogue':
     s_roll = vroll(f'1d20 + {constitutionMod}')
     succ = s_roll.total >= entry["concentration_dc"]
 
-    t = f'{c.name} tries to catalogue their knowledge about {entry_name}...'
-    f = f'{c.name} has to maintain the knowledge while it is extracted by the Aldahen...|**Constitution save:** {s_roll.full}\n{sl if succ else fl}'
+    t = f'{c.name} tries to catalogue the information...'
+    f = f'Can you hold on to the knowledge as it is catalogued by The Aldahen Chamber?|**Constitution save:** {s_roll.full}'
 
 
     if R_IMG_VAR in cv:
@@ -336,12 +358,12 @@ elif action == 'catalogue':
                     loot_list += f'{loot_qt}x {loot_n}, '
         loot_list = loot_list[:len(loot_list) - 2]
 
-        f2 = f'{c.name} is able to transfer the knowledge to the Aldahen and receives a bounty in return.|'
-        f2 += 'When you exit the chamber, you feel tired, and can not think straight. Most of the knowledge you acquired is gone from your memories... but you keep the loot!'
-        f3 = f'You gained: {loot_list}.|They have been added to your "Research" bag!'
+        f2 = f'Success!|The knowledge you acquired about **{entry_name}** has been transferred to The Aldahen!'
+        f3 = 'When you next exit the chamber...|You feel tired and can not think straight. Most of the knowledge you acquired is gone from your memories... but you keep the loot paid by The Aldahen Syndicate!'
+        f4 = f'You gained: {loot_list}.|They have been added to your "Research" bag!'
     else:
         thumb = image
-        f2 = f'{c.name} was not able to hold onto the knowledge long enough to transfer it to the Aldahen!|'
+        f2 = f'{c.name} was NOT able to hold onto the knowledge long enough to transfer it to the Aldahen!|'
         f2 += "Better luck next time! Use `!research start` to try again."
 
 c.set_cvar(R_STATS_VAR, dump_json(stats))
