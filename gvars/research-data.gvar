@@ -47,7 +47,7 @@
       "chance_int": [91,100],
       "chance_cha": [91,100],
       "img_url": ["https://cdn.discordapp.com/attachments/838716777320022016/852025051884027954/the_primordial_by_schneerf_d6olmr8-fullview.jpeg"]
-    },
+    }
   },
   "entries": {
     "R1": {
@@ -1732,6 +1732,6 @@
       "concentration_dc": 9,
       "loot": [{"name": "Aldahen Coin (1sp)", "qt":1545}],
       "img_url": [""]
-    },
+    }
   }
 }
