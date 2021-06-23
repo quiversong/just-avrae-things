@@ -3,13 +3,13 @@
     "personality": {
       "name": "Seventra Personality",
       "chance_int": [1,10],
-      "chance_cha": [1,30],
+      "chance_cha": [1,40],
       "img_url": [""]
     },
     "arts": {
       "name": "Arts",
       "chance_int": [11,20],
-      "chance_cha": [31,60],
+      "chance_cha": [41,60],
       "img_url": [""]
     },
     "alchemy": {

@@ -312,7 +312,7 @@ if action == "identify":
 
     adv_status = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
     s_roll = vroll(skill.d20(base_adv = adv_status))
-    succ = s_roll.total > entry["check_dc"]
+    succ = s_roll.total >= entry["check_dc"] or s_roll.result.crit == 1
 
     t = f"{c.name} tries to identify and understand the secrets of the Foundation!"
     f = f"The Research Chamber has selected a topic about **'{category_name}'**...|"
@@ -334,7 +334,10 @@ if action == "identify":
 
 elif action == 'catalogue':
     c.delete_cvar(R_STAGE_VAR)
-    s_roll = vroll(f'1d20 + {constitutionMod}')
+    adv_status = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
+    b_bonus_param = ' + '.join(pargs.get('b', default=[''])).strip()
+    dice = '1d20kh1' if pargs.adv() == 1 else '1d20kl1' if pargs.adv() == -1 else '1d20'
+    s_roll = vroll(f'{dice} + {constitutionMod}{b_bonus_param}')
     succ = s_roll.total >= entry["concentration_dc"]
 
     t = f'{c.name} tries to catalogue the information...'
