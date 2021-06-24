@@ -28,7 +28,7 @@ img = None
 thumb = None
 sl, fl = "**Success!**", "**Failure!**"
 
-R_TIME_VAR = "_h_dhc_"
+R_TIME_VAR = "_r_dhc_"
 R_STAGE_VAR = "_r_sc_"
 R_STATS_VAR = "_r_st_"
 R_AREAS_VISITED_VAR = "_r_av_"
@@ -284,7 +284,7 @@ if action == "identify":
         "history": "You use your knowledge about History to unveil the secrets kept by the Foundation...",
         "magic_items": "You use your Arcana expertise to identify the Foundation database of Magic Items...",
         "medicine": "You use your experience with Medicine to understand and transcribe the knowledge kept by the Foundation...",
-        "personality": "You use your Persusasion skills to understand the motivations of a Seventra personality..."
+        "personality": "You use your Charisma skills to put yourself in their shoes and understand their motivations..."
     }
 
     images = entry['img_url']
@@ -353,7 +353,7 @@ elif action == 'catalogue':
 
         f2 = f'Success!|The knowledge you acquired about **{entry_name}** has been transferred to The Aldahen!'
         f3 = 'When you next exit the chamber...|You feel tired and can not think straight. Most of the knowledge you acquired is gone from your memories... but you keep the loot paid by The Aldahen Syndicate!'
-        f4 = f'You gained: {loot_list}.|They have been added to your "Research" bag!'
+        f4 = f'You gained: {loot_list}.|They have been added to your "Research" bag!\n\Research some more with `!research start`!'
     else:
         thumb = image
         f2 = f'{c.name} was NOT able to hold onto the knowledge long enough to transfer it to the Aldahen!|'
@@ -371,7 +371,7 @@ if add_to_bag != None:
   __p1__ = add_to_bag
   _bag_name = __p0__
   _content = __p1__
-  
+
   _cv = character().cvars
   _bags = load_json(_cv["bags"]) if "bags" in _cv else []
   _bag_index = [i for i, x in enumerate(_bags) if x[0] == _bag_name]
