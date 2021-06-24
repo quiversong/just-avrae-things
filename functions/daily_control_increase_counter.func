@@ -1,7 +1,7 @@
 # returns current counter and wait time text if any
 _var_name = __p0__
 _cvars = character().cvars
-if not _var_name in _cvars:
+if not _var_name in _cvars or _cvars[_var_name] == "0:0":
   _now = time()
   character().set_cvar(_var_name, f'1:{_now}')
   __result__ = 1

@@ -28,26 +28,62 @@ img = None
 thumb = None
 sl, fl = "**Success!**", "**Failure!**"
 
-R_TIME_VAR = "_r_tc_"
+R_TIME_VAR = "_h_dhc_"
 R_STAGE_VAR = "_r_sc_"
 R_STATS_VAR = "_r_st_"
 R_AREAS_VISITED_VAR = "_r_av_"
 R_IMG_VAR = "_r_img_"
 
-research_count = -1
-#! research_count = devrae_f get_activity_count(#P R_TIME_VAR) !#
-##### devrae function insert [get_activity_count] #####
-research_count = None
+daily_activity_control = None
+#! daily_activity_control = devrae_f daily_control_init(#P R_TIME_VAR #P DAILY_CAP) !#
+##### devrae function insert [daily_control_init] #####
+daily_activity_control = None
 __p0__ = R_TIME_VAR
+__p1__ = DAILY_CAP
+# returns current counter and wait time text if any
 _var_name = __p0__
+_daily_limit = __p1__
 _cvars = character().cvars
-_count = 0
-if _var_name in _cvars:
+
+_now = time()
+if _var_name not in _cvars:
+  __result__ = { "count": 0, "wait_time": None }
+  character().set_cvar(_var_name, f"0:0")
+else:
   _var_parts = _cvars[_var_name].split(':')
   _count = int(_var_parts[0])
-__result__ = _count
-research_count = __result__
-##### devrae function end [get_activity_count] #####
+  _first_time = float(_var_parts[1])
+  _wait_time = None
+  _is_next_day = False
+
+  if _count > 0 and _first_time != None:
+    _passed_in_day_since_first_time = _first_time % 86400
+    _next_midnight_after_first_time = _first_time + (86400 - _passed_in_day_since_first_time)
+    if _now > _next_midnight_after_first_time:
+      _is_next_day = True
+    elif _count >= _daily_limit:
+      _wait_time = _next_midnight_after_first_time - _now
+      _hours = floor(_wait_time / 3600)
+      _minutes = 0
+      if _hours == 0:
+        _minutes = ceil(_wait_time / 60)
+      else:
+        _minutes = ceil((_wait_time % 3600) / 60)
+      _wait_text = (str(_hours) + ' hours and ' if _hours > 0 else '') + str(_minutes) + ' minutes'
+
+  if _is_next_day:
+    _count = 0
+    __result__ = { "count": _count, "wait_time": None }
+    character().set_cvar(_var_name, f"0:0")
+  elif _count < _daily_limit:
+    __result__ = { "count": _count, "wait_time": None }
+  else:
+    __result__ = { "count": _count, "wait_time": _wait_text }
+
+daily_activity_control = __result__
+##### devrae function end [daily_control_init] #####
+research_count = daily_activity_control["count"]
+wait_time = daily_activity_control["wait_time"]
 
 footer = "Don't forget to role-play your research!\n"
 footer += f'There is a limit of {DAILY_CAP} researches per day. You have researched {research_count}x today.'
@@ -119,54 +155,6 @@ if len(args) == 0 or (not current_stage and args[0].lower() != 'start'):
     img = research_images[roll(f'1d{len(research_images)}') - 1]
     return 0
 
-#! daily_status = devrae_f daily_activity_get_status(#P R_TIME_VAR #P DAILY_CAP) !#
-##### devrae function insert [daily_activity_get_status] #####
-daily_status = None
-__p0__ = R_TIME_VAR
-__p1__ = DAILY_CAP
-# returns current counter and wait time text if any
-_var_name = __p0__
-_daily_limit = __p1__
-_cvars = character().cvars
-
-_now = time()
-if _var_name not in _cvars:
-  __result__ = { "count": 0, "wait_time": None }
-else:
-  _var_parts = _cvars[_var_name].split(':')
-  _count = int(_var_parts[0])
-  _first_time = float(_var_parts[1])
-  _wait_time = None
-  _is_next_day = False
-
-  if _count > 0 and _first_time != None:
-    _passed_in_day_since_first_time = _first_time % 86400
-    _next_midnight_after_first_time = _first_time + (86400 - _passed_in_day_since_first_time)
-    if _now > _next_midnight_after_first_time:
-      _is_next_day = True
-    elif _count >= _daily_limit:
-      _wait_time = _next_midnight_after_first_time - _now
-      _hours = floor(_wait_time / 3600)
-      _minutes = 0
-      if _hours == 0:
-        _minutes = ceil(_wait_time / 60)
-      else:
-        _minutes = ceil((_wait_time % 3600) / 60)
-      _wait_text = (str(_hours) + ' hours and ' if _hours > 0 else '') + str(_minutes) + ' minutes'
-
-  if _is_next_day:
-    _count = 0
-    __result__ = { "count": _count, "wait_time": None }
-  elif _count < _daily_limit:
-    __result__ = { "count": _count, "wait_time": None }
-  else:
-    __result__ = { "count": _count, "wait_time": _wait_text }
-
-daily_status = __result__
-##### devrae function end [daily_activity_get_status] #####
-
-research_count = daily_status["count"]
-wait_time = daily_status["wait_time"]
 action = args[0]
 
 if action == "start":
@@ -175,14 +163,14 @@ if action == "start":
         f += '\n(Research resets at midnight UTC)'
         return 1
 
-    #! research_count = devrae_f daily_activity_increase_counter(#P R_TIME_VAR) !#
-    ##### devrae function insert [daily_activity_increase_counter] #####
+    #! research_count = devrae_f daily_control_increase_counter(#P R_TIME_VAR) !#
+    ##### devrae function insert [daily_control_increase_counter] #####
     research_count = None
     __p0__ = R_TIME_VAR
     # returns current counter and wait time text if any
     _var_name = __p0__
     _cvars = character().cvars
-    if not _var_name in _cvars:
+    if not _var_name in _cvars or _cvars[_var_name] == "0:0":
       _now = time()
       character().set_cvar(_var_name, f'1:{_now}')
       __result__ = 1
@@ -193,8 +181,7 @@ if action == "start":
       character().set_cvar(_var_name, f'{_count}:{_time}')
       __result__ = _count
     research_count = __result__
-    ##### devrae function end [daily_activity_increase_counter] #####
-
+    ##### devrae function end [daily_control_increase_counter] #####
     footer = footer.replace(f'{research_count - 1}x today', f'{research_count}x today')
 
     a_roll = roll("1d100")
@@ -384,7 +371,7 @@ if add_to_bag != None:
   __p1__ = add_to_bag
   _bag_name = __p0__
   _content = __p1__
-
+  
   _cv = character().cvars
   _bags = load_json(_cv["bags"]) if "bags" in _cv else []
   _bag_index = [i for i, x in enumerate(_bags) if x[0] == _bag_name]

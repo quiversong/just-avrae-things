@@ -6,6 +6,7 @@ _cvars = character().cvars
 _now = time()
 if _var_name not in _cvars:
   __result__ = { "count": 0, "wait_time": None }
+  character().set_cvar(_var_name, f"0:0")
 else:
   _var_parts = _cvars[_var_name].split(':')
   _count = int(_var_parts[0])
@@ -31,6 +32,7 @@ else:
   if _is_next_day:
     _count = 0
     __result__ = { "count": _count, "wait_time": None }
+    character().set_cvar(_var_name, f"0:0")
   elif _count < _daily_limit:
     __result__ = { "count": _count, "wait_time": None }
   else:
