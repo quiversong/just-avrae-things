@@ -230,28 +230,29 @@ if action == "start":
         f = f"Reality warps around you, and you find yourself {area['name']}|"
         f += area["intro"]
 
-        f2 = ""
+        f2 = "You feel your mind being probed...|"
     else:
         area = areas[areas_visited[len(areas_visited) - 1]]
         thumb = area['url']
 
         t = f'{c.name} continues researching in the Aldahen Research Chamber!'
-        f2 = f"Still {area['name']} "
+        f2 = f"Still {area['name']} you feel your mind being probed...|"
 
 
-    f2 += f"You feel your mind being probed...|"
-    f2 += "Do you have what it takes to help The Aldahen catalogue the knowledge stored in the Foundation?\n"
+    f2 += "The Aldahen measures how far your knowledge goes...\nCould you handle the communion with The Foundation?\n"
     f2 += f"**Arcana roll:** {arcana_roll.full}"
 
     if arcana_roll.total >= entry['arcana_dc']:
         c.set_cvar(R_STAGE_VAR, f'{entry_id}:identify')
-        f3 = f"The Research Chamber has chosen a topic about {category_name.upper()} for you to research!|"
-        f3 += "Use `!research identify` to identify the mysteries about this piece of knowledge."
+        f3 = f"The Research Chamber has chosen a topic for you to catalogue...|"
+        f3 += f"**Category:** `{category_name}`\n\n"
+        f3 += "Use `!research identify` to identify its mysteries."
     else:
         c.delete_cvar(R_STAGE_VAR)
-        f3 = "Everything stops, and the chamber goes dark...|"
+        f3 = "Time" if research_count == 1 else "Again, time"
+        f3 += " seems to stop, and the chamber goes dark...|"
         f3 += "There is no knowledge suitable for you at this time.\nMaybe they will deem you worthy next time?"
-        f3 += "\nTo try again, use `!research start`."
+        f3 += "\n\nTo try again, use `!research start`."
 
     stats["t_researches"] = stats["t_researches"] + 1 if "t_researches" in stats else 1
     stats["s_research_start"] = stats["s_research_start"] + 1 if "s_research_start" in stats else 1
@@ -289,14 +290,14 @@ if action == "identify":
     }
 
     skill_text = {
-        "alchemy": "uses their knowledge in Arcana to unveil the alchemy secrets of the Foundation...",
-        "arcana_domain": "uses their Arcana knowledge to unveil the secrets of the Foundation...",
-        "arts": "uses their experience with Art and Performance to unveil the secrets of the Foundation...",
-        "geography": "uses their knowledge about Nature to unveil the geography secrets stored in the Foundation...",
-        "history": "uses their knowledge about History to unveil the secrets kept by the Foundation...",
-        "magic_items": "uses their Arcana expertise to identify the Foundation database of Magic Items...",
-        "medicine": "uses their experience with Medicine to understand and transcribe the knowledge kept by the Foundation...",
-        "personality": "uses their Persusasion skills to understand the motivations of a Seventra personality..."
+        "alchemy": "You use your knowledge in Arcana to unveil the alchemy secrets of the Foundation...",
+        "arcana_domain": "You use your Arcana knowledge to unveil the secrets of the Foundation...",
+        "arts": "You use your experience with Art and Performance to unveil the secrets of the Foundation...",
+        "geography": "You use your knowledge about Nature to unveil the geography secrets stored in the Foundation...",
+        "history": "You use your knowledge about History to unveil the secrets kept by the Foundation...",
+        "magic_items": "You use your Arcana expertise to identify the Foundation database of Magic Items...",
+        "medicine": "You use your experience with Medicine to understand and transcribe the knowledge kept by the Foundation...",
+        "personality": "You use your Persusasion skills to understand the motivations of a Seventra personality..."
     }
 
     images = entry['img_url']
@@ -314,22 +315,25 @@ if action == "identify":
     s_roll = vroll(skill.d20(base_adv = adv_status))
     succ = s_roll.total >= entry["check_dc"] or s_roll.result.crit == 1
 
-    t = f"{c.name} tries to identify and understand the secrets of the Foundation!"
-    f = f"The Research Chamber has selected a topic about **'{category_name}'**...|"
-    f += f"The topic is: **'{entry_name}'**"
+    t = f"{c.name} tries to understand the secrets of the Foundation!"
+    f = f"You are presented with a piece of knowledge about **'{category_name}':**|"
+    if category_id == "magic_items":
+        f += f"```Can you identify an {entry_name}?```"
+    else:
+        f += f"```{entry_name}```"
 
-    f2 = f"{c.name} {skill_text[category_id]}|"
+    f2 = f"{skill_text[category_id]}|"
     f2 += f"**{skill_name} roll:** {s_roll.full}" + "\n" + f"{sl if succ else fl}"
 
     if succ:
         stats["s_identify"] = stats["s_identify"] + 1 if "s_identify" in stats else 1
-        f3 = f'{c.name} has successfully acquired the knowledge about {entry_name}!|'
-        f3 += 'Now use `!research catalogue` to catalogue the knowledge you acquired.'
+        f3 = f'{c.name} has successfully acquired the knowledge about `{entry_name}`!|'
+        f3 += 'Well done!\n\nUse `!research catalogue` to catalogue the knowledge you acquired.'
         c.set_cvar(R_STAGE_VAR, f'{entry_id}:catalogue')
     else:
         thumb = image
-        f3 = f'The information about {entry_name} was too complex for you to grasp...|'
-        f3 += 'Better luck next time! Use `!research start` to try again.'
+        f3 = f'The information about `{entry_name}` was too complex for you to grasp...|'
+        f3 += 'Better luck next time!\n\nUse `!research start` to try again.'
         c.delete_cvar(R_STAGE_VAR)
 
 elif action == 'catalogue':
@@ -342,7 +346,6 @@ elif action == 'catalogue':
 
     t = f'{c.name} tries to catalogue the information...'
     f = f'Can you hold on to the knowledge as it is catalogued by The Aldahen Chamber?|**Constitution save:** {s_roll.full}'
-
 
     if R_IMG_VAR in cv:
         thumb = cv[R_IMG_VAR]
@@ -367,7 +370,7 @@ elif action == 'catalogue':
     else:
         thumb = image
         f2 = f'{c.name} was NOT able to hold onto the knowledge long enough to transfer it to the Aldahen!|'
-        f2 += "Better luck next time! Use `!research start` to try again."
+        f2 += "Better luck next time!\n\nUse `!research start` to try again."
 
 c.set_cvar(R_STATS_VAR, dump_json(stats))
 
