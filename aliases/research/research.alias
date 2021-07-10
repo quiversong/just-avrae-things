@@ -317,8 +317,7 @@ if action == "identify":
 
     if succ:
         stats["s_identify"] = stats["s_identify"] + 1 if "s_identify" in stats else 1
-        f3 = f'{c.name} has successfully acquired the knowledge about `{entry_name}`!|'
-        f3 += 'Well done!\n\nUse `!research catalogue` to catalogue the knowledge you acquired.'
+        f3 = 'Well done!|Use `!research catalogue` to catalogue the knowledge you acquired.'
         c.set_cvar(R_STAGE_VAR, f'{entry_id}:catalogue')
     else:
         thumb = image
@@ -335,7 +334,9 @@ elif action == 'catalogue':
     succ = s_roll.total >= entry["concentration_dc"]
 
     t = f'{c.name} tries to catalogue the information...'
-    f = f'Can you hold your Concentration on to the knowledge as it is catalogued by The Aldahen Chamber?|**Constitution save:** {s_roll.full}'
+    f = 'You can feel the knowledge being transferred from your mind...|'
+    f += 'Can you hold your Concentration on to the knowledge as it is catalogued by The Aldahen Chamber?\n'
+    f += f'**Constitution save:** {s_roll.full}'
 
     if R_IMG_VAR in cv:
         thumb = cv[R_IMG_VAR]
@@ -351,12 +352,13 @@ elif action == 'catalogue':
               for loot_n in entry["loot"]:
                     loot_qt = entry["loot"][loot_n]
                     add_to_bag[loot_n] = loot_qt
-                    loot_list += f'{loot_qt}x {loot_n}, '
-        loot_list = loot_list[:len(loot_list) - 2]
+                    spaces = '   ' if loot_qt < 10 else '  ' if loot_qt < 100 else ' ' if loot_qt < 1000 else ''
+                    loot_list += f'`{spaces}{loot_qt}x {loot_n}`' + '\n'
 
         f2 = f'Success!|The knowledge you acquired about **{entry_name}** has been transferred to The Aldahen!'
-        f3 = 'When you next exit the chamber...|You feel tired and can not think straight. Most of the knowledge you acquired is gone from your memories... but you keep the loot paid by The Aldahen Syndicate!'
-        f4 = f'You gained: {loot_list}.|They have been added to your "Research" bag!\n\nResearch some more with `!research start`!'
+        f3 = 'When you next exit the chamber...|You feel tired and can not think straight.\n'
+        f3 += 'Most of the knowledge you acquired is gone from your memories... but you keep the loot paid by The Aldahen Syndicate!'
+        f4 = f'You gained:|{loot_list}They have been added to your "Research" bag!\n\nResearch some more with `!research start`!'
     else:
         thumb = image
         f2 = f'{c.name} was NOT able to hold onto the knowledge long enough to transfer it to the Aldahen!|'
