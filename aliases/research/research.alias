@@ -4,8 +4,11 @@ embed
 IS_LIVE = False
 VERSION = '1.0'
 
-BETA_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
-LIVE_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
+BETA_CAT_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
+LIVE_CAT_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
+
+BETA_ENTRY_VAR = "1ea827c8-c2b3-4f5a-9b67-ebac9c7db1f0"
+LIVE_ENTRY_VAR = "1ea827c8-c2b3-4f5a-9b67-ebac9c7db1f0"
 
 BETA_AREAS_VAR = "a5d585d6-92d2-4961-adfa-f475f4b4d737"
 LIVE_AREAS_VAR = "a5d585d6-92d2-4961-adfa-f475f4b4d737"
@@ -18,7 +21,8 @@ pargs = argparse(args)
 c = character()
 cv, cs = c.cvars, c.skills
 
-data_var = LIVE_VAR if IS_LIVE else BETA_VAR
+categories_var = LIVE_CAT_VAR if IS_LIVE else BETA_CAT_VAR
+entries_var = LIVE_ENTRY_VAR if IS_LIVE else BETA_ENTRY_VAR
 areas_var = LIVE_AREAS_VAR if IS_LIVE else BETA_AREAS_VAR
 
 t = f'{c.name} wants to aid The Aldahen Syndicate with their research!'
@@ -127,11 +131,10 @@ if R_STAGE_VAR in cv:
     entry_id = stage_vars[0]
     current_stage = stage_vars[1]
 
-data = load_json(get_gvar(data_var))
+categories = load_json(get_gvar(categories_var))
+entries = load_json(get_gvar(entries_var))
 areas = load_json(get_gvar(areas_var))
 areas_visited = load_json(cv[R_AREAS_VISITED_VAR]) if R_AREAS_VISITED_VAR in cv else []
-categories = data["categories"]
-entries = data["entries"]
 spell_attr = 'INT' if intelligenceMod >= charismaMod else 'CHA'
 spell_mod = charismaMod if spell_attr == 'CHA' else intelligenceMod
 
