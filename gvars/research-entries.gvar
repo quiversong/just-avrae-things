@@ -5,7 +5,7 @@
       "arcana_dc": 10,
       "check_dc": 11,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":10, "Relic [Potion of Mind Reading] [1/31] (10gp)": 2}],
+      "loot": {"Aldahen Coin (1sp)":10, "Relic [Potion of Mind Reading] [1/31] (10gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855927953325162516/Capture.PNG"]
     },
     "R2": {
@@ -14,7 +14,7 @@
       "arcana_dc": 10,
       "check_dc": 11,
       "concentration_dc": 7,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":138}],
+      "loot": {"Aldahen Coin (1sp)":138},
       "img_url": ["https://media.discordapp.net/attachments/799023685885100102/799025742826438676/1eac9a93db858ec3edd0a412d7db86ff.png?width=397&height=669"]
     },
     "R3": {
@@ -23,7 +23,7 @@
       "arcana_dc": 10,
       "check_dc": 11,
       "concentration_dc": 7,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":139}],
+      "loot": {"Aldahen Coin (1sp)":139},
       "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/804225935309537320/unknown.png"]
     },
     "R4": {
@@ -32,7 +32,7 @@
       "arcana_dc": 10,
       "check_dc": 11,
       "concentration_dc": 7,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":134}],
+      "loot": {"Aldahen Coin (1sp)":134},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855927352378916914/Capture.PNG"]
     },
     "R5": {
@@ -41,7 +41,7 @@
       "arcana_dc": 10,
       "check_dc": 11,
       "concentration_dc": 7,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":140}],
+      "loot": {"Aldahen Coin (1sp)":140},
       "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/805305927400947732/unknown.png"]
     },
     "R6": {
@@ -50,7 +50,7 @@
       "arcana_dc": 10,
       "check_dc": 11,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":52, "Relic [Potion of Healing] [1/18] (4gp)": 2}],
+      "loot": {"Aldahen Coin (1sp)":52, "Relic [Potion of Healing] [1/18] (4gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855928189900554260/Capture.PNG"]
     },
     "R7": {
@@ -59,7 +59,7 @@
       "arcana_dc": 10,
       "check_dc": 11,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":48, "Relic [Potion of Healing] [1/18] (4gp)": 2}],
+      "loot": {"Aldahen Coin (1sp)":48, "Relic [Potion of Healing] [1/18] (4gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855958678204448788/2adf7df871e29dd9eafcbcdacf04c115.jpg"]
     },
     "R8": {
@@ -68,7 +68,7 @@
       "arcana_dc": 12,
       "check_dc": 12,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":182, "Relic [Potion of Healing] [1/18] (4gp)": 4}],
+      "loot": {"Aldahen Coin (1sp)":182, "Relic [Potion of Healing] [1/18] (4gp)": 4},
       "img_url": ["https://cdn.discordapp.com/attachments/820115277966606337/839267674285408256/markus2.jpg"]
     },
     "R9": {
@@ -77,7 +77,7 @@
       "arcana_dc": 12,
       "check_dc": 12,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":336}],
+      "loot": {"Aldahen Coin (1sp)":336},
       "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/799717767020281896/Capa_Mariosa_Avatar.png"]
     },
     "R10": {
@@ -86,7 +86,7 @@
       "arcana_dc": 12,
       "check_dc": 12,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":334}],
+      "loot": {"Aldahen Coin (1sp)":334},
       "img_url": ["https://i.pinimg.com/originals/17/10/7b/17107b5640519d496ca5d920d3beb993.jpg"]
     },
     "R11": {
@@ -95,7 +95,7 @@
       "arcana_dc": 12,
       "check_dc": 12,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":80, "Relic [Spell Scroll Level 0] [1/10] (8gp)": 3}],
+      "loot": {"Aldahen Coin (1sp)":80, "Relic [Spell Scroll Level 0] [1/10] (8gp)": 3},
       "img_url": ["https://media.discordapp.net/attachments/798678462768480305/825893558619209748/ooo.PNG"]
     },
     "R12": {
@@ -104,7 +104,7 @@
       "arcana_dc": 11,
       "check_dc": 12,
       "concentration_dc": 9,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":44, "Relic [Spell Scroll Level 0] [1/10] (8gp)": 3}],
+      "loot": {"Aldahen Coin (1sp)":44, "Relic [Spell Scroll Level 0] [1/10] (8gp)": 3},
       "img_url": ["https://i.pinimg.com/originals/af/44/33/af443335eafa5117ff929b546771fbc7.jpg"]
     },
     "R13": {
@@ -113,7 +113,7 @@
       "arcana_dc": 11,
       "check_dc": 12,
       "concentration_dc": 9,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":122}],
+      "loot": {"Aldahen Coin (1sp)":122},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855928332340559962/Capture.PNG"]
     },
     "R14": {
@@ -122,7 +122,7 @@
       "arcana_dc": 11,
       "check_dc": 12,
       "concentration_dc": 9,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":10, "Relic [Potion of Healing] [1/18] (4gp)": 3}],
+      "loot": {"Aldahen Coin (1sp)":10, "Relic [Potion of Healing] [1/18] (4gp)": 3},
       "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/813437308044312576/unknown.png"]
     },
     "R15": {
@@ -131,7 +131,7 @@
       "arcana_dc": 12,
       "check_dc": 13,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":108, "Relic [Potion of Healing] [1/18] (4gp)": 7}],
+      "loot": {"Aldahen Coin (1sp)":108, "Relic [Potion of Healing] [1/18] (4gp)": 7},
       "img_url": ["https://media.discordapp.net/attachments/798678462768480305/825906730289725450/Capture.PNG"]
     },
     "R16": {
@@ -140,7 +140,7 @@
       "arcana_dc": 12,
       "check_dc": 13,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":312, "Relic [Potion of Healing] [1/18] (4gp)": 2}],
+      "loot": {"Aldahen Coin (1sp)":312, "Relic [Potion of Healing] [1/18] (4gp)": 2},
       "img_url": ["https://media.discordapp.net/attachments/798678462768480305/821073929237823498/Capture2.PNG"]
     },
     "R17": {
@@ -149,7 +149,7 @@
       "arcana_dc": 6,
       "check_dc": 8,
       "concentration_dc": 6,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":12}],
+      "loot": {"Aldahen Coin (1sp)":12},
       "img_url": ["https://i.pinimg.com/736x/40/80/ea/4080ea5c08cb308161e62a0f06424a25--character-concept-character-ideas.jpg"]
     },
     "R18": {
@@ -158,7 +158,7 @@
       "arcana_dc": 6,
       "check_dc": 8,
       "concentration_dc": 6,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":12}],
+      "loot": {"Aldahen Coin (1sp)":12},
       "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/821771801717637120/8c383eb3a761146e5597f036cd937c7a.jpg"]
     },
     "R19": {
@@ -167,7 +167,7 @@
       "arcana_dc": 13,
       "check_dc": 11,
       "concentration_dc": 10,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":62}],
+      "loot": {"Aldahen Coin (1sp)":62},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/863236051816677396/jO4aryv.jpeg"]
     },
     "R20": {
@@ -176,7 +176,7 @@
       "arcana_dc": 12,
       "check_dc": 20,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":382}],
+      "loot": {"Aldahen Coin (1sp)":382},
       "img_url": ["https://cdn.discordapp.com/attachments/807265971496419348/824459738145882122/azata_final_by_miguelregodon-d7c9fmb.png"]
     },
     "R21": {
@@ -185,7 +185,7 @@
       "arcana_dc": 11,
       "check_dc": 14,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":196, "Relic [Spell Scroll Level 0] [1/10] (8gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":196, "Relic [Spell Scroll Level 0] [1/10] (8gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/831572839626440724/3-FB3462-A-270-C-4702-A057-52-F2-B0945-BDB.png"]
     },
     "R22": {
@@ -194,7 +194,7 @@
       "arcana_dc": 14,
       "check_dc": 18,
       "concentration_dc": 9,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":566}],
+      "loot": {"Aldahen Coin (1sp)":566},
       "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/825139038892589116/Wj6E4FZh-1.jpg"]
     },
     "R23": {
@@ -203,7 +203,7 @@
       "arcana_dc": 11,
       "check_dc": 11,
       "concentration_dc": 7,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":28}],
+      "loot": {"Aldahen Coin (1sp)":28},
       "img_url": ["https://media.discordapp.net/attachments/802200320326893609/808463122687066112/Bianca_Fangryd.jpg?width=670&height=670"]
     },
     "R24": {
@@ -212,7 +212,7 @@
       "arcana_dc": 11,
       "check_dc": 11,
       "concentration_dc": 7,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":16}],
+      "loot": {"Aldahen Coin (1sp)":16},
       "img_url": ["https://media.discordapp.net/attachments/802200320326893609/808463313075437578/unknown.png"]
     },
     "R25": {
@@ -221,7 +221,7 @@
       "arcana_dc": 14,
       "check_dc": 16,
       "concentration_dc": 14,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":30, "Relic [Spell Scroll Level 0] [1/10] (8gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":30, "Relic [Spell Scroll Level 0] [1/10] (8gp)": 1},
       "img_url": ["https://media.discordapp.net/attachments/802200320326893609/808463475969753188/unknown.png"]
     },
     "R26": {
@@ -230,7 +230,7 @@
       "arcana_dc": 12,
       "check_dc": 15,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":242}],
+      "loot": {"Aldahen Coin (1sp)":242},
       "img_url": ["https://media.discordapp.net/attachments/802200320326893609/808463684715806770/unknown.png?width=756&height=670"]
     },
     "R27": {
@@ -239,7 +239,7 @@
       "arcana_dc": 13,
       "check_dc": 40,
       "concentration_dc": 10,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2, "Relic [Any Rare Magic Item] [1/40] (120gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":2, "Relic [Any Rare Magic Item] [1/40] (120gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855927186287886336/Capture.PNG"]
     },
     "R28": {
@@ -248,7 +248,7 @@
       "arcana_dc": 8,
       "check_dc": 14,
       "concentration_dc": 9,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":76}],
+      "loot": {"Aldahen Coin (1sp)":76},
       "img_url": ["https://media.discordapp.net/attachments/798678462768480305/828423778438479892/Screenshots_2021-03-30-17-56-37.png"]
     },
     "R29": {
@@ -257,7 +257,7 @@
       "arcana_dc": 14,
       "check_dc": 11,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":68}],
+      "loot": {"Aldahen Coin (1sp)":68},
       "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828397523935952916/Screenshots_2021-04-04-16-28-59.png"]
     },
     "R30": {
@@ -266,7 +266,7 @@
       "arcana_dc": 6,
       "check_dc": 13,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":56}],
+      "loot": {"Aldahen Coin (1sp)":56},
       "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828396491185192970/Screenshots_2021-04-04-16-30-48.png"]
     },
     "R31": {
@@ -275,7 +275,7 @@
       "arcana_dc": 11,
       "check_dc": 13,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":82}],
+      "loot": {"Aldahen Coin (1sp)":82},
       "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828399764625555496/Screenshots_2021-03-30-18-11-12.png"]
     },
     "R32": {
@@ -284,7 +284,7 @@
       "arcana_dc": 16,
       "check_dc": 14,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":234}],
+      "loot": {"Aldahen Coin (1sp)":234},
       "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828392058891796551/Screenshots_2021-03-30-17-37-23.png"]
     },
     "R33": {
@@ -293,7 +293,7 @@
       "arcana_dc": 15,
       "check_dc": 12,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":54}],
+      "loot": {"Aldahen Coin (1sp)":54},
       "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828391357675733042/Screenshots_2021-03-30-17-36-28.png"]
     },
     "R34": {
@@ -302,7 +302,7 @@
       "arcana_dc": 8,
       "check_dc": 10,
       "concentration_dc": 6,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":12}],
+      "loot": {"Aldahen Coin (1sp)":12},
       "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828390088861679666/Screenshots_2021-03-30-17-42-16.png"]
     },
     "R35": {
@@ -311,7 +311,7 @@
       "arcana_dc": 11,
       "check_dc": 11,
       "concentration_dc": 6,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":34}],
+      "loot": {"Aldahen Coin (1sp)":34},
       "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828389445886541884/Screenshots_2021-03-30-17-38-27.png"]
     },
     "R36": {
@@ -320,7 +320,7 @@
       "arcana_dc": 8,
       "check_dc": 12,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":68}],
+      "loot": {"Aldahen Coin (1sp)":68},
       "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828388428860620811/Screenshots_2021-03-30-17-40-30.png"]
     },
     "R37": {
@@ -329,7 +329,7 @@
       "arcana_dc": 13,
       "check_dc": 22,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":202, "Relic [Midnight Tears] [1/30] (80gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":202, "Relic [Midnight Tears] [1/30] (80gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828387198038048838/Screenshots_2021-03-30-17-51-27.png"]
     },
     "R38": {
@@ -338,7 +338,7 @@
       "arcana_dc": 16,
       "check_dc": 10,
       "concentration_dc": 10,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":10}],
+      "loot": {"Aldahen Coin (1sp)":10},
       "img_url": ["https://i.pinimg.com/originals/22/ca/6b/22ca6bcb3fb6fa3bbb5a4012a62d1197.jpg"]
     },
     "R39": {
@@ -347,7 +347,7 @@
       "arcana_dc": 12,
       "check_dc": 11,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":298}],
+      "loot": {"Aldahen Coin (1sp)":298},
       "img_url": ["https://cdn.discordapp.com/attachments/799362765059129374/826039478308175942/d205hns-efaac44b-dc1a-41c0-9ea2-0d0a29812c07.png"]
     },
     "R40": {
@@ -356,7 +356,7 @@
       "arcana_dc": 13,
       "check_dc": 12,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":38}],
+      "loot": {"Aldahen Coin (1sp)":38},
       "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/815658757308547072/Eydis.jpg"]
     },
     "R41": {
@@ -365,7 +365,7 @@
       "arcana_dc": 13,
       "check_dc": 23,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":784}],
+      "loot": {"Aldahen Coin (1sp)":784},
       "img_url": ["https://cdn.discordapp.com/attachments/816447953387520030/832825203763052584/6718af3f514109818925c09ed3a1ed77.png"]
     },
     "R42": {
@@ -374,7 +374,7 @@
       "arcana_dc": 5,
       "check_dc": 25,
       "concentration_dc": 9,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":146, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":146, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/842416035411787796/852248122248003594/E0vP75sWEAEMVhg_1.jpeg"]
     },
     "R43": {
@@ -383,7 +383,7 @@
       "arcana_dc": 5,
       "check_dc": 40,
       "concentration_dc": 10,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":216, "Relic [Any Uncommon Magic Item] [1/20] (40gp)": 2}],
+      "loot": {"Aldahen Coin (1sp)":216, "Relic [Any Uncommon Magic Item] [1/20] (40gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/805571354391740466/805583180752486411/d15a7bddd14011d9eb32d95c6d7b181e.png"]
     },
     "R44": {
@@ -392,7 +392,7 @@
       "arcana_dc": 5,
       "check_dc": 40,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":222, "Relic [Any Uncommon Magic Item] [1/20] (40gp)": 2}],
+      "loot": {"Aldahen Coin (1sp)":222, "Relic [Any Uncommon Magic Item] [1/20] (40gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/842416035411787796/852246754950774795/tttumblr_orcbnkqUnL1tx1lfio1_1280.jpeg"]
     },
     "R45": {
@@ -401,7 +401,7 @@
       "arcana_dc": 13,
       "check_dc": 10,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":136}],
+      "loot": {"Aldahen Coin (1sp)":136},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855962838224732200/music.jpg"]
     },
     "R46": {
@@ -410,7 +410,7 @@
       "arcana_dc": 15,
       "check_dc": 13,
       "concentration_dc": 14,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":436}],
+      "loot": {"Aldahen Coin (1sp)":436},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862866411117477958/4b95c294e5ab154e6ae8c92381c78311.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862866409201074176/9374dbf3df61751f0b0cfc6d2f5ba690.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862866412393201665/0921e7e1088ca0e3ffa8bedcac6eb6b2.jpeg"]
     },
     "R47": {
@@ -419,7 +419,7 @@
       "arcana_dc": 11,
       "check_dc": 12,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":123}],
+      "loot": {"Aldahen Coin (1sp)":123},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862867810450276372/flute.jpg"]
     },
     "R48": {
@@ -428,7 +428,7 @@
       "arcana_dc": 15,
       "check_dc": 15,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":392}],
+      "loot": {"Aldahen Coin (1sp)":392},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862846495689277440/3051.jpeg"]
     },
     "R49": {
@@ -437,7 +437,7 @@
       "arcana_dc": 6,
       "check_dc": 8,
       "concentration_dc": 5,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":12}],
+      "loot": {"Aldahen Coin (1sp)":12},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862846915309469716/bda5cb12c115857e5def7164fb2aed1e.jpeg"]
     },
     "R50": {
@@ -446,7 +446,7 @@
       "arcana_dc": 12,
       "check_dc": 11,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":62}],
+      "loot": {"Aldahen Coin (1sp)":62},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862847516973989898/Twins.jpeg"]
     },
     "R51": {
@@ -455,7 +455,7 @@
       "arcana_dc": 13,
       "check_dc": 12,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":76}],
+      "loot": {"Aldahen Coin (1sp)":76},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862851099521843220/stack-books-scroll-pen-candle_291138-46.jpeg"]
     },
     "R52": {
@@ -464,7 +464,7 @@
       "arcana_dc": 12,
       "check_dc": 20,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":276}],
+      "loot": {"Aldahen Coin (1sp)":276},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862853388764708914/1b6cd32a0cc70ddab378679ed7bf7447.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862851891624935424/bd784075ec7a621f4d5e577713c95646.jpeg"]
     },
     "R53": {
@@ -473,7 +473,7 @@
       "arcana_dc": 14,
       "check_dc": 18,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":566}],
+      "loot": {"Aldahen Coin (1sp)":566},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862853747900940318/panflute.png", "https://cdn.discordapp.com/attachments/855908840633270282/862854982798016572/dd94b26b0ab1872ece41c9588239d7d5.jpeg"]
     },
     "R54": {
@@ -482,7 +482,7 @@
       "arcana_dc": 11,
       "check_dc": 8,
       "concentration_dc": 6,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":28}],
+      "loot": {"Aldahen Coin (1sp)":28},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862854964991623188/Chalemies.png"]
     },
     "R55": {
@@ -491,7 +491,7 @@
       "arcana_dc": 11,
       "check_dc": 8,
       "concentration_dc": 5,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":16}],
+      "loot": {"Aldahen Coin (1sp)":16},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862855652556275712/d2612159591ef243d0caf8e4758b78c2.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862855655516667944/a4c288ee66f2a8865213aa089801edc4.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862855658398810152/c9223e7d0161512617674747fec3d7d3.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862855661019725824/51fe71484c96395116fc2bf41ffdb8c2.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862867804620718090/piano.jpg"]
     },
     "R56": {
@@ -500,7 +500,7 @@
       "arcana_dc": 14,
       "check_dc": 16,
       "concentration_dc": 14,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":110}],
+      "loot": {"Aldahen Coin (1sp)":110},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862856528683466792/da5bccc87c2ca8531f3e3f7e6917347c.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862856529812389908/d150d5a06a8be1c2e18436b42894e4b6.jpeg", "https://media.discordapp.net/attachments/855908840633270282/862856531242516520/61e38f38ff63d5940ba4ce37d54b4c28.jpeg"]
     },
     "R57": {
@@ -509,7 +509,7 @@
       "arcana_dc": 12,
       "check_dc": 15,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":242}],
+      "loot": {"Aldahen Coin (1sp)":242},
       "img_url": ["https://media.discordapp.net/attachments/855908840633270282/862857510188613632/819fb6a5361a6a848013d264d93b151d.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862857512267808829/eb1d7ebd9aa8875ddd608a41be98d982.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862857514730651748/2483dd09f8cae39a8a12cf8102b56653.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862857516269830174/874f4ce9098ef2858c7f309f64e13128.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862867804138373170/dance3.jpg", "https://cdn.discordapp.com/attachments/855908840633270282/862867802154205214/dance2.jpg", "https://cdn.discordapp.com/attachments/855908840633270282/862867800509906964/dance1.jpg"]
     },
     "R58": {
@@ -518,7 +518,7 @@
       "arcana_dc": 13,
       "check_dc": 28,
       "concentration_dc": 10,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":1377}],
+      "loot": {"Aldahen Coin (1sp)":1377},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862860099038871562/9fc1a598625b9be24a31763751d41e0d.jpeg", "https://media.discordapp.net/attachments/855908840633270282/862860084290781204/a6353baa34405fd492094e588bfcb80d.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862860088532402216/a41fd66a10477e513df4b7b4a525087a.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862860090461126676/34beba0fd8258853c2bc7f6b273e45aa.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862860093976608768/aa8c9b3a0753a06c2f1e4e314ac53161.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862860096144932874/8708890f245979324118a141f77c7950.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862860107451990026/8a9ccf9521a9b14d160753c2d86a1982.jpeg"]
     },
     "R59": {
@@ -527,7 +527,7 @@
       "arcana_dc": 8,
       "check_dc": 11,
       "concentration_dc": 9,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":76}],
+      "loot": {"Aldahen Coin (1sp)":76},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862851099521843220/stack-books-scroll-pen-candle_291138-46.jpeg"]
     },
     "R60": {
@@ -536,7 +536,7 @@
       "arcana_dc": 14,
       "check_dc": 11,
       "concentration_dc": 9,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":68}],
+      "loot": {"Aldahen Coin (1sp)":68},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862851099521843220/stack-books-scroll-pen-candle_291138-46.jpeg"]
     },
     "R61": {
@@ -545,7 +545,7 @@
       "arcana_dc": 11,
       "check_dc": 13,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":242}],
+      "loot": {"Aldahen Coin (1sp)":242},
       "img_url": ["https://media.discordapp.net/attachments/855908840633270282/862861135409971230/c4ec9f9cc47cb3d94027ab44bcf536d8.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862861137137762304/f1e6e454dc55ac37bd62e719cf78cdc4.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862861138786254858/6964dd6aee9f7454bd3998aa1ca6099a.jpeg"]
     },
     "R62": {
@@ -554,7 +554,7 @@
       "arcana_dc": 13,
       "check_dc": 14,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":234}],
+      "loot": {"Aldahen Coin (1sp)":234},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855964214928867328/f02f95fc38289f43e1bf992990460543.jpeg"]
     },
     "R63": {
@@ -563,7 +563,7 @@
       "arcana_dc": 15,
       "check_dc": 12,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":56}],
+      "loot": {"Aldahen Coin (1sp)":56},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862861901079117846/55aa762aa52a3df9a587298a6b07a45a.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862867805467443210/viol.jpg"]
     },
     "R64": {
@@ -572,7 +572,7 @@
       "arcana_dc": 8,
       "check_dc": 7,
       "concentration_dc": 6,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":14}],
+      "loot": {"Aldahen Coin (1sp)":14},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855963784702066688/theater.jpg", "https://cdn.discordapp.com/attachments/855908840633270282/862863930703478784/7bc059172a423b29994f24f85a6c16e4.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862863934348460032/2574d8a43bbf6cffccad7c55a2ee2177.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862863950151417876/ef986a0f169a3e27ae687bd1d852b5b0.jpeg"]
     },
     "R65": {
@@ -581,7 +581,7 @@
       "arcana_dc": 8,
       "check_dc": 12,
       "concentration_dc": 6,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":72}],
+      "loot": {"Aldahen Coin (1sp)":72},
       "img_url": [""]
     },
     "R66": {
@@ -590,7 +590,7 @@
       "arcana_dc": 11,
       "check_dc": 16,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":592}],
+      "loot": {"Aldahen Coin (1sp)":592},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855964214928867328/f02f95fc38289f43e1bf992990460543.jpeg"]
     },
     "R67": {
@@ -599,7 +599,7 @@
       "arcana_dc": 13,
       "check_dc": 6,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":42}],
+      "loot": {"Aldahen Coin (1sp)":42},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862861897656827914/c2889b6fde61383c1e05855a43577944.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862861896515584000/180a363e8535b564fea10d889a4927c5.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862867807544803328/violin.jpg"]
     },
     "R68": {
@@ -608,7 +608,7 @@
       "arcana_dc": 12,
       "check_dc": 11,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":613}],
+      "loot": {"Aldahen Coin (1sp)":613},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862865562224951306/f0724bab90d47038176e4ebc6a29d134.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862865565978591322/13327f601b1181d3919df94112761413.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862865564473360384/1c8560570342b0ba6f2a8c2a731c3271.jpeg"]
     },
     "R69": {
@@ -617,7 +617,7 @@
       "arcana_dc": 12,
       "check_dc": 20,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":1181}],
+      "loot": {"Aldahen Coin (1sp)":1181},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862870378732060692/d5egayt-7fdf9d4d-94f6-407a-9d84-4bde8e19828c.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862870376120188968/a55dae0f5c3555568cf9e7fa7389c01d.jpeg"]
     },
     "R70": {
@@ -626,7 +626,7 @@
       "arcana_dc": 10,
       "check_dc": 11,
       "concentration_dc": 7,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":16, "Relic [Potion of Healing] [1/18] (4gp)": 3}],
+      "loot": {"Aldahen Coin (1sp)":16, "Relic [Potion of Healing] [1/18] (4gp)": 3},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855968910774763570/dcmksdy-ebc420bf-4c46-4aaa-95cf-6a1d451f7fe4.jpeg"]
     },
     "R71": {
@@ -635,7 +635,7 @@
       "arcana_dc": 10,
       "check_dc": 11,
       "concentration_dc": 7,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":58, "Relic [Elixir of Health] [1/26] (8gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":58, "Relic [Elixir of Health] [1/26] (8gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855969076450689085/tumblr_pmblalNUiC1r03qmqo1_640.jpeg"]
     },
     "R72": {
@@ -644,7 +644,7 @@
       "arcana_dc": 10,
       "check_dc": 11,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":64, "Relic [Potion of Poison] [1/21] (8gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":64, "Relic [Potion of Poison] [1/21] (8gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855969273079005184/56309583c78aee5ea1120d5bb6b13708.jpeg"]
     },
     "R73": {
@@ -653,7 +653,7 @@
       "arcana_dc": 10,
       "check_dc": 11,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":74, "Relic [Philter of Love] [1/26] (6gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":74, "Relic [Philter of Love] [1/26] (6gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855969872588177428/veronika-vasileva-banka-1.jpeg"]
     },
     "R74": {
@@ -662,7 +662,7 @@
       "arcana_dc": 10,
       "check_dc": 11,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":60, "Relic [Potion of Fire Breath] [1/32] (8gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":60, "Relic [Potion of Fire Breath] [1/32] (8gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970556461842452/c00548fca5e88b4b1a90b4350b7c6949.jpeg"]
     },
     "R75": {
@@ -671,7 +671,7 @@
       "arcana_dc": 10,
       "check_dc": 11,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":22, "Relic [Potion of Climbing] [1/26] (12gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":22, "Relic [Potion of Climbing] [1/26] (12gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R76": {
@@ -680,7 +680,7 @@
       "arcana_dc": 10,
       "check_dc": 11,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":16, "Relic [Potion of Heroism] [1/26] (12gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":16, "Relic [Potion of Heroism] [1/26] (12gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R77": {
@@ -689,7 +689,7 @@
       "arcana_dc": 13,
       "check_dc": 14,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":242, "Relic [Potion of Invisibility] [1/16] (20gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":242, "Relic [Potion of Invisibility] [1/16] (20gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855972491113529354/2d3bdf52c033c18bd42e642cc8f682a1.jpeg"]
     },
     "R78": {
@@ -698,7 +698,7 @@
       "arcana_dc": 13,
       "check_dc": 16,
       "concentration_dc": 10,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":16, "Relic [Potion of Cloud Giant Strength] [1/67] (50gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":16, "Relic [Potion of Cloud Giant Strength] [1/67] (50gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855972757925003284/0823f20101c5294f2d385bf8ef7e11d4.jpeg"]
     },
     "R79": {
@@ -707,7 +707,7 @@
       "arcana_dc": 15,
       "check_dc": 10,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":74, "Relic [Potion of Mind Reading] [1/31] (10gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":74, "Relic [Potion of Mind Reading] [1/31] (10gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855981431780278314/39a89312f1ee924621eedd559d34d055.jpeg"]
     },
     "R80": {
@@ -716,7 +716,7 @@
       "arcana_dc": 13,
       "check_dc": 13,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":220, "Relic [Potion of Animal Friendship] [1/16] (20gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":220, "Relic [Potion of Animal Friendship] [1/16] (20gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855972481226637332/84f1790b62726ae9f1b918b812f991c2.jpeg"]
     },
     "R81": {
@@ -725,7 +725,7 @@
       "arcana_dc": 11,
       "check_dc": 12,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":8, "Relic [Potion of Diminution] [1/36] (12gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":8, "Relic [Potion of Diminution] [1/36] (12gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R82": {
@@ -734,7 +734,7 @@
       "arcana_dc": 11,
       "check_dc": 12,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":8, "Relic [Potion of Growth] [1/36] (12gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":8, "Relic [Potion of Growth] [1/36] (12gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R83": {
@@ -743,7 +743,7 @@
       "arcana_dc": 11,
       "check_dc": 12,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":8, "Relic [Potion of Gaseous Form] [1/40] (12gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":8, "Relic [Potion of Gaseous Form] [1/40] (12gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855973309221306379/31d4d3adb3a39fbd09a523db2144b133.jpeg"]
     },
     "R84": {
@@ -752,7 +752,7 @@
       "arcana_dc": 15,
       "check_dc": 15,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":190, "Relic [Potion of Resistance] [1/25] (20gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":190, "Relic [Potion of Resistance] [1/25] (20gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R85": {
@@ -761,7 +761,7 @@
       "arcana_dc": 15,
       "check_dc": 15,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":192, "Relic [Potion of Speed] [1/32] (20gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":192, "Relic [Potion of Speed] [1/32] (20gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R86": {
@@ -770,7 +770,7 @@
       "arcana_dc": 15,
       "check_dc": 11,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":62}],
+      "loot": {"Aldahen Coin (1sp)":62},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R87": {
@@ -779,7 +779,7 @@
       "arcana_dc": 14,
       "check_dc": 14,
       "concentration_dc": 10,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":76}],
+      "loot": {"Aldahen Coin (1sp)":76},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R88": {
@@ -788,7 +788,7 @@
       "arcana_dc": 11,
       "check_dc": 40,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":38, "Relic [Potion of Invulnerability] [1/65] (96gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":38, "Relic [Potion of Invulnerability] [1/65] (96gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R89": {
@@ -797,7 +797,7 @@
       "arcana_dc": 8,
       "check_dc": 11,
       "concentration_dc": 10,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2, "Relic [Potion of Water Breathing] [1/28] (10gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":2, "Relic [Potion of Water Breathing] [1/28] (10gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R90": {
@@ -806,7 +806,7 @@
       "arcana_dc": 6,
       "check_dc": 13,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":61, "Relic [Potion of Clairvoyance] [1/76] (20gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":61, "Relic [Potion of Clairvoyance] [1/76] (20gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855976972055478272/4f6fc65aacd6eadce01035be920a7ca5.jpeg"]
     },
     "R91": {
@@ -815,7 +815,7 @@
       "arcana_dc": 11,
       "check_dc": 13,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":42, "Relic [Potion of Flying] [1/40] (20gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":42, "Relic [Potion of Flying] [1/40] (20gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970931277299732/862816a114ebce84e5a81bcfb9f43048.jpeg"]
     },
     "R92": {
@@ -824,7 +824,7 @@
       "arcana_dc": 12,
       "check_dc": 16,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":276}],
+      "loot": {"Aldahen Coin (1sp)":276},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855973309221306379/31d4d3adb3a39fbd09a523db2144b133.jpeg"]
     },
     "R93": {
@@ -833,7 +833,7 @@
       "arcana_dc": 14,
       "check_dc": 18,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":466}],
+      "loot": {"Aldahen Coin (1sp)":466},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R94": {
@@ -842,7 +842,7 @@
       "arcana_dc": 11,
       "check_dc": 12,
       "concentration_dc": 6,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":28}],
+      "loot": {"Aldahen Coin (1sp)":28},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R95": {
@@ -851,7 +851,7 @@
       "arcana_dc": 11,
       "check_dc": 10,
       "concentration_dc": 7,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":15}],
+      "loot": {"Aldahen Coin (1sp)":15},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R96": {
@@ -860,7 +860,7 @@
       "arcana_dc": 14,
       "check_dc": 16,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":110}],
+      "loot": {"Aldahen Coin (1sp)":110},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R97": {
@@ -869,7 +869,7 @@
       "arcana_dc": 6,
       "check_dc": 9,
       "concentration_dc": 6,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":12}],
+      "loot": {"Aldahen Coin (1sp)":12},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R98": {
@@ -878,7 +878,7 @@
       "arcana_dc": 6,
       "check_dc": 9,
       "concentration_dc": 6,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":11}],
+      "loot": {"Aldahen Coin (1sp)":11},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R99": {
@@ -887,7 +887,7 @@
       "arcana_dc": 12,
       "check_dc": 15,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":42, "Relic [Drow Poison] [1/16] (20gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":42, "Relic [Drow Poison] [1/16] (20gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R100": {
@@ -896,7 +896,7 @@
       "arcana_dc": 14,
       "check_dc": 12,
       "concentration_dc": 9,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":68}],
+      "loot": {"Aldahen Coin (1sp)":68},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855971127636262972/day8n0n-c3305023-3665-4f68-9aea-234117af58cb.png"]
     },
     "R101": {
@@ -905,7 +905,7 @@
       "arcana_dc": 16,
       "check_dc": 14,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":34, "Relic [Truth serum] [1/12] (20gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":34, "Relic [Truth serum] [1/12] (20gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855978343123124244/be1cfb02ab9e8d34ade0e8610899a146.jpeg"]
     },
     "R102": {
@@ -914,7 +914,7 @@
       "arcana_dc": 15,
       "check_dc": 12,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":53}],
+      "loot": {"Aldahen Coin (1sp)":53},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855978701698367528/4fd9b269736f9ef948355d9edaa9b8a6.jpeg"]
     },
     "R103": {
@@ -923,7 +923,7 @@
       "arcana_dc": 8,
       "check_dc": 7,
       "concentration_dc": 6,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":11}],
+      "loot": {"Aldahen Coin (1sp)":11},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855981434493075456/43759fbf6903453f55d9eac1c2109bbb.jpeg"]
     },
     "R104": {
@@ -932,7 +932,7 @@
       "arcana_dc": 11,
       "check_dc": 8,
       "concentration_dc": 9,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":34}],
+      "loot": {"Aldahen Coin (1sp)":34},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855976983146004501/27cb166b10e56e11d34872aff2a05adb.jpeg"]
     },
     "R105": {
@@ -941,7 +941,7 @@
       "arcana_dc": 8,
       "check_dc": 12,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":69}],
+      "loot": {"Aldahen Coin (1sp)":69},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855981437752311838/a411bbab9c181cf46263d18c3ad466d3.jpeg"]
     },
     "R106": {
@@ -950,7 +950,7 @@
       "arcana_dc": 13,
       "check_dc": 22,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":82, "Relic [Essence of Ether] [1/10] (48gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":82, "Relic [Essence of Ether] [1/10] (48gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855976980889600021/gabriela-marchioro-pot-3.jpeg"]
     },
     "R107": {
@@ -959,7 +959,7 @@
       "arcana_dc": 16,
       "check_dc": 6,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":42}],
+      "loot": {"Aldahen Coin (1sp)":42},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855981424883662858/214f56fabfdbe9cf92445def6324c870.jpeg"]
     },
     "R108": {
@@ -968,7 +968,7 @@
       "arcana_dc": 12,
       "check_dc": 11,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":98, "Relic [Burnt Othur Fumes] [1/40] (20gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":98, "Relic [Burnt Othur Fumes] [1/40] (20gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855982842554613760/cce5af50b2c7ef559fb454a4f12e090d.jpeg"]
     },
     "R109": {
@@ -977,7 +977,7 @@
       "arcana_dc": 13,
       "check_dc": 13,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":37}],
+      "loot": {"Aldahen Coin (1sp)":37},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855972488142913556/2ef7023353d5f0269c7b195100db394f.jpeg"]
     },
     "R110": {
@@ -986,7 +986,7 @@
       "arcana_dc": 13,
       "check_dc": 23,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":23}],
+      "loot": {"Aldahen Coin (1sp)":23},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855981443607035914/fd2713b8174d3c1c201f98f9d0cf25fc.jpeg"]
     },
     "R111": {
@@ -995,7 +995,7 @@
       "arcana_dc": 5,
       "check_dc": 28,
       "concentration_dc": 9,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":444, "Relic [Potion of Fire Giant Strength] [1/30] (70gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":444, "Relic [Potion of Fire Giant Strength] [1/30] (70gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855983277897940992/db51d111930c1a58b5cdda4e5bc145d3.jpeg"]
     },
     "R112": {
@@ -1004,7 +1004,7 @@
       "arcana_dc": 5,
       "check_dc": 40,
       "concentration_dc": 10,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":216, "Relic [Purple Worm Poison] [1/40] (80gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":216, "Relic [Purple Worm Poison] [1/40] (80gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855976987196915732/3ccb84a7f4c2f9b163f2efa6874c2e1a.jpeg"]
     },
     "R113": {
@@ -1013,7 +1013,7 @@
       "arcana_dc": 5,
       "check_dc": 40,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":216, "Relic [Midnight Tears] [1/30] (80gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":216, "Relic [Midnight Tears] [1/30] (80gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855972494577500170/2632b53a581ed0d29d5332673ffec517.jpeg"]
     },
     "R114": {
@@ -1022,7 +1022,7 @@
       "arcana_dc": 6,
       "check_dc": 8,
       "concentration_dc": 5,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":11}],
+      "loot": {"Aldahen Coin (1sp)":11},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855972485442961429/03f42e5e4b725d881f86340bc637495a.jpeg"]
     },
     "R115": {
@@ -1031,7 +1031,7 @@
       "arcana_dc": 13,
       "check_dc": 10,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":56, "Relic [Spell Scroll Level 1] [1/15] (8gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":56, "Relic [Spell Scroll Level 1] [1/15] (8gp)": 1},
       "img_url": [""]
     },
     "R116": {
@@ -1040,7 +1040,7 @@
       "arcana_dc": 5,
       "check_dc": 28,
       "concentration_dc": 9,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":258, "Relic [Spell Scroll Level 4] [1/20] (64gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":258, "Relic [Spell Scroll Level 4] [1/20] (64gp)": 1},
       "img_url": [""]
     },
     "R117": {
@@ -1049,7 +1049,7 @@
       "arcana_dc": 15,
       "check_dc": 13,
       "concentration_dc": 14,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":22, "Relic [Spell Scroll Level 3] [1/15] (42gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":22, "Relic [Spell Scroll Level 3] [1/15] (42gp)": 1},
       "img_url": [""]
     },
     "R118": {
@@ -1058,7 +1058,7 @@
       "arcana_dc": 11,
       "check_dc": 12,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":43, "Relic [Spell Scroll Level 1] [1/15] (8gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":43, "Relic [Spell Scroll Level 1] [1/15] (8gp)": 1},
       "img_url": [""]
     },
     "R119": {
@@ -1067,7 +1067,7 @@
       "arcana_dc": 15,
       "check_dc": 15,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":392}],
+      "loot": {"Aldahen Coin (1sp)":392},
       "img_url": [""]
     },
     "R120": {
@@ -1076,7 +1076,7 @@
       "arcana_dc": 13,
       "check_dc": 10,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":57, "Relic [Spell Scroll Level 1] [1/15] (8gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":57, "Relic [Spell Scroll Level 1] [1/15] (8gp)": 1},
       "img_url": [""]
     },
     "R121": {
@@ -1085,7 +1085,7 @@
       "arcana_dc": 15,
       "check_dc": 12,
       "concentration_dc": 9,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":62}],
+      "loot": {"Aldahen Coin (1sp)":62},
       "img_url": [""]
     },
     "R122": {
@@ -1094,7 +1094,7 @@
       "arcana_dc": 5,
       "check_dc": 16,
       "concentration_dc": 10,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":72, "Relic [Spell Scroll Level 3] [1/15] (42gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":72, "Relic [Spell Scroll Level 3] [1/15] (42gp)": 1},
       "img_url": [""]
     },
     "R123": {
@@ -1103,7 +1103,7 @@
       "arcana_dc": 12,
       "check_dc": 14,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":56, "Relic [Spell Scroll Level 2] [1/15] (22gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":56, "Relic [Spell Scroll Level 2] [1/15] (22gp)": 1},
       "img_url": [""]
     },
     "R124": {
@@ -1112,7 +1112,7 @@
       "arcana_dc": 8,
       "check_dc": 11,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":8, "Relic [Spell Scroll Level 1] [1/15] (8gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":8, "Relic [Spell Scroll Level 1] [1/15] (8gp)": 1},
       "img_url": [""]
     },
     "R125": {
@@ -1121,7 +1121,7 @@
       "arcana_dc": 11,
       "check_dc": 10,
       "concentration_dc": 6,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":28}],
+      "loot": {"Aldahen Coin (1sp)":28},
       "img_url": [""]
     },
     "R126": {
@@ -1130,7 +1130,7 @@
       "arcana_dc": 11,
       "check_dc": 10,
       "concentration_dc": 6,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":15}],
+      "loot": {"Aldahen Coin (1sp)":15},
       "img_url": [""]
     },
     "R127": {
@@ -1139,7 +1139,7 @@
       "arcana_dc": 12,
       "check_dc": 15,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":162, "Relic [Spell Scroll Level 1] [1/15] (8gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":162, "Relic [Spell Scroll Level 1] [1/15] (8gp)": 1},
       "img_url": [""]
     },
     "R128": {
@@ -1148,7 +1148,7 @@
       "arcana_dc": 12,
       "check_dc": 14,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":146, "Relic [Spell Scroll Level 2] [1/15] (22gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":146, "Relic [Spell Scroll Level 2] [1/15] (22gp)": 1},
       "img_url": [""]
     },
     "R129": {
@@ -1157,7 +1157,7 @@
       "arcana_dc": 10,
       "check_dc": 14,
       "concentration_dc": 10,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":212, "Relic [Spell Scroll Level 2] [1/15] (22gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":212, "Relic [Spell Scroll Level 2] [1/15] (22gp)": 1},
       "img_url": [""]
     },
     "R130": {
@@ -1166,7 +1166,7 @@
       "arcana_dc": 5,
       "check_dc": 40,
       "concentration_dc": 10,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":117, "Relic [Any Rare Magic Item] [1/40] (120gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":117, "Relic [Any Rare Magic Item] [1/40] (120gp)": 1},
       "img_url": [""]
     },
     "R131": {
@@ -1175,7 +1175,7 @@
       "arcana_dc": 14,
       "check_dc": 18,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":166, "Relic [Any Uncommon Magic Item] [1/20] (40gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":166, "Relic [Any Uncommon Magic Item] [1/20] (40gp)": 1},
       "img_url": [""]
     },
     "R132": {
@@ -1184,7 +1184,7 @@
       "arcana_dc": 6,
       "check_dc": 13,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":142}],
+      "loot": {"Aldahen Coin (1sp)":142},
       "img_url": [""]
     },
     "R133": {
@@ -1193,7 +1193,7 @@
       "arcana_dc": 11,
       "check_dc": 13,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":80, "Relic [Any Common Magic Item] [1/10] (16gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":80, "Relic [Any Common Magic Item] [1/10] (16gp)": 1},
       "img_url": [""]
     },
     "R134": {
@@ -1202,7 +1202,7 @@
       "arcana_dc": 16,
       "check_dc": 14,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":74, "Relic [Any Common Magic Item] [1/10] (16gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":74, "Relic [Any Common Magic Item] [1/10] (16gp)": 1},
       "img_url": [""]
     },
     "R135": {
@@ -1211,7 +1211,7 @@
       "arcana_dc": 15,
       "check_dc": 12,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":53}],
+      "loot": {"Aldahen Coin (1sp)":53},
       "img_url": [""]
     },
     "R136": {
@@ -1220,7 +1220,7 @@
       "arcana_dc": 8,
       "check_dc": 7,
       "concentration_dc": 5,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":11}],
+      "loot": {"Aldahen Coin (1sp)":11},
       "img_url": [""]
     },
     "R137": {
@@ -1229,7 +1229,7 @@
       "arcana_dc": 11,
       "check_dc": 8,
       "concentration_dc": 9,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":34}],
+      "loot": {"Aldahen Coin (1sp)":34},
       "img_url": [""]
     },
     "R138": {
@@ -1238,7 +1238,7 @@
       "arcana_dc": 8,
       "check_dc": 12,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":69}],
+      "loot": {"Aldahen Coin (1sp)":69},
       "img_url": [""]
     },
     "R139": {
@@ -1247,7 +1247,7 @@
       "arcana_dc": 14,
       "check_dc": 11,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":68}],
+      "loot": {"Aldahen Coin (1sp)":68},
       "img_url": [""]
     },
     "R140": {
@@ -1256,7 +1256,7 @@
       "arcana_dc": 12,
       "check_dc": 6,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":42}],
+      "loot": {"Aldahen Coin (1sp)":42},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/856001001919741952/c43df044d16f83c3ffcdfc812d9d086a.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/856001129140715550/401bc0141b0951594887e871d7824acc.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/856001048546902027/d32ef0d824267dcefd6cd86945c42750.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/856001163090198588/2367b21bc3ebdf0b48a49b718be0751a.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/856001726623252489/4211ae116f19f1ff7e5fdba50b7235c5.jpeg"]
     },
     "R141": {
@@ -1265,7 +1265,7 @@
       "arcana_dc": 12,
       "check_dc": 11,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2, "Relic [Any Uncommon Magic Item] [1/20] (40gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":2, "Relic [Any Uncommon Magic Item] [1/20] (40gp)": 1},
       "img_url": [""]
     },
     "R142": {
@@ -1274,7 +1274,7 @@
       "arcana_dc": 13,
       "check_dc": 12,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":37}],
+      "loot": {"Aldahen Coin (1sp)":37},
       "img_url": [""]
     },
     "R143": {
@@ -1283,7 +1283,7 @@
       "arcana_dc": 9,
       "check_dc": 10,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":23}],
+      "loot": {"Aldahen Coin (1sp)":23},
       "img_url": [""]
     },
     "R144": {
@@ -1292,7 +1292,7 @@
       "arcana_dc": 6,
       "check_dc": 8,
       "concentration_dc": 6,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":12}],
+      "loot": {"Aldahen Coin (1sp)":12},
       "img_url": [""]
     },
     "R145": {
@@ -1301,7 +1301,7 @@
       "arcana_dc": 12,
       "check_dc": 12,
       "concentration_dc": 9,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":2, "Relic [Spell Scroll Level 0] [1/10] (8gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":2, "Relic [Spell Scroll Level 0] [1/10] (8gp)": 1},
       "img_url": [""]
     },
     "R146": {
@@ -1310,7 +1310,7 @@
       "arcana_dc": 14,
       "check_dc": 16,
       "concentration_dc": 14,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":30, "Relic [Spell Scroll Level 0] [1/10] (8gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":30, "Relic [Spell Scroll Level 0] [1/10] (8gp)": 1},
       "img_url": [""]
     },
     "R147": {
@@ -1319,7 +1319,7 @@
       "arcana_dc": 13,
       "check_dc": 10,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":136}],
+      "loot": {"Aldahen Coin (1sp)":136},
       "img_url": [""]
     },
     "R148": {
@@ -1328,7 +1328,7 @@
       "arcana_dc": 16,
       "check_dc": 14,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":234}],
+      "loot": {"Aldahen Coin (1sp)":234},
       "img_url": [""]
     },
     "R149": {
@@ -1337,7 +1337,7 @@
       "arcana_dc": 15,
       "check_dc": 13,
       "concentration_dc": 14,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":442}],
+      "loot": {"Aldahen Coin (1sp)":442},
       "img_url": [""]
     },
     "R150": {
@@ -1346,7 +1346,7 @@
       "arcana_dc": 11,
       "check_dc": 12,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":123}],
+      "loot": {"Aldahen Coin (1sp)":123},
       "img_url": [""]
     },
     "R151": {
@@ -1355,7 +1355,7 @@
       "arcana_dc": 13,
       "check_dc": 10,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":137}],
+      "loot": {"Aldahen Coin (1sp)":137},
       "img_url": [""]
     },
     "R152": {
@@ -1364,7 +1364,7 @@
       "arcana_dc": 5,
       "check_dc": 16,
       "concentration_dc": 9,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":444}],
+      "loot": {"Aldahen Coin (1sp)":444},
       "img_url": [""]
     },
     "R153": {
@@ -1373,7 +1373,7 @@
       "arcana_dc": 15,
       "check_dc": 11,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":62}],
+      "loot": {"Aldahen Coin (1sp)":62},
       "img_url": [""]
     },
     "R154": {
@@ -1382,7 +1382,7 @@
       "arcana_dc": 15,
       "check_dc": 15,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":392}],
+      "loot": {"Aldahen Coin (1sp)":392},
       "img_url": [""]
     },
     "R155": {
@@ -1391,7 +1391,7 @@
       "arcana_dc": 11,
       "check_dc": 14,
       "concentration_dc": 10,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":276}],
+      "loot": {"Aldahen Coin (1sp)":276},
       "img_url": [""]
     },
     "R156": {
@@ -1400,7 +1400,7 @@
       "arcana_dc": 8,
       "check_dc": 11,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":76}],
+      "loot": {"Aldahen Coin (1sp)":76},
       "img_url": [""]
     },
     "R157": {
@@ -1409,7 +1409,7 @@
       "arcana_dc": 11,
       "check_dc": 8,
       "concentration_dc": 10,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":28}],
+      "loot": {"Aldahen Coin (1sp)":28},
       "img_url": [""]
     },
     "R158": {
@@ -1418,7 +1418,7 @@
       "arcana_dc": 11,
       "check_dc": 8,
       "concentration_dc": 6,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":15}],
+      "loot": {"Aldahen Coin (1sp)":15},
       "img_url": [""]
     },
     "R159": {
@@ -1427,7 +1427,7 @@
       "arcana_dc": 12,
       "check_dc": 15,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":241}],
+      "loot": {"Aldahen Coin (1sp)":241},
       "img_url": [""]
     },
     "R160": {
@@ -1436,7 +1436,7 @@
       "arcana_dc": 11,
       "check_dc": 13,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":239}],
+      "loot": {"Aldahen Coin (1sp)":239},
       "img_url": [""]
     },
     "R161": {
@@ -1445,7 +1445,7 @@
       "arcana_dc": 15,
       "check_dc": 12,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":54}],
+      "loot": {"Aldahen Coin (1sp)":54},
       "img_url": [""]
     },
     "R162": {
@@ -1454,7 +1454,7 @@
       "arcana_dc": 11,
       "check_dc": 14,
       "concentration_dc": 10,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":362}],
+      "loot": {"Aldahen Coin (1sp)":362},
       "img_url": [""]
     },
     "R163": {
@@ -1463,7 +1463,7 @@
       "arcana_dc": 14,
       "check_dc": 15,
       "concentration_dc": 10,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":566}],
+      "loot": {"Aldahen Coin (1sp)":566},
       "img_url": [""]
     },
     "R164": {
@@ -1472,7 +1472,7 @@
       "arcana_dc": 6,
       "check_dc": 13,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":261}],
+      "loot": {"Aldahen Coin (1sp)":261},
       "img_url": [""]
     },
     "R165": {
@@ -1481,7 +1481,7 @@
       "arcana_dc": 12,
       "check_dc": 12,
       "concentration_dc": 7,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":384}],
+      "loot": {"Aldahen Coin (1sp)":384},
       "img_url": [""]
     },
     "R166": {
@@ -1490,7 +1490,7 @@
       "arcana_dc": 5,
       "check_dc": 18,
       "concentration_dc": 9,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":886}],
+      "loot": {"Aldahen Coin (1sp)":886},
       "img_url": [""]
     },
     "R167": {
@@ -1499,7 +1499,7 @@
       "arcana_dc": 8,
       "check_dc": 40,
       "concentration_dc": 7,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":677, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 1}],
+      "loot": {"Aldahen Coin (1sp)":677, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 1},
       "img_url": [""]
     },
     "R168": {
@@ -1508,7 +1508,7 @@
       "arcana_dc": 13,
       "check_dc": 10,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":136}],
+      "loot": {"Aldahen Coin (1sp)":136},
       "img_url": [""]
     },
     "R169": {
@@ -1517,7 +1517,7 @@
       "arcana_dc": 14,
       "check_dc": 18,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":566}],
+      "loot": {"Aldahen Coin (1sp)":566},
       "img_url": [""]
     },
     "R170": {
@@ -1526,7 +1526,7 @@
       "arcana_dc": 15,
       "check_dc": 13,
       "concentration_dc": 14,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":442}],
+      "loot": {"Aldahen Coin (1sp)":442},
       "img_url": [""]
     },
     "R171": {
@@ -1535,7 +1535,7 @@
       "arcana_dc": 11,
       "check_dc": 12,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":122}],
+      "loot": {"Aldahen Coin (1sp)":122},
       "img_url": [""]
     },
     "R172": {
@@ -1544,7 +1544,7 @@
       "arcana_dc": 13,
       "check_dc": 10,
       "concentration_dc": 11,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":137}],
+      "loot": {"Aldahen Coin (1sp)":137},
       "img_url": [""]
     },
     "R173": {
@@ -1553,7 +1553,7 @@
       "arcana_dc": 15,
       "check_dc": 12,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":35}],
+      "loot": {"Aldahen Coin (1sp)":35},
       "img_url": [""]
     },
     "R174": {
@@ -1562,7 +1562,7 @@
       "arcana_dc": 15,
       "check_dc": 12,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":62}],
+      "loot": {"Aldahen Coin (1sp)":62},
       "img_url": [""]
     },
     "R175": {
@@ -1571,7 +1571,7 @@
       "arcana_dc": 15,
       "check_dc": 15,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":392}],
+      "loot": {"Aldahen Coin (1sp)":392},
       "img_url": [""]
     },
     "R176": {
@@ -1580,7 +1580,7 @@
       "arcana_dc": 12,
       "check_dc": 20,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":277}],
+      "loot": {"Aldahen Coin (1sp)":277},
       "img_url": [""]
     },
     "R177": {
@@ -1589,7 +1589,7 @@
       "arcana_dc": 8,
       "check_dc": 11,
       "concentration_dc": 12,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":76}],
+      "loot": {"Aldahen Coin (1sp)":76},
       "img_url": [""]
     },
     "R178": {
@@ -1598,7 +1598,7 @@
       "arcana_dc": 11,
       "check_dc": 8,
       "concentration_dc": 10,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":28}],
+      "loot": {"Aldahen Coin (1sp)":28},
       "img_url": [""]
     },
     "R179": {
@@ -1607,7 +1607,7 @@
       "arcana_dc": 11,
       "check_dc": 8,
       "concentration_dc": 7,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":15}],
+      "loot": {"Aldahen Coin (1sp)":15},
       "img_url": [""]
     },
     "R180": {
@@ -1616,7 +1616,7 @@
       "arcana_dc": 12,
       "check_dc": 15,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":239}],
+      "loot": {"Aldahen Coin (1sp)":239},
       "img_url": [""]
     },
     "R181": {
@@ -1625,7 +1625,7 @@
       "arcana_dc": 11,
       "check_dc": 13,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":239}],
+      "loot": {"Aldahen Coin (1sp)":239},
       "img_url": [""]
     },
     "R182": {
@@ -1634,7 +1634,7 @@
       "arcana_dc": 9,
       "check_dc": 17,
       "concentration_dc": 10,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":824}],
+      "loot": {"Aldahen Coin (1sp)":824},
       "img_url": [""]
     },
     "R183": {
@@ -1643,7 +1643,7 @@
       "arcana_dc": 9,
       "check_dc": 17,
       "concentration_dc": 10,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":836}],
+      "loot": {"Aldahen Coin (1sp)":836},
       "img_url": [""]
     },
     "R184": {
@@ -1652,7 +1652,7 @@
       "arcana_dc": 5,
       "check_dc": 40,
       "concentration_dc": 8,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":1317}],
+      "loot": {"Aldahen Coin (1sp)":1317},
       "img_url": [""]
     },
     "R185": {
@@ -1661,7 +1661,7 @@
       "arcana_dc": 6,
       "check_dc": 13,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":261}],
+      "loot": {"Aldahen Coin (1sp)":261},
       "img_url": [""]
     },
     "R186": {
@@ -1670,7 +1670,7 @@
       "arcana_dc": 16,
       "check_dc": 14,
       "concentration_dc": 13,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":234}],
+      "loot": {"Aldahen Coin (1sp)":234},
       "img_url": [""]
     },
     "R187": {
@@ -1679,7 +1679,7 @@
       "arcana_dc": 5,
       "check_dc": 28,
       "concentration_dc": 9,
-      "loot": [{"name": "Aldahen Coin (1sp)", "qt":1545}],
+      "loot": {"Aldahen Coin (1sp)":1545},
       "img_url": [""]
     }
 }

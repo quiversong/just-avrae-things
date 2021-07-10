@@ -348,8 +348,8 @@ elif action == 'catalogue':
         add_to_bag = {}
         loot_list = ""
         if "loot" in entry:
-              for loot_entry in entry["loot"]:
-                    loot_n, loot_qt = loot_entry["name"], loot_entry["qt"]
+              for loot_n in entry["loot"]:
+                    loot_qt = entry["loot"][loot_n]
                     add_to_bag[loot_n] = loot_qt
                     loot_list += f'{loot_qt}x {loot_n}, '
         loot_list = loot_list[:len(loot_list) - 2]
