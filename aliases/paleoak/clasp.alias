@@ -1,0 +1,45 @@
+!alias clasp embed <drac2>
+f2 = None
+args = &ARGS&
+
+c = character()
+cc = 'Clasp of the Pale Oak'
+c.create_cc_nx(cc, dispType = 'bubble' , maxVal = 1, minVal = 0, reset = 'long')
+has_cc = c.get_cc(cc) > 0
+color = '32a852'
+
+t = f'{c.name} tries to use their Claps of the Pale Oak!'
+thumb = image
+
+if not combat() or not combat().me:
+    f = 'The clasp must be used during combat!|Are you in initiative? You do not need an alias to use Vines of Hunger!'
+    return -1
+
+arg = args[0].lower() if len(args) > 0 else ''
+if not (arg.startswith('pow') or arg.startswith('prot')):
+    f = f'Oops! What power of the Clasp of the Pale Oak do you want to use?|'
+    f += 'Use `!clasp power` for the Vines of Power.\n'
+    f += 'Use `!clasp protection` for the Vines of Protection.\n'
+    f += 'Use `!item clasp` to learn more.'
+    return -1
+
+if has_cc:
+    mod_cc(cc, -1)
+    powers = {
+        'pow': ['Vines of Power', '-b 1 -d 1', 10, 'Vines grow from the clasp and cover your arms. Gain a +1 bonus to attack and damage for 1 minute.'],
+        'prot': ['Vines of Protection', '-ac +1', 99, 'Vines grow from the clasp and cover your torso. Gain +1 AC for 10 minutes.']
+    }
+    power = powers['pow'] if arg.startswith('pow') else powers['prot']
+    combat().me.add_effect(f'{cc}: {power[0]}', power[1], power[2], False, None, False, f'{power[0]}: {power[3]}')
+    t = f'{c.name} uses the Claps of the Pale Oak!'
+    f = 'Claps of the Pale Oak|The wooden clasp is carved by a member of the order from a branch willingly shed by a Pale Oak. The clasp will show your allegiance and dedication to the wilds and wonders of Seventra.'
+    f2 = f'{power[0]}|{power[3]}'
+    thumb = 'https://cdn.discordapp.com/attachments/805571354391740466/832097951614238740/924_2020_large.png'
+else:
+    f = 'The Clasp of the Pale Oak needs time to regrow its vines...|Try again after a long rest!'
+</drac2>
+-title "{{t}}"
+-thumb "{{thumb}}"
+-f "{{f}}"
+{{f'-f "{f2}"' if f2 else ""}}
+-color "{{color}}"

@@ -1,57 +1,162 @@
 [
-{
-  "name": "in a place in ruins...",
-  "intro": "Time seems to move slower here, and you seem to be in the depths of an ocean. Around you, pillars are chained to a large floating island direct in front of you. You can not quite tell what... but something hidden in the island reaches out to you inside your mind...",
-  "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265896904622080/Screen_Shot_2021-06-20_at_2.05.11_PM.png"
-},
-{
-  "name": "in a magical library...",
-  "intro": "A small platform allows you to come closer to the thousands of magical shelves that fly upwards in front of you. An infinite amount of books sit on the shelves while some of them float in the air, some coming almost close enough for you to take them...",
-  "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265951817367552/7zaQLj6ffJllfiIvBdZOdF1H6wC_t_SuKkgDIKKbiQ.jpeg"
-},
-{
-  "name": "in magical forest...",
-  "intro": "A moon shines large in the ethereal sky as you walk over a small wooden bridge around a magical, beautiful pit lit with shiny lights surrounded by majestic trees. You feel like the moon watches you and reaches out to you inside your mind...",
-  "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265957785075712/48f1c4f5148c14a9c8b621b7b1a5f934.jpeg"
-},
-{
-  "name": "in a small magical room...",
-  "intro": "The room is small but the ceiling is high, enough to hold a magical aparatus where a swirly sun sits surrounded by orbiting objects set up with some kind of magical engineering. A few books sit in the lower section of aparatus. Perhaps something worth reading?",
-  "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265962662658078/dominik-zdenkovic-gafans-workshop-2.jpeg"
-},
-{
-  "name": "in a small hall...",
-  "intro": "The hall is alive with plants as green as day. A mysterious figure covered in robes from head to toe watches you...",
-  "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265966009581588/1f27d46be8adecedc34fd16e96207a98.jpeg"
-},
-{
-  "name": "in a small well lit room...",
-  "intro": "A cubic complex aparatus takes the center of the room, with swirly magical energy surrounding its whole structure. A mechanical voice coming from inside the aparatus speaks to you...",
-  "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265969948164187/c61ecadae718729dcce339cb9e37e99a.jpeg"
-},
-{
-  "name": "at a well lit library...",
-  "intro": "A magnificent chandelier hangs below the glass dome. Many books sit on the shelves on both sides while a table carefully and misteriously set with a warm cup of some fragrant beverage invites you for a little reading...",
-  "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265974772269061/52a2a378a5b062fe8cce710f2dafc9c0.jpeg"
-},
-{
-  "name": "at a splendid hall with a tall dome...",
-  "intro": "The sun shines through the glassy dome against the magnificent tree in the center of the hall. The tree looks old... very old, and yet white flowers blossom at the tips of its gnarly branches. As you touch the tree, you feel an entity reach out to you inside your mind...",
-  "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265978563133470/2e5ed8aa384d5dead6082bade5dbdfc5.jpeg"
-},
-{
-  "name": "on a glassy platform floating in the void...",
-  "intro": "Stars surround you from all sides as you stand on the platform. Large rings float around the platform as they circle and orbit you with an almost inaudible hum. An aparatus in the shape of a globe sits in the center of platform. You touch the globe and you feel an entity reach out to you inside your mind...",
-  "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265987216244736/9738_tuDdeNlhpeopvCjG_061217205047.jpeg"
-},
-{
-  "name": "on an island floating in the dark void...",
-  "intro": "In front of you, a large temple sits next to an imposing gigantic tree. As you walk inside the temple you hear a mysterious ancient voice call your name...",
-  "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265988261150780/size-9.jpeg"
-},
-{
-  "name": "in a small temple...",
-  "intro": "At the center of the temple sits a circular structure with a raised platform. An ancient mummified monk floats above the structure. Suddenly, the monk moves its head ever so slightly, looking directly at you. You then hear a hoarse and ethereal voice talk to you inside your mind...",
-  "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266002916573184/norris-lin-mayan-cm-01.jpeg"
-}
+  {
+    "name": "in a place in ruins...",
+    "intro": "Time seems to move slower here, and you seem to be in the depths of an ocean. Around you, pillars are chained to a large floating island direct in front of you. You cannot quite tell what... but something hidden in the island reaches out to you inside your mind...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265896904622080/Screen_Shot_2021-06-20_at_2.05.11_PM.png",
+  },
+  {
+    "name": "in a magical library...",
+    "intro": "A small platform allows you to come closer to the thousands of magical shelves that fly upwards in front of you. An infinite amount of books sit on the shelves while some of them float in the air, some coming almost close enough for you to take them...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265951817367552/7zaQLj6ffJllfiIvBdZOdF1H6wC_t_SuKkgDIKKbiQ.jpeg",
+  },
+  {
+    "name": "in magical forest...",
+    "intro": "A moon shines large in the ethereal sky as you walk over a small wooden bridge around a magical, beautiful pit lit with shiny lights surrounded by majestic trees. You feel like the moon watches you and reaches out to you inside your mind...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265957785075712/48f1c4f5148c14a9c8b621b7b1a5f934.jpeg",
+  },
+  {
+    "name": "in a small magical room...",
+    "intro": "The room is small but the ceiling is high, enough to hold a magical aparatus where a swirly sun sits surrounded by orbiting objects set up with some kind of magical engineering. A few books sit in the lower section of aparatus. Perhaps something worth reading?",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265962662658078/dominik-zdenkovic-gafans-workshop-2.jpeg",
+  },
+  {
+    "name": "in a small hall...",
+    "intro": "The hall is alive with plants as green as day. A mysterious figure covered in robes from head to toe watches you...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265966009581588/1f27d46be8adecedc34fd16e96207a98.jpeg",
+  },
+  {
+    "name": "in a small well lit room...",
+    "intro": ""A cubic complex aparatus takes the center of the room, with swirly magical energy surrounding its whole structure. A mechanical voice coming from inside the aparatus speaks to you...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265969948164187/c61ecadae718729dcce339cb9e37e99a.jpeg",
+  },
+  {
+    "name": "at a well lit library...",
+    "intro": "A magnificent chandelier hangs below the glass dome. Many books sit on the shelves on both sides while a table carefully and misteriously set with a warm cup of some fragrant beverage invites you for a little reading...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265974772269061/52a2a378a5b062fe8cce710f2dafc9c0.jpeg",
+  },
+  {
+    "name": "at a splendid hall with a tall dome...",
+    "intro": "The sun shines through the glassy dome against the magnificent tree in the center of the hall. The tree looks old... very old, and yet white flowers blossom at the tips of its gnarly branches. As you touch the tree, you feel an entity reach out to you inside your mind...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265978563133470/2e5ed8aa384d5dead6082bade5dbdfc5.jpeg",
+  },
+  {
+    "name": "on a glassy platform floating in the void...",
+    "intro": "Stars surround you from all sides as you stand on the platform. Large rings float around the platform as they circle and orbit you with an almost inaudible hum. An aparatus in the shape of a globe sits in the center of platform. You touch the globe and you feel an entity reach out to you inside your mind...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265987216244736/9738_tuDdeNlhpeopvCjG_061217205047.jpeg",
+  },
+  {
+    "name": "on an island floating in the dark void...",
+    "intro": "In front of you, a large temple sits next to an imposing gigantic tree. As you walk inside the temple you hear a mysterious ancient voice call your name...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856265988261150780/size-9.jpeg",
+  },
+  {
+    "name": "in a small temple...",
+    "intro": "At the center of the temple sits a circular structure with a raised platform. An ancient mummified monk floats above the structure. Suddenly, the monk moves its head ever so slightly, looking directly at you. You then hear a hoarse and ethereal voice talk to you inside your mind...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266002916573184/norris-lin-mayan-cm-01.jpeg",
+  },
+  {
+    "name": "in the nexus of the universe",
+    "intro": "An uncomprehensable complex yet simple nexus of all creation, thought, energy and potential.  All possibilites are open to your mind at this place as the cosmoses seem to seep through your very essense.  Thoughts act as ripples as a force more powerful than all the deities in the vastness of the multiverse probes your mind ...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266006559981568/yingyi-xsu-72px.jpeg",
+  },
+  {
+    "name": "at a portal pad outside an unknown city",
+    "intro": "In the briefest moments within the shimmering confines of the portal you feel a presence bearing down. You step sideways instead of forward and a warm wave of curiousity fills your mind as it gently brushes against your memories and senses looking for some long lost knowledge ...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266010620723200/yanchong-lim-lobby-x16f-1.jpeg",
+  },
+  {
+    "name": "at an observation tower in the grand library",
+    "intro": "As you study the stars and the great beyond some force from the great beyond reaches back and studies you... ",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266014579490916/efe429572c536092eb4cc9bb1e54a2dc.jpeg",
+  },
+  {
+    "name": "in a huge library...",
+    "intro": "The walls, the stairs, the pillars... everything seems to be made of shelves completely taken by thousands of books. Perhaps there's some hidden knowledge available for you here?",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266018737750026/c6eddcf6d487fb28660fc6efa97326c4.jpeg",
+  },
+  {
+    "name": "standing on platform surrounded by nothingness...",
+    "intro": "As you take it in all in, you notice the platform is actually made by a pile of gigantic books! Enormous butterflies fly around you. Is this a world where everything is larger beyond imagination? Or was it you who shrunk? A butterfly hovers in the air in front of you, and you hear its voice talk to you inside your head...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266023123943474/e3cc5a8acf2979e809e5a95be580c5c3.jpeg",
+  },
+  {
+    "name": "on the top of a frigid mountain range...",
+    "intro": "You face a large bridge made out of gigantic chain-links. They lead you to frozen ruins sitting atop the highest peak of the mountain range. Snow falls heavily, obscuring your vision, but you can clearly hear a harsh voice talk to you through the wind...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266026521460736/68048267ec185a959714915e5348de92.jpeg",
+  },
+  {
+    "name": "in a long forgotten ruin deep in the jungle",
+    "intro": "You come accross a what appears to be the remains of an ancient society.  The air is hot and humid, the stillness of this place is broken by the sqauks of birds, the buzz of insects and the howling of strange primates. The sounds of the jungle are all cut short when a pressence touches your mind ...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266031751495690/a32e96895cff5a3fc3f9569e3561f841.jpeg",
+  },
+  {
+    "name": "deep under a mountain ...",
+    "intro": "As you move through the dark dank abandoned dwarven hold, a light from far above touches down before you.  Causiously you move through the light, there for an instance you freeze. To you, time has stopped; the dust halts in midair, your companions freeze, the torch you hold stops flickering but remains bright. Unable to move you feel a forboding voice speak to you ... ",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266035795722250/abddbee7d81e97a3bba07d5f49ccd78b.jpeg",
+  },
+  {
+    "name": "In a not quite abandoned watery chamber ...",
+    "intro": "Your pressence remains unknown until you find some strange relics concealed within a fake wall.  As you remove the relics a voice speaks to you ...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266040382849034/bbef5cf98d3edf3b414fd9cc87347102.jpeg",
+  },
+  {
+    "name": "within a stronghold of the Shadowfeld ...",
+    "intro": "The gloom and greyness of the space weighs heavily upon you.  As you desperately search for and exit from this cursed plane of existance you feel a sense of fortitude and calmess wash over your mind giving a renewed sense of determination.  While this positive pressence stays with you, it exchanges a piece of your knowledge for the route that will lead you to safety ...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266045172875284/455435c4c6185ff13404f8e8260f96c8.jpeg",
+  },
+  {
+    "name": "over a steep precipice ...",
+    "intro": "You feel a deep urge to look over the edge into a deep nothing. As quiet as this deserted place is a thunderous voice inside your mind reaches out from the dark void beneath you... ",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266048180584458/841b5b111a032bd18555b0a2855f2e2b.jpeg",
+  },
+  {
+    "name": "at the beginning of a labyrinth ... ",
+    "intro": "You feel a compulsion to venture forth into the dark maze.  A strong force directs your path until you reach the heart of the labyrinth, there you encounter the entity that guided you.  With a soft and reasuring touch it peels open your mind to reveal the knowledge within ...  ",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266053376933958/3106f00b9d633d3fb13b005badd35b41.jpeg",
+  },
+  {
+    "name": "in a forgotten frozen waste land a portal stands before you ... ",
+    "intro": "As you gaze at the empty ring a blazing eruption swirls into view.  The fires are a stark contrast to the area you're in.  You apporach cautiously and you feel complused to reveal your mind ... ",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266057189818401/0d1d1e17120f38597e40c28734c87a27.jpeg",
+  },
+  {
+    "name": "in a mysterious dark place, a gateway open before you ...",
+    "intro": "Upon your travels to another realm the realization befalls upon you that should you stray a little from the fiery path you'll be trapped forever in some alternate reality.  The sense of dread overwhelms you and you become dizzy.  Before you fall you feel a presence steadying your will and begins to guide you towards the exit in exchange for some knowledge ...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266062102003713/e89bf1f8f7a7b27779e6526874ba545c.jpeg",
+  },
+  {
+    "name": "on the edge of the abyss ... ",
+    "intro": "You find yourself staring at an entity.  Whether it is benevolent or malicious you can't tell.  It's alien mind reaches out to probe your thoughts to gain some inkling on how you perceive the universe ...  ",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266065994055690/9b53d65513f40a274146eaa78e8d7cef.jpeg",
+  },
+  {
+    "name": "in side a strange reactor ...",
+    "intro": "You see the raw power of the elemental plane of fire being converted into some sort of useful energy being converted into what ... and for whom? Staring at the immensly bright light you feel an urge to explore some deep thoughts you never knew you had ... ",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266074701299722/09eea48570b57358713fc8324bd3d3f6.jpeg",
+  },
+  {
+    "name": "deep in a untouched forest ....",
+    "intro": "You stumble accross an ancient portal.  You begin exporing the seemingly inactive device.  While attempting to decipher the ruins the gateway opens, what emerges from the otherside you can't remember ... all you can say is that it took something from your mind .... ",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266078127390740/ec30b5f20fd758bb9ef0b748ca7d0d9b.jpeg",
+  },
+  {
+    "name": "in the scalding sea of dunes of an unknown desert...",
+    "intro": "A mysterious black monolith stands right in front of you. The monolith is static, but you have to eerie feeling of being observed. Ideas being to form inside your mind, as if something is trying to communicate with you in a way you never experienced before...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266096067477524/26152e2ae685a4edea7e379869731630.jpeg",
+  },
+  {
+    "name": "While meditating on a hilltop...",
+    "intro": "A sudden swirl of unknown energy opens a gate into the great unknown.  There a force reaches out to your open and still mind ...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266101590458408/692995a4e95ba3f6a452b6ebed2124ba.jpeg",
+  },
+  {
+    "name": "on a mysterious island completed surrounded by an ocean of lava...",
+    "intro": "On the island, a massive sphere of crackling energy looms over you among an eerie set of ruins. The cacophony made by the crackles and lightnings grows in intensity and you feel as an unknown entity is inside your mind, reaching for your thoughts...",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266104845238272/88b0725accd477fa8e7838ee8a89913c.jpeg",
+  },
+  {
+    "name": "upon the floating isles of an once forgotten land ...",
+    "intro": "You seem to find peace of mind.  The warm sun shines down calming your body.  You feel the need to rest and soak up the rays; while you sit you feel a deep connection with an unknown power.  The power begins to gently touch your mind and you freely give it the knowledge it seeks ... ",
+    "url": "https://cdn.discordapp.com/attachments/855908840633270282/856266109699620904/44abcf17e8c9db2afbda7ef6b98ec967.jpeg",
+  }
 ]

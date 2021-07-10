@@ -143,7 +143,7 @@ if in_wrong_stage:
     return 1
 
 if len(args) == 0 or (not current_stage and args[0].lower() != 'start'):
-    f = f'Ready to start researtching?|Type `!research start` to enter the Aldahen Research Center.'
+    f = f'Ready to start researching?|Type `!research start` to enter the Aldahen Research Center.'
     research_images = [
         'https://cdn.discordapp.com/attachments/827581981452795975/851694263058432040/BookGen.jpeg',
         'https://cdn.discordapp.com/attachments/827581981452795975/851694419753041960/d8294928b89f344318e248ee809853c8.jpeg',
@@ -332,7 +332,7 @@ elif action == 'catalogue':
     succ = s_roll.total >= entry["concentration_dc"]
 
     t = f'{c.name} tries to catalogue the information...'
-    f = f'Can you hold on to the knowledge as it is catalogued by The Aldahen Chamber?|**Constitution save:** {s_roll.full}'
+    f = f'Can you hold your Concentration on to the knowledge as it is catalogued by The Aldahen Chamber?|**Constitution save:** {s_roll.full}'
 
     if R_IMG_VAR in cv:
         thumb = cv[R_IMG_VAR]
@@ -353,7 +353,7 @@ elif action == 'catalogue':
 
         f2 = f'Success!|The knowledge you acquired about **{entry_name}** has been transferred to The Aldahen!'
         f3 = 'When you next exit the chamber...|You feel tired and can not think straight. Most of the knowledge you acquired is gone from your memories... but you keep the loot paid by The Aldahen Syndicate!'
-        f4 = f'You gained: {loot_list}.|They have been added to your "Research" bag!\n\Research some more with `!research start`!'
+        f4 = f'You gained: {loot_list}.|They have been added to your "Research" bag!\n\nResearch some more with `!research start`!'
     else:
         thumb = image
         f2 = f'{c.name} was NOT able to hold onto the knowledge long enough to transfer it to the Aldahen!|'
