@@ -231,8 +231,8 @@ if action == "start":
         f2 = f"Still {area['name']} you feel your mind being probed...|"
 
 
-    f2 += "The Foundation measures how far your knowledge goes...\Can you handle the communion with it?\n"
-    f2 += f"**Arcana roll:** {arcana_roll.full}"
+    f2 += "The Foundation measures how far your knowledge goes...\nCan you handle the communion with it?\n"
+    f2 += "**Arcana roll:**\n" + f"{arcana_roll.full}"
 
     if arcana_roll.total >= entry['arcana_dc'] or is_crit:
         c.set_cvar(R_STAGE_VAR, f'{entry_id}:identify:{is_crit}')
@@ -359,7 +359,7 @@ elif action == 'catalogue':
 
         f2 = f'Success!|The knowledge you acquired about **{entry_name}** has been successfully catalogued!'
         f3 = 'When you next exit the chamber...|You feel tired and can not think straight.\n'
-        f3 += 'Most of the knowledge you acquired is gone from your memories... but you keep the bounty paid by The Foundation!'
+        f3 += 'Most of the knowledge you acquired is gone from your memories... But you keep the bounty paid by The Foundation!'
         f4 = f'You gained:|{loot_list}They have been added to your "Research" bag!\n\nResearch some more with `!research start`!'
     else:
         thumb = image
