@@ -25,7 +25,7 @@ categories_var = LIVE_CAT_VAR if IS_LIVE else BETA_CAT_VAR
 entries_var = LIVE_ENTRY_VAR if IS_LIVE else BETA_ENTRY_VAR
 areas_var = LIVE_AREAS_VAR if IS_LIVE else BETA_AREAS_VAR
 
-t = f'{c.name} wants to aid The Aldahen Syndicate with their research!'
+t = f'{c.name} wants to aid The Foundation with their research!'
 f, f2, f3, f4, color = None, None, None, None, 'f200ff'
 
 img = None
@@ -146,7 +146,7 @@ if in_wrong_stage:
     return 1
 
 if len(args) == 0 or (not current_stage and args[0].lower() != 'start'):
-    f = f'Ready to start researching?|Type `!research start` to enter the Aldahen Research Center.'
+    f = f'Ready to start researching?|Type `!research start` to enter the Foundation Research Center.'
     research_images = [
         'https://cdn.discordapp.com/attachments/827581981452795975/851694263058432040/BookGen.jpeg',
         'https://cdn.discordapp.com/attachments/827581981452795975/851694419753041960/d8294928b89f344318e248ee809853c8.jpeg',
@@ -216,7 +216,7 @@ if action == "start":
         area = areas[new_area_index]
         img = area['url']
 
-        t = f'{c.name} enters the Aldahen Research Chamber!'
+        t = f'{c.name} enters the Foundation Research Chamber!'
         f = f"Reality warps around you, and you find yourself {area['name']}|"
         f += area["intro"]
 
@@ -225,11 +225,11 @@ if action == "start":
         area = areas[areas_visited[len(areas_visited) - 1]]
         thumb = area['url']
 
-        t = f'{c.name} continues researching in the Aldahen Research Chamber!'
+        t = f'{c.name} continues researching in the Foundation Research Chamber!'
         f2 = f"Still {area['name']} you feel your mind being probed...|"
 
 
-    f2 += "The Aldahen measures how far your knowledge goes...\nCould you handle the communion with The Foundation?\n"
+    f2 += "The Foundation measures how far your knowledge goes...\Can you handle the communion with it?\n"
     f2 += f"**Arcana roll:** {arcana_roll.full}"
 
     if arcana_roll.total >= entry['arcana_dc']:
@@ -335,7 +335,7 @@ elif action == 'catalogue':
 
     t = f'{c.name} tries to catalogue the information...'
     f = 'You can feel the knowledge being transferred from your mind...|'
-    f += 'Can you hold your Concentration on to the knowledge as it is catalogued by The Aldahen Chamber?\n'
+    f += 'Can you hold your Concentration on to the knowledge as it is catalogued by The Foundation Chamber?\n'
     f += f'**Constitution save:** {s_roll.full}'
 
     if R_IMG_VAR in cv:
@@ -355,13 +355,13 @@ elif action == 'catalogue':
                     spaces = '   ' if loot_qt < 10 else '  ' if loot_qt < 100 else ' ' if loot_qt < 1000 else ''
                     loot_list += f'`{spaces}{loot_qt}x {loot_n}`' + '\n'
 
-        f2 = f'Success!|The knowledge you acquired about **{entry_name}** has been transferred to The Aldahen!'
+        f2 = f'Success!|The knowledge you acquired about **{entry_name}** has been successfully catalogued!'
         f3 = 'When you next exit the chamber...|You feel tired and can not think straight.\n'
-        f3 += 'Most of the knowledge you acquired is gone from your memories... but you keep the loot paid by The Aldahen Syndicate!'
+        f3 += 'Most of the knowledge you acquired is gone from your memories... but you keep the bounty paid by The Foundation!'
         f4 = f'You gained:|{loot_list}They have been added to your "Research" bag!\n\nResearch some more with `!research start`!'
     else:
         thumb = image
-        f2 = f'{c.name} was NOT able to hold onto the knowledge long enough to transfer it to the Aldahen!|'
+        f2 = f'{c.name} was NOT able to hold onto the knowledge long enough for it to be catalogued!'
         f2 += "Better luck next time!\n\nUse `!research start` to try again."
 
 c.set_cvar(R_STATS_VAR, dump_json(stats))

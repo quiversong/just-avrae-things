@@ -1,0 +1,82 @@
+embed
+<drac2>
+    t = f'{character().name} needs help with Researches!'
+    imgs = [
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589125914230805/f0f72cf16a2a49efbbe957edcffaee1c.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589134769979392/fb1ef980ce984a31a6300919c2c6014b.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589135344074792/925704becc4cc270fe07249b74655f79.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589138959826944/642ee6d8bb39df2dbf10ea499eb70b72.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589140976500736/62dde1e68b7cb760f485bd76622312cf.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589142867869717/4fa125b2eb2c8d411426349c77f465b8.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589167472443413/1f949682248588d881ff16700fd97ef8.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589174568419368/919e5b0f70e3febe8a3d7ad6611e40f4.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589179014512680/304093598d62ca026d42b87001af339c.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589181863624704/80b2afcfba8f5b50f020b3df46e29011.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589184509050900/b043bc984c7f3537e0f372c56557dbc8.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589186712109066/81c2276037541d7bf9d99e2dc0fb8b88.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589189894799370/9c44699ef6e6e91864704141e3a167b7.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589192495661086/347a4cc9c4f3dd147eca46b4ecf0e1d8.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589195368628224/a72fa6da68db5e317fdf2b26836a2da9.jpeg'
+    ]
+    thumb = imgs[roll(f'1d{len(imgs)}') - 1]
+</drac2>
+-title "{{t}}"
+-thumb "{{thumb}}"
+
+-f "__**The Foundation Requests Your Aid!**__|
+`!research` created by and for the members of **Seventra: Exodus of Heroes!**"
+
+-f "__**The Foundation**__|
+The Foundation is a guild of powerful scholars and mages centered in Arbarax and dedicated to collecting and protecting all knowledge in the multiverse! The guild is not open to the public and will only speak to the Arbarax government through liaisons.
+
+As time goes on and the mages advance their work in unveiling the mysteries of the fabric of space, magic, and time, they have developed a mechanism through which individuals can have access to uncatalogued pieces of data. If the information is held long enough in their consciousness, the Foundation research chamber can extract the knowledge from capable individuals and catalogue it for further analysis."
+
+-f "__**The Foundation And You**__|
+Are you one of these individuals, capable of aiding The Foundation in unveiling and cataloguing the various pieces of knowledge scattered around the world inside the minds and scriptures of every living being in the material planes?
+
+Use your skills in arcana, history, nature, medicine, performance and persuasion to unveil the hidden knowledges still not catalogued by the Foundation mages. If you're able to aid them in cataloguing pieces of data, you will receive valuable bounties!"
+
+-f "**1. How does this work?**|
+- The Foundation mages have setup Research Chambers in every major city of Seventra. Enter one the Research Chambers and check the channel pins for more information.
+- If you complete the research successfully, you will earn prizes provided by The Foundation. They will be automatically added to a bag called **Research** on your `!bag`."
+
+-f "**2. Getting A Research Session Started**|
+- Use `!research start` to have the Research Chamber pick a Subject/Category for you to research upon.
+- The Category is chosen at random, but character with higher INT have higher probability of being assigned to Categories that require an intelligence-based check, whereas characters with higher CHA have higher chances of receiving assignments for charisma-based checks.
+- Once a Category is selected, the Foundation Research Chamber will probe your mind to evaluate if it is strong enough to have information magically transferred to you. You will perform either a `Charisma (Arcana)` or `Intelligence (Arcana)` check to determine if your mind is in sync with the Foundation (the check is again decided based on your highest attribute)."
+
+-f "Available Categories|
+`Alchemy:` use your *Arcana* knowledge to catalogue information about brewing potions and poisons.
+`Arcana:` is you knowledge enough about the *Arcana* mysteries surrounding us?
+`Arts:` by testing your *Performance* prowess you can aid in cataloguing information about various types of Arts.
+`Geography:` by using your knowledge about *Nature*, you can unveil information about Seventra's Geography.
+`History:` discover and catalogue Seventran historical facts through your *History* knowledge.
+`Magic Items:` use your *Arcana* experience to catalogue techniques in the crafting and identification of magic items.
+`Medicine:` you *Medicine* knowledge will be put to the test to catalogue any medicinal information needed by the Foundation mages.
+`Seventra Personality:` uses your *Persuasion* skills to understand the motivations of a Seventra Personality and help catalogue information about famous Seventra residents."
+
+-f "**3. Receiving Knowledge**|
+- If your mind in sync with the Foundation, use `!research identify` to perform the appropriate check and try to decipher all the knowledge and information selected for you by the Foundation.
+- The check performed will vary according to the Category selected.
+- The DC of the check varies depending on the entry that you are researching. Entries with higher DC award more valuable loot. The entries are selected at random."
+
+-f "**4. Cataloguing the Information**|
+- Upon identification, use `!research catalogue` to have the knowledge extracted from your mind and catalogued for the Foundation mages. This is a **Concentration Check**.
+- Characters that have benefits on Concentration Checks can use them here. For example, if you have the Warcaster Feat that gives advantage on Concentration Checks, you can do `!research catalogue adv`. If you have a feature that gives you a bonus to Concentration Checks, use `!research catalogue -b <bonus>`.
+- **ATTENTION:** As per our Honor System, only use the benefits that are granted to you and not more. Admins can track how commands have been run and **potential offenses to Servers Rules 2 or 7 are passive of moderation**."
+
+-f "**5. Receiving Loot**|
+- Upon completion, the receiving loot will automatically be added to a bag called **Research**. Use `!bag Research` to see its contents.
+- Every research entry awards **Foundation Tokens**. These are simple tokens with the stamp of the Foundation and they can be traded for copper/silver/gold pieces at any market channel. Each token can be sold for 5 copper pieces.
+- Some special entries award Relics. These are collectible items that can either be traded for gold, or collected and traded for specific items. For example:
+`Relic [Spell Scroll Level 2] [1/15] (22gp)`: this relic can be traded for 11gp (50% of market value as per rules on trading with merchants) or, if you collect 15 of them, they can be traded for a `Spell Scroll Level 2`."
+
+-f "**6. How Much Can I Research?**|
+- Researching is limited to 6 times per 24-hours on the server. The counter resets at 00:00 UTC, and then you can hunt 6 more times in the 24-hour window.
+- **ATTENTION:** `!research` and `!hunt` are mutually exclusive. You can perform up to 6 of either one on a given day."
+
+-f "**7. How well have I done?**|
+- Use `!research stats` to see your character statistics."
+
+-f "**8. I have more questions...**|
+- Ping `@Guide` for questions about the research alias. We will continue to update this help guide for future use."
