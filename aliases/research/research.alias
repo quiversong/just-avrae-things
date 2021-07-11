@@ -124,12 +124,13 @@ if len(args) > 0 and args[0] == "reset":
   footer = footer.replace(f'{research_count}x today', '0x today')
   return 0
 
-stage_vars, stage_topic, current_stage = None, None, None
+stage_vars, stage_topic, current_stage, auto_adv = None, None, None, None
 
 if R_STAGE_VAR in cv:
     stage_vars = cv[R_STAGE_VAR].split(":")
     entry_id = stage_vars[0]
     current_stage = stage_vars[1]
+    auto_adv = stage_vars[2] == 'True'
 
 categories = load_json(get_gvar(categories_var))
 entries = load_json(get_gvar(entries_var))
@@ -204,6 +205,7 @@ if action == "start":
         check_mod += f' + {arcana_skill.prof * proficiencyBonus} [Arcana prof]'
 
     arcana_roll = vroll(f'1d20 + {check_mod}')
+    is_crit = arcana_roll.result.crit == 1
 
     if research_count == 1:
         if len(areas_visited) >= len(areas):
@@ -232,8 +234,8 @@ if action == "start":
     f2 += "The Foundation measures how far your knowledge goes...\Can you handle the communion with it?\n"
     f2 += f"**Arcana roll:** {arcana_roll.full}"
 
-    if arcana_roll.total >= entry['arcana_dc']:
-        c.set_cvar(R_STAGE_VAR, f'{entry_id}:identify')
+    if arcana_roll.total >= entry['arcana_dc'] or is_crit:
+        c.set_cvar(R_STAGE_VAR, f'{entry_id}:identify:{is_crit}')
         f3 = f"The Research Chamber has chosen a topic for you to catalogue...|"
         f3 += f"**Category:** `{category_name}`\n\n"
         f3 += "Use `!research identify` to identify its mysteries."
@@ -301,9 +303,10 @@ if action == "identify":
     skill = skills_by_category[category_id]
     skill_name = skill_name_by_category[category_id]
 
-    adv_status = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
+    adv_status = True if pargs.adv() == 1 or auto_adv else False if pargs.adv() == -1 else None
     s_roll = vroll(skill.d20(base_adv = adv_status))
-    succ = s_roll.total >= entry["check_dc"] or s_roll.result.crit == 1
+    is_crit = s_roll.result.crit == 1
+    succ = s_roll.total >= entry["check_dc"] or is_crit
 
     t = f"{c.name} tries to understand the secrets of the Foundation!"
     f = f"You are presented with a piece of knowledge about **'{category_name}':**|"
@@ -318,7 +321,7 @@ if action == "identify":
     if succ:
         stats["s_identify"] = stats["s_identify"] + 1 if "s_identify" in stats else 1
         f3 = 'Well done!|Use `!research catalogue` to catalogue the knowledge you acquired.'
-        c.set_cvar(R_STAGE_VAR, f'{entry_id}:catalogue')
+        c.set_cvar(R_STAGE_VAR, f'{entry_id}:catalogue:{is_crit}')
     else:
         thumb = image
         f3 = f'The information about `{entry_name}` was too complex for you to grasp...|'
@@ -327,9 +330,8 @@ if action == "identify":
 
 elif action == 'catalogue':
     c.delete_cvar(R_STAGE_VAR)
-    adv_status = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
     b_bonus_param = ' + '.join(pargs.get('b', default=[''])).strip()
-    dice = '1d20kh1' if pargs.adv() == 1 else '1d20kl1' if pargs.adv() == -1 else '1d20'
+    dice = '2d20kh1' if pargs.adv() == 1 or auto_adv else '1d20kl1' if pargs.adv() == -1 else '1d20'
     s_roll = vroll(f'{dice} + {constitutionMod}{b_bonus_param}')
     succ = s_roll.total >= entry["concentration_dc"]
 
