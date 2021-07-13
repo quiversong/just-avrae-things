@@ -1,0 +1,12 @@
+# sets daily activity control counter to max
+_var_name = __p0__
+_max = __p1__
+_cvars = character().cvars
+if not _var_name in _cvars or _cvars[_var_name] == "0:0":
+  _now = time()
+  character().set_cvar(_var_name, f'{_max}:{_now}')
+else:
+  _var_parts = _cvars[_var_name].split(':')
+  _time = _var_parts[1]
+  character().set_cvar(_var_name, f'{_max}:{_time}')
+__result__ = _max
