@@ -1681,41 +1681,5 @@
       "concentration_dc": 9,
       "loot": {"Foundation Token (1gp)":154},
       "img_url": [""]
-    },
-    "R188": {
-      "name": "",
-      "type": "",
-      "arcana_dc": ,
-      "check_dc": ,
-      "concentration_dc": ,
-      "loot": {"Foundation Token (1gp)":},
-      "img_url": [""]
-    },
-    "R189": {
-      "name": "",
-      "type": "",
-      "arcana_dc": ,
-      "check_dc": ,
-      "concentration_dc": ,
-      "loot": {"Foundation Token (1gp)":},
-      "img_url": [""]
-    },
-    "R190": {
-      "name": "",
-      "type": "",
-      "arcana_dc": ,
-      "check_dc": ,
-      "concentration_dc": ,
-      "loot": {"Foundation Token (1gp)":},
-      "img_url": [""]
-    },
-    "R191": {
-      "name": "",
-      "type": "",
-      "arcana_dc": ,
-      "check_dc": ,
-      "concentration_dc": ,
-      "loot": {"Foundation Token (1gp)":},
-      "img_url": [""]
     }
 }
