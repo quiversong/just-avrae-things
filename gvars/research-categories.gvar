@@ -21,7 +21,7 @@
       "name": "Arcana Domain",
       "chance_int": [41,65],
       "chance_cha": [76,80],
-      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855996399656501278/5734dbf8ddf89cfa8b7f0d881d7c5201.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/855996402685050890/ccd340e557921452871ae67e19cd2ade.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/855996857942671370/03a983c8456757418bec6dac3b0e4b52.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/855996409010192414/55b65a59594ea4443724715283ff4080.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/855996412382806026/a149d8f0436983327630c5fc0c7aceb7.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/855996415515033620/7fc83e9c1668c9c0f08de7ff2d548533.jpeg"]
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855996399656501278/5734dbf8ddf89cfa8b7f0d881d7c5201.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/855996402685050890/ccd340e557921452871ae67e19cd2ade.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/855996857942671370/03a983c8456757418bec6dac3b0e4b52.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/855996412382806026/a149d8f0436983327630c5fc0c7aceb7.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/855996415515033620/7fc83e9c1668c9c0f08de7ff2d548533.jpeg"]
     },
     "magic_items": {
       "name": "Magic Items",
