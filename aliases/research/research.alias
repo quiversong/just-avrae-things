@@ -18,7 +18,7 @@ LIVE_RIFTS_VAR = "e6bebfd3-c296-4f7e-9a27-2b7fd1403d42"
 
 DAILY_CAP = 6
 RIFT_DC = 20
-RIFT_DIE = 540
+RIFT_DIE = 250
 
 # Code
 args = &ARGS&
