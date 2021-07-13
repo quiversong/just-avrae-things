@@ -18,6 +18,7 @@ LIVE_RIFTS_VAR = "e6bebfd3-c296-4f7e-9a27-2b7fd1403d42"
 
 DAILY_CAP = 6
 RIFT_DC = 20
+RIFT_DIE = 540
 
 # Code
 args = &ARGS&
@@ -264,7 +265,7 @@ category_name = category['name']
 add_to_bag = None
 
 if action == "identify":
-    rift_chance = 2
+    rift_chance = RIFT_DIE
     rift_chance_roll = roll(f'1d{rift_chance}')
     if rift_chance_roll == rift_chance:
         rift_data = load_json(get_gvar(rifts_var))
@@ -273,12 +274,13 @@ if action == "identify":
         creatures = plane['creatures']
         creature = creatures[roll(f'1d{len(creatures)}') - 1]
 
-        color = 'a835f0'
+        color = 'f0b330'
         t = 'What... ?'
         f = '... is happening?|'
+        thumb = creature['img']
 
         f += 'The whole chamber goes dark, you cannot see even one inch in front of your eyes.\n'
-        f += 'Suddenly a small source of light appears, and it grows, twisting and turning in the air until a large rift of crackling energy is before you...'
+        f += 'Suddenly a small source of light appears. It grows gradually, twisting and turning in the air until a large rift of crackling energy is before you...'
 
         f2 = f'It is a rift to __**{plane["name"]}**__! A creature comes out of the rift!|'
         f2 += creature['desc']
@@ -291,8 +293,8 @@ if action == "identify":
         arcana_roll = vroll(f'1d20 + {check_mod}')
         is_crit = arcana_roll.result.crit == 1
 
-        f3 = 'This creature does not belong in Seventra!|Can you use your Arcane powers to send it back and close the rift?'
-        f3 += "**Arcana roll:**\n" + f"{arcana_roll.full}"
+        f3 = f'This __**{creature["name"]}**__ does not belong in Seventra!|Can you use your Arcane powers to send it back and close the rift?'
+        f3 += "\n**Arcana roll:**\n" + f"{arcana_roll.full}"
 
         if (arcana_roll.total >= RIFT_DC) or is_crit:
             loot_list = ''
@@ -302,11 +304,13 @@ if action == "identify":
             f4 = 'Success!|You have managed to purge the creature and close the rift!\n'
             f4 += 'You are now exhausted and have to stop researching for today, but as you turn around to leave, you find:\n'
             f4 += loot_list
+            f4 += 'They have been added to your Research bag!\n'
             add_to_bag = creature['loot']
         else:
             f4 = 'Failure!|Everything goes dark again...\nAnd when you recover your consciousness, you lay on the ground outside of the Research Chamber, feeling exhausted. It would seem as research can be more dangerous than you ever could have thought!'
 
         c.delete_cvar(R_STAGE_VAR)
+        footer = footer.replace(f'{research_count}x today', f'{DAILY_CAP}x today')
         #! devrae_f daily_control_set_to_max(#P R_TIME_VAR #P DAILY_CAP) !#
         ##### devrae function insert [daily_control_set_to_max] #####
         __p0__ = R_TIME_VAR
