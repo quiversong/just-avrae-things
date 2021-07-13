@@ -17,8 +17,7 @@ BETA_RIFTS_VAR = "e6bebfd3-c296-4f7e-9a27-2b7fd1403d42"
 LIVE_RIFTS_VAR = "e6bebfd3-c296-4f7e-9a27-2b7fd1403d42"
 
 DAILY_CAP = 6
-RIFT_DC = 20
-RIFT_DIE = 250
+RIFT_DIE = 2
 
 # Code
 args = &ARGS&
@@ -296,7 +295,9 @@ if action == "identify":
         f3 = f'This __**{creature["name"]}**__ does not belong in Seventra!|Can you use your Arcane powers to send it back and close the rift?'
         f3 += "\n**Arcana roll:**\n" + f"{arcana_roll.full}"
 
-        if (arcana_roll.total >= RIFT_DC) or is_crit:
+        rift_dc = creature['dc']
+        dc = 2
+        if (arcana_roll.total >= rift_dc) or is_crit:
             loot_list = ''
             for l in creature['loot']:
                 ln, lq = l, creature['loot'][l]
