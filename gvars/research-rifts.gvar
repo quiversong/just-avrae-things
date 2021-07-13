@@ -1,23 +1,25 @@
 {
-  "planes": [{
-    "name": "The Feywild",
-    "creatures": [
-      {
-        "name": "Hag",
-        "desc": "A hideous crone, with wrinkled and blotchy skin marred by warts and moles. Her long, skinny fingers stretch towards you, the talon-like nails as tough as steel and as sharp as blades glisten against the faint light inside the chamber. Behind her ugly smile you can see with sharp and blackened teeth, and smell her noxious breath.",
-        "img": "https://cdn.discordapp.com/attachments/855908840633270282/864376548764680192/95ca0fe5646c9ffbae2e3f8e39199949.jpeg",
-        "loot": {"Arcane Essence (100gp)": 1, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 7}
-      }, {
-        "name": "Dryad",
-        "desc": "A beautiful woman with delicate features seemingly made of soft wood. Her green and lush hair seems to be made of leaves and foliage. She chants an eerie and mysterious melody to you, charming you to do its bidding...",
-        "img": "https://cdn.discordapp.com/attachments/855908840633270282/864376477096607764/ccf3442a87f8b232d9db46934fca99f3.jpeg",
-        "loot": {"Arcane Essence (100gp)": 2, "Relic [Any Uncommon Magic Item] [1/20] (40gp)": 10}
-      }, {
-        "name": "Faerie Dragon",
-        "desc": "A dragon-like creature about the size of a cat with an iridescent coat of scales that reflect all colors of the rainbow hisses at you, beating its butterfly-like wings as it waggles its long, platinum-colored tail. You cannot tell if it is threatening to attack or just mocking you. Perhaps it's both...",
-        "img": "https://cdn.discordapp.com/attachments/855908840633270282/864376483706306580/d601265aa09ce31967be09ad0a3120f1.jpeg",
-        "loot": {"Arcane Essence (100gp)": 1, "Faerie Dragon Scale": 1, "Relic [Any Rare Magic Item] [1/40] (120gp)": 5}
-      }
-    ]
-  }]
-]
+  "planes": [
+    {
+      "name": "The Feywild",
+      "creatures": [
+        {
+          "name": "Hag",
+          "desc": "A hideous crone, with wrinkled and blotchy skin marred by warts and moles. Her long, skinny fingers stretch towards you, the talon-like nails as tough as steel and as sharp as blades glisten against the faint light inside the chamber. Behind her ugly smile you can see with sharp and blackened teeth, and smell her noxious breath.",
+          "img": "https://cdn.discordapp.com/attachments/855908840633270282/864376548764680192/95ca0fe5646c9ffbae2e3f8e39199949.jpeg",
+          "loot": {"Arcane Essence (100gp)": 1, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 7}
+        }, {
+          "name": "Dryad",
+          "desc": "A beautiful woman with delicate features seemingly made of soft wood. Her green and lush hair seems to be made of leaves and foliage. She chants an eerie and mysterious melody to you, charming you to do its bidding...",
+          "img": "https://cdn.discordapp.com/attachments/855908840633270282/864376477096607764/ccf3442a87f8b232d9db46934fca99f3.jpeg",
+          "loot": {"Arcane Essence (100gp)": 2, "Relic [Any Uncommon Magic Item] [1/20] (40gp)": 10}
+        }, {
+          "name": "Faerie Dragon",
+          "desc": "A dragon-like creature about the size of a cat with an iridescent coat of scales that reflect all colors of the rainbow hisses at you, beating its butterfly-like wings as it waggles its long, platinum-colored tail. You cannot tell if it is threatening to attack or just mocking you. Perhaps it's both...",
+          "img": "https://cdn.discordapp.com/attachments/855908840633270282/864376483706306580/d601265aa09ce31967be09ad0a3120f1.jpeg",
+          "loot": {"Arcane Essence (100gp)": 1, "Faerie Dragon Scale": 1, "Relic [Any Rare Magic Item] [1/40] (120gp)": 5}
+        }
+      ]
+    }
+  ]
+}

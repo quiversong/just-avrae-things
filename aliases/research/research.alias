@@ -445,7 +445,7 @@ if add_to_bag != None:
   __p1__ = add_to_bag
   _bag_name = __p0__
   _content = __p1__
-  
+
   _cv = character().cvars
   _bags = load_json(_cv["bags"]) if "bags" in _cv else []
   _bag_index = [i for i, x in enumerate(_bags) if x[0] == _bag_name]
