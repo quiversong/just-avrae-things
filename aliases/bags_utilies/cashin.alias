@@ -1,145 +1,196 @@
 embed
 <drac2>
-  c = character()
-  cv = c.cvars
+    c = character()
+    cv = c.cvars
 
-  t = f'{c.name} wants to cash-in and sell their goods!'
-  footer = 'Don\'t forget to role-play your transaction!\n'
-  footer += 'Seventra: Exodus of Heroes | Cash-in your goods!'
+    FISH = 'FISH'
+    HUNT = 'HUNT'
+    RELICS = 'RELICS'
+    TOKENS = 'TOKENS'
 
-  f, f2, f3, img, thumb, color = None, None, None, None, None, None
-  thumb = image
+    t = f'{c.name} wants to cash-in and sell their goods!'
+    footer = 'Don\'t forget to role-play your transaction!\n'
+    footer += 'Seventra: Exodus of Heroes | Cash-in your goods!'
 
-  bags = load_json(cv['bags'])
+    f, f2, f3, img, thumb, color = None, None, None, None, None, None
+    thumb = image
 
-  args = &ARGS&
-  pargs = argparse(args)
+    all_bags = load_json(cv['bags'])
 
-  coin_pouch_index = [i for i, bag in enumerate(bags) if bag[0] == 'Coin Pouch']
-  if len(coin_pouch_index) <= 0:
-    f = 'Oops! You don\'t have a coin pouch!|Make sure you have one and try again.'
-    return 1
+    args = &ARGS&
+    want_to_sell = []
 
-  if not (pargs.get('f') or pargs.get('h') or pargs.get('fh') or pargs.get('hf')):
-    f = 'Oops! What do you want to sell?|'
-    f += 'Use `!cashin -fh` to sell your fish AND hunting loot\n'
-    f += 'Use `!cashin -f` to sell ONLY your fish\n'
-    f += 'Use `!cashin -h` to sell ONLY your hunting loot'
-    return 1
-  coin_pouch_index = coin_pouch_index[0]
-  coin_pouch_content = bags[coin_pouch_index][1]
+    if len(args) > 0 and args[0].startswith('-'):
+        first_arg = args[0][1:].lower()
+        if 'f' in first_arg:
+            want_to_sell.append(FISH)
+        if 'h' in first_arg:
+            want_to_sell.append(HUNT)
+        if 'r' in first_arg:
+            want_to_sell.append(RELICS)
+        if 't' in first_arg:
+            want_to_sell.append(TOKENS)
 
-  total_cp = 0
-  total_sp = 0
-  total_gp = 0
+    if len(args) == 0 or (not args[0].startswith('-')) or len(want_to_sell) == 0:
+      f = 'Oops! What do you want to sell?|'
+      f += 'Use `!cashin -f` to sell ONLY your Fish\n'
+      f += 'Use `!cashin -h` to sell ONLY your Hunting loot\n'
+      f += 'Use `!cashin -t` to sell ONLY your Foundation Tokens\n'
+      f += 'Use `!cashin -r` to sell ONLY your Research Relics (all of them!)\n'
+      f += 'You can combine the letters, for example: `!cashing -fr`\n'
+      f += 'The alias only sells items in your `Fish`, `Hunting` and `Research` bags.\n'
+      f += 'Move the items you want to keep to other bags before cashing in.'
+      return 1
 
-  sold_fish = []
-  sold_hunt = []
+    coin_pouch_index = [i for i, bag in enumerate(all_bags) if bag[0] == 'Coin Pouch']
+    if len(coin_pouch_index) <= 0:
+      f = 'Oops! You don\'t have a coin pouch!|Make sure you have one and try again.'
+      return 1
+    coin_pouch_index = coin_pouch_index[0]
+    coin_pouch_content = all_bags[coin_pouch_index][1]
 
-  fish_bag_index = [i for i, bag in enumerate(bags) if bag[0] == 'Fish']
-  fish_bag_index = fish_bag_index[0] if len(fish_bag_index) > 0 else None
+    fish_bag_index = [i for i, bag in enumerate(all_bags) if bag[0] == 'Fish']
+    fish_bag_index = fish_bag_index[0] if len(fish_bag_index) > 0 else None
 
-  hunting_bag_index = [i for i, bag in enumerate(bags) if bag[0] == 'Hunting']
-  hunting_bag_index = hunting_bag_index[0] if len(hunting_bag_index) > 0 else None
-  new_hunt_content = {}
+    hunting_bag_index = [i for i, bag in enumerate(all_bags) if bag[0] == 'Hunting']
+    hunting_bag_index = hunting_bag_index[0] if len(hunting_bag_index) > 0 else None
 
-  want_to_sell_fish = pargs.get('f') or pargs.get('fh') or pargs.get('hf')
-  want_to_sell_hunt = pargs.get('h') or pargs.get('fh') or pargs.get('hf')
+    research_bag_index = [i for i, bag in enumerate(all_bags) if bag[0] == 'Research']
+    research_bag_index = research_bag_index[0] if len(research_bag_index) > 0 else None
 
-  fish_gp, fish_sp = 0, 0
-  if fish_bag_index != None and want_to_sell_fish:
-    fish_content = bags[fish_bag_index][1]
-    fish_count = sum(fish_content.values())
-    sold_fish = [f'{fish_content[fish]}x {fish}' for fish in fish_content.keys()]
-    fish_sp = fish_count * 5
-    if fish_sp >= 10:
-      fish_gp = floor(fish_sp / 10)
-      fish_sp = fish_sp % 10
+    total_cp = 0
+    total_sp = 0
+    total_gp = 0
 
-  hunt_gp, hunt_sp, hunt_cp = 0, 0, 0
-  if hunting_bag_index != None and want_to_sell_hunt:
-    hunt_content = bags[hunting_bag_index][1]
-    prizes_sp_value, prizes_gp_value = 0, 0
-    for k in hunt_content.keys():
-      if k.lower().endswith('sp)'):
-        value = int(k.split('(')[1].lower().split('sp')[0])
-        qty = hunt_content[k]
-        prizes_sp_value += qty * value
-        sold_hunt.append(f'{qty}x {k}')
-      elif k.lower().endswith('gp)'):
-        value = int(k.split('(')[1].lower().split('gp')[0])
-        qty = hunt_content[k]
-        prizes_gp_value += qty * value
-        sold_hunt.append(f'{qty}x {k}')
-      else:
-        new_hunt_content[k] = hunt_content[k]
-    hunt_gp = floor(prizes_gp_value / 2)
-    prizes_sp_value += prizes_gp_value % 2 * 5
-    hunt_sp = floor(prizes_sp_value / 2)
-    hunt_cp = prizes_sp_value % 2 * 5
-    if hunt_sp >= 10:
-      hunt_gp += floor(hunt_sp / 10)
-      hunt_sp = hunt_sp % 10
+    # identify other bags that need to be sold
+    bags_to_sell = {}
+    if hunting_bag_index != None and HUNT in want_to_sell:
+        bags_to_sell['Hunting'] = { 'index': hunting_bag_index, 'loot_name': 'Hunting' }
+    if research_bag_index != None and (RELICS in want_to_sell or TOKENS in want_to_sell):
+        bags_to_sell['Research'] = { 'index': research_bag_index, 'loot_name': 'Research' }
+    if fish_bag_index != None and FISH in want_to_sell:
+        bags_to_sell['Fish'] = { 'index': fish_bag_index, 'loot_name': 'Fishing' }
 
-  total_gp += hunt_gp + fish_gp
-  total_sp += hunt_sp + fish_sp
-  total_cp += hunt_cp
+    # removes items from bags and calculates how much is earned for each bag
+    for bag_name in bags_to_sell:
+        bag_control = bags_to_sell[bag_name]
+        bag_control['gp'] = 0
+        bag_control['sp'] = 0
+        bag_control['cp'] = 0
+        bag_control['sold_lines'] = []
+        bag_control['new_content'] = {}
 
-  if total_cp >= 10:
-    total_sp += floor(total_cp / 10)
-    total_cp = total_cp % 10
-  if total_sp >= 10:
-    total_gp += floor(total_sp / 10)
-    total_sp = total_sp % 10
+        bag_content = all_bags[bag_control['index']][1]
 
-  bag_cp = coin_pouch_content['cp'] + total_cp
-  bag_sp = coin_pouch_content['sp'] + total_sp
-  bag_gp = coin_pouch_content['gp'] + total_gp
+        total_item_gp, total_item_sp = 0, 0
 
-  if bag_cp >= 10:
-    bag_sp += floor(bag_cp / 10)
-    bag_cp = bag_cp % 10
-  if bag_sp >= 10:
-    bag_gp += floor(bag_sp / 10)
-    bag_sp = bag_sp % 10
+        if bag_name.lower() == 'fish':
+            fish_gp, fish_sp = 0, 0
+            fish_count = sum(bag_content.values())
+            bag_control['sold_lines'] = [f'{bag_content[fish]}x {fish}' for fish in bag_content.keys()]
+            bag_control['sp'] += fish_count * 5
+            if bag_control['sp'] >= 10:
+                bag_control['gp'] = floor(bag_control['sp'] / 10)
+                bag_control['sp'] = bag_control['sp'] % 10
 
-  coin_pouch_content['gp'] = bag_gp
-  coin_pouch_content['sp'] = bag_sp
-  coin_pouch_content['cp'] = bag_cp
+            bag_control['new_content'] = {}
+            total_gp += fish_gp
+            total_sp += fish_sp
+        else:
+            for item_name in bag_content.keys():
+                name_lower = item_name.lower()
+                is_silver_item = name_lower.endswith('sp)')
+                is_gold_item = name_lower.endswith('gp)')
+                is_research_relic = bag_name == 'Research' and name_lower.startswith('relic')
+                is_research_token = bag_name == 'Research' and name_lower.startswith('foundation token')
 
-  bags[coin_pouch_index] = ['Coin Pouch', coin_pouch_content]
+                item_for_sale = False if is_research_token and not TOKENS in want_to_sell else \
+                        False if is_research_relic and not RELICS in want_to_sell else \
+                        True if is_silver_item or is_gold_item else \
+                        False
 
-  hunt_text = None
-  if len(sold_hunt) > 0:
-    bags[hunting_bag_index] = ['Hunting', new_hunt_content]
-    hunt_gp_text = (hunt_gp + 'gp' + (', ' if hunt_sp > 0 and hunt_cp > 0 else ' and ' if hunt_sp > 0 or hunt_cp > 0 else '')) if hunt_gp > 0 else ''
-    hunt_sp_text = (hunt_sp + 'sp' + (' and ' if hunt_cp > 0 else '')) if hunt_sp > 0 else ''
-    hunt_cp_text = hunt_cp + 'cp' if hunt_cp > 0 else ''
-    hunt_text = f'{c.name} sells their hunting loot!|You made **{hunt_gp_text}{hunt_sp_text}{hunt_cp_text}** by selling:'
-    hunt_text += '\n' + '\n'.join(sold_hunt)
-    f = hunt_text
+                if item_for_sale and is_silver_item:
+                    value = int(item_name.split('(')[1].lower().split('sp')[0])
+                    qty = bag_content[item_name]
+                    total_item_sp += qty * value
+                    bag_control['sold_lines'].append(f'{qty}x {item_name}')
+                elif item_for_sale and is_gold_item:
+                    value = int(item_name.split('(')[1].lower().split('gp')[0])
+                    qty = bag_content[item_name]
+                    total_item_gp += qty * value
+                    bag_control['sold_lines'].append(f'{qty}x {item_name}')
+                else:
+                    bag_control['new_content'][item_name] = bag_content[item_name]
 
-  if len(sold_fish) > 0:
-    bags[fish_bag_index] = ['Fish', {}]
-    fish_gp_text = fish_gp + 'gp' + (' and ' if fish_sp > 0 else '') if fish_gp > 0 else ''
-    fish_sp_text = fish_sp + 'sp' if fish_sp > 0 else ''
-    fish_text = f'{c.name} sells their fish!|You made **{fish_gp_text}{fish_sp_text}** by selling:'
-    fish_text += '\n' + '\n'.join(sold_fish)
-    f2 = fish_text
+            bag_control['gp'] = floor(total_item_gp / 2)
+            total_item_sp += total_item_gp % 2 * 5
+            bag_control['sp'] = floor(total_item_sp / 2)
+            bag_control['cp'] = total_item_sp % 2 * 5
+            if bag_control['sp'] >= 10:
+                bag_control['gp'] += floor(bag_control['sp'] / 10)
+                bag_control['sp'] = bag_control['sp'] % 10
 
-  if len(sold_hunt) == 0 and want_to_sell_hunt:
-    f = f'{c.name} tries to sell their hunting loot...|But you have none! Come back later.'
-  if len(sold_fish) == 0 and want_to_sell_fish:
-    f2 = f'{c.name} tries to sell their fish...|But you have none! Come back later.'
-  if len(sold_fish) > 0 or len(sold_hunt) > 0:
-    f3 = 'Well done!|Your coins have been added to your Coin Pouch' if len(sold_hunt) > 0 or len(sold_fish) > 0 else None
-    c.set_cvar('bags', dump_json(bags))
+        total_gp += bag_control['gp']
+        total_sp += bag_control['sp']
+        total_cp += bag_control['cp']
+
+    # Normalize totals
+    if total_cp >= 10:
+        total_sp += floor(total_cp / 10)
+        total_cp = total_cp % 10
+    if total_sp >= 10:
+        total_gp += floor(total_sp / 10)
+        total_sp = total_sp % 10
+
+    # Credit money to coin pouch
+    bag_cp = coin_pouch_content['cp'] + total_cp
+    bag_sp = coin_pouch_content['sp'] + total_sp
+    bag_gp = coin_pouch_content['gp'] + total_gp
+
+    if bag_cp >= 10:
+        bag_sp += floor(bag_cp / 10)
+        bag_cp = bag_cp % 10
+    if bag_sp >= 10:
+        bag_gp += floor(bag_sp / 10)
+        bag_sp = bag_sp % 10
+
+    coin_pouch_content['gp'] = bag_gp
+    coin_pouch_content['sp'] = bag_sp
+    coin_pouch_content['cp'] = bag_cp
+
+    all_bags[coin_pouch_index] = ['Coin Pouch', coin_pouch_content]
+
+    # Build output text
+    embed_fields = []
+    sold_something = False
+    for bag_name in bags_to_sell:
+        field = ''
+        bag_control = bags_to_sell[bag_name]
+        gp, sp, cp = bag_control['gp'], bag_control['sp'], bag_control['cp']
+        final_text = ''
+
+        if gp > 0 or sp > 0 or cp > 0:
+            sold_something = True
+            gp_text = (gp + 'gp' + (', ' if sp > 0 and cp > 0 else ' and ' if sp > 0 or cp > 0 else '')) if gp > 0 else ''
+            sp_text = (sp + 'sp' + (' and ' if cp > 0 else '')) if sp > 0 else ''
+            cp_text = cp + 'cp' if cp > 0 else ''
+            final_text += f'{c.name} sells their {bag_control["loot_name"]} loot!|You made **{gp_text}{sp_text}{cp_text}** by selling:'
+            final_text += '\n' + '\n'.join(bag_control['sold_lines'])
+        else:
+            final_text += f'{c.name} tries to sell their {bag_control["loot_name"]} loot...|But you have none! Come back later.'
+
+        embed_fields.append(f'-f "{final_text}"')
+        all_bags[bag_control['index']][1] = bag_control['new_content']
+
+    if sold_something:
+        embed_fields.append('-f "Well done!|Your coins have been added to your Coin Pouch"')
+
+    c.set_cvar('bags', dump_json(all_bags))
+
+    return '\n'.join(embed_fields)
 </drac2>
 -title "{{t}}"
 {{f'-image "{img}"' if img else ""}}
 {{f'-thumb "{thumb}"' if thumb else ""}}
-{{f'-f "{f}"' if f else ""}}
-{{f'-f "{f2}"' if f2 else ""}}
-{{f'-f "{f3}"' if f3 else ""}}
 {{f'-color "{color}"' if color else ""}}
 {{f'-footer "{footer}"' if footer else ""}}
