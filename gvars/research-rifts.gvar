@@ -41,7 +41,7 @@
         }, {
           "name": "Maw Demon",
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864555091146702888/Maw_demon-5e.jpeg",
-          "desc": "A blob of toothy mouth surrounded by a plethora of stubby appendages, this aberrational monster makes its way out of the rift. The squat, bulbous body of the demon is split in half to accommodate its giant gullets It looks at you and starts to drool...",
+          "desc": "A blob of toothy mouth surrounded by a plethora of stubby appendages, this aberrational monster makes its way out of the rift. The squat, bulbous body of the demon is split in half to accommodate its giant gullets. It looks at you and starts to drool...",
           "dc": 20,
           "loot": {"Arcane Essence (100gp)": 1, "Maw Demon Tooth": 1, "Relic [Any Rare Magic Item] [1/40] (120gp)": 6}
         }

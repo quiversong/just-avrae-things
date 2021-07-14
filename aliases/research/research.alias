@@ -17,7 +17,7 @@ BETA_RIFTS_VAR = "e6bebfd3-c296-4f7e-9a27-2b7fd1403d42"
 LIVE_RIFTS_VAR = "e6bebfd3-c296-4f7e-9a27-2b7fd1403d42"
 
 DAILY_CAP = 6
-RIFT_DIE = 2
+RIFT_DIE = 270
 
 # Code
 args = &ARGS&
@@ -37,7 +37,7 @@ img = None
 thumb = None
 sl, fl = "**Success!**", "**Failure!**"
 
-R_TIME_VAR = "_r_dhc_"
+R_TIME_VAR = "_h_dhc_"
 R_STAGE_VAR = "_r_sc_"
 R_STATS_VAR = "_r_st_"
 R_AREAS_VISITED_VAR = "_r_av_"
@@ -296,7 +296,6 @@ if action == "identify":
         f3 += "\n**Arcana roll:**\n" + f"{arcana_roll.full}"
 
         rift_dc = creature['dc']
-        dc = 2
         if (arcana_roll.total >= rift_dc) or is_crit:
             loot_list = ''
             for l in creature['loot']:
@@ -308,7 +307,7 @@ if action == "identify":
             f4 += 'They have been added to your Research bag!\n'
             add_to_bag = creature['loot']
         else:
-            f4 = 'Failure!|Everything goes dark again...\nAnd when you recover your consciousness, you lay on the ground outside of the Research Chamber, feeling exhausted. It would seem as research can be more dangerous than you ever could have thought!'
+            f4 = 'Failure!|Everything goes dark again...\nAnd when you recover your consciousness, you lay on the ground outside of the Research Chamber, feeling exhausted... Somebody must have intervened... It would seem as research can be more dangerous than you ever could have thought!'
 
         c.delete_cvar(R_STAGE_VAR)
         footer = footer.replace(f'{research_count}x today', f'{DAILY_CAP}x today')
@@ -435,7 +434,8 @@ elif action == 'catalogue':
         f4 = f'You gained:|{loot_list}They have been added to your "Research" bag!\n\nResearch some more with `!research start`!'
     else:
         thumb = image
-        f2 = f'{c.name} was NOT able to hold onto the knowledge long enough for it to be catalogued!'
+        f2 = fl + "\n"
+        f2 += f'{c.name} was NOT able to hold onto the knowledge long enough for it to be catalogued!'
         f2 += "Better luck next time!\n\nUse `!research start` to try again."
 
 c.set_cvar(R_STATS_VAR, dump_json(stats))
