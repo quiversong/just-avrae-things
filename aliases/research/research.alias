@@ -2,7 +2,7 @@ embed
 <drac2>
 # Configuration Variables
 IS_LIVE = False
-VERSION = '1.0'
+VERSION = '1.01'
 
 BETA_CAT_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
 LIVE_CAT_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
@@ -403,12 +403,14 @@ elif action == 'catalogue':
     c.delete_cvar(R_STAGE_VAR)
     b_bonus_param = ' + '.join(pargs.get('b', default=[''])).strip()
     dice = '2d20kh1' if pargs.adv() == 1 or auto_adv else '1d20kl1' if pargs.adv() == -1 else '1d20'
-    s_roll = vroll(f'{dice} + {constitutionMod}{b_bonus_param}')
+    s_die = f'{dice} + {constitutionMod}'
+    s_die = f'{s_die} + {b_bonus_param}' if b_bonus_param != '' else s_die
+    s_roll = vroll(s_die)
     succ = s_roll.total >= entry["concentration_dc"]
 
     t = f'{c.name} tries to catalogue the information...'
     f = 'You can feel the knowledge being transferred from your mind...|'
-    f += 'Can you hold your Concentration on to the knowledge as it is catalogued by The Foundation Chamber?\n'
+    f += 'Can you hold your **Concentration** on to the knowledge as it is catalogued by The Foundation Chamber?\n'
     f += f'**Constitution save:** {s_roll.full}'
 
     if R_IMG_VAR in cv:
