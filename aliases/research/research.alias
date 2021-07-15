@@ -2,7 +2,7 @@ embed
 <drac2>
 # Configuration Variables
 IS_LIVE = False
-VERSION = '1.01'
+VERSION = '1.10'
 
 BETA_CAT_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
 LIVE_CAT_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
@@ -199,9 +199,14 @@ if action == "start":
     category_id = category_id[0]
     category_name = categories[category_id]['name']
 
-    category_entries = [k for k, v in entries.items() if v['type'] == category_id]
-    entry_id = category_entries[roll(f'1d{len(category_entries)}') - 1]
-    entry = entries[entry_id]
+
+    entry_roll = roll('1d100')
+    category_entries = [(k, v) for k, v in entries.items() if v['type'] == category_id]
+    entry = [x for x in category_entries if entry_roll >= x[1]['chance'][0] and entry_roll <= x[1]['chance'][1]]
+    entry = entry[0] if len(entry) > 0 else category_entries[0]
+
+    entry_id = entry[0]
+    entry = entry[1]
     entry_name = entry['name']
 
     check_mod = f'{spell_mod} [Spell Mod]'
@@ -277,6 +282,7 @@ if action == "identify":
         t = 'What... ?'
         f = '... is happening?|'
         thumb = creature['img']
+        stats["t_rifts"] = stats["t_rifts"] + 1 if "t_rifts" in stats else 1
 
         f += 'The whole chamber goes dark, you cannot see even one inch in front of your eyes.\n'
         f += 'Suddenly a small source of light appears. It grows gradually, twisting and turning in the air until a large rift of crackling energy is before you...'
@@ -306,6 +312,7 @@ if action == "identify":
             f4 += loot_list
             f4 += 'They have been added to your Research bag!\n'
             add_to_bag = creature['loot']
+            stats["s_rifts"] = stats["s_rifts"] + 1 if "s_rifts" in stats else 1
         else:
             f4 = 'Failure!|Everything goes dark again...\nAnd when you recover your consciousness, you lay on the ground outside of the Research Chamber, feeling exhausted... Somebody must have intervened... It would seem as research can be more dangerous than you ever could have thought!'
 
