@@ -12,7 +12,7 @@ t, f, f2, f3, footer, thumb, img = None, None, None, None, None, None, None
 dino_img = 'https://cdn.discordapp.com/attachments/808062130996641832/808062789952077844/dinorace.jpg'
 
 footer = "Don't forget to role-play your race turns!"
-footer += "\nSeventra: Exodus of Heroes | Dino Go! v1.01 | Created by quiversong#2772 aka Adrienne"
+footer += "\nSeventra: Exodus of Heroes | Dino Go! v1.03 | Created by quiversong#2772 aka Adrienne"
 
 if len(args) > 0 and args[0] == 'reset':
     t = 'Resetting race participation...'
@@ -60,12 +60,17 @@ f = f'{c.name} spurs their mount forward!|**Animal Handling roll:** {ah_roll.ful
 moved = ah_roll.total + int(heat) + (10 if crit else 0)
 
 obstacles = [75, 175, 275, 375]
+
 obstacles_names = {}
 obstacles_names[75] = obstacles_names[275] = 'Geysers'
 obstacles_names[175] = obstacles_names[375] = 'Quicksand pits'
+
+obstacles_images = {}
+obstacles_images[75] = obstacles_images[275] = 'https://cdn.discordapp.com/attachments/830894843860484126/865370212726865920/1024px-Old_Faithful_Geyser_Yellowstone_National_Park-59fd375eec2f6400377abeb0.webp'
+obstacles_images[175] = obstacles_images[375] = 'https://cdn.discordapp.com/attachments/830894843860484126/865370215800897556/dreamstime_xl_150588-custom.jpeg'
+
 obstacle = [x for x in obstacles if current_pos < x and current_pos + moved >= x]
 obstacle = obstacle[0] if len(obstacle) > 0 else None
-stuck_at_obstacle = False
 
 f2 = ''
 dino_critical = None
@@ -81,6 +86,7 @@ if obstacle != None:
     f2 += '\n' + f'**You and your dino do not manage to avoid the {obstacles_names[obstacle]}!**\n'
     f2 += f'You are now stuck at the {obstacle}ft mark and have disadvantage on your next turn...'
     c.set_cvar(var_name, f'{heat}:{obstacle}:{dino_dex}:dis')
+    img = obstacles_images[obstacle]
     return 0
   else:
     f2 += '\n' + f'**You managed to avoid the {obstacles_names[obstacle]}!**' + '\nGreat job!'
