@@ -42,6 +42,7 @@ R_STAGE_VAR = "_r_sc_"
 R_STATS_VAR = "_r_st_"
 R_AREAS_VISITED_VAR = "_r_av_"
 R_IMG_VAR = "_r_img_"
+R_TIME_OF_FIRST_VAR = "_r_tofv_"
 
 daily_activity_control = None
 #! daily_activity_control = devrae_f daily_control_init(#P R_TIME_VAR #P DAILY_CAP) !#
@@ -193,6 +194,18 @@ if action == "start":
     ##### devrae function end [daily_control_increase_counter] #####
     footer = footer.replace(f'{research_count - 1}x today', f'{research_count}x today')
 
+    is_first_research_of_the_day = False
+    if not R_TIME_OF_FIRST_VAR in cv:
+        c.set_cvar(R_TIME_OF_FIRST_VAR, str(time()))
+        is_first_research_of_the_day = True
+    else:
+        time_of_first_research = float(cv[R_TIME_OF_FIRST_VAR])
+        passed_since_first_time = time_of_first_research % 86400
+        midnnight_after_first_time = time_of_first_research + 86400 - passed_since_first_time
+        if time() > midnnight_after_first_time:
+            is_first_research_of_the_day = True
+            c.set_cvar(R_TIME_OF_FIRST_VAR, str(time()))
+
     a_roll = roll("1d100")
     category_chances = [(k, v['chance_cha']) if spell_attr == 'CHA' else (k, v['chance_int']) for k, v in categories.items()]
     category_id = [k for k, v in category_chances if (a_roll == v if not 'List' in typeof(v) else a_roll == v[0] if len(v) == 1 else a_roll >= v[0] and a_roll <= v[1])]
@@ -217,7 +230,7 @@ if action == "start":
     arcana_roll = vroll(f'1d20 + {check_mod}')
     is_crit = arcana_roll.result.crit == 1
 
-    if research_count == 1:
+    if is_first_research_of_the_day or len(areas_visited) == 0:
         if len(areas_visited) >= len(areas):
             areas_visited = []
         indexes_not_visited = [x for x in range(0, len(areas)) if x not in areas_visited]
