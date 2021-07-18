@@ -1,0 +1,142 @@
+embed <drac2>
+args = &ARGS&
+BAG_NAME = 'Contingency Band'
+POTS = {
+    'healing': {'dice': [{4: 2}, 2], 'name': 'Potion of Healing'},
+    'greater-healing': {'dice': [{4: 4}, 4], 'name': 'Potion of Greater Healing'},
+    'superior-healing': {'dice': [{4: 8}, 8], 'name': 'Potion of Superior Healing'},
+    'supreme-healing': {'dice': [{4: 10}, 20], 'name': 'Potion of Supreme Healing'}
+}
+
+out = []
+c = character()
+f, cv = [], c.cvars
+img, desc, f1, f2, color, footer = None, None, None, None, None, None
+thumb = "https://cdn.discordapp.com/attachments/855908840633270282/865991919318073354/images_e_hgDQhXc_medium.png"
+
+all_bags = load_json(cv['bags'])
+contingency_bag_index = [i for i, x in enumerate(all_bags) if x[0] == BAG_NAME]
+if len(contingency_bag_index) == 0:
+    all_bags.append([BAG_NAME, {}])
+    contingency_bag_index = len(all_bags) - 1
+else:
+    contingency_bag_index = contingency_bag_index[0]
+
+current_potions = all_bags[contingency_bag_index][1]
+
+current_txt = ''
+if len(current_potions) > 0:
+    current_txt = 'Your Contingency Band currently has these potions loaded:|'
+    current_txt += '\n'.join([f'{potion}: {current_potions[potion]}' for potion in current_potions])
+else:
+    current_txt = 'Oops!|Your Contingency Band is currently empty!'
+
+help_use_txt = 'To use a potion absorbed by the Contingency Band...|'
+help_use_txt += 'Use: `!cb use healing` for a Potion of Healing.\n'
+help_use_txt += 'Use: `!cb use greater` for a Potion of Greater Healing.\n'
+help_use_txt += 'Use: `!cb use superior` for a Potion of Superior Healing.\n'
+help_use_txt += 'Use: `!cb use supreme` for a Potion of Supreme Healing.\n'
+
+help_load_txt = 'To have the Contingency Band absorb a potion flask...|'
+help_load_txt += 'Use: `!cb add healing` for a Potion of Healing.\n'
+help_load_txt += 'Use: `!cb add greater` for a Potion of Greater Healing.\n'
+help_load_txt += 'Use: `!cb add superior` for a Potion of Superior Healing.\n'
+help_load_txt += 'Use: `!cb add supreme` for a Potion of Supreme Healing.\n'
+
+if len(args) >= 2 and args[0].lower() in ['add', 'load', 'submerge', 'charge']:
+    title = f'{c.name} submerges their Contingency Band in a healing draft...'
+    rest_args = args[1:len(args)]
+    args_str = ''.join(rest_args).lower().replace(' ', '')
+    pot = None
+    name = None
+    if args_str in ['potionofhealing', 'potionhealing', 'healingpotion', 'healing']:
+        pot = 'healing'
+    elif 'greater' in args_str:
+        pot = 'greater-healing'
+    elif 'superi' in args_str:
+        pot = 'superior-healing'
+    elif 'suprem' in args_str:
+        pot = 'supreme-healing'
+    else:
+        f.append('Oops!|I do not understand what potion you want to use...')
+        f.append(help_load_txt)
+
+    if len(current_potions) >= 3:
+        f.append(f"Oops!|Your contingency band already has 3 absorbed healing properties!")
+        f.append(current_txt)
+    elif pot != None:
+        name = POTS[pot]['name']
+        f.append(f"It is a {name}!|The band magically consumes it and its healing properties. One of the band's dark serpents glows with a faint red light." + '\n\nTo use the healing properties of this potion using your reacion, use:\n' + f'`!cb use {pot}`')
+        current_potions[name] = current_potions[name] + 1 if name in current_potions else 1
+        current_txt = 'Your Contingency Band currently has these potions loaded:|'
+        current_txt += '\n'.join([f'{potion}: {current_potions[potion]}' for potion in current_potions])
+        f.append(current_txt)
+elif len(args) >= 2 and args[0].lower() == 'use':
+    title = f'{c.name} uses their Contingency Band!'
+    pot = args[1].lower()
+    if pot.startswith('heal'):
+        pot = 'healing'
+    if pot.startswith('great'):
+        pot = 'greater-healing'
+    if pot.startswith('superi'):
+        pot = 'superior-healing'
+    if pot.startswith('suprem'):
+        pot = 'supreme-healing'
+    name = POTS[pot]['name']
+    if not name in current_potions:
+        f.append(f"Oops!|You do not have one of these potions consumed by the Contingency Band!")
+        f.append(current_txt)
+    else:
+        name = POTS[pot]['name']
+        new_current_potions = {}
+        for x in current_potions:
+            if x != name:
+                new_current_potions[x] = current_potions[x]
+            elif current_potions[x] != 1:
+                new_current_potions[x] = current_potions[x] - 1
+        heal_dice = POTS[pot]['dice'][0]
+        heal_mod = POTS[pot]['dice'][1]
+        dice_expr = []
+        for face in heal_dice:
+            dice_expr.append(f'{heal_dice[face]}d{face}')
+        dice_expr = '+'.join(dice_expr) + f'+{heal_mod}'
+        roll_result = vroll(dice_expr)
+        f.append("One of the serpent-shaped leather bands glows with a bright red light...|And you feel somewhat renewed!")
+        dice_f = 'Healing Total:|' + roll_result.full
+        c.modify_hp(roll_result.total, False, False)
+        dice_f += '\n' + f'{c.name}: {c.hp}/{c.max_hp}'
+        f.append(dice_f)
+
+        current_potions = new_current_potions
+
+        current_txt = ''
+        if len(current_potions) > 0:
+            current_txt = 'Your Contingency Band currently has these potions loaded:|'
+            current_txt += '\n'.join([f'{potion}: {current_potions[potion]}' for potion in current_potions])
+        else:
+            current_txt = 'Oops!|Your Contingency Band is currently empty!'
+        f.append(current_txt)
+else:
+    title = f"{c.name}'s Contingency Band!"
+    f.append(help_load_txt)
+    f.append(help_use_txt)
+    current_txt = ''
+    if len(current_potions) > 0:
+        current_txt = 'Your Contingency Band currently has these potions loaded:|'
+        current_txt += '\n'.join([f'{potion}: {current_potions[potion]}' for potion in current_potions])
+    else:
+        current_txt = 'Oops!|Your Contingency Band is currently empty!'
+    f.append(current_txt)
+
+all_bags[contingency_bag_index][1] = current_potions
+c.set_cvar('bags', dump_json(all_bags))
+</drac2>
+-title "{{title}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-desc "{desc}"' if desc else ""}}
+{{f'-f "{f1}"' if f1 else ""}}
+{{f'-f "{f2}"' if f2 else ""}}
+{{''.join(['-f "' + field + '"\n' for field in f]) if len(f) > 0 else ''}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
