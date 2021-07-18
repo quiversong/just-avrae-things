@@ -1,0 +1,9 @@
+!alias rs3 embed <drac2>
+VAR = "_h_dhc_"
+cv = character().cvars
+current = cv[VAR]
+parts = current.split(':')
+new_value = f'3:{parts[1]}'
+character().set_cvar(VAR, new_value)
+</drac2>
+-title 'RESETTING STATE TO 3...'
