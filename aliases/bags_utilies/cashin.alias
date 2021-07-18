@@ -5,14 +5,17 @@ embed
 
     FISH = 'FISH'
     HUNT = 'HUNT'
+    RATIONS = 'RATIONS'
     RELICS = 'RELICS'
     TOKENS = 'TOKENS'
 
     t = f'{c.name} wants to cash-in and sell their goods!'
     footer = 'Don\'t forget to role-play your transaction!\n'
-    footer += 'Seventra: Exodus of Heroes | Cash-in your goods!'
+    footer += 'Seventra: Exodus of Heroes | Cash-in your goods!\n'
+    footer += '!cashin [-f (fish)] [-h (hunt)] [-n (rations)] [-t (research tokens)] [-r (relics)]'
 
-    f, f2, f3, img, thumb, color = None, None, None, None, None, None
+    fields = []
+    img, thumb, color = None, None, None
     thumb = image
 
     all_bags = load_json(cv['bags'])
@@ -26,6 +29,8 @@ embed
             want_to_sell.append(FISH)
         if 'h' in first_arg:
             want_to_sell.append(HUNT)
+        if 'n' in first_arg:
+            want_to_sell.append(RATIONS)
         if 'r' in first_arg:
             want_to_sell.append(RELICS)
         if 't' in first_arg:
@@ -35,16 +40,18 @@ embed
       f = 'Oops! What do you want to sell?|'
       f += 'Use `!cashin -f` to sell ONLY your Fish\n'
       f += 'Use `!cashin -h` to sell ONLY your Hunting loot\n'
+      f += 'Use `!cashin -n` to sell ONLY your Hunting Rations\n'
       f += 'Use `!cashin -t` to sell ONLY your Foundation Tokens\n'
       f += 'Use `!cashin -r` to sell ONLY your Research Relics (all of them!)\n'
-      f += 'You can combine the letters, for example: `!cashing -fr`\n'
-      f += 'The alias only sells items in your `Fish`, `Hunting` and `Research` bags.\n'
+      f += 'You can combine the letters, for example: `!cashin -fr`\n'
+      f += '\n`!cashin` will only sell items in your `Fish`, `Hunting` and `Research` bags. '
       f += 'Move the items you want to keep to other bags before cashing in.'
+      fields.append(f)
       return 1
 
     coin_pouch_index = [i for i, bag in enumerate(all_bags) if bag[0] == 'Coin Pouch']
     if len(coin_pouch_index) <= 0:
-      f = 'Oops! You don\'t have a coin pouch!|Make sure you have one and try again.'
+      fields.append('Oops! You don\'t have a coin pouch!|Make sure you have one and try again.')
       return 1
     coin_pouch_index = coin_pouch_index[0]
     coin_pouch_content = all_bags[coin_pouch_index][1]
@@ -64,7 +71,7 @@ embed
 
     # identify other bags that need to be sold
     bags_to_sell = {}
-    if hunting_bag_index != None and HUNT in want_to_sell:
+    if hunting_bag_index != None and (HUNT in want_to_sell or RATIONS in want_to_sell):
         bags_to_sell['Hunting'] = { 'index': hunting_bag_index, 'loot_name': 'Hunting' }
     if research_bag_index != None and (RELICS in want_to_sell or TOKENS in want_to_sell):
         bags_to_sell['Research'] = { 'index': research_bag_index, 'loot_name': 'Research' }
@@ -101,12 +108,14 @@ embed
                 name_lower = item_name.lower()
                 is_silver_item = name_lower.endswith('sp)')
                 is_gold_item = name_lower.endswith('gp)')
+                is_rations = name_lower == 'rations'
                 is_research_relic = bag_name == 'Research' and name_lower.startswith('relic')
                 is_research_token = bag_name == 'Research' and name_lower.startswith('foundation token')
 
-                item_for_sale = False if is_research_token and not TOKENS in want_to_sell else \
-                        False if is_research_relic and not RELICS in want_to_sell else \
-                        True if is_silver_item or is_gold_item else \
+                item_for_sale = False if is_research_token and not TOKENS in want_to_sell and bag_name == 'Research' else \
+                        False if is_research_relic and not RELICS in want_to_sell and bag_name == 'Research' else \
+                        True if (is_silver_item or is_gold_item) and HUNT in want_to_sell and bag_name == 'Hunting' else \
+                        True if is_rations and RATIONS in want_to_sell and bag_name == 'Hunting' else \
                         False
 
                 if item_for_sale and is_silver_item:
@@ -118,6 +127,10 @@ embed
                     value = int(item_name.split('(')[1].lower().split('gp')[0])
                     qty = bag_content[item_name]
                     total_item_gp += qty * value
+                    bag_control['sold_lines'].append(f'{qty}x {item_name}')
+                elif item_for_sale and is_rations:
+                    qty = bag_content[item_name]
+                    total_item_sp += qty * 5
                     bag_control['sold_lines'].append(f'{qty}x {item_name}')
                 else:
                     bag_control['new_content'][item_name] = bag_content[item_name]
@@ -161,10 +174,8 @@ embed
     all_bags[coin_pouch_index] = ['Coin Pouch', coin_pouch_content]
 
     # Build output text
-    embed_fields = []
     sold_something = False
     for bag_name in bags_to_sell:
-        field = ''
         bag_control = bags_to_sell[bag_name]
         gp, sp, cp = bag_control['gp'], bag_control['sp'], bag_control['cp']
         final_text = ''
@@ -179,18 +190,17 @@ embed
         else:
             final_text += f'{c.name} tries to sell their {bag_control["loot_name"]} loot...|But you have none! Come back later.'
 
-        embed_fields.append(f'-f "{final_text}"')
+        fields.append(final_text)
         all_bags[bag_control['index']][1] = bag_control['new_content']
 
     if sold_something:
-        embed_fields.append('-f "Well done!|Your coins have been added to your Coin Pouch"')
+        fields.append('Well done!|Your coins have been added to your Coin Pouch')
 
     c.set_cvar('bags', dump_json(all_bags))
-
-    return '\n'.join(embed_fields)
 </drac2>
 -title "{{t}}"
 {{f'-image "{img}"' if img else ""}}
 {{f'-thumb "{thumb}"' if thumb else ""}}
 {{f'-color "{color}"' if color else ""}}
 {{f'-footer "{footer}"' if footer else ""}}
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
