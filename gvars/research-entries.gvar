@@ -746,7 +746,7 @@
       "check_dc": 11,
       "concentration_dc": 8,
       "chance": [19,20],
-      "loot": {"Foundation Token (1gp)":3, "Relic [Potion of Climbing] [1/26] (12gp)": 1},
+      "loot": {"Foundation Token (1gp)":3, "Relic [Potion of Climbing] [1/26] (12gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R76": {
@@ -756,7 +756,7 @@
       "check_dc": 11,
       "concentration_dc": 8,
       "chance": [21,22],
-      "loot": {"Foundation Token (1gp)":2, "Relic [Potion of Heroism] [1/26] (12gp)": 1},
+      "loot": {"Foundation Token (1gp)":2, "Relic [Potion of Heroism] [1/26] (12gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R77": {
@@ -766,7 +766,7 @@
       "check_dc": 14,
       "concentration_dc": 11,
       "chance": [23,23],
-      "loot": {"Foundation Token (1gp)":25, "Relic [Potion of Invisibility] [1/16] (20gp)": 1},
+      "loot": {"Foundation Token (1gp)":20, "Relic [Potion of Invisibility] [1/16] (20gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855972491113529354/2d3bdf52c033c18bd42e642cc8f682a1.jpeg"]
     },
     "R78": {
@@ -786,7 +786,7 @@
       "check_dc": 10,
       "concentration_dc": 12,
       "chance": [25,29],
-      "loot": {"Foundation Token (1gp)":8, "Relic [Potion of Mind Reading] [1/31] (10gp)": 1},
+      "loot": {"Foundation Token (1gp)":3, "Relic [Potion of Mind Reading] [1/31] (10gp)": 3},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855981431780278314/39a89312f1ee924621eedd559d34d055.jpeg"]
     },
     "R80": {
@@ -806,7 +806,7 @@
       "check_dc": 12,
       "concentration_dc": 11,
       "chance": [31,35],
-      "loot": {"Foundation Token (1gp)":1, "Relic [Potion of Diminution] [1/36] (12gp)": 1},
+      "loot": {"Foundation Token (1gp)":1, "Relic [Potion of Diminution] [1/36] (12gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R82": {
@@ -816,7 +816,7 @@
       "check_dc": 12,
       "concentration_dc": 11,
       "chance": [36,39],
-      "loot": {"Foundation Token (1gp)":1, "Relic [Potion of Growth] [1/36] (12gp)": 1},
+      "loot": {"Foundation Token (1gp)":1, "Relic [Potion of Growth] [1/36] (12gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R83": {
@@ -826,7 +826,7 @@
       "check_dc": 12,
       "concentration_dc": 11,
       "chance": [40,44],
-      "loot": {"Foundation Token (1gp)":1, "Relic [Potion of Gaseous Form] [1/40] (12gp)": 1},
+      "loot": {"Foundation Token (1gp)":1, "Relic [Potion of Gaseous Form] [1/40] (12gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855973309221306379/31d4d3adb3a39fbd09a523db2144b133.jpeg"]
     },
     "R84": {
@@ -836,7 +836,7 @@
       "check_dc": 15,
       "concentration_dc": 13,
       "chance": [45,45],
-      "loot": {"Foundation Token (1gp)":21, "Relic [Potion of Resistance] [1/25] (20gp)": 1},
+      "loot": {"Foundation Token (1gp)":15, "Relic [Potion of Resistance] [1/25] (20gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R85": {
@@ -846,7 +846,7 @@
       "check_dc": 15,
       "concentration_dc": 13,
       "chance": [46,46],
-      "loot": {"Foundation Token (1gp)":21, "Relic [Potion of Speed] [1/32] (20gp)": 1},
+      "loot": {"Foundation Token (1gp)":15, "Relic [Potion of Speed] [1/32] (20gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R86": {
@@ -906,7 +906,7 @@
       "check_dc": 13,
       "concentration_dc": 13,
       "chance": [56,57],
-      "loot": {"Foundation Token (1gp)":4, "Relic [Potion of Flying] [1/40] (20gp)": 1},
+      "loot": {"Foundation Token (1gp)":2, "Relic [Potion of Flying] [1/40] (20gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970931277299732/862816a114ebce84e5a81bcfb9f43048.jpeg"]
     },
     "R92": {
@@ -956,7 +956,7 @@
       "check_dc": 16,
       "concentration_dc": 12,
       "chance": [66,67],
-      "loot": {"Foundation Token (1gp)":11},
+      "loot": {"Foundation Token (1gp)":22},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R97": {
@@ -1046,7 +1046,7 @@
       "check_dc": 12,
       "concentration_dc": 13,
       "chance": [85,86],
-      "loot": {"Foundation Token (1gp)":7},
+      "loot": {"Foundation Token (1gp)":20},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855981437752311838/a411bbab9c181cf46263d18c3ad466d3.jpeg"]
     },
     "R106": {
@@ -1076,7 +1076,7 @@
       "check_dc": 11,
       "concentration_dc": 8,
       "chance": [90,91],
-      "loot": {"Foundation Token (1gp)":10, "Relic [Burnt Othur Fumes] [1/40] (20gp)": 1},
+      "loot": {"Foundation Token (1gp)":4, "Relic [Burnt Othur Fumes] [1/40] (20gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855982842554613760/cce5af50b2c7ef559fb454a4f12e090d.jpeg"]
     },
     "R109": {
@@ -1116,7 +1116,7 @@
       "check_dc": 40,
       "concentration_dc": 10,
       "chance": [97,97],
-      "loot": {"Foundation Token (1gp)":22, "Relic [Purple Worm Poison] [1/40] (80gp)": 1},
+      "loot": {"Foundation Token (1gp)":38, "Relic [Purple Worm Poison] [1/40] (80gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855976987196915732/3ccb84a7f4c2f9b163f2efa6874c2e1a.jpeg"]
     },
     "R113": {
@@ -1126,7 +1126,7 @@
       "check_dc": 40,
       "concentration_dc": 11,
       "chance": [98,98],
-      "loot": {"Foundation Token (1gp)":22, "Relic [Midnight Tears] [1/30] (80gp)": 1},
+      "loot": {"Foundation Token (1gp)":38, "Relic [Midnight Tears] [1/30] (80gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855972494577500170/2632b53a581ed0d29d5332673ffec517.jpeg"]
     },
     "R114": {
