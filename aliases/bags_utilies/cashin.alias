@@ -112,8 +112,8 @@ embed
                 is_research_relic = bag_name == 'Research' and name_lower.startswith('relic')
                 is_research_token = bag_name == 'Research' and name_lower.startswith('foundation token')
 
-                item_for_sale = False if is_research_token and not TOKENS in want_to_sell and bag_name == 'Research' else \
-                        False if is_research_relic and not RELICS in want_to_sell and bag_name == 'Research' else \
+                item_for_sale = True if is_research_token and TOKENS in want_to_sell and bag_name == 'Research' else \
+                        True if is_research_relic and RELICS in want_to_sell and bag_name == 'Research' else \
                         True if (is_silver_item or is_gold_item) and HUNT in want_to_sell and bag_name == 'Hunting' else \
                         True if is_rations and RATIONS in want_to_sell and bag_name == 'Hunting' else \
                         False
