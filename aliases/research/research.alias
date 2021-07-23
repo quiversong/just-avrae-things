@@ -17,8 +17,8 @@ BETA_RIFTS_VAR = "e6bebfd3-c296-4f7e-9a27-2b7fd1403d42"
 LIVE_RIFTS_VAR = "e6bebfd3-c296-4f7e-9a27-2b7fd1403d42"
 
 DAILY_CAP = 6
-RIFT_DIE = int(get_svar('_research_rdie_'))
-RIFT_DIE = 270 if RIFT_DIE == None else RIFT_DIE
+RIFT_DIE = get_svar('_research_rdie_')
+RIFT_DIE = 270 if RIFT_DIE == None else int(RIFT_DIE)
 
 # Code
 args = &ARGS&
