@@ -2,7 +2,7 @@ embed
 <drac2>
 # Configuration Variables
 IS_LIVE = False
-VERSION = '1.12'
+VERSION = '1.13'
 
 BETA_CAT_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
 LIVE_CAT_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
@@ -17,7 +17,8 @@ BETA_RIFTS_VAR = "e6bebfd3-c296-4f7e-9a27-2b7fd1403d42"
 LIVE_RIFTS_VAR = "e6bebfd3-c296-4f7e-9a27-2b7fd1403d42"
 
 DAILY_CAP = 6
-RIFT_DIE = 270
+RIFT_DIE = int(get_svar('_research_rdie_'))
+RIFT_DIE = 270 if RIFT_DIE == None else RIFT_DIE
 
 # Code
 args = &ARGS&
@@ -31,7 +32,8 @@ areas_var = LIVE_AREAS_VAR if IS_LIVE else BETA_AREAS_VAR
 rifts_var = LIVE_RIFTS_VAR if IS_LIVE else BETA_RIFTS_VAR
 
 t = f'{c.name} wants to aid The Foundation with their research!'
-f, f2, f3, f4, color = None, None, None, None, 'a835f0'
+color = 'a835f0'
+fields = []
 
 img = None
 thumb = None
@@ -110,11 +112,11 @@ else:
 if len(args) > 0 and args[0] == "stats":
   t = f'{c.name}\'s research statistics...'
   if stats == {}:
-    f = f'You have no statistics!|Go do some research!'
+    fields.append(f'You have no statistics!|Go do some research!')
     return 0
   stats_list = [key.split('_')[1] + (' successes' if key.startswith('s_') else ' total') +
       f': {value}' for key, value in stats.items()]
-  f = 'Your research history shows:|' + '\n'.join(stats_list)
+  fields.append('Your research history shows:|' + '\n'.join(stats_list))
   return 0
 
 if len(args) > 0 and args[0] == "resetstats":
@@ -148,12 +150,12 @@ spell_mod = charismaMod if spell_attr == 'CHA' else intelligenceMod
 in_wrong_stage = current_stage and (len(args) == 0 or (len(args) > 0 and current_stage != args[0]))
 if in_wrong_stage:
     name = entries[entry_id]['name']
-    f = f'Oops! You are already researching \'{name}\'!|Use `!research {current_stage}` to continue.'
+    fields.append(f'Oops! You are already researching \'{name}\'!|Use `!research {current_stage}` to continue.')
     thumb = image
     return 1
 
 if len(args) == 0 or (not current_stage and args[0].lower() != 'start'):
-    f = f'Ready to start researching?|Type `!research start` to enter the Foundation Research Center.'
+    fields.append(f'Ready to start researching?|Type `!research start` to enter the Foundation Research Center.')
     research_images = [
         'https://cdn.discordapp.com/attachments/827581981452795975/851694263058432040/BookGen.jpeg',
         'https://cdn.discordapp.com/attachments/827581981452795975/851694419753041960/d8294928b89f344318e248ee809853c8.jpeg',
@@ -169,8 +171,10 @@ action = args[0]
 
 if action == "start":
     if wait_time != None:
-        f = f'{c.name} is exhausted from so much research today...|You have to wait {wait_time} until you can research again.'
+        f = f'{c.name} is exhausted from so much research today...|'
+        f += f'You have to wait {wait_time} until you can research again.'
         f += '\n(Research resets at midnight UTC)'
+        fields.append(f)
         return 1
 
     #! research_count = devrae_f daily_control_increase_counter(#P R_TIME_VAR) !#
@@ -229,7 +233,9 @@ if action == "start":
 
     arcana_roll = vroll(f'1d20 + {check_mod}')
     is_crit = arcana_roll.result.crit == 1
+    roll_success = arcana_roll.total >= entry['arcana_dc'] or is_crit
 
+    area_field = None
     if is_first_research_of_the_day or len(areas_visited) == 0:
         if len(areas_visited) >= len(areas):
             areas_visited = []
@@ -242,32 +248,33 @@ if action == "start":
         img = area['url']
 
         t = f'{c.name} enters the Foundation Research Chamber!'
-        f = f"Reality warps around you, and you find yourself {area['name']}|"
-        f += area["intro"]
-
-        f2 = "You feel your mind being probed...|"
+        fields.append(f"Reality warps around you, and you find yourself {area['name']}|" + area['intro'])
+        area_field = "You feel your mind being probed...|"
     else:
         area = areas[areas_visited[len(areas_visited) - 1]]
         thumb = area['url']
 
         t = f'{c.name} continues researching in the Foundation Research Chamber!'
-        f2 = f"Still {area['name']} you feel your mind being probed...|"
+        area_field = f"Still {area['name']} you feel your mind being probed...|"
 
+    area_field += "The Foundation measures how far your knowledge goes...\nCan you handle the communion with it?\n"
+    area_field += "**Arcana roll:**\n" + f"{arcana_roll.full}"
+    area_field += "\n" + (sl if roll_success else fl)
+    fields.append(area_field)
 
-    f2 += "The Foundation measures how far your knowledge goes...\nCan you handle the communion with it?\n"
-    f2 += "**Arcana roll:**\n" + f"{arcana_roll.full}"
-
-    if arcana_roll.total >= entry['arcana_dc'] or is_crit:
+    if roll_success:
         c.set_cvar(R_STAGE_VAR, f'{entry_id}:identify:{is_crit}')
-        f3 = f"The Research Chamber has chosen a topic for you to catalogue...|"
-        f3 += f"**Category:** `{category_name}`\n\n"
-        f3 += "Use `!research identify` to identify its mysteries."
+        f = f"The Research Chamber has chosen a topic for you to catalogue...|"
+        f += f"**Category:** `{category_name}`\n\n"
+        f += "Use `!research identify` to identify its mysteries."
+        fields.append(f)
     else:
         c.delete_cvar(R_STAGE_VAR)
-        f3 = "Time" if research_count == 1 else "Again, time"
-        f3 += " seems to stop, and the chamber goes dark...|"
-        f3 += "There is no knowledge suitable for you at this time.\nMaybe they will deem you worthy next time?"
-        f3 += "\n\nTo try again, use `!research start`."
+        f = "Time" if research_count == 1 else "Again, time"
+        f += " seems to stop, and the chamber goes dark...|"
+        f += "There is no knowledge suitable for you at this time.\nMaybe they will deem you worthy next time?"
+        f += "\n\nTo try again, use `!research start`."
+        fields.append(f)
 
     stats["t_researches"] = stats["t_researches"] + 1 if "t_researches" in stats else 1
     stats["s_research_start"] = stats["s_research_start"] + 1 if "s_research_start" in stats else 1
@@ -299,9 +306,11 @@ if action == "identify":
 
         f += 'The whole chamber goes dark, you cannot see even one inch in front of your eyes.\n'
         f += 'Suddenly a small source of light appears. It grows gradually, twisting and turning in the air until a large rift of crackling energy is before you...'
+        fields.append(f)
 
-        f2 = f'It is a rift to __**{plane["name"]}**__! A creature comes out of the rift!|'
-        f2 += creature['desc']
+        f = f'It is a rift to __**{plane["name"]}**__! A creature comes out of the rift!|'
+        f += creature['desc']
+        fields.append(f)
 
         check_mod = f'{spell_mod} [Spell Mod]'
         arcana_skill = [s[1] for s in character().skills if s[0] == 'arcana'][0]
@@ -311,8 +320,9 @@ if action == "identify":
         arcana_roll = vroll(f'1d20 + {check_mod}')
         is_crit = arcana_roll.result.crit == 1
 
-        f3 = f'This __**{creature["name"]}**__ does not belong in Seventra!|Can you use your Arcane powers to send it back and close the rift?'
-        f3 += "\n**Arcana roll:**\n" + f"{arcana_roll.full}"
+        f = f'This __**{creature["name"]}**__ does not belong in Seventra!|Can you use your Arcane powers to send it back and close the rift?'
+        f += "\n**Arcana roll:**\n" + f"{arcana_roll.full}"
+        fields.append(f)
 
         rift_dc = creature['dc']
         if (arcana_roll.total >= rift_dc) or is_crit:
@@ -320,14 +330,16 @@ if action == "identify":
             for l in creature['loot']:
                 ln, lq = l, creature['loot'][l]
                 loot_list += f'`{lq}x {ln}`' + '\n'
-            f4 = 'Success!|You have managed to purge the creature and close the rift!\n'
-            f4 += 'You are now exhausted and have to stop researching for today, but as you turn around to leave, you find:\n'
-            f4 += loot_list
-            f4 += 'They have been added to your Research bag!\n'
+            f = 'Success!|You have managed to purge the creature and close the rift!\n'
+            f += 'You are now exhausted and have to stop researching for today, but as you turn around to leave, you find:\n'
+            f += loot_list
+            f += 'They have been added to your Research bag!\n'
+            fields.append(f)
             add_to_bag = creature['loot']
             stats["s_rifts"] = stats["s_rifts"] + 1 if "s_rifts" in stats else 1
         else:
-            f4 = 'Failure!|Everything goes dark again...\nAnd when you recover your consciousness, you lay on the ground outside of the Research Chamber, feeling exhausted... Somebody must have intervened... It would seem as research can be more dangerous than you ever could have thought!'
+            f = 'Failure!|Everything goes dark again...\nAnd when you recover your consciousness, you lay on the ground outside of the Research Chamber, feeling exhausted... Somebody must have intervened... It would seem as research can be more dangerous than you ever could have thought!'
+            fields.append(f)
 
         c.delete_cvar(R_STAGE_VAR)
         footer = footer.replace(f'{research_count}x today', f'{DAILY_CAP}x today')
@@ -405,18 +417,21 @@ if action == "identify":
             f += f"```Can you identify an {entry_name}?```"
         else:
             f += f"```{entry_name}```"
+        fields.append(f)
 
-        f2 = f"{skill_text[category_id]}|"
-        f2 += f"**{skill_name} roll:** {s_roll.full}" + "\n" + f"{sl if succ else fl}"
+        f = f"{skill_text[category_id]}|"
+        f += f"**{skill_name} roll:** {s_roll.full}" + "\n" + f"{sl if succ else fl}"
+        fields.append(f)
 
         if succ:
             stats["s_identify"] = stats["s_identify"] + 1 if "s_identify" in stats else 1
-            f3 = 'Well done!|Use `!research catalogue` to catalogue the knowledge you acquired.'
+            fields.append('Well done!|Use `!research catalogue` to catalogue the knowledge you acquired.')
             c.set_cvar(R_STAGE_VAR, f'{entry_id}:catalogue:{is_crit}')
         else:
             thumb = image
-            f3 = f'The information about `{entry_name}` was too complex for you to grasp...|'
-            f3 += 'Better luck next time!\n\nUse `!research start` to try again.'
+            f = f'The information about `{entry_name}` was too complex for you to grasp...|'
+            f += 'Better luck next time!\n\nUse `!research start` to try again.'
+            fields.append(f)
             c.delete_cvar(R_STAGE_VAR)
 
 elif action == 'catalogue':
@@ -432,6 +447,7 @@ elif action == 'catalogue':
     f = 'You can feel the knowledge being transferred from your mind...|'
     f += 'Can you hold your **Concentration** on to the knowledge as it is catalogued by The Foundation Chamber?\n'
     f += f'**Constitution save:** {s_roll.full}'
+    fields.append(f)
 
     if R_IMG_VAR in cv:
         thumb = cv[R_IMG_VAR]
@@ -450,15 +466,20 @@ elif action == 'catalogue':
                     spaces = '   ' if loot_qt < 10 else '  ' if loot_qt < 100 else ' ' if loot_qt < 1000 else ''
                     loot_list += f'`{spaces}{loot_qt}x {loot_n}`' + '\n'
 
-        f2 = f'Success!|The knowledge you acquired about **{entry_name}** has been successfully catalogued!'
-        f3 = 'When you next exit the chamber...|You feel tired and can not think straight.\n'
-        f3 += 'Most of the knowledge you acquired is gone from your memories... But you keep the bounty paid by The Foundation!'
-        f4 = f'You gained:|{loot_list}They have been added to your "Research" bag!\n\nResearch some more with `!research start`!'
+        f = f'Success!|The knowledge you acquired about **{entry_name}** has been successfully catalogued!'
+        fields.append(f)
+
+        f = 'When you next exit the chamber...|You feel tired and can not think straight.\n'
+        f += 'Most of the knowledge you acquired is gone from your memories... But you keep the bounty paid by The Foundation!'
+        fields.append(f)
+
+        f = f'You gained:|{loot_list}They have been added to your "Research" bag!\n\nResearch some more with `!research start`!'
+        fields.append(f)
     else:
         thumb = image
-        f2 = fl + "\n"
-        f2 += f'{c.name} was NOT able to hold onto the knowledge long enough for it to be catalogued!'
-        f2 += "Better luck next time!\n\nUse `!research start` to try again."
+        f = f'Failure!|{c.name} was NOT able to hold onto the knowledge long enough for it to be catalogued!'
+        f += "Better luck next time!\n\nUse `!research start` to try again."
+        fields.append(f)
 
 c.set_cvar(R_STATS_VAR, dump_json(stats))
 
@@ -495,9 +516,6 @@ if add_to_bag != None:
 -title "{{t}}"
 {{f'-image "{img}"' if img else ""}}
 {{f'-thumb "{thumb}"' if thumb else ""}}
-{{f'-f "{f}"' if f else ""}}
-{{f'-f "{f2}"' if f2 else ""}}
-{{f'-f "{f3}"' if f3 else ""}}
-{{f'-f "{f4}"' if f4 else ""}}
 {{f'-color "{color}"' if color else ""}}
 {{f'-footer "{footer}"' if footer else ""}}
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
