@@ -2,9 +2,9 @@
     "R1": {
       "name": "O'livia Rector",
       "type": "personality",
-      "arcana_dc": 10,
-      "check_dc": 11,
-      "concentration_dc": 8,
+      "arcana_dc": 12,
+      "check_dc": 12,
+      "concentration_dc": 11,
       "chance": [1,3],
       "loot": {"Foundation Token (1gp)":1, "Relic [Potion of Mind Reading] [1/31] (10gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855927953325162516/Capture.PNG"]
@@ -112,11 +112,11 @@
     "R12": {
       "name": "Father Whiskers, Orphanage Guardian in Nephix",
       "type": "personality",
-      "arcana_dc": 11,
-      "check_dc": 12,
-      "concentration_dc": 9,
+      "arcana_dc": 12,
+      "check_dc": 14,
+      "concentration_dc": 11,
       "chance": [27,30],
-      "loot": {"Foundation Token (1gp)":5, "Relic [Spell Scroll Level 0] [1/10] (8gp)": 3},
+      "loot": {"Foundation Token (1gp)":2, "Relic [Spell Scroll Level 0] [1/10] (8gp)": 2},
       "img_url": ["https://i.pinimg.com/originals/af/44/33/af443335eafa5117ff929b546771fbc7.jpg"]
     },
     "R13": {
@@ -142,11 +142,11 @@
     "R15": {
       "name": "Aleas, Arbarax Alchemist",
       "type": "personality",
-      "arcana_dc": 12,
-      "check_dc": 13,
+      "arcana_dc": 14,
+      "check_dc": 14,
       "concentration_dc": 11,
       "chance": [37,38],
-      "loot": {"Foundation Token (1gp)":11, "Relic [Potion of Healing] [1/18] (4gp)": 7},
+      "loot": {"Foundation Token (1gp)":3, "Relic [Potion of Healing] [1/18] (4gp)": 6},
       "img_url": ["https://media.discordapp.net/attachments/798678462768480305/825906730289725450/Capture.PNG"]
     },
     "R16": {
@@ -652,11 +652,11 @@
     "R66": {
       "name": "The Art of Paiting and Capturing Color",
       "type": "arts",
-      "arcana_dc": 11,
+      "arcana_dc": 12,
       "check_dc": 16,
-      "concentration_dc": 12,
+      "concentration_dc": 11,
       "chance": [91,92],
-      "loot": {"Foundation Token (1gp)":61},
+      "loot": {"Foundation Token (1gp)":48},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855964214928867328/f02f95fc38289f43e1bf992990460543.jpeg"]
     },
     "R67": {
@@ -676,37 +676,37 @@
       "check_dc": 11,
       "concentration_dc": 8,
       "chance": [98,99],
-      "loot": {"Foundation Token (1gp)":62},
+      "loot": {"Foundation Token (1gp)":12},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862865562224951306/f0724bab90d47038176e4ebc6a29d134.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862865565978591322/13327f601b1181d3919df94112761413.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862865564473360384/1c8560570342b0ba6f2a8c2a731c3271.jpeg"]
     },
     "R69": {
       "name": "Seventrapalooza Classics",
       "type": "arts",
-      "arcana_dc": 12,
-      "check_dc": 20,
+      "arcana_dc": 16,
+      "check_dc": 21,
       "concentration_dc": 12,
       "chance": [100,100],
-      "loot": {"Foundation Token (1gp)":121},
+      "loot": {"Foundation Token (1gp)":92},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862870378732060692/d5egayt-7fdf9d4d-94f6-407a-9d84-4bde8e19828c.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862870376120188968/a55dae0f5c3555568cf9e7fa7389c01d.jpeg"]
     },
     "R70": {
       "name": "Potion of Healing Recipe",
       "type": "alchemy",
       "arcana_dc": 10,
-      "check_dc": 13,
+      "check_dc": 15,
       "concentration_dc": 10,
       "chance": [1,6],
-      "loot": {"Foundation Token (1gp)":1, "Relic [Potion of Healing] [1/18] (4gp)": 3},
+      "loot": {"Foundation Token (1gp)":1, "Relic [Potion of Healing] [1/18] (4gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855968910774763570/dcmksdy-ebc420bf-4c46-4aaa-95cf-6a1d451f7fe4.jpeg"]
     },
     "R71": {
       "name": "Elixir of Health Recipe",
       "type": "alchemy",
-      "arcana_dc": 12,
-      "check_dc": 13,
+      "arcana_dc": 14,
+      "check_dc": 14,
       "concentration_dc": 10,
       "chance": [7,12],
-      "loot": {"Foundation Token (1gp)":3, "Relic [Elixir of Health] [1/26] (8gp)": 1},
+      "loot": {"Foundation Token (1gp)":1, "Relic [Elixir of Health] [1/26] (8gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855969076450689085/tumblr_pmblalNUiC1r03qmqo1_640.jpeg"]
     },
     "R72": {
@@ -806,7 +806,7 @@
       "check_dc": 14,
       "concentration_dc": 11,
       "chance": [31,35],
-      "loot": {"Foundation Token (1gp)":4, "Relic [Potion of Diminution] [1/36] (12gp)": 1},
+      "loot": {"Foundation Token (1gp)":3, "Relic [Potion of Diminution] [1/36] (12gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855970639654944798/61c294eb186803f0e7e5cfe85bfc4f82.gif"]
     },
     "R82": {
@@ -1073,8 +1073,8 @@
       "name": "Burnt Othur Fumes Recipe",
       "type": "alchemy",
       "arcana_dc": 12,
-      "check_dc": 11,
-      "concentration_dc": 8,
+      "check_dc": 13,
+      "concentration_dc": 10,
       "chance": [90,91],
       "loot": {"Foundation Token (1gp)":6, "Relic [Burnt Othur Fumes] [1/40] (20gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855982842554613760/cce5af50b2c7ef559fb454a4f12e090d.jpeg"]
@@ -1142,9 +1142,9 @@
     "R115": {
       "name": "Spellweaving",
       "type": "arcana_domain",
-      "arcana_dc": 10,
-      "check_dc": 10,
-      "concentration_dc": 10,
+      "arcana_dc": 14,
+      "check_dc": 15,
+      "concentration_dc": 13,
       "chance": [1,8],
       "loot": {"Foundation Token (1gp)":2, "Relic [Spell Scroll Level 1] [1/15] (8gp)": 1},
       "img_url": [""]
@@ -1172,11 +1172,11 @@
     "R118": {
       "name": "Influence of Verbal Components on Enchantments",
       "type": "arcana_domain",
-      "arcana_dc": 11,
-      "check_dc": 13,
-      "concentration_dc": 10,
+      "arcana_dc": 14,
+      "check_dc": 15,
+      "concentration_dc": 13,
       "chance": [15,22],
-      "loot": {"Foundation Token (1gp)":2, "Relic [Spell Scroll Level 1] [1/15] (8gp)": 1},
+      "loot": {"Foundation Token (1gp)":1, "Relic [Spell Scroll Level 1] [1/15] (8gp)": 1},
       "img_url": [""]
     },
     "R119": {
@@ -1193,18 +1193,18 @@
       "name": "The Science of Abjuration Spells",
       "type": "arcana_domain",
       "arcana_dc": 12,
-      "check_dc": 13,
-      "concentration_dc": 11,
+      "check_dc": 15,
+      "concentration_dc": 14,
       "chance": [27,34],
-      "loot": {"Foundation Token (1gp)":3, "Relic [Spell Scroll Level 1] [1/15] (8gp)": 1},
+      "loot": {"Foundation Token (1gp)":1, "Relic [Spell Scroll Level 1] [1/15] (8gp)": 1},
       "img_url": [""]
     },
     "R121": {
       "name": "The Science of Conjuration Spells",
       "type": "arcana_domain",
-      "arcana_dc": 9,
-      "check_dc": 9,
-      "concentration_dc": 9,
+      "arcana_dc": 10,
+      "check_dc": 12,
+      "concentration_dc": 11,
       "chance": [35,41],
       "loot": {"Foundation Token (1gp)":6},
       "img_url": [""]
@@ -1212,9 +1212,9 @@
     "R122": {
       "name": "The Science of Divination Spells",
       "type": "arcana_domain",
-      "arcana_dc": 14,
+      "arcana_dc": 15,
       "check_dc": 18,
-      "concentration_dc": 14,
+      "concentration_dc": 16,
       "chance": [42,44],
       "loot": {"Foundation Token (1gp)":2, "Relic [Spell Scroll Level 3] [1/15] (42gp)": 1},
       "img_url": [""]
@@ -1242,9 +1242,9 @@
     "R124": {
       "name": "The Science of Evocation Spells",
       "type": "arcana_domain",
-      "arcana_dc": 8,
-      "check_dc": 11,
-      "concentration_dc": 10,
+      "arcana_dc": 12,
+      "check_dc": 13,
+      "concentration_dc": 13,
       "chance": [52,59],
       "loot": {"Foundation Token (1gp)":1, "Relic [Spell Scroll Level 1] [1/15] (8gp)": 1},
       "img_url": [""]
@@ -1272,9 +1272,9 @@
     "R127": {
       "name": "The Science of Transmutation Spells",
       "type": "arcana_domain",
-      "arcana_dc": 10,
-      "check_dc": 11,
-      "concentration_dc": 10,
+      "arcana_dc": 14,
+      "check_dc": 14,
+      "concentration_dc": 13,
       "chance": [74,80],
       "loot": {"Foundation Token (1gp)":3, "Relic [Spell Scroll Level 1] [1/15] (8gp)": 1},
       "img_url": [""]
@@ -1452,9 +1452,9 @@
     "R141": {
       "name": "Unidentified Magic Bracelet",
       "type": "magic_items",
-      "arcana_dc": 10,
-      "check_dc": 13,
-      "concentration_dc": 8,
+      "arcana_dc": 14,
+      "check_dc": 15,
+      "concentration_dc": 11,
       "chance": [63,64],
       "loot": {"Foundation Token (1gp)":1, "Relic [Any Uncommon Magic Item] [1/20] (40gp)": 1},
       "img_url": [""]
@@ -1492,9 +1492,9 @@
     "R145": {
       "name": "Unidentified Magic Gloves",
       "type": "magic_items",
-      "arcana_dc": 10,
-      "check_dc": 12,
-      "concentration_dc": 9,
+      "arcana_dc": 11,
+      "check_dc": 14,
+      "concentration_dc": 11,
       "chance": [87,93],
       "loot": {"Foundation Token (1gp)":1, "Relic [Spell Scroll Level 0] [1/10] (8gp)": 1},
       "img_url": [""]
@@ -1506,57 +1506,57 @@
       "check_dc": 14,
       "concentration_dc": 12,
       "chance": [94,100],
-      "loot": {"Foundation Token (1gp)":6, "Relic [Spell Scroll Level 0] [1/10] (8gp)": 1},
+      "loot": {"Foundation Token (1gp)":4, "Relic [Spell Scroll Level 0] [1/10] (8gp)": 1},
       "img_url": [""]
     },
     "R147": {
       "name": "Weather Trends in Valinor",
       "type": "geography",
-      "arcana_dc": 13,
-      "check_dc": 13,
+      "arcana_dc": 14,
+      "check_dc": 16,
       "concentration_dc": 10,
       "chance": [1,17],
-      "loot": {"Foundation Token (1gp)":23},
+      "loot": {"Foundation Token (1gp)":10},
       "img_url": [""]
     },
     "R148": {
       "name": "River Kor'aku Pomabi Fauna and Flow",
       "type": "geography",
-      "arcana_dc": 16,
-      "check_dc": 14,
+      "arcana_dc": 14,
+      "check_dc": 16,
       "concentration_dc": 10,
       "chance": [18,34],
-      "loot": {"Foundation Token (1gp)":24},
+      "loot": {"Foundation Token (1gp)":10},
       "img_url": [""]
     },
     "R149": {
       "name": "Bastion Bay Geography and Fauna",
       "type": "geography",
-      "arcana_dc": 15,
-      "check_dc": 13,
+      "arcana_dc": 14,
+      "check_dc": 16,
       "concentration_dc": 10,
       "chance": [35,49],
-      "loot": {"Foundation Token (1gp)":24},
+      "loot": {"Foundation Token (1gp)":10},
       "img_url": [""]
     },
     "R150": {
       "name": "Seventra Coastal Currents",
       "type": "geography",
       "arcana_dc": 11,
-      "check_dc": 12,
+      "check_dc": 14,
       "concentration_dc": 10,
       "chance": [50,67],
-      "loot": {"Foundation Token (1gp)":16},
+      "loot": {"Foundation Token (1gp)":8},
       "img_url": [""]
     },
     "R151": {
       "name": "Weather Trends in Nephix",
       "type": "geography",
       "arcana_dc": 13,
-      "check_dc": 10,
+      "check_dc": 15,
       "concentration_dc": 10,
       "chance": [68,85],
-      "loot": {"Foundation Token (1gp)":16},
+      "loot": {"Foundation Token (1gp)":8},
       "img_url": [""]
     },
     "R152": {
@@ -1566,7 +1566,7 @@
       "check_dc": 16,
       "concentration_dc": 9,
       "chance": [86,100],
-      "loot": {"Foundation Token (1gp)":24},
+      "loot": {"Foundation Token (1gp)":11},
       "img_url": [""]
     },
     "R153": {
@@ -1692,9 +1692,9 @@
     "R165": {
       "name": "The History of The Blue-Fang",
       "type": "history",
-      "arcana_dc": 12,
-      "check_dc": 12,
-      "concentration_dc": 7,
+      "arcana_dc": 13,
+      "check_dc": 15,
+      "concentration_dc": 10,
       "chance": [88,95],
       "loot": {"Foundation Token (1gp)":38},
       "img_url": [""]
@@ -1702,11 +1702,11 @@
     "R166": {
       "name": "Ragna City Limits: The Story of Ragna's Annual Music Festival",
       "type": "history",
-      "arcana_dc": 5,
+      "arcana_dc": 11,
       "check_dc": 18,
       "concentration_dc": 9,
       "chance": [96,98],
-      "loot": {"Foundation Token (1gp)":89},
+      "loot": {"Foundation Token (1gp)":76},
       "img_url": [""]
     },
     "R167": {

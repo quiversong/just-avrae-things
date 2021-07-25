@@ -267,6 +267,7 @@ if action == "start":
         f = f"The Research Chamber has chosen a topic for you to catalogue...|"
         f += f"**Category:** `{category_name}`\n\n"
         f += "Use `!research identify` to identify its mysteries."
+        stats["s_research_start"] = stats["s_research_start"] + 1 if "s_research_start" in stats else 1
         fields.append(f)
     else:
         c.delete_cvar(R_STAGE_VAR)
@@ -277,7 +278,6 @@ if action == "start":
         fields.append(f)
 
     stats["t_researches"] = stats["t_researches"] + 1 if "t_researches" in stats else 1
-    stats["s_research_start"] = stats["s_research_start"] + 1 if "s_research_start" in stats else 1
     c.set_cvar(R_STATS_VAR, dump_json(stats))
     return 0
 
