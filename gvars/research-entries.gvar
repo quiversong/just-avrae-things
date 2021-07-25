@@ -3,8 +3,8 @@
       "name": "O'livia Rector",
       "type": "personality",
       "arcana_dc": 12,
-      "check_dc": 12,
-      "concentration_dc": 11,
+      "check_dc": 14,
+      "concentration_dc": 13,
       "chance": [1,3],
       "loot": {"Foundation Token (1gp)":1, "Relic [Potion of Mind Reading] [1/31] (10gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855927953325162516/Capture.PNG"]
@@ -54,9 +54,9 @@
       "type": "personality",
       "arcana_dc": 10,
       "check_dc": 11,
-      "concentration_dc": 8,
+      "concentration_dc": 10,
       "chance": [16,18],
-      "loot": {"Foundation Token (1gp)":6, "Relic [Potion of Healing] [1/18] (4gp)": 2},
+      "loot": {"Foundation Token (1gp)":3, "Relic [Potion of Healing] [1/18] (4gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855928189900554260/Capture.PNG"]
     },
     "R7": {
@@ -64,9 +64,9 @@
       "type": "personality",
       "arcana_dc": 10,
       "check_dc": 11,
-      "concentration_dc": 8,
+      "concentration_dc": 10,
       "chance": [19,21],
-      "loot": {"Foundation Token (1gp)":5, "Relic [Potion of Healing] [1/18] (4gp)": 2},
+      "loot": {"Foundation Token (1gp)":3, "Relic [Potion of Healing] [1/18] (4gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855958678204448788/2adf7df871e29dd9eafcbcdacf04c115.jpg"]
     },
     "R8": {
@@ -114,9 +114,9 @@
       "type": "personality",
       "arcana_dc": 12,
       "check_dc": 14,
-      "concentration_dc": 11,
+      "concentration_dc": 13,
       "chance": [27,30],
-      "loot": {"Foundation Token (1gp)":2, "Relic [Spell Scroll Level 0] [1/10] (8gp)": 2},
+      "loot": {"Foundation Token (1gp)":2, "Relic [Spell Scroll Level 0] [1/10] (8gp)": 1},
       "img_url": ["https://i.pinimg.com/originals/af/44/33/af443335eafa5117ff929b546771fbc7.jpg"]
     },
     "R13": {
@@ -132,9 +132,9 @@
     "R14": {
       "name": "Finley, barman at The Golden Glass in Arbarax",
       "type": "personality",
-      "arcana_dc": 11,
-      "check_dc": 12,
-      "concentration_dc": 9,
+      "arcana_dc": 14,
+      "check_dc": 16,
+      "concentration_dc": 11,
       "chance": [33,36],
       "loot": {"Foundation Token (1gp)":1, "Relic [Potion of Healing] [1/18] (4gp)": 3},
       "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/813437308044312576/unknown.png"]
@@ -582,19 +582,19 @@
     "R59": {
       "name": "Seventran Poetry Classics",
       "type": "arts",
-      "arcana_dc": 8,
+      "arcana_dc": 10,
       "check_dc": 11,
-      "concentration_dc": 9,
+      "concentration_dc": 10,
       "chance": [55,60],
-      "loot": {"Foundation Token (1gp)":8},
+      "loot": {"Foundation Token (1gp)":5},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862851099521843220/stack-books-scroll-pen-candle_291138-46.jpeg"]
     },
     "R60": {
       "name": "Poetry and Prose Studies",
       "type": "arts",
       "arcana_dc": 14,
-      "check_dc": 11,
-      "concentration_dc": 9,
+      "check_dc": 14,
+      "concentration_dc": 10,
       "chance": [61,66],
       "loot": {"Foundation Token (1gp)":7},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862851099521843220/stack-books-scroll-pen-candle_291138-46.jpeg"]
@@ -642,11 +642,11 @@
     "R65": {
       "name": "The Art of Make-up and Costumes",
       "type": "arts",
-      "arcana_dc": 8,
+      "arcana_dc": 10,
       "check_dc": 12,
-      "concentration_dc": 6,
+      "concentration_dc": 10,
       "chance": [85,90],
-      "loot": {"Foundation Token (1gp)":9},
+      "loot": {"Foundation Token (1gp)":6},
       "img_url": [""]
     },
     "R66": {
@@ -1546,7 +1546,7 @@
       "check_dc": 14,
       "concentration_dc": 10,
       "chance": [50,67],
-      "loot": {"Foundation Token (1gp)":8},
+      "loot": {"Foundation Token (1gp)":4},
       "img_url": [""]
     },
     "R151": {
@@ -1556,7 +1556,7 @@
       "check_dc": 15,
       "concentration_dc": 10,
       "chance": [68,85],
-      "loot": {"Foundation Token (1gp)":8},
+      "loot": {"Foundation Token (1gp)":6},
       "img_url": [""]
     },
     "R152": {
@@ -1664,9 +1664,9 @@
       "type": "history",
       "arcana_dc": 11,
       "check_dc": 14,
-      "concentration_dc": 10,
+      "concentration_dc": 14,
       "chance": [68,75],
-      "loot": {"Foundation Token (1gp)":36},
+      "loot": {"Foundation Token (1gp)":28},
       "img_url": [""]
     },
     "R163": {
@@ -1692,11 +1692,11 @@
     "R165": {
       "name": "The History of The Blue-Fang",
       "type": "history",
-      "arcana_dc": 13,
-      "check_dc": 15,
-      "concentration_dc": 10,
+      "arcana_dc": 10,
+      "check_dc": 10,
+      "concentration_dc": 15,
       "chance": [88,95],
-      "loot": {"Foundation Token (1gp)":38},
+      "loot": {"Foundation Token (1gp)":28},
       "img_url": [""]
     },
     "R166": {
