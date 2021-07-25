@@ -134,9 +134,9 @@
       "type": "personality",
       "arcana_dc": 14,
       "check_dc": 16,
-      "concentration_dc": 11,
+      "concentration_dc": 12,
       "chance": [33,36],
-      "loot": {"Foundation Token (1gp)":1, "Relic [Potion of Healing] [1/18] (4gp)": 3},
+      "loot": {"Foundation Token (1gp)":2, "Relic [Potion of Healing] [1/18] (4gp)": 2},
       "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/813437308044312576/unknown.png"]
     },
     "R15": {
@@ -446,7 +446,7 @@
       "check_dc": 10,
       "concentration_dc": 11,
       "chance": [1,4],
-      "loot": {"Foundation Token (1gp)":14},
+      "loot": {"Foundation Token (1gp)":8},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/855962838224732200/music.jpg"]
     },
     "R46": {
@@ -466,7 +466,7 @@
       "check_dc": 12,
       "concentration_dc": 11,
       "chance": [7,10],
-      "loot": {"Foundation Token (1gp)":13},
+      "loot": {"Foundation Token (1gp)":7},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862867810450276372/flute.jpg"]
     },
     "R48": {
@@ -496,7 +496,7 @@
       "check_dc": 11,
       "concentration_dc": 12,
       "chance": [19,24],
-      "loot": {"Foundation Token (1gp)":7},
+      "loot": {"Foundation Token (1gp)":5},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862847516973989898/Twins.jpeg"]
     },
     "R51": {
@@ -566,7 +566,7 @@
       "check_dc": 15,
       "concentration_dc": 13,
       "chance": [50,53],
-      "loot": {"Foundation Token (1gp)":25},
+      "loot": {"Foundation Token (1gp)":16},
       "img_url": ["https://media.discordapp.net/attachments/855908840633270282/862857510188613632/819fb6a5361a6a848013d264d93b151d.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862857512267808829/eb1d7ebd9aa8875ddd608a41be98d982.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862857514730651748/2483dd09f8cae39a8a12cf8102b56653.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862857516269830174/874f4ce9098ef2858c7f309f64e13128.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862867804138373170/dance3.jpg", "https://cdn.discordapp.com/attachments/855908840633270282/862867802154205214/dance2.jpg", "https://cdn.discordapp.com/attachments/855908840633270282/862867800509906964/dance1.jpg"]
     },
     "R58": {
@@ -583,8 +583,8 @@
       "name": "Seventran Poetry Classics",
       "type": "arts",
       "arcana_dc": 10,
-      "check_dc": 11,
-      "concentration_dc": 10,
+      "check_dc": 13,
+      "concentration_dc": 11,
       "chance": [55,60],
       "loot": {"Foundation Token (1gp)":5},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862851099521843220/stack-books-scroll-pen-candle_291138-46.jpeg"]
@@ -594,7 +594,7 @@
       "type": "arts",
       "arcana_dc": 14,
       "check_dc": 14,
-      "concentration_dc": 10,
+      "concentration_dc": 12,
       "chance": [61,66],
       "loot": {"Foundation Token (1gp)":7},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862851099521843220/stack-books-scroll-pen-candle_291138-46.jpeg"]
@@ -622,11 +622,11 @@
     "R63": {
       "name": "Viol Playing and Techniques",
       "type": "arts",
-      "arcana_dc": 15,
-      "check_dc": 12,
-      "concentration_dc": 11,
+      "arcana_dc": 12,
+      "check_dc": 15,
+      "concentration_dc": 12,
       "chance": [73,78],
-      "loot": {"Foundation Token (1gp)":7},
+      "loot": {"Foundation Token (1gp)":5},
       "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/862861901079117846/55aa762aa52a3df9a587298a6b07a45a.jpeg", "https://cdn.discordapp.com/attachments/855908840633270282/862867805467443210/viol.jpg"]
     },
     "R64": {
@@ -642,11 +642,11 @@
     "R65": {
       "name": "The Art of Make-up and Costumes",
       "type": "arts",
-      "arcana_dc": 10,
+      "arcana_dc": 11,
       "check_dc": 12,
-      "concentration_dc": 10,
+      "concentration_dc": 11,
       "chance": [85,90],
-      "loot": {"Foundation Token (1gp)":6},
+      "loot": {"Foundation Token (1gp)":4},
       "img_url": [""]
     },
     "R66": {
@@ -1516,7 +1516,7 @@
       "check_dc": 16,
       "concentration_dc": 10,
       "chance": [1,17],
-      "loot": {"Foundation Token (1gp)":10},
+      "loot": {"Foundation Token (1gp)":7},
       "img_url": [""]
     },
     "R148": {
@@ -1526,7 +1526,7 @@
       "check_dc": 16,
       "concentration_dc": 10,
       "chance": [18,34],
-      "loot": {"Foundation Token (1gp)":10},
+      "loot": {"Foundation Token (1gp)":7},
       "img_url": [""]
     },
     "R149": {
@@ -1536,7 +1536,7 @@
       "check_dc": 16,
       "concentration_dc": 10,
       "chance": [35,49],
-      "loot": {"Foundation Token (1gp)":10},
+      "loot": {"Foundation Token (1gp)":7},
       "img_url": [""]
     },
     "R150": {
@@ -1554,7 +1554,7 @@
       "type": "geography",
       "arcana_dc": 13,
       "check_dc": 15,
-      "concentration_dc": 10,
+      "concentration_dc": 12,
       "chance": [68,85],
       "loot": {"Foundation Token (1gp)":6},
       "img_url": [""]
@@ -1564,9 +1564,9 @@
       "type": "geography",
       "arcana_dc": 5,
       "check_dc": 16,
-      "concentration_dc": 9,
+      "concentration_dc": 12,
       "chance": [86,100],
-      "loot": {"Foundation Token (1gp)":11},
+      "loot": {"Foundation Token (1gp)":10},
       "img_url": [""]
     },
     "R153": {
