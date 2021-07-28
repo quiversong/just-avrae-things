@@ -76,7 +76,7 @@
       "check_dc": 12,
       "concentration_dc": 12,
       "chance": [22,22],
-      "loot": {"Foundation Token (1gp)":19, "Relic [Potion of Healing] [1/18] (4gp)": 4},
+      "loot": {"Foundation Token (1gp)":10, "Relic [Potion of Healing] [1/18] (4gp)": 4},
       "img_url": ["https://cdn.discordapp.com/attachments/820115277966606337/839267674285408256/markus2.jpg"]
     },
     "R9": {
@@ -423,8 +423,8 @@
       "name": "Lady Zaelia, arcana master at the Magic Emporium in Arbarax",
       "type": "personality",
       "arcana_dc": 5,
-      "check_dc": 25,
-      "concentration_dc": 9,
+      "check_dc": 26,
+      "concentration_dc": 10,
       "chance": [98,98],
       "loot": {"Foundation Token (1gp)":15, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 1},
       "img_url": ["https://cdn.discordapp.com/attachments/842416035411787796/852248122248003594/E0vP75sWEAEMVhg_1.jpeg"]
