@@ -289,9 +289,19 @@ category_name = category['name']
 add_to_bag = None
 
 if action == "identify":
-    rift_chance = RIFT_DIE
-    rift_chance_roll = roll(f'1d{rift_chance}')
-    if rift_chance_roll == rift_chance:
+    rift_chance_roll = roll(f'1d{RIFT_DIE}')
+
+    rift_chance = spell_mod
+    arcana_skill = [s[1] for s in character().skills if s[0] == 'arcana'][0]
+    if arcana_skill.prof > 0:
+        rift_chance += arcana_skill.prof * proficiencyBonus
+    rift_chance = rift_chance / 2
+    if rift_chance < 1:
+        rift_chance = 1
+    if rift_chance > 5:
+        rift_chance = 5
+
+    if rift_chance_roll <= rift_chance:
         rift_data = load_json(get_gvar(rifts_var))
         planes = rift_data['planes']
         plane = planes[roll(f'1d{len(planes)}') - 1]

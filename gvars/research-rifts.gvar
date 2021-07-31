@@ -8,7 +8,7 @@
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864376548764680192/95ca0fe5646c9ffbae2e3f8e39199949.jpeg",
           "desc": "A hideous crone, with wrinkled and blotchy skin marred by warts and moles. Her long, skinny fingers stretch towards you, the talon-like nails as tough as steel and as sharp as blades glisten against the faint light inside the chamber. Behind her ugly smile you can see with sharp and blackened teeth, and smell her noxious breath.",
           "dc": 15,
-          "loot": {"Arcane Essence (10gp)": 1, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 3}
+          "loot": {"Arcane Essence (10gp)": 1, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 2}
         }, {
           "name": "Dryad",
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864376477096607764/ccf3442a87f8b232d9db46934fca99f3.jpeg",
@@ -31,7 +31,7 @@
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864553764697407498/Abyssal_chicken_DiA.jpeg",
           "desc": "Coming out of the rift you see a small creature with leather wings that do not seem capable of suistained flight, but fold above the creature's torso, giving it a tear-shaped appearance. Its large mouth is filled with fangs that you can see when it opens its mouth, lashing its long tongue out. It's coming towards you fast with its two large chicken-like legs!",
           "dc": 18,
-          "loot": {"Arcane Essence (10gp)": 1, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 4}
+          "loot": {"Arcane Essence (10gp)": 1, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 2}
         }, {
           "name": "Nashrou",
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864551164774973470/Nashrou3e.jpeg",
@@ -54,7 +54,7 @@
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864558901171847178/Shadow_Mastiff.png",
           "desc": "You can barely see it, but you are certain that a creature creeps out of the rift and makes its way into the chamber, hiding in the darkness. When the portal's energy crackles and sputters, the surge of light helps you finally see it: a large and monstrous dog like beast, with a humanoid face full of vicious teeth. Its mouth opens wide as it barks towards you, spitting menacingly.",
           "dc": 15,
-          "loot": {"Arcane Essence (10gp)": 1, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 3}
+          "loot": {"Arcane Essence (10gp)": 1, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 2}
         },
         {
           "name": "Darkweaver",
@@ -79,7 +79,7 @@
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864565388317556766/Garmorm.gif",
           "desc": "A round, 12 feet long limbless body covered in huge, tooth-filled mouths, crawls out of the rift towards you. Its many mouths start to sing a terrifying chant as it makes itself ready for its next meal (that's you)!",
           "dc": 15,
-          "loot": {"Arcane Essence (10gp)": 1, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 3}
+          "loot": {"Arcane Essence (10gp)": 1, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 2}
         },
         {
           "name": "Astral Dreadnought",
@@ -104,7 +104,7 @@
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864640781066829874/636252758704142054.jpeg",
           "desc": "A hideous blob of molten, stinking flesh oozes as it moves through the rift and into the research chamber. Its formless, shivering underneath mass dragging through the ground as it reaches towards you with its vaguely humanoid arms and eyes. With expression of horror and anguish on its horrific face, it grunts at you, but you cannot tell if it's threatening you or begging for help... Perhaps it's both?",
           "dc": 18,
-          "loot": {"Arcane Essence (10gp)": 1, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 4}
+          "loot": {"Arcane Essence (10gp)": 1, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 2}
         }, {
           "name": "Kyton",
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864640778517348392/636252766618069332.jpeg",
