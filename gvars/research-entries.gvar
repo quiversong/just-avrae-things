@@ -400,14 +400,14 @@
       "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/815658757308547072/Eydis.jpg"]
     },
     "R401": {
-      "name": "Mara, the Blood Mage",
+      "name": "Mara, the Blood Queen",
       "type": "personality",
       "arcana_dc": 5,
       "check_dc": 40,
       "concentration_dc": 16,
       "chance": [96,96],
       "loot": {"Foundation Token (1gp)":1, "Relic [Any Rare Magic Item] [1/40] (120gp)": 4},
-      "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/869590792379985930/Mara_7-1.jpg"]
+      "img_url": ["https://cdn.discordapp.com/attachments/855908840633270282/871065714889482310/C72513021684705000.jpeg"]
     },
     "R41": {
       "name": "Eydis, leader of the Blue Fang",
