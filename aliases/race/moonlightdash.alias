@@ -1,0 +1,129 @@
+embed
+<drac2>
+finish = 400
+obstacle_dc = 14
+
+var_name = "_drm_vars_"
+args = &ARGS&
+pargs = argparse(args)
+c = character()
+cv, cs = c.cvars, c.skills
+t, f, f2, f3, footer, thumb, img = None, None, None, None, None, None, None
+dino_img = 'https://cdn.discordapp.com/attachments/808062130996641832/808062789952077844/dinorace.jpg'
+
+footer = "Don't forget to role-play your race turns!"
+footer += "\nSeventra: Exodus of Heroes | Moonlight Dashaway! v1.0 | Created by quiversong#2772 aka Adrienne"
+
+if len(args) > 0 and args[0] == 'reset':
+    t = 'Resetting race participation...'
+    c.delete_cvar(var_name)
+    return 0
+
+if len(args) > 0 and args[0] == 'start':
+    t = f'{c.name} wants to join the Moonlight Dashaway!'
+    if not 'dinodex' in pargs:
+        f = 'Oops, what dino do you want to race with?|Use `!dinogo start -dinodex <your mount dex mod>`'
+        thumb = image
+        return 1
+
+    heat = 40
+    dino_dex = int(pargs.get('dinodex')[0])
+    c.set_cvar(var_name, f'{heat}:0:{dino_dex}:-')
+    t = f'{c.name} joins the Moonlight Dashaway!'
+    thumb = image
+    img = dino_img
+    f = 'You are all set on the tracks!|Roll initiative with `!init join` and do not forget to RP!'
+    f += '\nWhen it is your turn, run `!dashaway` to advance on the track!'
+    return 0
+
+if not var_name in cv:
+    t = f'{c.name} wants to join the Moonlight Dashaway!'
+    f = 'Oops, it looks like you are not racing yet.|Use `!dashaway start -dinodex <your mount dex mod>` to start racing!'
+    thumb = image
+    return 1
+
+thumb = image
+var_values = cv[var_name].split(':')
+heat = int(var_values[0])
+current_pos = int(var_values[1])
+dino_dex = int(var_values[2])
+adv_status = var_values[3]
+
+ah_skill = c.skills.animalHandling
+adv = True if adv_status == 'adv' else False if adv_status == 'dis' else None
+ah_roll = vroll(ah_skill.d20(base_adv = adv))
+crit = ah_roll.total == 20 + ah_skill.value
+
+t = f'{c.name} is racing in the Moonlight Dashaway!'
+f = f'{c.name} spurs their mount forward!|**Animal Handling roll:** {ah_roll.full}'
+
+moved = ah_roll.total + int(heat) + (10 if crit else 0)
+
+obstacles = [75, 175, 275, 375]
+
+obstacles_names = {}
+obstacles_names[75] = obstacles_names[275] = 'Geysers'
+obstacles_names[175] = obstacles_names[375] = 'Tar Pits'
+
+obstacles_images = {}
+obstacles_images[75] = obstacles_images[275] = 'https://cdn.discordapp.com/attachments/830894843860484126/865370212726865920/1024px-Old_Faithful_Geyser_Yellowstone_National_Park-59fd375eec2f6400377abeb0.webp'
+obstacles_images[175] = obstacles_images[375] = 'https://cdn.discordapp.com/attachments/863823240744927283/876619028536365116/jakub-skop-tar-pit.png'
+
+obstacle = [x for x in obstacles if current_pos < x and current_pos + moved >= x]
+obstacle = obstacle[0] if len(obstacle) > 0 else None
+
+f2 = ''
+dino_critical = None
+if obstacle != None:
+  dino_dex_str = '+' + str(dino_dex) if dino_dex > 0 else '' if dino_dex == 0 else str(dino_dex)
+  dino_roll = vroll(f'1d20{dino_dex_str}')
+  dino_critical = dino_roll.total == 20 + dino_dex
+  f2 = f'{c.name} reaches the track obstacles at the {obstacle}ft mark!|'
+  f2 += f'It is the dangerous **{obstacles_names[obstacle]}**!' + '\n'
+  f2 += f'**Dino dexterity roll:** {dino_roll.full}'
+
+  if dino_roll.total < obstacle_dc:
+    if obstacle in [175, 375]:
+      f2 += '\n' + f'**You did not manage to avoid the Tar Pits!**' + '\n'
+      f2 += 'You are unfortunately out of the race! Go enjoy some Jagg Rolls!\n'
+      f2 += 'And do not forget to remove yourself from initiative!'
+      c.delete_cvar(var_name)
+      return 0
+    else:
+      f2 += '\n' + f'**You and your dino do not manage to avoid the {obstacles_names[obstacle]}!**\n'
+      f2 += f'You are now stuck at the {obstacle}ft mark and have disadvantage on your next turn...'
+      c.set_cvar(var_name, f'{heat}:{obstacle}:{dino_dex}:dis')
+      img = obstacles_images[obstacle]
+      return 0
+  else:
+    f2 += '\n' + f'**You managed to avoid the {obstacles_names[obstacle]}!**' + '\nGreat job!'
+
+  if dino_critical:
+    f2 += '\nYou also get advantage on your next turn due to a critical roll!'
+
+current_pos += moved
+new_pos_text = f'Nice going!|You advanced {moved}ft and are now at the {current_pos}ft mark!'
+
+if f2 == '':
+  f2 = new_pos_text
+else:
+  f3 = new_pos_text
+
+adv_var = 'adv' if dino_critical else '-'
+c.set_cvar(var_name, f'{heat}:{current_pos}:{dino_dex}:{adv_var}')
+
+if current_pos >= finish:
+  finish_text = f'Congratulations!|You have finished the Moonlight Dashaway! You covered {current_pos}ft in total!'
+  c.delete_cvar(var_name)
+  if f2 == '':
+    f2 = finish_text
+  else:
+    f3 = finish_text
+</drac2>
+-title "{{t}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-f "{f}"' if f else ""}}
+{{f'-f "{f2}"' if f2 else ""}}
+{{f'-f "{f3}"' if f3 else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
