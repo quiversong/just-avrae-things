@@ -367,7 +367,7 @@
       "concentration_dc": 12,
       "chance": [89,89],
       "loot": {"Foundation Token (1gp)":21, "Relic [Midnight Tears] [1/30] (80gp)": 1},
-      "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828387198038048838/Screenshots_2021-03-30-17-51-27.png"]
+      "img_url": ["https://cdn.discordapp.com/attachments/816447953387520030/832825203763052584/6718af3f514109818925c09ed3a1ed77.png"]
     },
     "R38": {
       "name": "Iris the Reseer, seer of faiths in Nephix",
@@ -397,7 +397,7 @@
       "concentration_dc": 12,
       "chance": [94,95],
       "loot": {"Foundation Token (1gp)":4},
-      "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/815658757308547072/Eydis.jpg"]
+      "img_url": ["https://cdn.discordapp.com/attachments/827386748114829382/828387198038048838/Screenshots_2021-03-30-17-51-27.png"]
     },
     "R401": {
       "name": "Mara, the Blood Queen",
@@ -417,7 +417,7 @@
       "concentration_dc": 8,
       "chance": [97,97],
       "loot": {"Foundation Token (1gp)":79},
-      "img_url": ["https://cdn.discordapp.com/attachments/816447953387520030/832825203763052584/6718af3f514109818925c09ed3a1ed77.png"]
+      "img_url": ["https://cdn.discordapp.com/attachments/798678462768480305/815658757308547072/Eydis.jpg"]
     },
     "R42": {
       "name": "Lady Zaelia, arcana master at the Magic Emporium in Arbarax",
