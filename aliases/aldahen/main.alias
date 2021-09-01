@@ -1,0 +1,21 @@
+embed <drac2>
+command = 'ald'
+footer = 'Seventra: Exodus of Heroes | Aldahen Collection v0.1 | !ald help\nCreators: quiversong#2772 (Adrienne)'
+title = 'The Aldahen Syndicate'
+fields = []
+
+output = 'Commands:|'
+
+output += f'`!{command}`: show this text.\n'
+
+output += '\n**Bracelet of the Aldahen:**\n'
+output += f'`!{command} bracelet use`: use one charge of the Bracelet of the Aldahen.\n'
+output += f'`!{command} bracelet curse -t <target1> ... -t <targetN>`: use one charge of the Bracelet of the Aldahen to curse enemies during combat.\n'
+
+fields.append(output)
+
+</drac2>
+-title "{{title}}"
+-thumb https://cdn.discordapp.com/attachments/855908840633270282/882483976986574848/Destructive-Magic-icon.png
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
+{{f'-footer "{footer}"' if footer else ""}}
