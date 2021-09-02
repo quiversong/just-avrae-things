@@ -1,6 +1,6 @@
 embed <drac2>
 command = 'ald'
-footer = 'Seventra: Exodus of Heroes | Aldahen Collection v0.1 | !ald help\nCreators: quiversong#2772 (Adrienne)'
+footer = 'Seventra: Exodus of Heroes | Aldahen Collection v0.1 | !ald\nCreators: quiversong#2772 (Adrienne)'
 args = &ARGS&
 pargs = argparse(args)
 c = character()

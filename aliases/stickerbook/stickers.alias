@@ -1,38 +1,22 @@
-!servalias stickers embed <drac2>
+embed <drac2>
 args = &ARGS&
 pargs = argparse(args)
-cvn = 'stickers'
-c = character()
-stickers = load_json(c.cvars[cvn]) if cvn in c.cvars else {}
+gvar = 'dac80a72-1610-43e7-8b42-e970ea5fae56'
+stickers = load_json(get_gvar(gvar))
+
+error_msg = 'Oops, what do you want to do?|'
+error_msg += 'To display a sticker:\n`!stickers show <key>`\n\n'
+error_msg += 'To list all the available stickers:\n`!stickers list`'
 
 f = []
 title = img = desc = None
 title = 'Heroes of Seventra Sticker Book'
 thumb = 'https://cdn.discordapp.com/attachments/855908840633270282/881614920033112064/365138e9102f7b14b93ce9aea2d98399.jpeg'
 
-error_msg = 'Oops, what do you want to do?|'
-error_msg += 'To add a sticker to your hero book:\n`!stickers add -key <key> -name <name> -desc <desc> -image <image>`\n\n'
-error_msg += 'To display a hero you have a sticker for:\n`!stickers show <key>`\n\n'
-error_msg += 'To list all the stickers added to this sticker book:\n`!stickers list`'
-
-if len(args) > 0 and args[0].lower() == 'add':
-  if not ('key' in pargs and 'name' in pargs and 'desc' in pargs and 'image' in pargs):
-    f.append(error_message)
-    return ''
-
-  key = pargs.get('key')[0].lower()
-  name = pargs.get('name')[0]
-  description = pargs.get('desc')[0]
-  image = pargs.get('image')[0]
-  thumb = image
-  stickers[key] = {'name': name, 'desc': description, 'img': image}
-  f.append(f'Well done!|The sticker for "{name}" has been added to your Heroes of Seventra Sticker Book!')
-  c.set_cvar(cvn, dump_json(stickers))
-
-elif len(args) > 1 and args[0].lower() == 'show':
+if len(args) > 1 and args[0].lower() == 'show':
   key = args[1].lower()
   if not key in stickers:
-    f.append(f'Oops!|`{key}` is not a sticker on your book!\nUse `!stickers list` to see all stickers you have available!')
+    f.append(f'Oops!|{key} is not a valid sticker in the Heroes of Seventra Sticker Book!\nUse `!stickers list` to see all available stickers!')
   else:
     entry = stickers[key]
     img = entry['img']
@@ -40,12 +24,14 @@ elif len(args) > 1 and args[0].lower() == 'show':
     f.append(f'Sticker: {entry["name"]}|{entry["desc"]}')
 
 elif len(args) > 0 and args[0].lower() == 'list':
-  msg = 'You Sticker Book has the following stickers:|'
+  msg = 'The Heroes of Seventra Sticker Book currently has the following stickers:|'
   if len(stickers) == 0:
     msg += 'This sticker book is empty! Need to collect more stickers!'
   else:
-    msg += '\n'.join([f'`{x}`' for x in stickers.keys()])
-    msg += '\n\nUse `!stickers show` <key> to display a sticker.'
+    keys = [x for x in stickers.keys()]
+    keys.sort()
+    msg += '\n'.join([f'`{x}`' for x in keys])
+    msg += '\n\nUse `!stickers show <key>` to display a sticker.'
   f.append(msg)
 
 else:
