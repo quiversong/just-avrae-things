@@ -10,7 +10,6 @@ error_msg += 'To list all the available stickers:\n`!stickers list`'
 
 footer = 'Seventra: Exodus of Heroes | Heroes of Seventra Sticker Book'
 footer += "\nCreated by Ser Jaime Lanister#4395 (Pete), coded by quiversong#2772 (Adrienne)"
-'
 
 f = []
 title = img = desc = None
