@@ -8,6 +8,10 @@ error_msg = 'Oops, what do you want to do?|'
 error_msg += 'To display a sticker:\n`!stickers show <key>`\n\n'
 error_msg += 'To list all the available stickers:\n`!stickers list`'
 
+footer = 'Seventra: Exodus of Heroes | Heroes of Seventra Sticker Book'
+footer += "\nCreated by Ser Jaime Lanister#4395 (Pete), coded by quiversong#2772 (Adrienne)"
+'
+
 f = []
 title = img = desc = None
 title = 'Heroes of Seventra Sticker Book'
@@ -44,3 +48,4 @@ else:
 {{f'-thumb "{thumb}"' if thumb else ""}}
 {{f'-desc "{desc}"' if desc else ""}}
 {{''.join(['-f "' + field + '"\n' for field in f]) if len(f) > 0 else ''}}
+{{f'-footer "{footer}"' if footer else ""}}
