@@ -1,77 +1,92 @@
 {
-  "mara": {
-    "name": "Mara",
-    "desc": "Mara , Half Elf , Female\n\nKnown for her missing eye, her shadow arm, and her large red wings made of dripping blood.\n\nFrequently in red dress and heels.\n\nKnown for blood rituals and her kiss of death.\n\nDuring the Battle for Abarax Mara summoned Ignacio from the grave and in a moment of passion kissed him and with a head turn blew a kiss that fell 8 blue fang warriors simulateouesly  in a single blow.\n\nOnce during a mission to fight a mummy, Mara turned a mummy lord into a fish, completely removing any threat the creature posed.\n\nMara now sits as a Queen on the blood river, a planar dimension between the infernal 9 hells and the abyss. She collects souls that pass through her domain and she watches the mortal realm, offering influence from beyond.",
-    "img": "https://media.discordapp.net/attachments/870453897456660490/881303370923667456/Screenshot_20210828-152628_Drive.jpg"
-  },
-  "scurry": {
-    "name": "Scurry",
-    "desc": "Aarakocra, female, is always seen wearing her trusty iron pot and her Grandmother's wooden laddle. A small fighter on the outside, but a great chef and longing for a family at heart, Scurry has been trying to find out where she belongs. She has helped free the village of Sunstone from ancient Warforged that were looking to abduct and kill people. She has been working from the shadows, helping fund the first orphanage in Nephix, and helped rescue Iris the Seer, who is now a truthseer for hire.",
-    "img": "https://media.discordapp.net/attachments/874071538930958366/879728149204721764/FB_IMG_16281891588524204.jpg"
-  },
-  "stoza": {
-    "name": "Lord Stoza",
-    "desc": "Lord Stoza, Baron of the Chultan Peninsula, Yuan-ti Pureblood, Male. This exotic and flamboyant nobleman travels with his loyal retainers and a procession of vehicles and animals. Stoza helped track and rehabilitate some bandits who had been thieving and found themselves being controlled by wicked myconids. He valiantly fights orcs, ogres and the undead with his eldritch magic and his pactblade - a golden tulwar.",
-    "img": "https://media.discordapp.net/attachments/612621044586512388/809743796723515402/unknown.png"
-  },
-  "ear": {
-    "name": "Earendil",
-    "desc": "Earendil, Elf, Male USP: His magical longsword Icefang delivers his unique version of ‘cold steel’ to his enemies. Ex1: Took part in the liberation of a local village that had been occupied by Trollkin. Earendril also Savagely put down, physically and verbally, the Fire Giant Accountant Bean-Counter.",
-    "img": "https://www.dndbeyond.com/avatars/13730/635/1581111423-32674200.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp"
-  },
-  "damcius": {
-    "name": "Damcius",
-    "desc": "Damcius, Tortle, Male, Damcius can focus his ki to form into an extra set of arms that extend the reach of his melee attacks and can damage foes normally resistant to or unphased by mundane attacks. Damcius helped rid several villages of various devil-caused plagues, then helped send the devil who caused their suffering back to the nine hells. He also helped unravel a mystery in Arbarax, surrounding a mysterious box, and helped a wizard apprentice return to his home and family.",
-    "img": "https://www.dndbeyond.com/avatars/43/518/636419457094681703.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp"
-  },
-  "boxi": {
-    "name": "Böxi Ironmane",
-    "desc": "Böxi Ironmane, Leonin, Male, Böxi is a powerful hand-to-hand specialist who has been granted rightous power by the Green Vale. Böxi led the heroic party, the Claws of Nephix, on a mission to destroy a warforged creation engine and save the vale from robotic enslavement. He then went on to return the kingdom of Arbarax to it's rightful people, and helped lead the charge to defeat the dark forces of Karketh the World Destroyer.",
-    "img": "https://cdn.discordapp.com/attachments/828058037902114856/879749011958038598/Screenshot_20210710-0848434.jpg"
-  },
-  "gal": {
-    "name": "Galliard Clark",
-    "desc": "Goblin, male. The Lookout, Head Navigator and Co-owner of Masters' Transportation. Galliard carries the crossbow Significance, a weapon of The Scaled Gods that make its bolts leave a wisp of green smoke in its trajectory. Galliard saved the town of Nargenstal from slavers that kept kidnapping people from the town. He also was instrumental in the exposure and incarceration of Tucktoe Ironhoof that was impersonating his brother Captain Bronk Ironhoof to run the Hornguard for his own selfish needs.",
-    "img": "https://cdn.discordapp.com/attachments/828056909621624873/880139838869897216/Screenshot_20210517-094457_Chrome.jpg"
-  },
-  "balor": {
-    "name": "Balor",
-    "desc": "Dwarf, Male, Balor is the Bulwark of Seventra. His magical armor and shield protect him from fiends of all types while his magical Lance rids the land of fiends and monsters. Balor rescued three bards from a sandy, hidden dungeon in the desert. He also saved Mossfort from mother nature herself with quick thinking and a plan to sure up her defenses.",
-    "img": "https://cdn.discordapp.com/attachments/812126914009366609/882750120926535740/85aa5299a4ab156754fcdb507ab4de22.jpg"
-  },
-  "klesyos": {
-    "name": "Klesyos",
-    "desc": "Minotaur, Male. Kleyos wields a mighty longsword called Pelor's Wrath which hits harder when Klesyos has been hit, this has helped save many people over his time. Klesyos is known for his signature attack, hurling his Javelin of Lightning when coming out of the mist of his misty step spell...the bad guys always give him a perfect line up. Klesyos enjoys spending time with his daughter, Juniper. They love to travel the roads and meet new people while also discovering and learning about nature and the creatures found in it. He is one proud Papa!",
-    "img": "https://cdn.discordapp.com/attachments/828059390354784297/880184326787059752/unknown.png"
-  },
-  "rinn": {
-    "name": "Rinn",
-    "desc": "Eladrin, Female, Rinn always has her trusty feywild lyre strapped around her waist. She has a cheerful personality with her friends and shy with others, also, she has changing colourful hair and skin. Rinn helped with the diplomatic discussion between the council of seven Tu'raas and the blue fang warriors. She also performs, busks and entertains passersby in the streets and patrons in taverns/inns.",
-    "img": "https://cdn.discordapp.com/attachments/828058835541426187/880305527119286323/22a1eb642b70ba08016a837562612bcab2.png"
-  },
-  "anya": {
-    "name": "Anya",
-    "desc": "Human, female. Continues to aid the impoverished children of Mossfort. Anya once saved a village from a necromancer's undead horde, even killed the undead Sea monster. The rest of Anya's exploits have been deemed classified and she is unable to speak about them.",
-    "img": "https://cdn.discordapp.com/attachments/828056558948581396/880880786654507058/7ec33c10d4a5af66ce0c48f82a357018.gif"
-  },
-  "seven": {
-    "name": "Seven",
-    "desc": "Grung, Male, Seven is not actually a prince in disguise, despite rumors to the contrary. In his free time, he likes to paint cityscapes and leave them for strangers to find. Seven helped save the real captain of the Hornguard from his evil twin brother. He was also part of a group that delivered much needed supplies to a village ransacked by raiders.",
-    "img": "https://cdn.discordapp.com/attachments/828057325649526844/880968426561101915/Sevenicon.png"
-  },
-  "adri": {
-    "name": "Adrienne",
-    "desc": "Race: Moon-Elf\nGender: Female\n\nAdrienne is an elf that travels through Seventra earning coins by busking, singing the songs she writes about the realm and about her adventures. Wherever she goes she brings her lute that has been fitted with an axe blade, which she's proficient with in combat, but she's also adept of magic (even though she doesn't like being called a Wizard - Witch is acceptable).\n\nMost often than not, she's accompanied by Mr. Swabs, her black-with-one-white-paw winged cat. Adrienne's also known to be able to smell sounds, and enjoy eating anything that is red.\n\nSince arriving in Seventra, Adrienne has freed a village of a Kuo-Toan invasion when she helped chase down the criminal Necromancer Gloria Vana, and also participated in the battle to free Arbarax.",
-    "img": "https://cdn.discordapp.com/attachments/846976225049575424/881343574447374437/quiversong_adrienne.jpg"
-  },
-  "dihiri": {
-    "name": "Dihiri",
-    "desc": "Tiefling /Drow mix, Female.\n**Unique feature:** Lost her left hand, and uses her psionic abilities, furnished by a magic cuff to project a fully functioning hand.  \n**Exploits:** Known most for her part in the Unveiling of Arbarax, Dihiri has made a home for herself with the Nephix Claw's.  One of the most famous battles in recent history, the Battle of Karketh, at the opening of Arbarax, Dihiri and a close team of friends carried the key through the desert, set upon by the Baron's men- determined to stop them.  Their dear friends, Jasper and Lorelie, sacrificed themselves to ensure that the rest of the party would make it to the gates of the city and begin the call for aid that blasted across all of Seventra.\n\nContinuing that work, she has engaged diplomatic communication between the Oshren Dohn, and the city of Arbarax to help unite two sundered peoples.",
-    "img": "https://cdn.discordapp.com/attachments/827694021693407292/881313953647579196/2021-7-18-12-28-47.gif"
-  },
-  "gaelin": {
-    "name": "Gaelin Siannodel",
-    "desc": "Noble Moon Elf, female. Gaelin is best know for her gleaming green and black poisoned longbow that never misses. She is often not seen until it's too late. She has aided Seventra in the raid against the Sable Destroyer, protecting and clearing the trade route into Mossfort, eliminating the sea monsters from Mammoth Island, and many other missions she will never be allowed to speak of in the interest of security.",
-    "img": "https://s3.amazonaws.com/ganbreederpublic/hires/de85fe442a3d3bb1.jpeg"
-  }
+	"mara": {
+		"name": "Mara",
+		"desc": "Mara , Half Elf , Female\n\nKnown for her missing eye, her shadow arm, and her large red wings made of dripping blood.\n\nFrequently in red dress and heels.\n\nKnown for blood rituals and her kiss of death.\n\nDuring the Battle for Abarax Mara summoned Ignacio from the grave and in a moment of passion kissed him and with a head turn blew a kiss that fell 8 blue fang warriors simulateouesly  in a single blow.\n\nOnce during a mission to fight a mummy, Mara turned a mummy lord into a fish, completely removing any threat the creature posed.\n\nMara now sits as a Queen on the blood river, a planar dimension between the infernal 9 hells and the abyss. She collects souls that pass through her domain and she watches the mortal realm, offering influence from beyond.",
+		"img": "https://media.discordapp.net/attachments/870453897456660490/881303370923667456/Screenshot_20210828-152628_Drive.jpg"
+	},
+	"scurry": {
+		"name": "Scurry",
+		"desc": "Aarakocra, female, is always seen wearing her trusty iron pot and her Grandmother's wooden laddle. A small fighter on the outside, but a great chef and longing for a family at heart, Scurry has been trying to find out where she belongs. She has helped free the village of Sunstone from ancient Warforged that were looking to abduct and kill people. She has been working from the shadows, helping fund the first orphanage in Nephix, and helped rescue Iris the Seer, who is now a truthseer for hire.",
+		"img": "https://media.discordapp.net/attachments/874071538930958366/879728149204721764/FB_IMG_16281891588524204.jpg"
+	},
+	"stoza": {
+		"name": "Lord Stoza",
+		"desc": "Lord Stoza, Baron of the Chultan Peninsula, Yuan-ti Pureblood, Male. This exotic and flamboyant nobleman travels with his loyal retainers and a procession of vehicles and animals. Stoza helped track and rehabilitate some bandits who had been thieving and found themselves being controlled by wicked myconids. He valiantly fights orcs, ogres and the undead with his eldritch magic and his pactblade - a golden tulwar.",
+		"img": "https://media.discordapp.net/attachments/612621044586512388/809743796723515402/unknown.png"
+	},
+	"ear": {
+		"name": "Earendil",
+		"desc": "Earendil, Elf, Male USP: His magical longsword Icefang delivers his unique version of ‘cold steel’ to his enemies. Ex1: Took part in the liberation of a local village that had been occupied by Trollkin. Earendril also Savagely put down, physically and verbally, the Fire Giant Accountant Bean-Counter.",
+		"img": "https://www.dndbeyond.com/avatars/13730/635/1581111423-32674200.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp"
+	},
+	"damcius": {
+		"name": "Damcius",
+		"desc": "Damcius, Tortle, Male, Damcius can focus his ki to form into an extra set of arms that extend the reach of his melee attacks and can damage foes normally resistant to or unphased by mundane attacks. Damcius helped rid several villages of various devil-caused plagues, then helped send the devil who caused their suffering back to the nine hells. He also helped unravel a mystery in Arbarax, surrounding a mysterious box, and helped a wizard apprentice return to his home and family.",
+		"img": "https://www.dndbeyond.com/avatars/43/518/636419457094681703.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp"
+	},
+	"boxi": {
+		"name": "Böxi Ironmane",
+		"desc": "Böxi Ironmane, Leonin, Male, Böxi is a powerful hand-to-hand specialist who has been granted rightous power by the Green Vale. Böxi led the heroic party, the Claws of Nephix, on a mission to destroy a warforged creation engine and save the vale from robotic enslavement. He then went on to return the kingdom of Arbarax to it's rightful people, and helped lead the charge to defeat the dark forces of Karketh the World Destroyer.",
+		"img": "https://cdn.discordapp.com/attachments/828058037902114856/879749011958038598/Screenshot_20210710-0848434.jpg"
+	},
+	"gal": {
+		"name": "Galliard Clark",
+		"desc": "Goblin, male. The Lookout, Head Navigator and Co-owner of Masters' Transportation. Galliard carries the crossbow Significance, a weapon of The Scaled Gods that make its bolts leave a wisp of green smoke in its trajectory. Galliard saved the town of Nargenstal from slavers that kept kidnapping people from the town. He also was instrumental in the exposure and incarceration of Tucktoe Ironhoof that was impersonating his brother Captain Bronk Ironhoof to run the Hornguard for his own selfish needs.",
+		"img": "https://cdn.discordapp.com/attachments/828056909621624873/880139838869897216/Screenshot_20210517-094457_Chrome.jpg"
+	},
+	"balor": {
+		"name": "Balor",
+		"desc": "Dwarf, Male, Balor is the Bulwark of Seventra. His magical armor and shield protect him from fiends of all types while his magical Lance rids the land of fiends and monsters. Balor rescued three bards from a sandy, hidden dungeon in the desert. He also saved Mossfort from mother nature herself with quick thinking and a plan to sure up her defenses.",
+		"img": "https://cdn.discordapp.com/attachments/812126914009366609/882750120926535740/85aa5299a4ab156754fcdb507ab4de22.jpg"
+	},
+	"klesyos": {
+		"name": "Klesyos",
+		"desc": "Minotaur, Male. Kleyos wields a mighty longsword called Pelor's Wrath which hits harder when Klesyos has been hit, this has helped save many people over his time. Klesyos is known for his signature attack, hurling his Javelin of Lightning when coming out of the mist of his misty step spell...the bad guys always give him a perfect line up. Klesyos enjoys spending time with his daughter, Juniper. They love to travel the roads and meet new people while also discovering and learning about nature and the creatures found in it. He is one proud Papa!",
+		"img": "https://cdn.discordapp.com/attachments/828059390354784297/880184326787059752/unknown.png"
+	},
+	"rinn": {
+		"name": "Rinn",
+		"desc": "Eladrin, Female, Rinn always has her trusty feywild lyre strapped around her waist. She has a cheerful personality with her friends and shy with others, also, she has changing colourful hair and skin. Rinn helped with the diplomatic discussion between the council of seven Tu'raas and the blue fang warriors. She also performs, busks and entertains passersby in the streets and patrons in taverns/inns.",
+		"img": "https://cdn.discordapp.com/attachments/828058835541426187/880305527119286323/22a1eb642b70ba08016a837562612bcab2.png"
+	},
+	"anya": {
+		"name": "Anya",
+		"desc": "Human, female. Continues to aid the impoverished children of Mossfort. Anya once saved a village from a necromancer's undead horde, even killed the undead Sea monster. The rest of Anya's exploits have been deemed classified and she is unable to speak about them.",
+		"img": "https://cdn.discordapp.com/attachments/828056558948581396/880880786654507058/7ec33c10d4a5af66ce0c48f82a357018.gif"
+	},
+	"seven": {
+		"name": "Seven",
+		"desc": "Grung, Male, Seven is not actually a prince in disguise, despite rumors to the contrary. In his free time, he likes to paint cityscapes and leave them for strangers to find. Seven helped save the real captain of the Hornguard from his evil twin brother. He was also part of a group that delivered much needed supplies to a village ransacked by raiders.",
+		"img": "https://cdn.discordapp.com/attachments/828057325649526844/880968426561101915/Sevenicon.png"
+	},
+	"adri": {
+		"name": "Adrienne",
+		"desc": "Race: Moon-Elf\nGender: Female\n\nAdrienne is an elf that travels through Seventra earning coins by busking, singing the songs she writes about the realm and about her adventures. Wherever she goes she brings her lute that has been fitted with an axe blade, which she's proficient with in combat, but she's also adept of magic (even though she doesn't like being called a Wizard - Witch is acceptable).\n\nMost often than not, she's accompanied by Mr. Swabs, her black-with-one-white-paw winged cat. Adrienne's also known to be able to smell sounds, and enjoy eating anything that is red.\n\nSince arriving in Seventra, Adrienne has freed a village of a Kuo-Toan invasion when she helped chase down the criminal Necromancer Gloria Vana, and also participated in the battle to free Arbarax.",
+		"img": "https://cdn.discordapp.com/attachments/846976225049575424/881343574447374437/quiversong_adrienne.jpg"
+	},
+	"dihiri": {
+		"name": "Dihiri",
+		"desc": "Tiefling /Drow mix, Female.\n**Unique feature:** Lost her left hand, and uses her psionic abilities, furnished by a magic cuff to project a fully functioning hand.  \n**Exploits:** Known most for her part in the Unveiling of Arbarax, Dihiri has made a home for herself with the Nephix Claw's.  One of the most famous battles in recent history, the Battle of Karketh, at the opening of Arbarax, Dihiri and a close team of friends carried the key through the desert, set upon by the Baron's men- determined to stop them.  Their dear friends, Jasper and Lorelie, sacrificed themselves to ensure that the rest of the party would make it to the gates of the city and begin the call for aid that blasted across all of Seventra.\n\nContinuing that work, she has engaged diplomatic communication between the Oshren Dohn, and the city of Arbarax to help unite two sundered peoples.",
+		"img": "https://cdn.discordapp.com/attachments/827694021693407292/881313953647579196/2021-7-18-12-28-47.gif"
+	},
+	"gaelin": {
+		"name": "Gaelin Siannodel",
+		"desc": "Noble Moon Elf, female. Gaelin is best know for her gleaming green and black poisoned longbow that never misses. She is often not seen until it's too late. She has aided Seventra in the raid against the Sable Destroyer, protecting and clearing the trade route into Mossfort, eliminating the sea monsters from Mammoth Island, and many other missions she will never be allowed to speak of in the interest of security.",
+		"img": "https://s3.amazonaws.com/ganbreederpublic/hires/de85fe442a3d3bb1.jpeg"
+	},
+	"jam": {
+		"name": "Jamari",
+		"desc": "Satyr, male. Jamari wanders the continent with a lute and a pocket of illusions, always looking for a way to use them to his advantage over the bad guys. Jamari helped fight the big black dragon and save that fancy new city, Arbarax. He also talked to a bunch of weird warrior people and made our part of Seventra safer from that nasty Baron.",
+		"img": "https://media.discordapp.net/attachments/799114561675329536/868143645612716062/20210722_230046.jpg"
+	},
+	"gratch": {
+		"name": "Gratch",
+		"desc": "If Gratch could be described by one word, it wouldn’t be Hero. It would be Honor. Dedicating his life to the service of Helm, this warrior defended those that needed defending, and lived by a strong code of honor. He story, his legend, is filled with various exploits. Traveling planes, dying only to be revived to killed the Bone Devil that killed him because of his shown strength in the court of a Demi-god. Battling his friend possessed by an evil spirit, and returning them home. Upon Seventra, Gratch helped defend the people of the land against the daemon horde summoned by the Baron. He was at the forefront of the peace negotiations with the Blue Fang mercenaries. Sadly, this warrior has gone missing; he will forever be remembered for his strength and honor.",
+		"img": "https://media.discordapp.net/attachments/789629375292506132/795013654855942164/half-orc.png"
+	},
+	"pete": {
+		"name": "Pete the Barbarian",
+		"desc": "Minotaur, male. Pete hails from the snowy north. He wields a fiery axe in battle and often claims his foes head for his dark gods. Among his famous deeds Pete's chief achievements include partaking in the battle against Karkerth, saving a village from both starvation and a horde of orc, saved Snowcrest from an evil plot of diabolical mushrooms, and most recently defeated a evil wizard attempting to summon a powerful demonic force into Seventra. He has one daughter name Kiala, she helps to keep him out of trouble.",
+		"img": "https://i.pinimg.com/564x/03/14/53/0314535e7ca00f6904728a5613509927.jpg"
+	}
 }
