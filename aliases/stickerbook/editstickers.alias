@@ -6,9 +6,10 @@ c = character()
 stickers = load_json(c.cvars[cvn]) if cvn in c.cvars else {}
 
 f = []
-title = img = desc = None
-title = 'Heroes of Seventra Sticker Book'
-thumb = 'https://cdn.discordapp.com/attachments/855908840633270282/881614920033112064/365138e9102f7b14b93ce9aea2d98399.jpeg'
+title = thumb = img = desc = None
+title = 'Heroes of Seventra Sticker Book Editor'
+
+footer = 'STICKER BOOK EDITOR'
 
 error_msg = 'Oops, what do you want to do?|'
 error_msg += 'To add a sticker to your hero book:\n!stickers add -key <key> -name <name> -desc <desc> -image <image>\n\n'
@@ -60,3 +61,4 @@ else:
 {{f'-thumb "{thumb}"' if thumb else ""}}
 {{f'-desc "{desc}"' if desc else ""}}
 {{''.join(['-f "' + field + '"\n' for field in f]) if len(f) > 0 else ''}}
+{{f'-footer "{footer}"' if footer else ""}}
