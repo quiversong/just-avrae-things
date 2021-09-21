@@ -88,11 +88,15 @@ if obstacle != None:
       f2 += 'You are unfortunately out of the race! Go enjoy some Jagg Rolls!\n'
       f2 += 'And do not forget to remove yourself from initiative!'
       c.delete_cvar(var_name)
+      img = obstacles_images[obstacle]
       return 0
     else:
       f2 += '\n' + f'**You and your dino do not manage to avoid the {obstacles_names[obstacle]}!**\n'
       f2 += f'You are now stuck at the {obstacle}ft mark and have disadvantage on your next turn...'
       c.set_cvar(var_name, f'{heat}:{obstacle}:{dino_dex}:dis')
+      if combat():
+        combat().me.remove_effect('RACE POSITION')
+        combat().me.add_effect(f'RACE POSITION: {obstacle}', '', -1, False)
       img = obstacles_images[obstacle]
       return 0
   else:
@@ -111,6 +115,9 @@ else:
 
 adv_var = 'adv' if dino_critical else '-'
 c.set_cvar(var_name, f'{heat}:{current_pos}:{dino_dex}:{adv_var}')
+if combat():
+  combat().me.remove_effect('RACE POSITION')
+  combat().me.add_effect(f'RACE POSITION: {current_pos}', '', -1, False)
 
 if current_pos >= finish:
   finish_text = f'Congratulations!|You have finished the Moonlight Dashaway! You covered {current_pos}ft in total!'

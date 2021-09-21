@@ -89,6 +89,9 @@ if obstacle != None:
     f2 += '\n' + f'**{orphan_name} and their Clawfoot do not manage to avoid the {obstacles_names[obstacle]}!**\n'
     f2 += f'They are now stuck at the {obstacle}ft mark and have disadvantage on your next turn...'
     c.set_cvar(var_name, f'{heat}:{obstacle}:{dino_dex}:dis')
+    if combat():
+      combat().me.remove_effect('RACE POSITION')
+      combat().me.add_effect(f'RACE POSITION: {obstacle}', '', -1, False)
     img = obstacles_images[obstacle]
     return 0
   else:
@@ -107,6 +110,9 @@ else:
 
 adv_var = 'adv' if dino_critical else '-'
 c.set_cvar(var_name, f'{heat}:{current_pos}:{dino_dex}:{adv_var}')
+if combat():
+  combat().me.remove_effect('RACE POSITION')
+  combat().me.add_effect(f'RACE POSITION: {current_pos}', '', -1, False)
 
 if current_pos >= finish:
   finish_text = f'Congratulations!|{orphan_name} and their Clawfoot have finished the race! They covered {current_pos}ft in total!'
