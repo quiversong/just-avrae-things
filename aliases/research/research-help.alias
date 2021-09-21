@@ -32,18 +32,18 @@ The Foundation is a guild of powerful scholars and mages centered in Arbarax and
 As time goes on and the mages advance their work in unveiling the mysteries of the fabric of space, magic, and time, they have developed a mechanism through which individuals can have access to uncatalogued pieces of data. If the information is held long enough in their consciousness, the Foundation research chamber can extract the knowledge from capable individuals and catalogue it for further analysis."
 
 -f "__**The Foundation And You**__|
-Are you one of these individuals, capable of aiding The Foundation in unveiling and cataloguing the various pieces of knowledge scattered around the world inside the minds and scriptures of every living being in the material planes?
+Are you capable of aiding The Foundation in unveiling and cataloguing the various pieces of knowledge scattered around the world inside the minds and scriptures of every living being in the material planes?
 
-Use your skills in arcana, history, nature, medicine, performance and persuasion to unveil the hidden knowledges still not catalogued by the Foundation mages. If you're able to aid them in cataloguing pieces of data, you will receive valuable bounties!"
+Use your skills to unveil the hidden knowledges still not catalogued by the Foundation mages. If you're able to aid them in cataloguing pieces of data, you will receive valuable bounties!"
 
--f "**1. How does this work?**|
-- The Foundation mages have setup Research Chambers in every major city of Seventra. Enter one the Research Chambers and check the channel pins for more information.
+-f "**1. How does it work?**|
+- The Mages have setup Research Chambers in every major city of Seventra. Enter one these Chambers and check the channel pins for more information.
 - If you complete the research successfully, you will earn prizes provided by The Foundation. They will be automatically added to a bag called **Research** on your `!bag`."
 
 -f "**2. Getting A Research Session Started**|
 - Use `!research start` to have the Research Chamber pick a Subject/Category for you to research upon.
 - The Category is chosen at random, but character with higher INT have higher probability of being assigned to Categories that require an intelligence-based check, whereas characters with higher CHA have higher chances of receiving assignments for charisma-based checks.
-- Once a Category is selected, the Foundation Research Chamber will probe your mind to evaluate if it is strong enough to have information magically transferred to you. You will perform either a `Charisma (Arcana)` or `Intelligence (Arcana)` check to determine if your mind is in sync with the Foundation (the check is again decided based on your highest attribute)."
+- Once a Category is selected, the Foundation Research Chamber will probe your mind to evaluate if it is strong enough to have information magically transferred to you. You will perform either a `Charisma (Arcana)` or `Intelligence (Arcana)` check to determine if your mind is in sync with the Foundation (the check is decided based on your highest attribute)."
 
 -f "Available Categories|
 `Alchemy:` use your *Arcana* knowledge to catalogue information about brewing potions and poisons.
@@ -56,9 +56,9 @@ Use your skills in arcana, history, nature, medicine, performance and persuasion
 `Seventra Personality:` uses your *Persuasion* skills to understand the motivations of a Seventra Personality and help catalogue information about famous Seventra residents."
 
 -f "**3. Receiving Knowledge**|
-- If your mind in sync with the Foundation, use `!research identify` to perform the appropriate check and try to decipher all the knowledge and information selected for you by the Foundation.
+- If your mind in sync with the Foundation, use `!research identify` to perform the appropriate check and try to decipher all the knowledge and information selected for you.
 - The check performed will vary according to the Category selected.
-- The DC of the check varies depending on the entry that you are researching. Entries with higher DC award more valuable loot. The entries are selected at random."
+- The DC of the check varies depending on the entry that you are researching. Entries with higher DC award more valuable loot. Entries are selected at random."
 
 -f "**4. Cataloguing the Information**|
 - Upon identification, use `!research catalogue` to have the knowledge extracted from your mind and catalogued for the Foundation mages. This is a **Concentration Check**.
@@ -69,7 +69,7 @@ Use your skills in arcana, history, nature, medicine, performance and persuasion
 - Upon completion, the receiving loot will automatically be added to a bag called **Research**. Use `!bag Research` to see its contents.
 - Every research entry awards **Foundation Tokens**. These are simple tokens with the stamp of the Foundation and they can be traded for copper/silver/gold pieces at any market channel. Each token can be sold for 5 copper pieces.
 - Some special entries award Relics. These are collectible items that can either be traded for gold, or collected and traded for specific items. For example:
-`Relic [Spell Scroll Level 2] [1/15] (22gp)`: this relic can be traded for 11gp (50% of market value as per rules on trading with merchants) or, if you collect 15 of them, they can be traded for a `Spell Scroll Level 2`."
+`Relic [Magical Scroll] (8gp)`: this relic can be traded for 4gp (50% of market value as per rules on trading with merchants) or, if you collect enough of them, they can be traded for Spell Scrolls. Use `!research relics` to see what each relic can be traded for. If you want to just sell them, you can use the `!cashin` alias."
 
 -f "**6. How Much Can I Research?**|
 - Researching is limited to 6 times per 24-hours on the server. The counter resets at 00:00 UTC, and then you can hunt 6 more times in the 24-hour window.

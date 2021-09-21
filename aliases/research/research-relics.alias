@@ -1,0 +1,80 @@
+embed
+<drac2>
+    t = f'{character().name} wants to trade their Relics!'
+    imgs = [
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589125914230805/f0f72cf16a2a49efbbe957edcffaee1c.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589134769979392/fb1ef980ce984a31a6300919c2c6014b.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589135344074792/925704becc4cc270fe07249b74655f79.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589138959826944/642ee6d8bb39df2dbf10ea499eb70b72.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589140976500736/62dde1e68b7cb760f485bd76622312cf.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589142867869717/4fa125b2eb2c8d411426349c77f465b8.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589167472443413/1f949682248588d881ff16700fd97ef8.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589174568419368/919e5b0f70e3febe8a3d7ad6611e40f4.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589179014512680/304093598d62ca026d42b87001af339c.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589181863624704/80b2afcfba8f5b50f020b3df46e29011.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589184509050900/b043bc984c7f3537e0f372c56557dbc8.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589186712109066/81c2276037541d7bf9d99e2dc0fb8b88.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589189894799370/9c44699ef6e6e91864704141e3a167b7.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589192495661086/347a4cc9c4f3dd147eca46b4ecf0e1d8.jpeg',
+        'https://cdn.discordapp.com/attachments/855908840633270282/863589195368628224/a72fa6da68db5e317fdf2b26836a2da9.jpeg'
+    ]
+    thumb = imgs[roll(f'1d{len(imgs)}') - 1]
+</drac2>
+-title "{{t}}"
+-thumb "{{thumb}}"
+
+-f "__**The Foundation Requests Your Aid!**__|
+`!research` created by and for the members of **Seventra: Exodus of Heroes!**"
+
+-f "**Trading Relics**|
+- Please ping `@Guide` before using your relics to validate the transaction.
+Additional cost may incur if the transaction involves a special type of item.
+- If you would like to role-play the exchange, you can head to the Magic Emporium in Arbarax. You get a free teleportation travel to the city to perform the exchange."
+
+-f "**Relic [Magical Artifact]**|
+These relics can be traded for any magic items!
+```Common Magic Item........10
+Uncommon Magic Item......47
+Rare Magic Item.........280```"
+
+-f "**Relic [Magical Scroll]**|
+These relics can be traded for spell scrolls!
+```Spell Scroll: Cantrip.....10
+Spell Scroll: Level 1.....15
+Spell Scroll: Level 2.....42
+Spell Scroll: Level 3.....77
+Spell Scroll: Level 4....160
+Spell Scroll: Level 5....305```"
+
+-f "**Relic [Alchemy]**|
+These relics can be traded for poisons or potions!
+```
+Potion of Healing.............18
+Philter of Love...............39
+Potion of Poison..............42
+Elixir of Health..............52
+Truth Serum...................60
+Potion of Fire Breath.........64
+Potion of Water Breathing.....70
+Potion of Mind Reading........77
+Potion of Climbing............78
+Potion of Heroism.............78
+Drow Poison...................80
+Potion of Animal Friendship...80
+Potion of Invisibility........80```"
+
+-f "```Potion of Diminution............108
+Potion of Growth................108
+Essence of Ether................120
+Potion of Gaseous Form..........120
+Potion of Resistance............125
+Potion of Speed.................160
+Burnt Othur Fumes...............200
+Potion of Flying................200
+Potion of Clairvoyance..........380
+Potion of Fire Giant Strength...525
+Midnight Tears..................600
+Purple Worm Poison..............800
+Potion of Cloud Giant Strength..835
+Potion of Invulnerability......1500```"
+

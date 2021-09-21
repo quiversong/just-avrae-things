@@ -2,7 +2,7 @@ embed
 <drac2>
 # Configuration Variables
 IS_LIVE = False
-VERSION = '1.14'
+VERSION = '2.00'
 
 BETA_CAT_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
 LIVE_CAT_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
@@ -446,10 +446,18 @@ if action == "identify":
 
 elif action == 'catalogue':
     c.delete_cvar(R_STAGE_VAR)
+
     b_bonus_param = ' + '.join(pargs.get('b', default=[''])).strip()
-    dice = '2d20kh1' if pargs.adv() == 1 or auto_adv else '1d20kl1' if pargs.adv() == -1 else '1d20'
-    s_die = f'{dice} + {constitutionMod}'
-    s_die = f'{s_die} + {b_bonus_param}' if b_bonus_param != '' else s_die
+
+    if 'wc' in pargs:
+        auto_adv = True
+
+    if 'bs' in pargs:
+        b_bonus_param = str(intelligenceMod)
+
+    adv_status = True if pargs.adv() == 1 or auto_adv else False if pargs.adv() == -1 else None
+    dice = c.saves.get('con').d20(base_adv = adv_status)
+    s_die = f'{dice} + {b_bonus_param}' if b_bonus_param != '' else dice
     s_roll = vroll(s_die)
     succ = s_roll.total >= entry["concentration_dc"]
 
