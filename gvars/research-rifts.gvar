@@ -8,19 +8,19 @@
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864376548764680192/95ca0fe5646c9ffbae2e3f8e39199949.jpeg",
           "desc": "A hideous crone, with wrinkled and blotchy skin marred by warts and moles. Her long, skinny fingers stretch towards you, the talon-like nails as tough as steel and as sharp as blades glisten against the faint light inside the chamber. Behind her ugly smile you can see with sharp and blackened teeth, and smell her noxious breath.",
           "dc": 15,
-          "loot": {"Arcane Essence (10gp)": 1, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 2}
+          "loot": {"Arcane Essence (10gp)": 1, "Relic [Magical Scroll] (8gp)": 18}
         }, {
           "name": "Dryad",
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864376477096607764/ccf3442a87f8b232d9db46934fca99f3.jpeg",
           "desc": "A beautiful woman with delicate features seemingly made of soft wood. Her green and lush hair seems to be made of leaves and foliage. She chants an eerie and mysterious melody to you, charming you to do its bidding...",
           "dc": 18,
-          "loot": {"Arcane Essence (10gp)": 1, "Relic [Any Uncommon Magic Item] [1/20] (40gp)": 4}
+          "loot": {"Arcane Essence (10gp)": 1, "Relic [Magical Artifact] (16gp)": 10}
         }, {
           "name": "Faerie Dragon",
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864376483706306580/d601265aa09ce31967be09ad0a3120f1.jpeg",
           "desc": "A dragon-like creature about the size of a cat with an iridescent coat of scales that reflect all colors of the rainbow hisses at you, beating its butterfly-like wings as it waggles its long, platinum-colored tail. You cannot tell if it is threatening to attack or just mocking you. Perhaps it's both...",
           "dc": 20,
-          "loot": {"Arcane Essence (10gp)": 1, "Faerie Dragon Scale": 1, "Relic [Any Rare Magic Item] [1/40] (120gp)": 4}
+          "loot": {"Arcane Essence (10gp)": 1, "Faerie Dragon Scale": 1, "Relic [Magical Artifact] (16gp)": 30}
         }
       ]
     }, {
@@ -31,19 +31,19 @@
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864553764697407498/Abyssal_chicken_DiA.jpeg",
           "desc": "Coming out of the rift you see a small creature with leather wings that do not seem capable of suistained flight, but fold above the creature's torso, giving it a tear-shaped appearance. Its large mouth is filled with fangs that you can see when it opens its mouth, lashing its long tongue out. It's coming towards you fast with its two large chicken-like legs!",
           "dc": 18,
-          "loot": {"Arcane Essence (10gp)": 1, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 2}
+          "loot": {"Arcane Essence (10gp)": 1, "Relic [Magical Scroll] (8gp)": 18}
         }, {
           "name": "Nashrou",
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864551164774973470/Nashrou3e.jpeg",
           "desc": "A bizarre, nightmarish creature looms 10 feet above the ground, taking slow but long steps towards you with its four long, lithe legs, waving its six arms threateningly as it makes its way out of the rift. Its thin, bony thicket of amalgamated spikes and claws is covered by a coat of glistening chitin. It looks straight to you with its hungry cluster of eyes sitting in the center of its body.",
           "dc": 20,
-          "loot": {"Arcane Essence (10gp)": 1, "Relic [Any Uncommon Magic Item] [1/20] (40gp)": 5}
+          "loot": {"Arcane Essence (10gp)": 1, "Relic [Magical Artifact] (16gp)": 12}
         }, {
           "name": "Maw Demon",
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864555091146702888/Maw_demon-5e.jpeg",
           "desc": "A blob of toothy mouth surrounded by a plethora of stubby appendages, this aberrational monster makes its way out of the rift. The squat, bulbous body of the demon is split in half to accommodate its giant gullets. It looks at you and starts to drool...",
           "dc": 24,
-          "loot": {"Arcane Essence (10gp)": 1, "Maw Demon Tooth": 1, "Relic [Any Rare Magic Item] [1/40] (120gp)": 5}
+          "loot": {"Arcane Essence (10gp)": 1, "Maw Demon Tooth": 1, "Relic [Magical Artifact] (16gp)": 37}
         }
       ]
     }, {
@@ -54,21 +54,21 @@
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864558901171847178/Shadow_Mastiff.png",
           "desc": "You can barely see it, but you are certain that a creature creeps out of the rift and makes its way into the chamber, hiding in the darkness. When the portal's energy crackles and sputters, the surge of light helps you finally see it: a large and monstrous dog like beast, with a humanoid face full of vicious teeth. Its mouth opens wide as it barks towards you, spitting menacingly.",
           "dc": 15,
-          "loot": {"Arcane Essence (10gp)": 1, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 2}
+          "loot": {"Arcane Essence (10gp)": 1, "Relic [Magical Scroll] (8gp)": 18}
         },
         {
           "name": "Darkweaver",
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864560720733011969/Darkweaver3e.jpeg",
           "desc": "An amorphous form of darkness clings like a cloak to the grey, fleshy body of this spider-like creature. It creep towards you with its eight long tentacles as it opens its horrendous mouth, baring its disgusting fangs at you.",
           "dc": 18,
-          "loot": {"Arcane Essence (10gp)": 1, "Relic [Any Uncommon Magic Item] [1/20] (40gp)": 5}
+          "loot": {"Arcane Essence (10gp)": 1, "Relic [Magical Artifact] (16gp)": 12}
         },
         {
           "name": "Shadow Dragon",
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864556490689740870/244449.jpeg",
           "desc": "Physically seeming insubstantial, a giant dark and translucent scaled beast of a lizard solemnly walks out of the rift imposingly, as if it owns every place it chooses to go. You can barely see its form, as it is completely camouflaged by the darkness around it. Each the small crackles of energy of the rift behind it sputters, a part of the dragon's body lightens up on your eyes. This is no black dragon... not one of those revered by the Kobolds of the Temple of the Scaled Gods. This is... something else...",
           "dc": 21,
-          "loot": {"Arcane Essence (10gp)": 1, "Shadow Dragon Scale": 1, "Relic [Any Rare Magic Item] [1/40] (120gp)": 3}
+          "loot": {"Arcane Essence (10gp)": 1, "Shadow Dragon Scale": 1, "Relic [Magical Artifact] (16gp)": 22}
         }
       ]
     }, {
@@ -79,21 +79,21 @@
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864565388317556766/Garmorm.gif",
           "desc": "A round, 12 feet long limbless body covered in huge, tooth-filled mouths, crawls out of the rift towards you. Its many mouths start to sing a terrifying chant as it makes itself ready for its next meal (that's you)!",
           "dc": 15,
-          "loot": {"Arcane Essence (10gp)": 1, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 2}
+          "loot": {"Arcane Essence (10gp)": 1, "Relic [Magical Scroll] (8gp)": 18}
         },
         {
           "name": "Astral Dreadnought",
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864576688298262538/Astral_dreadnought-5e.png",
           "desc": "A massive, gargantuan creature with a large single eye above a large mouth filled with sharp teeth crawls through the rift, hissing and roaring at you, its long serpentine body seems to stretch off infinitely into the distance and into the rift. It sways its crab-link pincers lined with sharp, serrated edges menacingly at you.",
           "dc": 18,
-          "loot": {"Arcane Essence (10gp)": 1, "Relic [Any Uncommon Magic Item] [1/20] (40gp)": 5}
+          "loot": {"Arcane Essence (10gp)": 1, "Relic [Magical Artifact] (16gp)": 12}
         },
         {
           "name": "Battle Dragon",
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864564207231041556/Battle_dragon-4e.jpeg",
           "desc": "A large dragon imposingly makes its way out of the rift. Its scales have a dull brown color at first, but when it locks eyes with you, it opens its large brilliantly patterned wings and its scales shift into a bright golden color. With a growl that demonstrates excitement and eagerness, it prepares to pounce onto you.",
           "dc": 20,
-          "loot": {"Arcane Essence (10gp)": 1, "Battle Dragon Scale": 1, "Relic [Any Rare Magic Item] [1/40] (120gp)": 3}
+          "loot": {"Arcane Essence (10gp)": 1, "Battle Dragon Scale": 1, "Relic [Magical Artifact] (16gp)": 22}
         }
       ]
     }, {
@@ -104,19 +104,19 @@
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864640781066829874/636252758704142054.jpeg",
           "desc": "A hideous blob of molten, stinking flesh oozes as it moves through the rift and into the research chamber. Its formless, shivering underneath mass dragging through the ground as it reaches towards you with its vaguely humanoid arms and eyes. With expression of horror and anguish on its horrific face, it grunts at you, but you cannot tell if it's threatening you or begging for help... Perhaps it's both?",
           "dc": 18,
-          "loot": {"Arcane Essence (10gp)": 1, "Relic [Spell Scroll Level 5] [1/35] (70gp)": 2}
+          "loot": {"Arcane Essence (10gp)": 1, "Relic [Magical Scroll] (8gp)": 18}
         }, {
           "name": "Kyton",
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864640778517348392/636252766618069332.jpeg",
           "desc": "A tall and muscular humanoid wearing chains wrapped around its body in place of regular apparel fiercely walks through the rift, eyes locked on you. The chains, wrapped tightly around the creature, rattles as it moves, and slither around its body as if they are alive. The spiked shackles are covered in barbs and iron scraps. The lengths ending in hooks, blades and weighty balls. As it approaches, the chains position themselves as snakes, ready to pounce at you...",
           "dc": 20,
-          "loot": {"Arcane Essence (10gp)": 1, "Relic [Any Uncommon Magic Item] [1/20] (40gp)": 6}
+          "loot": {"Arcane Essence (10gp)": 1, "Relic [Magical Artifact] (16gp)": 15}
         }, {
           "name": "Pit Fiend",
           "img": "https://cdn.discordapp.com/attachments/855908840633270282/864640776573812737/636252772132434763.jpeg",
           "desc": "A majestic and horrifying creature, with a hulking 12-foot tall form and at least 800 pounds stomps out of the rift and into the research chamber. Its body, armored with inflamed scales hovers over everything as it opens its massive, bat-like wings wide. It looks deep at you with its gargoylish face, baring its huge fangs that drip with green venom...",
           "dc": 25,
-          "loot": {"Arcane Essence (10gp)": 1, "Pit Fiend Scale": 1, "Relic [Any Rare Magic Item] [1/40] (120gp)": 5}
+          "loot": {"Arcane Essence (10gp)": 1, "Pit Fiend Scale": 1, "Relic [Magical Artifact] (16gp)": 37}
         }
       ]
     }
