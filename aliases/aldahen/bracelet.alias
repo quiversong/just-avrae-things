@@ -1,21 +1,25 @@
 embed <drac2>
 command = 'ald'
-footer = 'Seventra: Exodus of Heroes | Aldahen Collection v0.1 | !ald\nCreators: quiversong#2772 (Adrienne)'
+footer = 'Seventra: Exodus of Heroes | Aldahen Collection v0.1 | !ald help\nCreators: quiversong#2772 (Adrienne)'
 args = &ARGS&
 pargs = argparse(args)
 c = character()
 f = []
-cc_name = "Aldahen Bracelet"
+
 spell_attr = 'INT' if intelligenceMod >= charismaMod else 'CHA'
 spell_mod = charismaMod if spell_attr == 'CHA' else intelligenceMod
 
-c.create_cc_nx(cc_name, 0, spell_mod, 'long', 'bubble')
-if c.get_cc_max(cc_name) < spell_mod:
-    c.create_cc_nx(cc_name, 0, spell_mod, 'long', 'bubble')
+CC_NAME = "Aldahen Bracelet"
+CHARGES = 3
+
+c.create_cc_nx(CC_NAME, 0, CHARGES, 'long', 'bubble')
+if c.get_cc_max(CC_NAME) > CHARGES:
+    c.delete_cc(CC_NAME)
+    c.create_cc_nx(CC_NAME, 0, CHARGES, 'long', 'bubble')
 
 title = f'{c.name} tries to use their Aldahen Bracelet...'
 
-if c.get_cc(cc_name) <= 0:
+if c.get_cc(CC_NAME) < 1:
     f.append('Oops!|Your bracelet is all out of charges! Try again tomorrow!')
     return ''
 
@@ -28,21 +32,35 @@ option = args[0].lower()
 
 if option == 'use':
     f.append('Benefits (choose one):|- You gain advantage on Arcana and History checks for the next 10 minutes.\n\n- You can cast Comprehend Languages without spending a spell slot. The spell is cast normally and not as a ritual, and you do not need to know this spell or have it prepared to be able to cast it through this feature.')
-    c.mod_cc(cc_name, -1)
-    f.append(f'Bracelet of the Aldahen|{c.cc_str(cc_name)}')
+    c.mod_cc(CC_NAME, -1)
+    f.append(f'Bracelet of the Aldahen|{c.cc_str(CC_NAME)}')
     return ''
 
 if option == 'curse':
-    targets = pargs.get('t')
-    target_limit = proficiencyBonus - 1
-    if len(targets) > target_limit:
-        f.append(f'Oops!|You can target a number of creatures equals to:\n**Proficiency bonus - 1**: `{target_limit}`\n**You tried to target**: `{len(targets)}`\n\nTry again with the appropriate number of targets.')
-        f.append(f'Bracelet of the Aldahen|{c.cc_str(cc_name)}')
+    if c.get_cc(CC_NAME) < 2:
+        f.append('Oops!|Your bracelet does not have enough charges! Try again tomorrow!')
         return ''
 
-    if not combat():
+    if not combat() or combat().me == None:
         f.append(f'Oops!|You must be in combat to use curse your enemies!')
-        f.append(f'Bracelet of the Aldahen|{c.cc_str(cc_name)}')
+        f.append(f'Bracelet of the Aldahen|{c.cc_str(CC_NAME)}')
+        return ''
+
+    target_names = pargs.get('t')
+    target_limit = spell_mod - 1
+    if target_limit < 1:
+        target_limit = 1
+    if len(target_names) > target_limit:
+        f.append(f'Oops!|You can target a number of creatures equals to:\n**Spellcasting modifier - 1**: `{target_limit}`\n**You tried to target**: `{len(target_names)}`\n\nTry again with the appropriate number of targets.')
+        f.append(f'Bracelet of the Aldahen|{c.cc_str(CC_NAME)}')
+        return ''
+
+    targets = []
+    for t in target_names:
+        targets.append(combat().get_combatant(t))
+        if t == None:
+            f.append(f'Oops!|Could not find target `{t}`')
+    if len(targets) != len(target_names):
         return ''
 
     roll_result = roll('1d4')
@@ -52,13 +70,12 @@ if option == 'curse':
     me.add_effect('Aldahen Bracelet', '', 2, False, None, True)
     my_effect = me.get_effect('Aldahen Bracelet')
 
-    for t in targets:
-        target = combat().get_combatant(t)
+    for target in targets:
         target.add_effect('Aldahen Curse', f'-sb -{roll_result}', -1, False, my_effect, True, f'Subtract 1d4 ({roll_result}) from their next saving throw.')
         f.append(f'{target.name}|**Effect**: Aldahen Curse: {roll_result}')
 
-    c.mod_cc(cc_name, -1)
-    f.append(f'Bracelet of the Aldahen|{c.cc_str(cc_name)}')
+    c.mod_cc(CC_NAME, -2)
+    f.append(f'Bracelet of the Aldahen|{c.cc_str(CC_NAME)}')
 
     f.append("Description|The Aldahen bracelet magically exposes the weaknesses of your enemies. As a bonus action on your turn, you can call on the bracelet's powers to bestow a curse on your foes. Choose a number of creatures equal to your proficiency bonus minus 1. Each of the chosen creatures subtract 1d4 from the next saving throw they make before the end of your next turn.")
 </drac2>
@@ -66,3 +83,4 @@ if option == 'curse':
 -thumb https://cdn.discordapp.com/attachments/871175851134304256/882292756309999616/aldahen-bracelet.jpg
 {{''.join(['-f "' + field + '"\n' for field in f]) if len(f) > 0 else ''}}
 {{f'-footer "{footer}"' if footer else ""}}
+
