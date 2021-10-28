@@ -171,7 +171,7 @@ if p in b_ids:
   is_dragon = is_dragon_roll == DRAGON_DIE
   if is_dragon:
     dragon_types = dragon_data["biomes"][p]
-    dragon_type = dragon_types[roll(f'1d{len(dragon_types)}')]
+    dragon_type = dragon_types[roll(f'1d{len(dragon_types)}') - 1]
     commune_or_battle = 'commune' if roll('1d2') == 1 else 'battle'
     anm_id = f'dragon-{dragon_type}-{commune_or_battle}'
     anm = dragon_data["dragons"][anm_id]
