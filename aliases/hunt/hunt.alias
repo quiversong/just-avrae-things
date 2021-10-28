@@ -2,11 +2,14 @@ tembed
 <drac2>
 # Configuration Variables
 IS_LIVE = False
-VERSION = '1.06'
+VERSION = '1.10'
 
 BETA_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
-LIVE_VAR = "e93be9b6-b00f-47bb-8d63-a8c5efd8d32a"
-DRAGON_VAR = ""
+LIVE_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
+
+DRAGON_DIE = 101
+DRAGON_VAR = "3f0c7f42-7712-4e86-8252-df4782f64c98"
+
 DAILY_CAP = 6
 
 # Code
@@ -96,6 +99,7 @@ if len(args) > 0 and args[0] == "resetstats":
   return 0
 
 data = load_json(get_gvar(data_var))
+dragon_data = load_json(get_gvar(DRAGON_VAR))
 
 biomes = data["biomes"]
 b_ids = [k for k, v in biomes.items()]
@@ -163,12 +167,22 @@ if p in b_ids:
     c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
     return 0
 
-  anm_id = anm_id[0]
-  anm = animals[anm_id]
+  is_dragon_roll = roll(f'1d{DRAGON_DIE}')
+  is_dragon = is_dragon_roll == DRAGON_DIE
+  if is_dragon:
+    dragon_types = dragon_data["biomes"][p]
+    dragon_type = dragon_types[roll(f'1d{len(dragon_types)}')]
+    commune_or_battle = 'commune' if roll('1d2') == 1 else 'battle'
+    anm_id = f'dragon-{dragon_type}-{commune_or_battle}'
+    anm = dragon_data["dragons"][anm_id]
+  else:
+    anm_id = anm_id[0]
+    anm = animals[anm_id]
+
   add_n = "n" if anm["name"][0] in "AEIOU" else ""
   c.set_cvar(HUNT_STAGE_VAR, f'{anm_id}:sneak')
 
-  if "commune" in anm and anm["commune"] == True:
+  if ("commune" in anm and anm["commune"] == True) or is_dragon:
     color = 'f0b330'
     f = f'{c.name} found a ***VERY RARE*** {anm["name"]}!|Use `!hunt sneak` to try to approach it without being noticed.'
   else:
@@ -176,9 +190,11 @@ if p in b_ids:
   c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
   return 0
 
-anm = animals[pid]
+anm = dragon_data["dragons"][pid] if pid.startswith('dragon-') else animals[pid]
 anm_name = anm["name"]
+
 add_to_bag = None
+
 if "commune" in anm and anm["commune"] == True:
   color = 'f0b330'
 
