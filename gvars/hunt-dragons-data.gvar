@@ -1,10 +1,10 @@
 {
-  "biomes":
-    "desert": ["red", "green"]
-    "mountain": ["red", "white"]
-    "forest": ["green", "black"]
-    "grassland": ["blue", "white"]
-    "swamp": ["green", "black"]
+  "biomes": {
+    "desert": ["red", "green"],
+    "mountain": ["red", "white"],
+    "forest": ["green", "black"],
+    "grassland": ["blue", "white"],
+    "swamp": ["green", "black"],
     "coastline": ["blue", "white"]
   },
   "dragons": {
@@ -103,4 +103,5 @@
       "commune_fail": "The {anm_name} seems dissatisfied. It turns and walks away.",
       "img": "https://cdn.discordapp.com/attachments/832440929855995914/895800292057178203/Screenshots_2021-10-07-16-28-09.png"
     }
+  }
 }
