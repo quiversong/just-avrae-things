@@ -12,12 +12,11 @@
         "g4": [58,63],
         "d4": [64,72],
         "f13": [73,77],
-        "d5": [78,84],
-        "f16": [85,89],
-        "d6": [90,93],
-        "My8": [94,97],
-        "My2": [98,99],
-        "My16": [100,100]
+        "d5": [78,85],
+        "f16": [86,91],
+        "d6": [92,95],
+        "My8": [96,98],
+        "My2": [99,100]
       },
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827949533438279730/latest.png"
     },
@@ -72,22 +71,21 @@
         "f3": [37,51],
         "f6": [52,56],
         "f17": [57,59],
-        "f20": [60,61],
-        "f13": [62,63],
-        "a3": [64,65],
-        "f12": [66,68],
-        "f15": [69,70],
-        "f18": [71,72],
-        "f2": [73,75],
-        "a4": [76,87],
-        "f16": [88,89],
-        "f4": [90,92],
-        "My1": [93,93],
-        "f11": [94,96],
-        "My4": [97,97],
-        "f21": [98,98],
-        "My10": [99,99],
-        "My19": [100,100]
+        "f20": [60,62],
+        "f13": [63,64],
+        "a3": [65,66],
+        "f12": [67,69],
+        "f15": [70,71],
+        "f18": [72,73],
+        "f2": [74,76],
+        "a4": [77,88],
+        "f16": [89,90],
+        "f4": [91,93],
+        "My1": [94,94],
+        "f11": [95,97],
+        "My4": [98,98],
+        "f21": [99,99],
+        "My10": [100,100]
       },
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827950400531333152/Hot-photo-backdrop-enchanted-forest-photo-booth-props-nature-scenery-photography-background-travel-v.png"
     },
@@ -135,16 +133,15 @@
         "m9": [56,58],
         "f1": [59,66],
         "f7": [67,69],
-        "s3": [70,71],
-        "f9": [72,76],
-        "f10": [77,81],
-        "f13": [82,86],
-        "s5": [87,92],
-        "f4": [93,96],
-        "My11": [97,97],
-        "My6": [98,98],
-        "s6": [99,99],
-        "My14": [100,100]
+        "s3": [70,72],
+        "f9": [73,77],
+        "f10": [78,82],
+        "f13": [83,87],
+        "s5": [88,93],
+        "f4": [94,97],
+        "My11": [98,98],
+        "My6": [99,99],
+        "s6": [100,100]
       },
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827950927582986270/Cb2wMeI0mNs2Dv8BLLwpeynqDsEXErHNN8G5YtvGy5Y.png"
     },
@@ -162,19 +159,18 @@
         "d6": [61,63],
         "c3": [64,67],
         "m1": [68,69],
-        "m5": [70,71],
-        "m14": [72,74],
-        "f9": [75,78],
-        "c7": [79,83],
-        "f20": [84,87],
-        "f13": [88,89],
-        "f12": [90,92],
-        "f4": [93,94],
-        "m13": [95,96],
-        "My7": [97,97],
-        "My9": [98,98],
-        "f21": [99,99],
-        "My17": [100,100]
+        "m5": [70,72],
+        "m14": [73,75],
+        "f9": [76,79],
+        "c7": [80,84],
+        "f20": [85,88],
+        "f13": [89,90],
+        "f12": [91,93],
+        "f4": [94,95],
+        "m13": [96,97],
+        "My7": [98,98],
+        "My9": [99,99],
+        "f21": [100,100]
       },
       "img": "https://cdn.discordapp.com/attachments/827581981452795975/827951208521269288/unknown.png"
     }
@@ -972,15 +968,6 @@
       "commune_fail": "The {anm_name} seems dissatisfied. It turns and walks away.",
       "img": "https://cdn.discordapp.com/attachments/829536903140343828/829840999785168957/unknown.jpeg"
     },
-"My14": {
-      "name": "Black Dragon",
-      "cha": 12,
-      "commune": true,
-      "pp": 13,
-      "prizes": [{"name": "Black Dragonscale Token", "qt": 1}],
-      "sneak_fail": "The {anm_name} sees your approach and flies away...",
-      "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813884135145482/BlackDragon.jpeg"
-    },
 "My15": {
       "name": "Divine Pegasus",
       "cha": 11,
@@ -992,24 +979,6 @@
       "commune_fail": "The {anm_name} seems dissatisfied. It turns and flies away.",
       "img": "https://i.pinimg.com/474x/c5/97/c2/c597c2cd270805d55f4494d3fe87842a.jpg"
     },
-"My17": {
-      "name": "Bronze Dragon",
-      "cha": 12,
-      "commune": true,
-      "pp": 13,
-      "prizes": [{"name": "Bronze Dragonscale Token", "qt": 1}],
-      "sneak_fail": "The {anm_name} sees your approach and flies away...",
-      "img": "https://cdn.discordapp.com/attachments/829536903140343828/829807404501696542/BronzeDragon.jpeg"
-    },
-"My19": {
-      "name": "Green Dragon",
-      "cha": 12,
-      "commune": true,
-      "pp": 13,
-      "prizes": [{"name": "Green Dragonscale Token", "qt": 1}],
-      "sneak_fail": "The {anm_name} sees your approach and flies away...",
-      "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811611169849404/GreenDragon.jpeg"
-    },
 "g12": {
       "name": "Chimera",
       "ac": 12,
@@ -1019,15 +988,6 @@
       "prizes": [{"name": "Chimera Parts (20gp)", "qt": 6},{"name": "Venom Gland (1gp)", "qt": 12}],
       "sneak_fail": "The {anm_name} sees your approach and flies away...",
       "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812014632140830/Chimera.png"
-    },
-"My16": {
-      "name": "Blue Dragon",
-      "cha": 12,
-      "commune": true,
-      "pp": 13,
-      "prizes": [{"name": "Blue Dragonscale Token", "qt": 1}],
-      "sneak_fail": "The {anm_name} sees your approach and flies away...",
-      "img": "https://cdn.discordapp.com/attachments/829536903140343828/829810431886622791/BlueDragon.jpeg"
     }
   },
   "images": {

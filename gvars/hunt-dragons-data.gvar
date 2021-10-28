@@ -1,0 +1,106 @@
+{
+  "biomes":
+    "desert": ["red", "green"]
+    "mountain": ["red", "white"]
+    "forest": ["green", "black"]
+    "grassland": ["blue", "white"]
+    "swamp": ["green", "black"]
+    "coastline": ["blue", "white"]
+  },
+  "dragons": {
+    "red-battle": {
+      "name": "Red Dragon",
+      "ac": 10,
+      "hp": 2,
+      "rations": 4,
+      "pp": 2,
+      "prizes": [{"name": "Red Dragon Scale", "qt": 1}],
+      "img": "https://media.discordapp.net/attachments/832440929855995914/895669190835470356/image0.jpg"
+    },
+    "red-commune": {
+      "name": "Red Dragon",
+      "cha": 7,
+      "commune": true,
+      "pp": 5,
+      "prizes": [{"name": "Red Dragon Scale", "qt": 1}],
+      "commune_succ": "The {anm_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
+      "commune_fail": "The {anm_name} seems dissatisfied. It turns and walks away.",
+      "img": "https://media.discordapp.net/attachments/832440929855995914/895669184518823976/image0.jpg"
+    },
+    "green-battle": {
+      "name": "Green Dragon",
+      "ac": 10,
+      "hp": 2,
+      "rations": 4,
+      "pp": 2,
+      "prizes": [{"name": "Green Dragon Scale", "qt": 1}],
+      "img": "https://media.discordapp.net/attachments/832440929855995914/895669175744360448/image0.jpg"
+    },
+    "green-commune": {
+      "name": "Green Dragon",
+      "cha": 7,
+      "commune": true,
+      "pp": 5,
+      "prizes": [{"name": "Green Dragon Scale", "qt": 1}],
+      "commune_succ": "The {anm_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
+      "commune_fail": "The {anm_name} seems dissatisfied. It turns and walks away.",
+      "img": "https://cdn.discordapp.com/attachments/832440929855995914/895796754920898580/Screenshots_2021-10-07-16-15-54.png"
+    },
+    "black-battle": {
+      "name": "Black Dragon",
+      "ac": 10,
+      "hp": 2,
+      "rations": 4,
+      "pp": 2,
+      "prizes": [{"name": "Black Dragon Scale", "qt": 1}],
+      "img": "https://media.discordapp.net/attachments/832440929855995914/895687706447843359/07744639ac03971905769519c36368c1.jpg"
+    },
+    "black-commune": {
+      "name": "Black Dragon",
+      "cha": 7,
+      "commune": true,
+      "pp": 5,
+      "prizes": [{"name": "Black Dragon Scale", "qt": 1}],
+      "commune_succ": "The {anm_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
+      "commune_fail": "The {anm_name} seems dissatisfied. It turns and walks away.",
+      "img": "https://static.wikia.nocookie.net/elderdragonsaga/images/d/d0/Dulath.jpg/revision/latest/scale-to-width-down/788?cb=20191216212753"
+    },
+    "blue-battle": {
+      "name": "Blue Dragon",
+      "ac": 10,
+      "hp": 2,
+      "rations": 4,
+      "pp": 2,
+      "prizes": [{"name": "Blue Dragon Scale", "qt": 1}],
+      "img": "https://media.discordapp.net/attachments/832440929855995914/895669163241123920/image0.jpg"
+    },
+    "blue-commune": {
+      "name": "Blue Dragon",
+      "cha": 7,
+      "commune": true,
+      "pp": 5,
+      "prizes": [{"name": "Blue Dragon Scale", "qt": 1}],
+      "commune_succ": "The {anm_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
+      "commune_fail": "The {anm_name} seems dissatisfied. It turns and walks away.",
+      "img": "https://cdn.discordapp.com/attachments/832440929855995914/895798875602968617/Screenshot_20211007-1621532.png"
+    },
+    "white-battle": {
+      "name": "White Dragon",
+      "ac": 17,
+      "hp": 133,
+      "rations": 20,
+      "pp": 5,
+      "prizes": [{"name": "White Dragon Scale", "qt": 1}],
+      "img": "https://media.discordapp.net/attachments/832440929855995914/895669155930456134/image0.jpg"
+    },
+    "white-commune": {
+      "name": "White Dragon",
+      "cha": 7,
+      "commune": true,
+      "pp": 5,
+      "prizes": [{"name": "White Dragon Scale", "qt": 1}],
+      "commune_succ": "The {anm_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
+      "commune_fail": "The {anm_name} seems dissatisfied. It turns and walks away.",
+      "img": "https://cdn.discordapp.com/attachments/832440929855995914/895800292057178203/Screenshots_2021-10-07-16-28-09.png"
+    }
+}
