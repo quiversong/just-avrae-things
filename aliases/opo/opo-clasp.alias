@@ -8,7 +8,7 @@ c.create_cc_nx(cc, dispType = 'bubble' , maxVal = 1, minVal = 0, reset = 'long')
 has_cc = c.get_cc(cc) > 0
 color = '32a852'
 
-t = f'{c.name} tries to use their Claps of the Pale Oak!'
+t = f'{c.name} tries to use their Clasp of the Pale Oak!'
 thumb = image
 fields = []
 
@@ -41,9 +41,9 @@ if has_cc:
         power = powers['pow'] if arg.startswith('pow') else powers['prot']
         combat().me.add_effect(f'{cc}: {power[0]}', power[1], power[2], False, None, False, f'{power[0]}: {power[3]}')
 
-        t = f'{c.name} uses the Claps of the Pale Oak!'
+        t = f'{c.name} uses the Clasp of the Pale Oak!'
 
-        f = 'Claps of the Pale Oak|The wooden clasp is carved by a member of the Order of the Pale Oak from a branch willingly shed by a Pale Oak. The clasp will show your allegiance and dedication to the wilds and wonders of Seventra.'
+        f = 'Clasp of the Pale Oak|The wooden clasp is carved by a member of the Order of the Pale Oak from a branch willingly shed by a Pale Oak. The clasp will show your allegiance and dedication to the wilds and wonders of Seventra.'
         fields.append(f)
 
         f = f'{power[0]}|{power[3]}'
