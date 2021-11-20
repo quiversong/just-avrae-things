@@ -1,0 +1,200 @@
+embed
+<drac2>
+# Configuration Variables
+VERSION = '0.1'
+
+DATA_VAR = "c85742dc-f2e9-4a99-b544-b8f71dd7bed9"
+DAILY_CAP = 1
+
+# Code
+args = &ARGS&
+pargs = argparse(args)
+c = character()
+c_first_name = c.name.split(' ')[0]
+cv, cs = c.cvars, c.skills
+
+title = f'{c_first_name} wants to challenge the warriors of the Kaizen Temple for a duel!'
+img, thumb = None, None
+sl, fl = "**Success!**", "**Failure!**"
+fields = []
+
+DUEL_TIME_VAR = "_du_dhc_"
+DUEL_STAGE_VAR = "_du_vars"
+DUEL_STATS_VAR = "_du_st_"
+
+daily_activity_control = None
+#! daily_activity_control = devrae_f daily_control_init(#P DUEL_TIME_VAR #P DAILY_CAP) !#
+##### devrae function insert [daily_control_init] #####
+daily_activity_control = None
+__p0__ = R_TIME_VAR
+__p1__ = DAILY_CAP
+# returns current counter and wait time text if any
+_var_name = __p0__
+_daily_limit = __p1__
+_cvars = character().cvars
+
+_now = time()
+if _var_name not in _cvars:
+  __result__ = { "count": 0, "wait_time": None }
+  character().set_cvar(_var_name, f"0:0")
+else:
+  _var_parts = _cvars[_var_name].split(':')
+  _count = int(_var_parts[0])
+  _first_time = float(_var_parts[1])
+  _wait_time = None
+  _is_next_day = False
+
+  if _count > 0 and _first_time != None:
+    _passed_in_day_since_first_time = _first_time % 86400
+    _next_midnight_after_first_time = _first_time + (86400 - _passed_in_day_since_first_time)
+    if _now > _next_midnight_after_first_time:
+      _is_next_day = True
+    elif _count >= _daily_limit:
+      _wait_time = _next_midnight_after_first_time - _now
+      _hours = floor(_wait_time / 3600)
+      _minutes = 0
+      if _hours == 0:
+        _minutes = ceil(_wait_time / 60)
+      else:
+        _minutes = ceil((_wait_time % 3600) / 60)
+      _wait_text = (str(_hours) + ' hours and ' if _hours > 0 else '') + str(_minutes) + ' minutes'
+
+  if _is_next_day:
+    _count = 0
+    __result__ = { "count": _count, "wait_time": None }
+    character().set_cvar(_var_name, f"0:0")
+  elif _count < _daily_limit:
+    __result__ = { "count": _count, "wait_time": None }
+  else:
+    __result__ = { "count": _count, "wait_time": _wait_text }
+
+daily_activity_control = __result__
+##### devrae function end [daily_control_init] #####
+research_count = daily_activity_control["count"]
+wait_time = daily_activity_control["wait_time"]
+
+footer = "Don't forget to role-play your duel!\n"
+footer += "\n" + f'Seventra: Exodus of Heroes | Nahachi Duel v{VERSION} | !duel help'
+footer += "\nCreators: quiversong#2772"
+
+all_warriors = load_json(get_gvar(DATA_VAR))
+warrior = None
+warrior_will_attack = False
+
+if len(args) > 0 and args[0] == 'start':
+    chosen_warrior_name = args[1].lower().strip()
+    warrior = [w for w in all_warriors if w["name"].lower() == chosen_warrior_name]
+    if len(warrior) == 0:
+        fields.append(f'{c_first_name} seems a little confused...|There are no warriors named {args[1]} available to duel with you.')
+        return 1
+
+    warrior = warrior[0]
+    warrior_name = warrior["name"]
+
+    title = f'{c.name} challenges {warrior_name} for a duel!'
+
+    player_init_roll = vroll(cs.initiative.d20())
+    fields.append(f"{c_first_name}'s initiative check|{player_init_roll.full}")
+
+    warrior_init_roll = vroll(f'1d20 + {warrior["init"]}')
+    fields.append(f"{warrior_name}'s initiative check|{warrior_init_roll.full}")
+
+    player_goes_fist = player_init_roll.total > warrior_init_roll.total
+    if player_init_roll.total == warrior_init_roll.total:
+        player_goes_fist = dexterityMod > warrior["init"]
+
+    if player_goes_fist:
+        f = f'{c_first_name} takes the initiative and makes the first move!|'
+        f += 'Use `!duel attack <one of your registered attacks>` to attack your opponent.'
+        fields.append(f)
+        c.set_cvar(DUEL_STAGE_VAR, f'0:0:{warrior_name}')
+    else:
+        warrior_will_attack = True
+
+if len(args) > 0 and args[0] == 'attack':
+    if len(args) == 1:
+        fields.append(f'{c_first_name} seems a little confused...|You need to specify which attack to use!')
+        return -1
+
+    stage_parts = cv[DUEL_STAGE_VAR].split(':')
+    player_hits = int(stage_parts[0])
+    warrior_hits = int(stage_parts[1])
+    warrior_id = stage_parts[2]
+    warrior = [w for w in all_warriors if w["name"].lower() == warrior_id]
+    warrior = warrior[0]
+
+    weapon = None
+    weapon_arg = args[1].lower()
+    weapon_str = [a for a in c.attacks
+      if str(a).lower().split(':')[0].strip().replace('*', '').startswith(weapon_arg)
+    ]
+    if len(weapon_str) > 0:
+        weapon_str = str(weapon_str[0])
+        weapon = {
+          'name': weapon_str.split(':')[0].strip(),
+          'a_bonus': int(weapon_str.split('Attack:')[1].strip().split(' ')[0])
+        }
+    else:
+        fields.append(f'{c_first_name} seems a little confused...|I could not find any attacks matching `{args[1]}`!')
+        return -1
+
+    title = f'{c_first_name} attacks with their {weapon["name"]}!'
+
+    attack_roll = vroll(f'1d20 + {weapon["a_bonus"]}')
+    crit = attack_roll.result.crit == 1
+
+    attack_successful = crit or attack_roll.total >= warrior["ac"]
+    player_hits += 1 if attack_successful else 0
+
+    fields.append(f"{c_first_name}'s attack roll|{attack_roll.full}")
+
+    if player_hits >= 3:
+        f = f'{c_first_name} wins!|'
+        f += '...after landing the third successful blow on {warrior["name"]}'
+        if warrior_hits == 0:
+            f += '\nFlawless victory!'
+        fields.append(f)
+        warrior_will_attack = False
+        c.delete_cvar(DUEL_STAGE_VAR)
+    else:
+        c.set_cvar(DUEL_STAGE_VAR, f'{player_hits}:{warrior_hits}:{warrior["name"].lower()}')
+        warrior_will_attack = True
+
+if warrior_will_attack:
+    stage_parts = cv[DUEL_STAGE_VAR].split(':')
+    player_hits = int(stage_parts[0])
+    warrior_hits = int(stage_parts[1])
+
+    attack_roll = vroll(f'1d20 + {warrior["attack"]}')
+    crit = attack_roll.result.crit == 1
+    attack_successful = crit or attack_roll.total >= c.ac
+    warrior_hits += 1 if attack_successful else 0
+
+    f = f"{warrior['name']} attacks with their {warrior['weapon']}!|"
+    f += "...and lands the blow successfully!" if attack_successful else "...but misses!"
+    fields.append(f)
+
+    if warrior_hits >= 3:
+        f = f'{warrior["name"]} wins!|'
+        f += '...after landing the third successful blow on {c_first_name}'
+        if warrior_hits == 0:
+            f += '\nFlawless victory!'
+        if "victory_action" in warrior:
+            f += f'\n{warrior["name"]} {warrior["victory_action"]}'
+        else:
+            f += f'\n{warrior["name"} bows politely and thanks you for the training.'
+        fields.append(f)
+        c.delete_cvar(DUEL_STAGE_VAR)
+    else:
+        fields.append('Use `!duel attack <one of your registered attacks>` to attack your opponent again.')
+        c.set_cvar(DUEL_STAGE_VAR, f'{player_hits}:{warrior_hits}:{warrior["name"].lower()}')
+
+</drac2>
+-title "{{title}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-f "{f}"' if f else ""}}
+{{f'-f "{f2}"' if f2 else ""}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}

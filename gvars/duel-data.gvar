@@ -1,0 +1,25 @@
+{
+  "warriors": [
+  {
+    "name": "A",
+    "desc": "A is cool",
+    "init": 2,
+    "ac": 13,
+    "attack": 4,
+    "weapon": "weapon of A",
+    "rewards": ["5gp"],
+    "victory_action": "throws confetti at you",
+    "image": ""
+  },
+  {
+    "name": "B",
+    "desc": "B is cool",
+    "init": 3,
+    "ac": 14,
+    "attack": 4,
+    "weapon": "weapon of B",
+    "rewards": ["7gp"],
+    "image": ""
+  }
+  ]
+}
