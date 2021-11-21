@@ -26,7 +26,7 @@ daily_activity_control = None
 #! daily_activity_control = devrae_f daily_control_init(#P DUEL_TIME_VAR #P DAILY_CAP) !#
 ##### devrae function insert [daily_control_init] #####
 daily_activity_control = None
-__p0__ = R_TIME_VAR
+__p0__ = DUEL_TIME_VAR
 __p1__ = DAILY_CAP
 # returns current counter and wait time text if any
 _var_name = __p0__
@@ -77,7 +77,7 @@ footer = "Don't forget to role-play your duel!\n"
 footer += "\n" + f'Seventra: Exodus of Heroes | Nahachi Duel v{VERSION} | !duel help'
 footer += "\nCreators: quiversong#2772"
 
-all_warriors = load_json(get_gvar(DATA_VAR))
+all_warriors = load_json(get_gvar(DATA_VAR))["warriors"]
 warrior = None
 warrior_will_attack = False
 
@@ -107,16 +107,17 @@ if len(args) > 0 and args[0] == 'start':
         f = f'{c_first_name} takes the initiative and makes the first move!|'
         f += 'Use `!duel attack <one of your registered attacks>` to attack your opponent.'
         fields.append(f)
-        c.set_cvar(DUEL_STAGE_VAR, f'0:0:{warrior_name}')
     else:
         warrior_will_attack = True
+
+    character().set_cvar(DUEL_STAGE_VAR, f'0:0:{warrior_name.lower()}')
 
 if len(args) > 0 and args[0] == 'attack':
     if len(args) == 1:
         fields.append(f'{c_first_name} seems a little confused...|You need to specify which attack to use!')
         return -1
 
-    stage_parts = cv[DUEL_STAGE_VAR].split(':')
+    stage_parts = character().cvars[DUEL_STAGE_VAR].split(':')
     player_hits = int(stage_parts[0])
     warrior_hits = int(stage_parts[1])
     warrior_id = stage_parts[2]
@@ -150,18 +151,18 @@ if len(args) > 0 and args[0] == 'attack':
 
     if player_hits >= 3:
         f = f'{c_first_name} wins!|'
-        f += '...after landing the third successful blow on {warrior["name"]}'
+        f += f'...after landing the third successful blow on {warrior["name"]}'
         if warrior_hits == 0:
             f += '\nFlawless victory!'
         fields.append(f)
         warrior_will_attack = False
-        c.delete_cvar(DUEL_STAGE_VAR)
+        character().delete_cvar(DUEL_STAGE_VAR)
     else:
-        c.set_cvar(DUEL_STAGE_VAR, f'{player_hits}:{warrior_hits}:{warrior["name"].lower()}')
+        character().set_cvar(DUEL_STAGE_VAR, f'{player_hits}:{warrior_hits}:{warrior["name"].lower()}')
         warrior_will_attack = True
 
 if warrior_will_attack:
-    stage_parts = cv[DUEL_STAGE_VAR].split(':')
+    stage_parts = character().cvars[DUEL_STAGE_VAR].split(':')
     player_hits = int(stage_parts[0])
     warrior_hits = int(stage_parts[1])
 
@@ -182,19 +183,16 @@ if warrior_will_attack:
         if "victory_action" in warrior:
             f += f'\n{warrior["name"]} {warrior["victory_action"]}'
         else:
-            f += f'\n{warrior["name"} bows politely and thanks you for the training.'
+            f += f'\n{warrior["name"]} bows politely and thanks you for the training.'
         fields.append(f)
-        c.delete_cvar(DUEL_STAGE_VAR)
+        character().delete_cvar(DUEL_STAGE_VAR)
     else:
         fields.append('Use `!duel attack <one of your registered attacks>` to attack your opponent again.')
-        c.set_cvar(DUEL_STAGE_VAR, f'{player_hits}:{warrior_hits}:{warrior["name"].lower()}')
+        character().set_cvar(DUEL_STAGE_VAR, f'{player_hits}:{warrior_hits}:{warrior["name"].lower()}')
 
 </drac2>
 -title "{{title}}"
 {{f'-image "{img}"' if img else ""}}
 {{f'-thumb "{thumb}"' if thumb else ""}}
-{{f'-f "{f}"' if f else ""}}
-{{f'-f "{f2}"' if f2 else ""}}
-{{f'-color "{color}"' if color else ""}}
 {{f'-footer "{footer}"' if footer else ""}}
 {{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
