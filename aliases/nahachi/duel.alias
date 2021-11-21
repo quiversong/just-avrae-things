@@ -80,8 +80,6 @@ footer += "\n" + f'Seventra: Exodus of Heroes | Nahachi Duel v{VERSION} | !duel 
 footer += "\nCreators: quiversong#2772"
 
 all_warriors = load_json(get_gvar(DATA_VAR))["warriors"]
-warrior = None
-warrior_will_attack = False
 
 if len(args) < 2:
     f = f'{c_first_name} seems a little confused...|'
@@ -94,7 +92,7 @@ if len(args) < 2:
 chosen_warrior_name = args[0].lower().strip()
 warrior = [w for w in all_warriors if w["code"].lower() == chosen_warrior_name]
 if len(warrior) == 0:
-    fields.append(f'{c_first_name} seems a little confused...|There are no warriors named {args[1]} available to duel with you.')
+    fields.append(f'{c_first_name} seems a little confused...|There are no warriors named {args[0]} available to duel with you.')
     return f'!embed -title "{title}" ' + ''.join(['-f "' + field.replace('"', '\"') + '"' for field in fields])
 
 warrior = warrior[0]
