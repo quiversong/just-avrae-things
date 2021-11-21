@@ -1,23 +1,26 @@
 {
   "warriors": [
   {
-    "name": "A",
-    "desc": "A is cool",
-    "init": 2,
+    "code": "grantha",
+    "name": "Grantha Ironmane",
+    "desc": "Grantha is cool",
+    "init": 3,
     "ac": 13,
     "attack": 4,
-    "weapon": "weapon of A",
+    "weapon": "Wisdom Flare Longsword",
     "rewards": ["5gp"],
-    "victory_action": "throws confetti at you",
-    "image": ""
+    "victory_action": "bows deeply in reverence, takes two steps backwards, and goes back to meditating.",
+    "defeat_action": "bows deeply in gratitude, takes two steps backwards, and goes back to meditating.",
+    "image": "https://cdn.discordapp.com/attachments/910682900863787028/910792764994756628/a62a4064ac431c766841bb57a7a827b2.jpg"
   },
   {
-    "name": "B",
-    "desc": "B is cool",
+    "code": "a",
+    "name": "A",
+    "desc": "A is cool",
     "init": 3,
     "ac": 14,
     "attack": 4,
-    "weapon": "weapon of B",
+    "weapon": "weapon of A",
     "rewards": ["7gp"],
     "image": ""
   }

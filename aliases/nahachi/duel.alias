@@ -1,10 +1,11 @@
-embed
+multiline
 <drac2>
 # Configuration Variables
 VERSION = '0.1'
 
 DATA_VAR = "c85742dc-f2e9-4a99-b544-b8f71dd7bed9"
 DAILY_CAP = 1
+BLOWS_NEEDED = 2
 
 # Code
 args = &ARGS&
@@ -17,6 +18,7 @@ title = f'{c_first_name} wants to challenge the warriors of the Kaizen Temple fo
 img, thumb = None, None
 sl, fl = "**Success!**", "**Failure!**"
 fields = []
+commands = []
 
 DUEL_TIME_VAR = "_du_dhc_"
 DUEL_STAGE_VAR = "_du_vars"
@@ -81,118 +83,134 @@ all_warriors = load_json(get_gvar(DATA_VAR))["warriors"]
 warrior = None
 warrior_will_attack = False
 
-if len(args) > 0 and args[0] == 'start':
-    chosen_warrior_name = args[1].lower().strip()
-    warrior = [w for w in all_warriors if w["name"].lower() == chosen_warrior_name]
-    if len(warrior) == 0:
-        fields.append(f'{c_first_name} seems a little confused...|There are no warriors named {args[1]} available to duel with you.')
-        return 1
-
-    warrior = warrior[0]
-    warrior_name = warrior["name"]
-
-    title = f'{c.name} challenges {warrior_name} for a duel!'
-
-    player_init_roll = vroll(cs.initiative.d20())
-    fields.append(f"{c_first_name}'s initiative check|{player_init_roll.full}")
-
-    warrior_init_roll = vroll(f'1d20 + {warrior["init"]}')
-    fields.append(f"{warrior_name}'s initiative check|{warrior_init_roll.full}")
-
-    player_goes_fist = player_init_roll.total > warrior_init_roll.total
-    if player_init_roll.total == warrior_init_roll.total:
-        player_goes_fist = dexterityMod > warrior["init"]
-
-    if player_goes_fist:
-        f = f'{c_first_name} takes the initiative and makes the first move!|'
-        f += 'Use `!duel attack <one of your registered attacks>` to attack your opponent.'
-        fields.append(f)
-    else:
-        warrior_will_attack = True
-
-    character().set_cvar(DUEL_STAGE_VAR, f'0:0:{warrior_name.lower()}')
-
-if len(args) > 0 and args[0] == 'attack':
-    if len(args) == 1:
-        fields.append(f'{c_first_name} seems a little confused...|You need to specify which attack to use!')
-        return -1
-
-    stage_parts = character().cvars[DUEL_STAGE_VAR].split(':')
-    player_hits = int(stage_parts[0])
-    warrior_hits = int(stage_parts[1])
-    warrior_id = stage_parts[2]
-    warrior = [w for w in all_warriors if w["name"].lower() == warrior_id]
-    warrior = warrior[0]
-
-    weapon = None
-    weapon_arg = args[1].lower()
-    weapon_str = [a for a in c.attacks
-      if str(a).lower().split(':')[0].strip().replace('*', '').startswith(weapon_arg)
-    ]
-    if len(weapon_str) > 0:
-        weapon_str = str(weapon_str[0])
-        weapon = {
-          'name': weapon_str.split(':')[0].strip(),
-          'a_bonus': int(weapon_str.split('Attack:')[1].strip().split(' ')[0])
-        }
-    else:
-        fields.append(f'{c_first_name} seems a little confused...|I could not find any attacks matching `{args[1]}`!')
-        return -1
-
-    title = f'{c_first_name} attacks with their {weapon["name"]}!'
-
-    attack_roll = vroll(f'1d20 + {weapon["a_bonus"]}')
-    crit = attack_roll.result.crit == 1
-
-    attack_successful = crit or attack_roll.total >= warrior["ac"]
-    player_hits += 1 if attack_successful else 0
-
-    fields.append(f"{c_first_name}'s attack roll|{attack_roll.full}")
-
-    if player_hits >= 3:
-        f = f'{c_first_name} wins!|'
-        f += f'...after landing the third successful blow on {warrior["name"]}'
-        if warrior_hits == 0:
-            f += '\nFlawless victory!'
-        fields.append(f)
-        warrior_will_attack = False
-        character().delete_cvar(DUEL_STAGE_VAR)
-    else:
-        character().set_cvar(DUEL_STAGE_VAR, f'{player_hits}:{warrior_hits}:{warrior["name"].lower()}')
-        warrior_will_attack = True
-
-if warrior_will_attack:
-    stage_parts = character().cvars[DUEL_STAGE_VAR].split(':')
-    player_hits = int(stage_parts[0])
-    warrior_hits = int(stage_parts[1])
-
-    attack_roll = vroll(f'1d20 + {warrior["attack"]}')
-    crit = attack_roll.result.crit == 1
-    attack_successful = crit or attack_roll.total >= c.ac
-    warrior_hits += 1 if attack_successful else 0
-
-    f = f"{warrior['name']} attacks with their {warrior['weapon']}!|"
-    f += "...and lands the blow successfully!" if attack_successful else "...but misses!"
+if len(args) < 2:
+    f = f'{c_first_name} seems a little confused...|'
+    f += '- To start a challenge:\n Use `!duel <warrior you want to challenge> <attack you want to use>`\n'
+    f += '- To view the warriors you can challenge:\n Use `!duel list`\n'
+    f += '- To view the attacks you can use:\n Use `!a`'
     fields.append(f)
+    return f'!embed -title "{title}" ' + ''.join(['-f "' + field.replace('"', '\"') + '"' for field in fields])
 
-    if warrior_hits >= 3:
-        f = f'{warrior["name"]} wins!|'
-        f += '...after landing the third successful blow on {c_first_name}'
-        if warrior_hits == 0:
-            f += '\nFlawless victory!'
-        if "victory_action" in warrior:
-            f += f'\n{warrior["name"]} {warrior["victory_action"]}'
-        else:
-            f += f'\n{warrior["name"]} bows politely and thanks you for the training.'
-        fields.append(f)
-        character().delete_cvar(DUEL_STAGE_VAR)
+chosen_warrior_name = args[0].lower().strip()
+warrior = [w for w in all_warriors if w["code"].lower() == chosen_warrior_name]
+if len(warrior) == 0:
+    fields.append(f'{c_first_name} seems a little confused...|There are no warriors named {args[1]} available to duel with you.')
+    return f'!embed -title "{title}" ' + ''.join(['-f "' + field.replace('"', '\"') + '"' for field in fields])
+
+warrior = warrior[0]
+warrior_name = warrior["name"]
+
+weapon = None
+weapon_arg = args[1].lower()
+weapon_str = [a for a in c.attacks
+  if str(a).lower().split(':')[0].strip().replace('*', '').startswith(weapon_arg)
+]
+
+if len(weapon_str) > 0:
+    weapon_str = str(weapon_str[0])
+    weapon = {
+      'name': weapon_str.split(':')[0].strip(),
+      'a_bonus': int(weapon_str.split('Attack:')[1].strip().split(' ')[0])
+    }
+else:
+    fields.append(f'{c_first_name} seems a little confused...|I could not find any attacks matching `{args[1]}`!')
+    return f'!embed -title "{title}" ' + ''.join(['-f "' + field.replace('"', '\"') + '"' for field in fields])
+
+player_init_roll = vroll(cs.initiative.d20())
+warrior_init_roll = vroll(f'1d20 + {warrior["init"]}')
+
+player_goes_fist = player_init_roll.total > warrior_init_roll.total
+if player_init_roll.total == warrior_init_roll.total:
+    player_goes_fist = dexterityMod > warrior["init"]
+
+player_hits = 0
+warrior_hits = 0
+hits = []
+
+is_player_turn = player_goes_fist
+
+while player_hits < BLOWS_NEEDED and warrior_hits < BLOWS_NEEDED:
+    if is_player_turn:
+        attack_roll = vroll(f'1d20 + {weapon["a_bonus"]}')
+        crit = attack_roll.result.crit == 1
+
+        attack_successful = crit or attack_roll.total >= warrior["ac"]
+        player_hits += 1 if attack_successful else 0
+
+        is_player_turn = False
+        hits.append({
+            'type': 'player',
+            'roll': attack_roll,
+            'successful': attack_successful
+        })
     else:
-        fields.append('Use `!duel attack <one of your registered attacks>` to attack your opponent again.')
-        character().set_cvar(DUEL_STAGE_VAR, f'{player_hits}:{warrior_hits}:{warrior["name"].lower()}')
+        attack_roll = vroll(f'1d20 + {warrior["attack"]}')
+        crit = attack_roll.result.crit == 1
 
+        attack_successful = crit or attack_roll.total >= character().ac
+        warrior_hits += 1 if attack_successful else 0
+
+        is_player_turn = True
+        hits.append({
+            'type': 'warrior',
+            'roll': attack_roll,
+            'successful': attack_successful
+        })
+
+f = ''
+if player_goes_fist:
+    f += f'{c_first_name} takes the initiative and makes the first move!|'
+    thumb = image
+else:
+    f += f'{c_first_name} is caught off-guard and {warrior_name} makes the first move!|'
+    thumb = warrior["image"]
+f += '**Initiative:**\n'
+f += f'{c_first_name}: {player_init_roll.full}\n'
+f += f'{warrior_name}: {warrior_init_roll.full}'
+fields.append(f)
+
+commands.append(f'!embed -title "{title}" ' + \
+        (f'-thumb {thumb} ' if thumb != None else '') + \
+        ''.join(['-f "' + field.replace('"', '\"') + '"' for field in fields]))
+
+fields = []
+title = f'{c_first_name} and {warrior_name} duel at the Nahachi Kaizen Temple!'
+for index, hit in enumerate(hits):
+    is_last_hit = (index == len(hits) - 1)
+
+    if hit['type'] == 'player':
+        if is_last_hit:
+            thumb = image
+            f = f'{c_first_name} lands the third and final blow and wins!'
+            f += f'...after landing the third successful blow on {warrior_name}'
+            if warrior_hits == 0:
+                f += '\nFlawless victory!'
+            fields.append(f)
+        else:
+            f = f'{c_first_name} attacks with their {weapon["name"]}!'
+            fields.append(f)
+
+        f = f'{c_first_name} attack roll|{hit["roll"].full}\n'
+        f += sl if hit['successful'] else fl
+        fields.append(f)
+    else:
+        if is_last_hit:
+            thumb = warrior['image'] if warrior['image'] != '' else None
+            f = f'{warrior_name} lands the third and final blow and wins!'
+            f += f'...after landing the third successful blow on {c_first_name}'
+            if player_hits == 0:
+                f += '\nFlawless victory!'
+            if 'victory_action' in warrior and warrior['victory_action'] != '':
+                f += f'\n\n{warrior["victory_action"]}'
+            fields.append(f)
+        else:
+            f = f"{warrior['name']} attacks with their {warrior['weapon']}!|"
+            f += f'Attack result...\n' + (sl if hit["successful"] else fl)
+            fields.append(f)
+
+commands.append(f'!embed -title "{title}" ' + \
+        (f'-thumb {thumb} ' if thumb != None else '') + \
+        ''.join(['-f "' + field.replace('"', '\"') + '"' for field in fields]))
+
+return '\n'.join(commands)
 </drac2>
--title "{{title}}"
-{{f'-image "{img}"' if img else ""}}
-{{f'-thumb "{thumb}"' if thumb else ""}}
-{{f'-footer "{footer}"' if footer else ""}}
-{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
