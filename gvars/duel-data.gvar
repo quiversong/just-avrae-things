@@ -9,8 +9,8 @@
     "attack": 4,
     "weapon": "Wisdom Flare Longsword",
     "rewards": ["5gp"],
-    "victory_action": "bows deeply in reverence, takes two steps backwards, and goes back to meditating.",
-    "defeat_action": "bows deeply in gratitude, takes two steps backwards, and goes back to meditating.",
+    "victory_action": "Grantha bows deeply in reverence...|...Takes two steps backwards, then turns around and goes back to meditating.",
+    "defeat_action": "Grantha bows deeply in gratitude...|...Takes two steps backwards, then turns around and goes back to meditating.",
     "image": "https://cdn.discordapp.com/attachments/910682900863787028/910792764994756628/a62a4064ac431c766841bb57a7a827b2.jpg"
   },
   {

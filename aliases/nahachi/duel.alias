@@ -1,11 +1,11 @@
-multiline
+embed
 <drac2>
 # Configuration Variables
 VERSION = '0.1'
 
 DATA_VAR = "c85742dc-f2e9-4a99-b544-b8f71dd7bed9"
 DAILY_CAP = 1
-BLOWS_NEEDED = 2
+BLOWS_NEEDED = 3
 
 # Code
 args = &ARGS&
@@ -75,7 +75,7 @@ daily_activity_control = __result__
 research_count = daily_activity_control["count"]
 wait_time = daily_activity_control["wait_time"]
 
-footer = "Don't forget to role-play your duel!\n"
+footer = "Don't forget to role-play your duel!"
 footer += "\n" + f'Seventra: Exodus of Heroes | Nahachi Duel v{VERSION} | !duel help'
 footer += "\nCreators: quiversong#2772"
 
@@ -87,13 +87,13 @@ if len(args) < 2:
     f += '- To view the warriors you can challenge:\n Use `!duel list`\n'
     f += '- To view the attacks you can use:\n Use `!a`'
     fields.append(f)
-    return f'!embed -title "{title}" ' + ''.join(['-f "' + field.replace('"', '\"') + '"' for field in fields])
+    return 1
 
 chosen_warrior_name = args[0].lower().strip()
 warrior = [w for w in all_warriors if w["code"].lower() == chosen_warrior_name]
 if len(warrior) == 0:
     fields.append(f'{c_first_name} seems a little confused...|There are no warriors named {args[0]} available to duel with you.')
-    return f'!embed -title "{title}" ' + ''.join(['-f "' + field.replace('"', '\"') + '"' for field in fields])
+    return 1
 
 warrior = warrior[0]
 warrior_name = warrior["name"]
@@ -112,7 +112,7 @@ if len(weapon_str) > 0:
     }
 else:
     fields.append(f'{c_first_name} seems a little confused...|I could not find any attacks matching `{args[1]}`!')
-    return f'!embed -title "{title}" ' + ''.join(['-f "' + field.replace('"', '\"') + '"' for field in fields])
+    return 1
 
 player_init_roll = vroll(cs.initiative.d20())
 warrior_init_roll = vroll(f'1d20 + {warrior["init"]}')
@@ -138,6 +138,7 @@ while player_hits < BLOWS_NEEDED and warrior_hits < BLOWS_NEEDED:
         is_player_turn = False
         hits.append({
             'type': 'player',
+            'is_player': True,
             'roll': attack_roll,
             'successful': attack_successful
         })
@@ -151,64 +152,70 @@ while player_hits < BLOWS_NEEDED and warrior_hits < BLOWS_NEEDED:
         is_player_turn = True
         hits.append({
             'type': 'warrior',
+            'is_player': False,
             'roll': attack_roll,
             'successful': attack_successful
         })
 
-f = ''
-if player_goes_fist:
-    f += f'{c_first_name} takes the initiative and makes the first move!|'
-    thumb = image
-else:
-    f += f'{c_first_name} is caught off-guard and {warrior_name} makes the first move!|'
-    thumb = warrior["image"]
-f += '**Initiative:**\n'
-f += f'{c_first_name}: {player_init_roll.full}\n'
-f += f'{warrior_name}: {warrior_init_roll.full}'
+is_player_winner = player_hits >= BLOWS_NEEDED
+
+img = 'https://cdn.discordapp.com/attachments/910682900863787028/910790078547230770/tumblr_c233596118d0ef2fee07434bfd216a7d_1635c08d_540.gif'
+img = 'https://cdn.discordapp.com/attachments/910682900863787028/912200744822767676/photo-1595084921991_orig.png'
+img = 'https://cdn.discordapp.com/attachments/910682900863787028/912201227402612736/grove.jpg'
+
+title = f'{c_first_name} challenges {warrior_name}!'
+
+f = 'The two duelists solemnly walk to the back of the temple...|'
+f += 'They take their positions under a red maple tree, surrounded by the fallen leaves that blow around the battlefield...'
+f += '\n\nStanding in front of each other, the warriors take a deep breath and ready themselves for the first move...'
+f += '\n\n```Initiative Rolls```'
 fields.append(f)
 
-commands.append(f'!embed -title "{title}" ' + \
-        (f'-thumb {thumb} ' if thumb != None else '') + \
-        ''.join(['-f "' + field.replace('"', '\"') + '"' for field in fields]))
+f = f'{c_first_name}|{player_init_roll.full}|inline'
+fields.append(f)
 
-fields = []
-title = f'{c_first_name} and {warrior_name} duel at the Nahachi Kaizen Temple!'
-for index, hit in enumerate(hits):
-    is_last_hit = (index == len(hits) - 1)
+f = f'{warrior_name}|{warrior_init_roll.full}|inline'
+fields.append(f)
 
-    if hit['type'] == 'player':
-        if is_last_hit:
-            thumb = image
-            f = f'{c_first_name} lands the third and final blow and wins!'
-            f += f'...after landing the third successful blow on {warrior_name}'
-            if warrior_hits == 0:
-                f += '\nFlawless victory!'
-            fields.append(f)
-        else:
-            f = f'{c_first_name} attacks with their {weapon["name"]}!'
-            fields.append(f)
+fields.append('```Attack Rolls```')
 
-        f = f'{c_first_name} attack roll|{hit["roll"].full}\n'
-        f += sl if hit['successful'] else fl
-        fields.append(f)
-    else:
-        if is_last_hit:
-            thumb = warrior['image'] if warrior['image'] != '' else None
-            f = f'{warrior_name} lands the third and final blow and wins!'
-            f += f'...after landing the third successful blow on {c_first_name}'
-            if player_hits == 0:
-                f += '\nFlawless victory!'
-            if 'victory_action' in warrior and warrior['victory_action'] != '':
-                f += f'\n\n{warrior["victory_action"]}'
-            fields.append(f)
-        else:
-            f = f"{warrior['name']} attacks with their {warrior['weapon']}!|"
-            f += f'Attack result...\n' + (sl if hit["successful"] else fl)
-            fields.append(f)
+fields.append((c_first_name if player_goes_fist else warrior_name) + '|')
+fields.append((warrior_name if player_goes_fist else c_first_name) + '|')
 
-commands.append(f'!embed -title "{title}" ' + \
-        (f'-thumb {thumb} ' if thumb != None else '') + \
-        ''.join(['-f "' + field.replace('"', '\"') + '"' for field in fields]))
+index = 0
+f_index_offset = len(fields) - 2
+while index < len(hits):
+    f_index = index % 2 + f_index_offset
+    hit = hits[index]
 
-return '\n'.join(commands)
+    fields[f_index] += f'Attack {int(index / 2) + 1}'
+    fields[f_index] += f': {hit["roll"]}\n' if hit['is_player'] else '\n'
+    fields[f_index] += sl if hit["successful"] else fl
+    fields[f_index] += '\n\n'
+
+    index += 1
+
+fields[f_index_offset] += '|inline'
+fields[f_index_offset + 1] += '|inline'
+thumb = warrior['image']
+
+if is_player_winner:
+    f = f'{c.name} wins!|'
+    f += 'Flawless victory!\n' if warrior_hits == 0 else ''
+    f += f'Congratulations! You earn {", ".join(warrior["rewards"])}.'
+    f += f'\n\n{warrior["defeat_action"]}' if 'defeat_action' in warrior else ''
+    fields.append(f)
+else:
+    f = f'{warrior_name} wins!|'
+    f += 'Flawless victory!\n' if player_hits == 0 else ''
+    f += f'It would seem as you need more training, young grasshopper.'
+    f += f'\n\n{warrior["victory_action"]}' if 'victory_action' in warrior else ''
+    fields.append(f)
+
 </drac2>
+-title "{{title}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
