@@ -1,28 +1,29 @@
 {
-  "warriors": [
-  {
-    "code": "grantha",
-    "name": "Grantha Ironmane",
-    "desc": "Grantha is cool",
-    "init": 3,
-    "ac": 13,
-    "attack": 4,
-    "weapon": "Wisdom Flare Longsword",
-    "rewards": ["5gp"],
-    "victory_action": "Grantha bows deeply in reverence...|...Takes two steps backwards, then turns around and goes back to meditating.",
-    "defeat_action": "Grantha bows deeply in gratitude...|...Takes two steps backwards, then turns around and goes back to meditating.",
-    "image": "https://cdn.discordapp.com/attachments/910682900863787028/910792764994756628/a62a4064ac431c766841bb57a7a827b2.jpg"
-  },
-  {
-    "code": "a",
-    "name": "A",
-    "desc": "A is cool",
-    "init": 3,
-    "ac": 14,
-    "attack": 4,
-    "weapon": "weapon of A",
-    "rewards": ["7gp"],
-    "image": ""
-  }
-  ]
+	"warriors": [{
+			"code": "kody",
+			"name": "Kody Gatana",
+			"desc": "Kody is a young and spirited warrior who frequents the Temple in Nahachi. A proud descendant of the Naha people, he is fierce, but can be reckless as well.",
+			"init": 1,
+			"ac": 12,
+			"attack": 3,
+			"weapon": "Mastercrafted Bokken",
+			"rewards": ["1sp"],
+			"victory_action": "Kody bows with a proud smirk on his face.|Grinning wide, he invites you to come back, who knows, maybe you will be lucky next time.",
+			"defeat_action": "Kody bows, grumbling.|He turns around and moves away, muttering something about these lucky visitors...",
+			"image": "https://cdn.discordapp.com/attachments/910682900863787028/912216832285507594/09a05c08166f041202a6768097d79314.jpg"
+		},
+		{
+			"code": "grantha",
+			"name": "Grantha Ironmane",
+			"desc": "A wise and collected leonin, Grantha's grey-peppered mane is witness to the years of experience he has as a seasoned warrior. Commonly seen wearing a red armor made of bamboo plaques and leather typical from Naha, he always carries his two trusted longswords on his hip: Wisdom Flare and Humble Cut.",
+			"init": 0,
+			"ac": 25,
+			"attack": 19,
+			"weapon": "Wisdom Flare Longsword",
+			"rewards": ["50gp", "Oil of Sharpness"],
+			"victory_action": "Grantha bows deeply in reverence...|...Takes two steps backwards, then turns around and goes back to meditating.",
+			"defeat_action": "Grantha bows deeply in gratitude...|...Takes two steps backwards, then turns around and goes back to meditating.",
+			"image": "https://cdn.discordapp.com/attachments/910682900863787028/910792764994756628/a62a4064ac431c766841bb57a7a827b2.jpg"
+		}
+	]
 }

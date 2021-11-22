@@ -166,9 +166,8 @@ img = 'https://cdn.discordapp.com/attachments/910682900863787028/912201227402612
 title = f'{c_first_name} challenges {warrior_name}!'
 
 f = 'The two duelists solemnly walk to the back of the temple...|'
-f += 'They take their positions under a red maple tree, surrounded by the fallen leaves that blow around the battlefield...'
-f += '\n\nStanding in front of each other, the warriors take a deep breath and ready themselves for the first move...'
-f += '\n\n```Initiative Rolls```'
+f += 'They take their positions under a red maple tree, surrounded by the fallen leaves that swirl around the battlefield...'
+f += '\n\n__***INITIATIVE ROLLS***__'
 fields.append(f)
 
 f = f'{c_first_name}|{player_init_roll.full}|inline'
@@ -177,7 +176,10 @@ fields.append(f)
 f = f'{warrior_name}|{warrior_init_roll.full}|inline'
 fields.append(f)
 
-fields.append('```Attack Rolls```')
+f = f'{c_first_name if player_goes_fist else warrior_name} is faster and makes the first move!'
+f += f'|Can {warrior_name if player_goes_fist else c_first_name} regain the upper hand?'
+f += '\n\n__***ATTACK ROLLS***__'
+fields.append(f)
 
 fields.append((c_first_name if player_goes_fist else warrior_name) + '|')
 fields.append((warrior_name if player_goes_fist else c_first_name) + '|')
@@ -188,10 +190,9 @@ while index < len(hits):
     f_index = index % 2 + f_index_offset
     hit = hits[index]
 
-    fields[f_index] += f'Attack {int(index / 2) + 1}'
-    fields[f_index] += f': {hit["roll"]}\n' if hit['is_player'] else '\n'
-    fields[f_index] += sl if hit["successful"] else fl
-    fields[f_index] += '\n\n'
+    attack_number = int(index / 2) + 1
+    fields[f_index] += f'Attack {attack_number}: {sl if hit["successful"] else fl}\n'
+    fields[f_index] += f'{hit["roll"].full}\n\n' if hit['is_player'] else f'`{hit["roll"].total}`\n\n'
 
     index += 1
 
@@ -200,17 +201,19 @@ fields[f_index_offset + 1] += '|inline'
 thumb = warrior['image']
 
 if is_player_winner:
-    f = f'{c.name} wins!|'
+    f = f'__***{c.name.upper()} WINS!***__|'
     f += 'Flawless victory!\n' if warrior_hits == 0 else ''
     f += f'Congratulations! You earn {", ".join(warrior["rewards"])}.'
-    f += f'\n\n{warrior["defeat_action"]}' if 'defeat_action' in warrior else ''
     fields.append(f)
+    if 'defeat_action' in warrior:
+        fields.append(warrior['defeat_action'])
 else:
-    f = f'{warrior_name} wins!|'
+    f = f'__***{warrior_name.upper()} WINS!***__|'
     f += 'Flawless victory!\n' if player_hits == 0 else ''
     f += f'It would seem as you need more training, young grasshopper.'
-    f += f'\n\n{warrior["victory_action"]}' if 'victory_action' in warrior else ''
     fields.append(f)
+    if 'victory_action' in warrior:
+        fields.append(warrior['victory_action'])
 
 </drac2>
 -title "{{title}}"
