@@ -15,7 +15,7 @@ c_first_name = c.name.split(' ')[0]
 cv, cs = c.cvars, c.skills
 
 title = f'{c_first_name} wants to challenge the warriors of the Kaizen Temple for a duel!'
-img, thumb = None, None
+img, thumb, desc = None, None, None
 sl, fl = "**Success!**", "**Failure!**"
 fields = []
 commands = []
@@ -146,10 +146,12 @@ if len(args) > 0 and args[0] == 'list':
 
 if len(args) < 2:
     f = f'{c_first_name} seems a little confused...|'
-    f += '- To start a challenge:\n Use `!duel <warrior you want to challenge> <attack you want to use>`\n'
-    f += '- To view the warriors you can challenge:\n Use `!duel list`\n'
-    f += '- To view the attacks you can use:\n Use `!a`'
+    f += '- To view the description of a Kaizen Temple warrior:\n`!duel desc <warrior code>`'
+    f += '\n- To view the warriors you can challenge:\n`!duel list`'
+    f += '\n- To start a challenge:\n`!duel <warrior code> <your attack/weapon of choice>`'
+    f += '\n- To view the attacks/weapons you can use:\n`!a`'
     fields.append(f)
+    img = 'https://cdn.discordapp.com/attachments/910682900863787028/912201227402612736/grove.jpg'
     return 1
 
 chosen_warrior_name = args[0].lower().strip()
@@ -173,7 +175,7 @@ weapon_str = [a for a in c.attacks
 if len(weapon_str) > 0:
     weapon_str = str(weapon_str[0])
     weapon = {
-      'name': weapon_str.split(':')[0].strip(),
+      'name': weapon_str.split(':')[0].strip().replace('**', ''),
       'a_bonus': int(weapon_str.split('Attack:')[1].strip().split(' ')[0])
     }
 else:
@@ -252,8 +254,9 @@ img = 'https://cdn.discordapp.com/attachments/910682900863787028/912200744822767
 img = 'https://cdn.discordapp.com/attachments/910682900863787028/912201227402612736/grove.jpg'
 
 title = f'{c_first_name} challenges {warrior_name}!'
+desc = f'*Using their {weapon["name"]}!*'
 
-f = 'The two duelists solemnly walk to the back of the temple...|'
+f = '*The two duelists solemnly walk to the back of the temple...*|'
 f += '*They take their positions under a red maple tree, surrounded by the fallen leaves that swirl around the battlefield...*'
 f += '\n\n__***INITIATIVE ROLLS***__'
 fields.append(f)
@@ -267,8 +270,11 @@ else:
     fields.append(warrior_init_f)
     fields.append(player_init_f)
 
-f = f'{c_first_name if player_goes_first else warrior_name} is faster and makes the first move!'
-f += f'|Can {warrior_name if player_goes_first else c_first_name} regain the upper hand?'
+f = f'*{c_first_name if player_goes_first else warrior_name} is faster and makes the first move!*'
+if player_goes_first:
+    f += f'|*Can {c_first_name} keep the pressure on their opponent?*'
+else:
+    f += f'|*Can {c_first_name} regain the upper hand?*'
 f += '\n\n__***ATTACK ROLLS***__'
 fields.append(f)
 
@@ -313,7 +319,10 @@ thumb = warrior['image']
 if is_player_winner:
     f = f'__***{c.name.upper()} WINS!***__|'
     f += 'Flawless victory!\n' if warrior_hits == 0 else ''
-    f += f'Congratulations! You earn {", ".join(warrior["rewards"])}.'
+    f += 'Congratulations!'
+    if 'rewards' in warrior and len(warrior['rewards']) > 0:
+        rewards_text = "\n- ".join(warrior["rewards"])
+        f += ' You earned:\n- ' + rewards_text
     if 'defeat_action' in warrior:
         f += '\n\n' + warrior['defeat_action'].replace('"', '\\"')
     fields.append(f)
@@ -368,6 +377,7 @@ character().set_cvar(DUEL_STATS_VAR, dump_json(global_stats))
 -title "{{title}}"
 {{f'-image "{img}"' if img else ""}}
 {{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-desc "{desc}"' if desc else ""}}
 {{f'-color "{color}"' if color else ""}}
 {{f'-footer "{footer}"' if footer else ""}}
 {{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
