@@ -1,29 +1,61 @@
 {
-	"warriors": [{
-			"code": "kody",
-			"name": "Kody Gatana",
-			"desc": "Kody is a young and spirited warrior who frequents the Temple in Nahachi. A proud descendant of the Naha people, he is fierce, but can be reckless as well.",
-			"init": 1,
-			"ac": 12,
-			"attack": 3,
-			"weapon": "Mastercrafted Bokken",
-			"rewards": ["1sp"],
-			"victory_action": "Kody bows with a proud smirk on his face.|Grinning wide, he invites you to come back, who knows, maybe you will be lucky next time.",
-			"defeat_action": "Kody bows, grumbling.|He turns around and moves away, muttering something about these lucky visitors...",
-			"image": "https://cdn.discordapp.com/attachments/910682900863787028/912216832285507594/09a05c08166f041202a6768097d79314.jpg"
-		},
-		{
-			"code": "grantha",
-			"name": "Grantha Ironmane",
-			"desc": "A wise and collected leonin, Grantha's grey-peppered mane is witness to the years of experience he has as a seasoned warrior. Commonly seen wearing a red armor made of bamboo plaques and leather typical from Naha, he always carries his two trusted longswords on his hip: Wisdom Flare and Humble Cut.",
-			"init": 0,
-			"ac": 25,
-			"attack": 19,
-			"weapon": "Wisdom Flare Longsword",
-			"rewards": ["50gp", "Oil of Sharpness"],
-			"victory_action": "Grantha bows deeply in reverence...|...Takes two steps backwards, then turns around and goes back to meditating.",
-			"defeat_action": "Grantha bows deeply in gratitude...|...Takes two steps backwards, then turns around and goes back to meditating.",
-			"image": "https://cdn.discordapp.com/attachments/910682900863787028/910792764994756628/a62a4064ac431c766841bb57a7a827b2.jpg"
-		}
-	]
-}
+"warriors": [
+  {
+    "code": "botoken",
+    "name": "Botoken",
+    "desc": "An automaton that is stationed in the back of the Kaizen Temple, Botoken offers reliable and readily-available practice for anyone who would like to test their combat abilities.",
+    "init": -1,
+    "ac": 11,
+    "attack": 2,
+    "weapon": "Rusty Nahaken (Naha traditional curved sword)",
+    "victory_action": "*The automaton bows stiffly, and a robotic voice says:* \"thank you for the practice.\"",
+    "defeat_action": "*The automaton bows stiffly, and a robotic voice says:* \"thank you for the practice.\"",
+    "unlocks": ["kody"],
+    "rewards": ["1sp"],
+    "image": "https://cdn.discordapp.com/attachments/910682900863787028/910953614225322044/f22a39827513f2179f0ae05c0e0834c0.jpg",
+  },
+  {
+    "code": "kody",
+    "name": "Kody Gatana",
+    "desc": "Kody is a young and spirited warrior who frequents the Temple in Nahachi. A proud descendant of the Naha people, he can be foolhardy, but is also fierce.",
+    "init": 1,
+    "ac": 12,
+    "attack": 3,
+    "weapon": "Simple Wooden Bokken",
+    "victory_action": "*Kody bows with a proud smirk on his face. Grinning wide, he invites you to come back, who knows, maybe you will be lucky next time.*",
+    "defeat_action": "*Kody bows, grumbling. He turns around and moves away, muttering something about these lucky visitors...*",
+    "unlocks": ["kamakiri", "crit:1:arikakun"],
+    "rewards": ["1sp", "Nahachi Kaizen White Sash"],
+    "image": "https://cdn.discordapp.com/attachments/910682900863787028/912216832285507594/09a05c08166f041202a6768097d79314.jpg",
+  },
+  {
+    "code": "arikakun",
+    "name": "Arika-kun",
+    "desc": "A young boy who stans for most of the warriors who frequent the Kaizen Temple. He's always wearing a cat mask on his face, and always keeps a bottle of Raptor Egg Athletic Drink in his pack.",
+    "init": -3,
+    "ac": 10,
+    "attack": -1,
+    "weapon": "Rusty Flaming Nahaken",
+    "victory_action": "*Arika-kun hops happily, finally a win!* \"Flaming Sword goes brrrrrr!!!!!!!,\" *He yells, running in circles.*",
+    "defeat_action": "*Arika-kun apologizes for the poor performance, but promises that next time he will do better.*",
+    "unlocks": [],
+    "rewards": ["1sp", "Raptor Egg Athletic Drink"],
+    "image": "https://cdn.discordapp.com/attachments/904156525680013363/912452011675496478/a0be8bd7b594a7a692f883632e4fd857.png",
+  },
+  {
+    "code": "kamakiri",
+    "name": "Kamakiri",
+    "desc": "Kamakiri is an energetic, schizophrenic, four-armed Thri-keen warrior. Kamakiri is easily provoked, and is often found consuming never before seen illicit substances. Kamakiri is capable of unleashing a flurry of reckless slashes, while clicking away in Thri-keen tongues.",
+    "init": 2,
+    "ac": 13,
+    "attack": 2,
+    "weapon": "*Frantic Clicking* (Two-Handed Spear, Throwing Stars)",
+    "victory_action": "*Kamakiri makes frantic, energetic clicking sounds from his mouth! He tosses his weapons to the ground and lifts you off your feet in an unwelcome embrace. He smells of fry-oil, fish, and dental floss.*",
+    "defeat_action": "*Kamakiri makes lots of angry clicking sounds with his mouth, followed by a wad of phlegm being spat on the ground beside you. He walks away, leaving you to pluck kunai from your limbs.*",
+    "unlocks": ["Ondoridono
+
+Zorak, if player hits a crit"],
+    "rewards": ["100 saliva-soaked copper pieces"],
+    "image": "https://cdn.discordapp.com/attachments/910682900863787028/910794728512028692/R_9.jpeg",
+  }
+]}
