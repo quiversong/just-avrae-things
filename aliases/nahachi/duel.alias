@@ -268,10 +268,16 @@ for index in range(len(rounds)):
         player_attacks_field += f'Attack {player_attack_count}: {sl if attack["successful"] else fl}\n'
         player_attacks_field += f'{attack["roll"].full}\n\n'
 
+    for i in range(max_attacks_this_round - len(player_attacks)):
+        player_attacks_field += '\n\n\n'
+
     for attack in warrior_attacks:
         warrior_attack_count += 1
         warrior_attacks_field += f'Attack {warrior_attack_count}: {sl if attack["successful"] else fl}\n'
-        warrior_attacks_field += f'{attack["roll"].total}\n\n'
+        warrior_attacks_field += f'`{attack["roll"].total}`\n\n'
+
+    for i in range(max_attacks_this_round - len(warrior_attacks)):
+        warrior_attacks_field += '\n\n\n'
 
 player_attacks_field += '|inline'
 warrior_attacks_field += '|inline'
