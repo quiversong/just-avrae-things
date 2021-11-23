@@ -114,7 +114,7 @@ if len(args) > 0 and args[0] == 'list':
             formatted_best_record = f'{left_padding}{best_record}'
             formatted_line = f'{formatted_wr} {formatted_best_record}'
             data_length = len(warrior['code']) + len(formatted_line) + 1
-            data_length -= 1 if is_secret else 0
+            data_length += 1 if is_secret else 0
             prefix = '*' if is_secret else ''
             padding = ''
             for i in range(29 - data_length + 1):
