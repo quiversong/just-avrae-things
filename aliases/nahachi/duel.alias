@@ -207,7 +207,7 @@ for index in range(len(rounds)):
     for attack in warrior_attacks:
         warrior_attack_count += 1
         warrior_attacks_field += f'Attack {warrior_attack_count}: {sl if attack["successful"] else fl}\n'
-        warrior_attacks_field += f'`{attack["roll"].total}`\n\n'
+        warrior_attacks_field += f'{attack["roll"].total}`\n\n'
 
 player_attacks_field += '|inline'
 warrior_attacks_field += '|inline'
@@ -231,6 +231,30 @@ else:
     if 'victory_action' in warrior:
         f += '\n\n' + warrior['victory_action'].replace('"', '\\"')
     fields.append(f)
+
+
+global_stats = load_json(get_gvar(DUEL_STATS_VAR))
+stats = global_stats[warrior['code']] if warrior['code'] in stats else {
+    'wins': 0,
+    'losses': 0,
+    'flawless_wins': 0,
+    'flawless_losses': 0,
+    'win_min_rounds': 0
+}
+
+if is_player_winner:
+    stats['wins'] += 1
+    if warrior_hits == 0:
+        stats['flawless_wins'] += 1
+    if len(rounds) < stats['min_rounds']:
+        stats['win_min_rounds'] = len(rounds)
+else:
+    stats['losses'] += 1
+    if player_hits == 0:
+        stats['flawless_losses'] += 1
+
+global_stats[warrior['code']] = stats
+character().set_cvar(DUEL_STATS_VAR, dump_json(global_stats))
 
 </drac2>
 -title "{{title}}"
