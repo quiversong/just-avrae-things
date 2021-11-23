@@ -123,11 +123,15 @@ if player_init_roll.total == warrior_init_roll.total:
 
 player_hits = 0
 warrior_hits = 0
-hits = []
+rounds = []
 
 is_player_turn = player_goes_fist
 
 while player_hits < BLOWS_NEEDED and warrior_hits < BLOWS_NEEDED:
+    is_new_round = (player_goes_fist and is_player_turn) or (not player_goes_fist and not is_player_turn)
+    if is_new_round:
+        rounds.append({})
+
     if is_player_turn:
         attack_roll = vroll(f'1d20 + {weapon["a_bonus"]}')
         crit = attack_roll.result.crit == 1
@@ -136,12 +140,12 @@ while player_hits < BLOWS_NEEDED and warrior_hits < BLOWS_NEEDED:
         player_hits += 1 if attack_successful else 0
 
         is_player_turn = False
-        hits.append({
+        rounds[len(rounds) - 1]['player'] = [{
             'type': 'player',
             'is_player': True,
             'roll': attack_roll,
             'successful': attack_successful
-        })
+        }]
     else:
         attack_roll = vroll(f'1d20 + {warrior["attack"]}')
         crit = attack_roll.result.crit == 1
@@ -150,12 +154,12 @@ while player_hits < BLOWS_NEEDED and warrior_hits < BLOWS_NEEDED:
         warrior_hits += 1 if attack_successful else 0
 
         is_player_turn = True
-        hits.append({
+        rounds[len(rounds) - 1]['warrior'] = [{
             'type': 'warrior',
             'is_player': False,
             'roll': attack_roll,
             'successful': attack_successful
-        })
+        }]
 
 is_player_winner = player_hits >= BLOWS_NEEDED
 
@@ -166,7 +170,7 @@ img = 'https://cdn.discordapp.com/attachments/910682900863787028/912201227402612
 title = f'{c_first_name} challenges {warrior_name}!'
 
 f = 'The two duelists solemnly walk to the back of the temple...|'
-f += 'They take their positions under a red maple tree, surrounded by the fallen leaves that swirl around the battlefield...'
+f += '*They take their positions under a red maple tree, surrounded by the fallen leaves that swirl around the battlefield...*'
 f += '\n\n__***INITIATIVE ROLLS***__'
 fields.append(f)
 
@@ -181,39 +185,52 @@ f += f'|Can {warrior_name if player_goes_fist else c_first_name} regain the uppe
 f += '\n\n__***ATTACK ROLLS***__'
 fields.append(f)
 
-fields.append((c_first_name if player_goes_fist else warrior_name) + '|')
-fields.append((warrior_name if player_goes_fist else c_first_name) + '|')
+player_attacks_field = f'{c_first_name}|'
+warrior_attacks_field = f'{warrior_name}|'
 
-index = 0
-f_index_offset = len(fields) - 2
-while index < len(hits):
-    f_index = index % 2 + f_index_offset
-    hit = hits[index]
+player_attack_count = 0
+warrior_attack_count = 0
 
-    attack_number = int(index / 2) + 1
-    fields[f_index] += f'Attack {attack_number}: {sl if hit["successful"] else fl}\n'
-    fields[f_index] += f'{hit["roll"].full}\n\n' if hit['is_player'] else f'`{hit["roll"].total}`\n\n'
+for index in range(len(rounds)):
+    this_round = rounds[index]
+    player_attacks = this_round['player'] if 'player' in this_round else []
+    warrior_attacks = this_round['warrior'] if 'warrior' in this_round else []
 
-    index += 1
+    max_attacks_this_round = len(player_attacks) if \
+            len(player_attacks) >= len(warrior_attacks) else len(warrior_attacks)
 
-fields[f_index_offset] += '|inline'
-fields[f_index_offset + 1] += '|inline'
+    for attack in player_attacks:
+        player_attack_count += 1
+        player_attacks_field += f'Attack {player_attack_count}: {sl if attack["successful"] else fl}\n'
+        player_attacks_field += f'{attack["roll"].full}\n\n'
+
+    for attack in warrior_attacks:
+        warrior_attack_count += 1
+        warrior_attacks_field += f'Attack {warrior_attack_count}: {sl if attack["successful"] else fl}\n'
+        warrior_attacks_field += f'`{attack["roll"].total}`\n\n'
+
+player_attacks_field += '|inline'
+warrior_attacks_field += '|inline'
+
+fields.append(player_attacks_field if player_goes_fist else warrior_attacks_field)
+fields.append(warrior_attacks_field if player_goes_fist else player_attacks_field)
+
 thumb = warrior['image']
 
 if is_player_winner:
     f = f'__***{c.name.upper()} WINS!***__|'
     f += 'Flawless victory!\n' if warrior_hits == 0 else ''
     f += f'Congratulations! You earn {", ".join(warrior["rewards"])}.'
-    fields.append(f)
     if 'defeat_action' in warrior:
-        fields.append(warrior['defeat_action'])
+        f += '\n\n' + warrior['defeat_action'].replace('"', '\\"')
+    fields.append(f)
 else:
     f = f'__***{warrior_name.upper()} WINS!***__|'
     f += 'Flawless victory!\n' if player_hits == 0 else ''
     f += f'It would seem as you need more training, young grasshopper.'
-    fields.append(f)
     if 'victory_action' in warrior:
-        fields.append(warrior['victory_action'])
+        f += '\n\n' + warrior['victory_action'].replace('"', '\\"')
+    fields.append(f)
 
 </drac2>
 -title "{{title}}"
