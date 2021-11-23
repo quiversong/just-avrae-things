@@ -11,7 +11,7 @@
     "defeat_action": "*The automaton bows stiffly, and a robotic voice says:* \"thank you for the practice.\"",
     "unlocks": ["kody", "crit:1:arikakun"],
     "rewards": ["1sp"],
-    "secret": False,
+    "secret": false,
     "image": "https://cdn.discordapp.com/attachments/910682900863787028/910953614225322044/f22a39827513f2179f0ae05c0e0834c0.jpg"
   },
   {
@@ -26,7 +26,7 @@
     "defeat_action": "*Kody bows, grumbling. He turns around and moves away, muttering something about these lucky visitors...*",
     "unlocks": ["kamakiri", "crit:1:arikakun"],
     "rewards": ["1sp", "Nahachi Kaizen White Sash"],
-    "secret": False,
+    "secret": false,
     "image": "https://cdn.discordapp.com/attachments/910682900863787028/912216832285507594/09a05c08166f041202a6768097d79314.jpg"
   },
   {
@@ -41,7 +41,7 @@
     "defeat_action": "*Arika-kun apologizes for the poor performance, but promises that next time he will do better.* ",
     "unlocks": ["dis"],
     "rewards": [One "Raptor Egg Athletic Drink", and Inspiration],
-    "secret": True,
+    "secret": true,
     "image": "https://cdn.discordapp.com/attachments/904156525680013363/912452011675496478/a0be8bd7b594a7a692f883632e4fd857.png"
   },
   {
@@ -56,7 +56,7 @@
     "defeat_action": "*Kamakiri makes lots of angry clicking sounds with his mouth, followed by a wad of phlegm being spat on the ground beside you. He walks away, leaving you to pluck kunai from your limbs.*",
     "unlocks": ["ondoridono","crit:1:zorak"],
     "rewards": ["100 saliva-soaked copper pieces"],
-    "secret": False,
+    "secret": false,
     "image": "https://cdn.discordapp.com/attachments/910682900863787028/910794728512028692/R_9.jpeg"
   },
   {
@@ -71,7 +71,7 @@
     "defeat_action": "\"Looks like I Cockadoodle'd you! Only the early bird gets the worm.\"",
     "unlocks": ["Sameow"],
     "rewards": [Ondoridono buys you a mimosa, and hands you a large, wriggling worm.],
-    "secret": True,
+    "secret": true,
     "image": "https://cdn.discordapp.com/attachments/910682900863787028/910797637387714590/5b01a557c77a44de0ba8df5f2f59dd0b.jpeg"
   },
   {
@@ -86,7 +86,7 @@
     "defeat_action": "*Sameow purrs as he sheathes his blade.* \"Well done. You fight like a hound.\"",
     "unlocks": ["Dalsheev"],
     "rewards": ["Nahachi Kaizen White Sash with yellow stripe"],
-    "secret": False,
+    "secret": false,
     "image": "https://cdn.discordapp.com/attachments/855908840633270282/912236127119872010/85a87609bbdcca045a4486811d57a624.jpeg"
   },
   {
@@ -101,7 +101,7 @@
     "defeat_action": "",
     "unlocks": [],
     "rewards": [],
-    "secret": False,
+    "secret": false,
     "image": "https://cdn.discordapp.com/attachments/855908840633270282/912236180949577788/03bf1c8fe607686f9172f74d9475d9ec.jpeg"
   },
   {
@@ -116,7 +116,7 @@
     "defeat_action": "",
     "unlocks": [],
     "rewards": [],
-    "secret": False,
+    "secret": false,
     "image": "https://cdn.discordapp.com/attachments/855908840633270282/912236127677710396/eb25cf76d7e7169420587dc4549f2d48.jpeg"
   },
   {
@@ -131,7 +131,7 @@
     "defeat_action": "\"You're not very good, are you? Later, chump.\"",
     "unlocks": ["Ichi"],
     "rewards": [Shiv (Masterworked Dagger +1)],
-    "secret": False,
+    "secret": false,
     "image": "https://cdn.discordapp.com/attachments/855908840633270282/912236128197812304/eb7eac21093ac5feb23982c502be3997.jpeg"
   },
   {
@@ -146,7 +146,7 @@
     "defeat_action": "\"I know not what I cut, for I am blind.\"",
     "unlocks": [],
     "rewards": [],
-    "secret": False,
+    "secret": false,
     "image": "https://cdn.discordapp.com/attachments/910682900863787028/912420391631355904/b9f94e20868c00c4df4dd2db2911fb14.jpg"
   }
 ]}
