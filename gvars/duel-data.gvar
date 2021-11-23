@@ -52,9 +52,7 @@
     "weapon": "*Frantic Clicking* (Two-Handed Spear, Throwing Stars)",
     "victory_action": "*Kamakiri makes frantic, energetic clicking sounds from his mouth! He tosses his weapons to the ground and lifts you off your feet in an unwelcome embrace. He smells of fry-oil, fish, and dental floss.*",
     "defeat_action": "*Kamakiri makes lots of angry clicking sounds with his mouth, followed by a wad of phlegm being spat on the ground beside you. He walks away, leaving you to pluck kunai from your limbs.*",
-    "unlocks": ["Ondoridono
-
-Zorak, if player hits a crit"],
+    "unlocks": ["ondoridono","crit:1:zokak"],
     "rewards": ["100 saliva-soaked copper pieces"],
     "image": "https://cdn.discordapp.com/attachments/910682900863787028/910794728512028692/R_9.jpeg"
   }
