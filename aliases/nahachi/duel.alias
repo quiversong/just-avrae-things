@@ -256,13 +256,13 @@ img = 'https://cdn.discordapp.com/attachments/910682900863787028/912201227402612
 title = f'{c_first_name} challenges {warrior_name}!'
 desc = f'*Using their {weapon["name"]}!*'
 
-f = '*The two duelists solemnly walk to the back of the temple...*|'
-f += '*They take their positions under a red maple tree, surrounded by the fallen leaves that swirl around the battlefield...*'
+f = '*The two solemnly walk to the grove behind the temple...*|'
+f += '*They take their positions under a red maple tree, the falling leaves swirl around them in the battlefield...*'
 f += '\n\n__***INITIATIVE ROLLS***__'
 fields.append(f)
 
-player_init_f = f'{c_first_name}|{player_init_roll.full}|inline'
-warrior_init_f = f'{warrior_name}|`{warrior_init_roll.total}`|inline'
+player_init_f = f'__{c_first_name}__|{player_init_roll.full}|inline'
+warrior_init_f = f'__{warrior_name}__|`{warrior_init_roll.total}`|inline'
 if player_goes_first:
     fields.append(player_init_f)
     fields.append(warrior_init_f)
@@ -278,8 +278,8 @@ else:
 f += '\n\n__***ATTACK ROLLS***__'
 fields.append(f)
 
-player_attacks_field = f'{c_first_name}|'
-warrior_attacks_field = f'{warrior_name}|'
+player_attacks_field = f'__{c_first_name}__|'
+warrior_attacks_field = f'__{warrior_name}__|'
 
 player_attack_count = 0
 warrior_attack_count = 0
@@ -318,20 +318,20 @@ thumb = warrior['image']
 
 if is_player_winner:
     f = f'__***{c.name.upper()} WINS!***__|'
-    f += 'Flawless victory!\n' if warrior_hits == 0 else ''
+    f += 'Flawless victory!\n' if warrior_hits == 0 else '\n\n'
+    if 'defeat_action' in warrior:
+        f += warrior['defeat_action'].replace('"', '\\"') + '\n\n'
     f += 'Congratulations!'
     if 'rewards' in warrior and len(warrior['rewards']) > 0:
         rewards_text = "\n- ".join(warrior["rewards"])
         f += ' You earned:\n- ' + rewards_text
-    if 'defeat_action' in warrior:
-        f += '\n\n' + warrior['defeat_action'].replace('"', '\\"')
     fields.append(f)
 else:
     f = f'__***{warrior_name.upper()} WINS!***__|'
-    f += 'Flawless victory!\n' if player_hits == 0 else ''
-    f += f'It would seem as you need more training, young grasshopper.'
+    f += 'Flawless victory!\n' if player_hits == 0 else '\n\n'
     if 'victory_action' in warrior:
-        f += '\n\n' + warrior['victory_action'].replace('"', '\\"')
+        f += warrior['victory_action'].replace('"', '\\"') + '\n\n'
+    f += f'It would seem as you need more training, young grasshopper.'
     fields.append(f)
 
 if not warrior['code'] in global_stats:
