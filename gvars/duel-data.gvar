@@ -40,7 +40,7 @@
     "victory_action": "*Arika-kun hops happily, finally a win!* \"Flaming Sword goes brrrrrr!!!!!!!,\" *He yells, while cracking open a Raptor Egg Athletic Drink, and running in circles.*",
     "defeat_action": "*Arika-kun apologizes for the poor performance, but promises that next time he will do better.* ",
     "unlocks": ["dis"],
-    "rewards": [One "Raptor Egg Athletic Drink", and Inspiration],
+    "rewards": ["Raptor Egg Athletic Drink", "Inspiration"],
     "secret": true,
     "image": "https://cdn.discordapp.com/attachments/904156525680013363/912452011675496478/a0be8bd7b594a7a692f883632e4fd857.png"
   },
@@ -70,7 +70,7 @@
     "victory_action": "\"Only the early bird gets the worm. You rise like the sun! Cockadoodledoo!\"",
     "defeat_action": "\"Looks like I Cockadoodle'd you! Only the early bird gets the worm.\"",
     "unlocks": ["Sameow"],
-    "rewards": [Ondoridono buys you a mimosa, and hands you a large, wriggling worm.],
+    "rewards": ["Mimosa", "Large, wriggling worm"],
     "secret": true,
     "image": "https://cdn.discordapp.com/attachments/910682900863787028/910797637387714590/5b01a557c77a44de0ba8df5f2f59dd0b.jpeg"
   },
@@ -130,7 +130,7 @@
     "victory_action": "\"Not bad, kid. Give my guys a sharp whistle if you ever get tossed in the slammer!\"",
     "defeat_action": "\"You're not very good, are you? Later, chump.\"",
     "unlocks": ["Ichi"],
-    "rewards": [Shiv (Masterworked Dagger +1)],
+    "rewards": ["Shiv (Masterworked Dagger +1)"],
     "secret": false,
     "image": "https://cdn.discordapp.com/attachments/855908840633270282/912236128197812304/eb7eac21093ac5feb23982c502be3997.jpeg"
   },
