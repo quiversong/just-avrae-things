@@ -187,13 +187,14 @@ while player_hits < BLOWS_NEEDED and warrior_hits < BLOWS_NEEDED:
         attack_successful = crit or attack_roll.total >= warrior["ac"]
         player_hits += 1 if attack_successful else 0
 
-        is_player_turn = False
         rounds[len(rounds) - 1]['player'] = [{
             'type': 'player',
             'is_player': True,
             'roll': attack_roll,
             'successful': attack_successful
         }]
+
+        is_player_turn = False
     else:
         attack_roll = vroll(f'1d20 + {warrior["attack"]}')
         crit = attack_roll.result.crit == 1
@@ -201,13 +202,28 @@ while player_hits < BLOWS_NEEDED and warrior_hits < BLOWS_NEEDED:
         attack_successful = crit or attack_roll.total >= character().ac
         warrior_hits += 1 if attack_successful else 0
 
-        is_player_turn = True
         rounds[len(rounds) - 1]['warrior'] = [{
             'type': 'warrior',
             'is_player': False,
             'roll': attack_roll,
             'successful': attack_successful
         }]
+
+        if 'attack2x' in warrior['powerups']:
+            attack_roll = vroll(f'1d20 + {warrior["attack"]}')
+            crit = attack_roll.result.crit == 1
+
+            attack_successful = crit or attack_roll.total >= character().ac
+            warrior_hits += 1 if attack_successful else 0
+
+            rounds[len(rounds) - 1]['warrior'].append({
+                'type': 'warrior',
+                'is_player': False,
+                'roll': attack_roll,
+                'successful': attack_successful
+            })
+
+        is_player_turn = True
 
 is_player_winner = player_hits >= BLOWS_NEEDED
 
