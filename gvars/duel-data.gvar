@@ -12,7 +12,7 @@
     "defeat_action": "*The automaton bows stiffly, and a robotic voice says:* \"thank you for the practice.\"",
     "unlocks": ["kody"],
     "rewards": ["1sp"],
-    "image": "https://cdn.discordapp.com/attachments/910682900863787028/910953614225322044/f22a39827513f2179f0ae05c0e0834c0.jpg",
+    "image": "https://cdn.discordapp.com/attachments/910682900863787028/910953614225322044/f22a39827513f2179f0ae05c0e0834c0.jpg"
   },
   {
     "code": "kody",
@@ -26,7 +26,7 @@
     "defeat_action": "*Kody bows, grumbling. He turns around and moves away, muttering something about these lucky visitors...*",
     "unlocks": ["kamakiri", "crit:1:arikakun"],
     "rewards": ["1sp", "Nahachi Kaizen White Sash"],
-    "image": "https://cdn.discordapp.com/attachments/910682900863787028/912216832285507594/09a05c08166f041202a6768097d79314.jpg",
+    "image": "https://cdn.discordapp.com/attachments/910682900863787028/912216832285507594/09a05c08166f041202a6768097d79314.jpg"
   },
   {
     "code": "arikakun",
@@ -40,7 +40,7 @@
     "defeat_action": "*Arika-kun apologizes for the poor performance, but promises that next time he will do better.*",
     "unlocks": [],
     "rewards": ["1sp", "Raptor Egg Athletic Drink"],
-    "image": "https://cdn.discordapp.com/attachments/904156525680013363/912452011675496478/a0be8bd7b594a7a692f883632e4fd857.png",
+    "image": "https://cdn.discordapp.com/attachments/904156525680013363/912452011675496478/a0be8bd7b594a7a692f883632e4fd857.png"
   },
   {
     "code": "kamakiri",
@@ -56,6 +56,6 @@
 
 Zorak, if player hits a crit"],
     "rewards": ["100 saliva-soaked copper pieces"],
-    "image": "https://cdn.discordapp.com/attachments/910682900863787028/910794728512028692/R_9.jpeg",
+    "image": "https://cdn.discordapp.com/attachments/910682900863787028/910794728512028692/R_9.jpeg"
   }
 ]}
