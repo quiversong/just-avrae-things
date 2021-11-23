@@ -318,20 +318,20 @@ thumb = warrior['image']
 
 if is_player_winner:
     f = f'__***{c.name.upper()} WINS!***__|'
-    f += 'Flawless victory!\n' if warrior_hits == 0 else '\n\n'
-    if 'defeat_action' in warrior:
-        f += warrior['defeat_action'].replace('"', '\\"') + '\n\n'
+    f += 'Flawless victory!\n' if warrior_hits == 0 else ''
     f += 'Congratulations!'
     if 'rewards' in warrior and len(warrior['rewards']) > 0:
-        rewards_text = "\n- ".join(warrior["rewards"])
-        f += ' You earned:\n- ' + rewards_text
+        rewards_text = '\n'.join([f'`{r}`' for r in warrior["rewards"]])
+        f += ' You earned:\n ' + rewards_text
+    if 'defeat_action' in warrior:
+        f += '\n\n' + warrior['defeat_action'].replace('"', '\\"')
     fields.append(f)
 else:
     f = f'__***{warrior_name.upper()} WINS!***__|'
-    f += 'Flawless victory!\n' if player_hits == 0 else '\n\n'
+    f += 'Flawless victory!\n' if player_hits == 0 else ''
+    f += 'It would seem as you need more training, young grasshopper!'
     if 'victory_action' in warrior:
-        f += warrior['victory_action'].replace('"', '\\"') + '\n\n'
-    f += f'It would seem as you need more training, young grasshopper.'
+        f += '\n\n' + warrior['victory_action'].replace('"', '\\"')
     fields.append(f)
 
 if not warrior['code'] in global_stats:
