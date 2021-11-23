@@ -23,6 +23,13 @@ commands = []
 DUEL_TIME_VAR = "_du_dhc_"
 DUEL_STAGE_VAR = "_du_vars"
 DUEL_STATS_VAR = "_du_st_"
+EMPTY_STATS = {
+    'wins': 0,
+    'losses': 0,
+    'flawless_wins': 0,
+    'flawless_losses': 0,
+    'win_min_rounds': 0
+}
 
 daily_activity_control = None
 #! daily_activity_control = devrae_f daily_control_init(#P DUEL_TIME_VAR #P DAILY_CAP) !#
@@ -80,6 +87,44 @@ footer += "\n" + f'Seventra: Exodus of Heroes | Nahachi Duel v{VERSION} | !duel 
 footer += "\nCreators: quiversong#2772"
 
 all_warriors = load_json(get_gvar(DATA_VAR))["warriors"]
+global_stats = load_json(cv[DUEL_STATS_VAR]) if DUEL_STATS_VAR in cv else {}
+
+if len(args) > 0 and args[0] == 'list':
+    title = f"{character().name}'s Duel Results"
+    f = 'Challenge Results|'
+    f += 'The list below contains the names of the warriors you have challenged and that can be challenged by you.\n'
+    f += '\nWinning challenges may unlock new warriors!\n'
+    f += '\n`W/R` = wins / total challenges.\n'
+    f += '`Best` = the least number of attacks you needed to beat that warrior.\n'
+    f += '`*` denotes a secret warrior that is only unlocked under certain special conditions.\n\n'
+
+    f += '```Kaizen Warrior     W/R   Best``````'
+    for i in range(len(all_warriors)):
+        warrior = all_warriors[i]
+        if i == 0 or warrior['code'] in global_stats:
+            stats = global_stats[warrior['code']] if warrior['code'] in global_stats else EMPTY_STATS
+            is_secret = 'secret' in warrior and warrior['secret']
+            wins = stats['wins']
+            total = wins + stats['losses']
+            left_padding = ' ' if wins > 9 and wins < 100 else '  ' if wins < 10 else ''
+            right_padding = ' ' if total > 9 and total < 100 else '  ' if total < 10 else ''
+            formatted_wr = f'{left_padding}{wins}/{total}{right_padding}'
+            best_record = stats['win_min_rounds']
+            left_padding = '  ' if best_record > 9 and best_record < 100 else '   ' if best_record < 10 else ' '
+            formatted_best_record = f'{left_padding}{best_record}'
+            formatted_line = f'{formatted_wr} {formatted_best_record}'
+            data_length = len(warrior['code']) + len(formatted_line) + 1
+            data_length -= 1 if is_secret else 0
+            prefix = '*' if is_secret else ''
+            padding = ''
+            for i in range(29 - data_length + 1):
+                padding += ' '
+            formatted_line = f'{prefix}{warrior["code"]}{padding}{formatted_line}\n'
+            f += formatted_line
+    f += '```\n\n'
+    fields.append(f)
+
+    return 1
 
 if len(args) < 2:
     f = f'{c_first_name} seems a little confused...|'
@@ -92,11 +137,14 @@ if len(args) < 2:
 chosen_warrior_name = args[0].lower().strip()
 warrior = [w for w in all_warriors if w["code"].lower() == chosen_warrior_name]
 if len(warrior) == 0:
-    fields.append(f'{c_first_name} seems a little confused...|There are no warriors named {args[0]} available to duel with you.')
+    fields.append(f'{c_first_name} seems a little confused...|There are no warriors named {args[0]} available to duel with you.\nUse `!duel list` to see the warriors that are available to duel with you.')
     return 1
 
 warrior = warrior[0]
 warrior_name = warrior["name"]
+if not warrior['code'] in global_stats:
+    fields.append(f'{c_first_name} is not ready yet...|You need to prove your strength by challenging other warriors before you can challenge {warrior["name"]}!\nUse `!duel list` to see the warriors that are available to duel with you.')
+    return 1
 
 weapon = None
 weapon_arg = args[1].lower()
@@ -207,7 +255,7 @@ for index in range(len(rounds)):
     for attack in warrior_attacks:
         warrior_attack_count += 1
         warrior_attacks_field += f'Attack {warrior_attack_count}: {sl if attack["successful"] else fl}\n'
-        warrior_attacks_field += f'{attack["roll"].total}`\n\n'
+        warrior_attacks_field += f'{attack["roll"].total}\n\n'
 
 player_attacks_field += '|inline'
 warrior_attacks_field += '|inline'
@@ -232,22 +280,20 @@ else:
         f += '\n\n' + warrior['victory_action'].replace('"', '\\"')
     fields.append(f)
 
+if not warrior['code'] in global_stats:
+    global_stats[warrior['code']] = EMPTY_STATS.copy()
 
-global_stats = load_json(get_gvar(DUEL_STATS_VAR))
-stats = global_stats[warrior['code']] if warrior['code'] in stats else {
-    'wins': 0,
-    'losses': 0,
-    'flawless_wins': 0,
-    'flawless_losses': 0,
-    'win_min_rounds': 0
-}
-
+stats = global_stats[warrior['code']]
 if is_player_winner:
     stats['wins'] += 1
     if warrior_hits == 0:
         stats['flawless_wins'] += 1
-    if len(rounds) < stats['min_rounds']:
+    if len(rounds) < stats['win_min_rounds'] or stats['win_min_rounds'] == 0:
         stats['win_min_rounds'] = len(rounds)
+    if 'unlocks' in warrior:
+        for unlock in warrior['unlocks']:
+            if not unlock in global_stats:
+                global_stats[unlock] = EMPTY_STATS.copy()
 else:
     stats['losses'] += 1
     if player_hits == 0:
