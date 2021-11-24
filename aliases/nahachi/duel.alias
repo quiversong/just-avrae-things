@@ -154,10 +154,13 @@ if len(args) < 2:
     img = 'https://cdn.discordapp.com/attachments/910682900863787028/912201227402612736/grove.jpg'
     return 1
 
-chosen_warrior_name = args[0].lower().strip()
-warrior = [w for w in all_warriors if w["code"].lower() == chosen_warrior_name]
+chosen_warrior_code = args[0].lower().strip()
+warrior = [w for w in all_warriors if w["code"].lower() == chosen_warrior_code]
 if len(warrior) == 0:
-    fields.append(f'{c_first_name} seems a little confused...|There are no warriors named {args[0]} available to duel with you.\nUse `!duel list` to see the warriors that are available to duel with you.')
+    if chosen_warrior_code in global_stats:
+        fields.append(f'Oops! This is still not ready to accept challenges!|Blame if on the Seventra staff! They are still working on it. :)')
+    else:
+        fields.append(f'{c_first_name} seems a little confused...|There are no warriors named {chosen_warrior_code} available to duel with you.\nUse `!duel list` to see the warriors that are available to duel with you.')
     return 1
 
 warrior = warrior[0]
