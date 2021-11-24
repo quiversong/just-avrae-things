@@ -15,7 +15,7 @@ c_first_name = c.name.split(' ')[0]
 cv, cs = c.cvars, c.skills
 
 title = f'{c_first_name} wants to challenge the warriors of the Kaizen Temple for a duel!'
-img, thumb, desc, add_to_bag = None, None, None, None
+img, thumb, desc, add_to_bag, add_to_coins = None, None, None, None, None
 sl, fl = "**Success!**", "**Failure!**"
 fields = []
 commands = []
@@ -158,7 +158,7 @@ chosen_warrior_code = args[0].lower().strip()
 warrior = [w for w in all_warriors if w["code"].lower() == chosen_warrior_code]
 if len(warrior) == 0:
     if chosen_warrior_code in global_stats:
-        fields.append(f'Oops! This is still not ready to accept challenges!|Blame if on the Seventra staff! They are still working on it. :)')
+        fields.append(f'Oops! This is still not ready to accept challenges!|Blame it on the Seventra staff! They are still working on it. :)')
     else:
         fields.append(f'{c_first_name} seems a little confused...|There are no warriors named {chosen_warrior_code} available to duel with you.\nUse `!duel list` to see the warriors that are available to duel with you.')
     return 1
@@ -325,9 +325,19 @@ if is_player_winner:
     f += 'Congratulations!'
     if 'rewards' in warrior and len(warrior['rewards']) > 0:
         add_to_bag = {}
+        add_to_coins = {}
+        rewards_text = ''
         for reward in warrior['rewards']:
-            rewards_text = '\n' + f'`{reward}`'
-            add_to_bag[reward] = 1
+            rewards_text += '\n' + f'`{reward}`'
+            non_digit_part = ''.join([i for i in reward if not i.isdigit()]).strip().lower()
+            if reward.lower() == 'inspiration':
+                character().create_cc_nx('Inspiration', 0, 1, None, 'bubble')
+                character().mod_cc('Inspiration', 1)
+            elif non_digit_part in ['cp', 'sp', 'gp']:
+                digit_part = int(''.join([i for i in reward if i.isdigit()]).strip().lower())
+                add_to_coins[non_digit_part] = digit_part
+            else:
+                add_to_bag[reward] = 1
         f += ' These were added to your bag:' + rewards_text
     if 'defeat_action' in warrior:
         f += '\n\n' + warrior['defeat_action'].replace('"', '\\"')
@@ -379,14 +389,37 @@ else:
 global_stats[warrior['code']] = stats
 character().set_cvar(DUEL_STATS_VAR, dump_json(global_stats))
 
-if add_to_bag != None:
-  _bag_name = "Kaizen Temple"
-  _content = add_to_bag
-
+if add_to_bag != None and len(add_to_bag) > 0:
   #! devrae_f add_to_bag (#P "Kaizen Temple" #P add_to_bag) !#
   ##### devrae function insert [add_to_bag] #####
   __p0__ = "Kaizen Temple"
   __p1__ = add_to_bag
+  _bag_name = __p0__
+  _content = __p1__
+
+  _cv = character().cvars
+  _bags = load_json(_cv["bags"]) if "bags" in _cv else []
+  _bag_index = [i for i, x in enumerate(_bags) if x[0] == _bag_name]
+  _bag_index = _bag_index[0] if len(_bag_index) > 0 else -1
+  if _bag_index == -1:
+    _bags.append([_bag_name, {}])
+    _bag_index = len(_bags) - 1
+  _bag_content = _bags[_bag_index][1]
+  for _key in _content:
+    if _key in _bag_content:
+      _bag_content[_key] = _bag_content[_key] + _content[_key]
+    else:
+      _bag_content[_key] = _content[_key]
+  _bags[_bag_index] = [_bag_name, _bag_content]
+  character().set_cvar('bags', dump_json(_bags))
+
+  ##### devrae function end [add_to_bag] #####
+
+if add_to_coins != None and len(add_to_coins) > 0:
+  #! devrae_f add_to_bag (#P "Coin Pouch" #P add_to_coins) !#
+  ##### devrae function insert [add_to_bag] #####
+  __p0__ = "Coin Pouch"
+  __p1__ = add_to_coins
   _bag_name = __p0__
   _content = __p1__
 
