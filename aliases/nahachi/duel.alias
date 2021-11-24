@@ -15,7 +15,7 @@ c_first_name = c.name.split(' ')[0]
 cv, cs = c.cvars, c.skills
 
 title = f'{c_first_name} wants to challenge the warriors of the Kaizen Temple for a duel!'
-img, thumb, desc = None, None, None
+img, thumb, desc, add_to_bag = None, None, None, None
 sl, fl = "**Success!**", "**Failure!**"
 fields = []
 commands = []
@@ -321,8 +321,11 @@ if is_player_winner:
     f += 'Flawless victory!\n' if warrior_hits == 0 else ''
     f += 'Congratulations!'
     if 'rewards' in warrior and len(warrior['rewards']) > 0:
-        rewards_text = '\n'.join([f'`{r}`' for r in warrior["rewards"]])
-        f += ' You earned:\n ' + rewards_text
+        add_to_bag = {}
+        for reward in warrior['rewards']:
+            rewards_text = '\n' + f'`{reward}`'
+            add_to_bag[reward] = 1
+        f += ' These were added to your bag:' + rewards_text
     if 'defeat_action' in warrior:
         f += '\n\n' + warrior['defeat_action'].replace('"', '\\"')
     fields.append(f)
@@ -372,6 +375,35 @@ else:
 
 global_stats[warrior['code']] = stats
 character().set_cvar(DUEL_STATS_VAR, dump_json(global_stats))
+
+if add_to_bag != None:
+  _bag_name = "Kaizen Temple"
+  _content = add_to_bag
+
+  #! devrae_f add_to_bag (#P "Kaizen Temple" #P add_to_bag) !#
+  ##### devrae function insert [add_to_bag] #####
+  __p0__ = "Kaizen Temple"
+  __p1__ = add_to_bag
+  _bag_name = __p0__
+  _content = __p1__
+
+  _cv = character().cvars
+  _bags = load_json(_cv["bags"]) if "bags" in _cv else []
+  _bag_index = [i for i, x in enumerate(_bags) if x[0] == _bag_name]
+  _bag_index = _bag_index[0] if len(_bag_index) > 0 else -1
+  if _bag_index == -1:
+    _bags.append([_bag_name, {}])
+    _bag_index = len(_bags) - 1
+  _bag_content = _bags[_bag_index][1]
+  for _key in _content:
+    if _key in _bag_content:
+      _bag_content[_key] = _bag_content[_key] + _content[_key]
+    else:
+      _bag_content[_key] = _content[_key]
+  _bags[_bag_index] = [_bag_name, _bag_content]
+  character().set_cvar('bags', dump_json(_bags))
+
+  ##### devrae function end [add_to_bag] #####
 
 </drac2>
 -title "{{title}}"
