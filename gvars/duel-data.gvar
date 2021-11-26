@@ -10,7 +10,7 @@
     "victory_action": "*The automaton bows stiffly, and a robotic voice says:* \"thank you for the practice.\"",
     "defeat_action": "*The automaton bows stiffly, and a robotic voice says:* \"thank you for the practice.\"",
     "unlocks": ["kody", "crit:1:arikakun"],
-    "charRewards": ["Nahachi Kaizen WHHHITE Sash"],
+    "charRewards": ["Nahachi Kaizen WHHHITTEEE Sash"],
     "itemRewards": {"sp": 1},
     "powerups": [],
     "secret": false,
@@ -311,8 +311,7 @@
   {
     "code": "hanagasumi",
     "name": "Hanagasumi",
-    "desc": "A Spring Eladrin from the Feywild, Hanagasumi used to be a former elite within the Order of the Pale Oak. However, she left the faction due to wanting to find something more interesting in her life.
-Despite a serious appearance, this woman enjoys doing rematches with people she wins against, so much so that if she's ever beaten, she'll still anticipate another rematch with those that challenge her. She finds combat as an art more than a forced act, when you see her in battle, she enjoys toying with her opponents in a more friendly manner, even genuine aggressors.",
+    "desc": "A Spring Eladrin from the Feywild, Hanagasumi used to be a former elite within the Order of the Pale Oak. However, she left the faction due to wanting to find something more interesting in her life.\nDespite a serious appearance, this woman enjoys doing rematches with people she wins against, so much so that if she's ever beaten, she'll still anticipate another rematch with those that challenge her. She finds combat as an art more than a forced act, when you see her in battle, she enjoys toying with her opponents in a more friendly manner, even genuine aggressors.",
     "init": 7,
     "ac": 16,
     "attack": 10,
