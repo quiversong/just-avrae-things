@@ -10,7 +10,7 @@
     "victory_action": "*The automaton bows stiffly, and a robotic voice says:* \"thank you for the practice.\"",
     "defeat_action": "*The automaton bows stiffly, and a robotic voice says:* \"thank you for the practice.\"",
     "unlocks": ["kody", "crit:1:arikakun"],
-    "charRewards": ["Nahachi Kaizen WHHHITTEEE Sash"],
+    "charRewards": [],
     "itemRewards": {"sp": 1},
     "powerups": [],
     "secret": false,
