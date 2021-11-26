@@ -101,8 +101,9 @@ if len(args) > 0 and args[0] == 'desc':
 
     title += f': {warrior["name"]}'
     description = warrior["desc"].replace('"', '\"')
+    weapon = warrior["weapon"].replace('"', '\"')
     fields.append(f'Description|{description}')
-    fields.append(f'Weapons of Choice|{warrior["weapon"]}')
+    fields.append(f'Weapons of Choice|{weapon}')
 
     img = warrior["image"]
 
