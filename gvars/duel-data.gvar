@@ -10,7 +10,7 @@
     "victory_action": "*The automaton bows stiffly, and a robotic voice says:* \"thank you for the practice.\"",
     "defeat_action": "*The automaton bows stiffly, and a robotic voice says:* \"thank you for the practice.\"",
     "unlocks": ["kody", "crit:1:arikakun"],
-    "charRewards": ["Nahachi Kaizen White 1 Sash"],
+    "charRewards": ["Nahachi Kaizen WHHHITE Sash"],
     "itemRewards": {"sp": 1},
     "powerups": [],
     "secret": false,
@@ -281,19 +281,8 @@
     "ac": 16,
     "attack": 6,
     "weapon": "Katana",
-    "victory_action": "\"Letting control go, letting it be
-How foolish of me to turn out to flee.
-There is no control, turning into a black hole
-Full of nothing but despair...
-Is that really fair?\"",
-    "defeat_action": "\"Victory is just a means to an end;
-The cycle keeps revolving.
-So is defeat -
-So are these words.
-Only one goal in mind:
-Shoot first,
-Ask questions never.
-The road is narrow.\"",
+    "victory_action": "\"Letting control go, letting it be\nHow foolish of me to turn out to flee.\nThere is no control, turning into a black hole\nFull of nothing but despair...\nIs that really fair?\"",
+    "defeat_action": "\"Victory is just a means to an end;\nThe cycle keeps revolving.\nSo is defeat -\nSo are these words.\nOnly one goal in mind:\nShoot first,\nAsk questions never.\nThe road is narrow.\"",
     "unlocks": ["azzarh"],
     "charRewards": ["Nahachi Kaizen Yellow Sash"],
     "itemRewards": {"gp": 20},

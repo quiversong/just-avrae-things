@@ -376,7 +376,7 @@ else:
                 add_to_bag[reward] = qty
         f += ' These were added to your bag:' + rewards_text
 
-    it 'charRewards' in warrior and len(warrior['charRewards']) > 0:
+    if 'charRewards' in warrior and len(warrior['charRewards']) > 0:
         rewards_text = '\nYou also gained:'
         for reward in warrior['charRewards']:
             stripped = reward.lower().strip()
