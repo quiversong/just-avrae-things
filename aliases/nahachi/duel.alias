@@ -106,6 +106,7 @@ if len(args) > 0 and args[0] == 'desc':
     fields.append(f'Weapons of Choice|{weapon}')
 
     img = warrior["image"]
+    thumb = 'https://cdn.discordapp.com/attachments/855908840633270282/913279197793886288/mountain.jpg'
 
     return 1
 
