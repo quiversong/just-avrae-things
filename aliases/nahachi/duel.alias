@@ -7,6 +7,14 @@ DATA_VAR = "c85742dc-f2e9-4a99-b544-b8f71dd7bed9"
 DAILY_CAP = 1
 BLOWS_NEEDED = 3
 
+CURRENCY = {
+    'cp': 'Copper Pieces',
+    'sp': 'Silver Pieces',
+    'ep': 'Electrum Pieces',
+    'gp': 'Gold Pieces',
+    'pp': 'Platinum Pieces'
+}
+
 # Code
 args = &ARGS&
 pargs = argparse(args)
@@ -23,6 +31,7 @@ commands = []
 DUEL_TIME_VAR = "_du_dhc_"
 DUEL_STAGE_VAR = "_du_vars"
 DUEL_STATS_VAR = "_du_st_"
+KAIZEN_FEATURES_VAR = "_du_kfeatures_"
 EMPTY_STATS = {
     'wins': 0,
     'losses': 0,
@@ -342,35 +351,58 @@ fields.append(warrior_attacks_field if player_goes_first else player_attacks_fie
 
 thumb = warrior['image']
 
-if is_player_winner:
-    f = f'__***{c.name.upper()} WINS!***__|'
-    f += 'Flawless victory!\n' if warrior_hits == 0 else ''
-    f += 'Congratulations!'
-    if 'rewards' in warrior and len(warrior['rewards']) > 0:
-        add_to_bag = {}
-        add_to_coins = {}
-        rewards_text = ''
-        for reward in warrior['rewards']:
-            rewards_text += '\n' + f'`{reward}`'
-            non_digit_part = ''.join([i for i in reward if not i.isdigit()]).strip().lower()
-            if reward.lower() == 'inspiration':
-                character().create_cc_nx('Inspiration', 0, 1, None, 'bubble')
-                character().mod_cc('Inspiration', 1)
-            elif non_digit_part in ['cp', 'sp', 'gp']:
-                digit_part = int(''.join([i for i in reward if i.isdigit()]).strip().lower())
-                add_to_coins[non_digit_part] = digit_part
-            else:
-                add_to_bag[reward] = 1
-        f += ' These were added to your bag:' + rewards_text
-    if 'defeat_action' in warrior:
-        f += '\n\n' + warrior['defeat_action'].replace('"', '\\"')
-    fields.append(f)
-else:
+if not is_player_winner:
     f = f'__***{warrior_name.upper()} WINS!***__|'
     f += 'Flawless victory!\n' if player_hits == 0 else ''
     f += 'It would seem as you need more training, young grasshopper!'
     if 'victory_action' in warrior:
         f += '\n\n' + warrior['victory_action'].replace('"', '\\"')
+    fields.append(f)
+else:
+    f = f'__***{c.name.upper()} WINS!***__|'
+    f += 'Flawless victory!\n' if warrior_hits == 0 else ''
+    f += 'Congratulations!'
+
+    if 'itemRewards' in warrior and len(warrior['itemRewards']) > 0:
+        add_to_bag = {}
+        add_to_coins = {}
+        rewards_text = ''
+        for reward, qty in warrior['itemRewards'].items():
+            if reward in CURRENCY.keys():
+                rewards_text += f'\n `{qty}x {CURRENCY[reward]}`'
+                add_to_coins[reward] = qty
+            else:
+                rewards_text += '\n' + f'`{qty}x {reward}`'
+                add_to_bag[reward] = qty
+        f += ' These were added to your bag:' + rewards_text
+
+    it 'charRewards' in warrior and len(warrior['charRewards']) > 0:
+        rewards_text = '\nYou also gained:'
+        for reward in warrior['charRewards']:
+            stripped = reward.lower().strip()
+            if stripped == 'inspiration':
+                character().create_cc_nx('Inspiration', 0, 1, None, 'bubble')
+                character().mod_cc('Inspiration', 1)
+                rewards_text += '\n`Inspiration`'
+            if 'kaizen' in stripped and stripped.endswith('Sash'):
+                vfeatures = load_json(cv['vfeatures']) if 'cvfeatures' in cv else {}
+                has_kaizen_features = [f for f in (vfeatures) if f['n'] == KAIZEN_FEATURES_VAR]
+                if len(has_kaizen_features) == 0:
+                    vfeatures.append({
+                        'n': KAIZEN_FEATURES_VAR,
+                        't': '\n**Kaizen Sashes:** '
+                    })
+                    character().set_cvar('vfeatures', dump_json(vfeatures))
+                features_var = cv[KAIZEN_FEATURES_VAR].strip() if KAIZEN_FEATURES_VAR else ''
+                if len(features_var) != 0:
+                    features_var += ', '
+                features_var += reward
+                character().set_cvar(KAIZEN_FEATURES_VAR, features_var)
+                rewards_text += '\n`{reward}`'
+
+    if 'defeat_action' in warrior:
+        f += '\n\n' + warrior['defeat_action'].replace('"', '\\"')
+
     fields.append(f)
 
 if not warrior['code'] in global_stats:
