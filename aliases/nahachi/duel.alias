@@ -100,7 +100,8 @@ if len(args) > 0 and args[0] == 'desc':
     warrior = warrior[0]
 
     title += f': {warrior["name"]}'
-    fields.append(f'Description|{warrior["desc"]}')
+    description = warrior["desc"].replace('"', '\"')
+    fields.append(f'Description|{description}')
     fields.append(f'Weapons of Choice|{warrior["weapon"]}')
 
     img = warrior["image"]
@@ -109,6 +110,8 @@ if len(args) > 0 and args[0] == 'desc':
 
 if len(args) > 0 and args[0] == 'list':
     title = f"{character().name}'s Duel Results"
+    thumb = 'https://cdn.discordapp.com/attachments/855908840633270282/913279197793886288/mountain.jpg'
+
     f = 'Challenge Results|'
     f += 'The list below contains the names of the warriors you have challenged and that can be challenged by you.\n'
     f += '\nWinning challenges may unlock new warriors!\n'
@@ -145,13 +148,14 @@ if len(args) > 0 and args[0] == 'list':
     return 1
 
 if len(args) < 2:
-    f = f'{c_first_name} seems a little confused...|'
+    thumb = 'https://cdn.discordapp.com/attachments/855908840633270282/913279197793886288/mountain.jpg'
+
+    f = f'{c_first_name} arrives at the Kaizen Temple in Nahachi...|'
     f += '- To view the description of a Kaizen Temple warrior:\n`!duel desc <warrior code>`'
     f += '\n- To view the warriors you can challenge:\n`!duel list`'
-    f += '\n- To start a challenge:\n`!duel <warrior code> <your attack/weapon of choice>`'
-    f += '\n- To view the attacks/weapons you can use:\n`!a`'
+    f += '\n- To start a challenge:\n`!duel <warrior> <your attack/weapon of choice>`'
+    f += '\n- To view the attacks/weapons you can use:\n`!attack`'
     fields.append(f)
-    img = 'https://cdn.discordapp.com/attachments/910682900863787028/912201227402612736/grove.jpg'
     return 1
 
 chosen_warrior_code = args[0].lower().strip()
@@ -205,7 +209,10 @@ while player_hits < BLOWS_NEEDED and warrior_hits < BLOWS_NEEDED:
         rounds.append({})
 
     if is_player_turn:
-        attack_roll = vroll(f'1d20 + {weapon["a_bonus"]}')
+        dice = '1d20'
+        if 'player_all_dis' in warrior['powerups']:
+            dice = '2d20kl1'
+        attack_roll = vroll(f'{dice} + {weapon["a_bonus"]}')
         crit = attack_roll.result.crit == 1
         player_crits += 1 if crit else 0
 
@@ -221,34 +228,47 @@ while player_hits < BLOWS_NEEDED and warrior_hits < BLOWS_NEEDED:
 
         is_player_turn = False
     else:
-        attack_roll = vroll(f'1d20 + {warrior["attack"]}')
-        crit = attack_roll.result.crit == 1
+        warrior_should_attack = not('3attacks' in warrior['powerups'] and len(rounds) > 3)
+        if warrior_should_attack:
+            dice = '1d20'
+            mod = ''
+            if 'warrior_all_dis' in warrior['powerups']:
+                dice = '2d20kl1'
+                mod = 'dis'
+            if 'warrior_1st_adv' in warrior['powerups'] and len(rounds) == 1:
+                dice = '2d20kh1'
+                mod = 'adv'
 
-        attack_successful = crit or attack_roll.total >= character().ac
-        warrior_hits += 1 if attack_successful else 0
-
-        rounds[len(rounds) - 1]['warrior'] = [{
-            'type': 'warrior',
-            'is_player': False,
-            'roll': attack_roll,
-            'successful': attack_successful
-        }]
-
-        if 'attack2x' in warrior['powerups']:
-            attack_roll = vroll(f'1d20 + {warrior["attack"]}')
+            attack_roll = vroll(f'{dice} + {warrior["attack"]}')
             crit = attack_roll.result.crit == 1
 
             attack_successful = crit or attack_roll.total >= character().ac
             warrior_hits += 1 if attack_successful else 0
 
-            rounds[len(rounds) - 1]['warrior'].append({
+            rounds[len(rounds) - 1]['warrior'] = [{
                 'type': 'warrior',
                 'is_player': False,
+                'mod': mod,
                 'roll': attack_roll,
                 'successful': attack_successful
-            })
+            }]
 
-        is_player_turn = True
+            if 'attack2x' in warrior['powerups']:
+                attack_roll = vroll(f'1d20 + {warrior["attack"]}')
+                crit = attack_roll.result.crit == 1
+
+                attack_successful = crit or attack_roll.total >= character().ac
+                warrior_hits += 1 if attack_successful else 0
+
+                rounds[len(rounds) - 1]['warrior'].append({
+                    'type': 'warrior',
+                    'is_player': False,
+                    'mod': mod,
+                    'roll': attack_roll,
+                    'successful': attack_successful
+                })
+
+            is_player_turn = True
 
 is_player_winner = player_hits >= BLOWS_NEEDED
 
@@ -306,6 +326,7 @@ for index in range(len(rounds)):
     for attack in warrior_attacks:
         warrior_attack_count += 1
         warrior_attacks_field += f'Attack {warrior_attack_count}: {sl if attack["successful"] else fl}\n'
+        warrior_attack_count += f'[{attack["mod"]}]: ' if attack['mod'] != '' else ''
         warrior_attacks_field += f'`{attack["roll"].total}`\n'
 
     for i in range(max_attacks_this_round - len(warrior_attacks)):
