@@ -351,12 +351,13 @@ fields.append(warrior_attacks_field if player_goes_first else player_attacks_fie
 
 thumb = warrior['image']
 
-if not is_player_winner:
+is_player_defeated = not is_player_winner
+if is_player_defeated:
     f = f'__***{warrior_name.upper()} WINS!***__|'
     f += 'Flawless victory!\n' if player_hits == 0 else ''
     f += 'It would seem as you need more training, young grasshopper!'
-    if 'victory_action' in warrior:
-        f += '\n\n' + warrior['victory_action'].replace('"', '\\"')
+    if 'player_lose_action' in warrior:
+        f += '\n\n' + warrior['player_lose_action'].replace('"', '\\"')
     fields.append(f)
 else:
     f = f'__***{c.name.upper()} WINS!***__|'
@@ -409,8 +410,8 @@ else:
             rewards_text = ('\nYou also gained:' if added_items else ' You gained:') + rewards_text
             f += rewards_text
 
-    if 'defeat_action' in warrior:
-        f += '\n\n' + warrior['defeat_action'].replace('"', '\\"')
+    if 'player_win_action' in warrior:
+        f += '\n\n' + warrior['player_win_action'].replace('"', '\\"')
 
     fields.append(f)
 
