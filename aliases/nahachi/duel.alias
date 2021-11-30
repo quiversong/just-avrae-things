@@ -15,6 +15,11 @@ CURRENCY = {
     'pp': 'Platinum Pieces'
 }
 
+ADMIN_USER_IDS = [771997367611949076]
+if get_svar('SEVENTRA_ALIAS_ADMINS') != None:
+    admin_ids = load_json(get_svar('SEVENTRA_ALIAS_ADMINS'))
+    ADMIN_USER_IDS += admin_ids
+
 # Code
 args = &ARGS&
 pargs = argparse(args)
@@ -88,12 +93,29 @@ else:
 
 daily_activity_control = __result__
 ##### devrae function end [daily_control_init] #####
-research_count = daily_activity_control["count"]
+duel_count = daily_activity_control["count"]
 wait_time = daily_activity_control["wait_time"]
 
 footer = "Don't forget to role-play your duel!"
+footer += ' You already dueled today!' if duel_count >= DAILY_CAP else ' Pick a challenger today!'
 footer += "\n" + f'Seventra: Exodus of Heroes | Nahachi Duel v{VERSION} | !duel help'
 footer += "\nCreators: quiversong#2772"
+
+if len(args) > 0 and args[0] == 'reset':
+    if not ctx.author.id in ADMIN_USER_IDS:
+        err('You are not allowed to do that!')
+        return 1
+    c.delete_cvar(DUEL_TIME_VAR)
+    fields.append('Resetting dueling time control...|Done!')
+    return 1
+
+if len(args) > 0 and args[0] == 'resetlog':
+    if not ctx.author.id in ADMIN_USER_IDS:
+        err('You are not allowed to do that!')
+        return 1
+    c.delete_cvar(DUEL_STATS_VAR)
+    fields.append('Resetting dueling progress and log...|Done!')
+    return 1
 
 all_warriors = load_json(get_gvar(DATA_VAR))["warriors"]
 global_stats = load_json(cv[DUEL_STATS_VAR]) if DUEL_STATS_VAR in cv else {}
@@ -169,6 +191,10 @@ if len(args) < 2:
     fields.append(f)
     return 1
 
+if duel_count >= DAILY_CAP:
+    fields.append('Patience is concentrated strength.|You have already challenged a Kaizen Warrior today. Come back tomorrow?!')
+    return 1
+
 chosen_warrior_code = args[0].lower().strip()
 warrior = [w for w in all_warriors if w["code"].lower() == chosen_warrior_code]
 if len(warrior) == 0:
@@ -183,6 +209,8 @@ warrior_name = warrior["name"]
 if not(warrior['code'] == all_warriors[0]['code'] or warrior['code'] in global_stats):
     fields.append(f'{c_first_name} is not ready yet...|You need to prove your strength by challenging other warriors before you can challenge {warrior["name"]}!\nUse `!duel list` to see the warriors that are available to duel with you.')
     return 1
+
+######### IDENTIFY WEAPON ##########
 
 weapon = None
 weapon_arg = args[1].lower()
@@ -199,6 +227,8 @@ if len(weapon_str) > 0:
 else:
     fields.append(f'{c_first_name} seems a little confused...|I could not find any attacks matching `{args[1]}`!')
     return 1
+
+########### DUEL ROLLS ###########
 
 player_init_roll = vroll(cs.initiative.d20())
 warrior_init_roll = vroll(f'1d20 + {warrior["init"]}')
@@ -283,6 +313,14 @@ while player_hits < BLOWS_NEEDED and warrior_hits < BLOWS_NEEDED:
 
 is_player_winner = player_hits >= BLOWS_NEEDED
 
+############ INIT STATS ############
+
+if not warrior['code'] in global_stats:
+    global_stats[warrior['code']] = EMPTY_STATS.copy()
+stats = global_stats[warrior['code']]
+
+########### MOUNT EMBED ###########
+
 img = 'https://cdn.discordapp.com/attachments/910682900863787028/910790078547230770/tumblr_c233596118d0ef2fee07434bfd216a7d_1635c08d_540.gif'
 img = 'https://cdn.discordapp.com/attachments/910682900863787028/912200744822767676/photo-1595084921991_orig.png'
 img = 'https://cdn.discordapp.com/attachments/910682900863787028/912201227402612736/grove.jpg'
@@ -351,19 +389,20 @@ fields.append(warrior_attacks_field if player_goes_first else player_attacks_fie
 
 thumb = warrior['image']
 
-is_player_defeated = not is_player_winner
-if is_player_defeated:
-    f = f'__***{warrior_name.upper()} WINS!***__|'
-    f += 'Flawless victory!\n' if player_hits == 0 else ''
-    f += 'It would seem as you need more training, young grasshopper!'
-    if 'player_lose_action' in warrior:
-        f += '\n\n' + warrior['player_lose_action'].replace('"', '\\"')
-    fields.append(f)
-else:
+if is_player_winner:
+    footer = footer.replace('Pick a challenger today!', 'Today you won!')
+
+    stats['wins'] += 1
+    if warrior_hits == 0:
+        stats['flawless_wins'] += 1
+    if len(rounds) < stats['win_min_rounds'] or stats['win_min_rounds'] == 0:
+        stats['win_min_rounds'] = len(rounds)
+
     f = f'__***{c.name.upper()} WINS!***__|'
     f += 'Flawless victory!\n' if warrior_hits == 0 else ''
     f += 'Congratulations!'
 
+    ####### REWARDS ########
     added_items = False
 
     if 'itemRewards' in warrior and len(warrior['itemRewards']) > 0:
@@ -380,10 +419,10 @@ else:
                 add_to_bag[reward] = qty
         f += ' These were added to your bag:' + rewards_text
 
-    if 'charRewards' in warrior and len(warrior['charRewards']) > 0:
+    if 'specialRewards' in warrior and len(warrior['specialRewards']) > 0 and stats['wins'] == 1:
         rewards_text = ''
 
-        for reward in warrior['charRewards']:
+        for reward in warrior['specialRewards']:
             stripped = reward.lower().strip()
             if stripped == 'inspiration':
                 character().create_cc_nx('Inspiration', 0, 1, None, 'bubble')
@@ -410,21 +449,15 @@ else:
             rewards_text = ('\nYou also gained:' if added_items else ' You gained:') + rewards_text
             f += rewards_text
 
+    ######### WARRIOR ACTION TEXT ##########
+
     if 'player_win_action' in warrior:
         f += '\n\n' + warrior['player_win_action'].replace('"', '\\"')
 
     fields.append(f)
 
-if not warrior['code'] in global_stats:
-    global_stats[warrior['code']] = EMPTY_STATS.copy()
+    ######### UNLOCKS ############
 
-stats = global_stats[warrior['code']]
-if is_player_winner:
-    stats['wins'] += 1
-    if warrior_hits == 0:
-        stats['flawless_wins'] += 1
-    if len(rounds) < stats['win_min_rounds'] or stats['win_min_rounds'] == 0:
-        stats['win_min_rounds'] = len(rounds)
     if 'unlocks' in warrior and len(warrior['unlocks']) > 0:
         unlocked_codes = []
         for unlock in warrior['unlocks']:
@@ -447,6 +480,15 @@ if is_player_winner:
             f += '\n'.join(unlocked_codes) + '\n\n'
             fields.append(f)
 else:
+    footer = footer.replace('Pick a challenger today!', 'Try again tomorrow!')
+
+    f = f'__***{warrior_name.upper()} WINS!***__|'
+    f += 'Flawless victory!\n' if player_hits == 0 else ''
+    f += 'It would seem as you need more training, young grasshopper!'
+    if 'player_lose_action' in warrior:
+        f += '\n\n' + warrior['player_lose_action'].replace('"', '\\"')
+    fields.append(f)
+
     stats['losses'] += 1
     if player_hits == 0:
         stats['flawless_losses'] += 1
@@ -505,6 +547,26 @@ if add_to_coins != None and len(add_to_coins) > 0:
   character().set_cvar('bags', dump_json(_bags))
 
   ##### devrae function end [add_to_bag] #####
+
+#! research_count = devrae_f daily_control_increase_counter(#P DUEL_TIME_VAR) !#
+##### devrae function insert [daily_control_increase_counter] #####
+research_count = None
+__p0__ = DUEL_TIME_VAR
+# returns current counter and wait time text if any
+_var_name = __p0__
+_cvars = character().cvars
+if not _var_name in _cvars or _cvars[_var_name] == "0:0":
+  _now = time()
+  character().set_cvar(_var_name, f'1:{_now}')
+  __result__ = 1
+else:
+  _var_parts = _cvars[_var_name].split(':')
+  _count = int(_var_parts[0]) + 1
+  _time = _var_parts[1]
+  character().set_cvar(_var_name, f'{_count}:{_time}')
+  __result__ = _count
+research_count = __result__
+##### devrae function end [daily_control_increase_counter] #####
 
 </drac2>
 -title "{{title}}"
