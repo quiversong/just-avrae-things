@@ -36,7 +36,7 @@ commands = []
 DUEL_TIME_VAR = "_du_dhc_"
 DUEL_STAGE_VAR = "_du_vars"
 DUEL_STATS_VAR = "_du_st_"
-KAIZEN_FEATURES_VAR = "_du_kfeatures_"
+KAIZEN_FEATURES_VAR = "duelsashes"
 EMPTY_STATS = {
     'wins': 0,
     'losses': 0,
