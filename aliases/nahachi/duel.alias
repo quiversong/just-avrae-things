@@ -4,7 +4,7 @@ embed
 VERSION = '0.1'
 
 DATA_VAR = "c85742dc-f2e9-4a99-b544-b8f71dd7bed9"
-DAILY_CAP = 1
+DAILY_CAP = 2
 BLOWS_NEEDED = 3
 
 CURRENCY = {
@@ -28,7 +28,7 @@ c_first_name = c.name.split(' ')[0]
 cv, cs = c.cvars, c.skills
 
 title = f'{c_first_name} wants to challenge the warriors of the Kaizen Temple for a duel!'
-img, thumb, desc, add_to_bag, add_to_coins = None, None, None, None, None
+img, thumb, desc, add_to_bag, add_to_coins, price = None, None, None, None, None, None
 sl, fl = "**Success!**", "**Failure!**"
 fields = []
 commands = []
@@ -419,16 +419,21 @@ if is_player_winner:
                 add_to_bag[reward] = qty
         f += ' These were added to your bag:' + rewards_text
 
-    if 'specialRewards' in warrior and len(warrior['specialRewards']) > 0 and stats['wins'] == 1:
+    if 'uniqueRewards' in warrior and len(warrior['uniqueRewards']) > 0 and stats['wins'] == 1:
         rewards_text = ''
 
-        for reward in warrior['specialRewards']:
+        for reward in warrior['uniqueRewards']:
             stripped = reward.lower().strip()
+            qty = warrior['uniqueRewards'][reward]
             if stripped == 'inspiration':
                 character().create_cc_nx('Inspiration', 0, 1, None, 'bubble')
                 character().mod_cc('Inspiration', 1)
                 rewards_text += '\n`Inspiration`'
-            if 'kaizen' in stripped and stripped.endswith('sash'):
+            elif 'xp' in stripped and 'admin' in stripped:
+                rewards_text += f'\n{qtx} {reward}'
+            elif 'seventran samurai feat' in stripped:
+                rewards_text += f'\n{reward} (use `!sevfeat` to see it)'
+            elif 'kaizen' in stripped and stripped.endswith('sash'):
                 vfeatures = load_json(cv['vfeatures']) if 'cvfeatures' in cv else []
                 has_kaizen_features = [f for f in (vfeatures) if f['n'] == KAIZEN_FEATURES_VAR]
                 if len(has_kaizen_features) == 0:
@@ -444,9 +449,16 @@ if is_player_winner:
                     features_var += reward
                     character().set_cvar(KAIZEN_FEATURES_VAR, features_var)
                     rewards_text += f'\n`{reward}`'
+            elif stripped in CURRENCY.keys():
+                add_to_coins[stripped] += qty
+                rewards_text += f'\n{qty}x {reward}'
+            else:
+                add_to_bag[reward] += qty
+                rewards_text += f'\n{qty}x {reward}'
 
         if rewards_text != '':
-            rewards_text = ('\nYou also gained:' if added_items else ' You gained:') + rewards_text
+            prefix = '\nYou also gained these unique rewards:' if added_items else ' You gained these unique rewards:'
+            rewards_text = prefix + rewards_text
             f += rewards_text
 
     ######### WARRIOR ACTION TEXT ##########
