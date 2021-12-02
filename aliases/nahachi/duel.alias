@@ -4,7 +4,7 @@ embed
 VERSION = '0.1'
 
 DATA_VAR = "c85742dc-f2e9-4a99-b544-b8f71dd7bed9"
-DAILY_CAP = 2000
+DAILY_CAP = 2
 BLOWS_NEEDED = 3
 
 CURRENCY = {
@@ -146,8 +146,9 @@ if len(args) > 0 and args[0] == 'desc':
         fields.append(f'Please check again!|There are no warriors who frequent the Kaizen Temple with codename {warrior_code}')
         return 1
     warrior = warrior[0]
+    warrior_name = warrior["name"].replace('"', '\\\"')
 
-    title += f': {warrior["name"]}'
+    title += f': {warrior_name}'
     description = warrior["desc"].replace('"', '\"')
     weapon = warrior["weapon"].replace('"', '\"')
     fields.append(f'Description|{description}')
@@ -228,9 +229,9 @@ if len(warrior) == 0:
     return 1
 
 warrior = warrior[0]
-warrior_name = warrior["name"]
+warrior_name = warrior["name"].replace('"', '\\\"')
 if not(warrior['code'] == all_warriors[0]['code'] or warrior['code'] in global_stats):
-    fields.append(f'{c_first_name} is not ready yet...|You need to prove your strength by challenging other warriors before you can challenge {warrior["name"]}!\nUse `!duel list` to see the warriors that are available to duel with you.')
+    fields.append(f'{c_first_name} is not ready yet...|You need to prove your strength by challenging other warriors before you can challenge {warrior_name}!\nUse `!duel list` to see the warriors that are available to duel with you.')
     return 1
 
 ######### IDENTIFY WEAPON ##########
@@ -454,7 +455,7 @@ if is_player_winner:
                 character().mod_cc('Inspiration', 1)
                 rewards_text += '\n`Inspiration`'
             elif 'xp' in stripped and 'admin' in stripped:
-                rewards_text += f'\n`{qtx} {reward}`'
+                rewards_text += f'\n`{qty} {reward}`'
             elif 'seventran samurai feat' in stripped:
                 rewards_text += f'\n`{reward} (use `!sevfeat` to see it)`'
             elif 'kaizen' in stripped and stripped.endswith('sash'):
