@@ -432,11 +432,12 @@ if is_player_winner:
         rewards_text = ''
         for reward, qty in warrior['itemRewards'].items():
             if reward in CURRENCY.keys():
-                rewards_text += f'\n `{qty}x {CURRENCY[reward]}`'
                 if qty > 0:
                     add_to_coins[reward] += qty
+                    rewards_text += f'\n `{qty}x {CURRENCY[reward]}`'
                 else:
                     remove_from_coins[reward] += (qty * -1)
+                    rewards_text += f'\n `NEGATIVE {qty * -1}x {CURRENCY[reward]}!!!`'
             else:
                 rewards_text += '\n' + f'`{qty}x {reward}`'
                 add_to_bag[reward] = qty
@@ -520,14 +521,13 @@ if is_player_winner:
 else:
     f = f'__***{warrior_name.upper()} WINS!***__|'
     f += 'Flawless victory!\n' if player_hits == 0 else ''
-    f += 'It would seem as you need more training, young grasshopper!'
 
     stats['losses'] += 1
     if player_hits == 0:
         stats['flawless_losses'] += 1
 
     if 'payment' in warrior and len(warrior['payment']) > 0:
-        payment_text = '\n'
+        payment_text = ''
         for payment in warrior['payment']:
             qty = warrior['payment'][payment]
             stripped = payment.lower().strip()
@@ -536,14 +536,14 @@ else:
                 character().mod_cc('Inspiration', 1)
                 payment_text += '\nYou gain Inspiration!'
             elif stripped in CURRENCY.keys():
-                remove_from_coins[reward] += qty
-                payment_text += f'\nYou lose {qty}x {reward}!'
+                remove_from_coins[payment] += qty
+                payment_text += f'\n`You lose {qty}x {payment}!`'
             elif 'exhaustion' in stripped:
                 character().create_cc_nx('Exhaustion', 0, 6, None, 'bubble')
                 character().mod_cc('Exhaustion', qty)
                 payment_text += f'\nYou suffer {qty} point{"s" if qty > 1 else ""} of exhaustion!'
 
-        if payment_text != '\n':
+        if payment_text != '':
             f += payment_text
 
     if 'player_lose_action' in warrior:
@@ -572,7 +572,7 @@ for key in remove_from_coins:
     if qty > 0:
         if not(key in bag_content) or bag_content[key] < qty:
             f = 'OOPS!|'
-            f += 'You are supposed to lose {qty}x {key} but it looks like you lack the funds!'
+            f += f'You are supposed to lose {qty}x {key} but it looks like you lack the funds!'
             f += '\nPlease ping `@Administrator` to get help.'
             fields.append(f)
         else:
