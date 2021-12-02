@@ -130,6 +130,13 @@ if len(args) > 0 and args[0] == 'resetlog':
 all_warriors = load_json(get_gvar(DATA_VAR))["warriors"]
 global_stats = load_json(cv[DUEL_STATS_VAR]) if DUEL_STATS_VAR in cv else {}
 
+if not("bags" in cv and "Coin Pouch" in cv["bags"]):
+    f = 'Stop!|'
+    f += 'It looks like you do not have your bags setup yet.\n'
+    f += 'Please execute `!coins` to have your pack and coin pouch properly setup before starting!'
+    fields.append(f)
+    return 1
+
 if len(args) > 0 and args[0] == 'desc':
     title = 'Nahachi Kaizen Temple Warriors'
 
@@ -184,6 +191,10 @@ if len(args) > 0 and args[0] == 'list':
             for i in range(29 - data_length + 1):
                 padding += ' '
             formatted_line = f'{prefix}{warrior["code"]}{padding}{formatted_line}\n'
+            if len(f + formatted_line) > 1024:
+                f += '```'
+                fields.append(f)
+                f = '```'
             f += formatted_line
     f += '```\n\n'
     fields.append(f)
@@ -545,6 +556,31 @@ footer = footer.replace(f'remaining today: {DAILY_CAP - duel_count}', f'remainin
 global_stats[warrior['code']] = stats
 character().set_cvar(DUEL_STATS_VAR, dump_json(global_stats))
 
+
+###### Coin Balance ########
+
+bag_name = 'Coin Pouch'
+cv = character().cvars
+bags = load_json(cv['bags'])
+pouch_index = [i for i, x in enumerate(bags) if x[0] == bag_name]
+pouch_index = pouch_index[0]
+bag_content = bags[pouch_index][1]
+for key in add_to_coins:
+    bag_content[key] += add_to_coins[key]
+for key in remove_from_coins:
+    qty = remove_from_coins[key]
+    if qty > 0:
+        if not(key in bag_content) or bag_content[key] < qty:
+            f = 'OOPS!|'
+            f += 'You are supposed to lose {qty}x {key} but it looks like you lack the funds!'
+            f += '\nPlease ping `@Administrator` to get help.'
+            fields.append(f)
+        else:
+            bag_content[key] -= qty
+bags[pouch_index] = [bag_name, bag_content]
+character().set_cvar('bags', dump_json(bags))
+
+
 if add_to_bag != None and len(add_to_bag) > 0:
   #! devrae_f add_to_bag (#P "Kaizen Temple" #P add_to_bag) !#
   ##### devrae function insert [add_to_bag] #####
@@ -571,50 +607,6 @@ if add_to_bag != None and len(add_to_bag) > 0:
 
   ##### devrae function end [add_to_bag] #####
 
-if add_to_coins != None and len(add_to_coins) > 0:
-  #! devrae_f add_to_bag (#P "Coin Pouch" #P add_to_coins) !#
-  ##### devrae function insert [add_to_bag] #####
-  __p0__ = "Coin Pouch"
-  __p1__ = add_to_coins
-  _bag_name = __p0__
-  _content = __p1__
-
-  _cv = character().cvars
-  _bags = load_json(_cv["bags"]) if "bags" in _cv else []
-  _bag_index = [i for i, x in enumerate(_bags) if x[0] == _bag_name]
-  _bag_index = _bag_index[0] if len(_bag_index) > 0 else -1
-  if _bag_index == -1:
-    _bags.append([_bag_name, {}])
-    _bag_index = len(_bags) - 1
-  _bag_content = _bags[_bag_index][1]
-  for _key in _content:
-    if _key in _bag_content:
-      _bag_content[_key] = _bag_content[_key] + _content[_key]
-    else:
-      _bag_content[_key] = _content[_key]
-  _bags[_bag_index] = [_bag_name, _bag_content]
-  character().set_cvar('bags', dump_json(_bags))
-
-  ##### devrae function end [add_to_bag] #####
-
-if remove_from_coins != None and len(remove_from_coins) > 0:
-    bag_name = "Coin Pouch"
-    bags = load_json(cv["bags"]) if "bags" in cv else []
-    bag_index = [i for i, x in enumerate(bags) if x[0] == bag_name]
-    bag_index = bag_index[0] if len(bag_index) > 0 else -1
-    if bag_index == -1:
-        bags.append([bag_name, {}])
-        bag_index = len(bags) - 1
-    bag_content = bags[bag_index][1]
-    for key in remove_from_coins:
-        currency = key
-        qty = remove_from_coins[currency]
-        if not(currency in bag_content) or bag_content[currency] < qty:
-            fields.append(f"OOPS!|Please ping @Administrator to get help. You are supposed to lose {qty}x {currency} but it looks like you lack the funds!")
-        else:
-            bag_content[currency] -= qty
-    bags[bag_index][1] = bag_content
-    character().set_cvar('bags', dump_json(bags))
 
 #! duel_count = devrae_f daily_control_increase_counter(#P DUEL_TIME_VAR) !#
 ##### devrae function insert [daily_control_increase_counter] #####

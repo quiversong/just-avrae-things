@@ -418,7 +418,7 @@
     "image": "https://cdn.discordapp.com/attachments/855908840633270282/912236242173853696/76d73f204c17eda212884a8953ee74bd.jpeg"
   },
   {
-    "code": "chance ",
+    "code": "chance",
     "name": "Chance",
     "desc": "This disgruntled ex-lyricist fights in an effort to carve out a reputation for himself. Discontent with the coins he made from performing he turned to banditry, and later, professional dueling. Rumor has it If you pay him off, he'll throw the fight. (Use `!duel chancethrow <weapon>`)",
     "init": 7,
