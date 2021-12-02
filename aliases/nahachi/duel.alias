@@ -170,7 +170,7 @@ if len(args) > 0 and args[0] == 'list':
     f += '`Best` = the least number of attacks you needed to beat that warrior.\n'
     f += '`*` denotes a secret warrior that is only unlocked under certain special conditions.\n\n'
 
-    f += '```Kaizen Warrior     W/R   Best``````'
+    f += '```Warrior      W/R   Best``````'
     for i in range(len(all_warriors)):
         warrior = all_warriors[i]
         if i == 0 or warrior['code'] in global_stats:
@@ -189,7 +189,7 @@ if len(args) > 0 and args[0] == 'list':
             data_length += 1 if is_secret else 0
             prefix = '*' if is_secret else ''
             padding = ''
-            for i in range(29 - data_length + 1):
+            for i in range(23 - data_length + 1):
                 padding += ' '
             formatted_line = f'{prefix}{warrior["code"]}{padding}{formatted_line}\n'
             if len(f + formatted_line) > 1024:
