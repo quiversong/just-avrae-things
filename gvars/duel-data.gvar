@@ -535,7 +535,7 @@
     "weapon": "Twin Katanas",
     "player_lose_action": "*Vincent nods at you slowly, studying you carefully. He decides you might have information that interests him, and disappears into the shadows.*",
     "player_win_action": "*Vincent extends his three-fingered hand towards you for a hand shake.* \"Well done,\" *he says, before disappearing into the shadows.*",
-    "unlocks": ["hasta"],
+    "unlocks": [],
     "itemRewards": {"gp": 30},
     "uniqueRewards": {"Inspiration": 1},
     "payment": {},
