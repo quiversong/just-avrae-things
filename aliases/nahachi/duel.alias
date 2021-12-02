@@ -109,7 +109,7 @@ wait_time = daily_activity_control["wait_time"]
 footer = "Don't forget to role-play your duel!"
 footer += f" Challenges remaining today: {DAILY_CAP - duel_count}"
 footer += "\n" + f'Seventra: Exodus of Heroes | Nahachi Duel v{VERSION} | !duel help'
-footer += "\nCreators: quiversong#2772"
+footer += "\nCreators: Library Fox#0895 and quiversong#2772"
 
 if len(args) > 0 and args[0] == 'reset':
     if not ctx.author.id in ADMIN_USER_IDS:
@@ -552,7 +552,7 @@ else:
 
     fields.append(f)
 
-footer = footer.replace(f'remaining today: {DAILY_CAP - duel_count}', f'remaining today: {DAILY_CAP - duel_count + 1}')
+footer = footer.replace(f'remaining today: {DAILY_CAP - duel_count}', f'remaining today: {DAILY_CAP - (duel_count + 1)}')
 
 global_stats[warrior['code']] = stats
 character().set_cvar(DUEL_STATS_VAR, dump_json(global_stats))
