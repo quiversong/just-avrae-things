@@ -170,7 +170,7 @@ if len(args) > 0 and args[0] == 'list':
     f += '`Best` = the least number of attacks you needed to beat that warrior.\n'
     f += '`*` denotes a secret warrior that is only unlocked under certain special conditions.\n\n'
 
-    f += '```Warrior      W/R   Best``````'
+    f += '```Warrior      W/R   Best```\n```'
     for i in range(len(all_warriors)):
         warrior = all_warriors[i]
         if i == 0 or warrior['code'] in global_stats:
