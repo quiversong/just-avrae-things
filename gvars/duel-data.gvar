@@ -153,8 +153,8 @@
     "ac": 15,
     "attack": 5,
     "weapon": "Kitchen Cleaver, Sharpened Doorjam, Silverware, Empty Bottle",
-    "player_lose_action": "\"Not bad, kid. Give my guys a sharp whistle if you ever get tossed in the slammer!\"",
-    "player_win_action": "\"You're not very good, are you? Later, chump.\"",
+    "player_lose_action": "\"You're not very good, are you? Later, chump.\"",
+    "player_win_action": "\"Not bad, kid. Give my guys a sharp whistle if you ever get tossed in the slammer!\"",
     "unlocks": ["ichi"],
     "itemRewards": {"gp": 2},
     "uniqueRewards": {"Shiv (Masterworked Dagger +1)": 1},
@@ -908,7 +908,7 @@
     "payment": {},
     "powerups": [],
     "secret": false,
-    "image": "https://cdn.discordapp.com/attachments/892464014905462796/913488801735782441/shinta.jpg"
+    "image": "https://cdn.discordapp.com/attachments/892464014905462796/913552778700398622/shinta3.jpg"
   },
   {
     "code": "grantha",
