@@ -27,8 +27,12 @@ embed
 `!research` created by and for the members of **Seventra: Exodus of Heroes!**"
 
 -f "**Trading Relics**|
-- Please ping `@Guide` before using your relics to validate the transaction.
-Additional cost may incur if the transaction involves a special type of item.
+- Please ping `@Guide` before using your relics to validate the transaction. Additional cost may incur if the transaction involves a special type of item.
+- When trading for magic items, the relics will cover the magic item cost as specified below. Any additional cost needs to provided in gold. For example, when buying an uncommon magic plate armor, the total cost would be 500 (uncommon) + 1500 (plate armor). The relics will cover the 500gp price, and the extra 1500gp must be paid in gold.
+> Common: 100gp
+> Uncommon: 500gp
+> Rare: 3000gp
+- You can only exchange your relics for items that you are eligible to buy, incluuding any level requirements that might apply.
 - If you would like to role-play the exchange, you can head to the Magic Emporium in Arbarax. You get a free teleportation travel to the city to perform the exchange."
 
 -f "**Relic [Magical Artifact]**|

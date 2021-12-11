@@ -1,0 +1,333 @@
+embed <drac2>
+c = character()
+cv = c.cvars
+cn = c.name.split(' ')[0]
+cfn = cn.split(' ')[0]
+fields = []
+sl, fl = "**Success!**", "**Failure!**"
+img, thumb, color = None, None, None
+thumb = 'https://cdn.discordapp.com/attachments/855908840633270282/919078456480903168/058398cbefc93033b516e636f719b0baa699a8c7.jpeg'
+
+args = &ARGS&
+pargs = argparse(args)
+
+VAR_NAME = 'mcraftInfo'
+RARITIES = ['common', 'uncommon', 'rare', 'very-rare']
+ARCANA_DCS = [11, 13, 14, 15]
+ABILITY_DCS = [13, 15, 16, 17]
+SKILLS = {
+        'str': c.skills.strength,
+        'dex': c.skills.dexterity,
+        'con': c.skills.constitution,
+        'int': c.skills.intelligence,
+        'wis': c.skills.wisdom,
+        'cha': c.skills.charisma
+}
+SKILL_NAMES = {
+        'str': 'Strength',
+        'dex': 'Dexterity',
+        'con': 'Constitution',
+        'int': 'Intelligence',
+        'wis': 'Wisdom',
+        'cha': 'Charisma'
+}
+
+footer = 'Seventra Magical Crafting | !mcraft help\nCreated by quiversong#2772'
+title = f"{cn}'s is crafting Magical Artifacts!"
+
+help_text = 'Magic Crafting Help|'
+help_text += 'This alias provides many utilities for crafting magical items.\n'
+help_text += 'Use `!mcraft config` to see the configurations you can set. For example: whether you have a spark item, what source of advantages you can use, what abilities to use, etc.\n'
+help_text += 'Use `!mcraft proj` to see how to manage your projects. You can create a new project, list existing projects, etc.\n'
+help_text += 'Use `!mcraft "<project name>"` to start the work. Make sure you have all the configurations in place first. Use `!mcraft config list` to see what you have set-up.'
+help_text += '\nAny text that contains spaces must be surrounded by " ".'
+
+if not VAR_NAME in cv:
+    base_var = {
+            'config': {
+                'ability': None,
+                'adv': False,
+                'spark': False,
+                'lgloves': False
+            },
+            'projects': [],
+            'default': None
+    }
+    character().set_cvar(VAR_NAME, dump_json(base_var))
+    cv = character().cvars
+
+craft_info = load_json(cv[VAR_NAME])
+
+if len(args) >= 1 and args[0] == 'config':
+    config_help = 'Magic Crafting Configurations|'
+    config_help += '`!mcraft config ability <str|dex|con|int|wis|cha>`: sets the ability you use for crafting\n'
+    config_help += '`!mcraft config adv <off|"explanation">`: toggles the use of advantage on the ability check on/off\n'
+    config_help += '`!mcraft config spark`: toggles the use of a spark item for crafting on/off\n'
+    config_help += '`!mcraft config lgloves`: toggles the use of living gloves on/off\n'
+    config_help += '`!mcraft config list`: lists your magic crafting configurations\n'
+    config_help += '\nAny text that contains spaces must be surrounded by " ".'
+
+    title = f"{cn}'s Magic Crafting Configurations"
+    if not 'config' in craft_info:
+        craft_info['config'] = {}
+    config = craft_info['config']
+
+    if len(args) == 1:
+        fields.append(config_help)
+        return 1
+
+    if len(args) >= 3 and args[1] == 'ability':
+        ability = args[2].lower()
+        valid_abilities = ['str', 'dex', 'con', 'int', 'wis', 'cha']
+        if not ability in valid_abilities:
+            fields.append(f'Oops|The ability must be of the following: {valid_abilities}')
+            return 1
+        config['ability'] = ability
+        character().set_cvar(VAR_NAME, dump_json(craft_info))
+        fields.append(f'Configuration updated|Crafting will use {SKILL_NAMES[ability]} for the ability checks.')
+        return 0
+
+    if len(args) >= 2 and args[1] == 'adv':
+        value = False if len(args) == 2 or (len(args) > 2 and args[2].lower().strip() == 'off') else True
+        if value:
+            config['adv'] = args[2]
+            f = f'Configuration updated|Now you have advantage on your ability rolls. Source:\n```{args[2]}```'
+            f += '\n\n`!mcraft config adv off` to disable advantage on ability checks.'
+        else:
+            config['adv'] = None
+            fields.append(f'Configuration updated|You will no longer have advantage on you ability checks.')
+        character().set_cvar(VAR_NAME, dump_json(craft_info))
+        return 0
+
+    if len(args) >= 2 and args[1] == 'spark':
+        value = False if 'spark' in config and config['spark'] else True
+        config['spark'] = value
+        character().set_cvar(VAR_NAME, dump_json(craft_info))
+        fields.append(f'Configuration updated|The use of a spark item is {"on" if value else "off"}.')
+        return 0
+
+    if len(args) >= 3 and args[1] == 'lgloves':
+        value = False if 'lgloves' in config and config['lgloves'] else True
+        config['lgloves'] = value
+        character().set_cvar(VAR_NAME, dump_json(craft_info))
+        fields.append(f'Configuration updated|The use of Living Gloves is {"on" if value else "off"}.')
+        return 0
+
+    if len(args) >= 2 and args[1] == 'list':
+        f = 'Configurations...|'
+        f += f'Ability used: {SKILL_NAMES[config["ability"]]}\n'
+        f += f'Spark item: {"on" if ("spark" in config and config["spark"]) else "off"}\n'
+        f += f'Living Gloves: {"on" if ("lgloves" in config and config["lgloves"]) else "off"}\n'
+        f += f'Advantage: '
+        if ('adv' in config and config['adv'] != None):
+            f += f'on. Source:{config["adv"]}\n'
+        else:
+            f += 'off\n'
+        fields.append(f)
+        return 0
+
+    fields.append(config_help)
+    return 1
+
+if len(args) >= 1 and args[0] == 'proj':
+    proj_help = 'Magic Crafting Configurations|'
+    proj_help += '`!mcraft proj new <name> <rarity> <total value>`: creates a new project\n'
+    proj_help += '`!mcraft proj remove <name>`: removes an existing project\n'
+    proj_help += '`!mcraft proj reset <name>`: resets all the progress made on a project\n'
+    proj_help += '`!mcraft proj list`: list all your existing projects\n'
+    proj_help += '`!mcraft proj default <name>`: sets a default project that will be used when invoking !mcraft with no arguments\n'
+    proj_help += '\nIf using a name with spaces, always surround it with double quotes.'
+    proj_help += '\nAny text that contains spaces must be surrounded by " ".'
+
+    title = f"{cn}'s Magical Crafting Projects"
+
+    if len(args) == 1:
+        fields.append(proj_help)
+        return 1
+
+    if not 'projects' in craft_info:
+        craft_info['projects'] = []
+    projects = craft_info['projects']
+
+    if len(args) >= 5 and args[1] == 'new':
+        name = args[2].strip()
+        existing_project = [p for p in projects if p['name'].lower().strip() == name.lower().strip()]
+        if len(existing_project) > 0:
+            fields.append('Oops!|There is already a project with this name!\nUse `!mcraft proj remove <name>` to remove it.')
+            return 1
+        rarity = args[3].lower().strip()
+        if not rarity in RARITIES:
+            fields.append(f'Oops!|Ensure the rarity specified is one of {RARITIES}')
+            return 1
+        value = int(args[4])
+        new_project = {'name': name, 'rarity': rarity, 'value': args[4]}
+        projects.append(new_project)
+        c.set_cvar(VAR_NAME, dump_json(craft_info))
+
+        length = ceil(value / 100)
+        c.create_cc_nx(name, 0, length)
+        c.set_cc(name, length)
+        f = f'Project \"{name}\" Created!|Name: {name}\nRarity: {rarity}\nTotal Value: {value}\n'
+        f += f'CC created with name "{name}"\n'
+        f += f'Project length: {length} days'
+        fields.append(f)
+        return 0
+
+    if len(args) >= 3 and args[1] == 'remove':
+        name = args[2].strip()
+        new_projs = [p for p in craft_info['projects'] if p['name'].lower().strip() != name.lower().strip()]
+        craft_info['projects'] = new_projs
+        c.set_cvar(VAR_NAME, dump_json(craft_info))
+        c.delete_cc(name)
+        fields.append(f'List of Projects Updated|Project "{name}" removed.\nCC "{name}" removed.')
+        return 0
+
+    if len(args) >= 2 and args[1] == 'reset':
+        name = args[2].strip()
+        existing_project = [p for p in craft_info['projects'] if p['name'].lower().strip() == name.lower().strip()]
+        if len(existing_project) == 0:
+            fields.append('Oops!|There is no project with this name!')
+            return 1
+        name = existing_project[0]['name']
+        c.set_cc(name, c.get_cc_max(name))
+        fields.append(f'Project Updated|Progress on roject \"{name}\" reset.')
+        return 0
+
+    if len(args) >= 2 and args[1] == 'list':
+        f = f"{cn}'s projects|"
+        for project in craft_info['projects']:
+            cc = c.get_cc(project['name'])
+            max_cc = c.get_cc_max(project['name'])
+            f += f'{project["name"]}: {cc}/{max_cc}\n'
+        fields.append(f)
+        return 0
+
+    if len(args) >= 3 and args[1] == 'default':
+        name = args[2].strip()
+        existing_project = [p for p in craft_info['projects'] if p['name'].lower().strip() == name.lower().strip()]
+        if len(existing_project) == 0:
+            fields.append(f'Oops!|I could not find a project named {name}!\nUse `!mcraft proj list` to display all existing projects.')
+            return 1
+        craft_info['default'] = name
+        c.set_cvar(VAR_NAME, dump_json(craft_info))
+        f = f'Default Project Updated|Executing `!mcraft` will now perform one day of work on project \"{name}\"'
+        f += '\nTo see your crafting configurations use `!mcraft config list`'
+        fields.append(f)
+        return 0
+
+# Crafting Work Starts
+
+project = None
+project_name = None
+config = craft_info['config']
+
+if len(args) == 0:
+    if 'default' in craft_info and craft_info['default'] != None:
+        project_name = craft_info['default']
+    else:
+        fields.append('Oops!|You do not have a default project set!\nEither set one with `!mcraft proj default <name>` or specify which project to work on with `!mcraft <project name>`')
+        return 1
+elif len(args) == 1:
+    project_name = args[0]
+else:
+    fields.append(help_text)
+    return 1
+
+existing_project = [p for p in craft_info['projects'] if p['name'].lower().strip() == project_name.lower().strip()]
+if len(existing_project) == 0:
+    f = f'Oops!|I could not find a project with name {project_name} to work on!'
+    f += '\nIf the name contain spaces, surround it with " " or I cannot find it!'
+    return 1
+project = existing_project[0]
+
+if not('ability' in config and config['ability'] in SKILLS.keys()):
+    fields.append('Oops!|Make sure to set your check ability with `!mcraft config ability <str|dex|con|int|wis|cha>`')
+    return 1
+
+rarity = project['rarity']
+ability = config['ability']
+
+arcana_dc = ARCANA_DCS[RARITIES.index(rarity)]
+arcana_roll = vroll(c.skills.arcana.d20())
+arcana_success = arcana_roll.total >= arcana_dc
+
+ability_dc = ABILITY_DCS[RARITIES.index(rarity)]
+skill = SKILLS[ability]
+has_ability_adv = True if ('adv' in config and config['adv'] != None) else None
+ability_mods = proficiencyBonus
+ability_roll = vroll(skill.d20(base_adv = has_ability_adv) + f" + {ability_mods}")
+ability_success = ability_roll.total >= ability_dc
+
+leftmost_expr = ability_roll.result.expr.roll.left
+while leftmost_expr.left != None:
+  leftmost_expr = leftmost_expr.left
+ability_dice_value = max([int(x.values[0]) for x in leftmost_expr.values])
+
+fields.append(f"Arcana Check|{cn} uses their arcane knowledge to imbue magic into an artifact...\n**Arcana check: DC {arcana_dc}**\n{arcana_roll.full}\n{sl if arcana_success else fl}\n\n")
+
+if arcana_success:
+    skill_name = SKILL_NAMES[ability]
+    f = f"{skill_name} Check|{cn} works on the crafting of their artifact using their tool proficiencies...\n**{skill_name} check: DC {ability_dc}**\n{ability_roll.full}\n{sl if ability_success else fl}"
+    fields.append(f)
+    if has_ability_adv:
+        fields.append(f'\nAdvantage|{config["adv"]}')
+
+cc_suffix = ""
+cc_name = project['name']
+successes = 0
+will_use_spark = False
+if arcana_roll.result.crit == 1:
+    if ability_roll.result.crit == 1:
+        successes = 3
+        fields.append(f'An extraordinary productive day!|By achieving two natural 20s, you have accomplished 3 days worth of work! Congratulations!')
+    elif ability_success:
+        successes = 2
+        fields.append(f'An extra productive day!|By achieving a natural 20 on the arcana check, you have accomplished 2 days worth of work!')
+    else:
+        successes = 1
+        fields.append(f'A great day for arcana work!|By achieving a natural 20 on the arcane check, you were able to finish the work day successfully!')
+elif arcana_success:
+    if ability_roll.result.crit == 1:
+        successes = 2
+        fields.append(f'An extra productive day!|By achieving a natural 20 on the ability check, you have accomplished 2 days worth of work!')
+    elif ability_success:
+        successes = 1
+        will_use_spark = 'spark' in config and config['spark'] and ability_dice_value >= 15
+        fields.append('A successful day of work!|Congratulations!')
+    else:
+        fields.append('Ugh... no luck today!|The Arcane knowledge was on point, but it was not enough...')
+else:
+    fields.append('Ugh... no luck today!|Cannot craft a magic item without the magic!')
+
+if will_use_spark and successes == 1:
+    second_arcana_roll = vroll(c.skills.arcana.d20())
+    second_arcana_success = second_arcana_roll.total >= arcana_dc
+    second_ability_roll = vroll(skill.d20(base_adv = has_ability_adv) + f" + {ability_mods}")
+
+    leftmost_expr = second_ability_roll.result.expr.roll.left
+    while leftmost_expr.left != None:
+      leftmost_expr = leftmost_expr.left
+    second_ability_dice_value = max([int(x.values[0]) for x in leftmost_expr.values])
+
+    second_ability_success = second_ability_roll.total >= ability_dc and second_ability_dice_value >= 15
+
+    fields.append('Sparks Fly Off The Workbench!|Can you accomplish two days worth of work in one day using your Spark Items?')
+    fields.append(f"Second Arcana Check|**Arcana check: DC {arcana_dc}**\n{second_arcana_roll.full}\n{sl if second_arcana_success else fl}\n\n")
+    fields.append(f"Second Ability Check|**{skill_name} check: DC {ability_dc} (Requires a roll of 15 of greater)**\n{second_ability_roll.full}\n{sl if second_ability_success else fl}")
+    if second_arcana_success and second_ability_success:
+        f = 'Two Days of Work in One!|You manage 2 days worth of work for achieving 2 rolls greater than 15 on the D20 on the ability checks!'
+        fields.append(f)
+        successes = 2
+
+if successes > 0:
+    c.mod_cc(cc_name, -successes)
+    cc_suffix = f" (-{successes})"
+
+fields.append(f"{cc_name}|{c.get_cc(cc_name)}/{c.get_cc_max(cc_name)}{cc_suffix}")
+</drac2>
+-title "{{title}}"
+{{''.join(['-f "' + field.replace('"', '\\"') + '"\n' for field in fields]) if len(fields) > 0 else ''}}
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
