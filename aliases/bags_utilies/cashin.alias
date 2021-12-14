@@ -152,7 +152,9 @@ embed
             fish_gp, fish_sp = 0, 0
             fish_count = sum(bag_content.values())
             bag_control['sold_lines'] = [f'{bag_content[fish]}x {fish}' for fish in bag_content.keys()]
-            bag_control['sp'] += fish_count * 5
+            value_in_cp = fish_count * 25
+            bag_control['sp'] += floor(value_in_cp / 10)
+            bag_control['cp'] += value_in_cp % 10
             if bag_control['sp'] >= 10:
                 bag_control['gp'] = floor(bag_control['sp'] / 10)
                 bag_control['sp'] = bag_control['sp'] % 10
@@ -193,9 +195,11 @@ embed
                     bag_control['new_content'][item_name] = bag_content[item_name]
 
             bag_control['gp'] = floor(total_item_gp / 2)
-            total_item_sp += total_item_gp % 2 * 5
             bag_control['sp'] = floor(total_item_sp / 2)
-            bag_control['cp'] = total_item_sp % 2 * 5
+            if total_item_gp % 2 != 0:
+                bag_control['sp'] += 5
+            if total_item_sp % 2 != 0:
+                bag_control['cp'] += 5
             if bag_control['sp'] >= 10:
                 bag_control['gp'] += floor(bag_control['sp'] / 10)
                 bag_control['sp'] = bag_control['sp'] % 10

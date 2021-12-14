@@ -1,0 +1,23 @@
+embed <drac2>
+fields = []
+title = 'Order of the Pale Oak'
+
+thumb = 'https://cdn.discordapp.com/attachments/855908840633270282/920190676388421662/opo9.png'
+
+color = '32a852'
+
+footer = 'Seventra: Exodus of Heroes | Order of the Pale Oak'
+footer += '\n!opo for help'
+
+f = 'Order of the Pale Oak Commands|'
+f += '`!opo`: display this help text\n'
+f += '`!opo clasp`: use the Clasp of the Pale Oak\n'
+
+fields.append(f)
+
+</drac2>
+-title "{{title}}"
+-thumb "{{thumb}}"
+-color "{{color}}"
+-footer "{{footer}}"
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}

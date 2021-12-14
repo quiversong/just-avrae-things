@@ -12,6 +12,9 @@ t = f'{c.name} tries to use their Clasp of the Pale Oak!'
 thumb = image
 fields = []
 
+footer = 'Seventra: Exodus of Heroes | Order of the Pale Oak'
+footer += '\n!opo for help'
+
 arg = args[0].lower() if len(args) > 0 else ''
 if not (arg.startswith('pow') or arg.startswith('prot') or arg.startswith('hung')):
     f = f'Oops! What power of the Clasp of the Pale Oak do you want to use?|'
@@ -25,7 +28,9 @@ if not (arg.startswith('pow') or arg.startswith('prot') or arg.startswith('hung'
 if has_cc:
     if arg.startswith('hung'):
         mod_cc(cc, -1)
-        f = 'Vines of Hunger|Vines grow from the clasp and shape around your face and head. Get Advantage on checks made to find food and water for yourself and others for 1 hour.\nAdd `adv` to any checks you make for that as per your DM instructions.'
+        f = 'Vines of Hunger|Vines grow from the clasp and shape around your face and head. Get Advantage on checks made to find food and water for yourself and others for 1 hour.\n\nAdd `adv` to any checks you make for that as per your DM instructions.'
+
+        f += f'\n\n{cc}: {character().cc_str(cc)}'
         fields.append(f)
     else:
         if not combat() or not combat().me:
@@ -47,6 +52,7 @@ if has_cc:
         fields.append(f)
 
         f = f'{power[0]}|{power[3]}'
+        f += f'\n\n{cc}: {character().cc_str(cc)}'
         fields.append(f)
 
         thumb = 'https://cdn.discordapp.com/attachments/805571354391740466/832097951614238740/924_2020_large.png'
@@ -57,4 +63,5 @@ else:
 -title "{{t}}"
 -thumb "{{thumb}}"
 -color "{{color}}"
+-footer "{{footer}}"
 {{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}

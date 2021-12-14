@@ -40,6 +40,7 @@ help_text += 'This alias provides many utilities for crafting magical items.\n'
 help_text += 'Use `!mcraft config` to see the configurations you can set. For example: whether you have a spark item, what source of advantages you can use, what abilities to use, etc.\n'
 help_text += 'Use `!mcraft proj` to see how to manage your projects. You can create a new project, list existing projects, etc.\n'
 help_text += 'Use `!mcraft "<project name>"` to start the work. Make sure you have all the configurations in place first. Use `!mcraft config list` to see what you have set-up.'
+help_text += 'Add "adv" to buy advantage on the arcana check. The coins will be deducted automatically.\n'
 help_text += '\nAny text that contains spaces must be surrounded by " ".'
 
 if not VAR_NAME in cv:
