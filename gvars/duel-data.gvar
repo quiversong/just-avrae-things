@@ -480,7 +480,7 @@
     "attack": 10,
     "weapon": "Chainblade",
     "player_lose_action": "\"You remind me of my brother... He was weak, too.\"",
-    "player_win_action": "*Per the dueling agreement, you spar the loser's life.* \"Go ahead! Finish me! What are you waiting for? Don't walk away..! ...Come back!\" *A dirty Grith yells in disgrace as you walk away.*",
+    "player_win_action": "*Per the dueling agreement, you spare the loser's life.*\n\"Go ahead! Finish me! What are you waiting for? Don't walk away..! ...Come back!\" *A dirty Grith yells in disgrace as you walk away.*",
     "unlocks": ["ailsa"],
     "itemRewards": {"gp": 24},
     "uniqueRewards": {},
