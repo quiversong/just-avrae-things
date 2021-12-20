@@ -425,12 +425,12 @@
       "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812876021596170/Cockatrice.jpeg"
     },
 "m11": {
-      "name": "Roc",
+      "name": "Injured Roc",
       "ac": 12,
-      "hp": 12,
+      "hp": 24,
       "rations": 3,
       "pp": 11,
-      "prizes": [{"name": "Large Feathers (3sp)", "qt": 16},{"name": "Roc Claw (4gp)", "qt": 6}],
+      "prizes": [{"name": "Large Feathers (3sp)", "qt": 18},{"name": "Roc Claw (4gp)", "qt": 8}],
       "sneak_fail": "The {anm_name} sees your approach and flies away...",
       "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813148466544721/Roc.jpeg"
     },
