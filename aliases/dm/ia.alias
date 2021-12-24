@@ -1,0 +1,18 @@
+!alias ia init a <drac2>
+args = &ARGS&
+
+monster = combat().current.monster_name
+monster_data = load_json(get('monstermods'))
+
+if not monster in monster_data:
+    return ' '.join(args)
+
+monster_mods = monster_data[monster]
+b_bonus = monster_mods['b']
+d_bonus = f'\"{monster_mods["d"]}\"'
+magical = 'magical' if ('magical' in monster_mods and monster_mods['magical']) else ''
+
+new_args = args + ['-b', str(b_bonus), '-d', str(d_bonus), magical]
+
+return ' '.join(new_args)
+</drac2>
