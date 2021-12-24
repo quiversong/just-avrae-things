@@ -1,7 +1,7 @@
 embed
 <drac2>
 # Configuration Variables
-VERSION = '0.1'
+VERSION = '0.4'
 
 DATA_VAR = "c85742dc-f2e9-4a99-b544-b8f71dd7bed9"
 DAILY_CAP = 2
@@ -210,6 +210,10 @@ if len(args) < 2:
     f += '\n- To view the warriors you can challenge:\n`!duel list`'
     f += '\n- To start a challenge:\n`!duel <warrior> <your attack/weapon of choice>`'
     f += '\n- To view the attacks/weapons you can use:\n`!attack`'
+    f += '\n\nAll rewards are automatically added to your Coin Pouch or Kaizen Temple bag.'
+    f += ' Some special rewards are handled differently. Example:'
+    f += '\n- Inspiration is added as a cc and can be used with the `insp` snippet when appropriate'
+    f += '\n- Sashes are added to your `!vsheet`'
     fields.append(f)
     return 1
 
@@ -333,7 +337,7 @@ while player_hits < BLOWS_NEEDED and warrior_hits < BLOWS_NEEDED:
                     'successful': attack_successful
                 })
 
-            is_player_turn = True
+        is_player_turn = True
 
 is_player_winner = player_hits >= BLOWS_NEEDED
 
@@ -438,11 +442,11 @@ if is_player_winner:
                     rewards_text += f'\n `{qty}x {CURRENCY[reward]}`'
                 else:
                     remove_from_coins[reward] += (qty * -1)
-                    rewards_text += f'\n `NEGATIVE {qty * -1}x {CURRENCY[reward]}!!!`'
+                    rewards_text += f'\n `NEGATIVE {qty * -1}x {CURRENCY[reward]}!`'
             else:
                 rewards_text += '\n' + f'`{qty}x {reward}`'
                 add_to_bag[reward] = qty
-        f += ' These were added to your bag:' + rewards_text
+        f += ' You gained the following rewards:' + rewards_text
 
     if 'uniqueRewards' in warrior and len(warrior['uniqueRewards']) > 0 and stats['wins'] == 1:
         rewards_text = ''
@@ -475,7 +479,7 @@ if is_player_winner:
                     character().set_cvar(KAIZEN_FEATURES_VAR, features_var)
                     rewards_text += f'\n`{reward}`'
             elif stripped in CURRENCY.keys():
-                rewards_text += f'\n`{qty}x {reward}`'
+                rewards_text += f'\n`{qty}x {CURRENCY[stripped]}`'
                 if qty > 0:
                     add_to_coins[reward] += qty
                 else:
@@ -485,7 +489,7 @@ if is_player_winner:
                 rewards_text += f'\n`{qty}x {reward}`'
 
         if rewards_text != '':
-            prefix = '\nYou also gained these unique rewards:' if added_items else ' You gained these unique rewards:'
+            prefix = '\nYou also gained these one-time rewards:' if added_items else ' You gained these one-time rewards:'
             rewards_text = prefix + rewards_text
             f += rewards_text
 
