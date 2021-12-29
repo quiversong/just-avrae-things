@@ -149,8 +149,8 @@ if len(args) > 0 and args[0] == 'desc':
     warrior_name = warrior["name"].replace('"', '\\\"')
 
     title += f': {warrior_name}'
-    description = warrior["desc"].replace('"', '\"')
-    weapon = warrior["weapon"].replace('"', '\"')
+    description = warrior["desc"].replace('"', '\\\"')
+    weapon = warrior["weapon"].replace('"', '\\\"')
     fields.append(f'Description|{description}')
     fields.append(f'Weapons of Choice|{weapon}')
 
@@ -496,7 +496,7 @@ if is_player_winner:
     ######### WARRIOR ACTION TEXT ##########
 
     if 'player_win_action' in warrior:
-        f += '\n\n' + warrior['player_win_action'].replace('"', '\\"')
+        f += '\n\n' + warrior['player_win_action'].replace('"', '\\\"')
 
     fields.append(f)
 
@@ -552,7 +552,7 @@ else:
             f += payment_text
 
     if 'player_lose_action' in warrior:
-        f += '\n\n' + warrior['player_lose_action'].replace('"', '\\"')
+        f += '\n\n' + warrior['player_lose_action'].replace('"', '\\\"')
 
     fields.append(f)
 
