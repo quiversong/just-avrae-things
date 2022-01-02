@@ -1,0 +1,102 @@
+<drac2>
+args = &ARGS&
+c, sb, cc_name, = character(), character().spellbook, 'Staff of Power'
+fields = []
+
+t = f'{c.name} uses their Staff of Power!'
+desc = "**Staff of Power:** This staff can be wielded as a magic quarterstaff that grants a +2 bonus to attack and damage rolls made with it. While holding it, you gain a +2 bonus to Armor Class, saving throws, and spell attack rolls.\n\nThe staff has 20 charges for a variety of properties. The staff regains 2d8 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff retains its +2 bonus to attack and damage rolls but loses all other properties. On a 20, the staff regains 1d8 + 2 charges."
+
+thumb = 'https://media-waterdeep.cursecdn.com/avatars/thumbnails/19/188/315/315/636382353417817884.jpeg'
+
+options = {
+    'powerstrike': 'When you hit with a melee attack using the staff, you can expend 1 charge to deal an extra 1d6 force damage to the target.',
+    'globe': 'Spend 6 charges to cast Globe of Invulnerability.',
+    'cone': 'Spend 5 charges to cast Cone of Cold.',
+    'fireball': 'Spend 5 charges to cast Fireball at 5th level.',
+    'hold': 'Spend 5 charges to cast Hold Monster.',
+    'lightning': 'Spend 5 charges to cast Lightning Bolt at 5th level.',
+    'wall': 'Spend 5 charges to cast Wall of Force.',
+    'levitate': 'Spend 2 charges to cast Levitate.',
+    'mm': 'Spend 1 charge to cast Magic Missile.',
+    'ray': 'Spend 1 charge to cast Ray of Enfeeblement.',
+    'recharge': 'To recharge the staff at dawn.'
+}
+
+spells = {
+    'globe': ['Globe of Invulnerability', 6, ''],
+    'cone': ['Cone of Cold', 5, ''],
+    'fireball': ['Fireball', 5, '-l 5'],
+    'hold': ['Hold Monster', 5, ''],
+    'lightning': ['Lightning Bolt', 5, '-l 5'],
+    'wall': ['Wall of Force', 5, ''],
+    'levitate': ['Levitate', 2, ''],
+    'mm': ['Magic Missile', 1, ''],
+    'ray': ['Ray of Enfeeblement', 1, '']
+}
+
+help_txt = 'Invalid option!|Accepted commands for the Staff of Power:\n'
+for option in options.keys():
+    help_txt += f'`!sop {option}`: {options[option]}\n'
+
+c.create_cc_nx(cc_name, minVal = 0, maxVal = 20)
+
+if len(args) == 0 or not args[0] in options.keys():
+    fields.append(help_txt)
+    fields.append(f'Staff of Power|{character().cc_str(cc_name)}')
+    return 'embed '
+
+if args[0] in spells.keys():
+    spell_code = args[0]
+    spell_data = spells[spell_code]
+    spell_name = spell_data[0]
+    charges_needed = spell_data[1]
+    current_charges = c.get_cc(cc_name)
+    if current_charges < charges_needed:
+        fields.append(f'You do not have enough charges to cast {spell_name}!\nYou have: {current_charges}\nYou need: {charges_needed}')
+        return 'embed '
+
+    c.mod_cc(cc_name, charges_needed * -1)
+    cmd = f'cast "{spell_name}" {spell_data[2]} -i '
+    new_args = [cmd]
+    for i in range(1, len(args)):
+        new_args.append(args[i])
+
+    t = f'{c.name} casts {spell_name} with their Staff of Power!'.replace('"', '\\\"')
+    fields.append(f'Staff of Power|{character().cc_str(cc_name)}')
+
+    if c.get_cc(cc_name) == 0:
+        f = 'You spent the last charge of the Staff of Power!|'
+        f += 'If you expend the last charge, roll a d20. On a 1, the staff retains its +2 bonus to attack and damage rolls but loses all other properties. On a 20, the staff regains 1d8 + 2 charges.\n'
+        fields.append(f)
+
+        break_die = 20
+        break_roll = vroll(f'1d{break_die}')
+        f = 'Last charge roll...|'
+        f += f'**Roll:** {break_roll.full}\n'
+        if break_roll.total == 1:
+            f += 'The staff retains its +2 bonus to attack and damage rolls but loses all other properties!\n'
+            fields.append(f)
+        elif break_roll.total == break_die:
+            recharge_roll = vroll('1d8 + 2')
+            c.mod_cc(cc_name, recharge_roll.total)
+            f += 'On a 20, the staff regains 1d8 + 2 charges.\n'
+            f += f'**Recharge roll:** {recharge_roll.full}'
+            fields.append(f)
+            fields.append(f'Staff of Power|{character().cc_str(cc_name)}')
+        else:
+            fields.append(f)
+
+    return ' '.join(new_args)
+
+if args[0] == 'recharge':
+    result = vroll('2d8 + 4')
+    c.mod_cc(cc_name, result.total)
+    f = 'Staff of Power recharging...|'
+    f += f'**Roll:** {result.full}\n'
+    fields.append(f)
+    fields.append(f'Staff of Power|{character().cc_str(cc_name)}')
+    return 'embed '
+</drac2>
+-title "{{t}}"
+-thumb "{{thumb}}"
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
