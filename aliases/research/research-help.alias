@@ -62,7 +62,7 @@ Use your skills to unveil the hidden knowledges still not catalogued by the Foun
 
 -f "**4. Cataloguing the Information**|
 - Upon identification, use `!research catalogue` to have the knowledge extracted from your mind and catalogued for the Foundation mages. This is a **Concentration Check**.
-- Characters that have benefits on Concentration Checks can use them here. For example, if you have the Warcaster Feat that gives advantage on Concentration Checks, you can do `!research catalogue adv`. If you have a feature that gives you a bonus to Concentration Checks, use `!research catalogue -b <bonus>`.
+- Characters that have benefits on Concentration Checks can use them here. For example, if you have features like War Caster Feat or Eldritch Mind invocation, you can do `!research catalogue adv`. If you have a feature that gives you a bonus to Concentration Checks, such as Bladesong, use `!research catalogue -b <bonus>`.
 - **ATTENTION:** As per our Honor System, only use the benefits that are granted to you and not more. Admins can track how commands have been run and **potential offenses to Servers Rules 2 or 7 are passive of moderation**."
 
 -f "**5. Receiving Loot**|
