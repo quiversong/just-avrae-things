@@ -4,6 +4,8 @@ c, sb, cc_name, f, f2 = character(), character().spellbook, 'Pearl of Power', No
 t = f'{c.name} uses their Pearl of Power!'
 desc = "**Pearl of Power:** while this pearl is on your person, you can use an action to speak its Command Word and regain one expended spell slot. If the expended slot is of 4th Level or higher, the new slot is 3rd Level. Once you have used the pearl, it can't be used again until the next dawn."
 
+footer = 'Items Collection: Shiftweave | Created by quiversong#2772'
+
 thumb = 'https://cdn.discordapp.com/attachments/827581981452795975/831781045908799498/michael-malkin-nw-powerstone4.jpeg'
 
 if len(args) == 0 or not args[0].isnumeric():
@@ -39,3 +41,4 @@ f2 = f'Spell slots of level {slot_level}| ' + sb.slots_str(slot_level)
 -f "{{f}}"
 {{f'-f "{f2}"' if f2 else ''}}
 -thumb "{{thumb}}"
+{{f'-footer "{footer}"' if footer else ""}}

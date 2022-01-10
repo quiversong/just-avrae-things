@@ -1,0 +1,90 @@
+embed <drac2>
+args = &ARGS&
+CVAR = "_outfits_"
+t, img, thumb = None, None, None
+cmd = ctx.alias
+c = character()
+cv = c.cvars
+fields = []
+
+outfits = load_json(cv[CVAR]) if CVAR in cv else {}
+valid = ['add', 'remove', 'show', 'desc']
+
+footer = 'Items Collection: Shiftweave | Created by quiversong#2772'
+
+help_title = "Need help with your Shiftweave?"
+help_text = "Use one of these commands:|"
+help_text += f'`!{cmd} add <outfit code> \\\"<outfit name>\\\" \\\"<outfit url>\\\"`:'
+help_text += '\nTo add a new shiftware.\nUse the quotes as in the example, and a single word for the outfit code.'
+help_text += f'\n\n`!{cmd} desc <outfit code> \\\"<outfit description>\\\"`:'
+help_text += '\nTo add a description text for an outfit.'
+help_text += '\n\n' + f'`!{cmd} remove <code>`:'
+help_text += '\nTo remove an existing outfit.'
+thumb = image
+if len(outfits) > 0:
+    help_text += '\n\n' + '\n'.join([f'`!{cmd} show {c}` to display the \'{outfits[c][0]}\' outfit.' for c in outfits.keys()])
+
+if len(args) < 2 or args[0].lower() == 'help' or not args[0] in valid:
+    t = help_title
+    fields.append(help_text)
+    return 1
+
+code = args[1]
+
+if args[0].lower() == 'add':
+    if len(args) < 4:
+        t = help_title
+        fields.append(help_text)
+        return 1
+
+    name = args[2]
+    img = args[3]
+    outfits[code] = [name, img]
+    c.set_cvar(CVAR, dump_json(outfits))
+    t = f'{c.name} sets the \'{name}\' outfit onto their Shiftweave!'
+    f = f'Usage|Use `!{cmd} show {code}` to display your outfit.'
+    f += '\nRemember that one Shiftweave allows at most 5 outfits!'
+    fields.append(f)
+    return 0
+
+if not code in outfits:
+    t = help_title
+    fields.append(f'Oops!|Could not find an outfit with code `{code}`.')
+    fields.append(help_text)
+    return 1
+
+name = outfits[code][0]
+
+if args[0].lower() == 'desc':
+    description = args[2]
+    if len(outfits[code]) > 2:
+        outfits[code][2] = description
+    else:
+        outfits[code].append(description)
+    c.set_cvar(CVAR, dump_json(outfits))
+    t = f'{c.name} sets a description for their \'{name}\' outfit.'
+    fields.append(f'Description|{description}')
+    fields.append(f'Usage|Use `!{cmd} show {code}` to display your outfit details.')
+    return 0
+
+if args[0].lower() == 'remove':
+    thumb = outfits[code][1]
+    outfits.pop(code)
+    c.set_cvar(CVAR, dump_json(outfits))
+    t = f'{c.name} removes the {name} outfit to their Shiftweave!'
+    f = f'Outfit named \'{code}\' removed!|Remember the outfits registered to a Shiftweave can not be changed once it is created.'
+    fields.append(f)
+    return 0
+
+img = outfits[code][1]
+thumb = None
+t = f'{c.name}\'s {name} Outfit!'
+if len(outfits[code]) > 2:
+    d = outfits[code][2].replace('"', '\\\"')
+    fields.append(f'Description|{d}')
+</drac2>
+{{f'-title "{t}"' if t else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-image "{img}"' if img else ""}}
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
+{{f'-footer "{footer}"' if footer else ""}}

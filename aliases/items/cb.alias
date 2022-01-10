@@ -8,10 +8,12 @@ POTS = {
     'supreme-healing': {'dice': [{4: 10}, 20], 'name': 'Potion of Supreme Healing'}
 }
 
+footer = 'Items Collection: Shiftweave | Created by quiversong#2772'
+
 out = []
 c = character()
 f, cv = [], c.cvars
-img, desc, f1, f2, color, footer = None, None, None, None, None, None
+img, desc, f1, f2, color = None, None, None, None, None
 thumb = "https://cdn.discordapp.com/attachments/855908840633270282/865991919318073354/images_e_hgDQhXc_medium.png"
 
 all_bags = load_json(cv['bags'])

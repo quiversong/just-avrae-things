@@ -1,0 +1,90 @@
+<drac2>
+command = 'ald'
+footer = 'Seventra: Exodus of Heroes | Aldahen Collection v0.1 | !ald help\nCreators: quiversong#2772 (Adrienne)'
+args = &ARGS&
+pargs = argparse(args)
+c, sb, cc_name, = character(), character().spellbook, 'Staff of Power'
+fields = []
+
+CC_NAME = "Aldahen Ruby"
+CHARGES = 7
+
+CC_SURGE_NAME = "Aldahen Ruby Spell Surge"
+
+c.create_cc_nx(CC_NAME, 0, CHARGES, 'long', 'bubble')
+c.create_cc_nx(CC_SURGE_NAME, 0, 1, 'short', 'bubble')
+if c.get_cc_max(CC_NAME) > CHARGES:
+    c.delete_cc(CC_NAME)
+    c.create_cc_nx(CC_NAME, 0, CHARGES, 'long', 'bubble')
+
+t = f'{c.name} tries to use their Aldahen Ruby of Spell Enhancing...'
+thumb = 'https://cdn.discordapp.com/attachments/871175851134304256/900433038410932274/francesco-pergola-crystal-01-red-gif.gif'
+
+if c.get_cc(CC_NAME) < 1:
+    f.append('Oops!|Your Aldahen Ruby is all out of charges! Try again tomorrow!')
+    return ''
+
+options = {
+    'surge': 'Spend 3 charges to be able to cast two leveled spells on a single turn.',
+    'cantrip': 'Spend 2 charges to cast a cantrip as a bonus action.',
+    'conc': 'Spend 1 charge to roll 1d4 to add as a bonus to a concentration save.',
+    'empower': 'Spend 1 charge to add 1d8 radiant damages to the targets of a spell.',
+    'hands': 'Spend 3 charges to cast Burning Hands at 7th level with a 60ft. cone.',
+    'passwall': 'Spend 3 charges to cast Passwall.',
+    'dimension': 'Spend 3 charges to cast Dimension Gate.',
+    'gate': 'Spend 3 charges to cast Arcane Gate.'
+}
+
+spells = {
+    'hands': ['Burning Hands', 3, '-l 7'],
+    'passwall': ['Passwall', 3, '']
+    'dimension': ['Dimension Gate', 3, ''],
+    'gate': ['Arcane Gate', 3, '']
+}
+
+help_txt = 'Invalid option!|Accepted commands for the Aldahen Ruby:\n'
+for option in options.keys():
+    help_txt += f'`!sop {option}`: {options[option]}\n'
+
+c.create_cc_nx(cc_name, minVal = 0, maxVal = 20)
+
+if len(args) == 0 or not args[0] in options.keys():
+    fields.append(help_txt)
+    fields.append(f'Aldahen Ruby|{character().cc_str(cc_name)}')
+    return 'embed '
+
+if args[0] in spells.keys():
+    spell_code = args[0]
+    spell_data = spells[spell_code]
+    spell_name = spell_data[0]
+    charges_needed = spell_data[1]
+    current_charges = c.get_cc(cc_name)
+    if current_charges < charges_needed:
+        fields.append(f'You do not have enough charges to cast {spell_name}!\nYou have: {current_charges}\nYou need: {charges_needed}')
+        return 'embed '
+
+    c.mod_cc(cc_name, charges_needed * -1)
+    cmd = f'cast "{spell_name}" {spell_data[2]} -i '
+    new_args = [cmd]
+    for i in range(1, len(args)):
+        new_args.append(args[i])
+
+    t = f'{c.name} casts {spell_name} with their Aldahen Ruby!'.replace('"', '\\\"')
+    fields.append(f'Aldahen Ruby|{character().cc_str(cc_name)}')
+
+    fields.append(f)
+
+    return ' '.join(new_args)
+
+if args[0] == 'recharge':
+    result = vroll('2d8 + 4')
+    c.mod_cc(cc_name, result.total)
+    f = 'Staff of Power recharging...|'
+    f += f'**Roll:** {result.full}\n'
+    fields.append(f)
+    fields.append(f'Staff of Power|{character().cc_str(cc_name)}')
+    return 'embed '
+</drac2>
+-title "{{t}}"
+-thumb "{{thumb}}"
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}

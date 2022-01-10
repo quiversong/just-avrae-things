@@ -1,0 +1,11 @@
+!snippet kaizen <drac2>
+  cc_name = "Kaizen Black Sash: Swift Strike"
+  character().create_cc_nx(cc_name, 0, 1, 'long', 'bubble')
+  if (character().get_cc(cc_name) > 0):
+    character().mod_cc(cc_name, -1)
+    cc_out = character().cc_str(cc_name)
+    return f' -d "1d4 [radiant] + 1d4 [necrotic]" -f "Kaizen Black Sash Swift Strike|As a Black Sash from the Nahachi Kaizen Temple in Arbarax, you learn the Swift Strike move: whenever you hit a creature with an attack, you can choose to deal an additional 1d4 radiant + 1d4 necrotic damage to the target. Once this feature has been used, you can not use it again until you finish a long rest.\n{cc_out}"'
+  else:
+    cc_out = character().cc_str(cc_name)
+    return f' -f "Kaizen Black Sash Swift Strike|You can only use this again after a long rest!\n{cc_out}"'
+</drac2>
