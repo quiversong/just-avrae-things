@@ -660,7 +660,7 @@
     "ac": 15,
     "attack": 11,
     "weapon": "Scimitar",
-    "player_lose_action": "*Avriel looks coolly down their nose at you.* \"You're lucky. Hot Lips' still digesting the last fool who crossed us.*",
+    "player_lose_action": "*Avriel looks coolly down their nose at you.* \"You're lucky. Hot Lips' still digesting the last fool who crossed us.\"",
     "player_win_action": "*Avriel looks at Hot Lips, nursing their wounds, and tells the snake:* \"these fools are a copper a dozen, so don't worry, my dear, you'll have your dinner before you know it.\"",
     "unlocks": ["anne"],
     "itemRewards": {"Snake Oil (2cp)": 1},
