@@ -463,7 +463,7 @@ if is_player_winner:
             elif 'seventran samurai feat' in stripped:
                 rewards_text += f'\n`{reward} (use `!sevfeat` to see it)`'
             elif 'kaizen' in stripped and stripped.endswith('sash'):
-                vfeatures = load_json(cv['vfeatures']) if 'cvfeatures' in cv else []
+                vfeatures = load_json(cv['vfeatures']) if 'vfeatures' in cv else []
                 has_kaizen_features = [f for f in (vfeatures) if f['n'] == KAIZEN_FEATURES_VAR]
                 if len(has_kaizen_features) == 0:
                     vfeatures.append({
