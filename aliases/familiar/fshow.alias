@@ -1,0 +1,35 @@
+embed <drac2>
+VAR_NAME = 'familiarData'
+args = &ARGS&
+c = character()
+thumb, color, footer, desc, img = None, None, None, None, None
+fields = []
+
+data = load_json(c.cvars[VAR_NAME]) if VAR_NAME in c.cvars else {}
+
+t = f"{c.name}'s Familiar"
+footer = 'Familiar Management\nCreated by zhu.exe#4211, extended by quiversong#2772'
+
+if not(VAR_NAME in c.cvars and 'type' in data):
+    return 'echo You have not set a familiar for yourself. Use `!familiar` to do so!'
+
+ftype = data['type']
+
+if 'name' in data:
+    fields.append(f"Name|{data['name']}")
+
+fields.append(f"Creature Type|{ftype}")
+
+if 'desc' in data:
+    fields.append(f"Description|{data['desc']}")
+
+if 'image' in data:
+    img = data['image']
+</drac2>
+-title "{{t}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-desc "{desc}"' if desc else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}

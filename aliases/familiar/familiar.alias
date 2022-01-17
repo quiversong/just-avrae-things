@@ -1,0 +1,97 @@
+embed <drac2>
+VAR_NAME = 'familiarData'
+
+t, img, desc, thumb, color, footer = None, None, None, None, None, None
+fields = []
+args = &ARGS&
+c = character()
+pargs = argparse(args)
+
+footer = 'Familiar Management | Created by zhu.exe#4211, extended by quiversong#2772'
+
+valid_commands = ['set', 'name', 'image', 'remove', 'desc']
+
+t = f"{c.name}'s Familiar"
+help_text = "`!familiar set <creature>`: Sets  your familiar's creature type\n"
+help_text += "`!familiar name <name>`: Sets your familiar's name\n"
+help_text += "`!familiar image <url>`: Sets your familiar's image\n"
+help_text += "`!familiar desc \\\"<desc>\\\"`: Sets your familiar's description\n"
+help_text += "`!familiar remove`: Removes your familiar\n"
+help_text += "`!fc <check>`: Roll a check\n"
+help_text += "`!fs <save>`: Roll a save\n"
+help_text += "`!fa <attack>`: Roll an attack\n"
+help_text += "`!fcast <spell>`: Cast a spell\n"
+help_text += "`!fjoin`: Add your familiar to initiative\n"
+help_text += "`!fshow`: Show your familiar's image and description"
+
+data = load_json(c.cvars[VAR_NAME]) if VAR_NAME in c.cvars else {}
+if 'image' in data:
+    thumb = data['image']
+
+if len(args) > 1 and args[0] == 'set':
+    familiar_type = args[1]
+    data['type'] = familiar_type
+    desc = f"Your familiar creature type was set to '{familiar_type}.'"
+    desc += f'\n\n{help_text}'
+    c.set_cvar(VAR_NAME, dump_json(data))
+    return ''
+
+if not VAR_NAME in c.cvars:
+    desc = "You have no familiar set. Get started by setting your familiar's creature type with `!familiar set <creature>`."
+    return ''
+
+if not 'type' in data:
+    desc = "You have to set your familiar creature type. Use `!familiar set <creature>`."
+    desc += f'\n\n{help_text}'
+    return ''
+
+current_type = data['type']
+desc = f"Your familiar is a {current_type}"
+desc += f" named {data['name']}." if 'name' in data else '.'
+
+if len(args) == 0:
+    desc += f'\n\n{help_text}'
+    return ''
+
+if args[0] == 'name' and len(args) > 1:
+    familiar_name = args[1]
+    data['name'] = familiar_name
+    desc = f"Your familiar's name was set to '{familiar_name}.'"
+    desc += f'\n\n{help_text}'
+    c.set_cvar(VAR_NAME, dump_json(data))
+    return ''
+
+if args[0] == 'image' and len(args) > 1:
+    familiar_image = args[1]
+    data['image'] = familiar_image
+    desc = f"Your familiar's image has been updated!"
+    desc += f'\n\n{help_text}'
+    thumb = familiar_image
+    c.set_cvar(VAR_NAME, dump_json(data))
+    return ''
+
+if args[0] == 'desc' and len(args) > 1:
+    familiar_desc = args[1]
+    data['desc'] = familiar_desc
+    desc = f"Your familiar's description has been updated!"
+    desc += f'\n\n{help_text}'
+    c.set_cvar(VAR_NAME, dump_json(data))
+    return ''
+
+if args[0] == 'remove':
+    thumb = None
+    desc = f"Your familiar data has been erased."
+    desc += f'\n\n{help_text}'
+    c.delete_cvar(VAR_NAME)
+    return ''
+
+desc = help_text
+
+</drac2>
+-title "{{t}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-desc "{desc}"' if desc else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}

@@ -1,0 +1,20 @@
+<drac2>
+VAR_NAME = 'familiarData'
+args = &ARGS&
+c = character()
+
+data = load_json(c.cvars[VAR_NAME]) if VAR_NAME in c.cvars else {}
+
+if not(VAR_NAME in c.cvars and 'type' in data):
+    return 'echo You have not set a familiar for yourself. Use `!familiar` to do so!'
+
+if not combat():
+    return 'echo There must be an active initiative to add your familiar to!'
+
+ftype = data['type']
+name = data['name'] if 'name' in data else f"{c.name}'s {data['type']}"
+
+new_args = ['init madd', f'"{ftype}"', f'-name "{name}"', '-h false'] + args
+return ' '.join(new_args)
+</drac2>
+

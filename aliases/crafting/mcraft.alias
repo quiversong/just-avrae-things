@@ -36,12 +36,21 @@ footer = 'Seventra Magical Crafting | !mcraft help\nCreated by quiversong#2772'
 title = f"{cn}'s is crafting Magical Artifacts!"
 
 help_text = 'Magic Crafting Help|'
-help_text += 'This alias provides many utilities for crafting magical items.\n'
-help_text += 'Use `!mcraft config` to see the configurations you can set. For example: whether you have a spark item, what source of advantages you can use, what abilities to use, etc.\n'
-help_text += 'Use `!mcraft proj` to see how to manage your projects. You can create a new project, list existing projects, etc.\n'
-help_text += 'Use `!mcraft "<project name>"` to start the work. Make sure you have all the configurations in place first. Use `!mcraft config list` to see what you have set-up.'
+help_text += 'This alias provides many utilities for crafting magical items in Seventra.\n\n'
+help_text += 'Use `!mcraft config` to see the configurations you can set. For example: whether you have a spark item, what source of advantages you can use, what abilities to use, etc.\n\n'
+help_text += 'Use `!mcraft proj` to see how to manage your projects. You can create a new project, list existing projects, etc.\n\n'
+help_text += 'Use `!mcraft "<project name>"` to start the work. Make sure you have all the configurations in place first.\n\n'
+help_text += 'Use `!mcraft config list` to see what your active configurations.\n\n'
 help_text += 'Add "adv" to buy advantage on the arcana check. The coins will be deducted automatically.\n'
-help_text += '\nAny text that contains spaces must be surrounded by " ".'
+help_text += '\nAny parameters that contains spaces must be surrounded by " ".'
+
+if not 'bags' in character().cvars:
+    fields.append('Oops!|Make sure you have your bags set-up. Use `!bag` and `!coins` for that.')
+    return ''
+
+if len(args) == 1 and args[0] == 'help':
+    fields.append(help_text)
+    return ''
 
 if not VAR_NAME in cv:
     base_var = {
@@ -52,6 +61,7 @@ if not VAR_NAME in cv:
                 'lgloves': False
             },
             'projects': [],
+            'completed': [],
             'default': None
     }
     character().set_cvar(VAR_NAME, dump_json(base_var))
@@ -121,7 +131,7 @@ if len(args) >= 1 and args[0] == 'config':
         f += f'Living Gloves: {"on" if ("lgloves" in config and config["lgloves"]) else "off"}\n'
         f += f'Advantage: '
         if ('adv' in config and config['adv'] != None):
-            f += f'on. Source:{config["adv"]}\n'
+            f += f'on. Source: `{config["adv"]}`\n'
         else:
             f += 'off\n'
         fields.append(f)
@@ -195,12 +205,19 @@ if len(args) >= 1 and args[0] == 'proj':
         return 0
 
     if len(args) >= 2 and args[1] == 'list':
-        f = f"{cn}'s projects|"
+        f = f"{cn}'s active projects|"
         for project in craft_info['projects']:
             cc = c.get_cc(project['name'])
             max_cc = c.get_cc_max(project['name'])
             f += f'{project["name"]}: {cc}/{max_cc}\n'
         fields.append(f)
+
+        if 'completed_projects' in craft_info:
+            f = f"{cn}'s completede projects|"
+            if len(craft_info['completed_projects']) == 0:
+                f += 'Nothing here yet!'
+            for project in craft_info['completed_projects']:
+                f += f'{project["name"]}\n  Completed on:{project["date"]}\n'
         return 0
 
     if len(args) >= 3 and args[1] == 'default':
@@ -221,6 +238,20 @@ if len(args) >= 1 and args[0] == 'proj':
 project = None
 project_name = None
 config = craft_info['config']
+
+has_arcana_adv = None
+current_gold = None
+if 'adv' in args:
+    args.remove('adv')
+    bags = load_json(cv['bags'])
+    i = [i for i in range(len(bags)) if bags[i][0] == 'Coin Pouch'][0]
+    bags[i][1].update({'gp': bags[i][1]['gp'] - 20})
+    if bags[i][1]['gp'] < 0:
+        fields.append('Oops!|It looks like you are trying to pay for arcana advantage but you lack sufficient funds!')
+        return ''
+    c.set_cvar('bags', dump_json(bags))
+    current_gold = bags[i][1]['gp']
+    has_arcana_adv = True
 
 if len(args) == 0:
     if 'default' in craft_info and craft_info['default'] != None:
@@ -249,82 +280,118 @@ rarity = project['rarity']
 ability = config['ability']
 
 arcana_dc = ARCANA_DCS[RARITIES.index(rarity)]
-arcana_roll = vroll(c.skills.arcana.d20())
-arcana_success = arcana_roll.total >= arcana_dc
-
 ability_dc = ABILITY_DCS[RARITIES.index(rarity)]
-skill = SKILLS[ability]
+
 has_ability_adv = True if ('adv' in config and config['adv'] != None) else None
-ability_mods = proficiencyBonus
-ability_roll = vroll(skill.d20(base_adv = has_ability_adv) + f" + {ability_mods}")
-ability_success = ability_roll.total >= ability_dc
 
-leftmost_expr = ability_roll.result.expr.roll.left
-while leftmost_expr.left != None:
-  leftmost_expr = leftmost_expr.left
-ability_dice_value = max([int(x.values[0]) for x in leftmost_expr.values])
+rolls = []
 
-fields.append(f"Arcana Check|{cn} uses their arcane knowledge to imbue magic into an artifact...\n**Arcana check: DC {arcana_dc}**\n{arcana_roll.full}\n{sl if arcana_success else fl}\n\n")
-
-if arcana_success:
-    skill_name = SKILL_NAMES[ability]
-    f = f"{skill_name} Check|{cn} works on the crafting of their artifact using their tool proficiencies...\n**{skill_name} check: DC {ability_dc}**\n{ability_roll.full}\n{sl if ability_success else fl}"
-    fields.append(f)
-    if has_ability_adv:
-        fields.append(f'\nAdvantage|{config["adv"]}')
-
-cc_suffix = ""
-cc_name = project['name']
-successes = 0
-will_use_spark = False
-if arcana_roll.result.crit == 1:
-    if ability_roll.result.crit == 1:
-        successes = 3
-        fields.append(f'An extraordinary productive day!|By achieving two natural 20s, you have accomplished 3 days worth of work! Congratulations!')
-    elif ability_success:
-        successes = 2
-        fields.append(f'An extra productive day!|By achieving a natural 20 on the arcana check, you have accomplished 2 days worth of work!')
+for i in range(4):
+    roll_result = None
+    dc = None
+    if i in [0, 2]:
+        roll_result = vroll(c.skills.arcana.d20(base_adv = has_arcana_adv))
+        dc = arcana_dc
     else:
-        successes = 1
-        fields.append(f'A great day for arcana work!|By achieving a natural 20 on the arcane check, you were able to finish the work day successfully!')
-elif arcana_success:
-    if ability_roll.result.crit == 1:
-        successes = 2
-        fields.append(f'An extra productive day!|By achieving a natural 20 on the ability check, you have accomplished 2 days worth of work!')
-    elif ability_success:
-        successes = 1
-        will_use_spark = 'spark' in config and config['spark'] and ability_dice_value >= 15
-        fields.append('A successful day of work!|Congratulations!')
-    else:
-        fields.append('Ugh... no luck today!|The Arcane knowledge was on point, but it was not enough...')
-else:
-    fields.append('Ugh... no luck today!|Cannot craft a magic item without the magic!')
+        skill = SKILLS[ability]
+        ability_mods = proficiencyBonus
+        roll_result = vroll(skill.d20(base_adv = has_ability_adv) + f" + {ability_mods}")
+        dc = ability_dc
 
-if will_use_spark and successes == 1:
-    second_arcana_roll = vroll(c.skills.arcana.d20())
-    second_arcana_success = second_arcana_roll.total >= arcana_dc
-    second_ability_roll = vroll(skill.d20(base_adv = has_ability_adv) + f" + {ability_mods}")
-
-    leftmost_expr = second_ability_roll.result.expr.roll.left
+    leftmost_expr = roll_result.result.expr.roll.left
     while leftmost_expr.left != None:
       leftmost_expr = leftmost_expr.left
-    second_ability_dice_value = max([int(x.values[0]) for x in leftmost_expr.values])
+    dice_value = max([int(x.values[0]) for x in leftmost_expr.values])
+    is_crit = roll_result.result.crit == 1
 
-    second_ability_success = second_ability_roll.total >= ability_dc and second_ability_dice_value >= 15
+    is_success = roll_result.total >= dc or is_crit
+    if i == 3:
+        is_success = is_success and dice_value >= 15
 
-    fields.append('Sparks Fly Off The Workbench!|Can you accomplish two days worth of work in one day using your Spark Items?')
-    fields.append(f"Second Arcana Check|**Arcana check: DC {arcana_dc}**\n{second_arcana_roll.full}\n{sl if second_arcana_success else fl}\n\n")
-    fields.append(f"Second Ability Check|**{skill_name} check: DC {ability_dc} (Requires a roll of 15 of greater)**\n{second_ability_roll.full}\n{sl if second_ability_success else fl}")
-    if second_arcana_success and second_ability_success:
-        f = 'Two Days of Work in One!|You manage 2 days worth of work for achieving 2 rolls greater than 15 on the D20 on the ability checks!'
-        fields.append(f)
-        successes = 2
+    rolls.append({
+        'roll': roll_result,
+        'crit': is_crit,
+        'dc': dc,
+        'success': is_success,
+        'dice_value': dice_value
+    })
 
-if successes > 0:
-    c.mod_cc(cc_name, -successes)
-    cc_suffix = f" (-{successes})"
+total_successes = 0
+cc_name = project['name']
+skill_name = SKILL_NAMES[ability]
 
-fields.append(f"{cc_name}|{c.get_cc(cc_name)}/{c.get_cc_max(cc_name)}{cc_suffix}")
+arcana_roll = rolls[0]
+fields.append(f"Arcana check: DC {arcana_dc}|{arcana_roll['roll'].full}: {sl if arcana_roll['success'] else fl}")
+
+result_field = '__CRAFTING PROGRESS__|'
+
+if not arcana_roll['success']:
+    result_field += 'Arcana Check Fail! Try again tomorrow...\n'
+    fields.append(result_field)
+    fields.append(f'{cc_name}|{c.cc_str(cc_name)}')
+    return ''
+
+if arcana_roll['crit']:
+    total_successes += 1
+    result_field += '+1 success due to a critical on the Arcana Check!\n'
+
+ability_roll = rolls[1]
+fields.append(f"{skill_name} check: DC {ability_dc}|{ability_roll['roll'].full}: {sl if ability_roll['success'] else fl}")
+if ability_roll['success']:
+    ability_successes = 2 if ability_roll['crit'] else 1
+    total_successes += ability_successes
+    if ability_successes == 1:
+        result_field += '+1 success due to successful arcana and ability checks!\n'
+    elif ability_successes == 2:
+        result_field += '+2 successes due to a sucessful arcana and a critical ability check!\n'
+else:
+    result_field += 'Ability Check Fail! Try again tomorrow...\n'
+
+will_use_spark = total_successes == 1 and 'spark' in config and config['spark'] and ability_roll['dice_value'] >= 15
+
+if will_use_spark:
+    arcana_roll = rolls[2]
+    ability_roll = rolls[3]
+
+    fields.append('__CRAFTER SPARK!__|Can you accomplish two days worth of work using your crafter spark?')
+    fields.append(f"2nd Arcana check: DC {arcana_dc}|{arcana_roll['roll'].full}\n{sl if arcana_roll['success'] else fl}\n\n")
+
+    if arcana_roll['crit']:
+        result_field += '+1 success due to a sparky critical arcana check!\n'
+        total_successes += 1
+    else:
+        if arcana_roll['success']:
+            fields.append(f"2nd {skill_name} check: DC {ability_dc} (Requires a roll of 15 of greater)|{ability_roll['roll'].full}: {sl if ability_roll['success'] else fl}")
+
+        spark_success = arcana_roll['success'] and ability_roll['success'] and ability_roll['dice_value'] >= 15
+        if spark_success:
+            result_field += '+1 success due to successful spark-powered arcana and ability checks!\n'
+            total_successes += 1
+
+if has_arcana_adv:
+    fields.append('Arcana Advantage|20gp have been removed from your pouch to pay for advantage on Arcana Rolls.')
+
+if has_ability_adv:
+    fields.append(f'Ability Check Advantage|{config["adv"]}')
+
+fields.append(result_field)
+
+cc_suffix = ''
+if total_successes > 0:
+    cc_before = c.get_cc(cc_name)
+    c.mod_cc(cc_name, -total_successes)
+    if cc_before > 0 and c.get_cc(cc_name) <= 0:
+        completed_projects = craft_info['completed_projects'] if 'completed_projects' in craft_info else []
+        completed = project
+        year = time() / 31536000 + 1970
+        month = time() / 2629743 % 12 + 1
+        day = month % int(month) * 30.44
+        completed['date'] = f'{int(year)}/{int(month)}/{int(day)}'
+        completed_projects.insert(0, completed)
+    cc_suffix = f' (-{total_successes})'
+
+fields.append(f'{cc_name}|{c.cc_str(cc_name)}{cc_suffix}')
+
 </drac2>
 -title "{{title}}"
 {{''.join(['-f "' + field.replace('"', '\\"') + '"\n' for field in fields]) if len(fields) > 0 else ''}}

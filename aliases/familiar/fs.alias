@@ -1,0 +1,17 @@
+<drac2>
+VAR_NAME = 'familiarData'
+args = &ARGS&
+c = character()
+
+data = load_json(c.cvars[VAR_NAME]) if VAR_NAME in c.cvars else {}
+
+if not(VAR_NAME in c.cvars and 'type' in data):
+    return 'echo You have not set a familiar for yourself. Use `!familiar` to do so!'
+
+ftype = data['type']
+name = data['name'] if 'name' in data else f"{c.name}'s {data['type']}"
+img = f"-thumb {data['image']}" if 'image' in data else ''
+
+new_args = ['ms', f'"{ftype}"'] + args + [f'-title "{name} makes a [sname] save!"', img]
+return ' '.join(new_args)
+</drac2>
