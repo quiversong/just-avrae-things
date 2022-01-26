@@ -32,8 +32,9 @@ embed
 > Common: 100gp
 > Uncommon: 500gp
 > Rare: 3000gp
-- You can only exchange your relics for items that you are eligible to buy, incluuding any level requirements that might apply.
-- If you would like to role-play the exchange, you can head to the Magic Emporium in Arbarax. You get a free teleportation travel to the city to perform the exchange."
+- You can only exchange your relics for items that you are eligible to buy, including any level requirements that might apply.
+- If you would like to role-play the exchange, you can head to the Magic Emporium in Arbarax. You get a free teleportation travel to the city to perform the exchange.
+- **Relics are not tradeable or transferable between players.**"
 
 -f "**Relic [Magical Artifact]**|
 These relics can be traded for any magic items!
@@ -74,7 +75,7 @@ Potion of Growth................108
 Essence of Ether................120
 Potion of Gaseous Form..........120
 Potion of Resistance............125
-Potion of Speed.................160
+Potion of Speed.................400
 Burnt Othur Fumes...............200
 Potion of Flying................200
 Potion of Clairvoyance..........380
@@ -83,4 +84,3 @@ Midnight Tears..................600
 Purple Worm Poison..............800
 Potion of Cloud Giant Strength..835
 Potion of Invulnerability......1500```"
-
