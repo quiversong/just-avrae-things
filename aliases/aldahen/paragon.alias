@@ -1,0 +1,48 @@
+embed <drac2>
+command = 'ald'
+footer = 'Seventra: Exodus of Heroes | Aldahen Collection v0.1 | !ald help\nCreators: quiversong#2772 (Adrienne)'
+args = &ARGS&
+pargs = argparse(args)
+c = character()
+fields = []
+thumb = 'https://cdn.discordapp.com/attachments/855908840633270282/937826935264919612/paragonstone.png'
+
+desc = "While holding this stone you can use an action to pull energy from it, recovering 1d4 levels of used spell slots. This can be done once per long rest, and it can't be combined with other items or features to recover higher level slots."
+
+title = f'{c.name} tries to use their Paragon Stone...'
+
+items = c.cvars['magicItems'].split(', ') if 'magicItems' in c.cvars else []
+stone = ([i for i in items if 'paragonstone' in i.lower().replace(' ', '')] + [None])[0]
+
+if stone == None:
+    f = 'Oops!|It looks like you do not have a Paragon Stone yet!\n\nHead to the Aldahen Armanomë to get one, then use the following command to register it:\n\n'
+    f += '`!manage items add "Paragon Stone"`'
+    fields.append(f)
+    return ''
+
+CC_NAME = 'Aldahen Paragon Stone'
+c.create_cc_nx(CC_NAME, 0, 1, 'long', 'bubble')
+
+if not (len(args) >= 1 and args[0].lower() == 'use'):
+    fields.append(f'Paragon Stone|{desc}')
+    fields.append('To use the Paragon Stone|`!ald paragon use`')
+    fields.append(f'{CC_NAME}|{c.cc_str(CC_NAME)}')
+    return ''
+
+if c.get_cc(CC_NAME) < 1:
+    fields.append('Oops!|Your Paragon Stone has already been used today. Try again after a long rest.')
+    return ''
+
+title = f'{c.name} uses their Aldahen Paragon Stone...'
+the_roll = vroll('1d4')
+fields.append(f'Paragon Stone|{desc}')
+fields.append(f'Roll...|{the_roll.full}\nYou can recover a total of {the_roll.total} spell slots.\nExample: if you roll a 3, you can recover one level 3 slot, or one level 1 plus one level 2 slots.')
+fields.append('To recover spell slots, use:|`!g ss <slot level> +<quantity>`')
+c.mod_cc(CC_NAME, -1)
+fields.append(f'{CC_NAME}|{c.cc_str(CC_NAME)}')
+
+</drac2>
+-title "{{title}}"
+-thumb "{{thumb}}"
+{{''.join(['-f "' + field.replace('"', '\\\"') + '"\n' for field in fields]) if len(fields) > 0 else ''}}
+{{f'-footer "{footer}"' if footer else ""}}

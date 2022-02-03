@@ -14,8 +14,10 @@ CHARGES = 3
 
 c.create_cc_nx(CC_NAME, 0, CHARGES, 'long', 'bubble')
 if c.get_cc_max(CC_NAME) > CHARGES:
+    value = c.get_cc(CC_NAME)
     c.delete_cc(CC_NAME)
     c.create_cc_nx(CC_NAME, 0, CHARGES, 'long', 'bubble')
+    c.set_cc(CC_NAME, value)
 
 title = f'{c.name} tries to use their Aldahen Bracelet...'
 
@@ -81,6 +83,6 @@ if option == 'curse':
 </drac2>
 -title "{{title}}"
 -thumb https://cdn.discordapp.com/attachments/871175851134304256/882292756309999616/aldahen-bracelet.jpg
-{{''.join(['-f "' + field + '"\n' for field in f]) if len(f) > 0 else ''}}
+{{''.join(['-f "' + field.replace('"', '\\\"') + '"\n' for field in f]) if len(f) > 0 else ''}}
 {{f'-footer "{footer}"' if footer else ""}}
 

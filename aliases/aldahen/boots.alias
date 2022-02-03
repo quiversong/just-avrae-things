@@ -1,0 +1,130 @@
+embed <drac2>
+command = 'ald'
+footer = 'Seventra: Exodus of Heroes | Aldahen Collection v0.1 | !ald help\nCreators: quiversong#2772 (Adrienne)'
+args = &ARGS&
+pargs = argparse(args)
+c = character()
+fields = []
+
+title = f'{c.name} tries to use their Aldahen Boots...'
+all_boots = [
+    'Aldahen Boots of Air Protection',
+    'Aldahen Boots of Unseen Protection',
+    'Aldahen Boots of Ethereal Protection'
+]
+
+all_images = {}
+all_images[all_boots[0]] = 'https://cdn.discordapp.com/attachments/871175851134304256/900268220202754058/802b8720831fe7bf2c38cbc90a33193d_1024x10242x.jpeg'
+all_images[all_boots[1]] = 'https://cdn.discordapp.com/attachments/871175851134304256/900268151378440272/ded936591fb79a54e4002034613dbfd7.jpeg'
+all_images[all_boots[2]] = 'https://cdn.discordapp.com/attachments/871175851134304256/900270978091876362/91OibZNQBML._AC_UL1500_.jpg'
+
+boot_image = list(all_images.values())[roll(f'1d{len(all_images)}') - 1]
+
+all_effects = {}
+all_effects[all_boots[0]] = [
+    {
+        'name': all_boots[0] + ': AC and Saves Bonus',
+        'args': '-ac +1 -sb +1',
+        'duration': 2,
+        'concentration': False,
+        'end': True,
+        'description': f'{c.name} gains +1 bonus to AC and +1 bonus to saving throws until the end of their next turn.'
+    },
+    {
+        'name': 'Flight Speed equal to Walking Speed',
+        'args': None,
+        'duration': -1,
+        'concentration': False,
+        'end': False,
+        'description': f'{c.name} gains flying speed equal to their walking speed for one hour.'
+    }
+]
+all_effects[all_boots[1]] = [
+    {
+        'name': all_boots[1] + ': AC and Saves Bonus',
+        'args': '-ac +1 -sb +1',
+        'duration': 2,
+        'concentration': False,
+        'end': True,
+        'description': f'{c.name} gains +1 bonus to AC and +1 bonus to saving throws until the end of their next turn.'
+    },
+    {
+        'name': 'Invisible until attacking or casting a spell',
+        'args': None,
+        'duration': -1,
+        'concentration': False,
+        'end': False,
+        'description': f'{c.name} is invisible for one hour or until attacking or casting a spell.'
+    }
+]
+all_effects[all_boots[2]] = [
+    {
+        'name': all_boots[2] + ': AC and Saves Bonus',
+        'args': '-ac +1 -sb +1',
+        'duration': 2,
+        'concentration': False,
+        'end': True,
+        'description': f'{c.name} casts Misty Step and gains +1 bonus to AC and +1 bonus to saving throws until the end of their next turn.'
+    }
+]
+
+items = c.cvars['magicItems'].split(', ') if 'magicItems' in c.cvars else []
+boot = ([i for i in items if i.startswith('Aldahen Boots')] + [None])[0]
+
+if boot == None or not boot in all_boots:
+    f = 'Oops!|It looks like you do not have a pair of Aldahen Boots yet! If you do, use one of the following to register it:\n'
+    for b in all_boots:
+        f += f'`!manage items add "{b}"`\n'
+    f += '\nUse the commands exactly as written above then try again.'
+    fields.append(f)
+    return ''
+
+boot_image = all_images[boot]
+CC_NAME = boot
+CHARGES = ceil(proficiencyBonus / 2)
+
+c.create_cc_nx(CC_NAME, 0, CHARGES, 'long', 'bubble')
+if c.get_cc_max(CC_NAME) > CHARGES:
+    value = c.get_cc(CC_NAME)
+    c.delete_cc(CC_NAME)
+    c.create_cc_nx(CC_NAME, 0, CHARGES, 'long', 'bubble')
+    c.set_cc(CC_NAME, value)
+
+title = f'{c.name} tries to use their {boot}...'
+
+if c.get_cc(CC_NAME) < 1:
+    fields.append('Oops!|Your boots are out of charges! Try again tomorrow!')
+    return ''
+
+if not (len(args) >= 1 and args[0].lower()):
+    fields.append(f"{c.name}'s {boot}|Execute `!{command} boots use` to activate the boots.")
+    fields.append(f"Initiative Tracking|If you are in initiative, the command will add the appropriate effects.")
+    fields.append(f'{boot}|{c.cc_str(CC_NAME)}')
+    return ''
+
+title = f'{c.name} activates their {boot}!'
+
+effects = all_effects[boot]
+f = f'{boot}|'
+for effect in effects:
+    f += effect['description'] + '\n\n'
+    if combat() and combat().me:
+        combat().me.add_effect(
+            effect['name'],
+            effect['args'],
+            effect['duration'],
+            effect['concentration'],
+            None,
+            effect['end'],
+            effect['description']
+        )
+
+c.mod_cc(CC_NAME, -1)
+fields.append(f)
+fields.append(f'{boot}|{c.cc_str(CC_NAME)}')
+
+</drac2>
+-title "{{title}}"
+-thumb "{{boot_image}}"
+{{''.join(['-f "' + field.replace('"', '\\\"') + '"\n' for field in fields]) if len(fields) > 0 else ''}}
+{{f'-footer "{footer}"' if footer else ""}}

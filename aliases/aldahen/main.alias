@@ -12,6 +12,13 @@ output += '\n**Bracelet of the Aldahen:**\n'
 output += f'`!{command} bracelet use`: use one charge of the Bracelet of the Aldahen.\n'
 output += f'`!{command} bracelet curse -t <target1> ... -t <targetN>`: use one charge of the Bracelet of the Aldahen to curse enemies during combat.\n'
 
+output += '\n**Aldahen Boots:**\n'
+output += f'`!{command} boots`: display information about your Aldahen Boots.\n'
+output += f'`!{command} boots use`: use one charge of your Aldahen Boots.\n'
+
+output += '\n**Aldahen Paragon Stone:**\n'
+output += f'`!{command} paragon`: display information about your Aldahen Paragon Stone.\n'
+output += f'`!{command} paragon use`: use the Paragon Stone to recover spell slots.\n'
 fields.append(output)
 
 </drac2>
