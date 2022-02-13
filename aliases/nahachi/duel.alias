@@ -615,7 +615,6 @@ if add_to_bag != None and len(add_to_bag) > 0:
 
 #! duel_count = devrae_f daily_control_increase_counter(#P DUEL_TIME_VAR) !#
 ##### devrae function insert [daily_control_increase_counter] #####
-research_count = None
 __p0__ = DUEL_TIME_VAR
 # returns current counter and wait time text if any
 _var_name = __p0__

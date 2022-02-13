@@ -1,0 +1,28 @@
+{
+  "rumors": [
+    {
+      "id": 0,
+      "type": "athletics",
+      "rumor": "According to a human man rubbing his shoulder, a rude, professional strongman is said to be a couple of miles up the road, challenging passerbys to arm wrestling for coin. Do you have what it takes to best him?",
+      "fail": "You meet the man, a burly Half-orc, who accepts your challenge, and nearly breaks your arm. You definitely pulled something, at the very least!",
+      "passfail": "You grapple valiantly with a Goliath, but alas, beating him proves to be just beyond your capabilities. He pretends to strain for a moment before slamming your hand to the table.",
+      "pass": "In a miraculous upset, you manage to defeat the Minotuar strongman. He gives you one of his many small golden rings as a reward!",
+      "dc1": 11,
+      "dc2": 14,
+      "payout": "5gp",
+      "penalty": "3hp"
+    },
+    {
+      "id": 1,
+      "type": "athletics",
+      "rumor": "A large, stone statue of a goblin that was built on the side of the road has fallen over, obstructing the path for carts and carriages.",
+      "fail": "You attempt to lift the statue back into it's original position, but you overexert yourself, and drop the statue back into the mud. When you stand back up you realize you have hurt yourself in the process.",
+      "passfail": "Try as you may to lift the statue from the mud, you cannot seem to even get it to budge the tinest bit. Eventually you decide to just leave it there.",
+      "pass": "You successfully lift the statue back into place. A group of local goblins quickly surround you, offering you dirty coins, cleaning, and worshipping the strange statue.",
+      "dc1": 12,
+      "dc2": 15,
+      "payout": "7gp",
+      "penalty": "-4hp"
+    }
+  ]
+}

@@ -1,0 +1,199 @@
+embed
+<drac2>
+# Configuration Variables
+VERSION = '0.1'
+
+DATA_VAR = "96111624-7e94-46f7-b32e-f0c2d6c52b13"
+DAILY_CAP = 1
+
+CURRENCY = {
+    'cp': 'Copper Pieces',
+    'sp': 'Silver Pieces',
+    'ep': 'Electrum Pieces',
+    'gp': 'Gold Pieces',
+    'pp': 'Platinum Pieces'
+}
+
+ADMIN_USER_IDS = [771997367611949076]
+if get_svar('SEVENTRA_ALIAS_ADMINS') != None:
+    admin_ids = load_json(get_svar('SEVENTRA_ALIAS_ADMINS'))
+    ADMIN_USER_IDS += admin_ids
+
+# Code
+args = &ARGS&
+pargs = argparse(args)
+c = character()
+cv, cs = c.cvars, c.skills
+
+title = f'{c.name} hears the many rumors that spread through Seventra...'
+img, thumb, desc, add_to_bag, remove_from_coins = None, None, None, None, None
+add_to_coins = {
+    'cp': 0,
+    'sp': 0,
+    'gp': 0
+}
+remove_from_coins = {
+    'cp': 0,
+    'sp': 0,
+    'gp': 0
+}
+sl, fl = "**Success!**", "**Failure!**"
+fields = []
+
+RUMOR_SEEN_VAR = "_sj_r_his_"
+RUMOR_TIME_VAR = "_sj_r_dhc_"
+
+daily_activity_control = None
+#! daily_activity_control = devrae_f daily_control_init(#P DUEL_TIME_VAR #P DAILY_CAP) !#
+##### devrae function insert [daily_control_init] #####
+daily_activity_control = None
+__p0__ = RUMOR_TIME_VAR
+__p1__ = DAILY_CAP
+# returns current counter and wait time text if any
+_var_name = __p0__
+_daily_limit = __p1__
+_cvars = character().cvars
+
+_now = time()
+if _var_name not in _cvars:
+  __result__ = { "count": 0, "wait_time": None }
+  character().set_cvar(_var_name, f"0:0")
+else:
+  _var_parts = _cvars[_var_name].split(':')
+  _count = int(_var_parts[0])
+  _first_time = float(_var_parts[1])
+  _wait_time = None
+  _is_next_day = False
+
+  if _count > 0 and _first_time != None:
+    _passed_in_day_since_first_time = _first_time % 86400
+    _next_midnight_after_first_time = _first_time + (86400 - _passed_in_day_since_first_time)
+    if _now > _next_midnight_after_first_time:
+      _is_next_day = True
+    elif _count >= _daily_limit:
+      _wait_time = _next_midnight_after_first_time - _now
+      _hours = floor(_wait_time / 3600)
+      _minutes = 0
+      if _hours == 0:
+        _minutes = ceil(_wait_time / 60)
+      else:
+        _minutes = ceil((_wait_time % 3600) / 60)
+      _wait_text = (str(_hours) + ' hours and ' if _hours > 0 else '') + str(_minutes) + ' minutes'
+
+  if _is_next_day:
+    _count = 0
+    __result__ = { "count": _count, "wait_time": None }
+    character().set_cvar(_var_name, f"0:0")
+  elif _count < _daily_limit:
+    __result__ = { "count": _count, "wait_time": None }
+  else:
+    __result__ = { "count": _count, "wait_time": _wait_text }
+
+daily_activity_control = __result__
+##### devrae function end [daily_control_init] #####
+rumors_performed = daily_activity_control["count"]
+wait_time = daily_activity_control["wait_time"]
+
+footer = "Don't forget to role-play about the rumors you hear!"
+footer += "\nYou can still come across another rumor today" if rumors_performed == 0 else "\nCome back tomorrow for another rumor!"
+footer += "\n" + f'Seventra: Exodus of Heroes | Road Rumors v{VERSION} | !rumor help'
+footer += "\nCreators: Library Fox#0895 and quiversong#2772"
+
+if len(args) > 0 and args[0] == 'reset':
+    if not ctx.author.id in ADMIN_USER_IDS:
+        err('You are not allowed to do that!')
+        return 1
+    c.delete_cvar(RUMOR_TIME_VAR)
+    fields.append('Resetting rumor time control...|Done!')
+    return 1
+
+if len(args) > 0 and args[0] == 'resetlog':
+    if not ctx.author.id in ADMIN_USER_IDS:
+        err('You are not allowed to do that!')
+        return 1
+    c.delete_cvar(RUMOR_SEEN_VAR)
+    fields.append('Resetting rumor history log...|Done!')
+    return 1
+
+all_rumors = load_json(get_gvar(DATA_VAR))["rumors"]
+
+if not("bags" in cv and "Coin Pouch" in cv["bags"]):
+    f = 'Stop!|'
+    f += 'It looks like you do not have your bags setup yet.\n'
+    f += 'Please execute `!coins` to have your pack and coin pouch properly setup before starting!'
+    fields.append(f)
+    return 1
+
+if not(len(args) > 0 and args[0] == 'start'):
+    title = 'Seventra Road Rumors'
+
+    fields.append('Help goes here|Need to work on it.')
+
+    return 1
+
+if rumors_performed >= DAILY_CAP:
+    f = 'You alredy heard a rumor today...|'
+    f += f'Come back tomorrow?! Time to reset: {wait_time}'
+    fields.append(f)
+    return 1
+
+rumors_seen = cv[RUMOR_SEEN_VAR] if RUMOR_SEEN_VAR in cv else []
+if len(rumors_seen) == len(all_rumors):
+    rumors_seen = []
+
+eligible_rumors = [r for r in all_rumors if r['id'] not in rumors_seen]
+the_rumor = eligible_rumors[roll(f'1d{len(eligible_rumors)}' - 1)]
+
+rumors_seen.append(the_rumor['id'])
+cv.set_cvar(RUMOR_SEEN_VAR, dump_json(rumors_seen))
+
+rumor_type = the_rumor['type'].lower()
+skill = [s for s in character().skills if s[0] == rumor_type]
+if len(skill) == 0:
+    fields.append('Oops! An unexpected error ocurred!|Please let Administrators know.\n(Unknown Rumor Type)')
+    return 1
+
+skill_name = skill[0][0]
+skill = skill[0][1]
+skill_roll = vroll(skill.d20(base_adv = None))
+
+desc = the_rumor['rumor']
+
+f = f'Rumor type: {skill_name}|**Roll:** {skill_roll.full}'
+fields.append(f)
+
+is_failure = skill_roll.total < the_rumor['dc1']
+is_success = skill_roll.total >= the_rumor['dc2']
+result = the_rumor['fail'] if is_failure else the_rumor['pass'] if is_success else the_rumor['passfail']
+
+f = f'Conclusion...|{result}'
+fields.append(f)
+
+#! _count = devrae_f daily_control_increase_counter(#P DUEL_TIME_VAR) !#
+##### devrae function insert [daily_control_increase_counter] #####
+research_count = None
+__p0__ = RUMOR_TIME_VAR
+# returns current counter and wait time text if any
+_var_name = __p0__
+_cvars = character().cvars
+if not _var_name in _cvars or _cvars[_var_name] == "0:0":
+  _now = time()
+  character().set_cvar(_var_name, f'1:{_now}')
+  __result__ = 1
+else:
+  _var_parts = _cvars[_var_name].split(':')
+  _count = int(_var_parts[0]) + 1
+  _time = _var_parts[1]
+  character().set_cvar(_var_name, f'{_count}:{_time}')
+  __result__ = _count
+duel_count = __result__
+##### devrae function end [daily_control_increase_counter] #####
+
+</drac2>
+-title "{{title}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-desc "{desc}"' if desc else ""}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
