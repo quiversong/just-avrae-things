@@ -26,8 +26,7 @@
   {
     "id": 2,
     "type": "Athletics",
-    "rumor": "
-A passing monk asks you what you know about of a strange sight... He claims a drinking well at the top of the hill has been curiously capped off by a large boulder.",
+    "rumor": "A passing monk asks you what you know about of a strange sight... He claims a drinking well at the top of the hill has been curiously capped off by a large boulder.",
     "fail": "You explore the surrounding hills for the better part of the afternoon, but despite your best efforts you fail to locate the well you were told about.",
     "passfail": "After a bit of exploring, you find the well as promised, at the top of the next hill. The rock seems firmly wedged in the well, and nothing you can think to try can dislodge it.",
     "pass": "Climbing the hill, you locate the well with ease. With a burst of Herculean strength you manage to force the boulder from atop the well. Inside the well, you find a Kobold, who explains a dragon imprisoned him there as punishment for stealing from his horde. The kobold shares his few remaining coins with you.",
@@ -87,8 +86,7 @@ A passing monk asks you what you know about of a strange sight... He claims a dr
   {
     "id": 7,
     "type": "Acrobatics",
-    "rumor": "
-A Dwarven Artificer is in a fuss over the broken rope bridge that leads to his workshop. He needs someone nimble to cross the bridge and secure it's pitons.",
+    "rumor": "A Dwarven Artificer is in a fuss over the broken rope bridge that leads to his workshop. He needs someone nimble to cross the bridge and secure it's pitons.",
     "fail": "You attempt to walk across the broken bridge but only succeed in making matters worse. Not long after you put your weight on the crossing, does the anchor on one and give out, causing you to clutch to the bridge as it slaps against the far wall of the cliffside. The Artificer curses you out and leaves you there to hang.",
     "passfail": "After nearly falling off several times, you make it to the other side of the divide. Once you catch your breath you begin making adjustments to the supporting beams by following the Artificer's careful instructions. You accidentally dislodge the bridge from the mountain entirely, which upsets him greatly.",
     "pass": "You manage to tiptoe across the drooping bridge with finesse, and exaggerated swagger. You find securing the bridge to be rewarding work, as your very pleased employer pays you for your dexterous services!",
@@ -199,8 +197,7 @@ A Dwarven Artificer is in a fuss over the broken rope bridge that leads to his w
     "rumor": "A Chronurgy wizard is working on a broken device on the roadside. She seems to be fussing with dozens of tiny pieces, arranging and rearranging them so that she can repair it with mending. She seems to be growing ever more frustrated...",
     "fail": "You invite yourself to assist with her project as she stares at you incredulously.  After a few moments without success, she informs you those parts are worth more than you are, and to unhand them.",
     "passfail": "You manage to assist her in reorganizing the broken watch, although it's easy to see that she's doing most of productive work. Once complete, the wizard mends the object and depart so quickly it was like she was never there.",
-    "pass": "You volunteer to help, leaping into the dissectology. With a steady hand, you carefully reconstruct the watch, and hold it in place so she can mend it. The wizard puts her watch on with a smile, and hands you a few gold to express her gratitude!
- ",
+    "pass": "You volunteer to help, leaping into the dissectology. With a steady hand, you carefully reconstruct the watch, and hold it in place so she can mend it. The wizard puts her watch on with a smile, and hands you a few gold to express her gratitude! ",
     "dc1": 15,
     "dc2": 18,
     "payout": "10gp",
@@ -260,8 +257,7 @@ A Dwarven Artificer is in a fuss over the broken rope bridge that leads to his w
     "rumor": "You are approached from a panicked, fleeing hunter that a band of Orcs is moving a particularly terrifying creature they captured through the area. He advises you to be discreet, or turn around at once.",
     "fail": "Your knees shake a bit whenever you hear a branch shake, or a stick break as you continue sneaking forward. Suddenly you hear a terrifying noise, and leap for cover behind a log, slicing your knee on a jagged ranch. You do your best to muffle your groaning as the enemy force sneaks by. ",
     "passfail": "You take the hunter's advice into consideration as you continue to sneak forward. Sneaking through the brush to the side of the beaten path, you watch in horror from the brush as the captured creature is brought passed. Once the coast is clear, you make a break for it!",
-    "pass": "You quickly track down the beast that the orcs have captured and sneak up to the soldiers when they stop for a meal break. You wait for an opportunity to give the creature a chance to break out of its restraints, and cause one hell of an escape. The Orcs, bruised and beaten, chase after the beast as it makes it's escape. In the wreckage of the tussle, you find the remains of a spilt coin purse.
-",
+    "pass": "You quickly track down the beast that the orcs have captured and sneak up to the soldiers when they stop for a meal break. You wait for an opportunity to give the creature a chance to break out of its restraints, and cause one hell of an escape. The Orcs, bruised and beaten, chase after the beast as it makes it's escape. In the wreckage of the tussle, you find the remains of a spilt coin purse.",
     "dc1": 15,
     "dc2": 18,
     "payout": "10gp",
@@ -285,8 +281,7 @@ A Dwarven Artificer is in a fuss over the broken rope bridge that leads to his w
     "rumor": "A entomologist advises you to be wary of a grove in the nearby woods. She says she came upon a suspicious banquet that has been set out, full of dewy plums, fresh fruits, and mixed nuts.",
     "fail": "You enter the woods in search of the banquet, following the delicious smell of food until you find it. The grove seems ordinary, and the food seems fresh, and you can't resist taking a bite. As soon as you do, the food turns into bowls and plates full of bugs, and a dozen pixies appear to laugh at you as your stomach begins to churn.",
     "passfail": " You enter the woods with caution, in search of the suspicious banquet. Something about how perfect everything looks doesn't sit right with you, and you retreat away from what you consider to be a fey trap.",
-    "pass": " You enter the woods in search of what is clearly a fey trap. Upon finding the grove, you approach the suspicious banquet table and loudly inquire if anyone would like some wine to pair with their \"dishes\". A dozen pixies appear in a roar of laughter at your joke. Impressed at seeing through their prank, they share a few tiny pieces of gemstones with you.
-",
+    "pass": " You enter the woods in search of what is clearly a fey trap. Upon finding the grove, you approach the suspicious banquet table and loudly inquire if anyone would like some wine to pair with their \"dishes\". A dozen pixies appear in a roar of laughter at your joke. Impressed at seeing through their prank, they share a few tiny pieces of gemstones with you.",
     "dc1": 12,
     "dc2": 15,
     "payout": "7gp",
@@ -297,8 +292,7 @@ A Dwarven Artificer is in a fuss over the broken rope bridge that leads to his w
     "type": "Arcana",
     "rumor": "You come across a mob of angry locals, who have a man surrounded, and pinned up against a tree. The mob is accusing the man of cheating them out of money using magic cards and dice.",
     "fail": "You take a deck of cards out of his pocket, and the man snaps his fingers, causing the cards to explode everywhere, knocking you on your back and allowing the man to escape! The mob boos at you as you walk away bruised...",
-    "passfail": "You take an ordinary looking pair of dice from the man's pocket and roll them repeatedly, yielding different results each time. A close inspection of his card deck makes you think that it's ordinary as well. 
-With no proof of wrongdoing, the accused gathers his property and retreats while the mob grumbles.",
+    "passfail": "You take an ordinary looking pair of dice from the man's pocket and roll them repeatedly, yielding different results each time. A close inspection of his card deck makes you think that it's ordinary as well. With no proof of wrongdoing, the accused gathers his property and retreats while the mob grumbles.",
     "pass": "You find an expertly carved pair of dice in the man's breast pocket that has a slight warmth--a faint magical aura! You notice that whatever number you are thinking about is the number that comes up each time you roll it. The man is outed as a charlatan, in the mob forces him to give back his ill-gotten gains. When everyone collects their money, a few gold coins remain for you.",
     "dc1": 13,
     "dc2": 16,
@@ -323,8 +317,7 @@ With no proof of wrongdoing, the accused gathers his property and retreats while
     "rumor": "A buff human warrior with uncomfortably large biceps, and rippling abs walks past you with the largest bag of gold you've ever seen. He says he's on his way to the Magic Emporium in Arbarax. He's been saving up for something amazing, and asks for your advice on what to purchase. ",
     "fail": "You propose that perhaps he could use a Headband of Intellect, so that his brain is as strong as his body. He takes offense to suggestion and responds with an open palm slap that hits like a freight train.",
     "passfail": " You proposed that perhaps he could use a new weapon, like a Wavecutter, a Flametongue Greatsword, or a Solacesteel Mitigator! He smiles at the suggestions and says he'll be sure to check it out. He thanks you for your advice and tells you he will see you around.",
-    "pass": "You show the man all of the magic items that you have at your disposal, and you suggest that he asks the shopkeeper what they would suggest, as they will be the most knowledgeable in regards to their inventory. The man gives you a hug and hands you a few of his coins. \"For your next big purchase.\"
-",
+    "pass": "You show the man all of the magic items that you have at your disposal, and you suggest that he asks the shopkeeper what they would suggest, as they will be the most knowledgeable in regards to their inventory. The man gives you a hug and hands you a few of his coins. \"For your next big purchase.\"",
     "dc1": 15,
     "dc2": 18,
     "payout": "10gp",
@@ -358,8 +351,7 @@ With no proof of wrongdoing, the accused gathers his property and retreats while
     "id": 29,
     "type": "History",
     "rumor": "You see a posted flyer, a group of dwarven miners are seeking help in trying to figure out what creature is spewing electricity all over the cavern they are excavating each night.  ",
-    "fail": "You respond to the flyer and head to the cavern where the dwarves are mining. 
-You remember hearing a story from a drunken man in a tavern about lighting sapphires, and do a lap of the cavern, looking for any flashy gemstones. You don't find any gemstones, but you do scrap your limb on the sharp rock.",
+    "fail": "You respond to the flyer and head to the cavern where the dwarves are mining. You remember hearing a story from a drunken man in a tavern about lighting sapphires, and do a lap of the cavern, looking for any flashy gemstones. You don't find any gemstones, but you do scrap your limb on the sharp rock.",
     "passfail": "You respond to the flyer and head to the cavern where the dwarves are mining. You remember hearing a story of a blue dragon as a child, and how they're capable of spitting torrents of lightning. You suggest to the dwarves that a blue dragon is hiding in the cavern. After a long pause they all look at each other and laugh you right out of the mine. ",
     "pass": " You respond to the flyer and head to the cavern where the dwarves are mining. The place where you grew up had a legend of a beast that lurked underground and spit lightning to mark its territory--you're certain the creature is a Behir. When you tell the dwarves what you know, they immediately believe you and evacuate the mine. The head miner hands you a small gemstone to thank you for the warning.",
     "dc1": 12,
@@ -371,11 +363,9 @@ You remember hearing a story from a drunken man in a tavern about lighting sapph
     "id": 30,
     "type": "History",
     "rumor": "Two dimwitted orcish rangers are sitting on a boulder, loudly arguing about what they think a Kobold is. One Half-orc believes it's a biproduct of true love between a Dragonborn and a Goblin, the other Half-orc insists it's a blueish-grey metal found underground.",
-    "fail": "You climb up on the boulder and offer your knowledge on the subject. One of the rangers get startled, jumps to his feet and screams, \"Ahh, it's a Kobold!\" Then he shoves you off the boulder. The pair scramble away, screaming for help.
-",
+    "fail": "You climb up on the boulder and offer your knowledge on the subject. One of the rangers get startled, jumps to his feet and screams, \"Ahh, it's a Kobold!\" Then he shoves you off the boulder. The pair scramble away, screaming for help.",
     "passfail": "You approach the Half-orcs, climbing up on the boulder. You go around for over an hour, each take turns suggesting your own hypothesizes, but none of you can seem to agree...",
-    "pass": "You calmy approach the dimwitted duo, and inform them that kobolds are their own species entirely. That they are craven, reptilian humanoids that make up for their physical ineptitude with a clever manipulation, and trap making.
-The rangers beg you for more information on the great races of the world. After listening keenly, they pay you for your wise tutoring!",
+    "pass": "You calmy approach the dimwitted duo, and inform them that kobolds are their own species entirely. That they are craven, reptilian humanoids that make up for their physical ineptitude with a clever manipulation, and trap making.The rangers beg you for more information on the great races of the world. After listening keenly, they pay you for your wise tutoring!",
     "dc1": 13,
     "dc2": 16,
     "payout": "8gp",
@@ -423,8 +413,7 @@ The rangers beg you for more information on the great races of the world. After 
     "rumor": "The chief of a local village suspects that one of his villagers is a murderer. He says he can only trust an outsider to investigate the matter.",
     "fail": "You spend the day snooping around the village, but have difficulty turning up any evidence of foul play. The villagers inform you their chief is a conspiracy theorist.",
     "passfail": "You spend the day sneaking around the village, and discover a few clues that you think might be helpful. The village leader quickly pokes holes in your theories, and dismisses you.",
-    "pass": "You detect a hint of nervousness in the voice of the village leader, and start your investigation in his home. Before long you discover the truth--the village leader is the true killer. You rally the villagers and an arrest is made. As they prepare to elect a new leader, they pay you for helping make their village a safer place!
-",
+    "pass": "You detect a hint of nervousness in the voice of the village leader, and start your investigation in his home. Before long you discover the truth--the village leader is the true killer. You rally the villagers and an arrest is made. As they prepare to elect a new leader, they pay you for helping make their village a safer place!",
     "dc1": 11,
     "dc2": 14,
     "payout": "5gp",
@@ -436,8 +425,7 @@ The rangers beg you for more information on the great races of the world. After 
     "rumor": "You confirm the reports with many travelers that the locals have been hearing a horrible howling sound coming from the woods for the better part of 2 days. Their woodcutters are too scared to investigate.",
     "fail": "You make your way into the woods, and hone in on the frequent, horrible noise the locals have been hearing. You discover a large creature caught in a hinter's beartrap. Against your better judgment, you foolishly approach an attempt to assist the poor creature. Being feral, and trapped, the creature shows its gratitude with a display of aggression.",
     "passfail": "You make your way into the woods, only hearing the horrible sound described to you a single time. You waste your afternoon listening intently while going in circles. On your return, the locals tell you the sound has abruptly stopped.",
-    "pass": "You make your way into the woods and find a hunter who has been attacked. He sustained a few broken bones, and several large bite marks on his leg. With your help, he staggers back to his family, and rewards you with what little he can.
-",
+    "pass": "You make your way into the woods and find a hunter who has been attacked. He sustained a few broken bones, and several large bite marks on his leg. With your help, he staggers back to his family, and rewards you with what little he can.",
     "dc1": 12,
     "dc2": 15,
     "payout": "7gp",
@@ -485,8 +473,7 @@ The rangers beg you for more information on the great races of the world. After 
     "rumor": "A passing hunter jingles a palm full of change as he boldly claims there is a golden pig in the forest that vomits coins if you pat it's head.",
     "fail": "After a number of hours you find yourself lost in the forest, mulling about through an onslaught of poison ivy and other irritating wildlife.",
     "passfail": "You waste your day in the forest, hot on the heel of a trail of shimmering tracks. Alas, no magical pig can be found.",
-    "pass": "You locate the pig and confirm the rumor is true! The pig allows you to pat his head, and I spit out a mouthful of old pieces for you in return!
-",
+    "pass": "You locate the pig and confirm the rumor is true! The pig allows you to pat his head, and I spit out a mouthful of old pieces for you in return!",
     "dc1": 10,
     "dc2": 13,
     "payout": "4gp",
@@ -520,8 +507,7 @@ The rangers beg you for more information on the great races of the world. After 
     "id": 42,
     "type": "Nature",
     "rumor": "A passing rock climber forewarns you to be wary of the rock shelf of a nearby mountainous trail, as it's ready to crumble.",
-    "fail": "You begin to cross the path warily. A mountain goat further up the mountain looses a rock, which causes a rock slide that sweeps you down the mountain.
-",
+    "fail": "You begin to cross the path warily. A mountain goat further up the mountain looses a rock, which causes a rock slide that sweeps you down the mountain.",
     "passfail": "You nervously cross the treacherous terrain, carefully arriving on the other side without incident.",
     "pass": "You determine the path is no longer safe to cross, and decide to rope it off to help protect other travelers. In doing so, you knock a chunk of the rock wall loose, discovering a hunk of golden ore.",
     "dc1": 13,
@@ -616,8 +602,7 @@ The rangers beg you for more information on the great races of the world. After 
   {
     "id": 50,
     "type": "Religion",
-    "rumor": "You overhear that a nearby commune of monks and priests are looking to have the Order of the Noble Heart tenants etched in stone as decor for their temple. 
-All of their members seem to be cracking the slates during the process. ",
+    "rumor": "You overhear that a nearby commune of monks and priests are looking to have the Order of the Noble Heart tenants etched in stone as decor for their temple. All of their members seem to be cracking the slates during the process. ",
     "fail": "You find the commune and volunteer a righteous hand to attempt the studious discipline. The priests begin to question your faith as you crack slate after slate. On your final attempt your chisel slips from the stone and gouges your hand! ",
     "passfail": "You find the commune and volunteer a righteous hand to attempt the studious discipline. You managed to etch half of the tenants into stone before a spider webbing crack ripples down the center of your slate. The priest at your side pats your back and insists it was a valiant effort. ",
     "pass": "You find the commune and volunteer a righteous hand to attempt the studious discipline. With divine grace, and a little luck, you wield the hammer and chisel like a pro, beautifully etching the tenants of the Noble Heart into a slate tablet. The priest at your shoulder holds your tablet high in the air, and proclaims yours the best of the lot. A monk grants you a donation of coin!",
@@ -642,8 +627,7 @@ All of their members seem to be cracking the slates during the process. ",
     "id": 52,
     "type": "Animal Handling ",
     "rumor": "You come across a chuckling crowd of people, gathered around the stockades of a pillory. You see a disgruntled person locked within the stockade, and a frustrated guardsman swatting at the tallest branch of a nearby tree with his halberd. It seems a crow has stolen the key to the stockade, much to the dismay of both the criminal, and the guard, who very much wants the key back.",
-    "fail": "
-You foolishly climb up into the tree to contest with the mischief making crow! The crow chirps at you defensively as you approach the branch on which it's sitting. Dropping the key, the crow flys around your head, pecking at your eyes, and scratching at your ears until you fall from the tree. The guard and the criminal thank you, regardless.",
+    "fail": "You foolishly climb up into the tree to contest with the mischief making crow! The crow chirps at you defensively as you approach the branch on which it's sitting. Dropping the key, the crow flys around your head, pecking at your eyes, and scratching at your ears until you fall from the tree. The guard and the criminal thank you, regardless.",
     "passfail": "You bravely climb up into the tree to contest with a mischief making crow! You pause as you grow closer, holding a tiny piece of granola up to the crow... Suddenly a pebble thrown by the guard strikes the bird, and causes the key to drop to the ground. The guard offhandedly thanks you for the distraction.",
     "pass": "You take a small piece of bread from your bag and walk underneath the tree with a crow is causing trouble. When you hold the piece high in the air, the crow considers the offer, and flies down to grab it, dropping the key at your feet. The crowd applauds your mastery over animals, and the embarrassed guard pays you, begging you to pretend this never happened!",
     "dc1": 12,
@@ -825,9 +809,7 @@ You foolishly climb up into the tree to contest with the mischief making crow! T
     "rumor": "A huntress tells you she heard an dreadful, moaning noise softly emanating from the mouth of a nearby cavern. Whatever poor creature is making the sound is clearly suffering from a terrible pain! You cautiously enter the cavern, creeping deep into it's foggy depths. In the back of the chamber you see at an unbelievable sight--a Bronze dragon lays wounded, with a large, wrought iron hook with several jagged barbs is embedded in his neck. A broken  chain swings from the hook...",
     "fail": "You approach the Bronze Dragon, awestruck by its manta-like wings, mottled with red and green discolorations near the end. You confess your intent to help the dragon, offering to do the best you can to carefully remove the hook. The dragon accepts your offer, but threatens to end you should you cause him unnecessary pain. You managed to bend a few of the barbs back before giving the hook a yank. The dragon screeches in pain, and throws you off of him. He gives you 30 seconds to run before breathing a gyster of bubbling acid after you!",
     "passfail": "You approach the Bronze Dragon, assessing his old age by counting the layers of triangular blades growing downward from his chin. You confess your intent to help the dragon, offering your knowledge of cleaning wounds, and applying bandages. The dragon promises that he will not harm you, and invites you closer to attempt to remove the foreign object from his neck. After a couple of hours of careful surgery, you successfully remove the massive hook. The dragon sighs in relief, and promises to remember you always. He decides to reward you by simply allowing you to leave.",
-    "pass": "You approach the Bronze Dragon, gazing at his aged scales, which have oxidized and begun to turn green. You guess the dragon is incredibly old, or sick... or both.
-You ensure the dragon that you mean it no harm--a confession the dragon considers humorous. You volunteer to assist the creature in removing the dreadful tether, mentioning the vast number of wounds you have healed in your lifetime. The Dragon has little choice but to accept your offer, vowing to pay you one gold for every minute it takes. Just a few deep incisions, and a few minutes of careful wiggling allows the hook to exit in the direction it first came in. The Dragon hands you your hard-earned gold, and burns your name into the side of his cavern using his acid breath.
-",
+    "pass": "You approach the Bronze Dragon, gazing at his aged scales, which have oxidized and begun to turn green. You guess the dragon is incredibly old, or sick... or both.You ensure the dragon that you mean it no harm--a confession the dragon considers humorous. You volunteer to assist the creature in removing the dreadful tether, mentioning the vast number of wounds you have healed in your lifetime. The Dragon has little choice but to accept your offer, vowing to pay you one gold for every minute it takes. Just a few deep incisions, and a few minutes of careful wiggling allows the hook to exit in the direction it first came in. The Dragon hands you your hard-earned gold, and burns your name into the side of his cavern using his acid breath.",
     "dc1": 15,
     "dc2": 18,
     "payout": "10gp",
@@ -838,8 +820,7 @@ You ensure the dragon that you mean it no harm--a confession the dragon consider
     "type": "Perception ",
     "rumor": "While passing through a gorgeous farmland, a friendly farmer invites you to rest and have lunch at his home. Towards the end of your meal the farmer and his wife begin acting suspiciously, and head upstairs to their spare room for a sudden, private conversation.",
     "fail": " Tiptoeing to the foot of the stairs, you pause to try to listen to what they are saying. You can hear both of their voices... but you can't make out what they're saying... so you decide to creep up the staircase. The couple opens the door as you ascend, causing you to startle, turn heel on the staircase, lose your balance, and tumble to the ground level of the farmhouse. The farmer tuts at you for your obvious evesdropping, and asks you to leave.",
-    "passfail": " Creeping to the top of the staircase, you listen to the Farmer and his wife discussing a horrifying ingredient in the meal you ate. The wife is ecstatic that you seemed to enjoy her \"special meat.\"
-You flee from the farm, retching all the way.",
+    "passfail": " Creeping to the top of the staircase, you listen to the Farmer and his wife discussing a horrifying ingredient in the meal you ate. The wife is ecstatic that you seemed to enjoy her \"special meat.\"You flee from the farm, retching all the way.",
     "pass": "You float to the top of the staircase, hardly creaking a step. You can hear the farmer and his wife speaking as if the door between you didn't exist. It seems his wife is excited to send you off with her gift basket full of exotic fruits and jams, and is asking her husband's opinion on what to include. You quickly retreat back to the kitchen, feeling somewhat guilty. The couple insist that you accept their wonderful giftbasket!",
     "dc1": 11,
     "dc2": 14,
@@ -850,8 +831,7 @@ You flee from the farm, retching all the way.",
     "id": 69,
     "type": "Perception",
     "rumor": "As you walk through the countryside you hear a peculiar spotted Blue Jay twittering above you as it moves from branch to branch. Over an hour later, you spot the same Blue Jay sitting on a fencepost...",
-    "fail": "Curious, you follow the Blue Jay down the path, tripping on a gnarled root and tumbling down the dirt hill, twisting your ankle. When you reach the bottom of the hill you see the Blue Jay land on the shoulder of an Elven ranger with a similarly twisted ankle. He stares at you in disbelief before he finally speaks. \"Ugh. You, too?\"
-",
+    "fail": "Curious, you follow the Blue Jay down the path, tripping on a gnarled root and tumbling down the dirt hill, twisting your ankle. When you reach the bottom of the hill you see the Blue Jay land on the shoulder of an Elven ranger with a similarly twisted ankle. He stares at you in disbelief before he finally speaks. \"Ugh. You, too?\"",
     "passfail": " You watch the Blue Jay stomp one little feet on the sign, and turn his head down the path, indicating to you that he's trying to get your attention. You cautiously follow him down the path being careful not to walk into a trap. The trail leads down a hill, and at the bottom you find an elven ranger holding the Blue Jay. It seems he fell down the hill and got thoroughly stuck on some ordinary vines. You help the man escape, and his Blue Jay brings you a mundane flower to thank you!",
     "pass": " You look the Blue Jay in the eyes, and perceive an underlying sense of urgency. You tell it to lead the way, and follow it down the trail's steep incline. Arriving at the bottom of the hill, you find the Blue Jay sitting on the head of a paraplegic Elven ranger seated in a combat-wheelchair. It seems he rolled down the hill and took a tumble, spraining his elbow. He asks for a little help being pushed back to the top of the hill. His Blue Jay brings you a golden flower for helping his bonded hero. ",
     "dc1": 12,
@@ -887,8 +867,7 @@ You flee from the farm, retching all the way.",
     "id": 72,
     "type": "Perception",
     "rumor": "Seated on the roadside you find a young cartographer fussing over a translucent greatsword made of gemstone. He seems thoroughly confused by the blade, and keeps glancing between the weapon and his surroundings.",
-    "fail": " You approach the man and ask him if he's lost. He informs you that his father left him their family sword, with a treasure map of a nearby area, but he can't decipher what it means.
-You spend hours looking at the greatsword finding the map to be etched on both sides of the blade. Despite your best efforts, turning it every which way, results in nothing more than a series of deep cuts on your hands...",
+    "fail": " You approach the man and ask him if he's lost. He informs you that his father left him their family sword, with a treasure map of a nearby area, but he can't decipher what it means.You spend hours looking at the greatsword finding the map to be etched on both sides of the blade. Despite your best efforts, turning it every which way, results in nothing more than a series of deep cuts on your hands...",
     "passfail": " You approach the man and ask him if he's lost. He informs you that his father left him their family sword, with a treasure map of a nearby area. You have the man place the sword on the ground, and help him to identify a few the most obvious landmarks on the weapon. The cartographer thanks you for helping narrow down his search!",
     "pass": "You approach the man and ask him if he's lost. He informs you that his father left him their family sword, with a treasure map of a nearby area. You examine the greatsword and find that both sides of the blade have details etched into them. You hold it up to the sun and the map of the area becomes clear. Not only is the map easy to read, but the treasure is close by. You accompany the cartographer to claim his family fortune, and he shares a small fraction with you!",
     "dc1": 15,
@@ -986,8 +965,7 @@ You spend hours looking at the greatsword finding the map to be etched on both s
     "rumor": "You approach a well constructed bridge with a turnstile that leads over a narrow river. You spot a Loxodon woman running the toll gate. You walk up to the gate and ask how the woman is doing. She complains about her boredom, and her terrible loneliness after her late husband's death. Then the woman taps her toll sign, and attempts to charge you a ridiculous fee--1 platinum!",
     "fail": "You raise an eyebrow at the unbelievable price, and turn her attention towards something behind her. When she turns you away you make a break for it!",
     "passfail": "Leaping the turnstile, and darting across the bridge you're confident you made a clean getaway, until a thorny vine coils around your leg and drags you back to the gate. The Loxodon turns you away from her bridge, forcing you to walk a longer and more treacherous path...",
-    "pass": "You attempt to sweeten up the Loxodon, telling her that her husband was a lucky man, and that the beauty of her stone bridge is only trumped by it's gatekeeper. The Loxodon woman swoons, and allows you to cross her bridge without paying \"just this once.\" She gives you a wink as you continue down the road!
-You speak a few sweet words to the Loxodon woman, complimenting her unique attire, and the gentle curvature of her tusks. The woman turns beat red, and offers to let you rest inside the gatehouse! She feeds you bites of cheese, and shots of fragrant liquor, until the next traveler comes along. She takes their platinum piece and passes it along to you.",
+    "pass": "You attempt to sweeten up the Loxodon, telling her that her husband was a lucky man, and that the beauty of her stone bridge is only trumped by it's gatekeeper. The Loxodon woman swoons, and allows you to cross her bridge without paying \"just this once.\" She gives you a wink as you continue down the road!You speak a few sweet words to the Loxodon woman, complimenting her unique attire, and the gentle curvature of her tusks. The woman turns beat red, and offers to let you rest inside the gatehouse! She feeds you bites of cheese, and shots of fragrant liquor, until the next traveler comes along. She takes their platinum piece and passes it along to you.",
     "dc1": 12,
     "dc2": 15,
     "payout": "7gp",
@@ -996,12 +974,10 @@ You speak a few sweet words to the Loxodon woman, complimenting her unique attir
   {
     "id": 81,
     "type": "Deception",
-    "rumor": "The ugliest garment you've ever seen in your life approaches you on the body of a
-strapping Half-orc. The lovable oaf waves hello and asks if you like his horrendous overalls. They're made of molding, stained corduroy with a grey and tannish-orange hue, and from 10 ft away you can tell they smell of something horrible. ",
+    "rumor": "The ugliest garment you've ever seen in your life approaches you on the body of astrapping Half-orc. The lovable oaf waves hello and asks if you like his horrendous overalls. They're made of molding, stained corduroy with a grey and tannish-orange hue, and from 10 ft away you can tell they smell of something horrible. ",
     "fail": "You attempt to act naturally as you smile and compliment the Half-orc's attire, but the smell of the garment prevents you from concealing your disgust. The Half-orc notices immediately, and smacks you with a stinky, open palm slap to the face!",
     "passfail": "You do your best to put on a friendly face, and manage to mutter out that you do like the overalls! You offer a compliment about the interesting variety of colors on his stained garment. You ask the man if he's ever taken the time to wash his overalls, and witness him experience an epiphany. He thanks you for the idea, having never considered washing laundry before!",
-    "pass": "You put on a deceitful smile, and offer the Half-orc a few white lies. After assuring him that his overalls are absolutely divine, you recommend a variety of other styles that you believe would suit his body type. The man offers you a few gold for the fashion advice, and tells you how excited he is to take your advice and buy some new clothing!
-",
+    "pass": "You put on a deceitful smile, and offer the Half-orc a few white lies. After assuring him that his overalls are absolutely divine, you recommend a variety of other styles that you believe would suit his body type. The man offers you a few gold for the fashion advice, and tells you how excited he is to take your advice and buy some new clothing!",
     "dc1": 13,
     "dc2": 16,
     "payout": "8gp",
@@ -1010,8 +986,7 @@ strapping Half-orc. The lovable oaf waves hello and asks if you like his horrend
   {
     "id": 82,
     "type": "Deception",
-    "rumor": "A local sees you walking on the road, and sheepishly approaches you with a warning: An enormous gang of violent bandits are lurking in the nearby area!
-You thank the local for the warning, and keep a sharp eye as you continue down the road. ",
+    "rumor": "A local sees you walking on the road, and sheepishly approaches you with a warning: An enormous gang of violent bandits are lurking in the nearby area!You thank the local for the warning, and keep a sharp eye as you continue down the road. ",
     "fail": "An arrow is suddenly strikes the path beside you and as you turn your head from side to side you find yourself surrounded by over 30 bandits! Their leader laughs, and tells you to drop all of your coin and magic items. You lie to the bandits, telling them you'll be happy to share your belongings, then decide to make a break for it! You shove the closest bandit and run as fast as you can! You miraculously manage to escape, but not before taking a rock to the back of the head...",
     "passfail": "A voice from behind you demands that you turn out your bag, and you realize you're completely surrounded by over 30 bandits in the brush! Taking a deep breath, you collect your nerves and lie through your teeth! You give the bandits a fake name, and tell them that you don't have much worth sharing... That you heard about their rowdy group--the brave men who live off the land, and do whatever they want! That you have traveled from far away to join them. The bandits are completely taken back and begrudgingly accept you into their ranks. The moment you get a chance to slip away, you run before anyone notices your absence.",
     "pass": "An tall bandit steps into the path in front of you, and tells you to dump out your bag. You smile at the bandits appearing on all sides, looking unbothered. You explain to them that you just sold almost everything you own to pay for your mother's medical treatments. You tell them you had the funds sent straight to the doctor. Tears begin to well up in the bandit leader's eyes! He gives you a hug, and a golden bangle. He tells you that your mother is going to get better, and sends you on your way without hassling you further.",
@@ -1050,8 +1025,7 @@ You thank the local for the warning, and keep a sharp eye as you continue down t
     "rumor": "You hear whispers in the street--A group of smugglers are asking around, seeking help in restoring their ship captain to better health. Their ship is docked on a nearby body of water...",
     "fail": "You saunder up onto the smuggler's ship, and are greeted by a pale skinned crew with jagged, missing teeth. They inform you that they require a liter of your blood to restore their captain's strength, and they won't take no as an answer from a weakling like you. As the danger of the situation becomes apparent, you turn on your heels and rush to escape from the ship, but not before one of the pirates grabs your forearm and lands a nasty bite on you!",
     "passfail": " You make your way onto the smuggler's ship, and are greeted by an eerily pale skinned crew with narrow noses, and sharpened teeth. As nervous sweat accumulates on the back of your neck, the smugglers inform you they require a liter of your blood to restore their captain. You welcome the smugglers to try to come and take it, and a nervous laugh spreads across the ship deck. The smugglers tell you to leave while you still have the chance.",
-    "pass": "You make your way onto the smuggler's ship and are greeted by an eerily pale crew with visibly sharp teeth, and piercing red eyes. They disclose that they needed a liter of your blood to restore strength to their captain. You decline their offer to exchange your blood for gold and the smugglers laugh in response, handing you the gold anyway... You leave the ship feeling woozy.
-",
+    "pass": "You make your way onto the smuggler's ship and are greeted by an eerily pale crew with visibly sharp teeth, and piercing red eyes. They disclose that they needed a liter of your blood to restore strength to their captain. You decline their offer to exchange your blood for gold and the smugglers laugh in response, handing you the gold anyway... You leave the ship feeling woozy.",
     "dc1": 11,
     "dc2": 14,
     "payout": "5gp",
@@ -1075,8 +1049,7 @@ You thank the local for the warning, and keep a sharp eye as you continue down t
     "rumor": "On their way down the road, you overhear a couple of rough looking men bragging all the protection money they've collected from a local merchant. When you reach the top of the hill, you spot the merchant fretting outside of his home. Seeing a strapping hero approach, he waves you down and begs you for your help in driving off the merciless thugs.",
     "fail": "Seeing the desperation in his eyes, you agree to help the merchant get rid of the thugs that are hassling him. Wasting not a moment, you rush down the street to catch up with the men that you saw. You firmly plant a finger in the middle of their chest and demand they return the money they forced the merchant to give them. The thug grabs your finger and twists, snapping it like a twig as his partner runs off with the cash.",
     "passfail": "Seeing how desperate the man is, you offer your help in driving the thugs off. You wait in the man's shop for a couple of hours until the thugs get bored enough to return. One thug enters and asks the merchant if he made any coin to fork over to him. You step between them and tell the thug that the shop is under your protection now. \"We'll see about that.\" The thug turns and exits, leaving the merchant to wonder if you've helped him, or made things worse. ",
-    "pass": "You assure the desperate merchant that the thugs will be handled by a professional. You grab a simple weapon, and an interesting book, and wait by the door for the next thug to enter... After a couple of hours, one of the thugs returns. You simply beat the snot out of him the moment he steps into the shop and opens his mouth--much to the shock and delight of the merchant! The thug eventually manages to crawl back out the door, never to return. The merchant pays you for your bloodthirsty display of heroics!
-",
+    "pass": "You assure the desperate merchant that the thugs will be handled by a professional. You grab a simple weapon, and an interesting book, and wait by the door for the next thug to enter... After a couple of hours, one of the thugs returns. You simply beat the snot out of him the moment he steps into the shop and opens his mouth--much to the shock and delight of the merchant! The thug eventually manages to crawl back out the door, never to return. The merchant pays you for your bloodthirsty display of heroics!",
     "dc1": 13,
     "dc2": 16,
     "payout": "8gp",
@@ -1141,93 +1114,5 @@ You thank the local for the warning, and keep a sharp eye as you continue down t
     "dc2": 16,
     "payout": "8gp",
     "penalty": "4hp"
-  },
-  {
-    "id": 93,
-    "type": "Performance",
-    "rumor": "As you make your way down the road it's hard not to see the crazy looking Fire Genasi, with his green eyes, and towering inferno of hair, is enthusiastically teaching the local teens how to breathe fire! He invites you to step up and try your hand at the exhilarating hobby!",
-    "fail": "You shrug your shoulders and volunteer to give it a go, taking the flask of hard liquor and the torch from the Genasi's hand. You squirt a thick stream of liquor up through the flame like an amateur, which splashes back down on you, igniting your hair and burning part of your face. The Fire Genasi laughs at your attempt while few of the teens scatter, not wanting to be associated with the trouble...",
-    "passfail": "You watch the Fire Genasi perform the trick once more, paying close attention to his technique in misting the fuel. Taking the flask of hard liquor and the torch from the Genasi's hand, you blow a small but respectable burst of flame into the air. The teens aren't really impressed by the size of your fireball, but the Genasi claps his hands and compliments your form!",
-    "pass": "You watch the Fire Genasi perform the trick once more, paying close attention to his stance, foot spacing, and his technique in misting the fuel between his lips. Before long you're ready to give it a go, and bravely take an enormous amount of fuel in your mouth before spraying at high end of the air in a fiery inferno! The Genasi explodes into cheers and applause, and insists that you take you a very hot golden ring from his hand! You drop it on the ground, pretending to lose it in the grass for a moment to give it a chance to cool off...
- ",
-    "dc1": 14,
-    "dc2": 17,
-    "payout": "9gp",
-    "penalty": "5hp"
-  },
-  {
-    "id": 94,
-    "type": "Performance",
-    "rumor": "A local tavern posted flyers for a talent show, looking for anyone who can appease the tough crowd that often gathers there.",
-    "fail": " You head into the tavern and sign up for the talent show. When you're called to the stage you put on your best show, but not a single member of the audience gives you so much as a smile. Eventually the tavern owner painfully yanks you from the stage by the neck with a shepherd's hook.",
-    "passfail": "You practice your best performance before making your way to the tavern, and signing up for the talent show. When you're called on the stage you put on a dazzling performance, which gets a warmer reception than usual from the crowd. You don't win the talent show but you perform well enough that the bartender serves you a hot meal on the house!",
-    "pass": " After a gentle warm-up, you head to the tavern to blow away the competition at the talent show. You sign up for the contest, and when you're called to the stage you give the best performance of your life. The applause from the crowd rattles the windows of the establishment, and a scout for the Mossfort Entertainment Expo hands you his business card, engraved on a platinum piece.
-",
-    "dc1": 15,
-    "dc2": 18,
-    "payout": "10gp",
-    "penalty": "5hp"
-  },
-  {
-    "id": 95,
-    "type": "Persuasion ",
-    "rumor": "As a group of local guards march past you, one of them slows to a stop and accuses you of resembling the perpetrator of a local crime! His partners surround you while you attempt to explain yourself...",
-    "fail": "
-You deny any connection to the crime that was committed, an attempt to walk backwards from the approaching guards. One of them rushes you, grabbing you by the arm and twisting it behind your back. You manage to wriggle free, and escape their arrest, but in doing so, you sprain your elbow.",
-    "passfail": "You deny any connection to the crime that was committed, corroborating your story with details that firmly establish your alibi. The guard captain glares at you in suspicion, but decides that he can't make an arrest without firm evidence.",
-    "pass": "You bring the key differences in the description they were given, and the one you possess to light. Furthermore, you explain your alibi with several specific details. You inform the guards you believe that you passed by someone matches their description, and tells them when and where you saw them. The guard that first accused you hands you a few gold and thanks you for the tip!",
-    "dc1": 11,
-    "dc2": 14,
-    "payout": "5gp",
-    "penalty": "3hp"
-  },
-  {
-    "id": 96,
-    "type": "Persuasion",
-    "rumor": " While gathering water from a well, a local stone carver expresses his disgust that an old widower is being forced out of her nearby home after the recent passing of her husband. You tell the stone carver that you will see if you can do something about it!",
-    "fail": "You rush to the residence of the old woman, and find a trio of movers placing all of her belongings on the curb! The old woman is in hysterics as she pleads with the men to stop what they're doing. You shout at the men to stop, and immediately grab the piece of furniture that one of the men is carrying and yank it back in the direction that it's coming from. The burly mover kicks you in the stomach, folding you in half and shoving you away from the piece of furniture. \"I hear you... but it's the Lord's order, mate. Take it up with the officials.\"",
-    "passfail": "You calmly make you way to the residence of the old woman, and find a trio of movers placing all of her belongings on the curb! The old woman is in hysterics as she pleads with the men to stop what they're doing! You tell the woman to go and sit down, and that you will handle this. You beg, and you barter, you try wagering, and threats of violence, but nothing will stop the men from completing their assigned job. The burley mover shrug and insist they don't make the rules, they just have to enforce them, or they'll be evicted themselves.",
-    "pass": "You rush to the residence of the old woman, and find a trio of movers placing all of her belongings on the curb! The old woman is sitting on her porch sipping tea and looking sad as she watches the men haul out her stuff. You approach the men with compliments and an lukewarm offer of assistance...but first you ask them to explain why the woman is being evicted. They hesitantly show you a letter from the local physician stating that the woman is suffering from a contagion, and she needs to be moved to a place where she can receive the appropriate care indefinitely. The movers accept your help moving a few pieces of heavy furniture, and hands you a few gold as a reward.",
-    "dc1": 12,
-    "dc2": 15,
-    "payout": "7gp",
-    "penalty": "4hp"
-  },
-  {
-    "id": 97,
-    "type": "Persuasion",
-    "rumor": "A frightened boy sprints past you on the road, shouting about how he saw the frightening visage of a scary woman moaning in the nearby area. You thank the boy for the tip, and continue forward keeping your eyes peeled...",
-    "fail": " You watch in horror as the dark blue spirit of a forlorn woman apparates before you. She has long, ragged hair, that shes continuously tugging at by its split ends. The spirit tells you that she's lost her baby, and needs to find him. You ask the woman how she died, and she flies into a rage at the thought, driving her spectral hand into your chest, and disappearing in a haunting wail!",
-    "passfail": "You watch in a terrified fascination as the dark blue spirit of a forlorn woman apparates before you. Her sunken eyes reveal she's tired, and has exhausted her ghostly tear ducts. She asks you if you've seen her lost baby, and you tell her you haven't. The spectral woman responds with a deafening wail, and disappears into the mist...",
-    "pass": "You watch in morbid fascination as the dark blue spirit of a forlorn woman apperates before you in utter despair. She implores you to help her find her missing baby, so you put her concerns at ease. You tell the ghost what you believe she would want to hear, that her darling baby is happy, playing safe and sound at her home. You suggest to the ghostly woman that she should head home to see them. The ghost pulls a golden hairpin from her hair and hands it to you. The breeze blows, and the woman's form dissipates...",
-    "dc1": 13,
-    "dc2": 16,
-    "payout": "8gp",
-    "penalty": "4hp"
-  },
-  {
-    "id": 98,
-    "type": "Persuasion",
-    "rumor": "Passing by a weapon shop on the side of the road, you see a young adult pouting on the front steps of the establishment. He begs for a few coins as you pass by, and when you ask him what he needs it for he tells you the shop owner refuses to cut him a discount on the gear he needs to start his adventuring career...",
-    "fail": "You enter the establishment on behalf of the young man, and ask the shop owner about the best price he is willing to do on a sword, a shield, and a medium set of armor. The storekeeper grows suspicious of your line of questioning immediately, making a comment about \"That snot nosed brat\" and demanding that you leave his store at once.",
-    "passfail": "You enter the fine establishment and get momentarily distracted by the surprising range of inventory within the little shop. The shopkeeper nearly makes a sale before you have the chance to naturally mention the young man on his stoop. The shopkeeper scratches the back of his head and grimaces. He tells you he's not allowed to sell gear to that boy, and it's as simple as that.",
-    "pass": "You enter the establishment and compliment the shop owner on his fine range of inventory. The shop owner greets you and recommends a few pieces of gear before inquiring why you have entered. You tell them you have entered on behalf of the boy on their stoop, who wishes to pursue a life of heroics. The shopkeeper reveals the young man is his best friend's son, and he wishes not to see him fall to danger. You argue back that before long the boy will decide to go adventuring with or without protective gear. The shopkeeper nods begrudgingly, and tells you to send the boy in on your way out. Tears in his eyes, the boy hands you a fist full of gold on his way into the shop, and mouths \"Thank you!\"
-",
-    "dc1": 14,
-    "dc2": 17,
-    "payout": "9gp",
-    "penalty": "5hp"
-  },
-  {
-    "id": 99,
-    "type": "Persuasion",
-    "rumor": "A huge creature has unexpectedly abandoned its treasure hoard, leaving the surrounding families to fight over it. The local lord is asking for a negotiator to help facilitate a peaceful distribution of the wealth.",
-    "fail": "You agree to help facilitate a peaceful distribution of the abandoned wealth, and report to the main square of the local village. You attempt to take charge of the situation by commandeering the conversation and commanding the greedier families to put back what they have taken from the pile. A larger gentleman doesn't hesitate to question your authority, knee you in the groin, and shove you to the ground.",
-    "passfail": "You agree to help facilitate a peaceful distribution of the abandoned wealth, and report to the main square of the local village. You approach the argument and take the time to listen to the stances presented by each family for why they deserve the share they think they do. With some minor adjustments a peaceful revolution is wagered, but the frugal families fail to waver on their decision to cut you out of the action.",
-    "pass": "You agree to help facilitate a peaceful distribution of the abandoned wealth, and report to the main square of the local village. You interrupt the chorus of arguments with your finely articulated suggestion to split the deserted money based on familial wealth, and number of members per household. By the time you're finished with your suggestion, the families are already penning it's official address to the local lord for approval. No one really seems to notice that you cut yourself in on a very small fraction the treasure.",
-    "dc1": 15,
-    "dc2": 18,
-    "payout": "10gp",
-    "penalty": "5hp"
   }
 ]}
