@@ -1,1 +1,1 @@
-./spreadsheet-to-json.py > ../gvars/duel-data.gvar
+./spreadsheet-to-json.py "warriors" "https://docs.google.com/spreadsheets/d/e/2PACX-1vRWGInNCIqGDN0YymouN2lLF8uMHsCvq7QZ47Djl_QPJROUJqcQyf5tgSJgPmG6-OQBYvzIr257ZZLO/pub?gid=434315334&single=true&output=csv" > ../gvars/duel-data.gvar

@@ -6,13 +6,39 @@ VERSION = '0.1'
 DATA_VAR = "96111624-7e94-46f7-b32e-f0c2d6c52b13"
 DAILY_CAP = 1
 
-CURRENCY = {
-    'cp': 'Copper Pieces',
-    'sp': 'Silver Pieces',
-    'ep': 'Electrum Pieces',
-    'gp': 'Gold Pieces',
-    'pp': 'Platinum Pieces'
-}
+img, thumb, desc, add_to_bag = None, None, None, None
+
+images = [
+    'https://cdn.discordapp.com/attachments/855908840633270282/943171024457961552/road10.jpg',
+    'https://cdn.discordapp.com/attachments/855908840633270282/943171024650924135/road9.jpg',
+    'https://cdn.discordapp.com/attachments/855908840633270282/943171024948699166/road8.jpg',
+    'https://cdn.discordapp.com/attachments/855908840633270282/943171025221341214/road7.jpg',
+    'https://cdn.discordapp.com/attachments/855908840633270282/943171025460424714/road6.jpg',
+    'https://cdn.discordapp.com/attachments/855908840633270282/943171025686913044/road5.jpg',
+    'https://cdn.discordapp.com/attachments/855908840633270282/943171025988898877/road4.jpg',
+    'https://cdn.discordapp.com/attachments/855908840633270282/943171026274095164/road3.jpg',
+    'https://cdn.discordapp.com/attachments/855908840633270282/943171026576105542/road2.jpg',
+    'https://cdn.discordapp.com/attachments/855908840633270282/943171026827751434/road1.jpg',
+    'https://cdn.discordapp.com/attachments/936730897619771432/942986378113863771/R_8.jpeg',
+    'https://cdn.discordapp.com/attachments/936730897619771432/942986378319364096/R_9.jpeg',
+    'https://cdn.discordapp.com/attachments/936730897619771432/942986378663329883/6fd62a650d4ea59093507be4ce395c25.jpg',
+    'https://cdn.discordapp.com/attachments/936730897619771432/942896668297265193/b684bfbbeaa8e5e456d48a8af81d1fdd.jpg',
+    'https://cdn.discordapp.com/attachments/936730897619771432/942872560616505344/92c321da13c4e3c78f48b9a3fd52ae00.jpg',
+    'https://cdn.discordapp.com/attachments/936730897619771432/942872237587984424/caravan.jpg',
+    'https://cdn.discordapp.com/attachments/936730897619771432/942872229430063204/0a5818cf6057cd6f429b456b106643ac.jpg',
+    'https://cdn.discordapp.com/attachments/936730897619771432/942872220064178226/roadside.jpg',
+    'https://cdn.discordapp.com/attachments/936730897619771432/942871681607819314/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxH5rd9eDAjcFyv45SRYAFMIcKL_PArgVSL403ulRUWEndVKv-j56FBw07JgIA57ykfVI2h6rMIG1Hv9nhwoKPw_P3Y7-Al28G7pZz2byS9Iisihq-uxRQO4VLoQ2.jpeg'
+]
+
+death_images = [
+    'https://cdn.discordapp.com/attachments/936730897619771432/943172700740911184/dwarf-death-777x437.jpg',
+    'https://cdn.discordapp.com/attachments/936730897619771432/943172700740911184/dwarf-death-777x437.jpg',
+    'https://cdn.discordapp.com/attachments/936730897619771432/943172700740911184/dwarf-death-777x437.jpg',
+    'https://cdn.discordapp.com/attachments/936730897619771432/943172701269409842/jsdsgr0dp4c01.jpg',
+    'https://cdn.discordapp.com/attachments/936730897619771432/943173059790135296/R_10.jpeg'
+]
+
+img = images[roll(f'1d{len(images)}') - 1]
 
 ADMIN_USER_IDS = [771997367611949076]
 if get_svar('SEVENTRA_ALIAS_ADMINS') != None:
@@ -26,17 +52,6 @@ c = character()
 cv, cs = c.cvars, c.skills
 
 title = f'{c.name} hears the many rumors that spread through Seventra...'
-img, thumb, desc, add_to_bag, remove_from_coins = None, None, None, None, None
-add_to_coins = {
-    'cp': 0,
-    'sp': 0,
-    'gp': 0
-}
-remove_from_coins = {
-    'cp': 0,
-    'sp': 0,
-    'gp': 0
-}
 sl, fl = "**Success!**", "**Failure!**"
 fields = []
 
@@ -95,7 +110,7 @@ rumors_performed = daily_activity_control["count"]
 wait_time = daily_activity_control["wait_time"]
 
 footer = "Don't forget to role-play about the rumors you hear!"
-footer += "\nYou can still come across another rumor today" if rumors_performed == 0 else "\nCome back tomorrow for another rumor!"
+footer += "\nYou can still come across another rumor today" if rumors_performed < DAILY_CAP else "\nCome back tomorrow for another rumor!"
 footer += "\n" + f'Seventra: Exodus of Heroes | Road Rumors v{VERSION} | !rumor help'
 footer += "\nCreators: Library Fox#0895 and quiversong#2772"
 
@@ -124,28 +139,53 @@ if not("bags" in cv and "Coin Pouch" in cv["bags"]):
     fields.append(f)
     return 1
 
-if not(len(args) > 0 and args[0] == 'start'):
-    title = 'Seventra Road Rumors'
+if len(args) == 0:
+    desc = '*Looking for a small side-job while on the road?*'
+    desc += '\n*Use `!rumor start`!*'
+    return ''
 
-    fields.append('Help goes here|Need to work on it.')
+if not(args[0].lower() == 'start'):
+    title = 'Rumors on the Roads!'
 
-    return 1
+    desc = 'You are likely to see all manner of curious sights, and hear a wide variety of fascinating rumors while traveling on the roads and through the smaller communities of Seventra.'
+    desc += '\n\nFor an adventurer like you, work is never far from your ears, and the people of the land will often seek traveler\\\'s aid with situations both big and small.'
+    desc += '\n\nYou can earn a pretty handful of gold while traveling on the road, but do so carefully, for the wilds of Seventra are sure to hold danger!'
+
+    f = 'How to?|'
+    f += 'Use `!rumor start` to randomly generate a rumor or situation along the road where you can get involved. A skill check will be chosen at random, and tested against a pair of DCs to see how well you do.'
+    f += '\n\nIf you fail, you will get hurt.'
+    f += '\nIf you pass the first DC, you will not get hurt.'
+    f += '\nIf you wholey succeed, you will earn a cash prize for your superb skills!'
+
+    f += '\n\nIn the event that the rumor side job reduces you to 0 HP, you will be immediately returned to the kingdom you last departed.'
+
+    f += '\n\n(This sidejob can be done as well as Downtime, Hunt, Fish, and Research, but you can only choose ONE sidejob each day. When traveling on the roads, you may roll on the Rumor sidejob wheel twice per day.)'
+
+    f += '\n\nDisclaimer: Some scenarios may require a bit of suspension of disbelief.\n'
+    f += 'For example: a flying character failing to climb a tower, A warforged eating and getting an upset stomach, or other instances of acting somewhat out of character.'
+
+    f += '\n\nDon\\\'t forget to RP your interactions!'
+
+    fields.append(f)
+
+    return ''
 
 if rumors_performed >= DAILY_CAP:
     f = 'You alredy heard a rumor today...|'
     f += f'Come back tomorrow?! Time to reset: {wait_time}'
+    img = None
     fields.append(f)
     return 1
 
-rumors_seen = cv[RUMOR_SEEN_VAR] if RUMOR_SEEN_VAR in cv else []
+rumors_seen = load_json(cv[RUMOR_SEEN_VAR]) if RUMOR_SEEN_VAR in cv else []
 if len(rumors_seen) == len(all_rumors):
     rumors_seen = []
 
 eligible_rumors = [r for r in all_rumors if r['id'] not in rumors_seen]
-the_rumor = eligible_rumors[roll(f'1d{len(eligible_rumors)}' - 1)]
+the_rumor = eligible_rumors[roll(f'1d{len(eligible_rumors)}') - 1]
 
 rumors_seen.append(the_rumor['id'])
-cv.set_cvar(RUMOR_SEEN_VAR, dump_json(rumors_seen))
+character().set_cvar(RUMOR_SEEN_VAR, dump_json(rumors_seen))
 
 rumor_type = the_rumor['type'].lower()
 skill = [s for s in character().skills if s[0] == rumor_type]
@@ -157,17 +197,37 @@ skill_name = skill[0][0]
 skill = skill[0][1]
 skill_roll = vroll(skill.d20(base_adv = None))
 
-desc = the_rumor['rumor']
+desc = f'*{the_rumor["rumor"]}*'
 
-f = f'Rumor type: {skill_name}|**Roll:** {skill_roll.full}'
+f = f'Rumor type: {skill_name}|**Skill Check:** {skill_roll.full}'
 fields.append(f)
 
 is_failure = skill_roll.total < the_rumor['dc1']
 is_success = skill_roll.total >= the_rumor['dc2']
 result = the_rumor['fail'] if is_failure else the_rumor['pass'] if is_success else the_rumor['passfail']
 
-f = f'Conclusion...|{result}'
-fields.append(f)
+fields.append(f'Conclusion...|*{result}*')
+
+if is_failure:
+    penalty = int(the_rumor['penalty'].lower().replace('hp', ''))
+    character().modify_hp(-1 * penalty)
+    f = f'You lost {penalty} hit points!|'
+
+    if character().hp <= 0:
+        f += '*Oh, no! It looks like you\\\'ve been dropped to 0 hit points!*'
+        f += '\n\n*The perils of the road have reduced you to an exhausted, beaten mess. Fortunately, a good samaritan such as a fellow hero, highway patrolman, or a common traveler may assist you in limping back to the closest city.*'
+        img = death_images[roll(f'1d{len(death_images)}') - 1]
+    else:
+        f += '*Better be more careful!*'
+    fields.append(f)
+
+if is_success:
+    payout = int(the_rumor['payout'].lower().replace('gp', ''))
+    bags = load_json(cv['bags'])
+
+    [bag[1].update({'gp': bag[1]['gp'] + payout}) for bag in bags if bag[0] == 'Coin Pouch']
+    character().set_cvar('bags', dump_json(bags))
+    fields.append(f'You gained {payout} gold coins!|*They have been added to your bag.*')
 
 #! _count = devrae_f daily_control_increase_counter(#P DUEL_TIME_VAR) !#
 ##### devrae function insert [daily_control_increase_counter] #####
