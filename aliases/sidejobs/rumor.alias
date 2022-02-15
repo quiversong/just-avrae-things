@@ -3,7 +3,8 @@ embed
 # Configuration Variables
 VERSION = '0.1'
 
-DATA_VAR = "96111624-7e94-46f7-b32e-f0c2d6c52b13"
+DATA_VAR_1 = "96111624-7e94-46f7-b32e-f0c2d6c52b13"
+DATA_VAR_2 = "dd5538b0-aab8-4ac0-a82c-5f08aa8cf42b"
 DAILY_CAP = 1
 
 img, thumb, desc, add_to_bag = None, None, None, None
@@ -130,7 +131,8 @@ if len(args) > 0 and args[0] == 'resetlog':
     fields.append('Resetting rumor history log...|Done!')
     return 1
 
-all_rumors = load_json(get_gvar(DATA_VAR))["rumors"]
+all_rumors = load_json(get_gvar(DATA_VAR_1))["rumors"]
+all_rumors = all_rumors + load_json(get_gvar(DATA_VAR_2))["rumors"]
 
 if not("bags" in cv and "Coin Pouch" in cv["bags"]):
     f = 'Stop!|'

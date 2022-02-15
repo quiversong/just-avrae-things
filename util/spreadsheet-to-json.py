@@ -24,4 +24,8 @@ if text[-1] == ',':
     text = text[0:len(text) - 1]
 text = '{"' + key + '": [\n' + text + '\n]}'
 
+#text = text.replace('\n', '')
+#for i in range(8):
+#    text = text.replace(' "', '"')
+
 print(text)
