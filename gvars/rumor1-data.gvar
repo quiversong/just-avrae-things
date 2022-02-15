@@ -113,7 +113,7 @@
     "rumor": "You spot a local priest that seems to be having some trouble getting his church bell to ring due to some tangled cords in the belfry. He begs you for your help as you pass by!",
     "fail": "You attempt to climb up the side of the building, but the gods do not smile upon you. You lose your grip, and fall to the dirty street. The priest helps you up, but can't heal your pride.",
     "passfail": "You climb up the side of the building with ease, but struggling to maintain your footing after you begin to fuss with the tangled cords. You slip and nearly get hurt, but swinging on the rope allows you to swing to the ground safely.",
-    "pass": "",
+    "pass": "The Gods smile upon you as you scale the side of the building, making a death defying series of leaps and vaults. After a few minutes of careful detangling, the belfry's cords swing loose once again. The priest grants you a prayer, and a small boon from the alms box!",
     "dc1": 14,
     "dc2": 17,
     "payout": "9gp",

@@ -9,7 +9,28 @@ DAILY_CAP = 1
 
 img, thumb, desc, add_to_bag = None, None, None, None
 
-images = [
+SKILL_NAMES = {
+    'acrobatics': 'Acrobatics',
+    'animalhandling': 'Animal Handling',
+    'arcana': 'Arcana',
+    'athletics': 'Athletics',
+    'deception': 'Deception',
+    'history': 'History',
+    'insight': 'Insight',
+    'intimidation': 'Intimidation',
+    'investigation': 'Investigation',
+    'medicine': 'Medicine',
+    'nature': 'Nature',
+    'perception': 'Perception',
+    'performance': 'Performance',
+    'persuasion': 'Persuasion',
+    'religion': 'Religion',
+    'sleightofhand': 'Sleight of Hand',
+    'stealth': 'Stealth',
+    'survival': 'Survival'
+}
+
+IMAGES = [
     'https://cdn.discordapp.com/attachments/855908840633270282/943171024457961552/road10.jpg',
     'https://cdn.discordapp.com/attachments/855908840633270282/943171024650924135/road9.jpg',
     'https://cdn.discordapp.com/attachments/855908840633270282/943171024948699166/road8.jpg',
@@ -31,7 +52,7 @@ images = [
     'https://cdn.discordapp.com/attachments/936730897619771432/942871681607819314/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxH5rd9eDAjcFyv45SRYAFMIcKL_PArgVSL403ulRUWEndVKv-j56FBw07JgIA57ykfVI2h6rMIG1Hv9nhwoKPw_P3Y7-Al28G7pZz2byS9Iisihq-uxRQO4VLoQ2.jpeg'
 ]
 
-death_images = [
+DEATH_IMAGES = [
     'https://cdn.discordapp.com/attachments/936730897619771432/943172700740911184/dwarf-death-777x437.jpg',
     'https://cdn.discordapp.com/attachments/936730897619771432/943172700740911184/dwarf-death-777x437.jpg',
     'https://cdn.discordapp.com/attachments/936730897619771432/943172700740911184/dwarf-death-777x437.jpg',
@@ -39,7 +60,7 @@ death_images = [
     'https://cdn.discordapp.com/attachments/936730897619771432/943173059790135296/R_10.jpeg'
 ]
 
-img = images[roll(f'1d{len(images)}') - 1]
+img = IMAGES[roll(f'1d{len(IMAGES)}') - 1]
 
 ADMIN_USER_IDS = [771997367611949076]
 if get_svar('SEVENTRA_ALIAS_ADMINS') != None:
@@ -189,17 +210,18 @@ the_rumor = eligible_rumors[roll(f'1d{len(eligible_rumors)}') - 1]
 rumors_seen.append(the_rumor['id'])
 character().set_cvar(RUMOR_SEEN_VAR, dump_json(rumors_seen))
 
-rumor_type = the_rumor['type'].lower()
-skill = [s for s in character().skills if s[0] == rumor_type]
+rumor_type_code = the_rumor['type'].lower().split(' ')[0]
+skill = [s for s in character().skills if s[0].startswith(rumor_type_code)]
 if len(skill) == 0:
-    fields.append('Oops! An unexpected error ocurred!|Please let Administrators know.\n(Unknown Rumor Type)')
+    fields.append('Oops! An unexpected error ocurred!|Please let Administrators know.\n(Unknown Rumor Type)' + '\n' + the_rumor['type'])
     return 1
 
-skill_name = skill[0][0]
+skill_name = SKILL_NAMES[skill[0][0].lower().replace(' ', '')]
 skill = skill[0][1]
 skill_roll = vroll(skill.d20(base_adv = None))
 
-desc = f'*{the_rumor["rumor"]}*'
+rumor_text = the_rumor['rumor'].strip().replace('"', '\\\"')
+desc = f'*{rumor_text}*'
 
 f = f'Rumor type: {skill_name}|**Skill Check:** {skill_roll.full}'
 fields.append(f)
@@ -207,6 +229,7 @@ fields.append(f)
 is_failure = skill_roll.total < the_rumor['dc1']
 is_success = skill_roll.total >= the_rumor['dc2']
 result = the_rumor['fail'] if is_failure else the_rumor['pass'] if is_success else the_rumor['passfail']
+result = result.strip().replace('"', '\\\"')
 
 fields.append(f'Conclusion...|*{result}*')
 
@@ -218,7 +241,7 @@ if is_failure:
     if character().hp <= 0:
         f += '*Oh, no! It looks like you\\\'ve been dropped to 0 hit points!*'
         f += '\n\n*The perils of the road have reduced you to an exhausted, beaten mess. Fortunately, a good samaritan such as a fellow hero, highway patrolman, or a common traveler may assist you in limping back to the closest city.*'
-        img = death_images[roll(f'1d{len(death_images)}') - 1]
+        img = DEATH_IMAGES[roll(f'1d{len(DEATH_IMAGES)}') - 1]
     else:
         f += '*Better be more careful!*'
     fields.append(f)
