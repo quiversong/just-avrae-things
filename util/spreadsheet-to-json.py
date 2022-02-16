@@ -25,6 +25,11 @@ text = text.replace('"  [', '  [').replace('],"\n', '],\n')
 if text.endswith('],"'):
     text = text[0:len(text) - 1]
 
+# handles files where every entry is a single string
+text = text.replace('"    "', '    "').replace('","\n', '",\n').rstrip()
+if text.endswith('","'):
+    text = text[0:len(text) - 2]
+
 text = text.split('\n\n')[0]
 if text[-1] == ',':
     text = text[0:len(text) - 1]

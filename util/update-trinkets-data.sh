@@ -1,0 +1,1 @@
+./spreadsheet-to-json.py "trinkets" "https://docs.google.com/spreadsheets/d/e/2PACX-1vSk0ELpeAW_0SdfW5kF_kBNvz48ikPNRFKLZ6AhFcTvHcZrxQiwBqXorUnK7RBDzi-aFymuFFKpbGhY/pub?output=csv&gid=469940321" > ../gvars/fish-trinkets-data.gvar
