@@ -30,7 +30,6 @@ footer = f'Seventra: Exodus of Heroes | Fish v{VERSION} | !fish help'
 if len(args) > 0 and args[0] == "reset":
   c.delete_cvar(FISH_TIME_VAR)
   t = "Resetting fishing state..."
-  footer = footer.replace(f'{fish_count}x today', '0x today')
   return 0
 
 fish_count = None
@@ -84,20 +83,21 @@ caught = None if is_trinket else survival_roll.total >= found[1]
 
 thumb = image
 color = '#96cce8'
+add_to_bag = None
 
 if is_trinket:
     desc = f'You found {found}.'
     desc += '\n\n*Trinkets are purely hooks for RP and provide no mechacnical benefit. They are not automatically added to your bag.*'
 
 if is_fish:
+    thumb = found[3]
     weight = roll(found[2])
     name_and_weight = f'{found[0]} ({weight}kg)'
-    desc = f'You found a {name_and_weight}! You need a **DC{found[1]}** SURVIVAL check to catch it!'
+    desc = f'You found a {name_and_weight}!\nYou need a **DC{found[1]}** SURVIVAL check to catch it!'
     desc += '\n\n' + f'Your survival check: {survival_roll.full}'
     desc += '\n\n' + (f'**Yay! You caught the {found[0]}!**' if caught else '**Unfortunately, the fish slips away!**')
     if caught:
-        thumb = found[3]
-        desc += '\n\n' + f':school_satchel: `{found[0]}` has been added to your "Fish" bag!'
+        desc += '\n\n' + f':school_satchel: `{name_and_weight}` has been added to your "Fish" bag!'
         add_to_bag = name_and_weight
 
 if add_to_bag:
@@ -105,10 +105,6 @@ if add_to_bag:
     bag_name = 'Fish'
     [bag[1].update({add_to_bag: bag[1][add_to_bag] + 1} if add_to_bag in bag[1] else {add_to_bag: 1}) for bag in bags if bag[0] == bag_name]
     character().set_cvar('bags', dump_json(bags))
-
-  fish_name = found[0]
-  content = {}
-  content[fish_name] = 1
 
 #! fish_count = devrae_f daily_control_increase_counter(#P FISH_TIME_VAR) !#
 ##### devrae function insert [daily_control_increase_counter] #####
@@ -129,7 +125,7 @@ else:
   __result__ = _count
 fish_count = __result__
 ##### devrae function end [daily_control_increase_counter] #####
-footer = footer.replace(f'{fish_count - 1}x today', '{fish_count}x today')
+footer = footer.replace(f'{fish_count - 1}x today', f'{fish_count}x today')
 </drac2>
 -title "{{t}}"
 {{f'-image "{img}"' if img else ""}}
