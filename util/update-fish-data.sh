@@ -1,0 +1,1 @@
+./spreadsheet-to-json.py "fish" "https://docs.google.com/spreadsheets/d/e/2PACX-1vS-3JR4Xiy69XiD-zaleypXxiJsBK8_gyRltASb0k615YRpbV86z_4X2rJlUPvbdg/pub?output=csv&gid=1602954352" > ../gvars/fish-data.gvar

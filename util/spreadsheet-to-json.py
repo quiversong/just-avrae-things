@@ -19,11 +19,16 @@ data = response.read()
 text = data.decode('utf-8')
 
 text = text.replace('"{', '{').replace('""', '"').replace('},"', '},').replace('"  {', '  {').replace('\r', '').strip()
+
+# handles files where every entry is an array
+text = text.replace('"  [', '  [').replace('],"\n', '],\n')
+if text.endswith('],"'):
+    text = text[0:len(text) - 1]
+
 text = text.split('\n\n')[0]
 if text[-1] == ',':
     text = text[0:len(text) - 1]
 text = '{"' + key + '": [\n' + text + '\n]}'
-
 #text = text.replace('\n', '')
 #for i in range(8):
 #    text = text.replace(' "', '"')

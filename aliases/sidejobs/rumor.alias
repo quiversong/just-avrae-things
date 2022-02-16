@@ -1,11 +1,11 @@
 embed
 <drac2>
 # Configuration Variables
-VERSION = '0.1'
+VERSION = '0.2'
 
 DATA_VAR_1 = "96111624-7e94-46f7-b32e-f0c2d6c52b13"
 DATA_VAR_2 = "dd5538b0-aab8-4ac0-a82c-5f08aa8cf42b"
-DAILY_CAP = 1
+DAILY_CAP = 2
 
 img, thumb, desc, add_to_bag = None, None, None, None
 
@@ -59,6 +59,9 @@ DEATH_IMAGES = [
     'https://cdn.discordapp.com/attachments/936730897619771432/943172701269409842/jsdsgr0dp4c01.jpg',
     'https://cdn.discordapp.com/attachments/936730897619771432/943173059790135296/R_10.jpeg'
 ]
+
+FOOTER_MORE_MSG = "You can still come across another rumor today."
+FOOTER_DONE_MSG = "Come back tomorrow for another rumor!"
 
 img = IMAGES[roll(f'1d{len(IMAGES)}') - 1]
 
@@ -132,7 +135,7 @@ rumors_performed = daily_activity_control["count"]
 wait_time = daily_activity_control["wait_time"]
 
 footer = "Don't forget to role-play about the rumors you hear!"
-footer += "\nYou can still come across another rumor today" if rumors_performed < DAILY_CAP else "\nCome back tomorrow for another rumor!"
+footer += '\n' + FOOTER_MORE_MSG if rumors_performed < DAILY_CAP else '\n' + FOOTER_DONE_MSG
 footer += "\n" + f'Seventra: Exodus of Heroes | Road Rumors v{VERSION} | !rumor help'
 footer += "\nCreators: Library Fox#0895 and quiversong#2772"
 
@@ -182,13 +185,18 @@ if not(args[0].lower() == 'start'):
 
     f += '\n\nIn the event that the rumor side job reduces you to 0 HP, you will be immediately returned to the kingdom you last departed.'
 
-    f += '\n\n(This sidejob can be done as well as Downtime, Hunt, Fish, and Research, but you can only choose ONE sidejob each day. When traveling on the roads, you may roll on the Rumor sidejob wheel twice per day.)'
+    f += '\n\nThis sidejob can be done as well as Downtime, Hunt, Fish, and Research, but you can only choose ONE sidejob each day. Sidejobs are activities exclusive to certain areas in Seventra. When traveling on the roads, you may roll on the Rumor sidejob wheel twice per day.'
+    fields.append(f)
 
-    f += '\n\nDisclaimer: Some scenarios may require a bit of suspension of disbelief.\n'
+    f = 'Attention!|'
+    f += '\n\nGold will be automatically added to your bag, and health will be automatically subtracted from your sheet. Please keep this in mind if you\\\'re on a quest, as you don\\\'t want your main instance losing HP unnecessarily, nor do you want your arena clone collecting your gold. If you have any questions, please ping `@Guide`.'
+    fields.append(f)
+
+    f = 'Disclaimer|'
+    f += 'Some scenarios may require a bit of suspension of disbelief.\n'
     f += 'For example: a flying character failing to climb a tower, A warforged eating and getting an upset stomach, or other instances of acting somewhat out of character.'
 
     f += '\n\nDon\\\'t forget to RP your interactions!'
-
     fields.append(f)
 
     return ''
@@ -254,9 +262,9 @@ if is_success:
     character().set_cvar('bags', dump_json(bags))
     fields.append(f'You gained {payout} gold coins!|*They have been added to your bag.*')
 
-#! _count = devrae_f daily_control_increase_counter(#P DUEL_TIME_VAR) !#
+#! rumors_performed = devrae_f daily_control_increase_counter(#P DUEL_TIME_VAR) !#
 ##### devrae function insert [daily_control_increase_counter] #####
-research_count = None
+rumors_performed = None
 __p0__ = RUMOR_TIME_VAR
 # returns current counter and wait time text if any
 _var_name = __p0__
@@ -271,8 +279,11 @@ else:
   _time = _var_parts[1]
   character().set_cvar(_var_name, f'{_count}:{_time}')
   __result__ = _count
-duel_count = __result__
+rumors_performed = __result__
 ##### devrae function end [daily_control_increase_counter] #####
+
+if rumors_performed >= DAILY_CAP:
+    footer = footer.replace(FOOTER_MORE_MSG, FOOTER_DONE_MSG)
 
 </drac2>
 -title "{{title}}"

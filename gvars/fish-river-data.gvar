@@ -1,9 +1,0 @@
-{
-  "type": "river",
-  "fish": [
-    ["Tilapia", 4],
-    ["River Fish 1", 10],
-    ["River Fish 2", 12],
-    ["River Fish 3", 8]
-  ]
-}
