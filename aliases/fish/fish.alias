@@ -86,7 +86,9 @@ color = '#96cce8'
 add_to_bag = None
 
 if is_trinket:
-    desc = f'You found {found}.'
+    formatted = found if found[len(found) - 1] == '.' else f'{found}.'
+    formatted = formatted[formatted[0].lower()] + formatted[formatted[1].lower()] + formatted[2:len(formatted)]
+    desc = f'You found {formatted}'
     desc += '\n\n*Trinkets are purely hooks for RP and provide no mechacnical benefit. They are not automatically added to your bag.*'
 
 if is_fish:
@@ -103,6 +105,7 @@ if is_fish:
 if add_to_bag:
     bags = load_json(cv['bags'])
     bag_name = 'Fish'
+    bags.append([bag_name, {}]) if len([bag for bag in bags if bag[0] == bag_name]) == 0 else None
     [bag[1].update({add_to_bag: bag[1][add_to_bag] + 1} if add_to_bag in bag[1] else {add_to_bag: 1}) for bag in bags if bag[0] == bag_name]
     character().set_cvar('bags', dump_json(bags))
 
