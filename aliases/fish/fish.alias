@@ -15,8 +15,8 @@ pargs = argparse(args)
 c = character()
 cv, cs = c.cvars, c.skills
 
-title, desc, img, thumb = None, None, None, None
-f, f2, f3, f4, color, footer = None, None, None, None, None, None
+title, desc, img, thumb, color, footer = None, None, None, None, None, None
+fields = []
 
 FISH_TIME_VAR = "_f_dfc_"
 FISH_STATS_VAR = "_f_st_"
@@ -28,9 +28,35 @@ footer = f'Seventra: Exodus of Heroes | Fish v{VERSION} | !fish help'
 
 
 if len(args) > 0 and args[0] == "reset":
-  c.delete_cvar(FISH_TIME_VAR)
-  t = "Resetting fishing state..."
-  return 0
+    c.delete_cvar(FISH_TIME_VAR)
+    t = "Resetting fishing state..."
+    return 0
+
+if len(args) > 0 and args[0] == 'help':
+    title = 'Fishing in Seventra!'
+
+    f = '__HOW TO?__|'
+    f += 'Use `!fish` to go fishing in Seventra!'
+    f += '\n\nEvery city has a dice channel dedicated for fishing, and a channel where you can RP your catches! If you are on the road, you can fish on the road dice channel and RP on the regular road RP channels. Every fish you catch is automatically added to your bag.'
+    fields.append(f)
+
+    f = '__RULES__|'
+    f += 'You are limited to 6 fishing attempts per day. You can do that alongisde downtime, hunting, and city/road sidejobs.'
+    f += '\n\nEvery fish is worth exact one ration. They can be sold at the city markets for half that price, as is with every item sold to merchants.'
+    f += '\n\nYou can use the `!cashin` alias to sell your fish at the market channels. Check the pinned messages on those channels for more details.'
+    fields.append(f)
+
+    f = '__TRINKETS__|'
+    f += 'On occasion, you may come across special trinkets. These items serve only as hooks for RP and provide no mechanical benefit. They are not added to your bag automatically. If you wish to, you can do so with `!bag <bag name> add <trinket>`.'
+    f += '\n\nIf you add trinkets to your "Fish" bag, `!cashin` will assume they are the same as fish and will sell them for the same price as one fish each.'
+    fields.append(f)
+
+    f = '__HAVE FUN!__|'
+    f += 'Enjoy a relaxing time fishing in Seventra.\nMaybe you will be the lucky one to catch a huge fish!'
+    fields.append(f)
+
+    img = 'https://cdn.discordapp.com/attachments/855908840633270282/943439792065118218/yeonji-rhee-digital-art-fantasy-art-boat-paddle-hd-wallpaper-preview.jpeg'
+    return 0
 
 fish_count = None
 #! fish_count = devrae_f daily_control_init(#P DUEL_TIME_VAR #P DAILY_CAP) !#
@@ -60,9 +86,11 @@ fish_count = __result__
 ##### devrae function end [daily_control_init] #####
 
 if fish_count >= DAILY_CAP:
-  f = f'{c.name} is exhausted from so much fishing today...|Come back later!'
-  f += '\n(Fishing resets at midnight UTC)'
-  return 1
+    thumb = image
+    f = f'{c.name} is exhausted from so much fishing today...|Come back later!'
+    f += '\n(Fishing resets at midnight UTC)'
+    fields.append(f)
+    return 1
 
 footer += f'\nThere is a limit of {DAILY_CAP} fish attempts per day. You have fished {fish_count}x today.'
 
@@ -134,9 +162,6 @@ footer = footer.replace(f'{fish_count - 1}x today', f'{fish_count}x today')
 {{f'-image "{img}"' if img else ""}}
 {{f'-thumb "{thumb}"' if thumb else ""}}
 {{f'-desc "{desc}"' if desc else ""}}
-{{f'-f "{f}"' if f else ""}}
-{{f'-f "{f2}"' if f2 else ""}}
-{{f'-f "{f3}"' if f3 else ""}}
-{{f'-f "{f4}"' if f4 else ""}}
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
 {{f'-color "{color}"' if color else ""}}
 {{f'-footer "{footer}"' if footer else ""}}
