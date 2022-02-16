@@ -87,7 +87,7 @@ add_to_bag = None
 
 if is_trinket:
     formatted = found if found[len(found) - 1] == '.' else f'{found}.'
-    formatted = formatted[formatted[0].lower()] + formatted[formatted[1].lower()] + formatted[2:len(formatted)]
+    formatted = formatted[0].lower() + formatted[1].lower() + formatted[2:len(formatted)]
     desc = f'You found {formatted}'
     desc += '\n\n*Trinkets are purely hooks for RP and provide no mechacnical benefit. They are not automatically added to your bag.*'
 
