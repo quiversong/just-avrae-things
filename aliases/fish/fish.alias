@@ -2,7 +2,7 @@ tembed
 <drac2>
 # Configuration Variables
 IS_LIVE = False
-VERSION = '1.00'
+VERSION = '0.1'
 
 FISH_VAR = "836c9cc0-faa2-4880-8986-6b240ced9a66"
 TRINKETS_VAR = "fbd058bc-7c49-46f7-af3f-c018a88443dc"
@@ -47,12 +47,13 @@ if len(args) > 0 and args[0] == 'help':
     fields.append(f)
 
     f = '__TRINKETS__|'
-    f += 'On occasion, you may come across special trinkets. These items serve only as hooks for RP and provide no mechanical benefit. They are not added to your bag automatically. If you wish to, you can do so with `!bag <bag name> add <trinket>`.'
+    f += 'On occasion, you may come across special trinkets. These items serve only as hooks for RP and provide no mechanical benefit. They are not added to your bag automatically. If you wish to, you can do so with `!bag \\\"<bag name>\\\" add 1 \\\"<trinket>\\\"`.'
     f += '\n\nIf you add trinkets to your "Fish" bag, `!cashin` will assume they are the same as fish and will sell them for the same price as one fish each.'
     fields.append(f)
 
     f = '__HAVE FUN!__|'
     f += 'Enjoy a relaxing time fishing in Seventra.\nMaybe you will be the lucky one to catch a huge fish!'
+    f += '\n\nSeventra Fishing is based on the `!fish` alias created by alpha#1832, and modified by the Staff of Seventra: Exodus of Heroes:\n`DtonyB85#1483`\n`misstris#4348`\n`quiversong#2772`\n`Ser Jaime Lannister#4395`'
     fields.append(f)
 
     img = 'https://cdn.discordapp.com/attachments/855908840633270282/943439792065118218/yeonji-rhee-digital-art-fantasy-art-boat-paddle-hd-wallpaper-preview.jpeg'
@@ -85,6 +86,8 @@ else:
 fish_count = __result__
 ##### devrae function end [daily_control_init] #####
 
+footer += f'\nThere is a limit of {DAILY_CAP} fish attempts per day. You have fished {fish_count}x today.'
+
 if fish_count >= DAILY_CAP:
     thumb = image
     f = f'{c.name} is exhausted from so much fishing today...|Come back later!'
@@ -92,7 +95,6 @@ if fish_count >= DAILY_CAP:
     fields.append(f)
     return 1
 
-footer += f'\nThere is a limit of {DAILY_CAP} fish attempts per day. You have fished {fish_count}x today.'
 
 trinket_chance = int(get_svar("fish_trinket_chance", "20"))
 is_trinket = roll("1d100") <= trinket_chance
@@ -117,7 +119,7 @@ if is_trinket:
     formatted = found if found[len(found) - 1] == '.' else f'{found}.'
     formatted = formatted[0].lower() + formatted[1].lower() + formatted[2:len(formatted)]
     desc = f'You found {formatted}'
-    desc += '\n\n*Trinkets are purely hooks for RP and provide no mechacnical benefit. They are not automatically added to your bag.*'
+    desc += '\n\n*Trinkets are purely hooks for RP and provide no mechanical benefit. They are not automatically added to your bag.*'
 
 if is_fish:
     thumb = found[3]
