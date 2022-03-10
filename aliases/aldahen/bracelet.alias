@@ -79,7 +79,7 @@ if option == 'curse':
     c.mod_cc(CC_NAME, -2)
     f.append(f'Bracelet of the Aldahen|{c.cc_str(CC_NAME)}')
 
-    f.append("Description|The Aldahen bracelet magically exposes the weaknesses of your enemies. As a bonus action on your turn, you can call on the bracelet's powers to bestow a curse on your foes. Choose a number of creatures equal to your proficiency bonus minus 1. Each of the chosen creatures subtract 1d4 from the next saving throw they make before the end of your next turn.")
+    f.append("Description|The Aldahen bracelet magically exposes the weaknesses of your enemies. As a bonus action on your turn, you can call on the bracelet's powers to bestow a curse on your foes. Choose a number of creatures equal to your spellcaster modifier minus 1. Each of the chosen creatures subtract 1d4 from the next saving throw they make before the end of your next turn.")
 </drac2>
 -title "{{title}}"
 -thumb https://cdn.discordapp.com/attachments/871175851134304256/882292756309999616/aldahen-bracelet.jpg
