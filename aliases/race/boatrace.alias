@@ -66,9 +66,11 @@ this_round = int(var_values[2]) + 1
 
 has_bonus = 'bonus' in pargs
 has_prof = 'prof' in pargs
+has_exp = 'exp' in pargs
 a_skill = c.skills.athletics
 suffix = '+' + str(momentum) + '[momentum]' if momentum > 0 else ''
 suffix += '+' + proficiencyBonus + '[water vehicles prof]' if has_prof else ''
+suffix += '+' + (2 * proficiencyBonus) + '[water vehicles exp]' if has_exp else ''
 suffix += '+5[spell bonus]' if has_bonus else ''
 a_roll = vroll(a_skill.d20() + suffix)
 
