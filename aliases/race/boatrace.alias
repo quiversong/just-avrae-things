@@ -36,8 +36,9 @@ if len(args) > 0 and args[0] == 'start':
     thumb = image
     f = f'{c.name} has gotten into their boat and rowed to the start line|'
     f += 'When you are ready, give the time keeper the signal and start to row.\nGood luck!'
-    f2 = 'Use `!boatrace row [prof] [bonus]` to start rowing!|'
+    f2 = 'Use `!boatrace row [prof/exp] [bonus]` to start rowing!|'
     f2 += 'Use `prof` if you are proficient with water vehicles.'
+    f2 += '\nUse `exp` if you have expertise with water vehicles.'
     f2 += '\nUse `bonus` if you are using a spell to boost your speed.'
     f2 += '\nRP your progress and watch the sandbars!'
     img = img_start
@@ -52,8 +53,9 @@ if not var_name in cv:
 if len(args) == 0 or args[0].lower() != 'row':
     t = f'{c.name} is already on boat race!'
     f = 'Oops, it looks like you are already on a race!|'
-    f += 'Use `!boatrace row [prof] [bonus]` to start rowing!'
+    f += 'Use `!boatrace row [prof/exp] [bonus]` to start rowing!'
     f += '\nUse `prof` if you are proficient with water vehicles.'
+    f += '\nUse `exp` if you have expertise with water vehicles.'
     f += '\nUse `bonus` if you are using a spell to boost your speed.'
     thumb = image
     return 1
@@ -66,7 +68,7 @@ this_round = int(var_values[2]) + 1
 
 has_bonus = 'bonus' in pargs
 has_prof = 'prof' in pargs
-has_exp = 'exp' in pargs
+has_exp = not(has_prof) and 'exp' in pargs
 a_skill = c.skills.athletics
 suffix = '+' + str(momentum) + '[momentum]' if momentum > 0 else ''
 suffix += '+' + proficiencyBonus + '[water vehicles prof]' if has_prof else ''
@@ -94,8 +96,9 @@ img = img_speed[img_key]
 
 t = f'{c.name} has progressed {moved}ft.'
 f = f'{c.name} is now at the {new_pos}ft. mark!|**Athletics roll:** {a_roll.full}'
-f2 = 'Use `!boatrace row [prof] [bonus]` to keep rowing!|'
+f2 = 'Use `!boatrace row [prof/exp] [bonus]` to keep rowing!|'
 f2 += 'Use `prof` if you are proficient with water vehicles.'
+f2 += '\nUse `exp` if you have expertise with water vehicles.'
 f2 += '\nUse `bonus` if you are using a spell to boost your speed.'
 
 if finished:
