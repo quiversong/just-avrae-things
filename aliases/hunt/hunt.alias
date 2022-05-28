@@ -65,10 +65,13 @@ footer += "\n" + f'Seventra: Exodus of Heroes | Hunt v{VERSION} | !hunt help'
 footer += "\nCreators: Archaias06#6633 (Rorik) and quiversong#2772 (Adrienne)"
 
 hvars, pid, stage = None, None, None
+last_stage_was_crit = False
 if HUNT_STAGE_VAR in cv:
   hvars = cv[HUNT_STAGE_VAR].split(":")
   pid = hvars[0]
   stage = hvars[1]
+  if len(hvars) > 2 and hvars[2] == 'lastcrit':
+      last_stage_was_crit = True
 
 if not HUNT_STATS_VAR in cv:
   stats = {}
@@ -318,7 +321,9 @@ elif p == 'attack':
   if dead:
     stats["s_attack"] = stats["s_attack"] + 1 if "s_attack" in stats else 1
     thumb = anm["img"]
-    c.set_cvar(HUNT_STAGE_VAR, f'{pid}:clean')
+    stage_value = f'{pid}:clean'
+    stage_value += ':lastcrit' if crit else ''
+    c.set_cvar(HUNT_STAGE_VAR, stage_value)
     if crit:
       f2 = f'{c.name} hit a critical hit killing the {anm_name} on the spot!'
     else:
@@ -335,7 +340,8 @@ elif p == 'attack':
 elif p == 'clean':
   c.delete_cvar(HUNT_STAGE_VAR)
   t = f'{c.name} attempts to clean their hunting prize!'
-  s_roll = vroll(cs.survival.d20())
+  adv_status = True if last_stage_was_crit else None
+  s_roll = vroll(cs.survival.d20(base_adv = adv_status))
   succ = s_roll.total > anm["ac"]
   f = f'{c.name} cleans and extracts the goods from the {anm_name}...|**Survival roll:** {s_roll.full}\n{sl if succ else fl}'
   img = data["images"]["campfire"]

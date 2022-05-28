@@ -1,7 +1,7 @@
 embed
 <drac2>
 # Configuration Variables
-VERSION = '0.4'
+VERSION = '0.5'
 
 DATA_VAR = "c85742dc-f2e9-4a99-b544-b8f71dd7bed9"
 DAILY_CAP = 2
@@ -443,6 +443,10 @@ if is_player_winner:
                 else:
                     remove_from_coins[reward] += (qty * -1)
                     rewards_text += f'\n `NEGATIVE {qty * -1}x {CURRENCY[reward]}!`'
+            elif 'inspiration' in reward.lower().strip():
+                character().create_cc_nx('Inspiration', 0, 1, None, 'bubble')
+                character().mod_cc('Inspiration', 1)
+                rewards_text += '\n`Inspiration`'
             else:
                 rewards_text += '\n' + f'`{qty}x {reward}`'
                 add_to_bag[reward] = qty
