@@ -1,13 +1,102 @@
 embed
 <drac2>
-    c = character()
-    cv = c.cvars
-
     FISH = 'FISH'
     HUNT = 'HUNT'
     RATIONS = 'RATIONS'
     RELICS = 'RELICS'
     TOKENS = 'TOKENS'
+
+    def modify_coins(coins_dict, all_bags = None):
+        all_bags = all_bags if all_bags != None else load_json(character().cvars['bags'])
+        bag_index = ([i for i, bag in enumerate(all_bags) if bag[0] == 'Coin Pouch'] + [None])[0]
+        if bag_index != None:
+            pouch = all_bags[bag_index]
+            [pouch[1].update({curr: pouch[1][curr] + coins_dict[curr]}) for curr in coins_dict.keys()]
+            character().set_cvar('bags', dump_json(all_bags))
+        new_coins = character().coinpurse.get_coins()
+        [new_coins.update({curr: new_coins[curr] + coins_dict[curr]}) for curr in coins_dict.keys()]
+        character().coinpurse.set_coins(cp = new_coins['cp'], sp = new_coins['sp'], ep = new_coins['ep'], gp = new_coins['gp'], pp = new_coins['pp'])
+
+    def replace_bags_content(new_bags_content, all_bags = None):
+        all_bags = all_bags if all_bags != None else load_json(character().cvars['bags'])
+        for bag in all_bags:
+            bag[1] = new_bags_content[bag[0]] if bag[0] in new_bags_content else bag[1]
+        character().set_cvar('bags', dump_json(all_bags))
+
+    def is_item_with_value_in_name(item_name):
+        lower_name = item_name.lower()
+        return lower_name.endswith('cp)') or lower_name.endswith('sp)') or lower_name.endswith('gp)')
+
+    def parse_item_price(item_name):
+        lower_name = item_name.lower()
+        if lower_name.endswith('cp)'):
+            return int(lower_name.split('(')[1].split('cp')[0])
+        if lower_name.endswith('sp)'):
+            return int(lower_name.split('(')[1].split('sp')[0]) * 10
+        if lower_name.endswith('gp)'):
+            return int(lower_name.split('(')[1].split('gp')[0]) * 100
+        return 0
+
+    def format_cp_value(cp_value):
+        converted = cp_value_to_dict(cp_value)
+        gp = converted['gp']
+        sp = converted['sp']
+        cp = converted['cp']
+        gp_text = (gp + 'gp' + (', ' if sp > 0 and cp > 0 else ' and ' if sp > 0 or cp > 0 else '')) if gp > 0 else ''
+        sp_text = (sp + 'sp' + (' and ' if cp > 0 else '')) if sp > 0 else ''
+        cp_text = cp + 'cp' if cp > 0 else ''
+        return f'{gp_text}{sp_text}{cp_text}'
+
+    def cp_value_to_dict(cp_value):
+        gp = floor(cp_value / 100)
+        sp = floor(cp_value % 100 / 10)
+        cp = cp_value % 100 % 10
+        return { 'cp': cp, 'sp': sp, 'gp': gp }
+
+    def sell_from_bag(want_to_sell, all_bags, bag_name, item_processor):
+        bag = ([bag for bag in all_bags if bag[0] == bag_name] + [None])[0]
+        result = {
+            'bag_name': bag_name,
+            'new_content': {},
+            'sold_items': {},
+            'total_sold_in_cp': 0
+        }
+        if bag == None:
+            return {}
+        for item_name in bag[1].keys():
+            item_quantity = bag[1][item_name]
+            item_result = item_processor(want_to_sell, item_name, item_quantity)
+            if item_result[0] == True:
+                result['sold_items'][item_name] = item_quantity
+                result['total_sold_in_cp'] += item_result[1]
+            else:
+                result['new_content'][item_name] = item_quantity
+        result['total_sold_in_cp'] = floor(result['total_sold_in_cp'] / 2)
+        return result
+
+    def hunting_item_processor(want_to_sell, item_name, item_quantity):
+        if item_name.lower() == 'rations' and RATIONS in want_to_sell:
+            return [True, 50 * int(item_quantity)]
+        elif item_name.lower() != 'rations' and is_item_with_value_in_name(item_name) and HUNT in want_to_sell:
+            return [True, parse_item_price(item_name) * int(item_quantity)]
+        else:
+            return [False, 0]
+
+    def research_item_processor(want_to_sell, item_name, item_quantity):
+        is_sellable_token = item_name.lower().startswith('foundation token') and TOKENS in want_to_sell
+        is_sellable_relic = item_name.lower().startswith('relic') and RELICS in want_to_sell
+        if is_sellable_token or is_sellable_relic:
+            return [True, parse_item_price(item_name) * int(item_quantity)]
+        else:
+            return [False, 0]
+
+    def fish_item_processor(want_to_sell, item_name, item_quantity):
+        if FISH in want_to_sell:
+            return [True, 50 * int(item_quantity)]
+        return [False, 0]
+
+    c = character()
+    cv = c.cvars
 
     t = f'{c.name} wants to cash-in and sell their goods!'
     footer = 'Don\'t forget to role-play your transaction!\n'
@@ -19,79 +108,6 @@ embed
     thumb = image
 
     all_bags = load_json(cv['bags'])
-
-    coin_pouch_index = [i for i, bag in enumerate(all_bags) if bag[0] == 'Coin Pouch']
-    if len(coin_pouch_index) <= 0:
-      fields.append('Oops! You don\'t have a coin pouch!|Make sure you have one and try again.')
-      return 1
-    coin_pouch_index = coin_pouch_index[0]
-    coin_pouch_content = all_bags[coin_pouch_index][1]
-
-    fish_bag_index = [i for i, bag in enumerate(all_bags) if bag[0] == 'Fish']
-    fish_bag_index = fish_bag_index[0] if len(fish_bag_index) > 0 else None
-
-    hunting_bag_index = [i for i, bag in enumerate(all_bags) if bag[0] == 'Hunting']
-    hunting_bag_index = hunting_bag_index[0] if len(hunting_bag_index) > 0 else None
-
-    research_bag_index = [i for i, bag in enumerate(all_bags) if bag[0] == 'Research']
-    research_bag_index = research_bag_index[0] if len(research_bag_index) > 0 else None
-
-
-
-
-    # >>> BEING--: convert research tokens
-    if research_bag_index != None:
-        rconv_total_scroll = 0
-        rconv_total_artifact = 0
-        rconv_total_alchemy = 0
-        has_to_convert = False
-        bag_content = all_bags[research_bag_index][1]
-        new_bag_content = {}
-
-        alchemy_names = ['othur fumes', 'drow poison', 'elixir of health', 'essence of ether',
-                'midnight tears', 'philter of love', 'purple worm poison', 'truth serum']
-
-        for item_name in bag_content.keys():
-            name_lower = item_name.lower()
-            if '(' in name_lower and 'gp' in name_lower:
-                value = int(item_name.split('(')[1].lower().split('gp')[0])
-                qty = bag_content[item_name]
-
-                if name_lower.startswith('relic [spell scroll level'):
-                    rconv_total_scroll += value * qty
-                    has_to_convert = True
-                elif name_lower.startswith('relic [any') and 'magic item' in name_lower:
-                    rconv_total_artifact += value * qty
-                    has_to_convert = True
-                elif name_lower.startswith('relic [potion of'):
-                    rconv_total_alchemy += value * qty
-                    has_to_convert = True
-                else:
-                    found_match = False
-                    for alchemy_name in alchemy_names:
-                        if alchemy_name in name_lower:
-                            rconv_total_alchemy += value * qty
-                            has_to_convert = True
-                            found_match = True
-                    if not found_match:
-                        new_bag_content[item_name] = bag_content[item_name]
-            else:
-                new_bag_content[item_name] = bag_content[item_name]
-
-        if has_to_convert:
-            if rconv_total_alchemy > 0:
-                new_bag_content['Relic [Alchemy] (4gp)'] = int(rconv_total_alchemy / 4)
-            if rconv_total_artifact > 0:
-                new_bag_content['Relic [Magical Artifact] (16gp)'] = int(rconv_total_artifact / 16)
-            if rconv_total_scroll > 0:
-                new_bag_content['Relic [Magical Scroll] (8gp)'] = int(rconv_total_scroll / 8)
-            all_bags[research_bag_index][1] = new_bag_content
-            c.set_cvar('bags', dump_json(all_bags))
-    # >>> END----: convert research tokens
-
-
-
-
 
     args = &ARGS&
     want_to_sell = []
@@ -122,142 +138,51 @@ embed
       fields.append(f)
       return 1
 
-    total_cp = 0
-    total_sp = 0
-    total_gp = 0
+    # identify bags that need to be analyzed
+    bags_to_sell = []
+    if HUNT in want_to_sell or RATIONS in want_to_sell:
+        bags_to_sell.append(['Hunting', hunting_item_processor])
+    if RELICS in want_to_sell or TOKENS in want_to_sell:
+        bags_to_sell.append(['Research', research_item_processor])
+    if FISH in want_to_sell:
+        bags_to_sell.append(['Fish', fish_item_processor])
 
-    # identify other bags that need to be sold
-    bags_to_sell = {}
-    if hunting_bag_index != None and (HUNT in want_to_sell or RATIONS in want_to_sell):
-        bags_to_sell['Hunting'] = { 'index': hunting_bag_index, 'loot_name': 'Hunting' }
-    if research_bag_index != None and (RELICS in want_to_sell or TOKENS in want_to_sell):
-        bags_to_sell['Research'] = { 'index': research_bag_index, 'loot_name': 'Research' }
-    if fish_bag_index != None and FISH in want_to_sell:
-        bags_to_sell['Fish'] = { 'index': fish_bag_index, 'loot_name': 'Fishing' }
-
-    # removes items from bags and calculates how much is earned for each bag
-    for bag_name in bags_to_sell:
-        bag_control = bags_to_sell[bag_name]
-        bag_control['gp'] = 0
-        bag_control['sp'] = 0
-        bag_control['cp'] = 0
-        bag_control['sold_lines'] = []
-        bag_control['new_content'] = {}
-
-        bag_content = all_bags[bag_control['index']][1]
-
-        total_item_gp, total_item_sp = 0, 0
-
-        if bag_name.lower() == 'fish':
-            fish_gp, fish_sp = 0, 0
-            fish_count = sum(bag_content.values())
-            bag_control['sold_lines'] = [f'{bag_content[fish]}x {fish}' for fish in bag_content.keys()]
-            value_in_cp = fish_count * 25
-            bag_control['sp'] += floor(value_in_cp / 10)
-            bag_control['cp'] += value_in_cp % 10
-            if bag_control['sp'] >= 10:
-                bag_control['gp'] = floor(bag_control['sp'] / 10)
-                bag_control['sp'] = bag_control['sp'] % 10
-
-            bag_control['new_content'] = {}
-            total_gp += fish_gp
-            total_sp += fish_sp
-        else:
-            for item_name in bag_content.keys():
-                name_lower = item_name.lower()
-                is_silver_item = name_lower.endswith('sp)')
-                is_gold_item = name_lower.endswith('gp)')
-                is_rations = name_lower == 'rations'
-                is_research_relic = bag_name == 'Research' and name_lower.startswith('relic')
-                is_research_token = bag_name == 'Research' and name_lower.startswith('foundation token')
-
-                item_for_sale = True if is_research_token and TOKENS in want_to_sell and bag_name == 'Research' else \
-                        True if is_research_relic and RELICS in want_to_sell and bag_name == 'Research' else \
-                        True if (is_silver_item or is_gold_item) and HUNT in want_to_sell and bag_name == 'Hunting' else \
-                        True if is_rations and RATIONS in want_to_sell and bag_name == 'Hunting' else \
-                        False
-
-                if item_for_sale and is_silver_item:
-                    value = int(item_name.split('(')[1].lower().split('sp')[0])
-                    qty = bag_content[item_name]
-                    total_item_sp += qty * value
-                    bag_control['sold_lines'].append(f'{qty}x {item_name}')
-                elif item_for_sale and is_gold_item:
-                    value = int(item_name.split('(')[1].lower().split('gp')[0])
-                    qty = bag_content[item_name]
-                    total_item_gp += qty * value
-                    bag_control['sold_lines'].append(f'{qty}x {item_name}')
-                elif item_for_sale and is_rations:
-                    qty = bag_content[item_name]
-                    total_item_sp += qty * 5
-                    bag_control['sold_lines'].append(f'{qty}x {item_name}')
-                else:
-                    bag_control['new_content'][item_name] = bag_content[item_name]
-
-            bag_control['gp'] = floor(total_item_gp / 2)
-            bag_control['sp'] = floor(total_item_sp / 2)
-            if total_item_gp % 2 != 0:
-                bag_control['sp'] += 5
-            if total_item_sp % 2 != 0:
-                bag_control['cp'] += 5
-            if bag_control['sp'] >= 10:
-                bag_control['gp'] += floor(bag_control['sp'] / 10)
-                bag_control['sp'] = bag_control['sp'] % 10
-
-        total_gp += bag_control['gp']
-        total_sp += bag_control['sp']
-        total_cp += bag_control['cp']
-
-    # Normalize totals
-    if total_cp >= 10:
-        total_sp += floor(total_cp / 10)
-        total_cp = total_cp % 10
-    if total_sp >= 10:
-        total_gp += floor(total_sp / 10)
-        total_sp = total_sp % 10
-
-    # Credit money to coin pouch
-    bag_cp = coin_pouch_content['cp'] + total_cp
-    bag_sp = coin_pouch_content['sp'] + total_sp
-    bag_gp = coin_pouch_content['gp'] + total_gp
-
-    if bag_cp >= 10:
-        bag_sp += floor(bag_cp / 10)
-        bag_cp = bag_cp % 10
-    if bag_sp >= 10:
-        bag_gp += floor(bag_sp / 10)
-        bag_sp = bag_sp % 10
-
-    coin_pouch_content['gp'] = bag_gp
-    coin_pouch_content['sp'] = bag_sp
-    coin_pouch_content['cp'] = bag_cp
-
-    all_bags[coin_pouch_index] = ['Coin Pouch', coin_pouch_content]
+    # processes bags
+    results = []
+    for bag_to_sell in bags_to_sell:
+        results.append(sell_from_bag(want_to_sell, all_bags, bag_to_sell[0], bag_to_sell[1]))
 
     # Build output text
     sold_something = False
-    for bag_name in bags_to_sell:
-        bag_control = bags_to_sell[bag_name]
-        gp, sp, cp = bag_control['gp'], bag_control['sp'], bag_control['cp']
+    for result in results:
+        loot_name = result['bag_name'] if result['bag_name'] != 'Fish' else 'Fishing'
+        bag_sold_cp = result['total_sold_in_cp']
+        formatted_value = format_cp_value(bag_sold_cp)
         final_text = ''
 
-        if gp > 0 or sp > 0 or cp > 0:
+        if bag_sold_cp > 0:
             sold_something = True
-            gp_text = (gp + 'gp' + (', ' if sp > 0 and cp > 0 else ' and ' if sp > 0 or cp > 0 else '')) if gp > 0 else ''
-            sp_text = (sp + 'sp' + (' and ' if cp > 0 else '')) if sp > 0 else ''
-            cp_text = cp + 'cp' if cp > 0 else ''
-            final_text += f'{c.name} sells their {bag_control["loot_name"]} loot!|You made **{gp_text}{sp_text}{cp_text}** by selling:'
-            final_text += '\n' + '\n'.join(bag_control['sold_lines'])
+            sold_items_lines = [f'{sold_item[1]}x {sold_item[0]}' for sold_item in result['sold_items'].items()]
+
+            final_text += f'{c.name} sells their {loot_name} loot!|You made **{formatted_value}** by selling:'
+            final_text += '\n' + '\n'.join(sold_items_lines)
         else:
-            final_text += f'{c.name} tries to sell their {bag_control["loot_name"]} loot...|But you have none! Come back later.'
+            final_text += f'{c.name} tries to sell their {loot_name} loot...|But you have none! Come back later.'
 
         fields.append(final_text)
-        all_bags[bag_control['index']][1] = bag_control['new_content']
 
     if sold_something:
-        fields.append('Well done!|Your coins have been added to your Coin Pouch')
+        bags_new_content = {result['bag_name']: result['new_content'] for result in results}
 
-    c.set_cvar('bags', dump_json(all_bags))
+        net_total_sold_in_cp = sum([result['total_sold_in_cp'] for result in results])
+        net_total_dict = cp_value_to_dict(net_total_sold_in_cp)
+
+        formatted_net_total = format_cp_value(net_total_sold_in_cp)
+
+        replace_bags_content(bags_new_content, all_bags)
+        modify_coins(net_total_dict, all_bags)
+
+        fields.append(f'Well done!|{formatted_net_total} have been added to your Coin Pouch')
 </drac2>
 -title "{{t}}"
 {{f'-image "{img}"' if img else ""}}

@@ -1,0 +1,94 @@
+embed
+<drac2>
+    FISH_TO_RATION = 'FISH_TO_RATION'
+    PRINT_HELP = 'PRINT_HELP'
+
+    title = 'Seventra Utilities!'
+    img, thumb, color, footer, fields = None, None, None, None, []
+
+    def replace_bags_content(new_bags_content, all_bags = None):
+        all_bags = all_bags if all_bags != None else load_json(character().cvars['bags'])
+        for bag in all_bags:
+            bag[1] = new_bags_content[bag[0]] if bag[0] in new_bags_content else bag[1]
+        character().set_cvar('bags', dump_json(all_bags))
+
+    def add_to_bag(bag_name, new_items, all_bags = None):
+        all_bags = all_bags if all_bags != None else load_json(character().cvars['bags'])
+        [[bag[1].update({item: new_items[item] + (bag[1][item] if item in bag[1] else 0)}) for item in new_items] for bag in all_bags if bag[0] == bag_name]
+        character().set_cvar('bags', dump_json(all_bags))
+
+    def has_bag_with_name(bag_name, all_bags = None):
+        all_bags = all_bags if all_bags != None else load_json(character().cvars['bags'])
+        return bag_name in [bag[0] for bag in all_bags]
+
+    def read_operation():
+        args = &ARGS&
+        if len(args) > 0 and args[0].lower() == 'ftor':
+            return FISH_TO_RATION
+        else:
+            return PRINT_HELP
+
+    def convert_fish_to_ration():
+        all_bags = load_json(character().cvars['bags'])
+
+        if not(has_bag_with_name('Fish', all_bags) and has_bag_with_name('Hunting'), all_bags):
+            title = f'{character().name} wants to convert their fish...'
+            fields.append('...but there was a problem!|Could not find bags named Fish and Hunting in your bags. Make sure they exist first.')
+            return -1
+
+        all_fish = [bag[1] for bag in all_bags if bag[0] == 'Fish'][0]
+        fish_count = sum([all_fish[fish_name] for fish_name in all_fish.keys()])
+
+        if fish_count == 0:
+            fields.append(f'{character().name} tries to fry their fish...|But you have none! Come back after catching some!')
+            return -1
+
+        fish_text = '\n'.join([f'{all_fish[fish_name]}x {fish_name}' for fish_name in all_fish.keys()])
+
+        replace_bags_content({'Fish': {}}, all_bags)
+        add_to_bag('Hunting', {'Rations': fish_count}, all_bags)
+
+        f = f'{character().name} tries to fry their fish...|'
+        f += 'The following fish were removed from your `Fish` bag:\n'
+
+        if len(fish_text) > 800:
+            split_index = fish_text.index('\n', 600)
+            f += fish_text[0:split_index]
+            fields.append(f)
+
+            f = "(Continued...)|"
+            f += fish_text[split_index + 1:len(fish_text)]
+            fields.append(f)
+        else:
+            f += fish_text
+            fields.append(f)
+
+        total_rations = [bag[1]['Rations'] for bag in all_bags if bag[0] == 'Hunting'][0]
+        f = f'{fish_count} ration(s) were added to your Hunting bag|'
+        f += f'Rations in Hunting Bag:\nRations: {total_rations}'
+        fields.append(f)
+
+    def print_help():
+        f = "Use one of the commands below:|"
+        f += "`!util ftor`: convert your Fish bag to Rations in your Hunting bag"
+        f += "\n\nNew commands are added as needed.\nLet the server Dragonspeakers know if you have any suggestions."
+        fields.append(f)
+
+    operation = read_operation()
+    {
+        FISH_TO_RATION: convert_fish_to_ration,
+        PRINT_HELP: print_help
+    }[operation]()
+
+    title = 'Seventra General Utilities'
+    thumb = image
+
+    footer = 'Seventra: Exodus of Heroes | Seventra Utilities\n'
+    footer += '!util help'
+</drac2>
+-title "{{title}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
