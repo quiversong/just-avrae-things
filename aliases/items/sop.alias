@@ -3,7 +3,7 @@ args = &ARGS&
 c, sb, cc_name, = character(), character().spellbook, 'Staff of Power'
 fields = []
 
-footer = 'Items Collection: Shiftweave | Created by quiversong#2772'
+footer = 'Items Collection: Staff of Power | Created by quiversong#2772'
 
 t = f'{c.name} uses their Staff of Power!'
 desc = "**Staff of Power:** This staff can be wielded as a magic quarterstaff that grants a +2 bonus to attack and damage rolls made with it. While holding it, you gain a +2 bonus to Armor Class, saving throws, and spell attack rolls.\n\nThe staff has 20 charges for a variety of properties. The staff regains 2d8 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff retains its +2 bonus to attack and damage rolls but loses all other properties. On a 20, the staff regains 1d8 + 2 charges."

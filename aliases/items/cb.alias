@@ -8,7 +8,7 @@ POTS = {
     'supreme-healing': {'dice': [{4: 10}, 20], 'name': 'Potion of Supreme Healing'}
 }
 
-footer = 'Items Collection: Shiftweave | Created by quiversong#2772'
+footer = 'Items Collection: Contingency Band | Created by quiversong#2772'
 
 out = []
 c = character()
