@@ -1,11 +1,127 @@
 embed
 <drac2>
 # Configuration Variables
-VERSION = '0.5'
+VERSION = '2.0'
 
 DATA_VAR = "c85742dc-f2e9-4a99-b544-b8f71dd7bed9"
 DAILY_CAP = 2
 BLOWS_NEEDED = 3
+
+def add_coins(coins_dict, all_bags = None):
+    out_of_funds = False
+    all_bags = all_bags if all_bags != None else load_json(character().cvars['bags'])
+    coin_pouch = ([bag for bag in all_bags if bag[0] == 'Coin Pouch'] + [None])[0]
+    if coin_pouch != None:
+        coin_pouch = coin_pouch[1]
+        currencies = ['cp', 'sp', 'gp', 'pp']
+        for i in range(0, len(currencies)):
+            currency = currencies[i]
+            coin_pouch[currency] += coins_dict[currency] if currency in coins_dict else 0
+            while coin_pouch[currency] < 0 and i < len(currencies) - 1:
+                next_currency = currencies[i + 1]
+                coin_pouch[next_currency] -= 1
+                coin_pouch[currency] += 10
+            if coin_pouch[currency] < 0 and i == len(currencies) - 1:
+                out_of_funds = True
+        character().set_cvar('bags', dump_json(all_bags))
+    diff = {'cp': 0, 'sp': 0, 'ep': 0, 'gp': 0, 'pp': 0}
+    diff.update(coins_dict)
+    character().coinpurse.modify_coins(cp=diff['cp'], sp=diff['sp'], ep=diff['ep'], gp=diff['gp'], pp=diff['pp'])
+    return not out_of_funds
+
+def add_to_bag(bag_name, new_items, all_bags = None):
+    all_bags = all_bags if all_bags != None else load_json(character().cvars['bags'])
+    bag = ([bag for bag in all_bags if bag[0] == bag_name] + [None])[0]
+    if bag == None:
+        all_bags.append([bag_name, {}])
+        bag = all_bags[len(all_bags) - 1]
+    [bag[1].update({item: new_items[item] + (bag[1][item] if item in bag[1] else 0)}) for item in new_items]
+    character().set_cvar('bags', dump_json(all_bags))
+
+
+def get_daily_activity_data(control_var, daily_cap):
+    cvars = character().cvars
+    if control_var not in cvars:
+        character().set_cvar(control_var, f"0:0")
+        return { "count": 0, "wait_time": None }
+    else:
+        var_parts = cvars[control_var].split(':')
+        count, first_time = int(var_parts[0]), float(var_parts[1])
+        now = time()
+        if count > 0 and first_time != None:
+            passed_in_day_since_first_time = first_time % 86400
+            next_midnight_after_first_time = first_time + (86400 - passed_in_day_since_first_time)
+            if now > next_midnight_after_first_time:
+                character().set_cvar(control_var, f"0:0")
+                return { "count": 0, "wait_time": None }
+            if count >= daily_cap:
+                wait_time = next_midnight_after_first_time - now
+                hours = floor(wait_time / 3600)
+                minutes = ceil(wait_time / 60) if hours == 0 else ceil((wait_time % 3600) / 60)
+                wait_text = (str(hours) + ' hours and ' if hours > 0 else '') + str(minutes) + ' minutes'
+                return { "count": count, "wait_time": wait_text }
+        return { "count": count, "wait_time": None }
+
+def increase_daily_activity_data(control_var):
+    cvars = character().cvars
+    if not control_var in cvars or cvars[control_var] == "0:0":
+        character().set_cvar(control_var, f'1:{time()}')
+        return 1
+    else:
+        var_parts = cvars[control_var].split(':')
+        count, last_time = int(var_parts[0]) + 1, var_parts[1]
+        character().set_cvar(control_var, f'{count}:{last_time}')
+        return count
+
+def add_inspiration():
+    character().create_cc_nx('Inspiration', 0, 1, None, 'bubble')
+    character().mod_cc('Inspiration', 1)
+
+def add_exhaustion(quantity):
+    character().create_cc_nx('Exhaustion', 0, 6, None, 'bubble')
+    character().mod_cc('Exhaustion', quantity)
+
+def add_vsheet_feature_if_not_existent(vsheet_variable_name, vsheet_variable_title, feature_value):
+    cv = character().cvars
+    vfeatures = load_json(cv['vfeatures']) if 'vfeatures' in cv else []
+    has_kaizen_features = [f for f in (vfeatures) if f['n'] == vsheet_variable_name]
+    if len(has_kaizen_features) == 0:
+        vfeatures.append({
+            'n': vsheet_variable_name,
+            't': f'\n**{vsheet_variable_title}:** '
+        })
+        character().set_cvar('vfeatures', dump_json(vfeatures))
+    features_var = cv[vsheet_variable_name].strip() if vsheet_variable_name in cv else ''
+    if not feature_value in features_var:
+        if len(features_var) != 0:
+            features_var += ', '
+        features_var += feature_value
+        character().set_cvar(vsheet_variable_name, features_var)
+        return True
+    return False
+
+def get_pc_weapon(weapon_label):
+    weapon_str = [a for a in character().attacks
+      if str(a).lower().split(':')[0].strip().replace('*', '').startswith(weapon_label)
+    ]
+
+    if len(weapon_str) > 0:
+        weapon_str = str(weapon_str[0])
+        return {
+          'name': weapon_str.split(':')[0].strip().replace('**', ''),
+          'a_bonus': int(weapon_str.split('Attack:')[1].strip().split(' ')[0])
+        }
+    else:
+        return None
+
+def get_warrior_data(all_warriors, warrior_code):
+    warrior = ([w for w in all_warriors if w['code'].lower() == warrior_code.lower()] + [None])[0]
+    return None if warrior == None else {
+        'name': warrior["name"].replace('"', '\\\"'),
+        'weapon': warrior["weapon"].replace('"', '\\\"'),
+        'desc': warrior["desc"].replace('"', '\\\"'),
+        'image': warrior['image']
+    }
 
 CURRENCY = {
     'cp': 'Copper Pieces',
@@ -28,17 +144,21 @@ c_first_name = c.name.split(' ')[0]
 cv, cs = c.cvars, c.skills
 
 title = f'{c_first_name} wants to challenge the warriors of the Kaizen Temple for a duel!'
-img, thumb, desc, add_to_bag, remove_from_coins = None, None, None, None, None
-add_to_coins = {
+img, thumb, desc = None, None, None
+items_to_add = {}
+
+coins_to_add = {
     'cp': 0,
     'sp': 0,
     'gp': 0
 }
-remove_from_coins = {
+
+coins_to_remove = {
     'cp': 0,
     'sp': 0,
     'gp': 0
 }
+
 sl, fl = "**Success!**", "**Failure!**"
 fields = []
 commands = []
@@ -47,6 +167,7 @@ DUEL_TIME_VAR = "_du_dhc_"
 DUEL_STAGE_VAR = "_du_vars"
 DUEL_STATS_VAR = "_du_st_"
 KAIZEN_FEATURES_VAR = "duelsashes"
+
 EMPTY_STATS = {
     'wins': 0,
     'losses': 0,
@@ -54,57 +175,11 @@ EMPTY_STATS = {
     'flawless_losses': 0,
     'win_min_rounds': 0
 }
+MOUNTAIN_ICON = 'https://cdn.discordapp.com/attachments/855908840633270282/913279197793886288/mountain.jpg'
 
-daily_activity_control = None
-#! daily_activity_control = devrae_f daily_control_init(#P DUEL_TIME_VAR #P DAILY_CAP) !#
-##### devrae function insert [daily_control_init] #####
-daily_activity_control = None
-__p0__ = DUEL_TIME_VAR
-__p1__ = DAILY_CAP
-# returns current counter and wait time text if any
-_var_name = __p0__
-_daily_limit = __p1__
-_cvars = character().cvars
-
-_now = time()
-if _var_name not in _cvars:
-  __result__ = { "count": 0, "wait_time": None }
-  character().set_cvar(_var_name, f"0:0")
-else:
-  _var_parts = _cvars[_var_name].split(':')
-  _count = int(_var_parts[0])
-  _first_time = float(_var_parts[1])
-  _wait_time = None
-  _is_next_day = False
-
-  if _count > 0 and _first_time != None:
-    _passed_in_day_since_first_time = _first_time % 86400
-    _next_midnight_after_first_time = _first_time + (86400 - _passed_in_day_since_first_time)
-    if _now > _next_midnight_after_first_time:
-      _is_next_day = True
-    elif _count >= _daily_limit:
-      _wait_time = _next_midnight_after_first_time - _now
-      _hours = floor(_wait_time / 3600)
-      _minutes = 0
-      if _hours == 0:
-        _minutes = ceil(_wait_time / 60)
-      else:
-        _minutes = ceil((_wait_time % 3600) / 60)
-      _wait_text = (str(_hours) + ' hours and ' if _hours > 0 else '') + str(_minutes) + ' minutes'
-
-  if _is_next_day:
-    _count = 0
-    __result__ = { "count": _count, "wait_time": None }
-    character().set_cvar(_var_name, f"0:0")
-  elif _count < _daily_limit:
-    __result__ = { "count": _count, "wait_time": None }
-  else:
-    __result__ = { "count": _count, "wait_time": _wait_text }
-
-daily_activity_control = __result__
-##### devrae function end [daily_control_init] #####
-duel_count = daily_activity_control["count"]
-wait_time = daily_activity_control["wait_time"]
+daily_data = get_daily_activity_data(DUEL_TIME_VAR, DAILY_CAP)
+duel_count = daily_data["count"]
+wait_time = daily_data["wait_time"]
 
 footer = "Don't forget to role-play your duel!"
 footer += f" Challenges remaining today: {DAILY_CAP - duel_count}"
@@ -139,29 +214,21 @@ if not("bags" in cv and "Coin Pouch" in cv["bags"]):
 
 if len(args) > 0 and args[0] == 'desc':
     title = 'Nahachi Kaizen Temple Warriors'
-
-    warrior_code = args[1]
-    warrior = [w for w in all_warriors if w['code'] == warrior_code]
-    if len(warrior) == 0:
-        fields.append(f'Please check again!|There are no warriors who frequent the Kaizen Temple with codename {warrior_code}')
+    warrior_data = get_warrior_data(all_warriors, args[1])
+    if warrior_data == None:
+        fields.append(f'Please check again!|There are no warriors who frequent the Kaizen Temple with codename {args[1]}')
         return 1
-    warrior = warrior[0]
-    warrior_name = warrior["name"].replace('"', '\\\"')
 
-    title += f': {warrior_name}'
-    description = warrior["desc"].replace('"', '\\\"')
-    weapon = warrior["weapon"].replace('"', '\\\"')
-    fields.append(f'Description|{description}')
-    fields.append(f'Weapons of Choice|{weapon}')
-
-    img = warrior["image"]
-    thumb = 'https://cdn.discordapp.com/attachments/855908840633270282/913279197793886288/mountain.jpg'
-
+    img = warrior_data["image"]
+    thumb = MOUNTAIN_ICON
+    title += f': {warrior_data["name"]}'
+    fields.append(f'Description|{warrior_data["desc"]}')
+    fields.append(f'Weapons of Choice|{warrior_data["weapon"]}')
     return 1
 
 if len(args) > 0 and args[0] == 'list':
     title = f"{character().name}'s Duel Results"
-    thumb = 'https://cdn.discordapp.com/attachments/855908840633270282/913279197793886288/mountain.jpg'
+    thumb = MOUNTAIN_ICON
 
     f = 'Challenge Results|'
     f += 'The list below contains the names of the warriors you have challenged and that can be challenged by you.\n'
@@ -203,7 +270,7 @@ if len(args) > 0 and args[0] == 'list':
     return 1
 
 if len(args) < 2:
-    thumb = 'https://cdn.discordapp.com/attachments/855908840633270282/913279197793886288/mountain.jpg'
+    thumb = MOUNTAIN_ICON
 
     f = f'{c_first_name} arrives at the Kaizen Temple in Nahachi...|'
     f += '- To view the description of a Kaizen Temple warrior:\n`!duel desc <warrior code>`'
@@ -227,7 +294,7 @@ chosen_warrior_code = args[0].lower().strip()
 warrior = [w for w in all_warriors if w["code"].lower() == chosen_warrior_code]
 if len(warrior) == 0:
     if chosen_warrior_code in global_stats:
-        fields.append(f'Oops! This is still not ready to accept challenges!|Blame it on the Seventra staff! They are still working on it. :)')
+        fields.append(f'Oops! This is warrior still not ready to accept challenges!|Blame it on the Seventra staff! They are still working on it. :)')
     else:
         fields.append(f'{c_first_name} seems a little confused...|There are no warriors named {chosen_warrior_code} available to duel with you.\nUse `!duel list` to see the warriors that are available to duel with you.')
     return 1
@@ -238,21 +305,9 @@ if not(warrior['code'] == all_warriors[0]['code'] or warrior['code'] in global_s
     fields.append(f'{c_first_name} is not ready yet...|You need to prove your strength by challenging other warriors before you can challenge {warrior_name}!\nUse `!duel list` to see the warriors that are available to duel with you.')
     return 1
 
-######### IDENTIFY WEAPON ##########
 
-weapon = None
-weapon_arg = args[1].lower()
-weapon_str = [a for a in c.attacks
-  if str(a).lower().split(':')[0].strip().replace('*', '').startswith(weapon_arg)
-]
-
-if len(weapon_str) > 0:
-    weapon_str = str(weapon_str[0])
-    weapon = {
-      'name': weapon_str.split(':')[0].strip().replace('**', ''),
-      'a_bonus': int(weapon_str.split('Attack:')[1].strip().split(' ')[0])
-    }
-else:
+weapon = get_pc_weapon(args[1].lower())
+if weapon == None:
     fields.append(f'{c_first_name} seems a little confused...|I could not find any attacks matching `{args[1]}`!')
     return 1
 
@@ -433,23 +488,22 @@ if is_player_winner:
 
     if 'itemRewards' in warrior and len(warrior['itemRewards']) > 0:
         added_items = True
-        add_to_bag = {}
+        items_to_add = {}
         rewards_text = ''
         for reward, qty in warrior['itemRewards'].items():
             if reward in CURRENCY.keys():
                 if qty > 0:
-                    add_to_coins[reward] += qty
+                    coins_to_add[reward] += qty
                     rewards_text += f'\n `{qty}x {CURRENCY[reward]}`'
                 else:
-                    remove_from_coins[reward] += (qty * -1)
+                    coins_to_remove[reward] += qty
                     rewards_text += f'\n `NEGATIVE {qty * -1}x {CURRENCY[reward]}!`'
             elif 'inspiration' in reward.lower().strip():
-                character().create_cc_nx('Inspiration', 0, 1, None, 'bubble')
-                character().mod_cc('Inspiration', 1)
+                add_inspiration()
                 rewards_text += '\n`Inspiration`'
             else:
                 rewards_text += '\n' + f'`{qty}x {reward}`'
-                add_to_bag[reward] = qty
+                items_to_add[reward] = qty
         f += ' You gained the following rewards:' + rewards_text
 
     if 'uniqueRewards' in warrior and len(warrior['uniqueRewards']) > 0 and stats['wins'] == 1:
@@ -459,37 +513,24 @@ if is_player_winner:
             stripped = reward.lower().strip()
             qty = warrior['uniqueRewards'][reward]
             if stripped == 'inspiration':
-                character().create_cc_nx('Inspiration', 0, 1, None, 'bubble')
-                character().mod_cc('Inspiration', 1)
+                add_inspiration()
                 rewards_text += '\n`Inspiration`'
             elif 'xp' in stripped and 'admin' in stripped:
                 rewards_text += f'\n`{qty} {reward}`'
             elif 'seventran samurai feat' in stripped:
                 rewards_text += f'\n`{reward} (use `!sevfeat` to see it)`'
             elif 'kaizen' in stripped and stripped.endswith('sash'):
-                vfeatures = load_json(cv['vfeatures']) if 'vfeatures' in cv else []
-                has_kaizen_features = [f for f in (vfeatures) if f['n'] == KAIZEN_FEATURES_VAR]
-                if len(has_kaizen_features) == 0:
-                    vfeatures.append({
-                        'n': KAIZEN_FEATURES_VAR,
-                        't': '\n**Kaizen Sashes:** '
-                    })
-                    character().set_cvar('vfeatures', dump_json(vfeatures))
-                features_var = cv[KAIZEN_FEATURES_VAR].strip() if KAIZEN_FEATURES_VAR in cv else ''
-                if not reward in features_var:
-                    if len(features_var) != 0:
-                        features_var += ', '
-                    features_var += reward
-                    character().set_cvar(KAIZEN_FEATURES_VAR, features_var)
+                sash_was_added = add_vsheet_feature_if_not_existent(KAIZEN_FEATURES_VAR, "Kaizen Sashes", reward)
+                if sash_was_added:
                     rewards_text += f'\n`{reward}`'
             elif stripped in CURRENCY.keys():
                 rewards_text += f'\n`{qty}x {CURRENCY[stripped]}`'
                 if qty > 0:
-                    add_to_coins[reward] += qty
+                    coins_to_add[reward] += qty
                 else:
-                    remove_from_coins[reward] += (qty * -1)
+                    coins_to_remove[reward] += (qty * -1)
             else:
-                add_to_bag[reward] = qty
+                items_to_add[reward] = qty
                 rewards_text += f'\n`{qty}x {reward}`'
 
         if rewards_text != '':
@@ -541,15 +582,13 @@ else:
             qty = warrior['payment'][payment]
             stripped = payment.lower().strip()
             if 'inspiration' in stripped:
-                character().create_cc_nx('Inspiration', 0, 1, None, 'bubble')
-                character().mod_cc('Inspiration', 1)
+                add_inspiration()
                 payment_text += '\nYou gain Inspiration!'
             elif stripped in CURRENCY.keys():
-                remove_from_coins[payment] += qty
+                coins_to_remove[payment] -= qty
                 payment_text += f'\n`You lose {qty}x {payment}!`'
             elif 'exhaustion' in stripped:
-                character().create_cc_nx('Exhaustion', 0, 6, None, 'bubble')
-                character().mod_cc('Exhaustion', qty)
+                add_exhaustion(qty)
                 payment_text += f'\nYou suffer {qty} point{"s" if qty > 1 else ""} of exhaustion!'
 
         if payment_text != '':
@@ -566,76 +605,17 @@ global_stats[warrior['code']] = stats
 character().set_cvar(DUEL_STATS_VAR, dump_json(global_stats))
 
 
-###### Coin Balance ########
+###### Bags Update ########
+all_bags = load_json(character().cvars['bags'])
+add_to_bag('Kaizen Temple', items_to_add, all_bags)
+add_coins(coins_to_add, all_bags)
+if not add_coins(coins_to_remove):
+    f = 'OOPS!|'
+    f += f'It seems like you were missing funds to cover a transaction!'
+    f += '\nPlease ping `@Administrator` to get help.'
+    fields.append(f)
 
-bag_name = 'Coin Pouch'
-cv = character().cvars
-bags = load_json(cv['bags'])
-pouch_index = [i for i, x in enumerate(bags) if x[0] == bag_name]
-pouch_index = pouch_index[0]
-bag_content = bags[pouch_index][1]
-for key in add_to_coins:
-    bag_content[key] += add_to_coins[key]
-for key in remove_from_coins:
-    qty = remove_from_coins[key]
-    if qty > 0:
-        if not(key in bag_content) or bag_content[key] < qty:
-            f = 'OOPS!|'
-            f += f'You are supposed to lose {qty}x {key} but it looks like you lack the funds!'
-            f += '\nPlease ping `@Administrator` to get help.'
-            fields.append(f)
-        else:
-            bag_content[key] -= qty
-bags[pouch_index] = [bag_name, bag_content]
-character().set_cvar('bags', dump_json(bags))
-
-
-if add_to_bag != None and len(add_to_bag) > 0:
-  #! devrae_f add_to_bag (#P "Kaizen Temple" #P add_to_bag) !#
-  ##### devrae function insert [add_to_bag] #####
-  __p0__ = "Kaizen Temple"
-  __p1__ = add_to_bag
-  _bag_name = __p0__
-  _content = __p1__
-
-  _cv = character().cvars
-  _bags = load_json(_cv["bags"]) if "bags" in _cv else []
-  _bag_index = [i for i, x in enumerate(_bags) if x[0] == _bag_name]
-  _bag_index = _bag_index[0] if len(_bag_index) > 0 else -1
-  if _bag_index == -1:
-    _bags.append([_bag_name, {}])
-    _bag_index = len(_bags) - 1
-  _bag_content = _bags[_bag_index][1]
-  for _key in _content:
-    if _key in _bag_content:
-      _bag_content[_key] = _bag_content[_key] + _content[_key]
-    else:
-      _bag_content[_key] = _content[_key]
-  _bags[_bag_index] = [_bag_name, _bag_content]
-  character().set_cvar('bags', dump_json(_bags))
-
-  ##### devrae function end [add_to_bag] #####
-
-
-#! duel_count = devrae_f daily_control_increase_counter(#P DUEL_TIME_VAR) !#
-##### devrae function insert [daily_control_increase_counter] #####
-__p0__ = DUEL_TIME_VAR
-# returns current counter and wait time text if any
-_var_name = __p0__
-_cvars = character().cvars
-if not _var_name in _cvars or _cvars[_var_name] == "0:0":
-  _now = time()
-  character().set_cvar(_var_name, f'1:{_now}')
-  __result__ = 1
-else:
-  _var_parts = _cvars[_var_name].split(':')
-  _count = int(_var_parts[0]) + 1
-  _time = _var_parts[1]
-  character().set_cvar(_var_name, f'{_count}:{_time}')
-  __result__ = _count
-duel_count = __result__
-##### devrae function end [daily_control_increase_counter] #####
-
+increase_daily_activity_data(DUEL_TIME_VAR)
 </drac2>
 -title "{{title}}"
 {{f'-image "{img}"' if img else ""}}
