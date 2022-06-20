@@ -1,0 +1,65 @@
+embed <drac2>
+args = &ARGS&
+coinTypes=["cp","sp","ep","gp","pp"]
+coinRates={"cp": 100, "sp": 10, "ep": 2, "gp": 1, "pp" :0.1}
+black=[2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35]
+red=[1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36]
+defaultCoin="gp"
+coinPouchName="Coin Pouch"
+
+help = False if len(args) == 2 else True
+
+bagsLoaded = load_json(bags)
+pouch=([x for x in bagsLoaded if x[0] == 'Coin Pouch'] + [None])[0]
+
+BetType = 'n/a' if help else args[0]
+BetAmount = '0' if help else args[1]
+BetAmount = BetAmount+defaultCoin if BetAmount.isdigit() else BetAmount
+amount = int(''.join([x for x in BetAmount if x in "0123456789-"]))
+coinType =''.join([x for x in BetAmount[1:] if not x.isdigit()])
+help = True if help else (not coinType in coinTypes)
+
+def create_coin_diff_hash(amount, coinType):
+    return {
+        'cp': amount if coinType == 'cp' else 0,
+        'sp': amount if coinType == 'sp' else 0,
+        'ep': amount if coinType == 'ep' else 0,
+        'gp': amount if coinType == 'gp' else 0,
+        'pp': amount if coinType == 'pp' else 0
+    }
+
+if not help:
+    diff = create_coin_diff_hash(-amount, coinType)
+    character().coinpurse.modify_coins(cp=diff['cp'], sp=diff['sp'], ep=diff['ep'], gp=diff['gp'], pp=diff['pp'])
+    if pouch != None:
+        pouch[1].update({coinType:pouch[1][coinType]-amount})
+        for coin in coinTypes[:-1]:
+            larger = coinTypes[coinTypes.index(coin)+1]
+            rate = int(coinRates[coin]/coinRates[larger])
+            p = pouch[1][coin]//rate
+            if pouch[1][coin] < 0:
+                pouch[1].update({larger:pouch[1][larger]+p,coin:pouch[1][coin]-p*rate})
+
+error = False
+if pouch != None:
+    error = [x for x in pouch[1]if pouch[1][x]<0]
+
+Roll = randint(36)
+result = [Roll]
+result.append('black') if Roll in black else (result.append('red') if Roll in red else result.append('green'))
+result.append('even') if (Roll % 2) == 0 else result.append('odd')
+result.append('high') if Roll >= 19 else result.append ('low')
+winnings = ((2*amount if BetType in ['black','red','high','low','odd','even'] else 35*amount) if BetType in result else 0*amount)
+
+if not help and not error:
+    if pouch != None:
+        pouch[1].update({coinType:pouch[1][coinType]+(winnings)})
+        character().set_cvar("bags",dump_json(bagsLoaded))
+    diff = create_coin_diff_hash(winnings, coinType)
+    character().coinpurse.modify_coins(cp=diff['cp'], sp=diff['sp'], ep=diff['ep'], gp=diff['gp'], pp=diff['pp'])
+</drac2>
+-title "<name> {{('would like to play roulette!') if help else ('should check their purse.') if error else (f'bet {BetAmount} on {BetType}.')}}"
+-desc "{{(f'To play, enter `!roulette <BetType> <BetAmount>`\n\nBet Types: black, red, even, odd, high, low, green.\nBet Amounts: You may specify coin type, or bet with gold pieces by default.\n\nExample1: `!roulette black 5cp` - Bet 5cp on black.\nExample2: `!roulette even 5sp` - Bet 5sp on even.\nExample3: `!roulette green 10` - Bet 10gp on green.') if help else (('Oh no... you lack the coin to make that bet... Try a smaller bet, or go home and rethink your life...') if error else (f'The ball landed on {result[1]} {result[0]}, winning {winnings}{coinType}'))}}"
+-thumb https://cdn.discordapp.com/attachments/798946342192807956/803013788353429565/images.png -color red
+-footer "{{('Roulette help | !roulette | Enjoy!')}}"
+-image "https://cdn.discordapp.com/attachments/855908840633270282/988494859000217640/roulette.jpg"
