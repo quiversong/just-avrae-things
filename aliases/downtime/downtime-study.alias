@@ -21,43 +21,46 @@ tembed
 {{DT = DowntimeTimes.split(', ')}}
 {{Times = True if len([x for x in DT if (float(x)-time()) > (576000)]) < 7 else False}}
 
+<drac2>
 # loading the pouch
-{{bagsLoaded = load_json(bags)}}
-{{pouch=([x for x in bagsLoaded if x[0]=='Coin Pouch'])[0]}}
-
-# Checks if the user can pay
-{{pouch[1].update({'gp':pouch[1]['gp']-(5)})}}
-
-# coins and coin rates
-{{CoinRates={"cp":100,"sp":10,"ep":2,"gp":1,"pp":0.1} }}
-{{CoinTypes=["cp","sp","ep","gp","pp"]}}
+bagsLoaded = load_json(bags)
+pouch=([x for x in bagsLoaded if x[0]=='Coin Pouch'] + [None])[0]
 
 # auto changing of coins.
-<drac2>
 if subject and Times:
-  for coin in CoinTypes[:-1]:
-    larger = CoinTypes[CoinTypes.index(coin)+1]
-    rate = int(CoinRates[coin]/CoinRates[larger])
-    p = pouch[1][coin]//rate
-    if pouch[1][coin] < 0:
-      pouch[1].update({larger:pouch[1][larger]+p,coin:pouch[1][coin]-p*rate})
-  payed = not any([x for x in pouch[1] if pouch[1][x]<0])
+    character().coinpurse.modify_coins(gp = -5)
+    payed = True
+    if pouch != None:
+        # Checks if the user can pay
+        pouch[1].update({'gp':pouch[1]['gp']-(5)})
+
+        # coins and coin rates
+        CoinRates={"cp":100,"sp":10,"ep":2,"gp":1,"pp":0.1}
+        CoinTypes=["cp","sp","ep","gp","pp"]
+
+        for coin in CoinTypes[:-1]:
+            larger = CoinTypes[CoinTypes.index(coin)+1]
+            rate = int(CoinRates[coin]/CoinRates[larger])
+            p = pouch[1][coin]//rate
+            if pouch[1][coin] < 0:
+                pouch[1].update({larger:pouch[1][larger]+p,coin:pouch[1][coin]-p*rate})
+        payed = not any([x for x in pouch[1] if pouch[1][x]<0])
 else:
-  payed = False
+    payed = False
 </drac2>
 
 # Checking for payment then main fuctions
 <drac2>
 if payed:
-  character().set_cvar("bags",dump_json(bagsLoaded))
-  create_cc_nx(subject + " progress")
-  mod_cc(subject + " progress", 1)
-  progress = int(cc_str(subject + " progress"))
-  DT.append(str(time()))
-  character().set_cvar('DowntimeTimes', ', '.join(DT))
-  if progress > (70 - intelligence):
-    delete_cc(subject + " progress")
-    character().set_cvar('pTools', ', '.join(Tools + [subject] if Tools != [''] else [subject])) if subject in get_svar('ToolList').split(', ') else character().set_cvar('languages', ', '.join(Langs + [subject] if Langs != [''] else [subject]))
+    character().set_cvar("bags",dump_json(bagsLoaded))
+    character().create_cc_nx(subject + " progress")
+    character().mod_cc(subject + " progress", 1)
+    progress = int(character().cc_str(subject + " progress"))
+    DT.append(str(time()))
+    character().set_cvar('DowntimeTimes', ', '.join(DT))
+    if progress > (70 - intelligence):
+        character().delete_cc(subject + " progress")
+        character().set_cvar('pTools', ', '.join(Tools + [subject] if Tools != [''] else [subject])) if subject in get_svar('ToolList').split(', ') else character().set_cvar('languages', ', '.join(Langs + [subject] if Langs != [''] else [subject]))
 </drac2>
 
 # message creation
@@ -65,5 +68,5 @@ if payed:
 -desc "{{(f'**Study** | {name} pays 5g to be tutored and trained in {subject}. This process uses your one downtime activity for the day.' if payed else f'It costs 5gp each day to study {subject}') if subject and Times else f"""You can only study one of the following languages or tools {', '.join([x for x in List if not(x in Tools or x in Langs)])}"""}}"
 -f "{{f"""The price of study has been automatically deducted from your `!coins`."""}}"
 -thumb https://media.discordapp.net/attachments/819223029409120366/819677454816903168/1DDFE633-2B85-468D-B28D05ADAE7D1AD8_source.png
--f "{{f"""Your Current Progress {cc_str(subject + ' progress')}/{(70 - intelligence)}""" if subject and Times and cc_exists(subject + ' progress') else 'If you allready know a language you cannot study it again. Further more if you have already used your downtime you cannot study.'}}"
+-f "{{f"""Your Current Progress {character().cc_str(subject + ' progress')}/{(70 - intelligence)}""" if subject and Times and character().cc_exists(subject + ' progress') else 'If you allready know a language you cannot study it again. Further more if you have already used your downtime you cannot study.'}}"
 -footer "Seventra: Exodus of Heroes | Downtime v2.0 | Made by Self.Anna | !help downtime "
