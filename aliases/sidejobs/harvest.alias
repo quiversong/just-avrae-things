@@ -1,0 +1,135 @@
+embed
+<drac2>
+# Configuration Variables
+VERSION = '1.0'
+
+DATA_VAR = "6f5df807-0561-45dd-b303-3f1b61bc6a2f"
+DAILY_CAP = 1
+
+def add_coins(coins_dict, all_bags = None):
+    all_bags = all_bags if all_bags != None else load_json(character().cvars['bags'])
+    [[bag[1].update({key: bag[1][key] + coins_dict[key]}) for key in coins_dict.keys()] for bag in all_bags if bag[0] == 'Coin Pouch']
+    character().set_cvar('bags', dump_json(all_bags))
+    diff = {'cp': 0, 'sp': 0, 'ep': 0, 'gp': 0, 'pp': 0}
+    diff.update(coins_dict)
+    character().coinpurse.modify_coins(cp=diff['cp'], sp=diff['sp'], ep=diff['ep'], gp=diff['gp'], pp=diff['pp'])
+
+def get_daily_activity_data(control_var, daily_cap):
+    cvars = character().cvars
+    if control_var not in cvars:
+        character().set_cvar(control_var, f"0:0")
+        return { "count": 0, "wait_time": None }
+    else:
+        var_parts = cvars[control_var].split(':')
+        count, first_time = int(var_parts[0]), float(var_parts[1])
+        now = time()
+        if count > 0 and first_time != None:
+            passed_in_day_since_first_time = first_time % 86400
+            next_midnight_after_first_time = first_time + (86400 - passed_in_day_since_first_time)
+            if now > next_midnight_after_first_time:
+                character().set_cvar(control_var, f"0:0")
+                return { "count": 0, "wait_time": None }
+            if count >= daily_cap:
+                wait_time = next_midnight_after_first_time - now
+                hours = floor(wait_time / 3600)
+                minutes = ceil(wait_time / 60) if hours == 0 else ceil((wait_time % 3600) / 60)
+                wait_text = (str(hours) + ' hours and ' if hours > 0 else '') + str(minutes) + ' minutes'
+                return { "count": count, "wait_time": wait_text }
+        return { "count": count, "wait_time": None }
+
+def increase_daily_activity_data(control_var):
+    cvars = character().cvars
+    if not control_var in cvars or cvars[control_var] == "0:0":
+        character().set_cvar(control_var, f'1:{time()}')
+        return 1
+    else:
+        var_parts = cvars[control_var].split(':')
+        count, last_time = int(var_parts[0]) + 1, var_parts[1]
+        character().set_cvar(control_var, f'{count}:{last_time}')
+        return count
+
+def is_matching_entry(entry, dice_roll):
+    is_range = len(entry['roll']) > 1
+    e_roll = entry['roll']
+    return (not(is_range) and dice_roll == e_roll[0]) or (is_range and dice_roll >= e_roll[0] and dice_roll <= e_roll[1])
+
+img, thumb, desc, add_to_bag = None, None, None, None
+
+IMAGES = [
+    'https://cdn.discordapp.com/attachments/940301218268479498/988340644403630140/1cba6d0a21dd26fc5503fa9a5a40e5d9.jpg'
+]
+
+FOOTER_MORE_MSG = "You can still harvest more today."
+FOOTER_DONE_MSG = "Come back tomorrow for more harvesting!"
+
+img = IMAGES[roll(f'1d{len(IMAGES)}') - 1]
+
+ADMIN_USER_IDS = [771997367611949076]
+if get_svar('SEVENTRA_ALIAS_ADMINS') != None:
+    admin_ids = load_json(get_svar('SEVENTRA_ALIAS_ADMINS'))
+    ADMIN_USER_IDS += admin_ids
+
+# Code
+args = &ARGS&
+pargs = argparse(args)
+c = character()
+cv, cs = c.cvars, c.skills
+
+title = f'Harvest Hollow Mountain'
+fields = []
+
+HARVEST_TIME_VAR = "_hhmt_dhc_"
+
+daily_data = get_daily_activity_data(HARVEST_TIME_VAR, DAILY_CAP)
+harvests_performed = daily_data["count"]
+wait_time = daily_data["wait_time"]
+
+footer = "Don't forget to role-play your harvest work!"
+footer += '\n' + FOOTER_MORE_MSG if harvests_performed < DAILY_CAP else '\n' + FOOTER_DONE_MSG
+footer += "\n" + f'Seventra: Exodus of Heroes | Harvest Hollow v{VERSION} | !rumor help'
+footer += "\nCreators: Library Fox#0895 and quiversong#2772"
+
+if harvests_performed >= DAILY_CAP:
+    f = 'You alredy heard a rumor today...|'
+    f += f'Come back tomorrow?! Time to reset: {wait_time}'
+    img = None
+    fields.append(f)
+    return 1
+
+
+entries = load_json(get_gvar(DATA_VAR))["entries"]
+dice_roll = roll('1d100')
+result = ([x for x in entries if is_matching_entry(x, dice_roll)] + [None])[0]
+
+if result == None:
+    fields.append('Sorry, but an unexpected error has occurred! Please contact `@Dragonspeaker`!')
+    return 1
+
+fields.append("Harvest Hollow Mountain|For those with the proper prowess over nature, you can help Katnia harvest ingredients for her shop.\nOnce per day, you can run `!harvest` to automatically roll 1d100 and help Katnia gather resources from her garden!\n\nWill you find valuable resources within the flourishing folds of Hollow Mountain, or will you fall prey to the magical garden's curious and intoxicating effects?")
+
+fields.append(f"Result|{result['text']}")
+
+prize = result["prize"].lower()
+if prize != "0":
+    if prize.endswith('gp'):
+        prize = int(prize.split('gp')[0])
+        add_coins({'gp': prize})
+        fields.append(f"Congratulations!|{prize} gold pieces have been added to your pouch!")
+    else:
+        fields.append(f"Congratulations!|You gained {prize}!")
+
+fields.append("Disclaimer|All random effects bestowed by the garden are temporary, and intended for RP purposes only. Negate them at your convenience.")
+
+harvests_performed = increase_daily_activity_data(HARVEST_TIME_VAR)
+
+if harvests_performed >= DAILY_CAP:
+    footer = footer.replace(FOOTER_MORE_MSG, FOOTER_DONE_MSG)
+
+</drac2>
+-title "{{title}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-desc "{desc}"' if desc else ""}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
