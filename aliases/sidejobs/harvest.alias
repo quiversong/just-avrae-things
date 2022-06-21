@@ -86,7 +86,7 @@ wait_time = daily_data["wait_time"]
 
 footer = "Don't forget to role-play your harvest work!"
 footer += '\n' + FOOTER_MORE_MSG if harvests_performed < DAILY_CAP else '\n' + FOOTER_DONE_MSG
-footer += "\n" + f'Seventra: Exodus of Heroes | Harvest Hollow v{VERSION} | !rumor help'
+footer += "\n" + f'Seventra: Exodus of Heroes | Harvest Hollow v{VERSION}
 footer += "\nCreators: Library Fox#0895 and quiversong#2772"
 
 if len(args) > 0 and args[0] == 'reset':
