@@ -1,7 +1,7 @@
 embed
 <drac2>
 # Configuration Variables
-VERSION = '2.0'
+VERSION = '2.1'
 
 DATA_VAR_1 = "96111624-7e94-46f7-b32e-f0c2d6c52b13"
 DATA_VAR_2 = "dd5538b0-aab8-4ac0-a82c-5f08aa8cf42b"
@@ -152,13 +152,6 @@ if len(args) > 0 and args[0] == 'resetlog':
 
 all_rumors = load_json(get_gvar(DATA_VAR_1))["rumors"]
 all_rumors = all_rumors + load_json(get_gvar(DATA_VAR_2))["rumors"]
-
-if not("bags" in cv and "Coin Pouch" in cv["bags"]):
-    f = 'Stop!|'
-    f += 'It looks like you do not have your bags setup yet.\n'
-    f += 'Please execute `!coins` to have your pack and coin pouch properly setup before starting!'
-    fields.append(f)
-    return 1
 
 if len(args) == 0:
     desc = '*Looking for a small side-job while on the road?*'
