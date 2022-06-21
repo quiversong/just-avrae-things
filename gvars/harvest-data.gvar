@@ -195,27 +195,27 @@
     "text": "After a long afternoon, you return from your Halloween Mountain escapade in a delirious stupor. Inexplicably, you become addicted to casually grazing on fistfuls of grass for 1d4 days."
   },
   {
-    "roll": [40-55],
+    "roll": [40,55],
     "prize": "3gp",
     "text": "You venture forth into the garden with an eager smile and a pair of rusty clippers in hand, casually gathering whatever musky flowers you can get your hands on. Katnia is hardly impressed with your yield of common flowers, but offers a gentle smile regardless, and pays for you your enthusiastic efforts! You gain 3 gold pieces!"
   },
   {
-    "roll": [56-69],
+    "roll": [56,69],
     "prize": "5gp",
     "text": "You bask in the warmth of the enormous hothouse--a harsh contrast to the chilling winds above! The expansive garden flourishes beneath your feet, swaying in the breeze in competition for your herbological attention. You trudge as far as you can through it's lush depths, and soon come across a peculiar finding. Taking a deep breath and steadying your hand, you carefully harvest a few samples of the foliage. Katnia is equally delighted and fascinated by your findings!You gain 5gp!"
   },
   {
-    "roll": [70-79],
+    "roll": [70,79],
     "prize": "8gp",
     "text": "You delve deep into the flourishing folds of Hallow Mountain Botanical Gardens, soaking in the heavenly aromas and artfully arranged flower gardens. By the end of your afternoon you return with a basket overflowing with particularly useful flowers with medicinal properties. Katnia is proud of your haul, and doesn't hesitate to tell you so. You're invited to bask in the warmth of the hothouse and share in some tea, only after you're properly compensated, of course.You gain 8 gold coins!"
   },
   {
-    "roll": [80-89],
+    "roll": [80,89],
     "prize": "9gp",
     "text": "The artificial light surges, washing over Hallow Mountain Botanical Gardens with a golden glow, causing the sugar-frosted coating of winter to melt from the grass near it's mighty enterance. Birdsong erupts from the shrubbery in glee while buzzing bees surf the open spaces from flower to flower, desperately stirring up pollen. The aloft pollen is swirled into tangible ribbons by frosty pixies, and clatter to the ground for your collection. Katnia looks relieved when you bring the concentrated pixie dust back to her, bolstering her dwindling supply. Katnia compensates you for your harvest, and gives you a warm embrace!You gain 9 gold pieces!"
   },
   {
-    "roll": [90-99],
+    "roll": [90,99],
     "prize": "15gp",
     "text": "You kick in the towering stone doors of Hallow Mountain Botanical Gardens and snatch up the proper tools needed for propagation of legendary proportions! You pave your way through the elegant, and vibrant offerings, easily navigating around the hazardous species of flora. You head to an untapped subsection of the garden and discover a curiosity, returning with never-before-seen vegetation riff with unknown properties.Katnia is astounded at the never-ending variety of offerings within the garden, and invites you to spend a short while performing experiments on your yields.You gain 15 gold pieces! "
   },
