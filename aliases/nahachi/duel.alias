@@ -1,7 +1,7 @@
 embed
 <drac2>
 # Configuration Variables
-VERSION = '2.0'
+VERSION = '2.1'
 
 DATA_VAR = "c85742dc-f2e9-4a99-b544-b8f71dd7bed9"
 DAILY_CAP = 2
@@ -204,13 +204,6 @@ if len(args) > 0 and args[0] == 'resetlog':
 
 all_warriors = load_json(get_gvar(DATA_VAR))["warriors"]
 global_stats = load_json(cv[DUEL_STATS_VAR]) if DUEL_STATS_VAR in cv else {}
-
-if not("bags" in cv and "Coin Pouch" in cv["bags"]):
-    f = 'Stop!|'
-    f += 'It looks like you do not have your bags setup yet.\n'
-    f += 'Please execute `!coins` to have your pack and coin pouch properly setup before starting!'
-    fields.append(f)
-    return 1
 
 if len(args) > 0 and args[0] == 'desc':
     title = 'Nahachi Kaizen Temple Warriors'
