@@ -110,8 +110,8 @@ if harvests_performed >= DAILY_CAP:
 
 entries = load_json(get_gvar(DATA_VAR))["entries"]
 images = load_json(get_gvar(IMAGES_VAR))["images"]
-dice_roll = roll('1d100')
-result = ([x for x in entries if is_matching_entry(x, dice_roll)] + [None])[0]
+dice_roll = vroll('2d100kh1' if 'adv' in args else '2d100kl1' if 'dis' in args else '1d100')
+result = ([x for x in entries if is_matching_entry(x, dice_roll.total)] + [None])[0]
 
 if result == None:
     fields.append('Sorry, but an unexpected error has occurred! Please contact `@Dragonspeaker`!')
@@ -119,8 +119,9 @@ if result == None:
 
 desc = "*You feel a sudden call to nature being carried along the chilling winds of Snowcrest. Eager to see what the Hollow Mountain Botanical Garden has in store, you head to the homely entrance at base of Mount Angrav, and volunteer to assist the garden's caretaker, Katnia Fellhammer!*"
 
+fields.append(f"Dice Roll...|{dice_roll.full}")
+
 text = result['text'].replace('"', '\\\"')
-fields.append(f"__RESULT__|{text}\n\n*Disclaimer: all random effects bestowed by the garden are temporary, and intended for RP purposes only. Negate them at your convenience.*")
 
 img = [x for x in images if x["image_label"].lower() == result['image'].lower()][0]["image_url"]
 
