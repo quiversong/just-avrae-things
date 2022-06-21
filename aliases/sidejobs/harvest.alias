@@ -4,6 +4,7 @@ embed
 VERSION = '1.0'
 
 DATA_VAR = "6f5df807-0561-45dd-b303-3f1b61bc6a2f"
+IMAGES_VAR = "534109e4-0224-478d-9d04-a84980550c4c"
 DAILY_CAP = 1
 
 def add_coins(coins_dict, all_bags = None):
@@ -55,14 +56,8 @@ def is_matching_entry(entry, dice_roll):
 
 img, thumb, desc, add_to_bag = None, None, None, None
 
-IMAGES = [
-    'https://cdn.discordapp.com/attachments/940301218268479498/988340644403630140/1cba6d0a21dd26fc5503fa9a5a40e5d9.jpg'
-]
-
 FOOTER_MORE_MSG = "You can still harvest more today."
 FOOTER_DONE_MSG = "Come back tomorrow for more harvesting!"
-
-img = IMAGES[roll(f'1d{len(IMAGES)}') - 1]
 
 ADMIN_USER_IDS = [771997367611949076]
 if get_svar('SEVENTRA_ALIAS_ADMINS') != None:
@@ -75,7 +70,7 @@ pargs = argparse(args)
 c = character()
 cv, cs = c.cvars, c.skills
 
-title = f'Harvest Hollow Mountain'
+title = f"{c.name}'s harvesting at the Hollow Mountain!"
 fields = []
 
 HARVEST_TIME_VAR = "_hhmt_dhc_"
@@ -86,8 +81,17 @@ wait_time = daily_data["wait_time"]
 
 footer = "Don't forget to role-play your harvest work!"
 footer += '\n' + FOOTER_MORE_MSG if harvests_performed < DAILY_CAP else '\n' + FOOTER_DONE_MSG
-footer += "\n" + f'Seventra: Exodus of Heroes | Harvest Hollow v{VERSION}
+footer += "\n" + f'Seventra: Exodus of Heroes | Harvest Hollow v{VERSION}'
 footer += "\nCreators: Library Fox#0895 and quiversong#2772"
+
+HELP_IMG = "https://cdn.discordapp.com/attachments/940301218268479498/988871101515972619/Herbalist_With_Horns.jpg"
+img = HELP_IMG
+
+if len(args)> 0 and args[0].lower() == 'help':
+    title = 'Harvest Hollow Mountain Botanical Gardens'
+    desc = 'Adventurous travelers with an interest in nature can volunteer beneath the mountain...\n\nOnce per day, you can run `!harvest` to automatically roll 1d100 and volunteer to help Katnia by gathering resources from her garden! Will you find valuable resources within the flourishing folds of Hollow Mountain, or will you fall prey to the magical garden\'s curious and intoxicating effects?'
+    fields.append('Disclaimer|All random effects bestowed by the garden are temporary, and intended for RP purposes only. Negate them at your convenience.')
+    return 0
 
 if len(args) > 0 and args[0] == 'reset':
     if not ctx.author.id in ADMIN_USER_IDS:
@@ -105,6 +109,7 @@ if harvests_performed >= DAILY_CAP:
     return 1
 
 entries = load_json(get_gvar(DATA_VAR))["entries"]
+images = load_json(get_gvar(IMAGES_VAR))["images"]
 dice_roll = roll('1d100')
 result = ([x for x in entries if is_matching_entry(x, dice_roll)] + [None])[0]
 
@@ -112,10 +117,12 @@ if result == None:
     fields.append('Sorry, but an unexpected error has occurred! Please contact `@Dragonspeaker`!')
     return 1
 
-desc = "*For those with the proper prowess over nature, you can help Katnia harvest ingredients for her shop.\n\nOnce per day, you can run `!harvest` to automatically roll 1d100 and help Katnia gather resources from her garden!\n\nWill you find valuable resources within the flourishing folds of Hollow Mountain, or will you fall prey to the magical garden's curious and intoxicating effects?*"
+desc = "*You feel a sudden call to nature being carried along the chilling winds of Snowcrest. Eager to see what the Hollow Mountain Botanical Garden has in store, you head to the homely entrance at base of Mount Angrav, and volunteer to assist the garden's caretaker, Katnia Fellhammer!*"
 
 text = result['text'].replace('"', '\\\"')
 fields.append(f"__RESULT__|{text}\n\n*Disclaimer: all random effects bestowed by the garden are temporary, and intended for RP purposes only. Negate them at your convenience.*")
+
+img = [x for x in images if x["image_label"].lower() == result['image'].lower()][0]["image_url"]
 
 prize = result["prize"].lower()
 if prize != "0":
