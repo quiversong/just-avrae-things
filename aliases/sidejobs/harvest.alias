@@ -89,13 +89,20 @@ footer += '\n' + FOOTER_MORE_MSG if harvests_performed < DAILY_CAP else '\n' + F
 footer += "\n" + f'Seventra: Exodus of Heroes | Harvest Hollow v{VERSION} | !rumor help'
 footer += "\nCreators: Library Fox#0895 and quiversong#2772"
 
+if len(args) > 0 and args[0] == 'reset':
+    if not ctx.author.id in ADMIN_USER_IDS:
+        err('You are not allowed to do that!')
+        return 1
+    c.delete_cvar(HARVEST_TIME_VAR)
+    fields.append('Resetting harvest time control...|Done!')
+    return 1
+
 if harvests_performed >= DAILY_CAP:
-    f = 'You alredy heard a rumor today...|'
+    f = 'You have alredy harvested today...|'
     f += f'Come back tomorrow?! Time to reset: {wait_time}'
     img = None
     fields.append(f)
     return 1
-
 
 entries = load_json(get_gvar(DATA_VAR))["entries"]
 dice_roll = roll('1d100')
@@ -105,9 +112,9 @@ if result == None:
     fields.append('Sorry, but an unexpected error has occurred! Please contact `@Dragonspeaker`!')
     return 1
 
-fields.append("Harvest Hollow Mountain|For those with the proper prowess over nature, you can help Katnia harvest ingredients for her shop.\nOnce per day, you can run `!harvest` to automatically roll 1d100 and help Katnia gather resources from her garden!\n\nWill you find valuable resources within the flourishing folds of Hollow Mountain, or will you fall prey to the magical garden's curious and intoxicating effects?")
+desc = "*For those with the proper prowess over nature, you can help Katnia harvest ingredients for her shop.\n\nOnce per day, you can run `!harvest` to automatically roll 1d100 and help Katnia gather resources from her garden!\n\nWill you find valuable resources within the flourishing folds of Hollow Mountain, or will you fall prey to the magical garden's curious and intoxicating effects?*"
 
-fields.append(f"Result|{result['text']}")
+fields.append(f"__RESULT__|{result['text']}\n\n\n*Disclaimer: all random effects bestowed by the garden are temporary, and intended for RP purposes only. Negate them at your convenience.*")
 
 prize = result["prize"].lower()
 if prize != "0":
@@ -118,7 +125,6 @@ if prize != "0":
     else:
         fields.append(f"Congratulations!|You gained {prize}!")
 
-fields.append("Disclaimer|All random effects bestowed by the garden are temporary, and intended for RP purposes only. Negate them at your convenience.")
 
 harvests_performed = increase_daily_activity_data(HARVEST_TIME_VAR)
 
