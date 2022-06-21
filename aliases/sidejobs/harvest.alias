@@ -114,7 +114,8 @@ if result == None:
 
 desc = "*For those with the proper prowess over nature, you can help Katnia harvest ingredients for her shop.\n\nOnce per day, you can run `!harvest` to automatically roll 1d100 and help Katnia gather resources from her garden!\n\nWill you find valuable resources within the flourishing folds of Hollow Mountain, or will you fall prey to the magical garden's curious and intoxicating effects?*"
 
-fields.append(f"__RESULT__|{result['text']}\n\n\n*Disclaimer: all random effects bestowed by the garden are temporary, and intended for RP purposes only. Negate them at your convenience.*")
+text = result['text'].replace('"', '\\\"')
+fields.append(f"__RESULT__|{text}\n\n*Disclaimer: all random effects bestowed by the garden are temporary, and intended for RP purposes only. Negate them at your convenience.*")
 
 prize = result["prize"].lower()
 if prize != "0":
