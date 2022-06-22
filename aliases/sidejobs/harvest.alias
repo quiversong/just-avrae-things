@@ -136,8 +136,10 @@ if prize != "0":
     else:
         fields.append(f"Congratulations!|You gained {prize}!")
 
-
-harvests_performed = increase_daily_activity_data(HARVEST_TIME_VAR)
+if dice_roll.total == 100:
+    fields.append(f"Today is your lucky day!|You get to try to `!harvest` one more time today. Go for it!")
+else:
+    harvests_performed = increase_daily_activity_data(HARVEST_TIME_VAR)
 
 if harvests_performed >= DAILY_CAP:
     footer = footer.replace(FOOTER_MORE_MSG, FOOTER_DONE_MSG)
