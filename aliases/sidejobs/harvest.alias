@@ -89,7 +89,8 @@ img = HELP_IMG
 
 if len(args)> 0 and args[0].lower() == 'help':
     title = 'Harvest Hollow Mountain Botanical Gardens'
-    desc = 'Adventurous travelers with an interest in nature can volunteer beneath the mountain...\n\nOnce per day, you can run `!harvest` to automatically roll 1d100 and volunteer to help Katnia by gathering resources from her garden! Will you find valuable resources within the flourishing folds of Hollow Mountain, or will you fall prey to the magical garden\'s curious and intoxicating effects?'
+    desc = 'Adventurous travelers with an interest in nature can volunteer beneath the mountain...\n\nOnce per day, you can run `!harvest` to automatically roll 1d100 and volunteer to help Katnia by gathering resources from her garden! Will you find valuable ingredients within the flourishing folds of Hollow Mountain, or will you fall prey to the magical garden\'s curious and intoxicating effects?'
+    fields.append('How to|Use `!harvest` to see the results. You can use `!harvest adv` or `!harvest dis` if and only if there is some effect to either grant you advantage or disadvantage. If you have any questions, ping `@Guide`!')
     fields.append('Disclaimer|All random effects bestowed by the garden are temporary, and intended for RP purposes only. Negate them at your convenience.')
     return 0
 
@@ -122,6 +123,7 @@ desc = "*You feel a sudden call to nature being carried along the chilling winds
 fields.append(f"Dice Roll...|{dice_roll.full}")
 
 text = result['text'].replace('"', '\\\"')
+fields.append(f'Outcome|{text}')
 
 img = [x for x in images if x["image_label"].lower() == result['image'].lower()][0]["image_url"]
 
