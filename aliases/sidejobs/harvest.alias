@@ -125,7 +125,8 @@ fields.append(f"Dice Roll...|{dice_roll.full}")
 text = result['text'].replace('"', '\\\"')
 fields.append(f'Outcome|{text}')
 
-img = [x for x in images if x["image_label"].lower() == result['image'].lower()][0]["image_url"]
+img_selection = [x for x in images if x["image_label"].lower() == result['image'].lower()]
+img = img_selection["image_url"] if len(img_selection) > 0 else HELP_IMG
 
 prize = result["prize"].lower()
 if prize != "0":
