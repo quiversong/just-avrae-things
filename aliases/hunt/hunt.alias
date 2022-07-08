@@ -1,8 +1,8 @@
 tembed
 <drac2>
 # Configuration Variables
-IS_LIVE = False
-VERSION = '1.20.04'
+IS_LIVE = True
+VERSION = '1.21'
 
 BETA_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
 LIVE_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
