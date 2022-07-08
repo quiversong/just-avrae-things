@@ -2,7 +2,7 @@ tembed
 <drac2>
 # Configuration Variables
 IS_LIVE = False
-VERSION = '1.10'
+VERSION = '1.20.04'
 
 BETA_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
 LIVE_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
@@ -59,10 +59,8 @@ if HUNT_TIME_VAR in cv:
         minutes = ceil((wait_time % 3600) / 60)
       wait_text = (str(hours) + ' hours and ' if hours > 0 else '') + str(minutes) + ' minutes'
 
-footer = "Don't forget to role-play your hunting actions!\n"
-footer += f'There is a limit of {hunt_daily_cap} hunts per day. You have gone hunting {hunt_count}x today.'
-footer += "\n" + f'Seventra: Exodus of Heroes | Hunt v{VERSION} | !hunt help'
-footer += "\nCreators: Archaias06#6633 (Rorik) and quiversong#2772 (Adrienne)"
+footer = f"You have hunted {hunt_count}/{hunt_daily_cap} times today. | !hunt help\n"
+footer += f'Seventra: Exodus of Heroes | Hunt v{VERSION} | !hunt credits'
 
 hvars, pid, stage = None, None, None
 last_stage_was_crit = False
@@ -93,7 +91,7 @@ if len(args) > 0 and args[0] == "reset":
   c.delete_cvar(HUNT_STAGE_VAR)
   c.delete_cvar(HUNT_TIME_VAR)
   t = "Resetting hunting state..."
-  footer = footer.replace(f'{hunt_count}x today', '0x today')
+  footer = footer.replace(f'{hunt_count}', '0')
   return 0
 
 if len(args) > 0 and args[0] == "resetstats":
@@ -151,10 +149,10 @@ if p in b_ids:
 
   first_hunt_time = time() if hunt_count == 1 else first_hunt_time
   c.set_cvar(HUNT_TIME_VAR, f'{hunt_count}:{first_hunt_time}')
-  footer = footer.replace(f'{hunt_count - 1}x today', f'{hunt_count}x today')
+  footer = footer.replace(f'{hunt_count - 1}', f'{hunt_count}')
 
   b = biomes[p]
-  img = b["img"]
+  thumb = b["img"]
   noprey_message = f'{c.name} could not find any prey.|Better luck next time!'
 
   a_roll = roll("1d100")
@@ -249,7 +247,7 @@ elif p == 'commune':
   f = f'{c.name} approaches the {anm_name}...|**Animal Handling roll:** {s_roll.full}\n{sl if succ else fl}'
   if succ:
     stats["s_commune"] = stats["s_commune"] + 1 if "s_commune" in stats else 1
-    thumb = anm["img"]
+    img = anm["img"]
     add_to_bag = {}
     prize_list = ''
     if "prizes" in anm:
@@ -267,7 +265,7 @@ elif p == 'commune':
     f2 += "You gained: " + prize_list + '.\nThey have been added to your "Hunting" bag!'
 
   else:
-    thumb = image
+    thumb = anm["img"]
     if "commune_fail" in anm:
       f2 = anm["commune_fail"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
     else:
@@ -312,7 +310,7 @@ elif p == 'attack':
 
   t = f'{c.name} attacks their prey{" with their " + weapon["name"] if weapon != None else ""}!'
 
-  dmg_l = "\n**Miss!**" if not a_hit else "\n**Critical Hit!**" if crit else "\n**Damage roll:** " + d_roll.full + "\n" + (sl if dead else fl)
+  dmg_l = "\n**Miss!**" if not a_hit else "\n**Critical Hit!**" if crit else "\n" + (sl if dead else fl)
 
   f = f'Was {c.name} able to kill the {anm_name}?|**Attack roll:** {a_roll.full}{dmg_l}'
   if a_hit:
@@ -332,7 +330,7 @@ elif p == 'attack':
   else:
     thumb = image
     if injured:
-      f2 = f'{c.name} successfully hit {anm_name}, but it was not enough to kill it, and it ran away...|Better luck next time!'
+      f2 = f'{c.name} injured {anm_name}, but it escaped...|Better luck next time!'
     else:
       f2 = f'The {anm_name} managed to escape your attack and flee...|Better luck next time!'
     c.delete_cvar(HUNT_STAGE_VAR)
@@ -344,8 +342,8 @@ elif p == 'clean':
   s_roll = vroll(cs.survival.d20(base_adv = adv_status))
   succ = s_roll.total > anm["ac"]
   f = f'{c.name} cleans and extracts the goods from the {anm_name}...|**Survival roll:** {s_roll.full}\n{sl if succ else fl}'
-  img = data["images"]["campfire"]
   if succ:
+    img = anm["img"]
     stats["s_clean"] = stats["s_clean"] + 1 if "s_clean" in stats else 1
     add_to_bag = {}
     prize_list = ''
@@ -362,6 +360,7 @@ elif p == 'clean':
 
     f2 = f'You gained: {prize_list}.|They have been added to your "Hunting" bag!'
   else:
+    thumb = data["images"]["campfire"]
     f2 = f'You ended up wasting the prey you caught...|Better luck next time!'
 
 
