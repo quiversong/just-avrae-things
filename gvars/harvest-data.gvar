@@ -27,7 +27,7 @@
     "roll": [5],
     "prize": "0",
     "image": "randomeffect",
-    "text": "You come across an awe inspiring sight, an enormous, illuminated cavern cavern that reacts to sound. You spend the better part of the afternoon shouting into the cavern and playing with the echoes. As you leave, your throat becomes as dry as a bone, forcing you to whisper for the next 24 hours with a gravely sounding voice."
+    "text": "You come across an awe inspiring sight! Creeping slowly, you enter an enormous, illuminated cavern that reacts to sound. You spend the better part of the afternoon shouting into the cavern and playing with the echoes. When you leave your throat becomes as dry as a bone, forcing you to whisper for the next 24 hours with a sore throat, ravenous thirst, and gravely sounding voice."
   },
   {
     "roll": [6],
@@ -207,7 +207,7 @@
     "roll": [35],
     "prize": "0",
     "image": "randomeffect",
-    "text": "A sudden, chilly breeze As you seeking refuge beneath a large bush. After burrowing into its strange branches, your skin glows in the dark for 1d10+5 hours."
+    "text": "A sudden, chilly breeze sweeps over the trail causing to run, you seeking refuge beneath a large bush. After burrowing into its strange branches, your skin glows in the dark for 1d10+5 hours."
   },
   {
     "roll": [36],
