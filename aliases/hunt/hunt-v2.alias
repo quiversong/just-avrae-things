@@ -4,7 +4,7 @@ tembed
 IS_LIVE = False
 VERSION = '2.0'
 
-BETA_VAR = "e93be9b6-b00f-47bb-8d63-a8c5efd8d32a"
+BETA_VAR = "9273da4d-bd73-4533-97cc-c3cf482666dc"
 LIVE_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
 
 DRAGON_DIE = 101
@@ -102,6 +102,9 @@ if len(args) > 0 and args[0] == "resetstats":
 data = load_json(get_gvar(data_var))
 dragon_data = load_json(get_gvar(DRAGON_VAR))
 
+biomes = data["biomes"]
+animals = data["animals"]
+
 in_wrong_stage = stage and (len(args) == 0 or (len(args) > 0 and stage != args[0]))
 quitting_hunt = stage == 'attack' and len(args) > 0 and args[0] == 'quit'
 if (in_wrong_stage and not quitting_hunt):
@@ -112,10 +115,10 @@ if (in_wrong_stage and not quitting_hunt):
   thumb = image
   return 1
 
-ACCEPTED_DIFFICULTY = ["easy","hard","legends"]
+ACCEPTED_DIFFICULTIES = ["easy","hard","legends"]
 
-if (len(args) == 0 or (not stage and args[0] not in ACCEPTED_DIFFICULTY)):
-  d_list_cmd = "  `!hunt " + "`\n  `!hunt ".join(ACCEPTED_DIFFICULTY) + "`"
+if (len(args) == 0 or (not stage and args[0] not in ACCEPTED_DIFFICULTIES)):
+  d_list_cmd = "  `!hunt " + "`\n  `!hunt ".join(ACCEPTED_DIFFICULTIES) + "`"
   f = f'Where do you want to go hunting?|Use one of the following:\n{d_list_cmd}'
   thumb = image
   hunt_images = [
@@ -134,32 +137,33 @@ if (len(args) == 0 or (not stage and args[0] not in ACCEPTED_DIFFICULTY)):
   return 0
 
 BIOME_BY_CHANNEL_ID = {
-833229819335409664: "test1",
-976126242141122580: "test2",
-861654042317029426: "arbarax",
-965727258507640832: "hydris",
-830682853373247488: "mossfort",
-861658628850057296: "nephix",
-861665071080276008: "snowcrest",
-861668091993260072: "valinor",
-922269788485599322: "travel",
-922269909101191219: "travel",
-922270001837264936: "travel",
-930614670455349290: "travel",
-930615138757779466: "travel"}
-region = ([x[1] for x in BIOME_BY_CHANNEL_ID.items() if ctx.channel.id == x[0]] + ["general"])[0] 
-challenge = args[0]
-#b_ids = [k for k, v in region.items()]
-animal_chances = f"{region}_{challenge}"
-animals = data["animals"]
+    833229819335409664: "test1",
+    976126242141122580: "test2",
+    861654042317029426: "arbarax",
+    965727258507640832: "hydris",
+    830682853373247488: "mossfort",
+    861658628850057296: "nephix",
+    861665071080276008: "snowcrest",
+    861668091993260072: "valinor",
+    922269788485599322: "travel",
+    922269909101191219: "travel",
+    922270001837264936: "travel",
+    930614670455349290: "travel",
+    930615138757779466: "travel"
+}
 
 p = args[0]
 
-if p in region:
+if p in ACCEPTED_DIFFICULTIES:
   if wait_time != None:
     f = f'{c.name} is exhausted from so much hunting today...|You have to wait {wait_text} until you can hunt again.'
     f += '\n(Hunting resets at midnight UTC)'
     return 1
+
+  region = ([x[1] for x in BIOME_BY_CHANNEL_ID.items() if ctx.channel.id == x[0]] + ["general"])[0]
+  challenge = p
+  chosen_biome = f"{region}_{challenge}"
+  biome = biomes[chosen_biome]
 
   hunt_count += 1
   stats["t_hunts"] = stats["t_hunts"] + 1 if "t_hunts" in stats else 1
@@ -168,17 +172,16 @@ if p in region:
   c.set_cvar(HUNT_TIME_VAR, f'{hunt_count}:{first_hunt_time}')
   footer = footer.replace(f'{hunt_count - 1}', f'{hunt_count}')
 
-  b = region[p]
-  thumb = b["img"]
+  thumb = biome["image"]
   noprey_message = f'{c.name} could not find any prey.|Better luck next time!'
 
   a_roll = roll("1d100")
-  if not "animal_chance" in b:
+  if not "animal_chance" in biome:
     f = noprey_message
     c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
     return 0
 
-  b_anms = [(k, v) for k, v in b["animal_chance"].items()]
+  b_anms = [(k, v) for k, v in biome["animal_chance"].items()]
   anm_id = [k for k, v in b_anms if (a_roll == v[0] if len(v) == 1 else a_roll >= v[0] and a_roll <= v[1])]
   if len(anm_id) == 0:
     f = noprey_message
@@ -204,7 +207,7 @@ if p in region:
     color = 'f0b330'
     f = f'{c.name} found a ***VERY RARE*** {anm["name"]}!|Use `!hunt sneak` to try to approach it without being noticed.'
   else:
-    f = f'{c.name} found a{add_n} {anm["name"]} in the {b["name"]}!|Use `!hunt sneak` to try and get the jump on it.'
+    f = f'{c.name} found a{add_n} {anm["name"]} in the {biome["name"]}!|Use `!hunt sneak` to try and get the jump on it.'
   c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
   return 0
 
