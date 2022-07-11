@@ -846,7 +846,7 @@
     "player_win_action": "\"Most impressive! Most impressive indeed! Good reflexes, good balance, excellent footwork! Almost as remarkable as the first time I was bested, yes! That was a long time ago, and I've learned much since then, but I never forgot about it!\"\n\n\"It was a hot dusk, just outside of Nephix, and...\" *Kaeruken goes on and on and on forever... are you going to stick around to listen to everything? Good luck!*",
     "unlocks": ["bennosuke", "tengu", "shinta", "grantha"],
     "itemRewards": {"gp": 30},
-    "uniqueRewards": {"XP (ping Admins to have it approved)": 1, "Kaizen Black Sash": 1, "Seventran Samurai Feat": 1, "gp": 70},
+    "uniqueRewards": {"XP (ping a Guide to have it approved)": 1, "Kaizen Black Sash": 1, "Seventran Samurai Feat": 1, "gp": 70},
     "payment": {},
     "powerups": [],
     "secret": false,
