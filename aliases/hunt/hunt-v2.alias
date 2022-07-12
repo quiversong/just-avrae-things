@@ -105,8 +105,16 @@ dragon_data = load_json(get_gvar(DRAGON_VAR))
 biomes = data["biomes"]
 animals = data["animals"]
 
+#STAGE OPTIONS
+if stage and stage in ["sneak","injured"] and len(arg) > 0 and args[0] == "track":
+  stage = "track"
+
+#if stage and stage in ["attack","injured"] and len(args) > 0 and args[0] == "tame":
+#  stage = "tame"
+
+#WRONG STAGE AND QUIT
 in_wrong_stage = stage and (len(args) == 0 or (len(args) > 0 and stage != args[0]))
-quitting_hunt = stage == any('attack','injured') and len(args) > 0 and args[0] == 'quit'
+quitting_hunt = stage and stage in ["attack","injured"] and len(args) > 0 and args[0] == 'quit'
 if (in_wrong_stage and not quitting_hunt):
   anm = animals[pid]
   anm_name = anm["name"]
@@ -250,6 +258,37 @@ if p == "sneak":
     f2 += 'Better luck next time! Use `!hunt` to try again.'
     c.delete_cvar(HUNT_STAGE_VAR)
 
+elif p == 'track':
+  adv_status = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
+  t_roll = vroll(cs.investigation.d20(base_adv = adv_status))
+  succ = t_roll.total > anm["pp"]
+  t = f'{c.name} follows the tracks of their prey!'
+  f = f'{c.name} approaches the {anm_name}...|**Investigation roll:** {t_roll.full}\n{sl if succ else fl}'
+  if succ:
+    thumb = anm["img"]
+    stats["s_track"] = stats["s_track"] + 1 if "s_track" in stats else 1
+    if "commune" in anm and anm["commune"] == True:
+      if "sneak_succ" in anm:
+        f2 = anm["sneak_succ"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
+      else:
+        f2 = f'The {anm_name} has seen you, but they do not seem scared.'
+      f2 += '\n' if '|' in f2 else '|'
+      f2 += f'Use `!hunt commune` to try to commune with the {anm_name}.'
+      c.set_cvar(HUNT_STAGE_VAR, f'{pid}:commune')
+    else:
+      f2 = f'You have found the {anm_name}!|Now use `!hunt attack` or `!hunt attack [weapon]` to attack your prey!'
+      f2 += "\nAlternatively use `!hunt quit` if you would rather not hunt this prey."
+      c.set_cvar(HUNT_STAGE_VAR, f'{pid}:attack')
+  else:
+    thumb = image
+    if "sneak_fail" in anm:
+      f2 = anm["sneak_fail"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
+    else:
+      f2 = f'The trail goes cold here, you lost the {anm_name}...'
+    f2 += '\n' if '|' in f2 else '|'
+    f2 += 'Better luck next time! Use `!hunt` to try again.'
+    c.delete_cvar(HUNT_STAGE_VAR)
+
 elif p == 'quit':
   t = f'{c.name} quits hunting the {anm_name}!'
   f = f'You lose sight of the {anm_name}.|But you spend some time admiring the beauty of the nature around you.'
@@ -358,6 +397,15 @@ elif p == 'attack':
     else:
       f2 = f'The {anm_name} managed to escape your attack and flee...|Better luck next time!'
       c.delete_cvar(HUNT_STAGE_VAR)
+
+# elif p == 'tame':
+# if <animal can be tamed>:
+#    if <the player level allows taming this animal CR>
+#      stage = "tame"
+#    else:
+#      <you need more experience before this animal can be tamed.>
+#  else:
+#    <this animal cannot be tamed.>
 
 elif p == 'clean':
   c.delete_cvar(HUNT_STAGE_VAR)
