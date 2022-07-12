@@ -4,7 +4,7 @@ tembed
 IS_LIVE = False
 VERSION = '2.0'
 
-BETA_VAR = "9273da4d-bd73-4533-97cc-c3cf482666dc"
+BETA_VAR = "e3ec8744-3eb6-4172-98be-24b9453d859a"
 LIVE_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
 
 DRAGON_DIE = 101
@@ -91,7 +91,7 @@ if len(args) > 0 and args[0] == "reset":
   c.delete_cvar(HUNT_STAGE_VAR)
   c.delete_cvar(HUNT_TIME_VAR)
   t = "Resetting hunting state..."
-  footer = footer.replace(f'{hunt_count}', '0')
+  footer = footer.replace(f'{hunt_count}/', '0/')
   return 0
 
 if len(args) > 0 and args[0] == "resetstats":
@@ -106,7 +106,7 @@ biomes = data["biomes"]
 animals = data["animals"]
 
 in_wrong_stage = stage and (len(args) == 0 or (len(args) > 0 and stage != args[0]))
-quitting_hunt = stage == 'attack' and len(args) > 0 and args[0] == 'quit'
+quitting_hunt = stage == any('attack','injured') and len(args) > 0 and args[0] == 'quit'
 if (in_wrong_stage and not quitting_hunt):
   anm = animals[pid]
   anm_name = anm["name"]
@@ -170,7 +170,7 @@ if p in ACCEPTED_DIFFICULTIES:
 
   first_hunt_time = time() if hunt_count == 1 else first_hunt_time
   c.set_cvar(HUNT_TIME_VAR, f'{hunt_count}:{first_hunt_time}')
-  footer = footer.replace(f'{hunt_count - 1}', f'{hunt_count}')
+  footer = footer.replace(f'{hunt_count - 1}/', f'{hunt_count}/')
 
   thumb = biome["image"]
   noprey_message = f'{c.name} could not find any prey.|Better luck next time!'
@@ -330,13 +330,13 @@ elif p == 'attack':
 
   t = f'{c.name} attacks their prey{" with their " + weapon["name"] if weapon != None else ""}!'
 
-  dmg_l = "\n**Miss!**" if not a_hit else "\n**Critical Hit!**" if crit else "\n" + (sl if dead else fl)
+  dmg_l = "\n**Miss!**" if not a_hit else "\n**Critical Hit!**" if crit else "\n" + (sl if dead else "**Hit!**" if injured else fl)
 
   f = f'Was {c.name} able to kill the {anm_name}?|**Attack roll:** {a_roll.full}{dmg_l}'
   if a_hit:
     stats["t_dmg"] = stats["t_dmg"] + damage_dealt if "t_dmg" in stats else damage_dealt
 
-  if dead:
+   if dead:
     stats["s_attack"] = stats["s_attack"] + 1 if "s_attack" in stats else 1
     thumb = anm["img"]
     stage_value = f'{pid}:clean'
@@ -350,10 +350,14 @@ elif p == 'attack':
   else:
     thumb = image
     if injured:
-      f2 = f'{c.name} injured {anm_name}, but it escaped...|Better luck next time!'
+      stage_value = f'{pid}:injured' 
+      stage_value += f':{anm["hp"] - damage_dealt}' if len(hvar[2]) >1 and hvar[2] == anm["hp"] else f':{hvar[2] - damage_dealt}'
+      f2 = f'{c.name} injured {anm_name}, do you track this animal? `!hunt track`'
+      f2 += f'... or do you look for a different animal? `!hunt quit`'
+      c.set_cvar(HUNT_STAGE_VAR, stage_value)
     else:
       f2 = f'The {anm_name} managed to escape your attack and flee...|Better luck next time!'
-    c.delete_cvar(HUNT_STAGE_VAR)
+      c.delete_cvar(HUNT_STAGE_VAR)
 
 elif p == 'clean':
   c.delete_cvar(HUNT_STAGE_VAR)
