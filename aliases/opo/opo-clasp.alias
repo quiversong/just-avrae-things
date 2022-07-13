@@ -27,7 +27,7 @@ if not (arg.startswith('pow') or arg.startswith('prot') or arg.startswith('hung'
 
 if has_cc:
     if arg.startswith('hung'):
-        mod_cc(cc, -1)
+        c.mod_cc(cc, -1)
         f = 'Vines of Hunger|Vines grow from the clasp and shape around your face and head. Get Advantage on checks made to find food and water for yourself and others for 1 hour.\n\nAdd `adv` to any checks you make for that as per your DM instructions.'
 
         f += f'\n\n{cc}: {character().cc_str(cc)}'
@@ -38,7 +38,7 @@ if has_cc:
             fields.append(f)
             return -1
 
-        mod_cc(cc, -1)
+        c.mod_cc(cc, -1)
         powers = {
             'pow': ['Vines of Power', '-b 1 -d 1', 10, 'Vines grow from the clasp and cover your arms. Gain a +1 bonus to attack and damage for 1 minute.'],
             'prot': ['Vines of Protection', '-ac +1', 99, 'Vines grow from the clasp and cover your torso. Gain +1 AC for 10 minutes.']
