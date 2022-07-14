@@ -62,14 +62,20 @@ if HUNT_TIME_VAR in cv:
 footer = f"You have hunted {hunt_count}/{hunt_daily_cap} times today. | !hunt help\n"
 footer += f'Seventra: Exodus of Heroes | Hunt v{VERSION} | !hunt credits'
 
-hvars, pid, stage = None, None, None
+hvars, prey_id, stage, substage = None, None, None, None
 last_stage_was_crit = False
+pursuit_round = False
 if HUNT_STAGE_VAR in cv:
   hvars = cv[HUNT_STAGE_VAR].split(":")
-  pid = hvars[0]
+  prey_id = hvars[0]
   stage = hvars[1]
-  if len(hvars) > 2 and hvars[2] == 'lastcrit':
-      last_stage_was_crit = True
+  substage = hvars[2] if len(hvars) > 2 else None
+  last_stage_was_crit = True if substage and substage == 'lastcrit' else False
+  if substage and substage.isnumeric():
+      pursuit_round = True
+      remaining_hp = ceil(substage)
+
+
 
 if not HUNT_STATS_VAR in cv:
   stats = {}
@@ -106,17 +112,17 @@ biomes = data["biomes"]
 animals = data["animals"]
 
 #STAGE OPTIONS
-if stage and stage in ["sneak","injured"] and len(arg) > 0 and args[0] == "track":
-  stage = "track"
+if stage and stage in ["sneak","pursue"] and len(args) > 0:
+  stage = "track" if "track" in args[0] else "sneak" if "sneak" in args[0] else hvars[1]
 
-#if stage and stage in ["attack","injured"] and len(args) > 0 and args[0] == "tame":
+#if stage and stage in ["attack","pursue"] and len(args) > 0 and args[0] == "tame":
 #  stage = "tame"
 
 #WRONG STAGE AND QUIT
 in_wrong_stage = stage and (len(args) == 0 or (len(args) > 0 and stage != args[0]))
-quitting_hunt = stage and stage in ["attack","injured"] and len(args) > 0 and args[0] == 'quit'
+quitting_hunt = stage and stage in ["attack","pursue"] and len(args) > 0 and args[0] == 'quit'
 if (in_wrong_stage and not quitting_hunt):
-  anm = animals[pid]
+  anm = animals[prey_id]
   anm_name = anm["name"]
   add_n = "n" if anm["name"][0] in "AEIOU" else ""
   f = f'Oops! You are already hunting a{add_n} {anm_name}!|Use `!hunt {stage}` to continue.'
@@ -213,13 +219,13 @@ if p in ACCEPTED_DIFFICULTIES:
 
   if ("commune" in anm and anm["commune"] == True) or is_dragon:
     color = 'f0b330'
-    f = f'{c.name} found a ***VERY RARE*** {anm["name"]}!|Use `!hunt sneak` to try to approach it without being noticed.'
+    f = f'{c.name} found a ***VERY RARE*** {anm["name"]}!|Do you...\n...try to approach unnoticed? `!hunt sneak`\n...follow it from a distance? `!hunt track`'
   else:
-    f = f'{c.name} found a{add_n} {anm["name"]} in the {biome["name"]}!|Use `!hunt sneak` to try and get the jump on it.'
+    f = f'{c.name} found a{add_n} {anm["name"]} in the {biome["name"]}!|Do you...\n ...sneak up on it? `!hunt sneak`\n...follow its trail? `!hunt track`'
   c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
   return 0
 
-anm = dragon_data["dragons"][pid] if pid.startswith('dragon-') else animals[pid]
+anm = dragon_data["dragons"][prey_id] if prey_id.startswith('dragon-') else animals[prey_id]
 anm_name = anm["name"]
 
 add_to_bag = None
@@ -233,6 +239,16 @@ if p == "sneak":
   succ = s_roll.total > anm["pp"]
   t = f'{c.name} tries to sneak on their prey!'
   f = f'{c.name} closes on the {anm_name}...|**Stealth roll:** {s_roll.full}\n{sl if succ else fl}'
+  if pursuit_round:
+    if wait_time != None:
+      f = f'{c.name} is exhausted from so much hunting today...|You have to wait {wait_text} until you can hunt again.'
+      f += '\n(Hunting resets at midnight UTC)'
+      c.delete_cvar(HUNT_STAGE_VAR)
+      return 1
+    else:
+      hunt_count += 1
+      c.set_cvar(HUNT_TIME_VAR, f'{hunt_count}:{first_hunt_time}')
+      footer = footer.replace(f'{hunt_count - 1}/', f'{hunt_count}/')
   if succ:
     thumb = anm["img"]
     stats["s_sneak"] = stats["s_sneak"] + 1 if "s_sneak" in stats else 1
@@ -243,11 +259,11 @@ if p == "sneak":
         f2 = f'The {anm_name} has seen you, but they do not seem scared.'
       f2 += '\n' if '|' in f2 else '|'
       f2 += f'Use `!hunt commune` to try to commune with the {anm_name}.'
-      c.set_cvar(HUNT_STAGE_VAR, f'{pid}:commune')
+      c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:commune')
     else:
       f2 = f'The {anm_name} has not seen you!|Now use `!hunt attack` or `!hunt attack [weapon]` to attack your prey!'
       f2 += "\nAlternatively use `!hunt quit` if you would rather not hunt this prey."
-      c.set_cvar(HUNT_STAGE_VAR, f'{pid}:attack')
+      c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:attack' + (f':{remaining_hp}' if pursuit_round else ''))
   else:
     thumb = image
     if "sneak_fail" in anm:
@@ -264,6 +280,16 @@ elif p == 'track':
   succ = t_roll.total > anm["pp"]
   t = f'{c.name} follows the tracks of their prey!'
   f = f'{c.name} approaches the {anm_name}...|**Investigation roll:** {t_roll.full}\n{sl if succ else fl}'
+  if pursuit_round:
+    if wait_time != None:
+      f = f'{c.name} is exhausted from so much hunting today...|You have to wait {wait_text} until you can hunt again.'
+      f += '\n(Hunting resets at midnight UTC)'
+      c.delete_cvar(HUNT_STAGE_VAR)
+      return 1
+    else:
+      hunt_count += 1
+      c.set_cvar(HUNT_TIME_VAR, f'{hunt_count}:{first_hunt_time}')
+      footer = footer.replace(f'{hunt_count - 1}/', f'{hunt_count}/')
   if succ:
     thumb = anm["img"]
     stats["s_track"] = stats["s_track"] + 1 if "s_track" in stats else 1
@@ -274,11 +300,11 @@ elif p == 'track':
         f2 = f'The {anm_name} has seen you, but they do not seem scared.'
       f2 += '\n' if '|' in f2 else '|'
       f2 += f'Use `!hunt commune` to try to commune with the {anm_name}.'
-      c.set_cvar(HUNT_STAGE_VAR, f'{pid}:commune')
+      c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:commune')
     else:
       f2 = f'You have found the {anm_name}!|Now use `!hunt attack` or `!hunt attack [weapon]` to attack your prey!'
       f2 += "\nAlternatively use `!hunt quit` if you would rather not hunt this prey."
-      c.set_cvar(HUNT_STAGE_VAR, f'{pid}:attack')
+      c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:attack' + (f':{remaining_hp}' if pursuit_round else ''))
   else:
     thumb = image
     if "sneak_fail" in anm:
@@ -319,7 +345,7 @@ elif p == 'commune':
     if "commune_succ" in anm:
       f2 = anm["commune_succ"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
     else:
-      f2 = f'The {anm_name} runs away, but the experience enlightens you...'
+      f2 = f'The {anm_name} runs away, but the experience enlightens you...\nDo you...\n...sneak after it? `!hunt sneak`\n...track its trail? `!hunt track`\n...end this hunt? `!hunt quit`'
     f2 += '\n' if '|' in f2 else '|'
     f2 += "You gained: " + prize_list + '.\nThey have been added to your "Hunting" bag!'
 
@@ -363,40 +389,41 @@ elif p == 'attack':
   d_roll = vroll(d_die)
 
   a_hit = crit or a_roll.total > anm["ac"]
-  dead = crit or (a_hit and d_roll.total > anm["hp"])
+  dead = crit or (a_hit and d_roll.total >= (remaining_hp if pursuit_round else anm["hp"]))
   injured = a_hit and not dead
   damage_dealt = d_roll.total if a_hit and not crit else anm["hp"] if crit else 0
+  this_attack_hp_results = ceil(remaining_hp - damage_dealt) if pursuit_round else ceil(anm["hp"] - damage_dealt)
 
   t = f'{c.name} attacks their prey{" with their " + weapon["name"] if weapon != None else ""}!'
 
-  dmg_l = "\n**Miss!**" if not a_hit else "\n**Critical Hit!**" if crit else "\n" + (sl if dead else "**Hit!**" if injured else fl)
+  dmg_l = "\n**Miss!**" if not a_hit else "\n**Critical Hit!**" if crit else "\n" + (f'##Test Data##\n' + f'**Damage roll:** ' + d_roll.full + f'\n**HP:** {this_attack_hp_results}/{anm["hp"]}' + f'\n##End Test Data##' if IS_LIVE == False else '') + (sl if dead else f'**Hit!**' if injured else fl)
 
   f = f'Was {c.name} able to kill the {anm_name}?|**Attack roll:** {a_roll.full}{dmg_l}'
   if a_hit:
     stats["t_dmg"] = stats["t_dmg"] + damage_dealt if "t_dmg" in stats else damage_dealt
 
-   if dead:
-    stats["s_attack"] = stats["s_attack"] + 1 if "s_attack" in stats else 1
-    thumb = anm["img"]
-    stage_value = f'{pid}:clean'
-    stage_value += ':lastcrit' if crit else ''
-    c.set_cvar(HUNT_STAGE_VAR, stage_value)
-    if crit:
-      f2 = f'{c.name} hit a critical hit killing the {anm_name} on the spot!'
-    else:
-      f2 = f'{c.name} manages to kill the {anm_name}.'
-    f2 += '|Use `!hunt clean` to clean your prize and collect the goods!'
-  else:
-    thumb = image
-    if injured:
-      stage_value = f'{pid}:injured' 
-      stage_value += f':{anm["hp"] - damage_dealt}' if len(hvar[2]) >1 and hvar[2] == anm["hp"] else f':{hvar[2] - damage_dealt}'
-      f2 = f'{c.name} injured {anm_name}, do you track this animal? `!hunt track`'
-      f2 += f'... or do you look for a different animal? `!hunt quit`'
+    if dead:
+      stats["s_attack"] = stats["s_attack"] + 1 if "s_attack" in stats else 1
+      thumb = anm["img"]
+      stage_value = f'{prey_id}:clean'
+      stage_value += ':lastcrit' if crit else ''
       c.set_cvar(HUNT_STAGE_VAR, stage_value)
+      if crit:
+        f2 = f'{c.name} hit a critical hit killing the {anm_name} on the spot!'
+      else:
+        f2 = f'{c.name} manages to kill the {anm_name}.'
+      f2 += '|Use `!hunt clean` to clean your prize and collect the goods!'
     else:
-      f2 = f'The {anm_name} managed to escape your attack and flee...|Better luck next time!'
-      c.delete_cvar(HUNT_STAGE_VAR)
+      thumb = image
+      if injured:
+        stage_value = f'{prey_id}:pursue' 
+        stage_value += f':{this_attack_hp_results}'
+        f2 = f'{c.name} injured {anm_name}, do you ...?\n... stalk it: `!hunt sneak`\n... follow the trail: `!hunt track`'
+        f2 += f'\n... look for a different animal? `!hunt quit`'
+        c.set_cvar(HUNT_STAGE_VAR, stage_value)
+  else:
+    f2 = f'The {anm_name} managed to escape your attack and flee...|Better luck next time!'
+    c.delete_cvar(HUNT_STAGE_VAR)
 
 # elif p == 'tame':
 # if <animal can be tamed>:
