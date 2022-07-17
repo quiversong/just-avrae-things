@@ -85,7 +85,7 @@ else:
 if IS_LIVE == False:
   hvar_before = f'\nNote: {hvars}' if HUNT_STAGE_VAR in cv else f'\nNote: hvars empty'
 else:
-  hvar_before = f''
+  hvar_before = None
 
 if not HUNT_STATS_VAR in cv:
   stats = {}
@@ -328,10 +328,10 @@ if p == "sneak":
         f2 = anm["sneak_fail"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
       else:
         f2 = f'You lost sight of the {anm_name}...'
+      f2 += '\n' if '|' in f2 else '|'
       f2 += 'Better luck next time! Use `!hunt` to try again.'
       footer += hvar_before
       c.delete_cvar(HUNT_STAGE_VAR)
-    f2 += '\n' if '|' in f2 else '|'
     
 elif p == 'track':
   adv_status = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
@@ -383,10 +383,10 @@ elif p == 'track':
         f2 = anm["sneak_fail"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
       else:
         f2 = f'You lost sight of the {anm_name}...'
+      f2 += '\n' if '|' in f2 else '|'
       f2 += 'Better luck next time! Use `!hunt` to try again.'
       footer += hvar_before
       c.delete_cvar(HUNT_STAGE_VAR)
-    f2 += '\n' if '|' in f2 else '|'
     
 elif p == 'quit':
   t = f'{c.name} quits hunting the {anm_name}!'
