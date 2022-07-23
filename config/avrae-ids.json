@@ -3,6 +3,7 @@
         "hunt": "60679c3b6485235880091773"
     },
     "gvars": {
+        "alias-utils": "efdbdcfa-1fe0-4976-bde0-04c368545d3d"
         "duel-data": "c85742dc-f2e9-4a99-b544-b8f71dd7bed9",
         "fish-data": "836c9cc0-faa2-4880-8986-6b240ced9a66",
         "fish-trinkets-data": "fbd058bc-7c49-46f7-af3f-c018a88443dc",
@@ -19,7 +20,6 @@
         "rumor1-data": "96111624-7e94-46f7-b32e-f0c2d6c52b13",
         "rumor2-data": "dd5538b0-aab8-4ac0-a82c-5f08aa8cf42b",
         "safari-data": "95611e59-99f0-4dfe-bc4e-9d72472a1e9b",
-        "stickers": "dac80a72-1610-43e7-8b42-e970ea5fae56",
-        "utils": "efdbdcfa-1fe0-4976-bde0-04c368545d3d"
+        "stickers": "dac80a72-1610-43e7-8b42-e970ea5fae56"
     }
 }

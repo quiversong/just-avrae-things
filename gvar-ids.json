@@ -1,5 +1,5 @@
 {
-    "aliases/utils.alias": "efdbdcfa-1fe0-4976-bde0-04c368545d3d",
+    "gvars/alias-utils.gvar": "efdbdcfa-1fe0-4976-bde0-04c368545d3d",
     "gvars/duel-data.gvar": "c85742dc-f2e9-4a99-b544-b8f71dd7bed9",
     "gvars/hunt-data.gvar": "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a",
     "gvars/hunt-dragons-data.gvar": "3f0c7f42-7712-4e86-8252-df4782f64c98",
