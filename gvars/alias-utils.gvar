@@ -1,4 +1,5 @@
 def add_coins(coins_dict, all_bags = None):
+    ### adds coins to `!g coins` and `!coins`
     all_bags = all_bags if all_bags != None else load_json(character().cvars['bags'])
     [[bag[1].update({key: bag[1][key] + coins_dict[key]}) for key in coins_dict.keys()] for bag in all_bags if bag[0] == 'Coin Pouch']
     character().set_cvar('bags', dump_json(all_bags))
