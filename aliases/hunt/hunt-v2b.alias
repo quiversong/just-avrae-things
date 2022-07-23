@@ -1,14 +1,16 @@
-embed
-<drac2>
-# Configuration Variables
+embed <drac2> # Configuration Variables
 IS_LIVE = False
 VERSION = '2.0.b.BETA'
 
-BETA_VAR = "e3ec8744-3eb6-4172-98be-24b9453d859a"
+BETA_VAR = "814404c1-670c-4849-84f8-13fb3493f6b9"
 LIVE_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
 
 DRAGON_DIE = 101
 DRAGON_VAR = "3f0c7f42-7712-4e86-8252-df4782f64c98"
+ANIMAL_VAR_A = "e93be9b6-b00f-47bb-8d63-a8c5efd8d32a"
+ANIMAL_VAR_B = "2c1f2eec-3149-48c7-b303-083b2152fbb1"
+ANIMAL_VAR_C = "465ae586-4497-4f7e-b760-c0819b21bd9b"
+MYTHIC_VAR_1 = "39caaf43-ae11-4a8e-9f8b-d5cd62c3ddd3"
 
 DAILY_CAP = 6
 
@@ -18,7 +20,7 @@ pargs = argparse(args)
 c = character()
 cv, cs = c.cvars, c.skills
 
-data_var = LIVE_VAR if IS_LIVE else BETA_VAR
+#data_var = LIVE_VAR if IS_LIVE else BETA_VAR
 hunt_daily_cap = DAILY_CAP
 
 t = f'{c.name} goes hunting!'
@@ -116,11 +118,15 @@ if len(args) > 0 and args[0] == "resetstats":
   t = "Resetting hunt statistics..."
   return 0
 
-data = load_json(get_gvar(data_var))
+data = load_json(get_gvar(LIVE_VAR)) if IS_LIVE else load_json(get_gvar(BETA_VAR))
 dragon_data = load_json(get_gvar(DRAGON_VAR))
+a_data_a = load_json(get_gvar(ANIMAL_VAR_A))
+a_data_b = load_json(get_gvar(ANIMAL_VAR_B))
+a_data_c = load_json(get_gvar(ANIMAL_VAR_C))
+a_data_My = load_json(get_gvar(MYTHIC_VAR_1))
 
 biomes = data["biomes"]
-animals = data["animals"]
+animals = a_data_a["animals"] | a_data_b["animals"] | a_data_c["animals"] | a_data_My["animals"]
 hunt_images = list(data["images"].values())
 
 #STAGE OPTIONS
@@ -150,6 +156,7 @@ if (len(args) == 0 or (not stage and args[0] not in ACCEPTED_DIFFICULTIES)):
   return 0
 
 BIOME_BY_CHANNEL_ID = {
+    999791496444268655: "test1",
     833229819335409664: "test1",
     976126242141122580: "test2",
     861654042317029426: "arbarax",
@@ -195,8 +202,8 @@ if p in ACCEPTED_DIFFICULTIES:
     return 0
 
   b_anms = [(k, v) for k, v in biome["animal_chance"].items()]
-  anm_id = [k for k, v in b_anms if (a_roll == v[0] if len(v) == 1 else a_roll >= v[0] and a_roll <= v[1])]
-  if len(anm_id) == 0:
+  anm_indicator = [k for k, v in b_anms if (a_roll == v[0] if len(v) == 1 else a_roll >= v[0] and a_roll <= v[1])]
+  if len(anm_indicator) == 0:
     f = noprey_message
     c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
     return 0
@@ -210,8 +217,16 @@ if p in ACCEPTED_DIFFICULTIES:
     anm_id = f'dragon-{dragon_type}-{commune_or_battle}'
     anm = dragon_data["dragons"][anm_id]
   else:
-    anm_id = anm_id[0]
-    anm = animals[anm_id]
+    anm_id = anm_indicator[0]
+    if anm_id in a_data_a["animals"]:
+        anm = a_data_a["animals"][anm_id]
+    elif anm_id in a_data_b["animals"]:
+        anm = a_data_b["animals"][anm_id]
+    elif anm_id in a_data_c["animals"]:
+        anm = a_data_c["animals"][anm_id]
+    elif anm_id in a_data_My["animals"]:
+        anm = a_data_My["animals"][anm_id]
+
 
   add_n = "n" if anm["name"][0] in "AEIOU" else ""
   footer += hvar_before
@@ -230,16 +245,25 @@ anm_name = anm["name"]
 
 add_to_bag = None
 
+ac_scale = ceil(ceil(ceil(anm["cr"]) / 5) * ceil(attempt_number - 1))
+kc_scale = ceil(ceil(ceil(anm["cr"]) / 5) * ceil(attempt_number - 1))
 if "commune" in anm and anm["commune"] == True:
-  color = 'f0b330'
-
-if "hp" in anm:
-  adaptive_ac = ceil(anm["ac"] + ((ceil(anm["rh"] / 2) * ceil(int(attempt_number) / 2)))) if pursuit_round else anm["ac"] if "ac" in anm else 0
-  adaptive_pp = ceil(anm["pp"] - ceil(int(attempt_number) - 1)) if "pp" in anm else 0
-  adaptive_cha = anm["cha"] if "cha" in anm else 0
+    color = 'f0b330'
+    adaptive_pp = ceil(anm["pp"] + ceil(int(attempt_number) - 1)) if pursuit_round else anm["pp"]
+    adaptive_cha = ceil(anm["cha"] + ceil(int(attempt_number) - 1)) if pursuit_round else anm["cha"]
 else:
-  adaptive_pp = ceil(anm["pp"] + ceil(int(attempt_number) - 1)) if "pp" in anm else 0
-  adaptive_cha = ceil(anm["cha"] + ceil(int(attempt_number) - 1)) if pursuit_round else anm["cha"] if "cha" in anm else 0
+    if pursuit_round:
+        ac_change = ac_scale if ac_scale > 1 else 1
+        kc_change = kc_scale if kc_scale > 1 else 1
+        adaptive_ac = ceil(anm["ac"] + ac_change) if ceil(anm["ac"] + ac_change) <= anm["kc"] else anm["ac"]
+        adaptive_kc = ceil(anm["kc"] - kc_change) if ceil(anm["kc"] - kc_change) >= adaptive_ac else adaptive_ac
+        adaptive_pp = ceil(anm["pp"] - ceil(int(attempt_number) - 1)) if ceil(anm["pp"] - ceil(int(attempt_number) - 1)) >= 3 else 3
+    else:
+        adaptive_ac = anm["ac"]
+        adaptive_kc = anm["kc"]
+        adaptive_pp = anm["pp"]
+    adaptive_cha = anm["cha"] if "cha" in anm else 0
+
 
 if "pp" in anm:
   if adaptive_pp == anm["pp"]:
@@ -259,20 +283,21 @@ if "cha" in anm:
 
 if "ac" in anm:
   if adaptive_ac == anm["ac"]:
-    adaptive_ac_math = f' `{adaptive_ac}`'
+    adaptive_ac_math = f' `{adaptive_ac}`:`{adaptive_kc}`'
   elif adaptive_ac > anm["ac"]:
-    adaptive_ac_math = f' *{anm["ac"]} + {adaptive_ac - anm["ac"]} =* `{adaptive_ac}`'
+    adaptive_ac_math = f' *{anm["ac"]} + {adaptive_ac - anm["ac"]} =* `{adaptive_ac}`:`{adaptive_kc}`'
   else:
-    adaptive_ac_math = f' *{anm["ac"]} - {anm["ac"] - adaptive_ac} =* `{adaptive_ac}`'
+    adaptive_ac_math = f' *{anm["ac"]} - {anm["ac"] - adaptive_ac} =* `{adaptive_ac}`:`{adaptive_kc}`'
 
-if attempt_number >= anm["rh"]:
-  found_anm_text = f'The {anm_name} might retaliate against {c.name}! This is the last chance!'
-elif attempt_number >= ceil(ceil(anm["rh"] * 3) / 4):
-  found_anm_text = f'The {anm_name} is ready to defend itself, it\'s waiting for {c.name}!'
-elif attempt_number >= ceil(ceil(anm["rh"] * 2) / 4):
-  found_anm_text = f'The {anm_name} is determined to escape, but {c.name} found a good position!'
-elif attempt_number >= ceil(anm["rh"] / 4):
-  found_anm_text = f'{c.name} found the {anm_name} again, it\'s more alert this time!'
+if pursuit_round:
+    if attempt_number >= anm["rh"]:
+        found_anm_text = f'The {anm_name} might retaliate against {c.name}! This is the last chance!'
+    elif attempt_number >= ceil(ceil(anm["rh"] * 3) / 4):
+        found_anm_text = f'The {anm_name} is ready to defend itself, it\'s waiting for {c.name}!'
+    elif attempt_number >= ceil(ceil(anm["rh"] * 2) / 4):
+        found_anm_text = f'The {anm_name} is determined to escape, but {c.name} found a good position!'
+    elif attempt_number >= ceil(anm["rh"] / 4):
+        found_anm_text = f'{c.name} found the {anm_name} again, it\'s more alert this time!'
 else:
   found_anm_text = f'{c.name} has not been detected by the {anm_name}!' if args[0] == "sneak" else f'{c.name} found a good position to observe the {anm_name}!'
 
@@ -471,7 +496,7 @@ elif p == 'attack':
 
 
   a_hit = crit or a_roll.total > adaptive_ac
-  dead = crit or (a_hit and (d_roll.total >= anm["hp"]) or (ceil(int(attempt_number) + 1) >= anm["rh"]))
+  dead = crit or (a_hit and (a_roll.total >= adaptive_kc) or (ceil(int(attempt_number) + 1) >= anm["rh"]))
   injured = a_hit and not dead
   damage_dealt = d_roll.total if a_hit and not crit else anm["hp"] if crit else 0
   damage_test = f'\n*## Creature HP:{anm["hp"] - (damage_dealt if damage_dealt <= anm["hp"] else anm["hp"])}/{anm["hp"]}*'
@@ -485,34 +510,39 @@ elif p == 'attack':
 
   f = f'Was {c.name} able to kill the {anm_name}?|**Attack roll:** {a_roll.full}{attack_test}{dmg_l}'
   if a_hit:
+    thumb = anm["img"]
     stats["t_dmg"] = stats["t_dmg"] + damage_dealt if "t_dmg" in stats else damage_dealt
 
     if dead:
       stats["s_attack"] = stats["s_attack"] + 1 if "s_attack" in stats else 1
-      thumb = anm["img"]
       stage_value = f'{prey_id}:clean:{attempt_number}'
       stage_value += ':lastcrit' if crit else ''
       footer += hvar_before
       c.set_cvar(HUNT_STAGE_VAR, stage_value)
       if crit:
-        f2 = f'{c.name} hit a critical hit killing the {anm_name} on the spot!'
+        f2 = f'{c.name} critically hit the {anm_name}! It drops on the spot!'
       else:
         f2 = f'{c.name} manages to kill the {anm_name}.'
       f2 += '|Use `!hunt clean` to clean your prize and collect the goods!'
     else:
-      thumb = image
       if injured:
         attempt_number += 2
         stage_value = f'{prey_id}:pursue:{attempt_number}' 
-        f2 = f'{c.name} injured {anm_name}, it should be easier to track!{pursue_text}'
+        f2 = f'{c.name} injured {anm_name}, it will be easier to track!|{pursue_text}'
         footer += hvar_before
         c.set_cvar(HUNT_STAGE_VAR, stage_value)
   else:
-    attempt_number += 1
-    stage_value = f'{prey_id}:pursue:{attempt_number}'
-    f2 = f'The {anm_name} managed to escape your attack and flee...|{pursue_text}!'
-    footer += hvar_before
-    c.set_cvar(HUNT_STAGE_VAR, stage_value)
+    thumb = image
+    if (attempt_number + 1) < anm["rh"]:
+        attempt_number += 1
+        stage_value = f'{prey_id}:pursue:{attempt_number}'
+        f2 = f'The {anm_name} managed to escape your attack and flee...|{pursue_text}!'
+        footer += hvar_before
+        c.set_cvar(HUNT_STAGE_VAR, stage_value)
+    else:
+        f2 = f'The {anm_name} escaped!|Better luck next time...'
+        footer += hvar_before
+        c.delete_cvar(HUNT_STAGE_VAR)
     
 # elif p == 'tame':
 # if <animal can be tamed>:
@@ -531,7 +561,7 @@ elif p == 'clean':
   s_roll = vroll(cs.survival.d20(base_adv = adv_status))
   clean_default = anm["ac"]
   clean_min = 5
-  clean_modifier = attempt_number * 2
+  clean_modifier = attempt_number
   adaptive_clean = ceil(clean_default - (clean_modifier if clean_modifier <= clean_default else clean_default))
   clean_dc = adaptive_clean if adaptive_clean > clean_min else clean_min
   if clean_dc == clean_min:
@@ -541,10 +571,16 @@ elif p == 'clean':
   else:
     clean_dc_math = f' `{clean_default}`'
   succ = s_roll.total > clean_dc
+  
   if IS_LIVE == False:
     clean_test = f'\n*##Test Data: Survival:{s_roll.total} vs Clean DC:*' + clean_dc_math
   f = f'{c.name} cleans and extracts the goods from the {anm_name}...|**Survival roll:** {s_roll.full}{clean_test}\n{sl if succ else fl}'
-  if succ:
+  #natural one
+  if s_roll.result.crit == 2:
+    thumb = randchoice(hunt_images)
+    f2 = f'You ended up wasting the prey you caught...|Better luck next time!'
+  #natrual 20
+  elif s_roll.result.crit == 1:
     img = anm["img"]
     stats["s_clean"] = stats["s_clean"] + 1 if "s_clean" in stats else 1
     add_to_bag = {}
@@ -553,17 +589,62 @@ elif p == 'clean':
       rations = anm["rations"]
       add_to_bag["Rations"] = rations
       prize_list += f'{rations}x Rations, '
+    if "prize_base" in anm:
+      for prize in anm["prize_base"]:
+        prize_bn, prize_bqt = prize["name"], prize["qt"]
+        add_to_bag[prize_bn] = prize_bqt
+        prize_list += f'{prize_bqt}x {prize_bn}, '
+    if "prizes" in anm:
+      for prize in anm["prizes"]:
+        prize_n, prize_qt = prize["name"], prize["qt"]
+        add_to_bag[prize_n] = prize_qt
+        prize_list += f'{prize_qt}x {prize_n}, '
+    if "prize_crit" in anm:
+      for prize in anm["prize_crit"]:
+        prize_cn, prize_cqt = prize["name"], prize["qt"]
+        add_to_bag[prize_cn] = prize_cqt
+        prize_list += f'{prize_cqt}x {prize_cn}, '
+    prize_list = prize_list[:len(prize_list) - 2]
+    f2 = f'You gained: {prize_list}.|They have been added to your "Hunting" bag!'
+  #success
+  elif succ:
+    img = anm["img"]
+    stats["s_clean"] = stats["s_clean"] + 1 if "s_clean" in stats else 1
+    add_to_bag = {}
+    prize_list = ''
+    if "rations" in anm and anm["rations"] > 0:
+      rations = anm["rations"]
+      add_to_bag["Rations"] = rations
+      prize_list += f'{rations}x Rations, '
+    if "prize_base" in anm:
+      for prize in anm["prize_base"]:
+        prize_bn, prize_bqt = prize["name"], prize["qt"]
+        add_to_bag[prize_bn] = prize_bqt
+        prize_list += f'{prize_bqt}x {prize_bn}, '
     if "prizes" in anm:
       for prize in anm["prizes"]:
         prize_n, prize_qt = prize["name"], prize["qt"]
         add_to_bag[prize_n] = prize_qt
         prize_list += f'{prize_qt}x {prize_n}, '
     prize_list = prize_list[:len(prize_list) - 2]
-
     f2 = f'You gained: {prize_list}.|They have been added to your "Hunting" bag!'
+  #non-natural 1 fail
   else:
-    thumb = randchoice(hunt_images)
-    f2 = f'You ended up wasting the prey you caught...|Better luck next time!'
+    img = anm["img"]
+    stats["s_clean"] = stats["s_clean"] + 1 if "s_clean" in stats else 1
+    add_to_bag = {}
+    prize_list = ''
+    if "rations" in anm and anm["rations"] > 0:
+      rations = anm["rations"]
+      add_to_bag["Rations"] = rations
+      prize_list += f'{rations}x Rations, '
+    if "prize_base" in anm:
+      for prize in anm["prize_base"]:
+        prize_bn, prize_bqt = prize["name"], prize["qt"]
+        add_to_bag[prize_bn] = prize_bqt
+        prize_list += f'{prize_bqt}x {prize_bn}, '
+    prize_list = prize_list[:len(prize_list) - 2]
+    f2 = f'You gained: {prize_list}.|They have been added to your "Hunting" bag!'
 
 
 c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
