@@ -1,0 +1,41 @@
+def add_coins(coins_dict, all_bags = None):
+    all_bags = all_bags if all_bags != None else load_json(character().cvars['bags'])
+    [[bag[1].update({key: bag[1][key] + coins_dict[key]}) for key in coins_dict.keys()] for bag in all_bags if bag[0] == 'Coin Pouch']
+    character().set_cvar('bags', dump_json(all_bags))
+    diff = {'cp': 0, 'sp': 0, 'ep': 0, 'gp': 0, 'pp': 0}
+    diff.update(coins_dict)
+    character().coinpurse.modify_coins(cp=diff['cp'], sp=diff['sp'], ep=diff['ep'], gp=diff['gp'], pp=diff['pp'])
+
+def get_daily_activity_data(control_var, daily_cap):
+    cvars = character().cvars
+    if control_var not in cvars:
+        character().set_cvar(control_var, f"0:0")
+        return { "count": 0, "wait_time": None }
+    else:
+        var_parts = cvars[control_var].split(':')
+        count, first_time = int(var_parts[0]), float(var_parts[1])
+        now = time()
+        if count > 0 and first_time != None:
+            passed_in_day_since_first_time = first_time % 86400
+            next_midnight_after_first_time = first_time + (86400 - passed_in_day_since_first_time)
+            if now > next_midnight_after_first_time:
+                character().set_cvar(control_var, f"0:0")
+                return { "count": 0, "wait_time": None }
+            if count >= daily_cap:
+                wait_time = next_midnight_after_first_time - now
+                hours = floor(wait_time / 3600)
+                minutes = ceil(wait_time / 60) if hours == 0 else ceil((wait_time % 3600) / 60)
+                wait_text = (str(hours) + ' hours and ' if hours > 0 else '') + str(minutes) + ' minutes'
+                return { "count": count, "wait_time": wait_text }
+        return { "count": count, "wait_time": None }
+
+def increase_daily_activity_data(control_var):
+    cvars = character().cvars
+    if not control_var in cvars or cvars[control_var] == "0:0":
+        character().set_cvar(control_var, f'1:{time()}')
+        return 1
+    else:
+        var_parts = cvars[control_var].split(':')
+        count, last_time = int(var_parts[0]) + 1, var_parts[1]
+        character().set_cvar(control_var, f'{count}:{last_time}')
+        return count
