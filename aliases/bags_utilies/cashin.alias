@@ -43,7 +43,7 @@ def parse_item_price(item_name):
         return 2000
     if lower_name.startswith('pale acorn of the'):
         return 4000
-    if lower_name.endswith('dragonscale token'):
+    if lower_name.endswith('dragonscale token') or lower_name.endswith('dragon scale'):
         return 10000
     return 0
 
@@ -87,7 +87,7 @@ def sell_from_bag(want_to_sell, all_bags, bag_name, item_processor):
 
 def hunting_item_processor(want_to_sell, item_name, item_quantity):
     is_sellable_opo_token = (item_name.lower().startswith('token of the') or item_name.lower().startswith('pale acorn of the')) and OPO_TOKENS in want_to_sell
-    is_sellable_dragon_token = item_name.lower().endswith('dragonscale token') and DRAGON_TOKENS in want_to_sell
+    is_sellable_dragon_token = (item_name.lower().endswith('dragonscale token') or item_name.lower().endswith('dragon scale')) and DRAGON_TOKENS in want_to_sell
     if item_name.lower() == 'rations' and RATIONS in want_to_sell:
         return [True, 50 * int(item_quantity)]
     elif item_name.lower() != 'rations' and is_item_with_value_in_name(item_name) and HUNT in want_to_sell:
@@ -115,7 +115,7 @@ cv = c.cvars
 
 t = f'{c.name} wants to cash-in and sell their goods!'
 footer = 'Don\'t forget to role-play your transaction!\n'
-footer += 'Seventra: Exodus of Heroes | Cash-in your goods! v2.1\n'
+footer += 'Seventra: Exodus of Heroes | Cash-in your goods! v2.1.1\n'
 footer += '!cashin [-f (fish)] [-h (hunt)] [-n (rations)] [-t (foundation tokens)] [-r (relics)]\n[-o (opo wilderness tokens)] [-d (dragonscale tokens)]'
 
 fields = []
@@ -152,7 +152,7 @@ if len(args) == 0 or (not args[0].startswith('-')) or len(want_to_sell) == 0:
   f += 'Use `!cashin -t` to sell ONLY your Foundation Tokens\n'
   f += 'Use `!cashin -r` to sell ONLY your Research Relics (all of them!)\n'
   f += 'Use `!cashin -o` to sell ONLY your Tokens of the Wilderness and Pale Acorns\n'
-  f += 'Use `!cashin -d` to sell ONLY your Dragonscales Tokens\n'
+  f += 'Use `!cashin -d` to sell ONLY your Dragonscale Tokens\n'
   f += 'You can combine the letters, for example: `!cashin -fr`\n'
   f += '\n`!cashin` will only sell items in your `Fish`, `Hunting` and `Research` bags. '
   f += 'Move the items you want to keep to other bags before cashing in.'
