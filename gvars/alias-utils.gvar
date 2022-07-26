@@ -1,11 +1,27 @@
 def add_coins(coins_dict, all_bags = None):
-    ### adds coins to `!g coins` and `!coins`
     all_bags = all_bags if all_bags != None else load_json(character().cvars['bags'])
     [[bag[1].update({key: bag[1][key] + coins_dict[key]}) for key in coins_dict.keys()] for bag in all_bags if bag[0] == 'Coin Pouch']
     character().set_cvar('bags', dump_json(all_bags))
     diff = {'cp': 0, 'sp': 0, 'ep': 0, 'gp': 0, 'pp': 0}
     diff.update(coins_dict)
     character().coinpurse.modify_coins(cp=diff['cp'], sp=diff['sp'], ep=diff['ep'], gp=diff['gp'], pp=diff['pp'])
+
+def get_control_variable_values(control_var):
+    cvars = character().cvars
+    if control_var not in cvars:
+        return []
+    return cvars[control_var].split(':')
+
+def update_control_variable(control_var, position, new_value):
+    values = get_control_variable_values(control_var)
+    if position > len(values):
+        return False
+    if position == len(values):
+        values.append(str(new_value))
+    else:
+        values[position] = str(new_value)
+    character().set_cvar(control_var, ':'.join(values))
+    return True
 
 def get_daily_activity_data(control_var, daily_cap):
     cvars = character().cvars

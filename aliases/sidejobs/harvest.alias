@@ -3,51 +3,16 @@ embed
 # Configuration Variables
 VERSION = '1.0'
 
+using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
+
 DATA_VAR = "6f5df807-0561-45dd-b303-3f1b61bc6a2f"
 IMAGES_VAR = "534109e4-0224-478d-9d04-a84980550c4c"
-DAILY_CAP = 1
 
-def add_coins(coins_dict, all_bags = None):
-    all_bags = all_bags if all_bags != None else load_json(character().cvars['bags'])
-    [[bag[1].update({key: bag[1][key] + coins_dict[key]}) for key in coins_dict.keys()] for bag in all_bags if bag[0] == 'Coin Pouch']
-    character().set_cvar('bags', dump_json(all_bags))
-    diff = {'cp': 0, 'sp': 0, 'ep': 0, 'gp': 0, 'pp': 0}
-    diff.update(coins_dict)
-    character().coinpurse.modify_coins(cp=diff['cp'], sp=diff['sp'], ep=diff['ep'], gp=diff['gp'], pp=diff['pp'])
+HARVEST_TIME_VAR = "_hhmt_dhc_"
+HARVEST_CONTROL_VAR = "_hhmt_ivc_"
 
-def get_daily_activity_data(control_var, daily_cap):
-    cvars = character().cvars
-    if control_var not in cvars:
-        character().set_cvar(control_var, f"0:0")
-        return { "count": 0, "wait_time": None }
-    else:
-        var_parts = cvars[control_var].split(':')
-        count, first_time = int(var_parts[0]), float(var_parts[1])
-        now = time()
-        if count > 0 and first_time != None:
-            passed_in_day_since_first_time = first_time % 86400
-            next_midnight_after_first_time = first_time + (86400 - passed_in_day_since_first_time)
-            if now > next_midnight_after_first_time:
-                character().set_cvar(control_var, f"0:0")
-                return { "count": 0, "wait_time": None }
-            if count >= daily_cap:
-                wait_time = next_midnight_after_first_time - now
-                hours = floor(wait_time / 3600)
-                minutes = ceil(wait_time / 60) if hours == 0 else ceil((wait_time % 3600) / 60)
-                wait_text = (str(hours) + ' hours and ' if hours > 0 else '') + str(minutes) + ' minutes'
-                return { "count": count, "wait_time": wait_text }
-        return { "count": count, "wait_time": None }
-
-def increase_daily_activity_data(control_var):
-    cvars = character().cvars
-    if not control_var in cvars or cvars[control_var] == "0:0":
-        character().set_cvar(control_var, f'1:{time()}')
-        return 1
-    else:
-        var_parts = cvars[control_var].split(':')
-        count, last_time = int(var_parts[0]) + 1, var_parts[1]
-        character().set_cvar(control_var, f'{count}:{last_time}')
-        return count
+control_var_values = utils.get_control_variable_values(HARVEST_CONTROL_VAR)
+daily_cap = int(control_var_values[0]) if len(control_var_values) > 0 else 1
 
 def is_matching_entry(entry, dice_roll):
     is_range = len(entry['roll']) > 1
@@ -73,14 +38,12 @@ cv, cs = c.cvars, c.skills
 title = f"{c.name}'s harvesting at the Hollow Mountain!"
 fields = []
 
-HARVEST_TIME_VAR = "_hhmt_dhc_"
-
-daily_data = get_daily_activity_data(HARVEST_TIME_VAR, DAILY_CAP)
+daily_data = utils.get_daily_activity_data(HARVEST_TIME_VAR, daily_cap)
 harvests_performed = daily_data["count"]
 wait_time = daily_data["wait_time"]
 
 footer = "Don't forget to role-play your harvest work!"
-footer += '\n' + FOOTER_MORE_MSG if harvests_performed < DAILY_CAP else '\n' + FOOTER_DONE_MSG
+footer += '\n' + FOOTER_MORE_MSG if harvests_performed < daily_cap else '\n' + FOOTER_DONE_MSG
 footer += "\n" + f'Seventra: Exodus of Heroes | Harvest Hollow v{VERSION}'
 footer += "\nCreators: Library Fox#0895 and quiversong#2772"
 
@@ -99,10 +62,11 @@ if len(args) > 0 and args[0] == 'reset':
         err('You are not allowed to do that!')
         return 1
     c.delete_cvar(HARVEST_TIME_VAR)
+    c.delete_cvar(HARVEST_CONTROL_VAR)
     fields.append('Resetting harvest time control...|Done!')
     return 1
 
-if harvests_performed >= DAILY_CAP:
+if harvests_performed >= daily_cap:
     f = 'You have alredy harvested today...|'
     f += f'Come back tomorrow?! Time to reset: {wait_time}'
     img = None
@@ -126,23 +90,23 @@ text = result['text'].replace('"', '\\\"')
 fields.append(f'Outcome|{text}')
 
 img_selection = [x for x in images if x["image_label"].lower() == result['image'].lower()]
-img = img_selection["image_url"] if len(img_selection) > 0 else HELP_IMG
+img = img_selection[0]["image_url"] if len(img_selection) > 0 else HELP_IMG
 
 prize = result["prize"].lower()
 if prize != "0":
     if prize.endswith('gp'):
         prize = int(prize.split('gp')[0])
-        add_coins({'gp': prize})
+        utils.add_coins({'gp': prize})
         fields.append(f"Congratulations!|{prize} gold pieces have been added to your pouch!")
     else:
         fields.append(f"Congratulations!|You gained {prize}!")
 
-if dice_roll.total == 100:
-    fields.append(f"Today is your lucky day!|You get to try to `!harvest` one more time today. Go for it!")
-else:
-    harvests_performed = increase_daily_activity_data(HARVEST_TIME_VAR)
+if dice_roll.total == 100 and daily_cap == 1:
+    utils.update_control_variable(HARVEST_CONTROL_VAR, 0, 2)
+    fields.append(f"Today is your lucky day!|From now on you get to try to `!harvest` twice every day.\nGo for it again!")
 
-if harvests_performed >= DAILY_CAP:
+harvests_performed = utils.increase_daily_activity_data(HARVEST_TIME_VAR)
+if harvests_performed >= daily_cap:
     footer = footer.replace(FOOTER_MORE_MSG, FOOTER_DONE_MSG)
 
 </drac2>
