@@ -335,8 +335,8 @@ if p == "sneak":
       footer += hvar_before
       c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:commune:{attempt_number}')
     else:
-      f2 = f'{found_anm_text}|Now use `!hunt attack` or `!hunt attack [weapon]` to attack your prey!'
-      f2 += "\nAlternatively use `!hunt quit` if you would rather not hunt this prey."
+      f2 = f'{found_anm_text}|Now use `!hunt attack [weapon]` to attack!'
+      f2 += "\nOr if you don't want to attack, use `!hunt quit`"
       footer += hvar_before
       c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:attack:{attempt_number}')
   else:
@@ -447,7 +447,7 @@ elif p == 'commune':
     else:
       f2 = f'The {anm_name} spends a moment with you, then turns away. The experience enlightens you...'
     f2 += '\n' if '|' in f2 else '|'
-    f2 += "You gained: " + prize_list + '.\nThey have been added to your "Hunting" bag!'
+    f2 += "You gained: " + prize_list + '.\nCheck `!bag "Hunting"` to see what you have collected!
     footer += hvar_before
     c.delete_cvar(HUNT_STAGE_VAR)
 
@@ -528,7 +528,7 @@ elif p == 'attack':
       if injured:
         attempt_number += 2
         stage_value = f'{prey_id}:pursue:{attempt_number}' 
-        f2 = f'{c.name} injured {anm_name}, it will be easier to track!|{pursue_text}'
+        f2 = f'{c.name} injured {anm_name}! It will be easier to find again!|{pursue_text}'
         footer += hvar_before
         c.set_cvar(HUNT_STAGE_VAR, stage_value)
   else:
@@ -574,11 +574,11 @@ elif p == 'clean':
   
   if IS_LIVE == False:
     clean_test = f'\n*##Test Data: Survival:{s_roll.total} vs Clean DC:*' + clean_dc_math
-  f = f'{c.name} cleans and extracts the goods from the {anm_name}...|**Survival roll:** {s_roll.full}{clean_test}\n{sl if succ else fl}'
+  f = f'{c.name} attempts to extracts market goods from the {anm_name}...|**Survival roll:** {s_roll.full}{clean_test}\n{sl if succ else fl}'
   #natural one
   if s_roll.result.crit == 2:
     thumb = randchoice(hunt_images)
-    f2 = f'You ended up wasting the prey you caught...|Better luck next time!'
+    f2 = f'The animal was wasted...|Better luck next time!'
   #natrual 20
   elif s_roll.result.crit == 1:
     img = anm["img"]
@@ -605,7 +605,7 @@ elif p == 'clean':
         add_to_bag[prize_cn] = prize_cqt
         prize_list += f'{prize_cqt}x {prize_cn}, '
     prize_list = prize_list[:len(prize_list) - 2]
-    f2 = f'You gained: {prize_list}.|They have been added to your "Hunting" bag!'
+    f2 = f'You gained: {prize_list}.|Check `!bag "Hunting"` to see what you have collected!
   #success
   elif succ:
     img = anm["img"]
@@ -627,7 +627,7 @@ elif p == 'clean':
         add_to_bag[prize_n] = prize_qt
         prize_list += f'{prize_qt}x {prize_n}, '
     prize_list = prize_list[:len(prize_list) - 2]
-    f2 = f'You gained: {prize_list}.|They have been added to your "Hunting" bag!'
+    f2 = f'You gained: {prize_list}.|Check `!bag "Hunting"` to see what you have collected!
   #non-natural 1 fail
   else:
     img = anm["img"]
@@ -644,7 +644,7 @@ elif p == 'clean':
         add_to_bag[prize_bn] = prize_bqt
         prize_list += f'{prize_bqt}x {prize_bn}, '
     prize_list = prize_list[:len(prize_list) - 2]
-    f2 = f'You gained: {prize_list}.|They have been added to your "Hunting" bag!'
+    f2 = f'You gained: {prize_list}.|Check `!bag "Hunting"` to see what you have collected!
 
 
 c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
