@@ -1,6 +1,6 @@
 embed <drac2> # Configuration Variables
 IS_LIVE = False
-VERSION = '2.0.b.BETA'
+VERSION = '2.0.ALPHA'
 
 BETA_VAR = "814404c1-670c-4849-84f8-13fb3493f6b9"
 LIVE_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
@@ -64,25 +64,41 @@ if HUNT_TIME_VAR in cv:
 footer = f"You have hunted {hunt_count}/{hunt_daily_cap} times today. | !hunt help\n"
 footer += f'Seventra: Exodus of Heroes | Hunt v{VERSION} | !hunt credits'
 
-hvars, prey_id, stage, last_stage_was_crit = None, None, None, None
-last_stage_was_crit = False
+hvars, prey_id, challenge, stage, attempt_number, last_stage, result_last = None, None, None, None, None, None, None
+##Delete after testing
+#last_stage_was_crit = False
 if HUNT_STAGE_VAR in cv:
   hvars = cv[HUNT_STAGE_VAR].split(":")
   prey_id = hvars[0]
-  stage = hvars[1]
+  challenge = hvars[1]
   if len(hvars) <= 2:
-    t = f'Welcome to Hunt!'
-    f = f'**Loading v2b (BETA VERSION)**\nYour progress from hunt v1 has been removed.\nRun `!!hunt` to begin testing.'
+    t = f'Updating Hunt'
+    t += f' v2 Beta Testing!' if IS_LIVE == False else f'v2!'
+    f = f'**Loading v2**'
+    f += f'**Loading v2 Beta Testing!**' if IS_LIVE == False else f'**Loading Hunt v2!**'
+    f +=f'\nYour progress from Hunt v1 has been removed.\nRun `!!hunt` to begin testing.'
     c.delete_cvar(HUNT_STAGE_VAR)
     return 2
   else:
-    last_stage_was_crit = True if len(hvars) > 3 and hvars[3] == 'lastcrit' else False
-    pursuit_round = True if len(hvars) > 2 and int(hvars[2]) > 1 else False
-
-if not HUNT_STAGE_VAR in cv:
-  attempt_number = 1
+    stage = hvars[2]
+    if len(hvars) <= 3:
+      t = f'Updating Hunt!'
+      f = f'**Loading Hunt v2 Beta Testing!**\nYou were testing or using an older version last. Your version has been updated and reset.'
+      c.delete_cvar(HUNT_STAGE_VAR)
+      return 3
+    attempt_number = int(hvars[3]) if hvars[3].isnumeric() else hvars[3]
+    result_last = hvars[5]
+    last_stage_was_crit = True if hvars[5] == 'lastcrit' else False
+    pursuit_round = True if int(hvars[3]) > 1 else False
+    last_stage = hvars[3]
 else:
-  attempt_number = int(hvars[2]) if hvars[2].isnumeric() else hvars[2]
+  attempt_number = 1
+
+##Delete after testing
+#if not HUNT_STAGE_VAR in cv:
+#  attempt_number = 1
+#else:
+#  attempt_number = int(hvars[2]) if hvars[2].isnumeric() else hvars[2]
 
 if IS_LIVE == False:
   hvar_before = f'\nNote: {hvars}' if HUNT_STAGE_VAR in cv else f'\nNote: hvars empty'
@@ -156,8 +172,8 @@ if (len(args) == 0 or (not stage and args[0] not in ACCEPTED_DIFFICULTIES)):
   return 0
 
 BIOME_BY_CHANNEL_ID = {
-    999791496444268655: "test1",
     833229819335409664: "test1",
+    999791496444268655: "test1",
     976126242141122580: "test2",
     861654042317029426: "arbarax",
     965727258507640832: "hydris",
@@ -195,7 +211,24 @@ if p in ACCEPTED_DIFFICULTIES:
   thumb = biome["image"]
   noprey_message = f'{c.name} could not find any prey.|Better luck next time!'
 
-  a_roll = roll("1d100")
+  if p == "legends" and c.levels.total_level < 5:
+    a_roll = roll("4d25kl1")
+    noprey_message = f'{c.name} narrowly avoids becoming the hunted!|Try an easier hunt until you are more experienced...'
+  elif p == "legends" and c.levels.total_level < 9:
+    a_roll = roll("2d50kl1")
+    noprey_message = f'{c.name} is not up to the challenge...|Maybe you\'ll have better luck at an easier hunt...'
+  elif p == "legends" and c.levels.total_level < 13:
+    a_roll = roll("1d80")
+  elif p == "hard" and c.levels.total_level < 5:
+    a_roll = roll("2d50kl1")
+    noprey_message = f'{c.name} is pushing their limits...|Maybe you\'ll have better luck at an easier hunt...'
+  elif p == "hard" and c.levels.total_level < 9:
+    a_roll = roll("1d80")
+  elif p == "easy" and c.levels.total_level < 5:
+    a_roll = roll("1d80")
+  else:
+    a_roll = roll("1d100")
+    
   if not "animal_chance" in biome:
     f = noprey_message
     c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
@@ -230,7 +263,8 @@ if p in ACCEPTED_DIFFICULTIES:
 
   add_n = "n" if anm["name"][0] in "AEIOU" else ""
   footer += hvar_before
-  c.set_cvar(HUNT_STAGE_VAR, f'{anm_id}:sneak:{attempt_number}')
+  stage = f'sneak'
+  c.set_cvar(HUNT_STAGE_VAR, f'{anm_id}:{challenge}:{stage}:{attempt_number}:{last_stage}:{result_last}')
   
   if ("commune" in anm and anm["commune"] == True) or is_dragon:
     color = 'f0b330'
@@ -300,17 +334,17 @@ if pursuit_round:
         found_anm_text = f'{c.name} found the {anm_name} again, it\'s more alert this time!'
 else:
   found_anm_text = f'{c.name} has not been detected by the {anm_name}!' if args[0] == "sneak" else f'{c.name} found a good position to observe the {anm_name}!'
-
 pursue_text = f' Do you ...?\n... stalk it: `!hunt sneak`\n... follow the trail: `!hunt track`\n... look for a different animal? `!hunt quit`'
 
 if p == "sneak":
-  adv_status = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
+  adv_status = True if pargs.adv() == 1 or last_stage_was_crit == True else False if pargs.adv() == -1 else None
   s_roll = vroll(cs.stealth.d20(base_adv = adv_status))
   succ = s_roll.total > adaptive_pp
   if IS_LIVE == False:
     sneak_test = f'\n*##Test Data: Stealth:`{s_roll.total}` vs PP:*' + adaptive_pp_math
   t = f'{c.name} tries to sneak on their prey!'
   f = f'{c.name} closes on the {anm_name}...|**Stealth roll:** {s_roll.full}{sneak_test}\n{sl if succ else fl}'
+  last_stage = f'sneak'
   if pursuit_round:
     if wait_time != None:
       f = f'{c.name} is exhausted from so much hunting today...|You have to wait {wait_text} until you can hunt again.'
@@ -325,6 +359,7 @@ if p == "sneak":
   if succ:
     thumb = anm["img"]
     stats["s_sneak"] = stats["s_sneak"] + 1 if "s_sneak" in stats else 1
+    result_last = f'hidden'
     if "commune" in anm and anm["commune"] == True:
       if "sneak_succ" in anm:
         f2 = anm["sneak_succ"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
@@ -332,22 +367,23 @@ if p == "sneak":
         f2 = f'The {anm_name} has seen you, but they do not seem scared.'
       f2 += '\n' if '|' in f2 else '|'
       f2 += f'Use `!hunt commune` to try to commune with the {anm_name}.'
+      stage = f'commune'
       footer += hvar_before
-      c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:commune:{attempt_number}')
     else:
       f2 = f'{found_anm_text}|Now use `!hunt attack [weapon]` to attack!'
       f2 += "\nOr if you don't want to attack, use `!hunt quit`"
+      stage = f'attack'
       footer += hvar_before
-      c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:attack:{attempt_number}')
+    c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:{challenge}:{stage}:{attempt_number}:{last_stage}:{result_last}')
   else:
     thumb = image
     if "commune" in anm and anm["commune"] == True:
       f2 = f'The {anm_name} knew exactly where you were! It moves deeper into the wilderness!'
       attempt_number += 1
-      stage_value = f'{prey_id}:pursue:{attempt_number}'
       f2 += f'\n{pursue_text}'
+      stage = 'pursue'
       footer += hvar_before
-      c.set_cvar(HUNT_STAGE_VAR, stage_value) 
+      c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:{challenge}:{stage}:{attempt_number}:{last_stage}:{result_last}') 
     else:
       if "sneak_fail" in anm:
         f2 = anm["sneak_fail"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
@@ -359,13 +395,15 @@ if p == "sneak":
       c.delete_cvar(HUNT_STAGE_VAR)
     
 elif p == 'track':
-  adv_status = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
-  s_roll = vroll(cs.investigation.d20(base_adv = adv_status))
+  adv_status = True if pargs.adv() == 1 or result_last == 'injured' else False if pargs.adv() == -1 else None
+  s_roll = vroll(cs.survival.d20(base_adv = adv_status))
   succ = s_roll.total > adaptive_pp
+  result_last = 'hidden' if s_roll.result.crit == 1 else None
   if IS_LIVE == False:
-    track_test = f'\n*##Test Data: Investigation:{s_roll.total} vs PP:*' + adaptive_pp_math
+    track_test = f'\n*##Test Data: Survival: {s_roll.total} vs PP:*' + adaptive_pp_math
   t = f'{c.name} follows the tracks of their prey!'
-  f = f'{c.name} approaches the {anm_name}...|**Investigation roll:** {s_roll.full}{track_test}\n{sl if succ else fl}'
+  f = f'{c.name} approaches the {anm_name}...|**Survival roll:** {s_roll.full}{track_test}\n{sl if succ else fl}'
+  last_stage = 'track'
   if pursuit_round:
     if wait_time != None:
       f = f'{c.name} is exhausted from so much hunting today...|You have to wait {wait_text} until you can hunt again.'
@@ -387,22 +425,23 @@ elif p == 'track':
         f2 = f'The {anm_name} has seen you, but they do not seem scared.'
       f2 += '\n' if '|' in f2 else '|'
       f2 += f'Use `!hunt commune` to try to commune with the {anm_name}.'
+      stage = f'commune'
       footer += hvar_before
-      c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:commune:{attempt_number}')
     else:
       f2 = f'{found_anm_text}|Now use `!hunt attack` or `!hunt attack [weapon]` to attack your prey!'
       f2 += "\nAlternatively use `!hunt quit` if you would rather not hunt this prey."
+      stage = f'attack'
       footer += hvar_before
-      c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:attack:{attempt_number}')
+    c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:{challenge}:{stage}:{attempt_number}:{last_stage}:{result_last}')
   else:
     thumb = image
     if "commune" in anm and anm["commune"] == True:
-      f2 = f'The {anm_name} was waiting for you! It boldly leaves you deeper into the wilderness!'
+      f2 = f'The {anm_name} was waiting for you! It boldly leads you deeper into the wilderness!'
       attempt_number += 1
-      stage_value = f'{prey_id}:pursue:{attempt_number}'
       f2 += f'\n{pursue_text}'
+      stage = 'pursue'
       footer += hvar_before
-      c.set_cvar(HUNT_STAGE_VAR, stage_value) 
+      c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:{challenge}:{stage}:{attempt_number}:{last_stage}:{result_last}') 
     else:
       if "sneak_fail" in anm:
         f2 = anm["sneak_fail"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
@@ -421,11 +460,14 @@ elif p == 'quit':
   c.delete_cvar(HUNT_STAGE_VAR)
   
 elif p == 'commune':
+  stage = 'pursue'
+  last_stage = 'commune'
   if not "commune" in anm or anm["commune"] == False:
     f = "!hunt script rolled a 1 and failed flat on its head! Please report to a Server Administrator."
     return 1
   s_roll = vroll(cs.animalHandling.d20())
   succ = s_roll.total > adaptive_cha
+  result_last = 'lastcrit' if s_roll.result.crit == 1 else None
   if IS_LIVE == False:
     commune_test = f'\n*##Test Data: Animal Handling:{s_roll.total} vs CHA:*' + adaptive_cha_math
   t = f'{c.name} tries to commune with the {anm_name}...'
@@ -447,7 +489,7 @@ elif p == 'commune':
     else:
       f2 = f'The {anm_name} spends a moment with you, then turns away. The experience enlightens you...'
     f2 += '\n' if '|' in f2 else '|'
-    f2 += "You gained: " + prize_list + '.\nCheck `!bag "Hunting"` to see what you have collected!
+    f2 += "You gained: " + prize_list + '.\nCheck `!bag "Hunting"` to see what you have collected!'
     footer += hvar_before
     c.delete_cvar(HUNT_STAGE_VAR)
 
@@ -459,13 +501,13 @@ elif p == 'commune':
       f2 = f'The {anm_name} was not impressed! It retreats into the wilderness!'
       f2 += '\n' if '|' in f2 else '|'
     attempt_number += 1
-    stage_value = f'{prey_id}:pursue:{attempt_number}'
     f2 += f'\n{pursue_text}'
     footer += hvar_before
-    c.set_cvar(HUNT_STAGE_VAR, stage_value)
+    c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:{challenge}:{stage}:{attempt_number}:{last_stage}:{result_last}')
 
 elif p == 'attack':
   weapon = None
+  last_stage = 'attack'
   if len(args) > 1 and len(args[1]) >= 3 and args[1] not in ["adv", "dis", "-b", "-d"]:
     weapon_arg = args[1].lower()
     weapon_str = [a for a in c.attacks
@@ -483,7 +525,7 @@ elif p == 'attack':
 
   a_bonus_param = '+'.join(pargs.get('b', default=[''])).strip()
   a_mod = weapon['a_bonus'] if weapon != None else dexterityMod + proficiencyBonus
-  a_die = '2d20kh1' if pargs.adv() == 1 else '2d20kl1' if pargs.adv() == -1 else '1d20'
+  a_die = '2d20kh1' if pargs.adv() == 1 or (pargs.adv() != -1 and result_last == 'hidden') else '2d20kl1' if pargs.adv() == -1 and result_last != 'hidden' else '1d20'
   a_die = f'{a_die} + {a_mod}'
   a_die = f'{a_die} + {a_bonus_param}' if a_bonus_param != '' else a_die
   a_roll = vroll(a_die)
@@ -494,7 +536,6 @@ elif p == 'attack':
   d_die = f'{d_die}+{d_bonus_param}' if d_bonus_param != '' else d_die
   d_roll = vroll(d_die)
 
-
   a_hit = crit or a_roll.total > adaptive_ac
   dead = crit or (a_hit and (a_roll.total >= adaptive_kc) or (ceil(int(attempt_number) + 1) >= anm["rh"]))
   injured = a_hit and not dead
@@ -502,7 +543,7 @@ elif p == 'attack':
   damage_test = f'\n*## Creature HP:{anm["hp"] - (damage_dealt if damage_dealt <= anm["hp"] else anm["hp"])}/{anm["hp"]}*'
   repeat_limit_test = f'\n*## Kill-on-Hit Meter: `{attempt_number}`/{anm["rh"]}*'
   if IS_LIVE == False:
-    attack_test = f'\n*##Test Data: Attack:{a_roll.total} vs AC:*' + adaptive_ac_math + damage_test + repeat_limit_test
+    attack_test = f'\n*##Test Data: Attack: {a_roll.total} vs AC:*' + adaptive_ac_math + damage_test + repeat_limit_test
 
   t = f'{c.name} attacks their prey{" with their " + weapon["name"] if weapon != None else ""}!'
 
@@ -512,33 +553,32 @@ elif p == 'attack':
   if a_hit:
     thumb = anm["img"]
     stats["t_dmg"] = stats["t_dmg"] + damage_dealt if "t_dmg" in stats else damage_dealt
-
     if dead:
       stats["s_attack"] = stats["s_attack"] + 1 if "s_attack" in stats else 1
-      stage_value = f'{prey_id}:clean:{attempt_number}'
-      stage_value += ':lastcrit' if crit else ''
+      stage = 'clean'
       footer += hvar_before
-      c.set_cvar(HUNT_STAGE_VAR, stage_value)
       if crit:
         f2 = f'{c.name} critically hit the {anm_name}! It drops on the spot!'
+        result_last = 'lastcrit'
       else:
         f2 = f'{c.name} manages to kill the {anm_name}.'
       f2 += '|Use `!hunt clean` to clean your prize and collect the goods!'
     else:
       if injured:
         attempt_number += 2
-        stage_value = f'{prey_id}:pursue:{attempt_number}' 
+        stage = 'pursue'
+        result_last = 'injured'
         f2 = f'{c.name} injured {anm_name}! It will be easier to find again!|{pursue_text}'
         footer += hvar_before
-        c.set_cvar(HUNT_STAGE_VAR, stage_value)
+    c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:{challenge}:{stage}:{attempt_number}:{last_stage}:{result_last}')
   else:
     thumb = image
     if (attempt_number + 1) < anm["rh"]:
         attempt_number += 1
-        stage_value = f'{prey_id}:pursue:{attempt_number}'
+        stage = 'pursue'
         f2 = f'The {anm_name} managed to escape your attack and flee...|{pursue_text}!'
         footer += hvar_before
-        c.set_cvar(HUNT_STAGE_VAR, stage_value)
+        c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:{challenge}:{stage}:{attempt_number}:{last_stage}:{result_last}')
     else:
         f2 = f'The {anm_name} escaped!|Better luck next time...'
         footer += hvar_before
@@ -558,7 +598,18 @@ elif p == 'clean':
   c.delete_cvar(HUNT_STAGE_VAR)
   t = f'{c.name} attempts to clean their hunting prize!'
   adv_status = True if last_stage_was_crit else None
-  s_roll = vroll(cs.survival.d20(base_adv = adv_status))
+  nature_clean = vroll(cs.nature.d20(base_adv = adv_status))
+  surv_clean = vroll(cs.survival.d20(base_adv = adv_status))
+  dex_clean = vroll(cs.dexterity.d20(base_adv = adv_status))
+  if cs.nature > (cs.survival and cs.dexterity):
+    s_roll = nature_clean
+    clean_type = f'Nature'
+  elif cs.survival > cs.dexterity:
+    s_roll = surv_clean
+    clean_type = f'Survival'
+  else:
+    s_roll = dex_clean
+    clean_type = f'Dexterity'
   clean_default = anm["ac"]
   clean_min = 5
   clean_modifier = attempt_number
@@ -571,10 +622,9 @@ elif p == 'clean':
   else:
     clean_dc_math = f' `{clean_default}`'
   succ = s_roll.total > clean_dc
-  
   if IS_LIVE == False:
-    clean_test = f'\n*##Test Data: Survival:{s_roll.total} vs Clean DC:*' + clean_dc_math
-  f = f'{c.name} attempts to extracts market goods from the {anm_name}...|**Survival roll:** {s_roll.full}{clean_test}\n{sl if succ else fl}'
+    clean_test = f'\n*##Test Data: {clean_type}: {s_roll.total} vs Clean DC:*' + clean_dc_math
+  f = f'{c.name} attempts to extracts market goods from the {anm_name}...|**{clean_type} roll:** {s_roll.full}{clean_test}\n{sl if succ else fl}'
   #natural one
   if s_roll.result.crit == 2:
     thumb = randchoice(hunt_images)
@@ -605,7 +655,7 @@ elif p == 'clean':
         add_to_bag[prize_cn] = prize_cqt
         prize_list += f'{prize_cqt}x {prize_cn}, '
     prize_list = prize_list[:len(prize_list) - 2]
-    f2 = f'You gained: {prize_list}.|Check `!bag "Hunting"` to see what you have collected!
+    f2 = f'You gained: {prize_list}.|Check `!bag "Hunting"` to see what you have collected!'
   #success
   elif succ:
     img = anm["img"]
@@ -627,7 +677,7 @@ elif p == 'clean':
         add_to_bag[prize_n] = prize_qt
         prize_list += f'{prize_qt}x {prize_n}, '
     prize_list = prize_list[:len(prize_list) - 2]
-    f2 = f'You gained: {prize_list}.|Check `!bag "Hunting"` to see what you have collected!
+    f2 = f'You gained: {prize_list}.|Check `!bag "Hunting"` to see what you have collected!'
   #non-natural 1 fail
   else:
     img = anm["img"]
@@ -644,7 +694,7 @@ elif p == 'clean':
         add_to_bag[prize_bn] = prize_bqt
         prize_list += f'{prize_bqt}x {prize_bn}, '
     prize_list = prize_list[:len(prize_list) - 2]
-    f2 = f'You gained: {prize_list}.|Check `!bag "Hunting"` to see what you have collected!
+    f2 = f'You gained: {prize_list}.|Check `!bag "Hunting"` to see what you have collected!'
 
 
 c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
