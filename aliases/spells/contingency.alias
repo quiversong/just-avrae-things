@@ -1,0 +1,10 @@
+embed <drac2>
+    t = "{name} uses the Contingency Spell!"
+
+</drac2>
+-title "{{t}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}

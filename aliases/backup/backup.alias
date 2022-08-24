@@ -1,0 +1,74 @@
+multiline
+<drac2>
+
+def create_backup_data():
+    data = {}
+    data['cvars'] = character().cvars
+    data['cc'] = {}
+    for c in c.consumables:
+        data['cc'][c.name] = {
+            'name': c.name,
+            'desc': c.desc,
+            'display_type': c.display_type,
+            'max': None if c.max == 2147483647 else c.max,
+            'min': None if c.min == -2147483648 else c.min,
+            'reset_by': c.reset_by,
+            'reset_on': c.reset_on,
+            'reset_to': c.reset_to,
+            'title': c.title,
+            'value': c.value
+        }
+    return data
+
+def restore_data(data):
+    for cvar in data.cvars:
+        character().set_cvar(cvar, data.cvars[cvar])
+
+    for cc_name in data.cc:
+        cc = data.cc[cc_name]
+        character().create_cc_nx(cc_name, cc.get('min'), cc.get('max'), cc.get('reset_on'), cc.get('display_type'), cc.get('reset_to'), cc.get('reset_by'), cc.get('title'), cc.get('desc'))
+        character().set_cc(cc_name, cc.get('value'))
+
+a = &ARGS&
+c = character()
+desc = None
+back = {'cvars': c.cvars, 'cc': c.consumables}
+v = ['Restored','Backed Up']
+n = '\n'
+fields = []
+data = None
+
+mode = ('RESTORE' if len(a[1]) == 36 else 'BACKUP' if a[0] in 'backup' else 'HELP') if len(a) > 1 else 'HELP'
+
+if mode == 'BACKUP':
+    data = create_backup_data()
+    return f"{ctx.prefix}gvar create {dump_json(data)}"
+
+if mode == 'RESTORE':
+    data = load_json(get_gvar(a[1]))
+    if not('cc' in data and 'cvars' in data):
+        err(f'Invalid gvar: `{a[1]}`')
+    else:
+        restore_data(data)
+</drac2>
+<drac2>
+if mode == 'HELP':
+    title = "Save it to the cloudkill!"
+    desc = "Allows a user to backup and restore an entire characters cvars and counters to/from a GVAR for those thicc characters.\n\n`!back backup yes`\n`!back restore <gvar address>`\n\n**Warning** - This may screw up your character, we make no promises that it is perfect. ~~Remember to backup your character befo~~...wait"
+
+if mode == 'BACKUP':
+    title = f"Character CVAR and CC backup to GVAR"
+    fields.append("Counters to back up|" + n.join([x for x in data.cc]))
+    fields.append("CVARS to back up|" + n.join([x for x in data.cvars]))
+
+if mode == 'RESTORE':
+    title = f"Character CVAR and CC restored from GVAR"
+    f = f"Counters Restored|"
+    fields.append("Counters restored|" + n.join([x for x in data.cc]))
+    fields.append("CVARS restored|" + n.join([x for x in data.cvars]))
+
+return ''
+</drac2>
+!embed -title "{{title}}"
+{{f'-desc "{desc}"' if desc else ""}}
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
