@@ -24,17 +24,15 @@ all_effects = {}
 all_effects[all_boots[0]] = [
     {
         'name': all_boots[0] + ': AC and Saves Bonus',
-        'args': '-ac +1 -sb +1',
+        'passive_effects': { "ac_bonus": 1, "save_bonus": 1 },
         'duration': 2,
-        'concentration': False,
         'end': True,
         'description': f'{c.name} gains +1 bonus to AC and +1 bonus to saving throws until the end of their next turn.'
     },
     {
         'name': 'Flight Speed equal to Walking Speed',
-        'args': None,
+        'passive_effects': {},
         'duration': -1,
-        'concentration': False,
         'end': False,
         'description': f'{c.name} gains flying speed equal to their walking speed for one hour.'
     }
@@ -42,17 +40,15 @@ all_effects[all_boots[0]] = [
 all_effects[all_boots[1]] = [
     {
         'name': all_boots[1] + ': AC and Saves Bonus',
-        'args': '-ac +1 -sb +1',
+        'passive_effects': { "ac_bonus": 1, "save_bonus": 1 },
         'duration': 2,
-        'concentration': False,
         'end': True,
         'description': f'{c.name} gains +1 bonus to AC and +1 bonus to saving throws until the end of their next turn.'
     },
     {
         'name': 'Invisible until attacking or casting a spell',
-        'args': None,
+        'passive_effects': {},
         'duration': -1,
-        'concentration': False,
         'end': False,
         'description': f'{c.name} is invisible for one hour or until attacking or casting a spell.'
     }
@@ -60,9 +56,8 @@ all_effects[all_boots[1]] = [
 all_effects[all_boots[2]] = [
     {
         'name': all_boots[2] + ': AC and Saves Bonus',
-        'args': '-ac +1 -sb +1',
+        'passive_effects': { "ac_bonus": 1, "save_bonus": 1 },
         'duration': 2,
-        'concentration': False,
         'end': True,
         'description': f'{c.name} casts Misty Step and gains +1 bonus to AC and +1 bonus to saving throws until the end of their next turn.'
     }
@@ -111,12 +106,10 @@ for effect in effects:
     if combat() and combat().me:
         combat().me.add_effect(
             effect['name'],
-            effect['args'],
-            effect['duration'],
-            effect['concentration'],
-            None,
-            effect['end'],
-            effect['description']
+            passive_effects = effect['passive_effects'],
+            duration = effect['duration'],
+            end = effect['end'],
+            desc = effect['description']
         )
 
 c.mod_cc(CC_NAME, -1)

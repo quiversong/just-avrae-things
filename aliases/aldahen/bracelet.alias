@@ -69,11 +69,16 @@ if option == 'curse':
     f.append(f'Meta|**Aldahen Bracelet Roll**: 1d4 = `{roll_result}`' )
 
     me = combat().me
-    me.add_effect('Aldahen Bracelet', '', 2, False, None, True)
+    me.add_effect('Aldahen Bracelet', duration = 2, end = True)
     my_effect = me.get_effect('Aldahen Bracelet')
 
     for target in targets:
-        target.add_effect('Aldahen Curse', f'-sb -{roll_result}', -1, False, my_effect, True, f'Subtract 1d4 ({roll_result}) from their next saving throw.')
+        target.add_effect(
+                'Aldahen Curse',
+                passive_effects = { "save_bonus": -roll_result },
+                parent = my_effect,
+                desc = f'Subtract 1d4 ({roll_result}) from their next saving throw.'
+        )
         f.append(f'{target.name}|**Effect**: Aldahen Curse: {roll_result}')
 
     c.mod_cc(CC_NAME, -2)
