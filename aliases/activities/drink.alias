@@ -6,10 +6,10 @@ if not character().cc_exists(cc):
     character().create_cc(cc, 0, 7, None, "bubble")
     character().set_cc(cc, 0)
 
-drinkType = [a for a in gv.drinks.keys() if args[0].lower() in a] if len(args) else ""
+drink_type = ([a for a in gv.drinks.keys() if args[0].lower() in a] + [""])[0] if len(args) else ""
 rr = parsed.last("rr", default=1, type_=int)
-dc = gv.drinks[drinkType[0]]['dc'] if drinkType else parsed.last("dc", default=13, type_=int)
-effect=gv.drinks[drinkType[0]]['effect'] if drinkType else "You're feeling that one."
+dc = gv.drinks[drink_type]['dc'] if drink_type else parsed.last("dc", default=13, type_=int)
+effect=gv.drinks[drink_type]['effect'] if drink_type else "You're feeling that one."
 
 if not character().cc_exists(cc):
     err("You have not yet setup your intoxication counter, run !intox to set them up! (please don't do this in the RP channels)")
@@ -17,7 +17,8 @@ if not character().cc_exists(cc):
 prevCC = character().get_cc(cc)
 save = f"{['1d20','2d20kh1','2d20kl1'][parsed.adv()]}+{constitutionSave}+{parsed.join('b', '+', '')}".rstrip('+')
 
-drink_name = gv.drinks[drinkType[0]]['name'] if drinkType else ''
+drink_name = gv.drinks[drink_type]['name'] if drink_type else ''
+title = f"{character().name} drinks an alcoholic beverage! {drink_name}"
 
 total = 0
 for i in range(rr):
@@ -29,7 +30,7 @@ for i in range(rr):
     succ_label = ['Success!', 'Critical ' if incr == 2 else 'Failure!'][success - 1]
     fields.append(f"Save {i + i if rr > 1 else ''}|{ro}; {succ_label}")
 </drac2>
--title "<name> drinks an alcoholic beverage! {{f"(drink_name)"}}"
+-title "{{title}}"
 -f "Meta|DC: {dc}
 CON Save"
 {{''.join(['-f "' + field.replace('"', '\\\"') + '"\n' for field in fields]) if len(fields) > 0 else ''}}
