@@ -3,67 +3,73 @@
     "code": "coralparrot",
     "name": "Coral Parrot",
     "habitat": "Coral Reef",
-    "desc": "",
+    "desc": "\"Grab your goggles, and some Muroosa Balm, because today you're going to be wading around in the shallows in search of the most adorable water bird! Coral Parrots are intelligent, playful, and possessive. They have short attention spans, lots of energy, and they seem to enjoy dramatic displays of dominance and affection.\nThese reef-building aquatic parrots are only found in shallow tropical and subtropical waters, where they tumble along the sands trying to collect coral larvae.\"\n-Prathus Dawnroar, Safari Guide ",
     "habitat_dc": 8,
     "stealth_dc": 9,
     "ac": 9,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998421498773651558/e72e3100adca8bfbd3fd4c73d23b97c9.jpg ",
     "unlocks": "pebbles"
+    "props": ""
   },
   {
     "code": "pebbles",
     "name": "Pebbled Spriteling",
     "habitat": "Coral Reef",
-    "desc": "",
+    "desc": "\"Moving right along...You now seek a creature that many adventurers have encountered, but very few seem to notice. The Pebbled Spriteling takes immense pride in it's greatest tricks. Often found bombarding unassuming travelers with small rocks and pebbles, all while blending in using their natural stone forms. When startled, a Pebbled Spriteling can disassemble it's form into an unassuming pile of stones. Truly fascinating...While these nature spirit pranksters remain perfectly motionless they can easily become undetectable in most environments.\"\n-Boza Stormgroomer, Green Vale Zoologist ",
     "habitat_dc": 9,
     "stealth_dc": 9,
     "ac": 10,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987201730909466624/IMG_4056.jpg?width=462&height=676",
     "unlocks": "rvole"
+    "props": ""
   },
   {
     "code": "rvole",
     "name": "Ruby Vole",
     "habitat": "Coral Reef",
-    "desc": "",
+    "desc": "\"Ordinary voles burrowing in and around your domicile can be infuriating, and tiresome. However, the presence of a Ruby Vole is widely considered a blessing by those who understand them. Resembling field mice with a rounded muzzle, these rare, crystalline rodents are capable of releasing a blinding flash of light, and embody the values of protection for the home, and family. Choice families of considerable wealth have acquired them for use as deterrents for unwanted pests, or pets for their children's safeguarding. I'm afraid there will be no chance of keeping your hands clean if you want to catch one of these buggers.\"\n-Prathus Dawnroar, Safari Guide ",
     "habitat_dc": 10,
     "stealth_dc": 12,
     "ac": 12,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988924752733282354/EWBK5EdU0AATJog.jpg?width=709&height=676",
     "unlocks": "tumbletide"
+    "props": ""
   },
   {
     "code": "tumbletide",
     "name": "Tumbletide Iguana",
     "habitat": "Coral Reef",
-    "desc": "",
+    "desc": "\"If you thought the coral parrot was too easy to nab, perhaps this next creature will test your safari skills... Today you will be in pursuit of a real rascal, the Tumbletide Iguana. These creatures are omnivores, but rarely stay content feeding on insects and small fish within their reef, instead choosing to climb into trees with branches suspended above the water. When a bird gets too close the iguana will leap at it, engulfing it in it's coral-encrusted tail and falling into the water where it can more slowly devour it's prey.\" -Prathus Dawnroar, Safari Guide ",
     "habitat_dc": 10,
     "stealth_dc": 15,
     "ac": 14,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998421498995953684/6f6ab567f0809857fb6743a8c21828a5.jpg",
     "unlocks": "frofennec"
+    "props": ""
   },
   {
     "code": "frofennec",
     "name": "Frost Fennec",
     "habitat": "Coral Reef",
-    "desc": "",
+    "desc": "\"You are ready to pursue the Frost Fennec? Fantastic! These frosty foxes tend to select dens that are easily accessible with many entrances, and that are clear from water sources, making it easier to burrow in. This means it will be particularly difficult to track, and nearly impossible to trap. Often hunted for their natural blue coat, these cerulean vulpines nearly faced extinction before migrating to a more welcoming southern environment.\" -Boza Stormgroomer, Green Vale Zoologist ",
     "habitat_dc": 12,
     "stealth_dc": 15,
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988287872496988190/IMG_4069.jpg?width=380&height=676",
     "unlocks": "swombat"
+    "props": ""
   },
   {
     "code": "swombat",
     "name": "Shadow Wombat",
     "habitat": "Coral Reef",
-    "desc": "",
+    "desc": "\"Shadow Wombats are short-legged, muscular marsupials native to the Green Vale. They are strictly nocturnal, emerging only at night to feed on grasses, herbs, bark, and roots. Researchers believe they originally hailed from the plane of Shadows. Their whelps always have to be kept in constant darkness, as bright light could kill them. Not surprisingly, shadow wombat blood is pitch-black in color, and leave a nasty stain.\" -Boza Stormgroomer, Green Vale Zoologist ",
     "habitat_dc": 12,
     "stealth_dc": 14,
     "ac": 16,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988287850493673522/IMG_4072.jpg?width=478&height=676",
     "unlocks": "funfennec"
+    "props": ""
   },
   {
     "code": "funfennec",
@@ -75,6 +81,7 @@
     "ac": 17,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988287880998830090/IMG_4068.jpg?width=391&height=676",
     "unlocks": "anvilcrab"
+    "props": ""
   },
   {
     "code": "anvilcrab",
@@ -86,6 +93,7 @@
     "ac": 18,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998381405396545606/bc64d622d975158ebab0d49ec29113b62.jpg",
     "unlocks": "seawolf"
+    "props": ""
   },
   {
     "code": "seawolf",
@@ -97,6 +105,7 @@
     "ac": 18,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988924752531976222/f4221598624a6b48a077536e0c2dc5b8.jpg",
     "unlocks": "manix"
+    "props": ""
   },
   {
     "code": "manix",
@@ -108,6 +117,7 @@
     "ac": 20,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134420404301834/IMG_4036.jpg?width=546&height=676",
     "unlocks": "skyturtle"
+    "props": ""
   },
   {
     "code": "skyturtle",
@@ -119,6 +129,7 @@
     "ac": 22,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385716407046266/2c1bd44ac98f8fa88a69537cb79fca19.jpg",
     "unlocks": "caithodrake"
+    "props": ""
   },
   {
     "code": "caithodrake",
@@ -130,6 +141,7 @@
     "ac": 23,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134425676529724/IMG_4037.jpg?width=691&height=676",
     "unlocks": "glurp"
+    "props": ""
   },
   {
     "code": "glurp",
@@ -141,6 +153,7 @@
     "ac": 24,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120003654500443/IMG_4017.jpg?width=658&height=676",
     "unlocks": "seaskulk"
+    "props": ""
   },
   {
     "code": "seaskulk",
@@ -152,6 +165,7 @@
     "ac": 25,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998381405216182282/1144816409483dbba087cd96a5a7683a.jpg",
     "unlocks": "reeftide"
+    "props": ""
   },
   {
     "code": "reeftide",
@@ -163,6 +177,7 @@
     "ac": 26,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987166936481816616/IMG_4042.jpg",
     "unlocks": "reeftidedragon"
+    "props": ""
   },
   {
     "code": "reeftidedragon",
@@ -174,6 +189,7 @@
     "ac": 28,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998421498580709466/c50d4bce2c8b2a85b4e5c7a70091a385.jpg ",
     "unlocks": ""
+    "props": ""
   },
   {
     "code": "bayouhorn",
@@ -185,6 +201,7 @@
     "ac": 7,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120020591112282/IMG_4014.jpg",
     "unlocks": "drakefly"
+    "props": "starter"
   },
   {
     "code": "drakefly",
@@ -196,6 +213,7 @@
     "ac": 8,
     "img": "https://media.discordapp.net/attachments/988476850152038550/996794447218081862/milica-celikovic-27-um.jpg",
     "unlocks": "gravewater"
+    "props": ""
   },
   {
     "code": "gravewater",
@@ -207,6 +225,7 @@
     "ac": 9,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173299408732160/IMG_4054.jpg",
     "unlocks": "skith"
+    "props": ""
   },
   {
     "code": "skith",
@@ -218,6 +237,7 @@
     "ac": 10,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173314403385415/IMG_4052.jpg?width=599&height=676",
     "unlocks": "bluebelly"
+    "props": ""
   },
   {
     "code": "bluebelly",
@@ -229,6 +249,7 @@
     "ac": 10,
     "img": "https://media.discordapp.net/attachments/988476850152038550/996794430667358329/milica-celikovic-16-me.jpg",
     "unlocks": "bananabelly"
+    "props": ""
   },
   {
     "code": "bananabelly",
@@ -240,6 +261,7 @@
     "ac": 13,
     "img": "https://media.discordapp.net/attachments/988476850152038550/996794439345377360/milica-celikovic-32-um.jpg",
     "unlocks": "ballaw"
+    "props": ""
   },
   {
     "code": "ballaw",
@@ -251,6 +273,7 @@
     "ac": 14,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122690672431184/IMG_4027.jpg",
     "unlocks": "surroval"
+    "props": ""
   },
   {
     "code": "surroval",
@@ -262,6 +285,7 @@
     "ac": 16,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987831288922783784/IMG_4064.jpg?width=508&height=676",
     "unlocks": "haverins, coralparrot"
+    "props": ""
   },
   {
     "code": "haverins",
@@ -273,6 +297,7 @@
     "ac": 17,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385798317608980/b85e6d70daa396846008b12b2a3504f2.jpg",
     "unlocks": "aoxo"
+    "props": ""
   },
   {
     "code": "aoxo",
@@ -284,6 +309,7 @@
     "ac": 18,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988287833376694333/IMG_4074.jpg",
     "unlocks": "roxo"
+    "props": ""
   },
   {
     "code": "roxo",
@@ -295,6 +321,7 @@
     "ac": 19,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988287843430449162/IMG_4073.jpg?width=676&height=676",
     "unlocks": "mossjaw"
+    "props": ""
   },
   {
     "code": "mossjaw",
@@ -306,6 +333,7 @@
     "ac": 20,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122683969945660/IMG_4028.jpg",
     "unlocks": "tantrippo"
+    "props": ""
   },
   {
     "code": "tantrippo",
@@ -317,6 +345,7 @@
     "ac": 21,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120040648273991/IMG_4011.jpg",
     "unlocks": "prehistoric"
+    "props": ""
   },
   {
     "code": "prehistoric",
@@ -328,6 +357,7 @@
     "ac": 23,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998426635076370553/e92c4ce34c1980115d1f9267580ff1fa.jpg",
     "unlocks": "kirin"
+    "props": ""
   },
   {
     "code": "kirin",
@@ -339,6 +369,7 @@
     "ac": 24,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134445419114556/IMG_4033.jpg",
     "unlocks": "dcrab"
+    "props": ""
   },
   {
     "code": "dcrab",
@@ -350,6 +381,7 @@
     "ac": 25,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988287864506818692/IMG_4070.jpg?width=450&height=676",
     "unlocks": "riptide"
+    "props": ""
   },
   {
     "code": "riptide",
@@ -361,6 +393,7 @@
     "ac": 25,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998418348519993374/riptide-chimera-ryan-barger.jpg",
     "unlocks": ""
+    "props": ""
   },
   {
     "code": "ledroll",
@@ -372,6 +405,7 @@
     "ac": 10,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987831312108879962/IMG_4063.jpg?width=523&height=676",
     "unlocks": "mossfurrow"
+    "props": "starter"
   },
   {
     "code": "mossfurrow",
@@ -383,6 +417,7 @@
     "ac": 12,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120061460381756/IMG_4008.jpg",
     "unlocks": "lagomoth"
+    "props": ""
   },
   {
     "code": "lagomoth",
@@ -394,6 +429,7 @@
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988287858068574258/IMG_4071.jpg?width=497&height=675",
     "unlocks": "pwombat"
+    "props": ""
   },
   {
     "code": "pwombat",
@@ -405,6 +441,7 @@
     "ac": 18,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987831292911550484/IMG_4065.jpg",
     "unlocks": "lyncaris"
+    "props": ""
   },
   {
     "code": "lyncaris",
@@ -416,6 +453,7 @@
     "ac": 18,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134393040650240/IMG_4039.jpg",
     "unlocks": "chasmprowler"
+    "props": ""
   },
   {
     "code": "chasmprowl",
@@ -427,6 +465,7 @@
     "ac": 20,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134383049830472/IMG_4040.jpg",
     "unlocks": "wombradin"
+    "props": ""
   },
   {
     "code": "wombradin",
@@ -438,6 +477,7 @@
     "ac": 23,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134586372882503/IMG_4035.jpg",
     "unlocks": "bellicose"
+    "props": ""
   },
   {
     "code": "bellicose",
@@ -449,6 +489,7 @@
     "ac": 25,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385717019414528/mtg_beast_token_by_jason_felix_by_jason_felix_dcjs8i2-pre.jpg",
     "unlocks": "drakiosaur, snoreberts"
+    "props": ""
   },
   {
     "code": "drakiosaur",
@@ -460,17 +501,19 @@
     "ac": 25,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120014387707964/IMG_4015.jpg?width=676&height=676",
     "unlocks": "splitty"
+    "props": ""
   },
   {
     "code": "splitty",
     "name": "Splitty Cat",
     "habitat": "Rainforest",
-    "desc": "\"While their Displacer beast cousins pretend to be in two places at once, the deadly, bobcat-esqu Splitty Kitty *actually is*. \nWhen these creatures feel threatened, they pounce on their prey, landing one attack before deploying what researchers have been calling their \"spirit clone\". This clone will circle around back and flank *with itself.* In days of old, wizards would keep these beasts as pets, valuing their ability to quickly take down enemy spellcasters... Their usage faded through the years, as their unpredictable reputation was more widely recorded.\"\n~Pranthus Dawnroar, Safari Guide",
+    "desc": "\"While their Displacer beast cousins pretend to be in two places at once, the deadly, bobcat-esqu Splitty Kitty *actually is*. \nWhen these creatures feel threatened, they pounce on their prey, landing one attack before deploying what researchers have been calling their \"spirit clone\". This clone will circle around back and flank *with itself.* In days of old, wizards would keep these beasts as pets, valuing their ability to quickly take down enemy spellcasters... Their usage faded through the years, as their unpredictable reputation was more widely recorded.\"\n-Prathus Dawnroar, Safari Guide",
     "habitat_dc": 24,
     "stealth_dc": 26,
     "ac": 26,
     "img": "https://cdn.discordapp.com/attachments/988476850152038550/998728697081245817/3c0fa045f24b5f41efaf43eb0fa4410f.jpg",
     "unlocks": "qilin"
+    "props": ""
   },
   {
     "code": "qilin",
@@ -482,6 +525,7 @@
     "ac": 25,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173360972726292/IMG_4044.jpg?width=739&height=676",
     "unlocks": "tetherpede"
+    "props": ""
   },
   {
     "code": "tetherpede",
@@ -493,6 +537,7 @@
     "ac": 27,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120045786280006/IMG_4010.jpg?width=522&height=676",
     "unlocks": "drakeblood"
+    "props": ""
   },
   {
     "code": "drakeblood",
@@ -504,6 +549,7 @@
     "ac": 28,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385799894675516/071a54fce24607f8af0843007983af10.jpg",
     "unlocks": "bristleback"
+    "props": ""
   },
   {
     "code": "bristleback",
@@ -515,6 +561,7 @@
     "ac": 28,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385750095708210/9c6149d212d362af16c505c18dd4aed2.jpg",
     "unlocks": "jungleviper"
+    "props": ""
   },
   {
     "code": "jungleviper",
@@ -526,6 +573,7 @@
     "ac": 29,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385716163788830/1ab13ca644cb7c6a32c3bcdd6e2cc914.jpg",
     "unlocks": "dandelion"
+    "props": ""
   },
   {
     "code": "danelion",
@@ -537,6 +585,7 @@
     "ac": 27,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998380272888320100/bbd6e843856692b034b1dd9a97635123.jpg",
     "unlocks": "greenback"
+    "props": ""
   },
   {
     "code": "greenback",
@@ -548,6 +597,7 @@
     "ac": 30,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385715907940412/fd05d3e8a909fa3b2ed1258e23d6c1a2.jpg",
     "unlocks": ""
+    "props": ""
   },
   {
     "code": "dwa-ctrice",
@@ -559,6 +609,7 @@
     "ac": 5,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122727049641994/IMG_4021.jpg",
     "unlocks": "emgerbil"
+    "props": "starter"
   },
   {
     "code": "emgerbil",
@@ -570,6 +621,7 @@
     "ac": 6,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122718518415370/IMG_4022.jpg",
     "unlocks": "cratakiti"
+    "props": ""
   },
   {
     "code": "cratakiti",
@@ -581,6 +633,7 @@
     "ac": 7,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173306920742962/IMG_4053.jpg?width=478&height=676",
     "unlocks": "staticscrap"
+    "props": ""
   },
   {
     "code": "staticscrap",
@@ -592,6 +645,7 @@
     "ac": 7,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998426549822947378/87947492ca365c69aec08b0da1ec5f77.jpg ",
     "unlocks": "dinocat"
+    "props": ""
   },
   {
     "code": "dinocat",
@@ -603,6 +657,7 @@
     "ac": 9,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988922193767432282/unknown.png?width=437&height=675",
     "unlocks": "magmal"
+    "props": ""
   },
   {
     "code": "magmal",
@@ -614,6 +669,7 @@
     "ac": 10,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122709479710730/IMG_4024.jpg?width=601&height=676",
     "unlocks": "cowl"
+    "props": ""
   },
   {
     "code": "cowl",
@@ -625,6 +681,7 @@
     "ac": 13,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122703460859914/IMG_4025.jpg?width=676&height=676",
     "unlocks": "babbleboon"
+    "props": ""
   },
   {
     "code": "babbleboon",
@@ -636,6 +693,7 @@
     "ac": 14,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385751081369750/06ab7749732252d617b8c6d9bafb828f.jpg",
     "unlocks": "dregnaur, wyrmlicorn"
+    "props": ""
   },
   {
     "code": "dregnaur",
@@ -647,6 +705,7 @@
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134378129899620/IMG_4041.jpg",
     "unlocks": "stargoyle"
+    "props": ""
   },
   {
     "code": "stargoyle ",
@@ -658,6 +717,7 @@
     "ac": 14,
     "img": "https://media.discordapp.net/attachments/988476850152038550/995433448229568582/Qiy1sSU.jpg",
     "unlocks": "craggling"
+    "props": ""
   },
   {
     "code": "craggling",
@@ -669,6 +729,7 @@
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385799185829968/ae69dd4d9140d281cbab25560dcdcacc.jpg",
     "unlocks": "horgonaut"
+    "props": ""
   },
   {
     "code": "horgonaut",
@@ -680,6 +741,7 @@
     "ac": 16,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134460040450088/IMG_4030.jpg",
     "unlocks": "bsserpent"
+    "props": ""
   },
   {
     "code": "bsserpent",
@@ -691,6 +753,7 @@
     "ac": 18,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134454369751100/IMG_4031.jpg?width=474&height=676",
     "unlocks": "braik"
+    "props": ""
   },
   {
     "code": "braik",
@@ -702,6 +765,7 @@
     "ac": 19,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122696041156629/IMG_4026.jpg?width=541&height=676",
     "unlocks": "amethystguard"
+    "props": ""
   },
   {
     "code": "amethystguard",
@@ -713,6 +777,7 @@
     "ac": 20,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385798858686494/7cc1a7a5301108e644e5a0fe8bb64819.jpg",
     "unlocks": "scorptiger"
+    "props": ""
   },
   {
     "code": "scorptiger",
@@ -724,6 +789,7 @@
     "ac": 20,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998381404788371567/63c949cd65d3e19a8d96c8d67a9f9967.jpg",
     "unlocks": "runesnout"
+    "props": ""
   },
   {
     "code": "runesnout",
@@ -735,17 +801,19 @@
     "ac": 22,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385716688076820/4006d1a5576ed74930abdfda3c36d6ba.jpg",
     "unlocks": ""
+    "props": ""
   },
   {
     "code": "snoreberts",
     "name": "Lingering Snoreberts",
     "habitat": "Valley",
-    "desc": "Lore: Snoreberts are the first creature in the valley ladder. Hunters have long trained their young to use these delicious, but blissfully unaware creatures for target practice.",
+    "desc": "\"Sometimes referred to as the 'Heedless Meatbag', Lingering Snoreberts are not known for their intellect. Fortunately, what the Snorebert lacks in brainpower it make up for in flavor. Just a pound of Lingering Snorebert meat adds a distinctive rich, and salty punch to any stew. Hunters have long trained their young to use these flavorful, but blissfully unaware creatures for target practice. A child never forgets their first Snorebert.\" -Prathus Dawnroar, Safari Guide ",
     "habitat_dc": 5,
     "stealth_dc": 7,
     "ac": 8,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385799454261248/49f388388baf0619604ee10afafdbc51.jpg",
     "unlocks": "branchbeaver"
+    "props": ""
   },
   {
     "code": "branchbeaver",
@@ -757,6 +825,7 @@
     "ac": 8,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385750750007418/d1dcdbfd4971258e6391dc92966c1df4.jpg",
     "unlocks": "dracohippus"
+    "props": ""
   },
   {
     "code": "dracohippus",
@@ -768,6 +837,7 @@
     "ac": 10,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134409364865034/IMG_4038.jpg?width=507&height=676",
     "unlocks": "kreokh"
+    "props": ""
   },
   {
     "code": "kreokh",
@@ -779,6 +849,7 @@
     "ac": 139,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120051037536336/IMG_4009.jpg?width=480&height=676",
     "unlocks": "hfalpaca"
+    "props": ""
   },
   {
     "code": "hfalpaca",
@@ -790,6 +861,7 @@
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173330098462780/IMG_4049.jpg",
     "unlocks": "drelk"
+    "props": ""
   },
   {
     "code": "drelk",
@@ -801,6 +873,7 @@
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173325996453888/IMG_4050.jpg?width=486&height=676",
     "unlocks": "noseblossom"
+    "props": ""
   },
   {
     "code": "noseblossom",
@@ -812,6 +885,7 @@
     "ac": 16,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998381405010665532/c1341ecfd029caa22fc1a3a204eb390c.jpg",
     "unlocks": "landglider"
+    "props": ""
   },
   {
     "code": "landglider",
@@ -823,6 +897,7 @@
     "ac": 18,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998381404360548362/e65f99e88bc36fb676db073674288c09.jpg",
     "unlocks": "masly"
+    "props": ""
   },
   {
     "code": "masly",
@@ -834,6 +909,7 @@
     "ac": 18,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988287829090123816/IMG_4075.jpg",
     "unlocks": "bloodstag"
+    "props": ""
   },
   {
     "code": "bloodstag",
@@ -845,6 +921,7 @@
     "ac": 20,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120010528964679/IMG_4016.jpg",
     "unlocks": "fgriffon"
+    "props": ""
   },
   {
     "code": "fgriffon",
@@ -856,6 +933,7 @@
     "ac": 21,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173354974896168/IMG_4045.jpg",
     "unlocks": "shman"
+    "props": ""
   },
   {
     "code": "shman",
@@ -867,6 +945,7 @@
     "ac": 22,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134431473053746/IMG_4034.jpg?width=504&height=675",
     "unlocks": "cfboar"
+    "props": ""
   },
   {
     "code": "cfboar",
@@ -878,6 +957,7 @@
     "ac": 22,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173340819111976/IMG_4047.jpg?width=714&height=676",
     "unlocks": "zhino"
+    "props": ""
   },
   {
     "code": "zhino",
@@ -889,6 +969,7 @@
     "ac": 24,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385750515134596/6400097a14ee0691ecb9f5ad9ad086c2.jpg",
     "unlocks": "glreav"
+    "props": ""
   },
   {
     "code": "glreav",
@@ -900,6 +981,7 @@
     "ac": 25,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173319264575528/IMG_4051.jpg",
     "unlocks": "hjorral"
+    "props": ""
   },
   {
     "code": "hjorral",
@@ -911,6 +993,7 @@
     "ac": 25,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173336251514983/IMG_4048.jpg?width=633&height=676",
     "unlocks": "cfmammoth"
+    "props": ""
   },
   {
     "code": "cfmammoth",
@@ -922,6 +1005,7 @@
     "ac": 26,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173347907493919/IMG_4046.jpg?width=676&height=676",
     "unlocks": "doomfate"
+    "props": ""
   },
   {
     "code": "doomfate",
@@ -933,6 +1017,7 @@
     "ac": 28,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998426550112358511/8fe5e9d8019823a5168648cc31d7e0c5.jpg",
     "unlocks": ""
+    "props": ""
   },
   {
     "code": "wyrmlicorn",
@@ -944,6 +1029,7 @@
     "ac": 5,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987201726589317171/IMG_4057.jpg?width=615&height=676",
     "unlocks": "bortle"
+    "props": ""
   },
   {
     "code": "bortle",
@@ -955,6 +1041,7 @@
     "ac": 7,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122713682407465/IMG_4023.jpg",
     "unlocks": "arachibian"
+    "props": ""
   },
   {
     "code": "arachibian",
@@ -966,6 +1053,7 @@
     "ac": 9,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987831317842513980/IMG_4062.jpg",
     "unlocks": "ccurler"
+    "props": ""
   },
   {
     "code": "ccurler",
@@ -977,6 +1065,7 @@
     "ac": 10,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987201738538905630/IMG_4055.jpg?width=388&height=675",
     "unlocks": "crawclaw"
+    "props": ""
   },
   {
     "code": "crawclaw",
@@ -988,6 +1077,7 @@
     "ac": 12,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122679570132992/IMG_4029.jpg",
     "unlocks": "cokaseal"
+    "props": ""
   },
   {
     "code": "cokaseal",
@@ -999,6 +1089,7 @@
     "ac": 14,
     "img": "https://cdn.discordapp.com/attachments/855908840633270282/987120035560583199/IMG_4012.jpg",
     "unlocks": "leifhund"
+    "props": ""
   },
   {
     "code": "leifhund",
@@ -1010,6 +1101,7 @@
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120025594908672/IMG_4013.jpg",
     "unlocks": "budwyrm"
+    "props": ""
   },
   {
     "code": "budwyrm",
@@ -1021,6 +1113,7 @@
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987202765925253230/IMG_4058.jpg?width=496&height=676",
     "unlocks": "stripelolly"
+    "props": ""
   },
   {
     "code": "stripelolly",
@@ -1032,6 +1125,7 @@
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385715639488552/7b441b14450de01721116b506c26d8e4.jpg",
     "unlocks": "aerototl"
+    "props": ""
   },
   {
     "code": "aerototl",
@@ -1043,6 +1137,7 @@
     "ac": 14,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987202754097328138/IMG_4060.jpg?width=591&height=676",
     "unlocks": "hemototl"
+    "props": ""
   },
   {
     "code": "hemototl",
@@ -1054,6 +1149,7 @@
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987202758249693214/IMG_4059.jpg?width=712&height=676",
     "unlocks": "wanderwolf"
+    "props": ""
   },
   {
     "code": "wanderwolf",
@@ -1065,6 +1161,7 @@
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385749785321552/42073b13f70f5631dc44cdabe3d89470.jpg",
     "unlocks": "bogtsha "
+    "props": ""
   },
   {
     "code": "bogtsha",
@@ -1076,6 +1173,7 @@
     "ac": 18,
     "img": "https://cdn.discordapp.com/attachments/790441224179941377/991417648040652930/unknown.png",
     "unlocks": "direplain"
+    "props": ""
   },
   {
     "code": "direplain",
@@ -1087,6 +1185,7 @@
     "ac": 19,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998379882755129474/gwn-monster01.jpg",
     "unlocks": "direcroc"
+    "props": ""
   },
   {
     "code": "direcroc",
@@ -1098,6 +1197,7 @@
     "ac": 20,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998419275670900807/gaetan-weltzer-swamp-crocodile19-spartan-s.jpg",
     "unlocks": "pinnacle"
+    "props": ""
   },
   {
     "code": "pinnacle",
@@ -1109,6 +1209,7 @@
     "ac": 22,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998426550322090065/43840c528d9c47c6928d4a9652cedec5.jpg",
     "unlocks": "smashmouth"
+    "props": ""
   },
   {
     "code": "smashmouth",
@@ -1120,5 +1221,6 @@
     "ac": 22,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998381404566065242/ec2f83369a052fa1906fc4aff8b46070.jpg",
     "unlocks": ""
+    "props": ""
   }
 ]}
