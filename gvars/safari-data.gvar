@@ -7,7 +7,7 @@
     "habitat_dc": 8,
     "stealth_dc": 9,
     "ac": 9,
-    "unlocks": [pebbles],
+    "unlocks": ["pebbles"]
   },
   {
     "code": "pebbles",
@@ -17,7 +17,7 @@
     "habitat_dc": 9,
     "stealth_dc": 9,
     "ac": 10,
-    "unlocks": [rvole],
+    "unlocks": ["rvole"]
   },
   {
     "code": "rvole",
@@ -27,7 +27,7 @@
     "habitat_dc": 10,
     "stealth_dc": 12,
     "ac": 12,
-    "unlocks": [tumbletide],
+    "unlocks": ["tumbletide"]
   },
   {
     "code": "tumbletide",
@@ -37,7 +37,7 @@
     "habitat_dc": 10,
     "stealth_dc": 15,
     "ac": 14,
-    "unlocks": [frofennec],
+    "unlocks": ["frofennec"]
   },
   {
     "code": "frofennec",
@@ -47,7 +47,7 @@
     "habitat_dc": 12,
     "stealth_dc": 15,
     "ac": 15,
-    "unlocks": [swombat],
+    "unlocks": ["swombat"]
   },
   {
     "code": "swombat",
@@ -57,7 +57,7 @@
     "habitat_dc": 12,
     "stealth_dc": 14,
     "ac": 16,
-    "unlocks": [funfennec],
+    "unlocks": ["funfennec"]
   },
   {
     "code": "funfennec",
@@ -67,7 +67,7 @@
     "habitat_dc": 14,
     "stealth_dc": 15,
     "ac": 17,
-    "unlocks": [anvilcrab],
+    "unlocks": ["anvilcrab"]
   },
   {
     "code": "anvilcrab",
@@ -77,7 +77,7 @@
     "habitat_dc": 16,
     "stealth_dc": 16,
     "ac": 18,
-    "unlocks": [seawolf],
+    "unlocks": ["seawolf"]
   },
   {
     "code": "seawolf",
@@ -87,7 +87,7 @@
     "habitat_dc": 18,
     "stealth_dc": 18,
     "ac": 18,
-    "unlocks": [manix],
+    "unlocks": ["manix"]
   },
   {
     "code": "manix",
@@ -97,7 +97,7 @@
     "habitat_dc": 20,
     "stealth_dc": 20,
     "ac": 20,
-    "unlocks": [skyturtle],
+    "unlocks": ["skyturtle"]
   },
   {
     "code": "skyturtle",
@@ -107,7 +107,7 @@
     "habitat_dc": 20,
     "stealth_dc": 22,
     "ac": 22,
-    "unlocks": [caithodrake],
+    "unlocks": ["caithodrake"]
   },
   {
     "code": "caithodrake",
@@ -117,7 +117,7 @@
     "habitat_dc": 23,
     "stealth_dc": 23,
     "ac": 23,
-    "unlocks": [glurp],
+    "unlocks": ["glurp"]
   },
   {
     "code": "glurp",
@@ -127,7 +127,7 @@
     "habitat_dc": 23,
     "stealth_dc": 24,
     "ac": 24,
-    "unlocks": [seaskulk],
+    "unlocks": ["seaskulk"]
   },
   {
     "code": "seaskulk",
@@ -137,7 +137,7 @@
     "habitat_dc": 25,
     "stealth_dc": 25,
     "ac": 25,
-    "unlocks": [reeftide],
+    "unlocks": ["reeftide"]
   },
   {
     "code": "reeftide",
@@ -147,7 +147,7 @@
     "habitat_dc": 26,
     "stealth_dc": 26,
     "ac": 26,
-    "unlocks": [reeftidedragon],
+    "unlocks": ["reeftidedragon"]
   },
   {
     "code": "reeftidedragon",
@@ -157,7 +157,7 @@
     "habitat_dc": 28,
     "stealth_dc": 28,
     "ac": 28,
-    "unlocks": [],
+    "unlocks": []
   },
   {
     "code": "bayouhorn",
@@ -167,7 +167,7 @@
     "habitat_dc": 4,
     "stealth_dc": 6,
     "ac": 7,
-    "unlocks": [drakefly],
+    "unlocks": ["drakefly"]
   },
   {
     "code": "drakefly",
@@ -177,7 +177,7 @@
     "habitat_dc": 4,
     "stealth_dc": 7,
     "ac": 8,
-    "unlocks": [gravewater],
+    "unlocks": ["gravewater"]
   },
   {
     "code": "gravewater",
@@ -187,7 +187,7 @@
     "habitat_dc": 5,
     "stealth_dc": 8,
     "ac": 9,
-    "unlocks": [skith],
+    "unlocks": ["skith"]
   },
   {
     "code": "skith",
@@ -197,7 +197,7 @@
     "habitat_dc": 7,
     "stealth_dc": 7,
     "ac": 10,
-    "unlocks": [bluebelly],
+    "unlocks": ["bluebelly"]
   },
   {
     "code": "bluebelly",
@@ -207,7 +207,7 @@
     "habitat_dc": 8,
     "stealth_dc": 13,
     "ac": 10,
-    "unlocks": [bananabelly],
+    "unlocks": ["bananabelly"]
   },
   {
     "code": "bananabelly",
@@ -217,7 +217,7 @@
     "habitat_dc": 8,
     "stealth_dc": 10,
     "ac": 13,
-    "unlocks": [ballaw],
+    "unlocks": ["ballaw"]
   },
   {
     "code": "ballaw",
@@ -227,7 +227,7 @@
     "habitat_dc": 12,
     "stealth_dc": 13,
     "ac": 14,
-    "unlocks": [surroval],
+    "unlocks": ["surroval"]
   },
   {
     "code": "surroval",
@@ -237,7 +237,7 @@
     "habitat_dc": 14,
     "stealth_dc": 14,
     "ac": 16,
-    "unlocks": [haverins],
+    "unlocks": ["haverins"]
   },
   {
     "code": "haverins",
@@ -247,7 +247,7 @@
     "habitat_dc": 16,
     "stealth_dc": 16,
     "ac": 17,
-    "unlocks": [aoxo],
+    "unlocks": ["aoxo"]
   },
   {
     "code": "aoxo",
@@ -257,7 +257,7 @@
     "habitat_dc": 16,
     "stealth_dc": 18,
     "ac": 18,
-    "unlocks": [roxo],
+    "unlocks": ["roxo"]
   },
   {
     "code": "roxo",
@@ -267,7 +267,7 @@
     "habitat_dc": 17,
     "stealth_dc": 19,
     "ac": 19,
-    "unlocks": [mossjaw],
+    "unlocks": ["mossjaw"]
   },
   {
     "code": "mossjaw",
@@ -277,7 +277,7 @@
     "habitat_dc": 20,
     "stealth_dc": 18,
     "ac": 20,
-    "unlocks": [tantrippo],
+    "unlocks": ["tantrippo"]
   },
   {
     "code": "tantrippo",
@@ -287,7 +287,7 @@
     "habitat_dc": 20,
     "stealth_dc": 20,
     "ac": 21,
-    "unlocks": [prehistoric],
+    "unlocks": ["prehistoric"]
   },
   {
     "code": "prehistoric",
@@ -297,7 +297,7 @@
     "habitat_dc": 21,
     "stealth_dc": 21,
     "ac": 23,
-    "unlocks": [kirin],
+    "unlocks": ["kirin"]
   },
   {
     "code": "kirin",
@@ -307,7 +307,7 @@
     "habitat_dc": 22,
     "stealth_dc": 23,
     "ac": 24,
-    "unlocks": [dcrab],
+    "unlocks": ["dcrab"]
   },
   {
     "code": "dcrab",
@@ -317,7 +317,7 @@
     "habitat_dc": 22,
     "stealth_dc": 20,
     "ac": 25,
-    "unlocks": [riptide],
+    "unlocks": ["riptide"]
   },
   {
     "code": "riptide",
@@ -327,7 +327,7 @@
     "habitat_dc": 24,
     "stealth_dc": 24,
     "ac": 25,
-    "unlocks": [],
+    "unlocks": []
   },
   {
     "code": "ledroll",
@@ -337,7 +337,7 @@
     "habitat_dc": 10,
     "stealth_dc": 10,
     "ac": 10,
-    "unlocks": [mossfurrow],
+    "unlocks": ["mossfurrow"]
   },
   {
     "code": "mossfurrow",
@@ -347,7 +347,7 @@
     "habitat_dc": 12,
     "stealth_dc": 12,
     "ac": 12,
-    "unlocks": [lagomoth],
+    "unlocks": ["lagomoth"]
   },
   {
     "code": "lagomoth",
@@ -357,7 +357,7 @@
     "habitat_dc": 15,
     "stealth_dc": 15,
     "ac": 15,
-    "unlocks": [pwombat],
+    "unlocks": ["pwombat"]
   },
   {
     "code": "pwombat",
@@ -367,7 +367,7 @@
     "habitat_dc": 15,
     "stealth_dc": 16,
     "ac": 18,
-    "unlocks": [lyncaris],
+    "unlocks": ["lyncaris"]
   },
   {
     "code": "lyncaris",
@@ -377,7 +377,7 @@
     "habitat_dc": 18,
     "stealth_dc": 18,
     "ac": 18,
-    "unlocks": [chasmprowler],
+    "unlocks": ["chasmprowler"]
   },
   {
     "code": "chasmprowl",
@@ -387,7 +387,7 @@
     "habitat_dc": 18,
     "stealth_dc": 20,
     "ac": 20,
-    "unlocks": [wombradin],
+    "unlocks": ["wombradin"]
   },
   {
     "code": "wombradin",
@@ -397,7 +397,7 @@
     "habitat_dc": 20,
     "stealth_dc": 22,
     "ac": 23,
-    "unlocks": [bellicose],
+    "unlocks": ["bellicose"]
   },
   {
     "code": "bellicose",
@@ -407,7 +407,7 @@
     "habitat_dc": 20,
     "stealth_dc": 12,
     "ac": 25,
-    "unlocks": [drakiosaur],
+    "unlocks": ["drakiosaur"]
   },
   {
     "code": "drakiosaur",
@@ -417,7 +417,7 @@
     "habitat_dc": 22,
     "stealth_dc": 25,
     "ac": 25,
-    "unlocks": [splitty],
+    "unlocks": ["splitty"]
   },
   {
     "code": "splitty",
@@ -427,7 +427,7 @@
     "habitat_dc": 24,
     "stealth_dc": 26,
     "ac": 26,
-    "unlocks": [qilin],
+    "unlocks": ["qilin"]
   },
   {
     "code": "qilin",
@@ -437,7 +437,7 @@
     "habitat_dc": 25,
     "stealth_dc": 25,
     "ac": 25,
-    "unlocks": [tetherpede],
+    "unlocks": ["tetherpede"]
   },
   {
     "code": "tetherpede",
@@ -447,7 +447,7 @@
     "habitat_dc": 26,
     "stealth_dc": 26,
     "ac": 27,
-    "unlocks": [drakeblood],
+    "unlocks": ["drakeblood"]
   },
   {
     "code": "drakeblood",
@@ -457,7 +457,7 @@
     "habitat_dc": 26,
     "stealth_dc": 27,
     "ac": 28,
-    "unlocks": [bristleback],
+    "unlocks": ["bristleback"]
   },
   {
     "code": "bristleback",
@@ -467,7 +467,7 @@
     "habitat_dc": 27,
     "stealth_dc": 28,
     "ac": 28,
-    "unlocks": [jungleviper],
+    "unlocks": ["jungleviper"]
   },
   {
     "code": "jungleviper",
@@ -477,7 +477,7 @@
     "habitat_dc": 29,
     "stealth_dc": 27,
     "ac": 29,
-    "unlocks": [dandelion],
+    "unlocks": ["dandelion"]
   },
   {
     "code": "danelion",
@@ -487,7 +487,7 @@
     "habitat_dc": 29,
     "stealth_dc": 29,
     "ac": 27,
-    "unlocks": [greenback],
+    "unlocks": ["greenback"]
   },
   {
     "code": "greenback",
@@ -497,7 +497,7 @@
     "habitat_dc": 30,
     "stealth_dc": 30,
     "ac": 30,
-    "unlocks": [],
+    "unlocks": []
   },
   {
     "code": "dwa-ctrice",
@@ -507,7 +507,7 @@
     "habitat_dc": 3,
     "stealth_dc": 6,
     "ac": 5,
-    "unlocks": [emgerbil],
+    "unlocks": ["emgerbil"]
   },
   {
     "code": "emgerbil",
@@ -517,7 +517,7 @@
     "habitat_dc": 3,
     "stealth_dc": 6,
     "ac": 6,
-    "unlocks": [cratakiti],
+    "unlocks": ["cratakiti"]
   },
   {
     "code": "cratakiti",
@@ -527,37 +527,7 @@
     "habitat_dc": 5,
     "stealth_dc": 6,
     "ac": 7,
-    "unlocks": [staticscrap],
-  },
-  {
-    "code": "cowl",
-    "name": "Citrus Owling",
-    "habitat": "Savannah",
-    "desc": "",
-    "habitat_dc": 12,
-    "stealth_dc": 11,
-    "ac": 13,
-    "unlocks": [babbleboon],
-  },
-  {
-    "code": "magmal",
-    "name": "Magmalotl",
-    "habitat": "Savannah",
-    "desc": "",
-    "habitat_dc": 10,
-    "stealth_dc": 10,
-    "ac": 10,
-    "unlocks": [cowl],
-  },
-  {
-    "code": "dinocat",
-    "name": "Dinocat",
-    "habitat": "Savannah",
-    "desc": "",
-    "habitat_dc": 8,
-    "stealth_dc": 8,
-    "ac": 9,
-    "unlocks": [magmal],
+    "unlocks": ["staticscrap"]
   },
   {
     "code": "staticscrap",
@@ -567,87 +537,37 @@
     "habitat_dc": 6,
     "stealth_dc": 7,
     "ac": 7,
-    "unlocks": [dinocat],
+    "unlocks": ["dinocat"]
   },
   {
-    "code": "bsserpent",
-    "name": "Bloodspine Serpent",
+    "code": "dinocat",
+    "name": "Dinocat",
     "habitat": "Savannah",
     "desc": "",
-    "habitat_dc": 16,
-    "stealth_dc": 16,
-    "ac": 18,
-    "unlocks": [braik],
+    "habitat_dc": 8,
+    "stealth_dc": 8,
+    "ac": 9,
+    "unlocks": ["magmal"]
   },
   {
-    "code": "braik",
-    "name": "Braiklaatz",
+    "code": "magmal",
+    "name": "Magmalotl",
     "habitat": "Savannah",
     "desc": "",
-    "habitat_dc": 17,
-    "stealth_dc": 17,
-    "ac": 19,
-    "unlocks": [amethystguard],
+    "habitat_dc": 10,
+    "stealth_dc": 10,
+    "ac": 10,
+    "unlocks": ["cowl"]
   },
   {
-    "code": "amethystguard",
-    "name": "Amethyst Guard Drake",
+    "code": "cowl",
+    "name": "Citrus Owling",
     "habitat": "Savannah",
     "desc": "",
-    "habitat_dc": 18,
-    "stealth_dc": 17,
-    "ac": 20,
-    "unlocks": [scorptiger],
-  },
-  {
-    "code": "scorptiger",
-    "name": "Canyon Scorptiger",
-    "habitat": "Savannah",
-    "desc": "",
-    "habitat_dc": 18,
-    "stealth_dc": 20,
-    "ac": 20,
-    "unlocks": [runesnout],
-  },
-  {
-    "code": "runesnout",
-    "name": "Runesnout Spellstopper",
-    "habitat": "Savannah",
-    "desc": "",
-    "habitat_dc": 20,
-    "stealth_dc": 20,
-    "ac": 22,
-    "unlocks": [],
-  },
-  {
-    "code": "horgonaut",
-    "name": "Horgonaut",
-    "habitat": "Savannah",
-    "desc": "",
-    "habitat_dc": 15,
-    "stealth_dc": 16,
-    "ac": 16,
-    "unlocks": [bsserpent],
-  },
-  {
-    "code": "stargoyle ",
-    "name": "Stargoyle ",
-    "habitat": "Savannah",
-    "desc": "",
-    "habitat_dc": 13,
-    "stealth_dc": 14,
-    "ac": 14,
-    "unlocks": [craggling],
-  },
-  {
-    "code": "craggling",
-    "name": "Craggling Clawfoot",
-    "habitat": "Savannah",
-    "desc": "",
-    "habitat_dc": 14,
-    "stealth_dc": 15,
-    "ac": 15,
-    "unlocks": [horgonaut],
+    "habitat_dc": 12,
+    "stealth_dc": 11,
+    "ac": 13,
+    "unlocks": ["babbleboon"]
   },
   {
     "code": "babbleboon",
@@ -657,7 +577,7 @@
     "habitat_dc": 12,
     "stealth_dc": 10,
     "ac": 14,
-    "unlocks": [dregnaur],
+    "unlocks": ["dregnaur"]
   },
   {
     "code": "dregnaur",
@@ -667,17 +587,97 @@
     "habitat_dc": 13,
     "stealth_dc": 13,
     "ac": 15,
-    "unlocks": [stargoyle],
+    "unlocks": ["stargoyle"]
+  },
+  {
+    "code": "stargoyle ",
+    "name": "Stargoyle ",
+    "habitat": "Savannah",
+    "desc": "",
+    "habitat_dc": 13,
+    "stealth_dc": 14,
+    "ac": 14,
+    "unlocks": ["craggling"]
+  },
+  {
+    "code": "craggling",
+    "name": "Craggling Clawfoot",
+    "habitat": "Savannah",
+    "desc": "",
+    "habitat_dc": 14,
+    "stealth_dc": 15,
+    "ac": 15,
+    "unlocks": ["horgonaut"]
+  },
+  {
+    "code": "horgonaut",
+    "name": "Horgonaut",
+    "habitat": "Savannah",
+    "desc": "",
+    "habitat_dc": 15,
+    "stealth_dc": 16,
+    "ac": 16,
+    "unlocks": ["bsserpent"]
+  },
+  {
+    "code": "bsserpent",
+    "name": "Bloodspine Serpent",
+    "habitat": "Savannah",
+    "desc": "",
+    "habitat_dc": 16,
+    "stealth_dc": 16,
+    "ac": 18,
+    "unlocks": ["braik"]
+  },
+  {
+    "code": "braik",
+    "name": "Braiklaatz",
+    "habitat": "Savannah",
+    "desc": "",
+    "habitat_dc": 17,
+    "stealth_dc": 17,
+    "ac": 19,
+    "unlocks": ["amethystguard"]
+  },
+  {
+    "code": "amethystguard",
+    "name": "Amethyst Guard Drake",
+    "habitat": "Savannah",
+    "desc": "",
+    "habitat_dc": 18,
+    "stealth_dc": 17,
+    "ac": 20,
+    "unlocks": ["scorptiger"]
+  },
+  {
+    "code": "scorptiger",
+    "name": "Canyon Scorptiger",
+    "habitat": "Savannah",
+    "desc": "",
+    "habitat_dc": 18,
+    "stealth_dc": 20,
+    "ac": 20,
+    "unlocks": ["runesnout"]
+  },
+  {
+    "code": "runesnout",
+    "name": "Runesnout Spellstopper",
+    "habitat": "Savannah",
+    "desc": "",
+    "habitat_dc": 20,
+    "stealth_dc": 20,
+    "ac": 22,
+    "unlocks": []
   },
   {
     "code": "snoreberts",
     "name": "Lingering Snoreberts",
     "habitat": "Valley",
     "desc": "Lore: Snoreberts are the first creature in the valley ladder. Hunters have long trained their young to use these delicious, but blissfully unaware creatures for target practice.",
-    "habitat_dc": ,
-    "stealth_dc": ,
-    "ac": ,
-    "unlocks": [branchbeaver],
+    "habitat_dc": 5,
+    "stealth_dc": 7,
+    "ac": 8,
+    "unlocks": ["branchbeaver"]
   },
   {
     "code": "branchbeaver",
@@ -687,7 +687,7 @@
     "habitat_dc": 5,
     "stealth_dc": 8,
     "ac": 8,
-    "unlocks": [dracohippus],
+    "unlocks": ["dracohippus"]
   },
   {
     "code": "dracohippus",
@@ -697,7 +697,7 @@
     "habitat_dc": 8,
     "stealth_dc": 10,
     "ac": 10,
-    "unlocks": [kreokh],
+    "unlocks": ["kreokh"]
   },
   {
     "code": "kreokh",
@@ -707,7 +707,7 @@
     "habitat_dc": 12,
     "stealth_dc": 12,
     "ac": 139,
-    "unlocks": [hfalpaca],
+    "unlocks": ["hfalpaca"]
   },
   {
     "code": "hfalpaca",
@@ -717,7 +717,7 @@
     "habitat_dc": 14,
     "stealth_dc": 14,
     "ac": 15,
-    "unlocks": [drelk],
+    "unlocks": ["drelk"]
   },
   {
     "code": "drelk",
@@ -727,7 +727,7 @@
     "habitat_dc": 15,
     "stealth_dc": 15,
     "ac": 15,
-    "unlocks": [noseblossom],
+    "unlocks": ["noseblossom"]
   },
   {
     "code": "noseblossom",
@@ -737,7 +737,7 @@
     "habitat_dc": 16,
     "stealth_dc": 16,
     "ac": 16,
-    "unlocks": [landglider],
+    "unlocks": ["landglider"]
   },
   {
     "code": "landglider",
@@ -747,7 +747,7 @@
     "habitat_dc": 17,
     "stealth_dc": 17,
     "ac": 18,
-    "unlocks": [masly],
+    "unlocks": ["masly"]
   },
   {
     "code": "masly",
@@ -757,7 +757,7 @@
     "habitat_dc": 18,
     "stealth_dc": 18,
     "ac": 18,
-    "unlocks": [bloodstag],
+    "unlocks": ["bloodstag"]
   },
   {
     "code": "bloodstag",
@@ -767,7 +767,7 @@
     "habitat_dc": 20,
     "stealth_dc": 20,
     "ac": 20,
-    "unlocks": [fgriffon],
+    "unlocks": ["fgriffon"]
   },
   {
     "code": "fgriffon",
@@ -777,7 +777,7 @@
     "habitat_dc": 20,
     "stealth_dc": 21,
     "ac": 21,
-    "unlocks": [shman],
+    "unlocks": ["shman"]
   },
   {
     "code": "shman",
@@ -787,7 +787,7 @@
     "habitat_dc": 21,
     "stealth_dc": 21,
     "ac": 22,
-    "unlocks": [cfboar],
+    "unlocks": ["cfboar"]
   },
   {
     "code": "cfboar",
@@ -797,7 +797,7 @@
     "habitat_dc": 21,
     "stealth_dc": 22,
     "ac": 22,
-    "unlocks": [zhino],
+    "unlocks": ["zhino"]
   },
   {
     "code": "zhino",
@@ -807,7 +807,7 @@
     "habitat_dc": 22,
     "stealth_dc": 22,
     "ac": 24,
-    "unlocks": [glreav],
+    "unlocks": ["glreav"]
   },
   {
     "code": "glreav",
@@ -817,7 +817,7 @@
     "habitat_dc": 23,
     "stealth_dc": 23,
     "ac": 25,
-    "unlocks": [hjorral],
+    "unlocks": ["hjorral"]
   },
   {
     "code": "hjorral",
@@ -827,7 +827,7 @@
     "habitat_dc": 23,
     "stealth_dc": 24,
     "ac": 25,
-    "unlocks": [cfmammoth],
+    "unlocks": ["cfmammoth"]
   },
   {
     "code": "cfmammoth",
@@ -837,7 +837,7 @@
     "habitat_dc": 25,
     "stealth_dc": 25,
     "ac": 26,
-    "unlocks": [doomfate],
+    "unlocks": ["doomfate"]
   },
   {
     "code": "doomfate",
@@ -846,8 +846,8 @@
     "desc": "",
     "habitat_dc": 26,
     "stealth_dc": 27,
-    "ac": ,
-    "unlocks": [],
+    "ac": 28,
+    "unlocks": []
   },
   {
     "code": "wyrmlicorn",
@@ -857,7 +857,7 @@
     "habitat_dc": 4,
     "stealth_dc": 6,
     "ac": 5,
-    "unlocks": [bortle],
+    "unlocks": ["bortle"]
   },
   {
     "code": "bortle",
@@ -867,7 +867,7 @@
     "habitat_dc": 4,
     "stealth_dc": 7,
     "ac": 7,
-    "unlocks": [arachibian],
+    "unlocks": ["arachibian"]
   },
   {
     "code": "arachibian",
@@ -877,7 +877,7 @@
     "habitat_dc": 7,
     "stealth_dc": 8,
     "ac": 9,
-    "unlocks": [ccurler],
+    "unlocks": ["ccurler"]
   },
   {
     "code": "ccurler",
@@ -887,7 +887,7 @@
     "habitat_dc": 8,
     "stealth_dc": 9,
     "ac": 10,
-    "unlocks": [crawclaw],
+    "unlocks": ["crawclaw"]
   },
   {
     "code": "crawclaw",
@@ -897,7 +897,7 @@
     "habitat_dc": 9,
     "stealth_dc": 10,
     "ac": 12,
-    "unlocks": [cokaseal],
+    "unlocks": ["cokaseal"]
   },
   {
     "code": "cokaseal",
@@ -907,7 +907,7 @@
     "habitat_dc": 10,
     "stealth_dc": 12,
     "ac": 14,
-    "unlocks": [leifhund],
+    "unlocks": ["leifhund"]
   },
   {
     "code": "leifhund",
@@ -917,7 +917,7 @@
     "habitat_dc": 12,
     "stealth_dc": 12,
     "ac": 15,
-    "unlocks": [budwyrm],
+    "unlocks": ["budwyrm"]
   },
   {
     "code": "budwyrm",
@@ -927,7 +927,7 @@
     "habitat_dc": 13,
     "stealth_dc": 13,
     "ac": 15,
-    "unlocks": [stripelolly],
+    "unlocks": ["stripelolly"]
   },
   {
     "code": "stripelolly",
@@ -937,7 +937,7 @@
     "habitat_dc": 13,
     "stealth_dc": 13,
     "ac": 15,
-    "unlocks": [aerototl],
+    "unlocks": ["aerototl"]
   },
   {
     "code": "aerototl",
@@ -947,7 +947,7 @@
     "habitat_dc": 14,
     "stealth_dc": 14,
     "ac": 14,
-    "unlocks": [hemototl],
+    "unlocks": ["hemototl"]
   },
   {
     "code": "hemototl",
@@ -957,7 +957,7 @@
     "habitat_dc": 15,
     "stealth_dc": 15,
     "ac": 15,
-    "unlocks": [wanderwolf],
+    "unlocks": ["wanderwolf"]
   },
   {
     "code": "wanderwolf",
@@ -967,7 +967,7 @@
     "habitat_dc": 15,
     "stealth_dc": 17,
     "ac": 15,
-    "unlocks": [bogtsha ],
+    "unlocks": ["bogtsha "]
   },
   {
     "code": "bogtsha",
@@ -977,7 +977,7 @@
     "habitat_dc": 16,
     "stealth_dc": 18,
     "ac": 18,
-    "unlocks": [direplain],
+    "unlocks": ["direplain"]
   },
   {
     "code": "direplain",
@@ -987,7 +987,7 @@
     "habitat_dc": 16,
     "stealth_dc": 17,
     "ac": 19,
-    "unlocks": [direcroc],
+    "unlocks": ["direcroc"]
   },
   {
     "code": "direcroc",
@@ -997,7 +997,7 @@
     "habitat_dc": 16,
     "stealth_dc": 18,
     "ac": 20,
-    "unlocks": [pinnacle],
+    "unlocks": ["pinnacle"]
   },
   {
     "code": "pinnacle",
@@ -1007,7 +1007,7 @@
     "habitat_dc": 18,
     "stealth_dc": 20,
     "ac": 22,
-    "unlocks": [smashmouth],
+    "unlocks": ["smashmouth"]
   },
   {
     "code": "smashmouth",
@@ -1017,6 +1017,6 @@
     "habitat_dc": 20,
     "stealth_dc": 22,
     "ac": 22,
-    "unlocks": [],
+    "unlocks": []
   }
 ]}
