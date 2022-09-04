@@ -157,7 +157,7 @@
     "habitat_dc": 28,
     "stealth_dc": 28,
     "ac": 28,
-    "unlocks": [reeftide],
+    "unlocks": [],
   },
   {
     "code": "bayouhorn",
@@ -327,7 +327,7 @@
     "habitat_dc": 24,
     "stealth_dc": 24,
     "ac": 25,
-    "unlocks": [roxo],
+    "unlocks": [],
   },
   {
     "code": "ledroll",
@@ -497,7 +497,7 @@
     "habitat_dc": 30,
     "stealth_dc": 30,
     "ac": 30,
-    "unlocks": [dandelion ],
+    "unlocks": [],
   },
   {
     "code": "dwa-ctrice",
@@ -527,7 +527,7 @@
     "habitat_dc": 5,
     "stealth_dc": 6,
     "ac": 7,
-    "unlocks": [dwa-ctrice],
+    "unlocks": [staticscrap],
   },
   {
     "code": "cowl",
@@ -537,7 +537,7 @@
     "habitat_dc": 12,
     "stealth_dc": 11,
     "ac": 13,
-    "unlocks": [magmal],
+    "unlocks": [babbleboon],
   },
   {
     "code": "magmal",
@@ -547,7 +547,7 @@
     "habitat_dc": 10,
     "stealth_dc": 10,
     "ac": 10,
-    "unlocks": [dinocat],
+    "unlocks": [cowl],
   },
   {
     "code": "dinocat",
@@ -557,7 +557,7 @@
     "habitat_dc": 8,
     "stealth_dc": 8,
     "ac": 9,
-    "unlocks": [staticscrap],
+    "unlocks": [magmal],
   },
   {
     "code": "staticscrap",
@@ -567,7 +567,7 @@
     "habitat_dc": 6,
     "stealth_dc": 7,
     "ac": 7,
-    "unlocks": [cratakiti],
+    "unlocks": [dinocat],
   },
   {
     "code": "bsserpent",
@@ -594,9 +594,9 @@
     "name": "Amethyst Guard Drake",
     "habitat": "Savannah",
     "desc": "",
-    "habitat_dc": ,
-    "stealth_dc": ,
-    "ac": ,
+    "habitat_dc": 18,
+    "stealth_dc": 17,
+    "ac": 20,
     "unlocks": [scorptiger],
   },
   {
@@ -617,7 +617,7 @@
     "habitat_dc": 20,
     "stealth_dc": 20,
     "ac": 22,
-    "unlocks": [scorptiger ],
+    "unlocks": [],
   },
   {
     "code": "horgonaut",
@@ -847,7 +847,7 @@
     "habitat_dc": 26,
     "stealth_dc": 27,
     "ac": ,
-    "unlocks": [cfmammoth],
+    "unlocks": [],
   },
   {
     "code": "wyrmlicorn",
@@ -1017,6 +1017,6 @@
     "habitat_dc": 20,
     "stealth_dc": 22,
     "ac": 22,
-    "unlocks": [pinnacle ],
+    "unlocks": [],
   }
 ]}
