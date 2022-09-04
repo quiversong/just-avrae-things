@@ -6,6 +6,56 @@ def add_coins(coins_dict, all_bags = None):
     diff.update(coins_dict)
     character().coinpurse.modify_coins(cp=diff['cp'], sp=diff['sp'], ep=diff['ep'], gp=diff['gp'], pp=diff['pp'])
 
+def add_to_bag(bag_name, new_items, all_bags = None):
+    all_bags = all_bags if all_bags != None else load_json(character().cvars['bags'])
+    bag = ([bag for bag in all_bags if bag[0] == bag_name] + [None])[0]
+    if bag == None:
+        all_bags.append([bag_name, {}])
+        bag = all_bags[len(all_bags) - 1]
+    [bag[1].update({item: new_items[item] + (bag[1][item] if item in bag[1] else 0)}) for item in new_items]
+    character().set_cvar('bags', dump_json(all_bags))
+
+def add_inspiration():
+    character().create_cc_nx('Inspiration', 0, 1, None, 'bubble')
+    character().mod_cc('Inspiration', 1)
+
+def add_exhaustion(quantity):
+    character().create_cc_nx('Exhaustion', 0, 6, None, 'bubble')
+    character().mod_cc('Exhaustion', quantity)
+
+def add_vsheet_feature_if_not_existent(vsheet_variable_name, vsheet_variable_title, feature_value):
+    cv = character().cvars
+    vfeatures = load_json(cv['vfeatures']) if 'vfeatures' in cv else []
+    has_kaizen_features = [f for f in (vfeatures) if f['n'] == vsheet_variable_name]
+    if len(has_kaizen_features) == 0:
+        vfeatures.append({
+            'n': vsheet_variable_name,
+            't': f'\n**{vsheet_variable_title}:** '
+        })
+        character().set_cvar('vfeatures', dump_json(vfeatures))
+    features_var = cv[vsheet_variable_name].strip() if vsheet_variable_name in cv else ''
+    if not feature_value in features_var:
+        if len(features_var) != 0:
+            features_var += ', '
+        features_var += feature_value
+        character().set_cvar(vsheet_variable_name, features_var)
+        return True
+    return False
+
+def get_pc_weapon(weapon_label):
+    weapon_str = [a for a in character().attacks
+      if str(a).lower().split(':')[0].strip().replace('*', '').startswith(weapon_label)
+    ]
+
+    if len(weapon_str) > 0:
+        weapon_str = str(weapon_str[0])
+        return {
+          'name': weapon_str.split(':')[0].strip().replace('**', ''),
+          'a_bonus': int(weapon_str.split('Attack:')[1].strip().split(' ')[0])
+        }
+    else:
+        return None
+
 def get_control_variable_values(control_var):
     cvars = character().cvars
     if control_var not in cvars:
