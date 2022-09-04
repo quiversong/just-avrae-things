@@ -7,6 +7,7 @@
     "habitat_dc": 8,
     "stealth_dc": 9,
     "ac": 9,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998421498773651558/e72e3100adca8bfbd3fd4c73d23b97c9.jpg ",
     "unlocks": "pebbles"
   },
   {
@@ -17,6 +18,7 @@
     "habitat_dc": 9,
     "stealth_dc": 9,
     "ac": 10,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987201730909466624/IMG_4056.jpg?width=462&height=676",
     "unlocks": "rvole"
   },
   {
@@ -27,6 +29,7 @@
     "habitat_dc": 10,
     "stealth_dc": 12,
     "ac": 12,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/988924752733282354/EWBK5EdU0AATJog.jpg?width=709&height=676",
     "unlocks": "tumbletide"
   },
   {
@@ -37,6 +40,7 @@
     "habitat_dc": 10,
     "stealth_dc": 15,
     "ac": 14,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998421498995953684/6f6ab567f0809857fb6743a8c21828a5.jpg",
     "unlocks": "frofennec"
   },
   {
@@ -47,6 +51,7 @@
     "habitat_dc": 12,
     "stealth_dc": 15,
     "ac": 15,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/988287872496988190/IMG_4069.jpg?width=380&height=676",
     "unlocks": "swombat"
   },
   {
@@ -57,6 +62,7 @@
     "habitat_dc": 12,
     "stealth_dc": 14,
     "ac": 16,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/988287850493673522/IMG_4072.jpg?width=478&height=676",
     "unlocks": "funfennec"
   },
   {
@@ -67,6 +73,7 @@
     "habitat_dc": 14,
     "stealth_dc": 15,
     "ac": 17,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/988287880998830090/IMG_4068.jpg?width=391&height=676",
     "unlocks": "anvilcrab"
   },
   {
@@ -77,6 +84,7 @@
     "habitat_dc": 16,
     "stealth_dc": 16,
     "ac": 18,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998381405396545606/bc64d622d975158ebab0d49ec29113b62.jpg",
     "unlocks": "seawolf"
   },
   {
@@ -87,6 +95,7 @@
     "habitat_dc": 18,
     "stealth_dc": 18,
     "ac": 18,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/988924752531976222/f4221598624a6b48a077536e0c2dc5b8.jpg",
     "unlocks": "manix"
   },
   {
@@ -97,6 +106,7 @@
     "habitat_dc": 20,
     "stealth_dc": 20,
     "ac": 20,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987134420404301834/IMG_4036.jpg?width=546&height=676",
     "unlocks": "skyturtle"
   },
   {
@@ -107,6 +117,7 @@
     "habitat_dc": 20,
     "stealth_dc": 22,
     "ac": 22,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998385716407046266/2c1bd44ac98f8fa88a69537cb79fca19.jpg",
     "unlocks": "caithodrake"
   },
   {
@@ -117,6 +128,7 @@
     "habitat_dc": 23,
     "stealth_dc": 23,
     "ac": 23,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987134425676529724/IMG_4037.jpg?width=691&height=676",
     "unlocks": "glurp"
   },
   {
@@ -127,6 +139,7 @@
     "habitat_dc": 23,
     "stealth_dc": 24,
     "ac": 24,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987120003654500443/IMG_4017.jpg?width=658&height=676",
     "unlocks": "seaskulk"
   },
   {
@@ -137,6 +150,7 @@
     "habitat_dc": 25,
     "stealth_dc": 25,
     "ac": 25,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998381405216182282/1144816409483dbba087cd96a5a7683a.jpg",
     "unlocks": "reeftide"
   },
   {
@@ -147,6 +161,7 @@
     "habitat_dc": 26,
     "stealth_dc": 26,
     "ac": 26,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987166936481816616/IMG_4042.jpg",
     "unlocks": "reeftidedragon"
   },
   {
@@ -157,6 +172,7 @@
     "habitat_dc": 28,
     "stealth_dc": 28,
     "ac": 28,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998421498580709466/c50d4bce2c8b2a85b4e5c7a70091a385.jpg ",
     "unlocks": ""
   },
   {
@@ -167,6 +183,7 @@
     "habitat_dc": 4,
     "stealth_dc": 6,
     "ac": 7,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987120020591112282/IMG_4014.jpg",
     "unlocks": "drakefly"
   },
   {
@@ -177,6 +194,7 @@
     "habitat_dc": 4,
     "stealth_dc": 7,
     "ac": 8,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/996794447218081862/milica-celikovic-27-um.jpg",
     "unlocks": "gravewater"
   },
   {
@@ -187,6 +205,7 @@
     "habitat_dc": 5,
     "stealth_dc": 8,
     "ac": 9,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987173299408732160/IMG_4054.jpg",
     "unlocks": "skith"
   },
   {
@@ -197,6 +216,7 @@
     "habitat_dc": 7,
     "stealth_dc": 7,
     "ac": 10,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987173314403385415/IMG_4052.jpg?width=599&height=676",
     "unlocks": "bluebelly"
   },
   {
@@ -207,6 +227,7 @@
     "habitat_dc": 8,
     "stealth_dc": 13,
     "ac": 10,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/996794430667358329/milica-celikovic-16-me.jpg",
     "unlocks": "bananabelly"
   },
   {
@@ -217,6 +238,7 @@
     "habitat_dc": 8,
     "stealth_dc": 10,
     "ac": 13,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/996794439345377360/milica-celikovic-32-um.jpg",
     "unlocks": "ballaw"
   },
   {
@@ -227,6 +249,7 @@
     "habitat_dc": 12,
     "stealth_dc": 13,
     "ac": 14,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987122690672431184/IMG_4027.jpg",
     "unlocks": "surroval"
   },
   {
@@ -237,6 +260,7 @@
     "habitat_dc": 14,
     "stealth_dc": 14,
     "ac": 16,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987831288922783784/IMG_4064.jpg?width=508&height=676",
     "unlocks": "haverins, coralparrot"
   },
   {
@@ -247,6 +271,7 @@
     "habitat_dc": 16,
     "stealth_dc": 16,
     "ac": 17,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998385798317608980/b85e6d70daa396846008b12b2a3504f2.jpg",
     "unlocks": "aoxo"
   },
   {
@@ -257,6 +282,7 @@
     "habitat_dc": 16,
     "stealth_dc": 18,
     "ac": 18,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/988287833376694333/IMG_4074.jpg",
     "unlocks": "roxo"
   },
   {
@@ -267,6 +293,7 @@
     "habitat_dc": 17,
     "stealth_dc": 19,
     "ac": 19,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/988287843430449162/IMG_4073.jpg?width=676&height=676",
     "unlocks": "mossjaw"
   },
   {
@@ -277,6 +304,7 @@
     "habitat_dc": 20,
     "stealth_dc": 18,
     "ac": 20,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987122683969945660/IMG_4028.jpg",
     "unlocks": "tantrippo"
   },
   {
@@ -287,6 +315,7 @@
     "habitat_dc": 20,
     "stealth_dc": 20,
     "ac": 21,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987120040648273991/IMG_4011.jpg",
     "unlocks": "prehistoric"
   },
   {
@@ -297,6 +326,7 @@
     "habitat_dc": 21,
     "stealth_dc": 21,
     "ac": 23,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998426635076370553/e92c4ce34c1980115d1f9267580ff1fa.jpg",
     "unlocks": "kirin"
   },
   {
@@ -307,6 +337,7 @@
     "habitat_dc": 22,
     "stealth_dc": 23,
     "ac": 24,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987134445419114556/IMG_4033.jpg",
     "unlocks": "dcrab"
   },
   {
@@ -317,6 +348,7 @@
     "habitat_dc": 22,
     "stealth_dc": 20,
     "ac": 25,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/988287864506818692/IMG_4070.jpg?width=450&height=676",
     "unlocks": "riptide"
   },
   {
@@ -327,6 +359,7 @@
     "habitat_dc": 24,
     "stealth_dc": 24,
     "ac": 25,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998418348519993374/riptide-chimera-ryan-barger.jpg",
     "unlocks": ""
   },
   {
@@ -337,6 +370,7 @@
     "habitat_dc": 10,
     "stealth_dc": 10,
     "ac": 10,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987831312108879962/IMG_4063.jpg?width=523&height=676",
     "unlocks": "mossfurrow"
   },
   {
@@ -347,6 +381,7 @@
     "habitat_dc": 12,
     "stealth_dc": 12,
     "ac": 12,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987120061460381756/IMG_4008.jpg",
     "unlocks": "lagomoth"
   },
   {
@@ -357,6 +392,7 @@
     "habitat_dc": 15,
     "stealth_dc": 15,
     "ac": 15,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/988287858068574258/IMG_4071.jpg?width=497&height=675",
     "unlocks": "pwombat"
   },
   {
@@ -367,6 +403,7 @@
     "habitat_dc": 15,
     "stealth_dc": 16,
     "ac": 18,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987831292911550484/IMG_4065.jpg",
     "unlocks": "lyncaris"
   },
   {
@@ -377,6 +414,7 @@
     "habitat_dc": 18,
     "stealth_dc": 18,
     "ac": 18,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987134393040650240/IMG_4039.jpg",
     "unlocks": "chasmprowler"
   },
   {
@@ -387,6 +425,7 @@
     "habitat_dc": 18,
     "stealth_dc": 20,
     "ac": 20,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987134383049830472/IMG_4040.jpg",
     "unlocks": "wombradin"
   },
   {
@@ -397,6 +436,7 @@
     "habitat_dc": 20,
     "stealth_dc": 22,
     "ac": 23,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987134586372882503/IMG_4035.jpg",
     "unlocks": "bellicose"
   },
   {
@@ -407,6 +447,7 @@
     "habitat_dc": 20,
     "stealth_dc": 12,
     "ac": 25,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998385717019414528/mtg_beast_token_by_jason_felix_by_jason_felix_dcjs8i2-pre.jpg",
     "unlocks": "drakiosaur, snoreberts"
   },
   {
@@ -417,6 +458,7 @@
     "habitat_dc": 22,
     "stealth_dc": 25,
     "ac": 25,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987120014387707964/IMG_4015.jpg?width=676&height=676",
     "unlocks": "splitty"
   },
   {
@@ -427,6 +469,7 @@
     "habitat_dc": 24,
     "stealth_dc": 26,
     "ac": 26,
+    "img": "https://cdn.discordapp.com/attachments/988476850152038550/998728697081245817/3c0fa045f24b5f41efaf43eb0fa4410f.jpg",
     "unlocks": "qilin"
   },
   {
@@ -437,6 +480,7 @@
     "habitat_dc": 25,
     "stealth_dc": 25,
     "ac": 25,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987173360972726292/IMG_4044.jpg?width=739&height=676",
     "unlocks": "tetherpede"
   },
   {
@@ -447,6 +491,7 @@
     "habitat_dc": 26,
     "stealth_dc": 26,
     "ac": 27,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987120045786280006/IMG_4010.jpg?width=522&height=676",
     "unlocks": "drakeblood"
   },
   {
@@ -457,6 +502,7 @@
     "habitat_dc": 26,
     "stealth_dc": 27,
     "ac": 28,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998385799894675516/071a54fce24607f8af0843007983af10.jpg",
     "unlocks": "bristleback"
   },
   {
@@ -467,6 +513,7 @@
     "habitat_dc": 27,
     "stealth_dc": 28,
     "ac": 28,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998385750095708210/9c6149d212d362af16c505c18dd4aed2.jpg",
     "unlocks": "jungleviper"
   },
   {
@@ -477,6 +524,7 @@
     "habitat_dc": 29,
     "stealth_dc": 27,
     "ac": 29,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998385716163788830/1ab13ca644cb7c6a32c3bcdd6e2cc914.jpg",
     "unlocks": "dandelion"
   },
   {
@@ -487,6 +535,7 @@
     "habitat_dc": 29,
     "stealth_dc": 29,
     "ac": 27,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998380272888320100/bbd6e843856692b034b1dd9a97635123.jpg",
     "unlocks": "greenback"
   },
   {
@@ -497,6 +546,7 @@
     "habitat_dc": 30,
     "stealth_dc": 30,
     "ac": 30,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998385715907940412/fd05d3e8a909fa3b2ed1258e23d6c1a2.jpg",
     "unlocks": ""
   },
   {
@@ -507,6 +557,7 @@
     "habitat_dc": 3,
     "stealth_dc": 6,
     "ac": 5,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987122727049641994/IMG_4021.jpg",
     "unlocks": "emgerbil"
   },
   {
@@ -517,6 +568,7 @@
     "habitat_dc": 3,
     "stealth_dc": 6,
     "ac": 6,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987122718518415370/IMG_4022.jpg",
     "unlocks": "cratakiti"
   },
   {
@@ -527,6 +579,7 @@
     "habitat_dc": 5,
     "stealth_dc": 6,
     "ac": 7,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987173306920742962/IMG_4053.jpg?width=478&height=676",
     "unlocks": "staticscrap"
   },
   {
@@ -537,6 +590,7 @@
     "habitat_dc": 6,
     "stealth_dc": 7,
     "ac": 7,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998426549822947378/87947492ca365c69aec08b0da1ec5f77.jpg ",
     "unlocks": "dinocat"
   },
   {
@@ -547,6 +601,7 @@
     "habitat_dc": 8,
     "stealth_dc": 8,
     "ac": 9,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/988922193767432282/unknown.png?width=437&height=675",
     "unlocks": "magmal"
   },
   {
@@ -557,6 +612,7 @@
     "habitat_dc": 10,
     "stealth_dc": 10,
     "ac": 10,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987122709479710730/IMG_4024.jpg?width=601&height=676",
     "unlocks": "cowl"
   },
   {
@@ -567,6 +623,7 @@
     "habitat_dc": 12,
     "stealth_dc": 11,
     "ac": 13,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987122703460859914/IMG_4025.jpg?width=676&height=676",
     "unlocks": "babbleboon"
   },
   {
@@ -577,6 +634,7 @@
     "habitat_dc": 12,
     "stealth_dc": 10,
     "ac": 14,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998385751081369750/06ab7749732252d617b8c6d9bafb828f.jpg",
     "unlocks": "dregnaur, wyrmlicorn"
   },
   {
@@ -587,6 +645,7 @@
     "habitat_dc": 13,
     "stealth_dc": 13,
     "ac": 15,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987134378129899620/IMG_4041.jpg",
     "unlocks": "stargoyle"
   },
   {
@@ -597,6 +656,7 @@
     "habitat_dc": 13,
     "stealth_dc": 14,
     "ac": 14,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/995433448229568582/Qiy1sSU.jpg",
     "unlocks": "craggling"
   },
   {
@@ -607,6 +667,7 @@
     "habitat_dc": 14,
     "stealth_dc": 15,
     "ac": 15,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998385799185829968/ae69dd4d9140d281cbab25560dcdcacc.jpg",
     "unlocks": "horgonaut"
   },
   {
@@ -617,6 +678,7 @@
     "habitat_dc": 15,
     "stealth_dc": 16,
     "ac": 16,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987134460040450088/IMG_4030.jpg",
     "unlocks": "bsserpent"
   },
   {
@@ -627,6 +689,7 @@
     "habitat_dc": 16,
     "stealth_dc": 16,
     "ac": 18,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987134454369751100/IMG_4031.jpg?width=474&height=676",
     "unlocks": "braik"
   },
   {
@@ -637,6 +700,7 @@
     "habitat_dc": 17,
     "stealth_dc": 17,
     "ac": 19,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987122696041156629/IMG_4026.jpg?width=541&height=676",
     "unlocks": "amethystguard"
   },
   {
@@ -647,6 +711,7 @@
     "habitat_dc": 18,
     "stealth_dc": 17,
     "ac": 20,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998385798858686494/7cc1a7a5301108e644e5a0fe8bb64819.jpg",
     "unlocks": "scorptiger"
   },
   {
@@ -657,6 +722,7 @@
     "habitat_dc": 18,
     "stealth_dc": 20,
     "ac": 20,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998381404788371567/63c949cd65d3e19a8d96c8d67a9f9967.jpg",
     "unlocks": "runesnout"
   },
   {
@@ -667,6 +733,7 @@
     "habitat_dc": 20,
     "stealth_dc": 20,
     "ac": 22,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998385716688076820/4006d1a5576ed74930abdfda3c36d6ba.jpg",
     "unlocks": ""
   },
   {
@@ -677,6 +744,7 @@
     "habitat_dc": 5,
     "stealth_dc": 7,
     "ac": 8,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998385799454261248/49f388388baf0619604ee10afafdbc51.jpg",
     "unlocks": "branchbeaver"
   },
   {
@@ -687,6 +755,7 @@
     "habitat_dc": 5,
     "stealth_dc": 8,
     "ac": 8,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998385750750007418/d1dcdbfd4971258e6391dc92966c1df4.jpg",
     "unlocks": "dracohippus"
   },
   {
@@ -697,6 +766,7 @@
     "habitat_dc": 8,
     "stealth_dc": 10,
     "ac": 10,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987134409364865034/IMG_4038.jpg?width=507&height=676",
     "unlocks": "kreokh"
   },
   {
@@ -707,6 +777,7 @@
     "habitat_dc": 12,
     "stealth_dc": 12,
     "ac": 139,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987120051037536336/IMG_4009.jpg?width=480&height=676",
     "unlocks": "hfalpaca"
   },
   {
@@ -717,6 +788,7 @@
     "habitat_dc": 14,
     "stealth_dc": 14,
     "ac": 15,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987173330098462780/IMG_4049.jpg",
     "unlocks": "drelk"
   },
   {
@@ -727,6 +799,7 @@
     "habitat_dc": 15,
     "stealth_dc": 15,
     "ac": 15,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987173325996453888/IMG_4050.jpg?width=486&height=676",
     "unlocks": "noseblossom"
   },
   {
@@ -737,6 +810,7 @@
     "habitat_dc": 16,
     "stealth_dc": 16,
     "ac": 16,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998381405010665532/c1341ecfd029caa22fc1a3a204eb390c.jpg",
     "unlocks": "landglider"
   },
   {
@@ -747,6 +821,7 @@
     "habitat_dc": 17,
     "stealth_dc": 17,
     "ac": 18,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998381404360548362/e65f99e88bc36fb676db073674288c09.jpg",
     "unlocks": "masly"
   },
   {
@@ -757,6 +832,7 @@
     "habitat_dc": 18,
     "stealth_dc": 18,
     "ac": 18,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/988287829090123816/IMG_4075.jpg",
     "unlocks": "bloodstag"
   },
   {
@@ -767,6 +843,7 @@
     "habitat_dc": 20,
     "stealth_dc": 20,
     "ac": 20,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987120010528964679/IMG_4016.jpg",
     "unlocks": "fgriffon"
   },
   {
@@ -777,6 +854,7 @@
     "habitat_dc": 20,
     "stealth_dc": 21,
     "ac": 21,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987173354974896168/IMG_4045.jpg",
     "unlocks": "shman"
   },
   {
@@ -787,6 +865,7 @@
     "habitat_dc": 21,
     "stealth_dc": 21,
     "ac": 22,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987134431473053746/IMG_4034.jpg?width=504&height=675",
     "unlocks": "cfboar"
   },
   {
@@ -797,6 +876,7 @@
     "habitat_dc": 21,
     "stealth_dc": 22,
     "ac": 22,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987173340819111976/IMG_4047.jpg?width=714&height=676",
     "unlocks": "zhino"
   },
   {
@@ -807,6 +887,7 @@
     "habitat_dc": 22,
     "stealth_dc": 22,
     "ac": 24,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998385750515134596/6400097a14ee0691ecb9f5ad9ad086c2.jpg",
     "unlocks": "glreav"
   },
   {
@@ -817,6 +898,7 @@
     "habitat_dc": 23,
     "stealth_dc": 23,
     "ac": 25,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987173319264575528/IMG_4051.jpg",
     "unlocks": "hjorral"
   },
   {
@@ -827,6 +909,7 @@
     "habitat_dc": 23,
     "stealth_dc": 24,
     "ac": 25,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987173336251514983/IMG_4048.jpg?width=633&height=676",
     "unlocks": "cfmammoth"
   },
   {
@@ -837,6 +920,7 @@
     "habitat_dc": 25,
     "stealth_dc": 25,
     "ac": 26,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987173347907493919/IMG_4046.jpg?width=676&height=676",
     "unlocks": "doomfate"
   },
   {
@@ -847,6 +931,7 @@
     "habitat_dc": 26,
     "stealth_dc": 27,
     "ac": 28,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998426550112358511/8fe5e9d8019823a5168648cc31d7e0c5.jpg",
     "unlocks": ""
   },
   {
@@ -857,6 +942,7 @@
     "habitat_dc": 4,
     "stealth_dc": 6,
     "ac": 5,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987201726589317171/IMG_4057.jpg?width=615&height=676",
     "unlocks": "bortle"
   },
   {
@@ -867,6 +953,7 @@
     "habitat_dc": 4,
     "stealth_dc": 7,
     "ac": 7,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987122713682407465/IMG_4023.jpg",
     "unlocks": "arachibian"
   },
   {
@@ -877,6 +964,7 @@
     "habitat_dc": 7,
     "stealth_dc": 8,
     "ac": 9,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987831317842513980/IMG_4062.jpg",
     "unlocks": "ccurler"
   },
   {
@@ -887,6 +975,7 @@
     "habitat_dc": 8,
     "stealth_dc": 9,
     "ac": 10,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987201738538905630/IMG_4055.jpg?width=388&height=675",
     "unlocks": "crawclaw"
   },
   {
@@ -897,6 +986,7 @@
     "habitat_dc": 9,
     "stealth_dc": 10,
     "ac": 12,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987122679570132992/IMG_4029.jpg",
     "unlocks": "cokaseal"
   },
   {
@@ -907,6 +997,7 @@
     "habitat_dc": 10,
     "stealth_dc": 12,
     "ac": 14,
+    "img": "https://cdn.discordapp.com/attachments/855908840633270282/987120035560583199/IMG_4012.jpg",
     "unlocks": "leifhund"
   },
   {
@@ -917,6 +1008,7 @@
     "habitat_dc": 12,
     "stealth_dc": 12,
     "ac": 15,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987120025594908672/IMG_4013.jpg",
     "unlocks": "budwyrm"
   },
   {
@@ -927,6 +1019,7 @@
     "habitat_dc": 13,
     "stealth_dc": 13,
     "ac": 15,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987202765925253230/IMG_4058.jpg?width=496&height=676",
     "unlocks": "stripelolly"
   },
   {
@@ -937,6 +1030,7 @@
     "habitat_dc": 13,
     "stealth_dc": 13,
     "ac": 15,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998385715639488552/7b441b14450de01721116b506c26d8e4.jpg",
     "unlocks": "aerototl"
   },
   {
@@ -947,6 +1041,7 @@
     "habitat_dc": 14,
     "stealth_dc": 14,
     "ac": 14,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987202754097328138/IMG_4060.jpg?width=591&height=676",
     "unlocks": "hemototl"
   },
   {
@@ -957,6 +1052,7 @@
     "habitat_dc": 15,
     "stealth_dc": 15,
     "ac": 15,
+    "img": "https://media.discordapp.net/attachments/855908840633270282/987202758249693214/IMG_4059.jpg?width=712&height=676",
     "unlocks": "wanderwolf"
   },
   {
@@ -967,16 +1063,18 @@
     "habitat_dc": 15,
     "stealth_dc": 17,
     "ac": 15,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998385749785321552/42073b13f70f5631dc44cdabe3d89470.jpg",
     "unlocks": "bogtsha "
   },
   {
     "code": "bogtsha",
     "name": "Bogtsha",
     "habitat": "Wetlands",
-    "desc": "",
+    "desc": "\"You aim to bag a Bogtsha? Awfully ambitious...I can respect that. According to the Bullywugs, Bogtsha translates to \"Warden of the Bog\", often chasing off unwelcome creatures from its chosen domain. Bogtsha are as territorial is any other creature of its formidable size, but where it truly excels is in its ability to camouflage. They're very sensitive to odor, so an overwhelming odor can sometimes shake its perception.\"\n-Prathus Dawnroar, Safari Guide",
     "habitat_dc": 16,
     "stealth_dc": 18,
     "ac": 18,
+    "img": "https://cdn.discordapp.com/attachments/790441224179941377/991417648040652930/unknown.png",
     "unlocks": "direplain"
   },
   {
@@ -987,6 +1085,7 @@
     "habitat_dc": 16,
     "stealth_dc": 17,
     "ac": 19,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998379882755129474/gwn-monster01.jpg",
     "unlocks": "direcroc"
   },
   {
@@ -997,6 +1096,7 @@
     "habitat_dc": 16,
     "stealth_dc": 18,
     "ac": 20,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998419275670900807/gaetan-weltzer-swamp-crocodile19-spartan-s.jpg",
     "unlocks": "pinnacle"
   },
   {
@@ -1007,6 +1107,7 @@
     "habitat_dc": 18,
     "stealth_dc": 20,
     "ac": 22,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998426550322090065/43840c528d9c47c6928d4a9652cedec5.jpg",
     "unlocks": "smashmouth"
   },
   {
@@ -1017,6 +1118,7 @@
     "habitat_dc": 20,
     "stealth_dc": 22,
     "ac": 22,
+    "img": "https://media.discordapp.net/attachments/988476850152038550/998381404566065242/ec2f83369a052fa1906fc4aff8b46070.jpg",
     "unlocks": ""
   }
 ]}
