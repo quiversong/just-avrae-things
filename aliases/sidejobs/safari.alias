@@ -11,6 +11,44 @@ DAILY_CAP = 2
 TIME_VAR = "_nsfr_dhc_"
 STATS_VAR = "_nsfr_st_"
 
+def print_table(header, data, column_lengths = None):
+    ROW_LENGTH = 23
+    result = []
+    column_count = len(header)
+    if column_lengths == None:
+        column_lengths = [floor(ROW_LENGTH / column_count) for _ in range(len(header))]
+        column_lengths[0] += ROW_LENGTH % column_count
+
+    all_rows = [header] + data
+    f = '```'
+    for row_index in range(len(all_rows)):
+        row = all_rows[row_index]
+        is_header = row_index == 0
+        line = ''
+        for cell_index in range(len(header)):
+            cell = row[cell_index]
+            column_length = column_lengths[cell_index]
+            cell_length = column_length + (ROW_LENGTH % column_count) if cell_index == 0 else column_length
+            if len(cell) > cell_length:
+                line += cell[0:cell_length - 1] + '.'
+            else:
+                padding = ''.join([' ' for x in range(cell_length - len(cell))])
+                line += padding + cell if cell_index == len(header) - 1 else cell + padding
+        line += '' if is_header else '\n'
+        if is_header:
+            f += line + '```'
+            result.append(f)
+            f = '```'
+        elif len(f + line) > 1024:
+            f += '```'
+            result.append(f)
+            f = '```'
+        else:
+            f += line
+    f += '```\n\n'
+    result.append(f)
+    return result
+
 def get_beast_data(all_beasts, beast_code):
     beast = ([b for b in all_beasts if b['code'].lower() == beast_code] + [None])[0]
     return None if beast == None else {
@@ -105,37 +143,16 @@ if len(args) > 0 and args[0] == 'list':
     f += '\nCapturing new beasts may unlock new creatures and habitats!\n'
     f += '\n`W/R` = wins / total attempts.\n\n'
 
-    f += '```Beast    Habitat     W/R   Best```\n```'
-    for i in range(len(all_warriors)):
-        warrior = all_warriors[i]
-        if i == 0 or warrior['code'] in global_stats:
-            stats = global_stats[warrior['code']] if warrior['code'] in global_stats else EMPTY_STATS
-            is_secret = 'secret' in warrior and warrior['secret']
-            wins = stats['wins']
-            total = wins + stats['losses']
-            left_padding = ' ' if wins > 9 and wins < 100 else '  ' if wins < 10 else ''
-            right_padding = ' ' if total > 9 and total < 100 else '  ' if total < 10 else ''
-            formatted_wr = f'{left_padding}{wins}/{total}{right_padding}'
-            best_record = stats['win_min_rounds']
-            left_padding = '  ' if best_record > 9 and best_record < 100 else '   ' if best_record < 10 else ' '
-            formatted_best_record = f'{left_padding}{best_record}'
-            formatted_line = f'{formatted_wr} {formatted_best_record}'
-            data_length = len(warrior['code']) + len(formatted_line) + 1
-            data_length += 1 if is_secret else 0
-            prefix = '*' if is_secret else ''
-            padding = ''
-            for i in range(23 - data_length + 1):
-                padding += ' '
-            formatted_line = f'{prefix}{warrior["code"]}{padding}{formatted_line}\n'
-            if len(f + formatted_line) > 1024:
-                f += '```'
-                fields.append(f)
-                f = '```'
-            f += formatted_line
-    f += '```\n\n'
-    fields.append(f)
+    header = ['Code', 'Habitat', 'W/R']
+    data = []
+    for beast in all_beasts:
+        if 'starter' in beast['props'] or beast['code'] in global_stats:
+            stats = global_stats[beast['code']] if beast['code'] in global_stats else EMPTY_STATS
+            data.append([beast['code'], beast['habitat'], f"{stats['captures']}/{stats['failures']}"])
 
-    return 1
+    table_fields = print_table(header, data, [15, 6, 4])
+    [fields.append(field) for field in table_fields]
+    return 0
 
 if len(args) < 2:
     thumb = MOUNTAIN_ICON
@@ -193,23 +210,24 @@ img = 'https://cdn.discordapp.com/attachments/910682900863787028/910790078547230
 img = 'https://cdn.discordapp.com/attachments/910682900863787028/912200744822767676/photo-1595084921991_orig.png'
 img = 'https://cdn.discordapp.com/attachments/910682900863787028/912201227402612736/grove.jpg'
 
-title = f'{c_first_name} tries to capture {beast["name"]}!'
-desc = f'*Using their {weapon["name"]}, they explore the {beast["habitat"]}!*'
+aan = 'an ' if beast["name"].strip().lower()[0] in 'aeiou' else 'a '
+title = f'{c_first_name} tries to capture {aan}{beast["name"]}!'
+desc = f'*Using their {weapon["name"]}, they explore the {beast["habitat"]} region!*'
 
 f = "*The challengers enters the special pen that mimics the creature's habitat...*|"
-f += f'*Will {c_first_name} be able to display the hunting skills necessary to capture the prey?*'
+f += f'*Will {c_first_name} display the hunting skills necessary to capture the prey?*'
 fields.append(f)
 
 nature_success_text = f"{c_first_name} navigates this habitat like a native!"
 nature_failure_text = f"{c_first_name} has a hard time navigating the surroundings.."
-f = "Environment adaptation...|"
+f = "__*Environment Adaptation...*__|"
 f += f"Nature check: {sl if nature_success else fl}\n{nature_roll.full}\n"
 f += nature_success_text if nature_success else nature_failure_text
 fields.append(f)
 
 perception_success_text = f"{c_first_name} quickly finds the {beast['name']}, but can they capture it?!"
 perception_failure_text = f"{c_first_name} can't seem to find the {beast['name']} no matter how hard they try, and time runs out!"
-f = "Prey detection...|"
+f = "__*Prey detection...*__|"
 f += f"Perception check: {sl if perception_success else fl}\n{perception_roll.full}\n"
 f += perception_success_text if perception_success else perception_failure_text
 fields.append(f)
@@ -217,7 +235,7 @@ fields.append(f)
 if perception_success:
     attack_success_text = f"{c_first_name} successfuly captures the {beast['name']}!"
     attack_failure_text = f"The {beast['name']} is too quick for {c_first_name} to be able to capture it, and the time runs out!"
-    f = "Capture attempt...|"
+    f = "__*Capture attempt...*__|"
     f += f"Attack roll: {sl if attack_success else fl}\n{attack_roll.full}\n"
     f += attack_success_text if attack_success else attack_failure_text
     fields.append(f)
@@ -227,6 +245,9 @@ if not beast['code'] in global_stats:
 stats = global_stats[beast['code']]
 
 thumb = beast['img']
+thumb = None
+img = beast['img']
+thumb = image
 
 if safari_success:
     stats['captures'] += 1
@@ -235,7 +256,7 @@ if safari_success:
     stats['attack_successes'] += 1 if attack_success else 0
 
     f = f'__***{c.name.upper()} WINS!***__|'
-    f += 'Congratulations!'
+    f += f'Congratulations! You have successfully captured the {beast["name"]}!'
     fields.append(f)
 
     if 'unlocks' in beast and len(beast['unlocks']) > 0:
@@ -244,7 +265,7 @@ if safari_success:
             should_add = not unlocked_code in global_stats
             if should_add:
                 unlocked_beast = get_beast_data(all_beasts, unlocked_code)
-                unlocked_codes.append(f'* `{unlocked_beast["name"]}` in `{unlocked_beast["habitat"]}`. Code: `{unlocked_code}`')
+                unlocked_codes.append(f'* `{unlocked_code}`: {unlocked_beast["name"]} @ the {unlocked_beast["habitat"]}.')
                 global_stats[unlocked_code] = EMPTY_STATS.copy()
 
         if len(unlocked_codes) > 0:
