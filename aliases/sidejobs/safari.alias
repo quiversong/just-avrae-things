@@ -3,132 +3,28 @@ embed
 # Configuration Variables
 VERSION = '1.0'
 
+using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
+
 DATA_VAR = "95611e59-99f0-4dfe-bc4e-9d72472a1e9b"
 DAILY_CAP = 2
 
-def add_coins(coins_dict, all_bags = None):
-    out_of_funds = False
-    all_bags = all_bags if all_bags != None else load_json(character().cvars['bags'])
-    coin_pouch = ([bag for bag in all_bags if bag[0] == 'Coin Pouch'] + [None])[0]
-    if coin_pouch != None:
-        coin_pouch = coin_pouch[1]
-        currencies = ['cp', 'sp', 'gp', 'pp']
-        for i in range(0, len(currencies)):
-            currency = currencies[i]
-            coin_pouch[currency] += coins_dict[currency] if currency in coins_dict else 0
-            while coin_pouch[currency] < 0 and i < len(currencies) - 1:
-                next_currency = currencies[i + 1]
-                coin_pouch[next_currency] -= 1
-                coin_pouch[currency] += 10
-            if coin_pouch[currency] < 0 and i == len(currencies) - 1:
-                out_of_funds = True
-        character().set_cvar('bags', dump_json(all_bags))
-    diff = {'cp': 0, 'sp': 0, 'ep': 0, 'gp': 0, 'pp': 0}
-    diff.update(coins_dict)
-    character().coinpurse.modify_coins(cp=diff['cp'], sp=diff['sp'], ep=diff['ep'], gp=diff['gp'], pp=diff['pp'])
-    return not out_of_funds
+TIME_VAR = "_nsfr_dhc_"
+STATS_VAR = "_nsfr_st_"
 
-def add_to_bag(bag_name, new_items, all_bags = None):
-    all_bags = all_bags if all_bags != None else load_json(character().cvars['bags'])
-    bag = ([bag for bag in all_bags if bag[0] == bag_name] + [None])[0]
-    if bag == None:
-        all_bags.append([bag_name, {}])
-        bag = all_bags[len(all_bags) - 1]
-    [bag[1].update({item: new_items[item] + (bag[1][item] if item in bag[1] else 0)}) for item in new_items]
-    character().set_cvar('bags', dump_json(all_bags))
-
-
-def get_daily_activity_data(control_var, daily_cap):
-    cvars = character().cvars
-    if control_var not in cvars:
-        character().set_cvar(control_var, f"0:0")
-        return { "count": 0, "wait_time": None }
-    else:
-        var_parts = cvars[control_var].split(':')
-        count, first_time = int(var_parts[0]), float(var_parts[1])
-        now = time()
-        if count > 0 and first_time != None:
-            passed_in_day_since_first_time = first_time % 86400
-            next_midnight_after_first_time = first_time + (86400 - passed_in_day_since_first_time)
-            if now > next_midnight_after_first_time:
-                character().set_cvar(control_var, f"0:0")
-                return { "count": 0, "wait_time": None }
-            if count >= daily_cap:
-                wait_time = next_midnight_after_first_time - now
-                hours = floor(wait_time / 3600)
-                minutes = ceil(wait_time / 60) if hours == 0 else ceil((wait_time % 3600) / 60)
-                wait_text = (str(hours) + ' hours and ' if hours > 0 else '') + str(minutes) + ' minutes'
-                return { "count": count, "wait_time": wait_text }
-        return { "count": count, "wait_time": None }
-
-def increase_daily_activity_data(control_var):
-    cvars = character().cvars
-    if not control_var in cvars or cvars[control_var] == "0:0":
-        character().set_cvar(control_var, f'1:{time()}')
-        return 1
-    else:
-        var_parts = cvars[control_var].split(':')
-        count, last_time = int(var_parts[0]) + 1, var_parts[1]
-        character().set_cvar(control_var, f'{count}:{last_time}')
-        return count
-
-def add_inspiration():
-    character().create_cc_nx('Inspiration', 0, 1, None, 'bubble')
-    character().mod_cc('Inspiration', 1)
-
-def add_exhaustion(quantity):
-    character().create_cc_nx('Exhaustion', 0, 6, None, 'bubble')
-    character().mod_cc('Exhaustion', quantity)
-
-def add_vsheet_feature_if_not_existent(vsheet_variable_name, vsheet_variable_title, feature_value):
-    cv = character().cvars
-    vfeatures = load_json(cv['vfeatures']) if 'vfeatures' in cv else []
-    has_kaizen_features = [f for f in (vfeatures) if f['n'] == vsheet_variable_name]
-    if len(has_kaizen_features) == 0:
-        vfeatures.append({
-            'n': vsheet_variable_name,
-            't': f'\n**{vsheet_variable_title}:** '
-        })
-        character().set_cvar('vfeatures', dump_json(vfeatures))
-    features_var = cv[vsheet_variable_name].strip() if vsheet_variable_name in cv else ''
-    if not feature_value in features_var:
-        if len(features_var) != 0:
-            features_var += ', '
-        features_var += feature_value
-        character().set_cvar(vsheet_variable_name, features_var)
-        return True
-    return False
-
-def get_pc_weapon(weapon_label):
-    weapon_str = [a for a in character().attacks
-      if str(a).lower().split(':')[0].strip().replace('*', '').startswith(weapon_label)
-    ]
-
-    if len(weapon_str) > 0:
-        weapon_str = str(weapon_str[0])
-        return {
-          'name': weapon_str.split(':')[0].strip().replace('**', ''),
-          'a_bonus': int(weapon_str.split('Attack:')[1].strip().split(' ')[0])
-        }
-    else:
-        return None
-
-def get_warrior_data(all_warriors, warrior_code):
-    warrior = ([w for w in all_warriors if w['code'].lower() == warrior_code.lower()] + [None])[0]
-    return None if warrior == None else {
-        'name': warrior["name"].replace('"', '\\\"'),
-        'weapon': warrior["weapon"].replace('"', '\\\"'),
-        'desc': warrior["desc"].replace('"', '\\\"'),
-        'image': warrior['image']
+def get_beast_data(all_beasts, beast_code):
+    beast = ([b for b in all_beasts if b['code'].lower() == beast_code] + [None])[0]
+    return None if beast == None else {
+        'code': beast["code"],
+        'name': beast["name"].replace('"', '\\\"'),
+        'habitat': beast["habitat"].replace('"', '\\\"'),
+        'desc': beast["desc"].replace('"', '\\\"'),
+        'habitat_dc': beast["habitat_dc"],
+        'stealth_dc': beast["stealth_dc"],
+        'ac': beast["ac"],
+        'img': beast["img"],
+        'unlocks': [u.strip() for u in beast['unlocks'].split(',')] if beast['unlocks'].strip() != '' else [],
+        'props': [u.strip() for u in beast['props'].split(',')] if beast['props'].strip() != '' else []
     }
-
-CURRENCY = {
-    'cp': 'Copper Pieces',
-    'sp': 'Silver Pieces',
-    'ep': 'Electrum Pieces',
-    'gp': 'Gold Pieces',
-    'pp': 'Platinum Pieces'
-}
 
 ADMIN_USER_IDS = [771997367611949076]
 if get_svar('SEVENTRA_ALIAS_ADMINS') != None:
@@ -142,54 +38,37 @@ c = character()
 c_first_name = c.name.split(' ')[0]
 cv, cs = c.cvars, c.skills
 
-title = f'{c_first_name} wants to challenge the warriors of the Kaizen Temple for a duel!'
+title = f'{c_first_name} wants to go on a Safari in Nephix!'
 img, thumb, desc = None, None, None
 items_to_add = {}
-
-coins_to_add = {
-    'cp': 0,
-    'sp': 0,
-    'gp': 0
-}
-
-coins_to_remove = {
-    'cp': 0,
-    'sp': 0,
-    'gp': 0
-}
 
 sl, fl = "**Success!**", "**Failure!**"
 fields = []
 commands = []
 
-DUEL_TIME_VAR = "_du_dhc_"
-DUEL_STAGE_VAR = "_du_vars"
-DUEL_STATS_VAR = "_du_st_"
-KAIZEN_FEATURES_VAR = "duelsashes"
-
 EMPTY_STATS = {
-    'wins': 0,
-    'losses': 0,
-    'flawless_wins': 0,
-    'flawless_losses': 0,
-    'win_min_rounds': 0
+    'captures': 0,
+    'failures': 0,
+    'nature_successes': 0,
+    'perception_successes': 0,
+    'attack_successes': 0
 }
 MOUNTAIN_ICON = 'https://cdn.discordapp.com/attachments/855908840633270282/913279197793886288/mountain.jpg'
 
-daily_data = get_daily_activity_data(DUEL_TIME_VAR, DAILY_CAP)
-duel_count = daily_data["count"]
+daily_data = utils.get_daily_activity_data(TIME_VAR, DAILY_CAP)
+activity_count = daily_data["count"]
 wait_time = daily_data["wait_time"]
 
-footer = "Don't forget to role-play your duel!"
-footer += f" Challenges remaining today: {DAILY_CAP - duel_count}"
-footer += "\n" + f'Seventra: Exodus of Heroes | Nahachi Duel v{VERSION} | !duel help'
+footer = "Don't forget to role-play your safari visit!"
+footer += f" Attempts remaining today: {DAILY_CAP - activity_count}"
+footer += "\n" + f'Seventra: Exodus of Heroes | Nephix Safari v{VERSION} | !safari help'
 footer += "\nCreators: Library Fox#0895 and quiversong#2772"
 
 if len(args) > 0 and args[0] == 'reset':
     if not ctx.author.id in ADMIN_USER_IDS:
         err('You are not allowed to do that!')
         return 1
-    c.delete_cvar(DUEL_TIME_VAR)
+    c.delete_cvar(TIME_VAR)
     fields.append('Resetting dueling time control...|Done!')
     return 1
 
@@ -197,39 +76,36 @@ if len(args) > 0 and args[0] == 'resetlog':
     if not ctx.author.id in ADMIN_USER_IDS:
         err('You are not allowed to do that!')
         return 1
-    c.delete_cvar(DUEL_STATS_VAR)
+    c.delete_cvar(STATS_VAR)
     fields.append('Resetting dueling progress and log...|Done!')
     return 1
 
-all_warriors = load_json(get_gvar(DATA_VAR))["warriors"]
-global_stats = load_json(cv[DUEL_STATS_VAR]) if DUEL_STATS_VAR in cv else {}
+all_beasts = load_json(get_gvar(DATA_VAR))["beasts"]
+global_stats = load_json(cv[STATS_VAR]) if STATS_VAR in cv else {}
 
-if len(args) > 0 and args[0] == 'desc':
-    title = 'Nahachi Kaizen Temple Warriors'
-    warrior_data = get_warrior_data(all_warriors, args[1])
-    if warrior_data == None:
-        fields.append(f'Please check again!|There are no warriors who frequent the Kaizen Temple with codename {args[1]}')
+if len(args) >= 2 and args[0] == 'desc':
+    title = 'Nephix Safari Beasts'
+    beast = get_beast_data(all_beasts, args[1])
+    if beast == None:
+        fields.append(f'Please check again!|There are no beasts available in the safari with codename {args[1]}')
         return 1
-
-    img = warrior_data["image"]
+    img = beast["img"]
     thumb = MOUNTAIN_ICON
-    title += f': {warrior_data["name"]}'
-    fields.append(f'Description|{warrior_data["desc"]}')
-    fields.append(f'Weapons of Choice|{warrior_data["weapon"]}')
-    return 1
+    title += f': {beast["name"]}'
+    fields.append(f'Habitat|{beast["habitat"]}')
+    fields.append(f'Description|{beast["desc"]}')
+    return 0
 
 if len(args) > 0 and args[0] == 'list':
-    title = f"{character().name}'s Duel Results"
+    title = f"{character().name}'s Safari Results"
     thumb = MOUNTAIN_ICON
 
-    f = 'Challenge Results|'
-    f += 'The list below contains the names of the warriors you have challenged and that can be challenged by you.\n'
-    f += '\nWinning challenges may unlock new warriors!\n'
-    f += '\n`W/R` = wins / total challenges.\n'
-    f += '`Best` = the least number of attacks you needed to beat that warrior.\n'
-    f += '`*` denotes a secret warrior that is only unlocked under certain special conditions.\n\n'
+    f = 'Safari Results|'
+    f += 'The list below contains the names of the beasts you are allowed to attempt to capture.\n'
+    f += '\nCapturing new beasts may unlock new creatures and habitats!\n'
+    f += '\n`W/R` = wins / total attempts.\n\n'
 
-    f += '```Warrior      W/R   Best```\n```'
+    f += '```Beast    Habitat     W/R   Best```\n```'
     for i in range(len(all_warriors)):
         warrior = all_warriors[i]
         if i == 0 or warrior['code'] in global_stats:
@@ -264,135 +140,52 @@ if len(args) > 0 and args[0] == 'list':
 if len(args) < 2:
     thumb = MOUNTAIN_ICON
 
-    f = f'{c_first_name} arrives at the Kaizen Temple in Nahachi...|'
-    f += '- To view the description of a Kaizen Temple warrior:\n`!duel desc <warrior code>`'
-    f += '\n- To view the warriors you can challenge:\n`!duel list`'
-    f += '\n- To start a challenge:\n`!duel <warrior> <your attack/weapon of choice>`'
+    f = f'{c_first_name} arrives at the Safari in Nephix...|'
+    f += '- To view the description of a Safari Beast:\n`!safari desc <beast code>`'
+    f += '\n- To view the beasts you are allowed to attempt to capture:\n`!safari list`'
+    f += '\n- To attempt to capture a beast:\n`!safari <beast code> <your attack/weapon of choice>`'
     f += '\n- To view the attacks/weapons you can use:\n`!attack`'
-    f += '\n\nAll rewards are automatically added to your Coin Pouch or Kaizen Temple bag.'
-    f += ' Some special rewards are handled differently. Example:'
+    f += '\n\nAll rewards are automatically added to your Coin Pouch or Safari bag.'
+    f += ' Some special rewards may be handled differently. Example:'
     f += '\n- Inspiration is added as a cc and can be used with the `insp` snippet when appropriate'
-    f += '\n- Sashes are added to your `!vsheet`'
+    fields.append(f)
+    return 0
+
+if activity_count >= DAILY_CAP:
+    f = 'It looks like the Prathus Dawnroar is busy setting up the pens!|'
+    f += 'Come back tomorrow for more attempts at capturing the Safari beasts!'
     fields.append(f)
     return 1
 
-if duel_count >= DAILY_CAP:
-    f = 'Patience is concentrated strength!|'
-    f += 'You have already challenged all the Kaizen Warriors who are available today. Come back tomorrow?!'
-    fields.append(f)
-    return 1
-
-chosen_warrior_code = args[0].lower().strip()
-warrior = [w for w in all_warriors if w["code"].lower() == chosen_warrior_code]
-if len(warrior) == 0:
-    if chosen_warrior_code in global_stats:
-        fields.append(f'Oops! This is warrior still not ready to accept challenges!|Blame it on the Seventra staff! They are still working on it. :)')
+beast_code = args[0].lower().strip()
+beast = get_beast_data(all_beasts, beast_code)
+if beast == None:
+    if beast_code in global_stats:
+        fields.append(f'Oops! This beast is still not ready to accept challenges!|Blame it on the Seventra staff! They are still working on it. :)')
     else:
-        fields.append(f'{c_first_name} seems a little confused...|There are no warriors named {chosen_warrior_code} available to duel with you.\nUse `!duel list` to see the warriors that are available to duel with you.')
+        fields.append(f'{c_first_name} seems a little confused...|There are no beasts with codename {beast_code} available in the Safari for you.\nUse `!safari list` to see the beasts you can try to capture!')
     return 1
 
-warrior = warrior[0]
-warrior_name = warrior["name"].replace('"', '\\\"')
-if not(warrior['code'] == all_warriors[0]['code'] or warrior['code'] in global_stats):
-    fields.append(f'{c_first_name} is not ready yet...|You need to prove your strength by challenging other warriors before you can challenge {warrior_name}!\nUse `!duel list` to see the warriors that are available to duel with you.')
+if not('starter' in beast['props'] or beast['code'] in global_stats):
+    fields.append(f'{c_first_name} is not ready yet...|You need to prove your abilities by capturing other beasts before you can go on a safari for for {beast["name"]}!\nUse `!safari list` to see the beasts that are available for you!')
     return 1
 
 
-weapon = get_pc_weapon(args[1].lower())
+weapon = utils.get_pc_weapon(args[1].lower())
 if weapon == None:
     fields.append(f'{c_first_name} seems a little confused...|I could not find any attacks matching `{args[1]}`!')
     return 1
 
-########### DUEL ROLLS ###########
+########### SAFARI ROLLS ###########
 
-player_init_roll = vroll(cs.initiative.d20())
-warrior_init_roll = vroll(f'1d20 + {warrior["init"]}')
-
-player_goes_first = player_init_roll.total > warrior_init_roll.total
-if player_init_roll.total == warrior_init_roll.total:
-    player_goes_first = dexterityMod > warrior["init"]
-
-player_hits = 0
-warrior_hits = 0
-player_crits = 0
-rounds = []
-
-is_player_turn = player_goes_first
-
-while player_hits < BLOWS_NEEDED and warrior_hits < BLOWS_NEEDED:
-    is_new_round = (player_goes_first and is_player_turn) or (not player_goes_first and not is_player_turn)
-    if is_new_round:
-        rounds.append({})
-
-    if is_player_turn:
-        dice = '1d20'
-        if 'player_all_dis' in warrior['powerups']:
-            dice = '2d20kl1'
-        attack_roll = vroll(f'{dice} + {weapon["a_bonus"]}')
-        crit = attack_roll.result.crit == 1
-        player_crits += 1 if crit else 0
-
-        attack_successful = crit or attack_roll.total >= warrior["ac"]
-        player_hits += 1 if attack_successful else 0
-
-        rounds[len(rounds) - 1]['player'] = [{
-            'type': 'player',
-            'is_player': True,
-            'roll': attack_roll,
-            'successful': attack_successful
-        }]
-
-        is_player_turn = False
-    else:
-        warrior_should_attack = not('3attacks' in warrior['powerups'] and len(rounds) > 3)
-        if warrior_should_attack:
-            dice = '1d20'
-            mod = ''
-            if 'warrior_all_dis' in warrior['powerups']:
-                dice = '2d20kl1'
-                mod = 'dis'
-            if 'warrior_1st_adv' in warrior['powerups'] and len(rounds) == 1:
-                dice = '2d20kh1'
-                mod = 'adv'
-
-            attack_roll = vroll(f'{dice} + {warrior["attack"]}')
-            crit = attack_roll.result.crit == 1
-
-            attack_successful = crit or attack_roll.total >= character().ac
-            warrior_hits += 1 if attack_successful else 0
-
-            rounds[len(rounds) - 1]['warrior'] = [{
-                'type': 'warrior',
-                'is_player': False,
-                'mod': mod,
-                'roll': attack_roll,
-                'successful': attack_successful
-            }]
-
-            if 'attack2x' in warrior['powerups']:
-                attack_roll = vroll(f'1d20 + {warrior["attack"]}')
-                crit = attack_roll.result.crit == 1
-
-                attack_successful = crit or attack_roll.total >= character().ac
-                warrior_hits += 1 if attack_successful else 0
-
-                rounds[len(rounds) - 1]['warrior'].append({
-                    'type': 'warrior',
-                    'is_player': False,
-                    'mod': mod,
-                    'roll': attack_roll,
-                    'successful': attack_successful
-                })
-
-        is_player_turn = True
-
-is_player_winner = player_hits >= BLOWS_NEEDED
-
-############ INIT STATS ############
-
-if not warrior['code'] in global_stats:
-    global_stats[warrior['code']] = EMPTY_STATS.copy()
-stats = global_stats[warrior['code']]
+nature_roll = vroll(cs.nature.d20())
+nature_success = nature_roll.result.crit == 1 or nature_roll.total >= beast["habitat_dc"]
+perception_adv = True if nature_success else None
+perception_roll = vroll(cs.perception.d20(base_adv = perception_adv))
+perception_success = perception_roll.result.crit == 1 or perception_roll.total >= beast["stealth_dc"]
+attack_roll = vroll(f'1d20 + {weapon["a_bonus"]}')
+attack_success = attack_roll.result.crit == 1 or attack_roll.total >= beast["ac"]
+safari_success = perception_success and attack_success
 
 ########### MOUNT EMBED ###########
 
@@ -400,214 +193,77 @@ img = 'https://cdn.discordapp.com/attachments/910682900863787028/910790078547230
 img = 'https://cdn.discordapp.com/attachments/910682900863787028/912200744822767676/photo-1595084921991_orig.png'
 img = 'https://cdn.discordapp.com/attachments/910682900863787028/912201227402612736/grove.jpg'
 
-title = f'{c_first_name} challenges {warrior_name}!'
-desc = f'*Using their {weapon["name"]}!*'
+title = f'{c_first_name} tries to capture {beast["name"]}!'
+desc = f'*Using their {weapon["name"]}, they explore the {beast["habitat"]}!*'
 
-f = '*The two solemnly walk to the grove behind the temple...*|'
-f += '*They take their positions under a red maple tree, the falling leaves swirl around them in the battlefield...*'
-f += '\n\n__***INITIATIVE ROLLS***__'
+f = "*The challengers enters the special pen that mimics the creature's habitat...*|"
+f += f'*Will {c_first_name} be able to display the hunting skills necessary to capture the prey?*'
 fields.append(f)
 
-player_init_f = f'__{c_first_name}__|{player_init_roll.full}|inline'
-warrior_init_f = f'__{warrior_name}__|`{warrior_init_roll.total}`|inline'
-if player_goes_first:
-    fields.append(player_init_f)
-    fields.append(warrior_init_f)
-else:
-    fields.append(warrior_init_f)
-    fields.append(player_init_f)
-
-f = f'*{c_first_name if player_goes_first else warrior_name} is faster and makes the first move!*'
-if player_goes_first:
-    f += f'|*Can {c_first_name} keep the pressure on their opponent?*'
-else:
-    f += f'|*Can {c_first_name} regain the upper hand?*'
-f += '\n\n__***ATTACK ROLLS***__'
+nature_success_text = f"{c_first_name} navigates this habitat like a native!"
+nature_failure_text = f"{c_first_name} has a hard time navigating the surroundings.."
+f = "Environment adaptation...|"
+f += f"Nature check: {sl if nature_success else fl}\n{nature_roll.full}\n"
+f += nature_success_text if nature_success else nature_failure_text
 fields.append(f)
 
-player_attacks_field = f'__{c_first_name}__|'
-warrior_attacks_field = f'__{warrior_name}__|'
+perception_success_text = f"{c_first_name} quickly finds the {beast['name']}, but can they capture it?!"
+perception_failure_text = f"{c_first_name} can't seem to find the {beast['name']} no matter how hard they try, and time runs out!"
+f = "Prey detection...|"
+f += f"Perception check: {sl if perception_success else fl}\n{perception_roll.full}\n"
+f += perception_success_text if perception_success else perception_failure_text
+fields.append(f)
 
-player_attack_count = 0
-warrior_attack_count = 0
-
-for index in range(len(rounds)):
-    this_round = rounds[index]
-    player_attacks = this_round['player'] if 'player' in this_round else []
-    warrior_attacks = this_round['warrior'] if 'warrior' in this_round else []
-
-    max_attacks_this_round = len(player_attacks) if \
-            len(player_attacks) >= len(warrior_attacks) else len(warrior_attacks)
-
-    for attack in player_attacks:
-        player_attack_count += 1
-        player_attacks_field += f'Attack {player_attack_count}: {sl if attack["successful"] else fl}\n'
-        player_attacks_field += f'{attack["roll"].full}\n'
-
-    for i in range(max_attacks_this_round - len(player_attacks)):
-        player_attacks_field += '\n\n'
-
-    for attack in warrior_attacks:
-        warrior_attack_count += 1
-        warrior_attacks_field += f'Attack {warrior_attack_count}: {sl if attack["successful"] else fl}\n'
-        warrior_attacks_field += f'[{attack["mod"]}]: ' if attack['mod'] != '' else ''
-        warrior_attacks_field += f'`{attack["roll"].total}`\n'
-
-    for i in range(max_attacks_this_round - len(warrior_attacks)):
-        warrior_attacks_field += '\n\n'
-
-player_attacks_field += '|inline'
-warrior_attacks_field += '|inline'
-
-fields.append(player_attacks_field if player_goes_first else warrior_attacks_field)
-fields.append(warrior_attacks_field if player_goes_first else player_attacks_field)
-
-thumb = warrior['image']
-
-if is_player_winner:
-    stats['wins'] += 1
-    if warrior_hits == 0:
-        stats['flawless_wins'] += 1
-    if len(rounds) < stats['win_min_rounds'] or stats['win_min_rounds'] == 0:
-        stats['win_min_rounds'] = len(rounds)
-
-    f = f'__***{c.name.upper()} WINS!***__|'
-    f += 'Flawless victory!\n' if warrior_hits == 0 else ''
-    f += 'Congratulations!'
-
-    ####### REWARDS ########
-    added_items = False
-
-    if 'itemRewards' in warrior and len(warrior['itemRewards']) > 0:
-        added_items = True
-        items_to_add = {}
-        rewards_text = ''
-        for reward, qty in warrior['itemRewards'].items():
-            if reward in CURRENCY.keys():
-                if qty > 0:
-                    coins_to_add[reward] += qty
-                    rewards_text += f'\n `{qty}x {CURRENCY[reward]}`'
-                else:
-                    coins_to_remove[reward] += qty
-                    rewards_text += f'\n `NEGATIVE {qty * -1}x {CURRENCY[reward]}!`'
-            elif 'inspiration' in reward.lower().strip():
-                add_inspiration()
-                rewards_text += '\n`Inspiration`'
-            else:
-                rewards_text += '\n' + f'`{qty}x {reward}`'
-                items_to_add[reward] = qty
-        f += ' You gained the following rewards:' + rewards_text
-
-    if 'uniqueRewards' in warrior and len(warrior['uniqueRewards']) > 0 and stats['wins'] == 1:
-        rewards_text = ''
-
-        for reward in warrior['uniqueRewards']:
-            stripped = reward.lower().strip()
-            qty = warrior['uniqueRewards'][reward]
-            if stripped == 'inspiration':
-                add_inspiration()
-                rewards_text += '\n`Inspiration`'
-            elif 'xp' in stripped and 'admin' in stripped:
-                rewards_text += f'\n`{qty} {reward}`'
-            elif 'seventran samurai feat' in stripped:
-                rewards_text += f'\n`{reward} (use `!sevfeat` to see it)`'
-            elif 'kaizen' in stripped and stripped.endswith('sash'):
-                sash_was_added = add_vsheet_feature_if_not_existent(KAIZEN_FEATURES_VAR, "Kaizen Sashes", reward)
-                if sash_was_added:
-                    rewards_text += f'\n`{reward}`'
-            elif stripped in CURRENCY.keys():
-                rewards_text += f'\n`{qty}x {CURRENCY[stripped]}`'
-                if qty > 0:
-                    coins_to_add[reward] += qty
-                else:
-                    coins_to_remove[reward] += (qty * -1)
-            else:
-                items_to_add[reward] = qty
-                rewards_text += f'\n`{qty}x {reward}`'
-
-        if rewards_text != '':
-            prefix = '\nYou also gained these one-time rewards:' if added_items else ' You gained these one-time rewards:'
-            rewards_text = prefix + rewards_text
-            f += rewards_text
-
-    ######### WARRIOR ACTION TEXT ##########
-
-    if 'player_win_action' in warrior:
-        f += '\n\n' + warrior['player_win_action'].replace('"', '\\\"')
-
+if perception_success:
+    attack_success_text = f"{c_first_name} successfuly captures the {beast['name']}!"
+    attack_failure_text = f"The {beast['name']} is too quick for {c_first_name} to be able to capture it, and the time runs out!"
+    f = "Capture attempt...|"
+    f += f"Attack roll: {sl if attack_success else fl}\n{attack_roll.full}\n"
+    f += attack_success_text if attack_success else attack_failure_text
     fields.append(f)
 
-    ######### UNLOCKS ############
+if not beast['code'] in global_stats:
+    global_stats[beast['code']] = EMPTY_STATS.copy()
+stats = global_stats[beast['code']]
 
-    if 'unlocks' in warrior and len(warrior['unlocks']) > 0:
+thumb = beast['img']
+
+if safari_success:
+    stats['captures'] += 1
+    stats['nature_successes'] += 1 if nature_success else 0
+    stats['perception_successes'] += 1 if perception_success else 0
+    stats['attack_successes'] += 1 if attack_success else 0
+
+    f = f'__***{c.name.upper()} WINS!***__|'
+    f += 'Congratulations!'
+    fields.append(f)
+
+    if 'unlocks' in beast and len(beast['unlocks']) > 0:
         unlocked_codes = []
-        for unlock in warrior['unlocks']:
-            unlocked_warrior_code = unlock
-            should_add = True
-            if ':' in unlock:
-                parts = unlock.split(':')
-                unlocked_warrior_code = parts[2]
-                if parts[0] == 'crit' and player_crits < int(parts[1]):
-                    should_add = False
-
-            should_add = should_add and (not unlocked_warrior_code in global_stats)
-
+        for unlocked_code in beast['unlocks']:
+            should_add = not unlocked_code in global_stats
             if should_add:
-                unlocked_codes.append(f'New warrior code: {unlocked_warrior_code}')
-                global_stats[unlocked_warrior_code] = EMPTY_STATS.copy()
+                unlocked_beast = get_beast_data(all_beasts, unlocked_code)
+                unlocked_codes.append(f'* `{unlocked_beast["name"]}` in `{unlocked_beast["habitat"]}`. Code: `{unlocked_code}`')
+                global_stats[unlocked_code] = EMPTY_STATS.copy()
 
         if len(unlocked_codes) > 0:
-            f = 'You can now challenge new warriors!|'
+            f = 'You can now attempt to capture new beasts!|'
             f += '\n'.join(unlocked_codes) + '\n\n'
             fields.append(f)
 else:
-    f = f'__***{warrior_name.upper()} WINS!***__|'
-    f += 'Flawless victory!\n' if player_hits == 0 else ''
-
-    stats['losses'] += 1
-    if player_hits == 0:
-        stats['flawless_losses'] += 1
-
-    if 'payment' in warrior and len(warrior['payment']) > 0:
-        payment_text = ''
-        for payment in warrior['payment']:
-            qty = warrior['payment'][payment]
-            stripped = payment.lower().strip()
-            if 'inspiration' in stripped:
-                add_inspiration()
-                payment_text += '\nYou gain Inspiration!'
-            elif stripped in CURRENCY.keys():
-                coins_to_remove[payment] -= qty
-                payment_text += f'\n`You lose {qty}x {payment}!`'
-            elif 'exhaustion' in stripped:
-                add_exhaustion(qty)
-                payment_text += f'\nYou suffer {qty} point{"s" if qty > 1 else ""} of exhaustion!'
-
-        if payment_text != '':
-            f += payment_text
-
-    if 'player_lose_action' in warrior:
-        f += '\n\n' + warrior['player_lose_action'].replace('"', '\\\"')
-
+    f = f'__***The {beast["name"]} WINS!***__|'
+    f += 'Better luck next time!'
     fields.append(f)
 
-footer = footer.replace(f'remaining today: {DAILY_CAP - duel_count}', f'remaining today: {DAILY_CAP - (duel_count + 1)}')
+    stats['failures'] += 1
 
-global_stats[warrior['code']] = stats
-character().set_cvar(DUEL_STATS_VAR, dump_json(global_stats))
+footer = footer.replace(f'remaining today: {DAILY_CAP - activity_count}', f'remaining today: {DAILY_CAP - (activity_count + 1)}')
 
+global_stats[beast['code']] = stats
+character().set_cvar(STATS_VAR, dump_json(global_stats))
 
-###### Bags Update ########
-all_bags = load_json(character().cvars['bags'])
-add_to_bag('Kaizen Temple', items_to_add, all_bags)
-add_coins(coins_to_add, all_bags)
-if not add_coins(coins_to_remove):
-    f = 'OOPS!|'
-    f += f'It seems like you were missing funds to cover a transaction!'
-    f += '\nPlease ping `@Administrator` to get help.'
-    fields.append(f)
-
-increase_daily_activity_data(DUEL_TIME_VAR)
+utils.increase_daily_activity_data(TIME_VAR)
 </drac2>
 -title "{{title}}"
 {{f'-image "{img}"' if img else ""}}
