@@ -107,21 +107,21 @@ def increase_daily_activity_data(control_var):
         character().set_cvar(control_var, f'{count}:{last_time}')
         return count
 
-def print_table(header, data, column_lengths = None):
+def print_table(data, header = None, column_lengths = None):
     ROW_LENGTH = 23
     result = []
-    column_count = len(header)
+    column_count = len(data[0])
     if column_lengths == None:
         column_lengths = [floor(ROW_LENGTH / column_count) for _ in range(len(header))]
         column_lengths[0] += ROW_LENGTH % column_count
 
-    all_rows = [header] + data
+    all_rows = [header] + data if header != None else data
     f = '```'
     for row_index in range(len(all_rows)):
         row = all_rows[row_index]
-        is_header = row_index == 0
+        is_header = header != None and row_index == 0
         line = ''
-        for cell_index in range(len(header)):
+        for cell_index in range(column_count):
             cell = row[cell_index]
             column_length = column_lengths[cell_index]
             cell_length = column_length + (ROW_LENGTH % column_count) if cell_index == 0 else column_length
@@ -129,7 +129,7 @@ def print_table(header, data, column_lengths = None):
                 line += cell[0:cell_length - 1] + '.'
             else:
                 padding = ''.join([' ' for x in range(cell_length - len(cell))])
-                line += padding + cell if cell_index == len(header) - 1 else cell + padding
+                line += padding + cell if cell_index == column_count - 1 else cell + padding
         line += '' if is_header else '\n'
         if is_header:
             f += line + '```'
