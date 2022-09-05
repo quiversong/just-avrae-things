@@ -53,7 +53,7 @@ EMPTY_STATS = {
     'perception_successes': 0,
     'attack_successes': 0
 }
-MOUNTAIN_ICON = 'https://cdn.discordapp.com/attachments/855908840633270282/913279197793886288/mountain.jpg'
+SAFARI_ICON = 'https://cdn.discordapp.com/attachments/855908840633270282/1016422111365046332/8b4f7cf7629cb03a44c4d7a659acdedf.jpeg'
 
 daily_data = utils.get_daily_activity_data(TIME_VAR, DAILY_CAP)
 activity_count = daily_data["count"]
@@ -90,7 +90,7 @@ if len(args) >= 2 and args[0] == 'desc':
         fields.append(f'Please check again!|There are no beasts available in the safari with codename {args[1]}')
         return 1
     img = beast["img"]
-    thumb = MOUNTAIN_ICON
+    thumb = SAFARI_ICON
     title += f': {beast["name"]}'
     fields.append(f'Habitat|{beast["habitat"]}')
     fields.append(f'Description|{beast["desc"]}')
@@ -98,7 +98,7 @@ if len(args) >= 2 and args[0] == 'desc':
 
 if len(args) > 0 and args[0] == 'list':
     title = f"{character().name}'s Safari Results"
-    thumb = MOUNTAIN_ICON
+    thumb = SAFARI_ICON
 
     f = 'Safari Results|'
     f += 'The list below contains the names of the beasts you are allowed to attempt to capture.\n'
@@ -126,7 +126,7 @@ if len(args) > 0 and args[0] == 'list':
     return 0
 
 if len(args) < 2:
-    thumb = MOUNTAIN_ICON
+    thumb = SAFARI_ICON
 
     f = f'{c_first_name} arrives at the Safari in Nephix...|'
     f += '- To view the description of a Safari Beast:\n`!safari desc <beast code>`'
@@ -176,11 +176,6 @@ attack_success = attack_roll.result.crit == 1 or attack_roll.total >= beast["ac"
 safari_success = perception_success and attack_success
 
 ########### MOUNT EMBED ###########
-
-img = 'https://cdn.discordapp.com/attachments/910682900863787028/910790078547230770/tumblr_c233596118d0ef2fee07434bfd216a7d_1635c08d_540.gif'
-img = 'https://cdn.discordapp.com/attachments/910682900863787028/912200744822767676/photo-1595084921991_orig.png'
-img = 'https://cdn.discordapp.com/attachments/910682900863787028/912201227402612736/grove.jpg'
-
 aan = 'an ' if beast["name"].strip().lower()[0] in 'aeiou' else 'a '
 title = f'{c_first_name} tries to capture {aan}{beast["name"]}!'
 desc = f'*Using their {weapon["name"]}, they explore the {beast["habitat"]} region!*'
@@ -215,8 +210,6 @@ if not beast['code'] in global_stats:
     global_stats[beast['code']] = EMPTY_STATS.copy()
 stats = global_stats[beast['code']]
 
-thumb = beast['img']
-thumb = None
 img = beast['img']
 thumb = image
 
