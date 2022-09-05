@@ -105,15 +105,24 @@ if len(args) > 0 and args[0] == 'list':
     f += '\nCapturing new beasts may unlock new creatures and habitats!\n'
     f += '\n`W/R` = wins / total attempts.\n\n'
 
-    header = ['Code', 'Habitat', 'W/R']
-    data = []
+    header = ['CODE', 'W/R']
+    data_per_habitat = {}
+    habitats = []
     for beast in all_beasts:
         if 'starter' in beast['props'] or beast['code'] in global_stats:
+            habitat = beast['habitat']
+            habitats.append(habitat) if not habitat in habitats else None
             stats = global_stats[beast['code']] if beast['code'] in global_stats else EMPTY_STATS
-            data.append([beast['code'], beast['habitat'], f"{stats['captures']}/{stats['failures']}"])
+            if not habitat in data_per_habitat:
+                data_per_habitat[habitat] = []
+            data_per_habitat[habitat].append([beast['code'], f"{stats['captures']}/{stats['failures']}"])
 
-    table_fields = utils.print_table(header, data, [15, 6, 4])
-    [fields.append(field) for field in table_fields]
+    habitats.sort()
+    for habitat in habitats:
+        table_title = f"__***Habitat Type: {habitat}***__"
+        table_fields = utils.print_table([header] + data_per_habitat[habitat], table_title, None, [19, 4])
+        [fields.append(field) for field in table_fields]
+
     return 0
 
 if len(args) < 2:
