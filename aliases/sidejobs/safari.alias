@@ -11,44 +11,6 @@ DAILY_CAP = 2
 TIME_VAR = "_nsfr_dhc_"
 STATS_VAR = "_nsfr_st_"
 
-def print_table(header, data, column_lengths = None):
-    ROW_LENGTH = 23
-    result = []
-    column_count = len(header)
-    if column_lengths == None:
-        column_lengths = [floor(ROW_LENGTH / column_count) for _ in range(len(header))]
-        column_lengths[0] += ROW_LENGTH % column_count
-
-    all_rows = [header] + data
-    f = '```'
-    for row_index in range(len(all_rows)):
-        row = all_rows[row_index]
-        is_header = row_index == 0
-        line = ''
-        for cell_index in range(len(header)):
-            cell = row[cell_index]
-            column_length = column_lengths[cell_index]
-            cell_length = column_length + (ROW_LENGTH % column_count) if cell_index == 0 else column_length
-            if len(cell) > cell_length:
-                line += cell[0:cell_length - 1] + '.'
-            else:
-                padding = ''.join([' ' for x in range(cell_length - len(cell))])
-                line += padding + cell if cell_index == len(header) - 1 else cell + padding
-        line += '' if is_header else '\n'
-        if is_header:
-            f += line + '```'
-            result.append(f)
-            f = '```'
-        elif len(f + line) > 1024:
-            f += '```'
-            result.append(f)
-            f = '```'
-        else:
-            f += line
-    f += '```\n\n'
-    result.append(f)
-    return result
-
 def get_beast_data(all_beasts, beast_code):
     beast = ([b for b in all_beasts if b['code'].lower() == beast_code] + [None])[0]
     return None if beast == None else {
@@ -150,7 +112,7 @@ if len(args) > 0 and args[0] == 'list':
             stats = global_stats[beast['code']] if beast['code'] in global_stats else EMPTY_STATS
             data.append([beast['code'], beast['habitat'], f"{stats['captures']}/{stats['failures']}"])
 
-    table_fields = print_table(header, data, [15, 6, 4])
+    table_fields = utils.print_table(header, data, [15, 6, 4])
     [fields.append(field) for field in table_fields]
     return 0
 
