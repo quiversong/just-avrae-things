@@ -9,10 +9,10 @@ pargs = argparse(args)
 c = character()
 cv, cs = c.cvars, c.skills
 t, f, f2, f3, footer, thumb, img = None, None, None, None, None, None, None
-dino_img = 'https://cdn.discordapp.com/attachments/808062130996641832/808062789952077844/dinorace.jpg'
+dino_img = 'https://cdn.discordapp.com/attachments/855908840633270282/1017185197848010792/dinorace_1.jpeg'
 
 footer = "Don't forget to role-play your race turns!"
-footer += "\nSeventra: Exodus of Heroes | Moonlight Dashaway! v1.0 | Created by quiversong#2772 aka Adrienne"
+footer += "\nSeventra: Exodus of Heroes | Moonlight Dashaway! v1.2 | Created by Library Fox#0895 and quiversong#2772"
 
 if len(args) > 0 and args[0] == 'reset':
     t = 'Resetting race participation...'
@@ -22,7 +22,7 @@ if len(args) > 0 and args[0] == 'reset':
 if len(args) > 0 and args[0] == 'start':
     t = f'{c.name} wants to join the Moonlight Dashaway!'
     if not 'dinodex' in pargs:
-        f = 'Oops, what dino do you want to race with?|Use `!dinogo start -dinodex <your mount dex mod>`'
+        f = 'Oops, what dino do you want to race with?|Use `!dashaway start -dinodex <your mount dex mod>`'
         thumb = image
         return 1
 
