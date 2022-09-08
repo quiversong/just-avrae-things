@@ -1,0 +1,46 @@
+echo <drac2>
+def print_racer_position(racer, position, token):
+    out = ''
+    p10 = int(position / 10)
+    p10 = 40 if p10 > 40 else p10
+    out += f'**{position}:** *{racer}*:\n:checkered_flag:'
+    for _ in range(40 - p10):
+        out += '-'
+    out += token
+    for _ in range(p10):
+        out += '-'
+    out += f':vertical_traffic_light:\n'
+    return out
+
+args = &ARGS&
+
+if 'help' in args:
+    out = '\nUse this alias to print a funny map of a Nephixian dinosaur race!\n\n'
+    out += 'Make sure the channel where you run it is in initiative, and a race is happening!\n\n'
+    out += 'If there is a t-rex following the contestants, add the `trex` parameter to the command!'
+    return out
+
+out = "Race Map:\n"
+if not combat():
+    return "Oops! It looks like this channel is not tracking initiative!"
+racers = {}
+for combatant in combat().combatants:
+    effect = combatant.get_effect('RACE POSITION')
+    if effect:
+        position = int(effect.name.split('RACE POSITION: ')[1])
+        if not position in racers:
+            racers[position] = []
+        racers[position].append(combatant.name.split(' ')[0])
+positions = [x for x in racers.keys()]
+positions.sort()
+positions.reverse()
+for position in positions:
+    for racer in racers[position]:
+        out += print_racer_position(racer, position, ':baby_chick:')
+
+if 'trex' in args and len(positions) > 0:
+    t_rex_pos = positions[len(positions) - 1] - 5
+    t_rex_pos = t_rex_pos if t_rex_pos >= 0 else 0
+    out += print_racer_position('Nephixian Tyrannosaurus', t_rex_pos, ':t_rex:')
+return out
+</drac2>
