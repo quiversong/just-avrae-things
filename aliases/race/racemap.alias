@@ -1,4 +1,8 @@
 echo <drac2>
+FAMOUS_RACER_TOKENS = {
+    'böxi': ':lion_face:',
+    'pete': ':cow2:'
+}
 def print_racer_position(racer, position, token):
     out = ''
     p10 = int(position / 10)
@@ -6,7 +10,8 @@ def print_racer_position(racer, position, token):
     out += f'**{position}:** *{racer}*:\n:checkered_flag:'
     for _ in range(40 - p10):
         out += '-'
-    out += token
+    racer_raw = racer.strip.lower()
+    out += FAMOUS_RACER_TOKENS[racer_raw] if racer_raw in FAMOUS_RACER_TOKENS else token
     for _ in range(p10):
         out += '-'
     out += f':vertical_traffic_light:\n'
