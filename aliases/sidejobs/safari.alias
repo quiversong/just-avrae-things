@@ -38,7 +38,7 @@ c = character()
 c_first_name = c.name.split(' ')[0]
 cv, cs = c.cvars, c.skills
 
-title = f'{c_first_name} works at the Green Vale Zoology Park Safari Center!'
+title = f'{c_first_name} arrives at the Green Vale Zoology Safari!'
 img, thumb, desc = None, None, None
 items_to_add = {}
 
@@ -180,12 +180,13 @@ aan = 'an ' if beast["name"].strip().lower()[0] in 'aeiou' else 'a '
 title = f'{c_first_name} tries to capture {aan}{beast["name"]}!'
 desc = f'*Using their {weapon["name"]}, they explore the {beast["habitat"]} region!*'
 
-f = "*The challengers enters the special pen that mimics the creature's habitat...*|"
+f = "*The challengers activates their Safari pass to be transported to the creature's habitat...*|"
 f += f'*Will {c_first_name} display the hunting skills necessary to capture the prey?*'
 fields.append(f)
 
-f = f'Today {c_first_name} is hunting {aan}{beast["name"]}...|{beast["desc"]}'
-fields.append(f)
+if beast["desc"].strip() != '':
+    f = f'*Today {c_first_name} is hunting {aan}{beast["name"]}...*|```{beast["desc"]}```'
+    fields.append(f)
 
 nature_success_text = f"{c_first_name} navigates this habitat like a native!"
 nature_failure_text = f"{c_first_name} has a hard time navigating the surroundings.."

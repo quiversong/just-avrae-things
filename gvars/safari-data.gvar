@@ -195,7 +195,7 @@
     "code": "bayouhorn",
     "name": "Loafing Bayouhorn",
     "habitat": "Estuary",
-    "desc": "\"Weighing in at over 700lbs, the Loafing Bayouhorn is one of the most docile creature south of the Sicklepeak Mountains. They have massive, dense horns that weigh more than all of the bones in their bodies, making it difficult to run away from predators. In my tribe, hunters start their careers as early as seven, just after we take down our first 'Loafer.'\" -Boza Stormgroomer, Green Vale Zoologist ",
+    "desc": "\"Weighing in at over 700lbs, the Loafing Bayouhorn is one of the most docile creature south of the Sicklepeak Mountains. They have massive, dense horns that weigh more than all of the bones in their bodies, making it difficult to run away from predators. In my tribe, hunters start their careers as early as seven, just after we take down our first 'Loafer.'\"\n\n-Boza Stormgroomer, Green Vale Zoologist ",
     "habitat_dc": 4,
     "stealth_dc": 6,
     "ac": 7,
