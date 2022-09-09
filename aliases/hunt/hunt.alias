@@ -1,8 +1,8 @@
-tembed
+embed
 <drac2>
 # Configuration Variables
 IS_LIVE = True
-VERSION = '1.21'
+VERSION = '1.21.2'
 
 BETA_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
 LIVE_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
@@ -91,7 +91,7 @@ if len(args) > 0 and args[0] == "reset":
   c.delete_cvar(HUNT_STAGE_VAR)
   c.delete_cvar(HUNT_TIME_VAR)
   t = "Resetting hunting state..."
-  footer = footer.replace(f'{hunt_count}', '0')
+  footer = footer.replace(f'{hunt_count}/', '0/')
   return 0
 
 if len(args) > 0 and args[0] == "resetstats":
@@ -149,7 +149,7 @@ if p in b_ids:
 
   first_hunt_time = time() if hunt_count == 1 else first_hunt_time
   c.set_cvar(HUNT_TIME_VAR, f'{hunt_count}:{first_hunt_time}')
-  footer = footer.replace(f'{hunt_count - 1}', f'{hunt_count}')
+  footer = footer.replace(f'{hunt_count - 1}/', f'{hunt_count}/')
 
   b = biomes[p]
   thumb = b["img"]
@@ -310,7 +310,7 @@ elif p == 'attack':
 
   t = f'{c.name} attacks their prey{" with their " + weapon["name"] if weapon != None else ""}!'
 
-  dmg_l = "\n**Miss!**" if not a_hit else "\n**Critical Hit!**" if crit else "\n" + (sl if dead else fl)
+  dmg_l = "\n**Miss!**" if not a_hit else "\n**Critical Hit!**" if crit else "\n" + (sl if dead else "**Hit!**" if injured else fl)
 
   f = f'Was {c.name} able to kill the {anm_name}?|**Attack roll:** {a_roll.full}{dmg_l}'
   if a_hit:
