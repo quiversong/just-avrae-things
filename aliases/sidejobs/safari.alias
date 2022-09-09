@@ -140,8 +140,8 @@ if len(args) < 2:
     return 0
 
 if activity_count >= DAILY_CAP:
-    f = 'It looks like the Prathus Dawnroar is busy setting up the pens!|'
-    f += 'Come back tomorrow for more attempts at capturing the Safari beasts!'
+    f = 'It looks like Prathus Dawnroar is busy doing research!|'
+    f += 'They will be back tomorrow to help hunters to visit the special habitats. Come back then for more attempts at capturing the Safari beasts!'
     fields.append(f)
     return 1
 
@@ -241,7 +241,7 @@ if safari_success:
             f += '\n'.join(unlocked_codes) + '\n\n'
             fields.append(f)
 else:
-    f = f'__***The {beast["name"]} WINS!***__|'
+    f = f'__***THE {beast["name"].upper()} ESCAPES!***__|'
     f += 'Better luck next time!'
     fields.append(f)
 
