@@ -2,7 +2,7 @@ embed
 <drac2>
 # Configuration Variables
 IS_LIVE = True
-VERSION = '1.21.2'
+VERSION = '1.21.3'
 
 BETA_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
 LIVE_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
@@ -110,10 +110,15 @@ animals = data["animals"]
 in_wrong_stage = stage and (len(args) == 0 or (len(args) > 0 and stage != args[0]))
 quitting_hunt = stage == 'attack' and len(args) > 0 and args[0] == 'quit'
 if (in_wrong_stage and not quitting_hunt):
-  anm = animals[pid]
-  anm_name = anm["name"]
-  add_n = "n" if anm["name"][0] in "AEIOU" else ""
-  f = f'Oops! You are already hunting a{add_n} {anm_name}!|Use `!hunt {stage}` to continue.'
+  animal_label = 'a different prey'
+  animal = animals[pid] if pid in animals \
+          else dragon_data['dragons'][pid] if pid in dragon_data['dragons'] \
+          else None
+  if animal != None:
+    anm_name = animal["name"]
+    add_n = "n" if anm_name[0].upper() in "AEIOU" else ""
+    animal_label = f'a{add_n} {anm_name}'
+  f = f'Oops! You are already hunting {animal_label}!|Use `!hunt {stage}` to continue.'
   thumb = image
   return 1
 
