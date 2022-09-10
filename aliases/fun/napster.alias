@@ -1,0 +1,28 @@
+embed <drac2>
+    fields = []
+    title, desc, footer, thumb, img = None, None, None, None, None
+
+    songs_data = load_json(get_gvar("f6956f6d-b13c-48a3-8c7f-1d8a27df532f"))
+
+    c = character()
+    title = f'{c.name} switches on their N.A.P.S.T.E.R.!'
+
+    f = '*It\'s time to rock!*|*You place the two small crystals inside your ears, and they instantly mold themselves into a perfect fit! The small portable device floats around you with its magic wings, transmitting through the crystals the sound of an elf woman with a killer voice, singing:*'
+    fields.append(f)
+
+    song = randchoice(songs_data["songs"])
+    f = f"{song['title']}|"
+    lyrics = song["lyrics"]
+    f += '    :notes::musical_note:\n    *' + lyrics.replace('\n', '*\n    *').replace('**', '') + '*'
+    fields.append(f)
+
+    thumb = 'https://cdn.discordapp.com/attachments/863823240744927283/1017883648210513920/quiversong_airpods_magic_fantasy_dd_5000ea04-5513-40b3-9a8f-66b0a733b325_copy.jpg'
+    thumb = 'https://i.pinimg.com/564x/8d/92/3b/8d923b0b82ef9873251e31c74bf3e3f5.jpg'
+</drac2>
+-title "{{title}}"
+{{f'-desc "{desc}"' if desc else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-image "{img}"' if img else ""}}
+{{''.join(['-f "' + field.replace('"', '\\\"') + '"\n' for field in fields]) if len(fields) > 0 else ''}}
+{{f'-footer "{footer}"' if footer else ""}}
+

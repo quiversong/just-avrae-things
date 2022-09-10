@@ -1,0 +1,12 @@
+<drac2>
+    # !raid pete done
+    # >> !init effect pete "Round {current_round}: done"
+    # combat().combatants[0].controller works
+
+    # !raid pingall
+    # >> go through combatants, if effect is not present, create ping message and sends it
+
+    # !raid next
+    # >> clears all round effects, ping controllers of all combatants to take their turns
+    # >> verifies that only the controller of DM can run it
+/drac2>
