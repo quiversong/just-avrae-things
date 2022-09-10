@@ -1,13 +1,13 @@
 tembed
 <drac2>
 # Configuration Variables
-IS_LIVE = False
-VERSION = '0.1'
+VERSION = '1.1'
 
 FISH_VAR = "836c9cc0-faa2-4880-8986-6b240ced9a66"
 TRINKETS_VAR = "fbd058bc-7c49-46f7-af3f-c018a88443dc"
 
 DAILY_CAP = 6
+DEFAULT_TRINKETS_CHANCE = 20
 
 # Code
 args = &ARGS&
@@ -96,7 +96,7 @@ if fish_count >= DAILY_CAP:
     return 1
 
 
-trinket_chance = int(get_svar("fish_trinket_chance", "20"))
+trinket_chance = int(get_svar("fish_trinket_chance", str(DEFAULT_TRINKETS_CHANCE)))
 is_trinket = roll("1d100") <= trinket_chance
 is_fish = not is_trinket
 
@@ -118,6 +118,7 @@ add_to_bag = None
 if is_trinket:
     formatted = found if found[len(found) - 1] == '.' else f'{found}.'
     formatted = formatted[0].lower() + formatted[1].lower() + formatted[2:len(formatted)]
+    formatted = formatted.replace('"', '\\\"')
     desc = f'You found {formatted}'
     desc += '\n\n*Trinkets are purely hooks for RP and provide no mechanical benefit. They are not automatically added to your bag.*'
 
