@@ -7,17 +7,21 @@ embed <drac2>
     c = character()
     title = f'{c.name} switches on their N.A.P.S.T.E.R.!'
 
-    f = '*It\'s time to rock!*|*You place the two small crystals inside your ears, and they instantly mold themselves into a perfect fit! The small portable device floats around you with its magic wings, transmitting through the crystals the sound of an elf woman with a killer voice, singing:*'
-    fields.append(f)
-
     song = randchoice(songs_data["songs"])
-    f = f"{song['title']}|"
-    lyrics = song["lyrics"]
-    f += '    :notes::musical_note:\n    *' + lyrics.replace('\n', '*\n    *').replace('**', '') + '*'
+
+    f = '*It\'s time to rock!*|*You place the two small crystals inside your ears, and they instantly mold themselves into a perfect fit! The small portable device floats around you with its magic wings, transmitting through the crystals the sound of an elf woman with a killer voice, singing:*'
+
+    f += f"\n\n**{song['title'].upper()}**"
     fields.append(f)
 
-    thumb = 'https://cdn.discordapp.com/attachments/863823240744927283/1017883648210513920/quiversong_airpods_magic_fantasy_dd_5000ea04-5513-40b3-9a8f-66b0a733b325_copy.jpg'
+    lyrics = song["lyrics"]
+    f = '\n    :notes::musical_note:\n    *' + lyrics.replace('\n', '*\n    *').replace('**', '') + '*'
+    fields.append(f)
+
     thumb = 'https://i.pinimg.com/564x/8d/92/3b/8d923b0b82ef9873251e31c74bf3e3f5.jpg'
+    thumb = 'https://cdn.discordapp.com/attachments/863823240744927283/1017883648210513920/quiversong_airpods_magic_fantasy_dd_5000ea04-5513-40b3-9a8f-66b0a733b325_copy.jpg'
+
+    footer = "Enjoy your Neuroconnected Adrienne's Portable Songs Tool for Endless Recreation!"
 </drac2>
 -title "{{title}}"
 {{f'-desc "{desc}"' if desc else ""}}
