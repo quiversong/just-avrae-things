@@ -1,12 +1,59 @@
 <drac2>
-    # !raid pete done
-    # >> !init effect pete "Round {current_round}: done"
-    # combat().combatants[0].controller works
+args = &ARGS&
+pargs = argparse(args)
 
-    # !raid pingall
-    # >> go through combatants, if effect is not present, create ping message and sends it
+def get_pendings_combatants():
+    pending = []
+    for c in combat().combatants:
+        if c.name != 'DM':
+            e = c.get_effect("Raid Control")
+            if e == None or not(f"round_complete: {combat().round_num}" in e.desc):
+                pending.append(c)
+    return pending
 
-    # !raid next
-    # >> clears all round effects, ping controllers of all combatants to take their turns
-    # >> verifies that only the controller of DM can run it
-/drac2>
+def get_all_combatants_in_group_of(combatant):
+    if combatant.group == None:
+        return [combatant]
+    group = combat().get_group(combatant.group)
+    return [c for c in group.combatants]
+
+def get_user_combatants(pargs):
+    if 't' in pargs:
+        result = []
+        for cn in pargs.get('t'):
+            c = combat().get_combatant(cn)
+            result = result + get_all_combatants_in_group_of(c)
+        return result
+    else:
+        return get_all_combatants_in_group_of(combat().me)
+
+if len(args) > 0 and args[0].lower() == "done":
+    if not combat():
+        err("You must be in initiative to do this!")
+    if not combat().me:
+        err("You do not have an active character in iniative!")
+    combatants = get_user_combatants(pargs)
+    out = "multiline\n"
+    for c in combatants:
+        c.add_effect("Raid Control", desc = f"round_complete: {combat().round_num}")
+        out += f"!echo {c.name} finished their turn on round {combat().round_num}.\n"
+    return out
+
+if len(args) > 0 and args[0].lower() == "next":
+    if not combat():
+        err("You must be in initiative to do this!")
+
+    p = get_pendings_combatants()
+    if len(p) > 0:
+        msg = "Cannot move to the next round because there are players not yet ready:\n"
+        msg += "\n".join([f"  {c.name}" for c in p])
+        err(msg)
+        return 1
+
+    for combatant in combat().combatants:
+        combatant.remove_effect("Raid Control")
+
+    new_round_num = combat().round_num + 1
+    combat().set_round(new_round_num)
+    return f"echo Starting new raid round... New round number: {new_round_num}"
+</drac2>
