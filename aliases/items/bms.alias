@@ -1,0 +1,116 @@
+embed <drac2>
+f2 = None
+args = &ARGS&
+
+c = character()
+cc = 'Brooch of Many Sizes'
+c.create_cc_nx(cc, dispType = 'bubble' , maxVal = 2, minVal = 0, reset = 'long')
+has_cc = c.get_cc(cc) > 0
+color = '32a852'
+
+t = f'{c.name} tries to use their Brooch of Many Sizes!'
+thumb = image
+fields = []
+
+arg = args[0].lower() if len(args) > 0 else ''
+if not (arg.startswith('grow') or arg.startswith('shrink') or arg.startswith('overgrow') or arg.startswith('overshrink')):
+    f = f'Oops! What size setting on the Brooch of Many Sizes are you wanting to use?|'
+    f += 'Use `!bms grow` to grow one size larger.\n'
+    f += 'Use `!bms overgrow` to grow one additional size larger (can only be used if `!bms grow` is used first).\n'
+    f += 'Use `!bms shrink` to shrink one size smaller.\n'
+    f += 'Use `!bms overshrink` to shrink one additional size smaller (can only be used if `!bms shrink` is used first).\n'
+    f += 'Use `!item brooch of many` to display an item description.'
+    fields.append(f)
+    return -1
+
+if has_cc:
+    if not combat() or not combat().me:
+            f = 'These commands must be used during combat in order to setup changes!|Are you in initiative? If you wish to use the Brooch of Many Sizes outside combat, simply manually change the counter ` !cc Brooch -1` and narrate the action'
+            fields.append(f)
+            return -1
+    else:
+        c.mod_cc(cc, -1)
+        t = f'{c.name} uses the Brooch of Many Sizes!'
+        f = 'Brooch of Many Sizes|This metal brooch can be used to secure a cape or pinned to adorn a piece of clothing and features a rotatable dial allowing the wearer to change their size. For full description run ` !item brooch of many sizes.`'
+        fields.append(f)
+        thumb = 'https://i.redd.it/atv7dohtuev21.png'
+        if arg.startswith('grow'):
+            combat().me.add_effect('Enlarge Spell (Concentration)',
+                    passive_effects = { "damage_bonus": "1d4" },
+                    duration = 10,
+                    concentration = True,
+                    end = True,
+                    desc = 'Your size doubles in all dimensions, and your weight is multiplied by eight. This growth increases your size by one category - from Medium to Large, for example. If there is not enough room for you to double your size, you attain the maximum possible size in the space available. Until the spell ends, you also have advantage on Strength checks and Strength Saving Throws. Your Weapons also grow to match your new size. While these Weapons are enlarged, the Attacks with these weapons deal 1d4 extra damage.')
+            DDD = 'Enlarge Spell (Concentration)| Your size doubles in all dimensions, and your weight is multiplied by eight. This growth increases your size by one category, from Medium to Large, for example. If there is not enough room for you to double your size, you attain the maximum possible size in the space available. Until the spell ends, you also have advantage on Strength checks and Strength Saving Throws. Your Weapons also grow to match your new size. While these Weapons are enlarged, the Attacks with these weapons deal 1d4 extra damage.'
+            AAA = "All damage bonuses/reductions are already added to iniative as an effect. You dont need to add them to your attack. You may attack as usual."
+            CCC = "If using the ` !map` alias,\ change your size with"
+            PPP = "` !map -size tiny/small/medium/large/huge -t name`"
+            EEE = "Drained| If concentration is broken or the spell is dismissed without overcharging, please run ` !cc brooch -1`. The brooch will be empty and will recharge at dawn by long resting. To overcharge the brooch instead, run ` !bms overgrow`"
+            fields.append(DDD)
+            fields.append(AAA)
+            fields.append(CCC)
+            fields.append(PPP)
+            fields.append(EEE)
+        if arg.startswith('shrink'):
+            combat().me.add_effect('Reduce Spell (Concentration)',
+                    passive_effects = { "damage_bonus": "-1d4" },
+                    duration = 10,
+                    concentration = True,
+                    end = True,
+                    desc = 'Your size is halved in all dimensions, and your weight is reduced to one-eighth of normal. This reduction decreases your size by one category - from Medium to Small, for example. Until the spell ends, you also has disadvantage on Strength checks and Strength saving throws. Your weapons also shrink to match your new size. While these weapons are reduced, attacks made with them deal 1d4 less damage (this can not reduce the damage below 1).')
+            DDD = 'Reduce Spell (Concentration)| Your size is halved in all dimensions, and your weight is reduced to one-eighth of normal. This reduction decreases your size by one category, from Medium to Small, for example. Until the spell ends, you also has disadvantage on Strength checks and Strength saving throws. Your weapons also shrink to match your new size. While these weapons are reduced, attacks made with them deal 1d4 less damage (this can not reduce the damage below 1).'
+            AAA = "All damage bonuses/reductions are already added to iniative as an effect. You dont need to add them to your attack. You may attack as usual."
+            CCC = "If using the ` !map` alias,\ change your size with"
+            PPP = "` !map -size tiny/small/medium/large/huge -t name`"
+            EEE = "Drained| If concentration is broken or the spell is dismissed without overcharging, please run ` !cc brooch -1`. The brooch will be empty and will recharge at dawn by long resting. To overcharge the brooch instead, run ` !bms overshrink`"
+            fields.append(DDD)
+            fields.append(AAA)
+            fields.append(CCC)
+            fields.append(PPP)
+            fields.append(EEE)
+        if arg.startswith('overgrow'):
+            combat().me.remove_effect('Enlarge Spell (Concentration)')
+            combat().me.add_effect('Double Enlarge Spell (Concentration)',
+                    passive_effects = { "damage_bonus": "2d4" },
+                    duration = 10,
+                    concentration = True,
+                    end = True,
+                    desc = 'Your size again doubles in all dimensions (times four now), and your weight is multiplied by eight again (x 64 now). This growth increases your size by one category - from Large to Huge, for example. If there is not enough room for you to grow again, you attain the maximum possible size in the space available. Until the spell ends, you also have advantage on Strength checks and Strength Saving Throws. Your Weapons also grow to match your new size. While these Weapons are enlarged, the Attacks with these weapons deal an additional 1d4 extra damage. (+2d4 total now).')
+            DDD = 'Double Enlarge Spell (Concentration)| Your size again doubles in all dimensions (times four now), and your weight is multiplied by eight again (x 64 now). This growth increases your size by one category, from Large to Huge, for example. If there is not enough room for you to grow again, you attain the maximum possible size in the space available. Until the spell ends, you also have advantage on Strength checks and Strength Saving Throws. Your Weapons also grow to match your new size. While these Weapons are enlarged, the Attacks with these weapons deal an additional 1d4 extra damage. (+2d4 total now).'
+            AAA = "All damage bonuses/reductions are already added to iniative as an effect. You dont need to add them to your attack. You may attack as usual."
+            CCC = "If using the ` !map` alias,\ change your size with"
+            PPP = "` !map -size tiny/small/medium/large/huge -t name`"
+            LLL = "OVERCHARGED| The brooch has been pushed to its limit and will recharge in 7 days. Ask your DM about time progression if questing."
+            fields.append(DDD)
+            fields.append(AAA)
+            fields.append(CCC)
+            fields.append(PPP)
+            fields.append(LLL)
+        if arg.startswith('overshrink'):
+            combat().me.remove_effect('Reduce Spell (Concentration)')
+            combat().me.add_effect('Double Reduce Spell (Concentration)',
+                    passive_effects = { "damage_bonus": "-2d4" },
+                    duration = 10,
+                    concentration = True,
+                    end = True,
+                    desc = 'Your size again is halved in all dimensions (divided by four now), and your weight is reduced to one-eighth again (divided by 64 now). This reduction decreases your size by one category - from Small to Tiny, for example. Until the spell ends, you also has disadvantage on Strength checks and Strength saving throws. Your weapons also shrink to match your new size. While these weapons are reduced, attacks made with them deal and additional 1d4 less damage (-2d4 total now) (this can not reduce the damage below 1).')
+            DDD = 'Double Reduce Spell (Concentration)| Your size again is halved in all dimensions (divided by four now), and your weight is reduced to one-eighth again (divided by 64 now). This reduction decreases your size by one category, from Small to Tiny, for example. Until the spell ends, you also has disadvantage on Strength checks and Strength saving throws. Your weapons also shrink to match your new size. While these weapons are reduced, attacks made with them deal and additional 1d4 less damage (-2d4 total now) (this can not reduce the damage below 1).'
+            AAA = "All damage bonuses/reductions are already added to iniative as an effect. You dont need to add them to your attack. You may attack as usual."
+            CCC = "If using the ` !map` alias,\ change your size with"
+            PPP = "` !map -size tiny/small/medium/large/huge -t name`"
+            LLL = "OVERCHARGED| The brooch has been pushed to its limit and will recharge in 7 days. Ask your DM about time progression if questing."
+            fields.append(DDD)
+            fields.append(AAA)
+            fields.append(CCC)
+            fields.append(PPP)
+            fields.append(LLL)
+
+else:
+    f = 'The Brooch of many sizes needs time to reset!'
+    fields.append(f)
+</drac2>
+-title "{{t}}"
+-thumb "{{thumb}}"
+-color "{{color}}"
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
+-f 'Brooch of Many Sizes| {{c.cc_str("Brooch of Many Sizes")}}'

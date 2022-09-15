@@ -40,11 +40,15 @@ if has_cc:
 
         c.mod_cc(cc, -1)
         powers = {
-            'pow': ['Vines of Power', '-b 1 -d 1', 10, 'Vines grow from the clasp and cover your arms. Gain a +1 bonus to attack and damage for 1 minute.'],
-            'prot': ['Vines of Protection', '-ac +1', 99, 'Vines grow from the clasp and cover your torso. Gain +1 AC for 10 minutes.']
+            'pow': ['Vines of Power', { "to_hit_bonus": 1, "damage_bonus": 1 }, 10, 'Vines grow from the clasp and cover your arms. Gain a +1 bonus to attack and damage for 1 minute.'],
+            'prot': ['Vines of Protection', { "ac_bonus": 1 }, 99, 'Vines grow from the clasp and cover your torso. Gain +1 AC for 10 minutes.']
         }
         power = powers['pow'] if arg.startswith('pow') else powers['prot']
-        combat().me.add_effect(f'{cc}: {power[0]}', power[1], power[2], False, None, False, f'{power[0]}: {power[3]}')
+        combat().me.add_effect(
+                f'{cc}: {power[0]}',
+                passive_effects = power[1],
+                duration = power[2],
+                desc = f'{power[0]}: {power[3]}')
 
         t = f'{c.name} uses the Clasp of the Pale Oak!'
 
