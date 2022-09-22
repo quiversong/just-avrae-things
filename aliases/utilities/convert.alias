@@ -1,0 +1,44 @@
+<drac2>
+args = &ARGS&
+
+help_text = "***Unit Conversion Utility***\n"
+help_text += "```\n"
+help_text += "!convert ftom <value>: feet to meters\n"
+help_text += "!convert mtof <value>: meters to feet\n"
+help_text += "!convert ftoc <value>: fahrenheit to celsius\n"
+help_text += "!convert ctof <value>: celsius to fahrenheit\n"
+help_text += "!convert ltok <value>: pounds to kilograms\n"
+help_text += "!convert ktol <value>: kilograms to pounds\n"
+help_text += "```"
+
+operations = ['ftom', 'mtof', 'ftoc', 'ctof', 'ltok', 'ktol']
+if len(args) < 2 or not(args[0] in operations):
+    return f'echo {help_text}'
+
+operation = args[0]
+source_value = int(args[1])
+
+if operation == 'ftom':
+    result = source_value / 3.281
+    return f'echo ***Converting Feet to Meters...***\n*{source_value}ft. equals {result} meters.*'
+
+if operation == 'mtof':
+    result = source_value * 3.281
+    return f'echo ***Converting Meters to Feet...***\n*{source_value} meters equals {result}ft.*'
+
+if operation == 'ftoc':
+    result = (source_value - 32) * 5/9
+    return f'echo ***Converting Fahrenheit to Celsius...***\n*{source_value} fahrenheit equals {result} celsius.*'
+
+if operation == 'ctof':
+    result = (source_value * 9/5) + 32
+    return f'echo ***Converting Celsius to Fahrenheit...***\n*{source_value} celsius equals {result} fahrenheit.*'
+
+if operation == 'ltok':
+    result = source_value * 0.453592
+    return f'echo ***Converting Pounds to Kilograms...***\n*{source_value} pounds equals {result} kilograms.*'
+
+if operation == 'ktol':
+    result = source_value * 2.20462
+    return f'echo ***Converting Kilograms to Pounds...***\n*{source_value} kilograms equals {result} pounds.*'
+</drac2>
