@@ -36,9 +36,14 @@ def add_reward(reward, qty):
     else:
         utils.add_to_bag('Safari', { reward: qty })
 
-def format_reward(reward, qty):
-    fqty = str(qty) if qty > 9 else f' {qty}'
-    return f'`{fqty}x {reward}`\n'
+def add_and_format_rewards(title, rewards):
+    formatted = title
+    for reward_item in rewards.items():
+        reward, qty = reward_item[0], reward_item[1]
+        add_reward(reward, qty)
+        fqty = str(qty) if qty > 9 else f' {qty}'
+        formatted += f'`{fqty}x {reward}`\n'
+    return formatted
 
 ADMIN_USER_IDS = [771997367611949076]
 if get_svar('SEVENTRA_ALIAS_ADMINS') != None:
@@ -243,17 +248,11 @@ if safari_success:
     f += f'Congratulations! You have successfully captured the {beast["name"]}!'
     fields.append(f)
 
-    f = 'You gained these rewards:|\n'
-    for reward in beast['rewards'].items():
-        add_reward(reward[0], reward[1])
-        f += format_reward(reward[0], reward[1])
+    f = add_and_format_rewards('You gained these rewards:|\n', beast['rewards'])
     fields.append(f)
 
     if stats['captures'] == 1:
-        f = 'You also gained these one-time rewards:|\n'
-        for reward in beast['uniqueRewards'].items():
-            add_reward(reward[0], reward[1])
-            f += format_reward(reward[0], reward[1])
+        f = add_and_format_rewards('You also gained these one-time rewards:|\n', beast['uniqueRewards'])
         fields.append(f)
 
     if 'unlocks' in beast and len(beast['unlocks']) > 0:
