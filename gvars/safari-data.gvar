@@ -830,7 +830,7 @@
   {
     "code": "dregnaur",
     "name": "Dregnaur",
-    "habitat": "Savannah ",
+    "habitat": "Savannah",
     "desc": "\"Something about relentlessly tracking a Dregnaur across the Savannah reminds me of when my mother would take me hunting.\n\nShe would bring star peaches, and we would wait in the open fields, traps baited...Mmm, I digress. Dregnaur aren't very bright...\n\nJust goad them into a charge, and they practically impale themselves...\"\n\n-Boza Stormgroomer, Green Vale Zoologist",
     "habitat_dc": 13,
     "stealth_dc": 13,
