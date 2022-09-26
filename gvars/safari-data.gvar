@@ -8,7 +8,7 @@
     "stealth_dc": 9,
     "ac": 9,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998421498773651558/e72e3100adca8bfbd3fd4c73d23b97c9.jpg ",
-    "itemRewards": {"gp" : 1},
+    "rewards": {"gp" : 1},
     "uniqueRewards": {"gp" : 14},
     "unlocks": "pebbles",
     "props": ""
@@ -22,7 +22,7 @@
     "stealth_dc": 9,
     "ac": 10,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987201730909466624/IMG_4056.jpg?width=462&height=676",
-    "itemRewards": {"gp" : 1},
+    "rewards": {"gp" : 1},
     "uniqueRewards": {"gp" : 16, 
 "Azurite (10gp)" : 1},
     "unlocks": "rvole",
@@ -37,7 +37,7 @@
     "stealth_dc": 12,
     "ac": 12,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988924752733282354/EWBK5EdU0AATJog.jpg?width=709&height=676",
-    "itemRewards": {"gp" : 3},
+    "rewards": {"gp" : 3},
     "uniqueRewards": {"Ruby Shard (50gp)" : 1},
     "unlocks": "tumbletide",
     "props": ""
@@ -51,7 +51,7 @@
     "stealth_dc": 15,
     "ac": 14,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998421498995953684/6f6ab567f0809857fb6743a8c21828a5.jpg",
-    "itemRewards": {"gp" : 5},
+    "rewards": {"gp" : 5},
     "uniqueRewards": {"gp" : 18},
     "unlocks": "frofennec",
     "props": ""
@@ -65,7 +65,7 @@
     "stealth_dc": 15,
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988287872496988190/IMG_4069.jpg?width=380&height=676",
-    "itemRewards": {"gp" : 6},
+    "rewards": {"gp" : 6},
     "uniqueRewards": {"gp" : 18},
     "unlocks": "swombat",
     "props": ""
@@ -79,7 +79,7 @@
     "stealth_dc": 14,
     "ac": 16,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988287850493673522/IMG_4072.jpg?width=478&height=676",
-    "itemRewards": {"gp" : 6},
+    "rewards": {"gp" : 6},
     "uniqueRewards": {"gp" : 18},
     "unlocks": "funfennec",
     "props": ""
@@ -93,7 +93,7 @@
     "stealth_dc": 15,
     "ac": 17,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988287880998830090/IMG_4068.jpg?width=391&height=676",
-    "itemRewards": {"gp" : 6},
+    "rewards": {"gp" : 6},
     "uniqueRewards": {"gp" : 20},
     "unlocks": "anvilcrab",
     "props": ""
@@ -107,7 +107,7 @@
     "stealth_dc": 16,
     "ac": 18,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998381405396545606/bc64d622d975158ebab0d49ec29113b62.jpg",
-    "itemRewards": {"gp" : 8},
+    "rewards": {"gp" : 8},
     "uniqueRewards": {"gp" : 20},
     "unlocks": "seawolf",
     "props": ""
@@ -121,7 +121,7 @@
     "stealth_dc": 18,
     "ac": 18,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988924752531976222/f4221598624a6b48a077536e0c2dc5b8.jpg",
-    "itemRewards": {"gp" : 9},
+    "rewards": {"gp" : 9},
     "uniqueRewards": {"Seawolf Jade Shard (25gp)" : 5},
     "unlocks": "manix",
     "props": ""
@@ -135,7 +135,7 @@
     "stealth_dc": 20,
     "ac": 20,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134420404301834/IMG_4036.jpg?width=546&height=676",
-    "itemRewards": {"gp" : 11},
+    "rewards": {"gp" : 11},
     "uniqueRewards": {"gp" : 23},
     "unlocks": "skyturtle",
     "props": ""
@@ -149,7 +149,7 @@
     "stealth_dc": 22,
     "ac": 22,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385716407046266/2c1bd44ac98f8fa88a69537cb79fca19.jpg",
-    "itemRewards": {"gp" : 12},
+    "rewards": {"gp" : 12},
     "uniqueRewards": {"gp" : 25},
     "unlocks": "caithodrake",
     "props": ""
@@ -163,7 +163,7 @@
     "stealth_dc": 23,
     "ac": 23,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134425676529724/IMG_4037.jpg?width=691&height=676",
-    "itemRewards": {"gp" : 15},
+    "rewards": {"gp" : 15},
     "uniqueRewards": {"gp" : 25},
     "unlocks": "glurp",
     "props": ""
@@ -177,7 +177,7 @@
     "stealth_dc": 24,
     "ac": 24,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120003654500443/IMG_4017.jpg?width=658&height=676",
-    "itemRewards": {"gp" : 20},
+    "rewards": {"gp" : 20},
     "uniqueRewards": {"gp" : 30},
     "unlocks": "seaskulk",
     "props": ""
@@ -191,7 +191,7 @@
     "stealth_dc": 25,
     "ac": 25,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998381405216182282/1144816409483dbba087cd96a5a7683a.jpg",
-    "itemRewards": {"gp" : 26},
+    "rewards": {"gp" : 26},
     "uniqueRewards": {"gp" : 40},
     "unlocks": "reeftide",
     "props": ""
@@ -205,7 +205,7 @@
     "stealth_dc": 26,
     "ac": 26,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987166936481816616/IMG_4042.jpg",
-    "itemRewards": {"gp" : 30},
+    "rewards": {"gp" : 30},
     "uniqueRewards": {"gp" : 45},
     "unlocks": "reeftidedragon",
     "props": ""
@@ -219,7 +219,7 @@
     "stealth_dc": 28,
     "ac": 28,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998421498580709466/c50d4bce2c8b2a85b4e5c7a70091a385.jpg ",
-    "itemRewards": {"gp" : 36},
+    "rewards": {"gp" : 36},
     "uniqueRewards": {"Reeftide Dragon Scale (50gp)" : 1, "gp" : 50},
     "unlocks": "",
     "props": ""
@@ -233,7 +233,7 @@
     "stealth_dc": 6,
     "ac": 7,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120020591112282/IMG_4014.jpg",
-    "itemRewards": {"sp" : 5},
+    "rewards": {"sp" : 5},
     "uniqueRewards": {"gp" : 5, 
 "Safari Bracelet" : 1},
     "unlocks": "drakefly",
@@ -248,7 +248,7 @@
     "stealth_dc": 7,
     "ac": 8,
     "img": "https://media.discordapp.net/attachments/988476850152038550/996794447218081862/milica-celikovic-27-um.jpg",
-    "itemRewards": {"sp" : 7},
+    "rewards": {"sp" : 7},
     "uniqueRewards": {"gp" : 5},
     "unlocks": "gravewater",
     "props": ""
@@ -262,7 +262,7 @@
     "stealth_dc": 8,
     "ac": 9,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173299408732160/IMG_4054.jpg",
-    "itemRewards": {"sp" : 8},
+    "rewards": {"sp" : 8},
     "uniqueRewards": {"gp" : 6},
     "unlocks": "skith",
     "props": ""
@@ -276,7 +276,7 @@
     "stealth_dc": 7,
     "ac": 10,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173314403385415/IMG_4052.jpg?width=599&height=676",
-    "itemRewards": {"sp" : 11},
+    "rewards": {"sp" : 11},
     "uniqueRewards": {"gp" : 6, 
 "+1 Net" : 1},
     "unlocks": "bluebelly",
@@ -291,7 +291,7 @@
     "stealth_dc": 13,
     "ac": 10,
     "img": "https://media.discordapp.net/attachments/988476850152038550/996794430667358329/milica-celikovic-16-me.jpg",
-    "itemRewards": {"sp" : 15},
+    "rewards": {"sp" : 15},
     "uniqueRewards": {"gp" : 8},
     "unlocks": "bananabelly",
     "props": ""
@@ -305,7 +305,7 @@
     "stealth_dc": 10,
     "ac": 13,
     "img": "https://media.discordapp.net/attachments/988476850152038550/996794439345377360/milica-celikovic-32-um.jpg",
-    "itemRewards": {"sp" : 15},
+    "rewards": {"sp" : 15},
     "uniqueRewards": {"gp" : 8},
     "unlocks": "ballaw",
     "props": ""
@@ -319,7 +319,7 @@
     "stealth_dc": 13,
     "ac": 14,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122690672431184/IMG_4027.jpg",
-    "itemRewards": {"gp" : 2},
+    "rewards": {"gp" : 2},
     "uniqueRewards": {"gp" : 8},
     "unlocks": "surroval",
     "props": ""
@@ -333,7 +333,7 @@
     "stealth_dc": 14,
     "ac": 16,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987831288922783784/IMG_4064.jpg?width=508&height=676",
-    "itemRewards": {"gp" : 3},
+    "rewards": {"gp" : 3},
     "uniqueRewards": {"gp" : 10},
     "unlocks": "haverins, coralparrot",
     "props": ""
@@ -347,7 +347,7 @@
     "stealth_dc": 16,
     "ac": 17,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385798317608980/b85e6d70daa396846008b12b2a3504f2.jpg",
-    "itemRewards": {"gp" : 3},
+    "rewards": {"gp" : 3},
     "uniqueRewards": {"gp" : 10},
     "unlocks": "aoxo",
     "props": ""
@@ -361,7 +361,7 @@
     "stealth_dc": 18,
     "ac": 18,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988287833376694333/IMG_4074.jpg",
-    "itemRewards": {"gp" : 6},
+    "rewards": {"gp" : 6},
     "uniqueRewards": {"gp" : 15},
     "unlocks": "roxo",
     "props": ""
@@ -375,7 +375,7 @@
     "stealth_dc": 19,
     "ac": 19,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988287843430449162/IMG_4073.jpg?width=676&height=676",
-    "itemRewards": {"gp" : 7},
+    "rewards": {"gp" : 7},
     "uniqueRewards": {"gp" : 15},
     "unlocks": "mossjaw",
     "props": ""
@@ -389,7 +389,7 @@
     "stealth_dc": 18,
     "ac": 20,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122683969945660/IMG_4028.jpg",
-    "itemRewards": {"gp" : 9},
+    "rewards": {"gp" : 9},
     "uniqueRewards": {"gp" : 15},
     "unlocks": "tantrippo",
     "props": ""
@@ -403,7 +403,7 @@
     "stealth_dc": 20,
     "ac": 21,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120040648273991/IMG_4011.jpg",
-    "itemRewards": {"gp" : 10},
+    "rewards": {"gp" : 10},
     "uniqueRewards": {"gp" : 16},
     "unlocks": "prehistoric",
     "props": ""
@@ -417,7 +417,7 @@
     "stealth_dc": 21,
     "ac": 23,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998426635076370553/e92c4ce34c1980115d1f9267580ff1fa.jpg",
-    "itemRewards": {"gp" : 12},
+    "rewards": {"gp" : 12},
     "uniqueRewards": {"gp" : 25},
     "unlocks": "kirin",
     "props": ""
@@ -431,7 +431,7 @@
     "stealth_dc": 23,
     "ac": 24,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134445419114556/IMG_4033.jpg",
-    "itemRewards": {"gp" : 13},
+    "rewards": {"gp" : 13},
     "uniqueRewards": {"gp" : 30},
     "unlocks": "dcrab",
     "props": ""
@@ -445,7 +445,7 @@
     "stealth_dc": 17,
     "ac": 25,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988287864506818692/IMG_4070.jpg?width=450&height=676",
-    "itemRewards": {"gp" : 15},
+    "rewards": {"gp" : 15},
     "uniqueRewards": {"gp" : 34},
     "unlocks": "riptide",
     "props": ""
@@ -459,7 +459,7 @@
     "stealth_dc": 24,
     "ac": 25,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998418348519993374/riptide-chimera-ryan-barger.jpg",
-    "itemRewards": {"gp" : 17},
+    "rewards": {"gp" : 17},
     "uniqueRewards": {"gp" : 35},
     "unlocks": "",
     "props": ""
@@ -473,7 +473,7 @@
     "stealth_dc": 10,
     "ac": 10,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987831312108879962/IMG_4063.jpg?width=523&height=676",
-    "itemRewards": {"gp" : 8},
+    "rewards": {"gp" : 8},
     "uniqueRewards": {"gp" : 10, "Safari Journal Bead" : 1},
     "unlocks": "mossfurrow",
     "props": "starter"
@@ -487,7 +487,7 @@
     "stealth_dc": 12,
     "ac": 12,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120061460381756/IMG_4008.jpg",
-    "itemRewards": {"gp" : 9},
+    "rewards": {"gp" : 9},
     "uniqueRewards": {"gp" : 15},
     "unlocks": "lagomoth",
     "props": ""
@@ -501,7 +501,7 @@
     "stealth_dc": 15,
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988287858068574258/IMG_4071.jpg?width=497&height=675",
-    "itemRewards": {"gp" : 12},
+    "rewards": {"gp" : 12},
     "uniqueRewards": {"gp" : 16},
     "unlocks": "pwombat",
     "props": ""
@@ -515,7 +515,7 @@
     "stealth_dc": 16,
     "ac": 18,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987831292911550484/IMG_4065.jpg",
-    "itemRewards": {"gp" : 12},
+    "rewards": {"gp" : 12},
     "uniqueRewards": {"gp" : 18},
     "unlocks": "lyncaris",
     "props": ""
@@ -529,7 +529,7 @@
     "stealth_dc": 18,
     "ac": 18,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134393040650240/IMG_4039.jpg",
-    "itemRewards": {"gp" : 16},
+    "rewards": {"gp" : 16},
     "uniqueRewards": {"gp" : 20},
     "unlocks": "chasmprowler",
     "props": ""
@@ -543,7 +543,7 @@
     "stealth_dc": 20,
     "ac": 20,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134383049830472/IMG_4040.jpg",
-    "itemRewards": {"gp" : 18},
+    "rewards": {"gp" : 18},
     "uniqueRewards": {"gp" : 20},
     "unlocks": "wombradin",
     "props": ""
@@ -557,7 +557,7 @@
     "stealth_dc": 22,
     "ac": 23,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134586372882503/IMG_4035.jpg",
-    "itemRewards": {"gp" : 20},
+    "rewards": {"gp" : 20},
     "uniqueRewards": {"gp" : 20},
     "unlocks": "bellicose",
     "props": ""
@@ -571,7 +571,7 @@
     "stealth_dc": 12,
     "ac": 25,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385717019414528/mtg_beast_token_by_jason_felix_by_jason_felix_dcjs8i2-pre.jpg",
-    "itemRewards": {"gp" : 18},
+    "rewards": {"gp" : 18},
     "uniqueRewards": {"gp" : 21},
     "unlocks": "drakiosaur",
     "props": ""
@@ -585,7 +585,7 @@
     "stealth_dc": 25,
     "ac": 25,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120014387707964/IMG_4015.jpg?width=676&height=676",
-    "itemRewards": {"gp" : 25},
+    "rewards": {"gp" : 25},
     "uniqueRewards": {"gp" : 21},
     "unlocks": "splitty",
     "props": ""
@@ -599,7 +599,7 @@
     "stealth_dc": 26,
     "ac": 26,
     "img": "https://cdn.discordapp.com/attachments/988476850152038550/998728697081245817/3c0fa045f24b5f41efaf43eb0fa4410f.jpg",
-    "itemRewards": {"gp" : 27},
+    "rewards": {"gp" : 27},
     "uniqueRewards": {"gp" : 22},
     "unlocks": "devour ",
     "props": ""
@@ -613,7 +613,7 @@
     "stealth_dc": 25,
     "ac": 25,
     "img": "https://media.discordapp.net/attachments/988476850152038550/1018222731273195540/8a8601_6765396.jpg",
-    "itemRewards": {"gp" : 30},
+    "rewards": {"gp" : 30},
     "uniqueRewards": {"gp" : 22},
     "unlocks": "tetherpede",
     "props": ""
@@ -627,7 +627,7 @@
     "stealth_dc": 26,
     "ac": 27,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120045786280006/IMG_4010.jpg?width=522&height=676",
-    "itemRewards": {"gp" : 35},
+    "rewards": {"gp" : 35},
     "uniqueRewards": {"gp" : 22},
     "unlocks": "drakeblood",
     "props": ""
@@ -641,7 +641,7 @@
     "stealth_dc": 27,
     "ac": 28,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385799894675516/071a54fce24607f8af0843007983af10.jpg",
-    "itemRewards": {"gp" : 36},
+    "rewards": {"gp" : 36},
     "uniqueRewards": {"gp" : 23},
     "unlocks": "bristleback",
     "props": ""
@@ -655,7 +655,7 @@
     "stealth_dc": 28,
     "ac": 28,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385750095708210/9c6149d212d362af16c505c18dd4aed2.jpg",
-    "itemRewards": {"gp" : 40},
+    "rewards": {"gp" : 40},
     "uniqueRewards": {"gp" : 23},
     "unlocks": "jungleviper",
     "props": ""
@@ -669,7 +669,7 @@
     "stealth_dc": 27,
     "ac": 29,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385716163788830/1ab13ca644cb7c6a32c3bcdd6e2cc914.jpg",
-    "itemRewards": {"gp" : 40},
+    "rewards": {"gp" : 40},
     "uniqueRewards": {"gp" : 25},
     "unlocks": "dandelion",
     "props": ""
@@ -683,7 +683,7 @@
     "stealth_dc": 29,
     "ac": 27,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998380272888320100/bbd6e843856692b034b1dd9a97635123.jpg",
-    "itemRewards": {"gp" : 40},
+    "rewards": {"gp" : 40},
     "uniqueRewards": {"gp" : 30},
     "unlocks": "greenback",
     "props": ""
@@ -697,7 +697,7 @@
     "stealth_dc": 30,
     "ac": 30,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385715907940412/fd05d3e8a909fa3b2ed1258e23d6c1a2.jpg",
-    "itemRewards": {"gp" : 50},
+    "rewards": {"gp" : 50},
     "uniqueRewards": {"gp" : 100},
     "unlocks": "",
     "props": ""
@@ -711,7 +711,7 @@
     "stealth_dc": 6,
     "ac": 5,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122727049641994/IMG_4021.jpg",
-    "itemRewards": {"sp" : 5},
+    "rewards": {"sp" : 5},
     "uniqueRewards": {"sp" : 5},
     "unlocks": "emgerbil",
     "props": "starter"
@@ -725,7 +725,7 @@
     "stealth_dc": 6,
     "ac": 6,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122718518415370/IMG_4022.jpg",
-    "itemRewards": {"sp" : 5},
+    "rewards": {"sp" : 5},
     "uniqueRewards": {"sp" : 5},
     "unlocks": "cratakiti",
     "props": ""
@@ -739,7 +739,7 @@
     "stealth_dc": 6,
     "ac": 7,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173306920742962/IMG_4053.jpg?width=478&height=676",
-    "itemRewards": {"sp" : 6},
+    "rewards": {"sp" : 6},
     "uniqueRewards": {"gp" : 3},
     "unlocks": "staticscrap",
     "props": ""
@@ -753,7 +753,7 @@
     "stealth_dc": 7,
     "ac": 7,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998426549822947378/87947492ca365c69aec08b0da1ec5f77.jpg ",
-    "itemRewards": {"sp" : 6},
+    "rewards": {"sp" : 6},
     "uniqueRewards": {"sp" : 30},
     "unlocks": "dinocat",
     "props": ""
@@ -767,7 +767,7 @@
     "stealth_dc": 8,
     "ac": 9,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988922193767432282/unknown.png?width=437&height=675",
-    "itemRewards": {"sp" : 7},
+    "rewards": {"sp" : 7},
     "uniqueRewards": {"gp" : 4},
     "unlocks": "magmal",
     "props": ""
@@ -781,7 +781,7 @@
     "stealth_dc": 10,
     "ac": 10,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122709479710730/IMG_4024.jpg?width=601&height=676",
-    "itemRewards": {"sp" : 8},
+    "rewards": {"sp" : 8},
     "uniqueRewards": {"gp" : 4},
     "unlocks": "cowl",
     "props": ""
@@ -795,7 +795,7 @@
     "stealth_dc": 11,
     "ac": 13,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122703460859914/IMG_4025.jpg?width=676&height=676",
-    "itemRewards": {"2 gp" : 1},
+    "rewards": {"2 gp" : 1},
     "uniqueRewards": {"gp" : 5},
     "unlocks": "babbleboon",
     "props": ""
@@ -809,7 +809,7 @@
     "stealth_dc": 10,
     "ac": 14,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385751081369750/06ab7749732252d617b8c6d9bafb828f.jpg",
-    "itemRewards": {"3 gp" : 1},
+    "rewards": {"3 gp" : 1},
     "uniqueRewards": {"gp" : 5},
     "unlocks": "dregnaur, wyrmlicorn",
     "props": ""
@@ -823,7 +823,7 @@
     "stealth_dc": 13,
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134378129899620/IMG_4041.jpg",
-    "itemRewards": {"3 gp" : 1},
+    "rewards": {"3 gp" : 1},
     "uniqueRewards": {"gp" : 5},
     "unlocks": "stargoyle",
     "props": ""
@@ -837,7 +837,7 @@
     "stealth_dc": 14,
     "ac": 14,
     "img": "https://media.discordapp.net/attachments/988476850152038550/995433448229568582/Qiy1sSU.jpg",
-    "itemRewards": {"4 gp" : 1},
+    "rewards": {"4 gp" : 1},
     "uniqueRewards": {"gp" : 5},
     "unlocks": "craggling",
     "props": ""
@@ -851,7 +851,7 @@
     "stealth_dc": 15,
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385799185829968/ae69dd4d9140d281cbab25560dcdcacc.jpg",
-    "itemRewards": {"4 gp" : 1},
+    "rewards": {"4 gp" : 1},
     "uniqueRewards": {"gp" : 5},
     "unlocks": "horgonaut",
     "props": ""
@@ -865,7 +865,7 @@
     "stealth_dc": 16,
     "ac": 16,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134460040450088/IMG_4030.jpg",
-    "itemRewards": {"5 gp" : 1},
+    "rewards": {"5 gp" : 1},
     "uniqueRewards": {"gp" : 7},
     "unlocks": "bsserpent",
     "props": ""
@@ -879,7 +879,7 @@
     "stealth_dc": 16,
     "ac": 18,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134454369751100/IMG_4031.jpg?width=474&height=676",
-    "itemRewards": {"6 gp" : 1},
+    "rewards": {"6 gp" : 1},
     "uniqueRewards": {"gp" : 10},
     "unlocks": "braik",
     "props": ""
@@ -893,7 +893,7 @@
     "stealth_dc": 17,
     "ac": 19,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122696041156629/IMG_4026.jpg?width=541&height=676",
-    "itemRewards": {"6 gp" : 1},
+    "rewards": {"6 gp" : 1},
     "uniqueRewards": {"gp" : 13},
     "unlocks": "amethystguard",
     "props": ""
@@ -907,7 +907,7 @@
     "stealth_dc": 17,
     "ac": 20,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385798858686494/7cc1a7a5301108e644e5a0fe8bb64819.jpg",
-    "itemRewards": {"7 gp" : 1},
+    "rewards": {"7 gp" : 1},
     "uniqueRewards": {"gp" : 15},
     "unlocks": "scorptiger",
     "props": ""
@@ -921,7 +921,7 @@
     "stealth_dc": 20,
     "ac": 20,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998381404788371567/63c949cd65d3e19a8d96c8d67a9f9967.jpg",
-    "itemRewards": {"8 gp" : 1},
+    "rewards": {"8 gp" : 1},
     "uniqueRewards": {"gp" : 15},
     "unlocks": "runesnout",
     "props": ""
@@ -935,7 +935,7 @@
     "stealth_dc": 20,
     "ac": 22,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385716688076820/4006d1a5576ed74930abdfda3c36d6ba.jpg",
-    "itemRewards": {"10 gp" : 1},
+    "rewards": {"10 gp" : 1},
     "uniqueRewards": {"gp" : 20},
     "unlocks": "",
     "props": ""
@@ -949,7 +949,7 @@
     "stealth_dc": 7,
     "ac": 8,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385799454261248/49f388388baf0619604ee10afafdbc51.jpg",
-    "itemRewards": {"gp" : 1},
+    "rewards": {"gp" : 1},
     "uniqueRewards": {"gp" : 6},
     "unlocks": "branchbeaver",
     "props": ""
@@ -963,7 +963,7 @@
     "stealth_dc": 8,
     "ac": 8,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385750750007418/d1dcdbfd4971258e6391dc92966c1df4.jpg",
-    "itemRewards": {"gp" : 1},
+    "rewards": {"gp" : 1},
     "uniqueRewards": {"gp" : 10},
     "unlocks": "dracohippus",
     "props": ""
@@ -977,7 +977,7 @@
     "stealth_dc": 10,
     "ac": 10,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134409364865034/IMG_4038.jpg?width=507&height=676",
-    "itemRewards": {"gp" : 3},
+    "rewards": {"gp" : 3},
     "uniqueRewards": {"gp" : 11},
     "unlocks": "kreokh",
     "props": ""
@@ -991,7 +991,7 @@
     "stealth_dc": 12,
     "ac": 13,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120051037536336/IMG_4009.jpg?width=480&height=676",
-    "itemRewards": {"gp" : 3},
+    "rewards": {"gp" : 3},
     "uniqueRewards": {"gp" : 12},
     "unlocks": "hfalpaca",
     "props": "Automatically fail adaption check?"
@@ -1005,7 +1005,7 @@
     "stealth_dc": 14,
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173330098462780/IMG_4049.jpg",
-    "itemRewards": {"gp" : 5},
+    "rewards": {"gp" : 5},
     "uniqueRewards": {"gp" : 13},
     "unlocks": "drelk",
     "props": ""
@@ -1019,7 +1019,7 @@
     "stealth_dc": 15,
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173325996453888/IMG_4050.jpg?width=486&height=676",
-    "itemRewards": {"gp" : 6},
+    "rewards": {"gp" : 6},
     "uniqueRewards": {"gp" : 14},
     "unlocks": "noseblossom",
     "props": ""
@@ -1033,7 +1033,7 @@
     "stealth_dc": 16,
     "ac": 16,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998381405010665532/c1341ecfd029caa22fc1a3a204eb390c.jpg",
-    "itemRewards": {"gp" : 7},
+    "rewards": {"gp" : 7},
     "uniqueRewards": {"gp" : 16},
     "unlocks": "landglider",
     "props": ""
@@ -1047,7 +1047,7 @@
     "stealth_dc": 17,
     "ac": 18,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998381404360548362/e65f99e88bc36fb676db073674288c09.jpg",
-    "itemRewards": {"gp" : 7},
+    "rewards": {"gp" : 7},
     "uniqueRewards": {"gp" : 16},
     "unlocks": "masly, ledroll",
     "props": ""
@@ -1061,7 +1061,7 @@
     "stealth_dc": 18,
     "ac": 18,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988287829090123816/IMG_4075.jpg",
-    "itemRewards": {"gp" : 8},
+    "rewards": {"gp" : 8},
     "uniqueRewards": {"gp" : 18},
     "unlocks": "bloodstag",
     "props": ""
@@ -1075,7 +1075,7 @@
     "stealth_dc": 20,
     "ac": 20,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120010528964679/IMG_4016.jpg",
-    "itemRewards": {"gp" : 8},
+    "rewards": {"gp" : 8},
     "uniqueRewards": {"gp" : 18},
     "unlocks": "fgriffon",
     "props": ""
@@ -1089,7 +1089,7 @@
     "stealth_dc": 21,
     "ac": 21,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173354974896168/IMG_4045.jpg",
-    "itemRewards": {"gp" : 9},
+    "rewards": {"gp" : 9},
     "uniqueRewards": {"gp" : 20},
     "unlocks": "shman",
     "props": ""
@@ -1103,7 +1103,7 @@
     "stealth_dc": 21,
     "ac": 22,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134431473053746/IMG_4034.jpg?width=504&height=675",
-    "itemRewards": {"pp" : 1},
+    "rewards": {"pp" : 1},
     "uniqueRewards": {"gp" : 20},
     "unlocks": "cfboar",
     "props": ""
@@ -1117,7 +1117,7 @@
     "stealth_dc": 22,
     "ac": 22,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173340819111976/IMG_4047.jpg?width=714&height=676",
-    "itemRewards": {"gp" : 12},
+    "rewards": {"gp" : 12},
     "uniqueRewards": {"gp" : 22},
     "unlocks": "zhino",
     "props": ""
@@ -1131,7 +1131,7 @@
     "stealth_dc": 22,
     "ac": 24,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385750515134596/6400097a14ee0691ecb9f5ad9ad086c2.jpg",
-    "itemRewards": {"gp" : 13},
+    "rewards": {"gp" : 13},
     "uniqueRewards": {"gp" : 25},
     "unlocks": "glreav",
     "props": ""
@@ -1145,7 +1145,7 @@
     "stealth_dc": 23,
     "ac": 25,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173319264575528/IMG_4051.jpg",
-    "itemRewards": {"gp" : 15},
+    "rewards": {"gp" : 15},
     "uniqueRewards": {"gp" : 30},
     "unlocks": "hjorral",
     "props": ""
@@ -1159,7 +1159,7 @@
     "stealth_dc": 24,
     "ac": 25,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173336251514983/IMG_4048.jpg?width=633&height=676",
-    "itemRewards": {"gp" : 18},
+    "rewards": {"gp" : 18},
     "uniqueRewards": {"gp" : 30},
     "unlocks": "cfmammoth",
     "props": ""
@@ -1173,7 +1173,7 @@
     "stealth_dc": 25,
     "ac": 26,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173347907493919/IMG_4046.jpg?width=676&height=676",
-    "itemRewards": {"gp" : 20},
+    "rewards": {"gp" : 20},
     "uniqueRewards": {"gp" : 35},
     "unlocks": "doomfate",
     "props": ""
@@ -1187,7 +1187,7 @@
     "stealth_dc": 27,
     "ac": 28,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998426550112358511/8fe5e9d8019823a5168648cc31d7e0c5.jpg",
-    "itemRewards": {"gp" : 25},
+    "rewards": {"gp" : 25},
     "uniqueRewards": {"gp" : 40},
     "unlocks": "",
     "props": ""
@@ -1201,7 +1201,7 @@
     "stealth_dc": 6,
     "ac": 5,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987201726589317171/IMG_4057.jpg?width=615&height=676",
-    "itemRewards": {"gp" : 1},
+    "rewards": {"gp" : 1},
     "uniqueRewards": {"gp" : 5},
     "unlocks": "bortle",
     "props": ""
@@ -1215,7 +1215,7 @@
     "stealth_dc": 7,
     "ac": 7,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122713682407465/IMG_4023.jpg",
-    "itemRewards": {"gp" : 1},
+    "rewards": {"gp" : 1},
     "uniqueRewards": {"gp" : 5},
     "unlocks": "croaker",
     "props": ""
@@ -1229,7 +1229,7 @@
     "stealth_dc": 8,
     "ac": 9,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987831317842513980/IMG_4062.jpg",
-    "itemRewards": {"gp" : 2},
+    "rewards": {"gp" : 2},
     "uniqueRewards": {"gp" : 5},
     "unlocks": "ccurler",
     "props": ""
@@ -1243,7 +1243,7 @@
     "stealth_dc": 9,
     "ac": 10,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987201738538905630/IMG_4055.jpg?width=388&height=675",
-    "itemRewards": {"gp" : 2},
+    "rewards": {"gp" : 2},
     "uniqueRewards": {"gp" : 5},
     "unlocks": "crawclaw",
     "props": ""
@@ -1257,7 +1257,7 @@
     "stealth_dc": 10,
     "ac": 12,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122679570132992/IMG_4029.jpg",
-    "itemRewards": {"gp" : 3},
+    "rewards": {"gp" : 3},
     "uniqueRewards": {"gp" : 5},
     "unlocks": "cokaseal",
     "props": ""
@@ -1271,7 +1271,7 @@
     "stealth_dc": 12,
     "ac": 14,
     "img": "https://cdn.discordapp.com/attachments/855908840633270282/987120035560583199/IMG_4012.jpg",
-    "itemRewards": {"gp" : 3},
+    "rewards": {"gp" : 3},
     "uniqueRewards": {"gp" : 5},
     "unlocks": "leifhund",
     "props": ""
@@ -1285,7 +1285,7 @@
     "stealth_dc": 12,
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120025594908672/IMG_4013.jpg",
-    "itemRewards": {"gp" : 4},
+    "rewards": {"gp" : 4},
     "uniqueRewards": {"gp" : 6},
     "unlocks": "budwyrm",
     "props": ""
@@ -1299,7 +1299,7 @@
     "stealth_dc": 13,
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987202765925253230/IMG_4058.jpg?width=496&height=676",
-    "itemRewards": {"gp" : 4},
+    "rewards": {"gp" : 4},
     "uniqueRewards": {"gp" : 7},
     "unlocks": "stripelolly",
     "props": ""
@@ -1313,7 +1313,7 @@
     "stealth_dc": 13,
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385715639488552/7b441b14450de01721116b506c26d8e4.jpg",
-    "itemRewards": {"gp" : 4},
+    "rewards": {"gp" : 4},
     "uniqueRewards": {"gp" : 8},
     "unlocks": "aerototl",
     "props": ""
@@ -1327,7 +1327,7 @@
     "stealth_dc": 14,
     "ac": 14,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987202754097328138/IMG_4060.jpg?width=591&height=676",
-    "itemRewards": {"gp" : 5},
+    "rewards": {"gp" : 5},
     "uniqueRewards": {"gp" : 10},
     "unlocks": "greatotl",
     "props": ""
@@ -1341,7 +1341,7 @@
     "stealth_dc": 15,
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987202758249693214/IMG_4059.jpg?width=712&height=676",
-    "itemRewards": {"gp" : 6},
+    "rewards": {"gp" : 6},
     "uniqueRewards": {"Feather Token" : 1},
     "unlocks": "wanderwolf",
     "props": ""
@@ -1355,7 +1355,7 @@
     "stealth_dc": 17,
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385749785321552/42073b13f70f5631dc44cdabe3d89470.jpg",
-    "itemRewards": {"gp" : 6},
+    "rewards": {"gp" : 6},
     "uniqueRewards": {"gp" : 11},
     "unlocks": "bogtsha ",
     "props": ""
@@ -1369,7 +1369,7 @@
     "stealth_dc": 18,
     "ac": 18,
     "img": "https://cdn.discordapp.com/attachments/790441224179941377/991417648040652930/unknown.png",
-    "itemRewards": {"gp" : 7},
+    "rewards": {"gp" : 7},
     "uniqueRewards": {"gp" : 12},
     "unlocks": "direplain",
     "props": ""
@@ -1383,7 +1383,7 @@
     "stealth_dc": 17,
     "ac": 19,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998379882755129474/gwn-monster01.jpg",
-    "itemRewards": {"gp" : 7},
+    "rewards": {"gp" : 7},
     "uniqueRewards": {"gp" : 15},
     "unlocks": "direcroc",
     "props": ""
@@ -1397,7 +1397,7 @@
     "stealth_dc": 19,
     "ac": 20,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998419275670900807/gaetan-weltzer-swamp-crocodile19-spartan-s.jpg",
-    "itemRewards": {"gp" : 8},
+    "rewards": {"gp" : 8},
     "uniqueRewards": {"gp" : 15},
     "unlocks": "pinnacle",
     "props": ""
@@ -1411,7 +1411,7 @@
     "stealth_dc": 17,
     "ac": 22,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998426550322090065/43840c528d9c47c6928d4a9652cedec5.jpg",
-    "itemRewards": {"gp" : 9},
+    "rewards": {"gp" : 9},
     "uniqueRewards": {"gp" : 20},
     "unlocks": "smashmouth",
     "props": ""
@@ -1425,7 +1425,7 @@
     "stealth_dc": 22,
     "ac": 22,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998381404566065242/ec2f83369a052fa1906fc4aff8b46070.jpg",
-    "itemRewards": {"gp" : 12},
+    "rewards": {"gp" : 12},
     "uniqueRewards": {"gp" : 25},
     "unlocks": "",
     "props": ""
