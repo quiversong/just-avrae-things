@@ -117,7 +117,7 @@ def print_table(data, title = None, header = None, column_lengths = None):
         column_lengths[0] += ROW_LENGTH % column_count
 
     all_rows = [header] + data if header != None else data
-    f = title if title != None else ''
+    f = (title if title.endswith('\n') else title + '\n') if title != None else ''
     f += '```'
     for row_index in range(len(all_rows)):
         row = all_rows[row_index]
