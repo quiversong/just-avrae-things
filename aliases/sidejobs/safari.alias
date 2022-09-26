@@ -248,13 +248,6 @@ if safari_success:
     f += f'Congratulations! You have successfully captured the {beast["name"]}!'
     fields.append(f)
 
-    f = add_and_format_rewards('You gained these rewards:|\n', beast['rewards'])
-    fields.append(f)
-
-    if stats['captures'] == 1:
-        f = add_and_format_rewards('You also gained these one-time rewards:|\n', beast['uniqueRewards'])
-        fields.append(f)
-
     if 'unlocks' in beast and len(beast['unlocks']) > 0:
         unlocked_codes = []
         for unlocked_code in beast['unlocks']:
@@ -268,6 +261,13 @@ if safari_success:
             f = 'You can now attempt to capture new beasts!|'
             f += '\n'.join(unlocked_codes) + '\n\n'
             fields.append(f)
+
+    f = add_and_format_rewards('You gained these rewards:|\n', beast['rewards'])
+    fields.append(f)
+
+    if stats['captures'] == 1:
+        f = add_and_format_rewards('You also gained these one-time rewards:|\n', beast['uniqueRewards'])
+        fields.append(f)
 else:
     f = f'__***THE {beast["name"].upper()} ESCAPES!***__|'
     f += 'Better luck next time!'
