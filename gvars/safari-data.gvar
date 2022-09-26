@@ -38,7 +38,7 @@
     "ac": 12,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988924752733282354/EWBK5EdU0AATJog.jpg?width=709&height=676",
     "rewards": {"gp" : 3},
-    "uniqueRewards": {"Ruby Shard (50gp)" : 1},
+    "uniqueRewards": {"Ruby Shard (25gp)" : 1},
     "unlocks": "tumbletide",
     "props": ""
   },
@@ -74,10 +74,10 @@
     "code": "swombat",
     "name": "Shadow Wombat",
     "habitat": "Coral Reef",
-    "desc": "\"Shadow Wombats are short-legged, muscular marsupials native to the Green Vale. They are strictly nocturnal, emerging only at night to feed on grasses, herbs, bark, and roots. Researchers believe they originally hailed from the plane of Shadows.\n\nTheir whelps always have to be kept in constant darkness, as bright light could kill them. Not surprisingly, shadow wombat blood is pitch-black in color, and leave a nasty stain.\"\n\n-Boza Stormgroomer, Green Vale Zoologist ",
+    "desc": "\"Shadow Wombats are short-legged, muscular marsupials native to the Green Vale. They are strictly nocturnal, emerging only at night to feed on grasses, herbs, bark, and roots. Researchers believe they originally hailed from the plane of Shadows.\n\nTheir whelps always have to be kept in constant darkness, as bright light could kill them. Not surprisingly, shadow wombat blood is pitch-black in color, and leaves a nasty stain.\"\n\n-Boza Stormgroomer, Green Vale Zoologist ",
     "habitat_dc": 12,
-    "stealth_dc": 14,
-    "ac": 16,
+    "stealth_dc": 17,
+    "ac": 14,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988287850493673522/IMG_4072.jpg?width=478&height=676",
     "rewards": {"gp" : 6},
     "uniqueRewards": {"gp" : 18},
@@ -88,7 +88,7 @@
     "code": "funfennec",
     "name": "Fungal Fennec",
     "habitat": "Coral Reef",
-    "desc": "\"Although no more stealthy or intellegent than their Frost Fennec ancestors, Fungal Fennecs have a tougher exterior, requiring a more solid blow to stun them.\n\nThese river prowlers have slowly developed an overdependence on pondscum and fungus for their nutritional needs, eliminating their need to hunt small game.\"\n\n-Boza Stormgroomer, Green Vale Zoologist ",
+    "desc": "\"Although no more stealthy or intellegent than their Frost Fennec ancestors, Fungal Fennecs have a tougher exterior, requiring a more solid blow to stun them.\n\nThese flat-browed river prowlers have slowly developed an overdependence on pondscum and fungus for their nutritional needs, eliminating their need to hunt small game.\"\n\n-Boza Stormgroomer, Green Vale Zoologist ",
     "habitat_dc": 14,
     "stealth_dc": 15,
     "ac": 17,
@@ -150,7 +150,8 @@
     "ac": 22,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385716407046266/2c1bd44ac98f8fa88a69537cb79fca19.jpg",
     "rewards": {"gp" : 12},
-    "uniqueRewards": {"gp" : 25},
+    "uniqueRewards": {"gp" : 25,
+"Turtle Brooch" : 1},
     "unlocks": "caithodrake",
     "props": ""
   },
@@ -206,7 +207,8 @@
     "ac": 26,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987166936481816616/IMG_4042.jpg",
     "rewards": {"gp" : 30},
-    "uniqueRewards": {"gp" : 45},
+    "uniqueRewards": {"gp" : 45,
+"Coral" : 1},
     "unlocks": "reeftidedragon",
     "props": ""
   },
@@ -220,7 +222,9 @@
     "ac": 28,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998421498580709466/c50d4bce2c8b2a85b4e5c7a70091a385.jpg ",
     "rewards": {"gp" : 36},
-    "uniqueRewards": {"Reeftide Dragon Scale (50gp)" : 1, "gp" : 50},
+    "uniqueRewards": {"Reeftide Dragon Scale (100gp)" : 1,
+"gp" : 50,
+"Coral Bead" : 1},
     "unlocks": "",
     "props": ""
   },
@@ -277,8 +281,7 @@
     "ac": 10,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173314403385415/IMG_4052.jpg?width=599&height=676",
     "rewards": {"sp" : 11},
-    "uniqueRewards": {"gp" : 6, 
-"+1 Net" : 1},
+    "uniqueRewards": {"gp" : 6},
     "unlocks": "bluebelly",
     "props": ""
   },
@@ -292,7 +295,8 @@
     "ac": 10,
     "img": "https://media.discordapp.net/attachments/988476850152038550/996794430667358329/milica-celikovic-16-me.jpg",
     "rewards": {"sp" : 15},
-    "uniqueRewards": {"gp" : 8},
+    "uniqueRewards": {"gp" : 8,
+"Blue Sangro Fruit Rations" : 5},
     "unlocks": "bananabelly",
     "props": ""
   },
@@ -306,7 +310,7 @@
     "ac": 13,
     "img": "https://media.discordapp.net/attachments/988476850152038550/996794439345377360/milica-celikovic-32-um.jpg",
     "rewards": {"sp" : 15},
-    "uniqueRewards": {"gp" : 8},
+    "uniqueRewards": {"gp" : 10},
     "unlocks": "ballaw",
     "props": ""
   },
@@ -320,7 +324,8 @@
     "ac": 14,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122690672431184/IMG_4027.jpg",
     "rewards": {"gp" : 2},
-    "uniqueRewards": {"gp" : 8},
+    "uniqueRewards": {"gp" : 8,
+"Anti-venom" : 1},
     "unlocks": "surroval",
     "props": ""
   },
@@ -348,7 +353,7 @@
     "ac": 17,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385798317608980/b85e6d70daa396846008b12b2a3504f2.jpg",
     "rewards": {"gp" : 3},
-    "uniqueRewards": {"gp" : 10},
+    "uniqueRewards": {"gp" : 13},
     "unlocks": "aoxo",
     "props": ""
   },
@@ -362,7 +367,8 @@
     "ac": 18,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988287833376694333/IMG_4074.jpg",
     "rewards": {"gp" : 6},
-    "uniqueRewards": {"gp" : 15},
+    "uniqueRewards": {"gp" : 15,
+"Azure Oxothynx Tooth (15gp)" : 1},
     "unlocks": "roxo",
     "props": ""
   },
@@ -376,7 +382,8 @@
     "ac": 19,
     "img": "https://media.discordapp.net/attachments/855908840633270282/988287843430449162/IMG_4073.jpg?width=676&height=676",
     "rewards": {"gp" : 7},
-    "uniqueRewards": {"gp" : 15},
+    "uniqueRewards": {"gp" : 15,
+"Ruby Oxothynx Tooth (20gp)" : 1},
     "unlocks": "mossjaw",
     "props": ""
   },
@@ -418,7 +425,8 @@
     "ac": 23,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998426635076370553/e92c4ce34c1980115d1f9267580ff1fa.jpg",
     "rewards": {"gp" : 12},
-    "uniqueRewards": {"gp" : 25},
+    "uniqueRewards": {"gp" : 25,
+"Prehistoric Oxothynx Tooth (25gp)" : 1},
     "unlocks": "kirin",
     "props": ""
   },
@@ -432,7 +440,8 @@
     "ac": 24,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134445419114556/IMG_4033.jpg",
     "rewards": {"gp" : 13},
-    "uniqueRewards": {"gp" : 30},
+    "uniqueRewards": {"gp" : 30,
+"Inspiration" : 1},
     "unlocks": "dcrab",
     "props": ""
   },
@@ -460,7 +469,8 @@
     "ac": 25,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998418348519993374/riptide-chimera-ryan-barger.jpg",
     "rewards": {"gp" : 17},
-    "uniqueRewards": {"gp" : 35},
+    "uniqueRewards": {"gp" : 35,
+"Sandstone Bead" : 1},
     "unlocks": "",
     "props": ""
   },
@@ -600,7 +610,8 @@
     "ac": 26,
     "img": "https://cdn.discordapp.com/attachments/988476850152038550/998728697081245817/3c0fa045f24b5f41efaf43eb0fa4410f.jpg",
     "rewards": {"gp" : 27},
-    "uniqueRewards": {"gp" : 22},
+    "uniqueRewards": {"gp" : 22,
+"Inspiration" : 1},
     "unlocks": "devour ",
     "props": ""
   },
@@ -670,7 +681,8 @@
     "ac": 29,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385716163788830/1ab13ca644cb7c6a32c3bcdd6e2cc914.jpg",
     "rewards": {"gp" : 40},
-    "uniqueRewards": {"gp" : 25},
+    "uniqueRewards": {"Jungleviper Oxothynx Fang (40gp)" : 1,
+"Serpent Venom" : 1},
     "unlocks": "dandelion",
     "props": ""
   },
@@ -698,7 +710,8 @@
     "ac": 30,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385715907940412/fd05d3e8a909fa3b2ed1258e23d6c1a2.jpg",
     "rewards": {"gp" : 50},
-    "uniqueRewards": {"gp" : 100},
+    "uniqueRewards": {"gp" : 100,
+"Jasper Bead" : 1},
     "unlocks": "",
     "props": ""
   },
@@ -769,7 +782,7 @@
     "img": "https://media.discordapp.net/attachments/855908840633270282/988922193767432282/unknown.png?width=437&height=675",
     "rewards": {"sp" : 7},
     "uniqueRewards": {"gp" : 4},
-    "unlocks": "magmal",
+    "unlocks": "magmax",
     "props": ""
   },
   {
@@ -908,7 +921,8 @@
     "ac": 20,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385798858686494/7cc1a7a5301108e644e5a0fe8bb64819.jpg",
     "rewards": {"7 gp" : 1},
-    "uniqueRewards": {"gp" : 15},
+    "uniqueRewards": {"gp" : 15,
+"Magebane Oxothynx Teeth (10gp)" : 3},
     "unlocks": "scorptiger",
     "props": ""
   },
@@ -936,7 +950,8 @@
     "ac": 22,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385716688076820/4006d1a5576ed74930abdfda3c36d6ba.jpg",
     "rewards": {"10 gp" : 1},
-    "uniqueRewards": {"gp" : 20},
+    "uniqueRewards": {"gp" : 20,
+"Sandstone Bead" : 1},
     "unlocks": "",
     "props": ""
   },
@@ -1048,7 +1063,8 @@
     "ac": 18,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998381404360548362/e65f99e88bc36fb676db073674288c09.jpg",
     "rewards": {"gp" : 7},
-    "uniqueRewards": {"gp" : 16},
+    "uniqueRewards": {"gp" : 16,
+"Landstrider Griffon Feathers (5gp)" : 5},
     "unlocks": "masly, ledroll",
     "props": ""
   },
@@ -1090,7 +1106,8 @@
     "ac": 21,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173354974896168/IMG_4045.jpg",
     "rewards": {"gp" : 9},
-    "uniqueRewards": {"gp" : 20},
+    "uniqueRewards": {"gp" : 20,
+"Inspiration" : 1},
     "unlocks": "shman",
     "props": ""
   },
@@ -1132,7 +1149,7 @@
     "ac": 24,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385750515134596/6400097a14ee0691ecb9f5ad9ad086c2.jpg",
     "rewards": {"gp" : 13},
-    "uniqueRewards": {"gp" : 25},
+    "uniqueRewards": {"Moonstone (50gp)" : 1},
     "unlocks": "glreav",
     "props": ""
   },
@@ -1174,7 +1191,8 @@
     "ac": 26,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987173347907493919/IMG_4046.jpg?width=676&height=676",
     "rewards": {"gp" : 20},
-    "uniqueRewards": {"gp" : 35},
+    "uniqueRewards": {"gp" : 35,
+"Potion of Fire Resistance" : 1},
     "unlocks": "doomfate",
     "props": ""
   },
@@ -1188,7 +1206,8 @@
     "ac": 28,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998426550112358511/8fe5e9d8019823a5168648cc31d7e0c5.jpg",
     "rewards": {"gp" : 25},
-    "uniqueRewards": {"gp" : 40},
+    "uniqueRewards": {"gp" : 40,
+"Quartz Bead" : 1},
     "unlocks": "",
     "props": ""
   },
@@ -1216,7 +1235,8 @@
     "ac": 7,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122713682407465/IMG_4023.jpg",
     "rewards": {"gp" : 1},
-    "uniqueRewards": {"gp" : 5},
+    "uniqueRewards": {"gp" : 5,
+"Acid Vial" : 1},
     "unlocks": "croaker",
     "props": ""
   },
@@ -1272,7 +1292,8 @@
     "ac": 14,
     "img": "https://cdn.discordapp.com/attachments/855908840633270282/987120035560583199/IMG_4012.jpg",
     "rewards": {"gp" : 3},
-    "uniqueRewards": {"gp" : 5},
+    "uniqueRewards": {"gp" : 5,
+"Epte Flower (6gp)": 1},
     "unlocks": "leifhund",
     "props": ""
   },
@@ -1300,7 +1321,8 @@
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987202765925253230/IMG_4058.jpg?width=496&height=676",
     "rewards": {"gp" : 4},
-    "uniqueRewards": {"gp" : 7},
+    "uniqueRewards": {"gp" : 7,
+"+1 Net" : 1},
     "unlocks": "stripelolly",
     "props": ""
   },
@@ -1328,7 +1350,8 @@
     "ac": 14,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987202754097328138/IMG_4060.jpg?width=591&height=676",
     "rewards": {"gp" : 5},
-    "uniqueRewards": {"gp" : 10},
+    "uniqueRewards": {"gp" : 10,
+"Spell Scroll (Gust)" : 1},
     "unlocks": "greatotl",
     "props": ""
   },
@@ -1412,7 +1435,8 @@
     "ac": 22,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998426550322090065/43840c528d9c47c6928d4a9652cedec5.jpg",
     "rewards": {"gp" : 9},
-    "uniqueRewards": {"gp" : 20},
+    "uniqueRewards": {
+"Pinnacle Oxothynx Tooth (30gp)" : 1},
     "unlocks": "smashmouth",
     "props": ""
   },
@@ -1426,7 +1450,8 @@
     "ac": 22,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998381404566065242/ec2f83369a052fa1906fc4aff8b46070.jpg",
     "rewards": {"gp" : 12},
-    "uniqueRewards": {"gp" : 25},
+    "uniqueRewards": {"gp" : 35,
+"Shell Bead" : 1},
     "unlocks": "",
     "props": ""
   }
