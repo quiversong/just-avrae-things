@@ -200,7 +200,7 @@ aan = 'an ' if beast["name"].strip().lower()[0] in 'aeiou' else 'a '
 title = f'{c_first_name} tries to capture {aan}{beast["name"]}!'
 desc = f'*Using their {weapon["name"]}, they explore the {beast["habitat"]} region!*'
 
-f = "*The challengers activates their Safari pass to be transported to the creature's habitat...*|"
+f = "*The challengers activates their Safari Bracelet to be transported to the creature's habitat...*|"
 f += f'*Will {c_first_name} display the hunting skills necessary to capture the prey?*'
 fields.append(f)
 
