@@ -185,9 +185,10 @@ nature_success = nature_roll.result.crit == 1 or nature_roll.total >= beast["hab
 perception_adv = True if nature_success else None
 perception_roll = vroll(cs.perception.d20(base_adv = perception_adv))
 perception_success = perception_roll.result.crit == 1 or perception_roll.total >= beast["stealth_dc"]
-attack_roll = vroll(f'1d20 + {weapon["a_bonus"]}')
+base_attack_die = '1d20' if perception_success else '2d20kl1'
+attack_roll = vroll(f'{base_attack_die} + {weapon["a_bonus"]}')
 attack_success = attack_roll.result.crit == 1 or attack_roll.total >= beast["ac"]
-safari_success = perception_success and attack_success
+safari_success = attack_success
 
 ########### MOUNT EMBED ###########
 aan = 'an ' if beast["name"].strip().lower()[0] in 'aeiou' else 'a '
@@ -210,19 +211,20 @@ f += nature_success_text if nature_success else nature_failure_text
 fields.append(f)
 
 perception_success_text = f"{c_first_name} quickly finds the {beast['name']}, but can they capture it?!"
-perception_failure_text = f"{c_first_name} can't seem to find the {beast['name']} no matter how hard they try, and time runs out!"
+perception_failure_text = f"{c_first_name} can't seem to find the {beast['name']}!"
 f = "__*Prey detection...*__|"
 f += f"Perception check: {sl if perception_success else fl}\n{perception_roll.full}\n"
 f += perception_success_text if perception_success else perception_failure_text
 fields.append(f)
 
-if perception_success:
-    attack_success_text = f"{c_first_name} successfuly captures the {beast['name']}!"
-    attack_failure_text = f"The {beast['name']} is too quick for {c_first_name} to be able to capture it, and the time runs out!"
-    f = "__*Capture attempt...*__|"
-    f += f"Attack roll: {sl if attack_success else fl}\n{attack_roll.full}\n"
-    f += attack_success_text if attack_success else attack_failure_text
-    fields.append(f)
+attack_success_text = f"{c_first_name} successfuly captures the {beast['name']}!" if perception_success else \
+        f"{beast['name']} gets the jump on {c_first_name}, but they still capture the beast against all odds!"
+attack_failure_text = f"The {beast['name']} is too quick for {c_first_name} to be able to capture it, and time runs out!" if perception_success else \
+        f"{beast['name']} gets the jump on {c_first_name} and pins them down!"
+f = "__*Capture attempt...*__|"
+f += f"Attack roll: {sl if attack_success else fl}\n{attack_roll.full}\n"
+f += attack_success_text if attack_success else attack_failure_text
+fields.append(f)
 
 if not beast['code'] in global_stats:
     global_stats[beast['code']] = EMPTY_STATS.copy()
