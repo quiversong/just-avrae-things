@@ -88,7 +88,7 @@ if len(args) > 0 and args[0] == 'reset':
         err('You are not allowed to do that!')
         return 1
     c.delete_cvar(TIME_VAR)
-    fields.append('Resetting dueling time control...|Done!')
+    fields.append('Resetting safari time control...|Done!')
     return 1
 
 if len(args) > 0 and args[0] == 'resetlog':
@@ -96,7 +96,7 @@ if len(args) > 0 and args[0] == 'resetlog':
         err('You are not allowed to do that!')
         return 1
     c.delete_cvar(STATS_VAR)
-    fields.append('Resetting dueling progress and log...|Done!')
+    fields.append('Resetting safari progress and log...|Done!')
     return 1
 
 all_beasts = load_json(get_gvar(DATA_VAR))["beasts"]
@@ -129,7 +129,7 @@ if len(args) > 0 and args[0] == 'list':
     habitats = []
     for beast in all_beasts:
         if 'starter' in beast['props'] or beast['code'] in global_stats:
-            habitat = beast['habitat']
+            habitat = beast['habitat'].strip()
             habitats.append(habitat) if not habitat in habitats else None
             stats = global_stats[beast['code']] if beast['code'] in global_stats else EMPTY_STATS
             if not habitat in data_per_habitat:
