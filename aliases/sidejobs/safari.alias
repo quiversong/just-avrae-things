@@ -22,9 +22,23 @@ def get_beast_data(all_beasts, beast_code):
         'stealth_dc': beast["stealth_dc"],
         'ac': beast["ac"],
         'img': beast["img"],
+        'rewards': beast["rewards"],
+        'uniqueRewards': beast['uniqueRewards'],
         'unlocks': [u.strip() for u in beast['unlocks'].split(',')] if beast['unlocks'].strip() != '' else [],
         'props': [u.strip() for u in beast['props'].split(',')] if beast['props'].strip() != '' else []
     }
+
+def add_reward(reward, qty):
+    if reward.lower() in ['cp', 'sp', 'gp', 'ep', 'pp']:
+        utils.add_coins({ reward: qty })
+    elif reward.lower() == 'inspiration':
+        utils.add_inspiration()
+    else:
+        utils.add_to_bag('Safari', { reward: qty })
+
+def format_reward(reward, qty):
+    fqty = str(qty) if qty > 9 else f' {qty}'
+    return f'`{fqty}x {reward}`\n'
 
 ADMIN_USER_IDS = [771997367611949076]
 if get_svar('SEVENTRA_ALIAS_ADMINS') != None:
@@ -226,6 +240,19 @@ if safari_success:
     f = f'__***{c.name.upper()} WINS!***__|'
     f += f'Congratulations! You have successfully captured the {beast["name"]}!'
     fields.append(f)
+
+    f = 'You gained these rewards:|\n'
+    for reward in beast['rewards'].items():
+        add_reward(reward[0], reward[1])
+        f += format_reward(reward[0], reward[1])
+    fields.append(f)
+
+    if stats['captures'] == 1:
+        f = 'You also gained these one-time rewards:|\n'
+        for reward in beast['uniqueRewards'].items():
+            add_reward(reward[0], reward[1])
+            f += format_reward(reward[0], reward[1])
+        fields.append(f)
 
     if 'unlocks' in beast and len(beast['unlocks']) > 0:
         unlocked_codes = []
