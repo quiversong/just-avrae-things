@@ -33,16 +33,20 @@ def add_reward(reward, qty):
         utils.add_coins({ reward: qty })
     elif reward.lower() == 'inspiration':
         utils.add_inspiration()
+    elif reward.lower().strip().endswith(' bead'):
+        return utils.add_vsheet_feature_if_not_existent("safaribeads", "Green Vale Safari Beads", reward.strip())
     else:
         utils.add_to_bag('Safari', { reward: qty })
+    return True
 
 def add_and_format_rewards(title, rewards):
     formatted = title
     for reward_item in rewards.items():
         reward, qty = reward_item[0], reward_item[1]
-        add_reward(reward, qty)
-        fqty = str(qty) if qty > 9 else f' {qty}'
-        formatted += f'`{fqty}x {reward}`\n'
+        item_added = add_reward(reward, qty)
+        if item_added:
+            fqty = str(qty) if qty > 9 else f' {qty}'
+            formatted += f'`{fqty}x {reward}`\n'
     return formatted
 
 ADMIN_USER_IDS = [771997367611949076]
