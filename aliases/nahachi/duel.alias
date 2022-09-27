@@ -508,7 +508,7 @@ if is_player_winner:
             if stripped == 'inspiration':
                 add_inspiration()
                 rewards_text += '\n`Inspiration`'
-            elif 'xp' in stripped and 'admin' in stripped:
+            elif 'xp' in stripped and 'ping' in stripped:
                 rewards_text += f'\n`{qty} {reward}`'
             elif 'seventran samurai feat' in stripped:
                 rewards_text += f'\n`{reward} (use `!sevfeat` to see it)`'
