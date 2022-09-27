@@ -260,6 +260,8 @@ if safari_success:
             should_add = not unlocked_code in global_stats
             if should_add:
                 unlocked_beast = get_beast_data(all_beasts, unlocked_code)
+                if unlocked_beast == None:
+                    err(f"Could not find matching beast to unlock. This is an alias internal error. Please contact the server's Dragonspeakers.\n`Beast code: {beast['code']}`")
                 unlocked_codes.append(f'* `{unlocked_code}`: {unlocked_beast["name"]} @ the {unlocked_beast["habitat"]}.')
                 global_stats[unlocked_code] = EMPTY_STATS.copy()
 
