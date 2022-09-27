@@ -17,7 +17,7 @@
     "code": "pebbles",
     "name": "Pebbled Spriteling",
     "habitat": "Coral Reef",
-    "desc": "\"Moving right along...You now seek a creature that many adventurers have encountered, but very few seem to notice. The Pebbled Spriteling takes immense pride in it's greatest tricks.\n\nOften found bombarding unassuming travelers with small rocks and pebbles, all while blending in using their natural stone forms. When startled, a Pebbled Spriteling can disassemble it's form into an unassuming pile of stones. Truly fascinating...While these nature spirit pranksters remain perfectly motionless they can easily become undetectable in most environments.\"\n\n-Boza Stormgroomer, Green Vale Zoologist ",
+    "desc": "\"Moving right along...You now seek a creature that many adventurers have encountered, but very few seem to notice. The Pebbled Spriteling takes immense pride in it's greatest tricks.\n\nOften found bombarding unassuming travelers with small rocks and pebbles, all while blending in using their natural stone forms. When startled, a Pebbled Spriteling can disassemble it's form into an unassuming pile of stones. Truly fascinating...While these nature spirit pranksters remain perfectly motionless they can easily become undetectable in most environments.\"\n\nSpecial Properties: this creature is known for its exceptional stealth capabilities.\n\n-Boza Stormgroomer, Green Vale Zoologist",
     "habitat_dc": 9,
     "stealth_dc": 20,
     "ac": 10,
