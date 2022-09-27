@@ -812,7 +812,7 @@
     "stealth_dc": 11,
     "ac": 13,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122703460859914/IMG_4025.jpg?width=676&height=676",
-    "rewards": {"2 gp" : 1},
+    "rewards": {"gp" : 2},
     "uniqueRewards": {"gp" : 5},
     "unlocks": "babbleboon",
     "props": ""
@@ -826,7 +826,7 @@
     "stealth_dc": 10,
     "ac": 14,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385751081369750/06ab7749732252d617b8c6d9bafb828f.jpg",
-    "rewards": {"3 gp" : 1},
+    "rewards": {"gp" : 3},
     "uniqueRewards": {"gp" : 5},
     "unlocks": "dregnaur, wyrmlicorn",
     "props": ""
@@ -840,7 +840,7 @@
     "stealth_dc": 13,
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134378129899620/IMG_4041.jpg",
-    "rewards": {"3 gp" : 1},
+    "rewards": {"gp" : 3},
     "uniqueRewards": {"gp" : 5},
     "unlocks": "stargoyle",
     "props": ""
@@ -854,7 +854,7 @@
     "stealth_dc": 14,
     "ac": 14,
     "img": "https://media.discordapp.net/attachments/988476850152038550/995433448229568582/Qiy1sSU.jpg",
-    "rewards": {"4 gp" : 1},
+    "rewards": {"gp" : 4},
     "uniqueRewards": {"gp" : 5},
     "unlocks": "craggling",
     "props": ""
@@ -868,7 +868,7 @@
     "stealth_dc": 15,
     "ac": 15,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385799185829968/ae69dd4d9140d281cbab25560dcdcacc.jpg",
-    "rewards": {"4 gp" : 1},
+    "rewards": {"gp" : 4},
     "uniqueRewards": {"gp" : 5},
     "unlocks": "horgonaut",
     "props": ""
@@ -882,7 +882,7 @@
     "stealth_dc": 16,
     "ac": 16,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134460040450088/IMG_4030.jpg",
-    "rewards": {"5 gp" : 1},
+    "rewards": {"gp" : 5},
     "uniqueRewards": {"gp" : 7},
     "unlocks": "bsserpent",
     "props": ""
@@ -896,7 +896,7 @@
     "stealth_dc": 16,
     "ac": 18,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987134454369751100/IMG_4031.jpg?width=474&height=676",
-    "rewards": {"6 gp" : 1},
+    "rewards": {"gp" : 6},
     "uniqueRewards": {"gp" : 10},
     "unlocks": "braik",
     "props": ""
@@ -910,7 +910,7 @@
     "stealth_dc": 17,
     "ac": 19,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122696041156629/IMG_4026.jpg?width=541&height=676",
-    "rewards": {"6 gp" : 1},
+    "rewards": {"gp" : 6},
     "uniqueRewards": {"gp" : 13},
     "unlocks": "magebane",
     "props": ""
@@ -924,7 +924,7 @@
     "stealth_dc": 17,
     "ac": 20,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385798858686494/7cc1a7a5301108e644e5a0fe8bb64819.jpg",
-    "rewards": {"7 gp" : 1},
+    "rewards": {"gp" : 7},
     "uniqueRewards": {"gp" : 15,
 "Magebane Oxothynx Teeth (10gp)" : 3},
     "unlocks": "scorptiger",
@@ -939,7 +939,7 @@
     "stealth_dc": 20,
     "ac": 20,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998381404788371567/63c949cd65d3e19a8d96c8d67a9f9967.jpg",
-    "rewards": {"8 gp" : 1},
+    "rewards": {"gp" : 8},
     "uniqueRewards": {"gp" : 15},
     "unlocks": "runesnout",
     "props": "attack_penalty_3"
