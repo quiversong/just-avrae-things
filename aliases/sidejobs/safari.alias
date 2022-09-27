@@ -29,11 +29,12 @@ def get_beast_data(all_beasts, beast_code):
     }
 
 def add_reward(reward, qty):
-    if reward.lower() in ['cp', 'sp', 'gp', 'ep', 'pp']:
+    raw = reward.lower().strip()
+    if raw in ['cp', 'sp', 'gp', 'ep', 'pp']:
         utils.add_coins({ reward: qty })
-    elif reward.lower() == 'inspiration':
+    elif raw == 'inspiration':
         utils.add_inspiration()
-    elif reward.lower().strip().endswith(' bead'):
+    elif raw.endswith(' bead') and not raw.endswith('journal bead'):
         return utils.add_vsheet_feature_if_not_existent("safaribeads", "Green Vale Safari Beads", reward.strip())
     else:
         utils.add_to_bag('Safari', { reward: qty })
@@ -195,7 +196,8 @@ perception_adv = True if nature_success else None
 perception_roll = vroll(cs.perception.d20(base_adv = perception_adv))
 perception_success = perception_roll.result.crit == 1 or perception_roll.total >= beast["stealth_dc"]
 base_attack_die = '1d20' if perception_success else '2d20kl1'
-attack_roll = vroll(f'{base_attack_die} + {weapon["a_bonus"]}')
+misc_roll = ([f' - {p.split("_")[2]}' for p in beast['props'] if p.lower().strip().startswith('attack_penalty_')] + [''])[0]
+attack_roll = vroll(f'{base_attack_die} + {weapon["a_bonus"]}{misc_roll}')
 attack_success = attack_roll.result.crit == 1 or attack_roll.total >= beast["ac"]
 safari_success = attack_success
 
@@ -204,7 +206,7 @@ aan = 'an ' if beast["name"].strip().lower()[0] in 'aeiou' else 'a '
 title = f'{c_first_name} tries to capture {aan}{beast["name"]}!'
 desc = f'*Using their {weapon["name"]}, they explore the {beast["habitat"]} region!*'
 
-f = "*The challengers activates their Safari Bracelet to be transported to the creature's habitat...*|"
+f = "*The challenger activates their Safari Bracelet to be transported to the creature's habitat...*|"
 f += f'*Will {c_first_name} display the hunting skills necessary to capture the prey?*'
 fields.append(f)
 
