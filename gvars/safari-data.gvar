@@ -19,14 +19,14 @@
     "habitat": "Coral Reef",
     "desc": "\"Moving right along...You now seek a creature that many adventurers have encountered, but very few seem to notice. The Pebbled Spriteling takes immense pride in it's greatest tricks.\n\nOften found bombarding unassuming travelers with small rocks and pebbles, all while blending in using their natural stone forms. When startled, a Pebbled Spriteling can disassemble it's form into an unassuming pile of stones. Truly fascinating...While these nature spirit pranksters remain perfectly motionless they can easily become undetectable in most environments.\"\n\n-Boza Stormgroomer, Green Vale Zoologist ",
     "habitat_dc": 9,
-    "stealth_dc": 9,
+    "stealth_dc": 20,
     "ac": 10,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987201730909466624/IMG_4056.jpg?width=462&height=676",
     "rewards": {"gp" : 1},
     "uniqueRewards": {"gp" : 16, 
 "Azurite (10gp)" : 1},
     "unlocks": "rvole",
-    "props": ""
+    "props": "extra_stealth"
   },
   {
     "code": "rvole",
@@ -105,12 +105,12 @@
     "desc": "\"Amber Anvilcrabs, which are native to islands in the southern Seventran oceans, use their claws to gain a dietary advantage. At adult size, their claws are capable of splitting a wrought iron anvil  — hence their nickname — but also other crabs, fruits, nuts and a wide variety of other foods that they can get their claws on...\n\nEnsure they don't get the chance to take a crack at you unless you're fine with having your bones crushed.\"\n\n-Prathus Dawnroar, Safari Guide ",
     "habitat_dc": 16,
     "stealth_dc": 16,
-    "ac": 18,
+    "ac": 22,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998381405396545606/bc64d622d975158ebab0d49ec29113b62.jpg",
     "rewards": {"gp" : 8},
     "uniqueRewards": {"gp" : 20},
     "unlocks": "seawolf",
-    "props": ""
+    "props": "extra_ac"
   },
   {
     "code": "seawolf",
@@ -147,7 +147,7 @@
     "desc": "\"It's a bird! It's a turtle! It's actually both, believe it or not! It doesn't take a genius to figure out why these guys are called Skyturtles, but it does take a genius to knock one from the air.\n\nThe Skyturtle has a highly sought after shell made of tough cartlidge, capable of deflecting most projectiles. Your best bet is to capture one when they land for a dip in the rivers, or seas.\"\n\n-Prathus Dawnroar, Safari Guide ",
     "habitat_dc": 20,
     "stealth_dc": 22,
-    "ac": 22,
+    "ac": 21,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998385716407046266/2c1bd44ac98f8fa88a69537cb79fca19.jpg",
     "rewards": {"gp" : 12},
     "uniqueRewards": {"gp" : 25,
@@ -167,7 +167,7 @@
     "rewards": {"gp" : 15},
     "uniqueRewards": {"gp" : 25},
     "unlocks": "glurp",
-    "props": ""
+    "props": "attack_penalty_3"
   },
   {
     "code": "glurp",
@@ -472,7 +472,7 @@
     "uniqueRewards": {"gp" : 35,
 "Sandstone Bead" : 1},
     "unlocks": "",
-    "props": ""
+    "props": "attack_penalty_3"
   },
   {
     "code": "ledroll",
@@ -696,7 +696,8 @@
     "ac": 27,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998380272888320100/bbd6e843856692b034b1dd9a97635123.jpg",
     "rewards": {"gp" : 40},
-    "uniqueRewards": {"gp" : 30},
+    "uniqueRewards": {"gp" : 30,
+"Prathus"s Pouch of Crikeys" : 1},
     "unlocks": "greenback",
     "props": ""
   },
@@ -733,13 +734,14 @@
     "code": "emgerbil",
     "name": "Ember Gerbil",
     "habitat": "Savannah",
-    "desc": "\"Often found to be the culprits responsible for the ignition of bushfires, this next small rodent is capable of storing and discharging biothermal energy.\n\n An Ember Gerbil collects food like any other forager, however they have special pockets in their elastic cheeks they can stuff with dry leaves, brittle woods, and cindersalt. In a sneeze-like blast, the Ember Gerbil can send this inflammatory dust over 20ft into the eyes of its predators.\"\n\n-Boza Stormgroomer, Green Vale Zoologist",
+    "desc": "\"Often found to be the culprits responsible for the ignition of bushfires, this next small rodent is capable of storing and discharging biothermal energy.\n\n An Ember Gerbil collects food like any other forager, however they have special pockets in their elastic cheeks they can stuff with dry leaves, brittle woods, and cindersalt, creating an iridescent dust. In a sneeze-like blast, the Ember Gerbil can send this inflammatory dust over 20ft into the eyes of its predators. When safely harvested, this \"Aurora Dust\" is used for theatric displays.\"\n\n-Boza Stormgroomer, Green Vale Zoologist",
     "habitat_dc": 3,
     "stealth_dc": 6,
     "ac": 6,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122718518415370/IMG_4022.jpg",
     "rewards": {"sp" : 5},
-    "uniqueRewards": {"sp" : 5},
+    "uniqueRewards": {"sp" : 5,
+"Aurora Dust" : 1},
     "unlocks": "cratakiti",
     "props": ""
   },
@@ -795,7 +797,8 @@
     "ac": 10,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987122709479710730/IMG_4024.jpg?width=601&height=676",
     "rewards": {"sp" : 8},
-    "uniqueRewards": {"gp" : 4},
+    "uniqueRewards": {"gp" : 4,
+"Alchemist's Fire" : 1},
     "unlocks": "cowl",
     "props": ""
   },
@@ -938,7 +941,7 @@
     "rewards": {"8 gp" : 1},
     "uniqueRewards": {"gp" : 15},
     "unlocks": "runesnout",
-    "props": ""
+    "props": "attack_penalty_3"
   },
   {
     "code": "runesnout",
@@ -1002,14 +1005,14 @@
     "name": "Kreokh",
     "habitat": "Valley",
     "desc": "\"In order to find this next animal you must submit yourself to hopelessness. The nature spirits Kreokh typically have only appeared to those who have become lost in nature. Some believe they can smell fear on humanoids, and appear to aid them, although they offer comfort more than any literal guidance.\n\nA Kreokh resemble hedgehogs with pale manes of fur and a pair of branch-like horns. They make bright, chipper noises with their tiny mouths, and like to cling to those who tolerate them. Many who encounter them have failed to prove it. Once a lost traveler finds their way, a Kreokh will always disappear in a puff of smoke.\"\n\n-Boza Stormgroomer, Green Vale Zoologist",
-    "habitat_dc": 12,
+    "habitat_dc": 50,
     "stealth_dc": 12,
     "ac": 13,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120051037536336/IMG_4009.jpg?width=480&height=676",
     "rewards": {"gp" : 3},
     "uniqueRewards": {"gp" : 12},
     "unlocks": "hfalpaca",
-    "props": "Automatically fail adaption check?"
+    "props": "difficult_habitat"
   },
   {
     "code": "hfalpaca",
@@ -1123,7 +1126,7 @@
     "rewards": {"pp" : 1},
     "uniqueRewards": {"gp" : 20},
     "unlocks": "cfboar",
-    "props": ""
+    "props": "attack_penalty_3"
   },
   {
     "code": "cfboar",
@@ -1201,9 +1204,9 @@
     "name": "Doomfate Pixie",
     "habitat": "Valley",
     "desc": "\"The darkest of omens is your final task of the valley...\n\nThe Doomfate will appear only to taunt and harass those marching towards their doom. These chaotic, boney nature spirits are no larger than an ordinary pixie, but are armed with large mantis like scythes which they may resort to using to inflict physical pain when mental torment fails to inspire enough anguish in their victims to satisfy their thirst.\n\nI've isolated a zone to send you to with a number of lethal creatures, which I hope will satisfy the requirements for their apparition...\"\n\n-Prathus Dawnroar, Safari Guide",
-    "habitat_dc": 26,
-    "stealth_dc": 27,
-    "ac": 28,
+    "habitat_dc": 28,
+    "stealth_dc": 23,
+    "ac": 27,
     "img": "https://media.discordapp.net/attachments/988476850152038550/998426550112358511/8fe5e9d8019823a5168648cc31d7e0c5.jpg",
     "rewards": {"gp" : 25},
     "uniqueRewards": {"gp" : 40,
@@ -1381,7 +1384,7 @@
     "rewards": {"gp" : 6},
     "uniqueRewards": {"gp" : 11},
     "unlocks": "bogtsha ",
-    "props": ""
+    "props": "attack_penalty_3"
   },
   {
     "code": "bogtsha",
@@ -1438,7 +1441,7 @@
     "uniqueRewards": {
 "Pinnacle Oxothynx Tooth (30gp)" : 1},
     "unlocks": "smashmouth",
-    "props": ""
+    "props": "attack_penalty_3"
   },
   {
     "code": "smashmouth",
@@ -1451,7 +1454,8 @@
     "img": "https://media.discordapp.net/attachments/988476850152038550/998381404566065242/ec2f83369a052fa1906fc4aff8b46070.jpg",
     "rewards": {"gp" : 12},
     "uniqueRewards": {"gp" : 35,
-"Shell Bead" : 1},
+"Shell Bead" : 1,
+"1 XP" : 1},
     "unlocks": "",
     "props": ""
   }
