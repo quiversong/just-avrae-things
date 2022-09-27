@@ -36,6 +36,8 @@ def add_reward(reward, qty):
         utils.add_inspiration()
     elif raw.endswith(' bead') and not raw.endswith('journal bead'):
         return utils.add_vsheet_feature_if_not_existent("safaribeads", "Green Vale Safari Beads", reward.strip())
+    elif 'xp' in raw and 'ping' in raw:
+        return True
     else:
         utils.add_to_bag('Safari', { reward: qty })
     return True

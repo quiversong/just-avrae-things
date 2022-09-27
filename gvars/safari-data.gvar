@@ -1456,7 +1456,7 @@
     "rewards": {"gp" : 12},
     "uniqueRewards": {"gp" : 35,
 "Shell Bead" : 1,
-"1 XP" : 1},
+"XP (ping a Guide to have it approved)": 1},
     "unlocks": "",
     "props": ""
   }
