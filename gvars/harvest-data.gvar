@@ -69,7 +69,7 @@
     "roll": [12],
     "prize": "0",
     "image": "randomeffect",
-    "text": " Birdsong lures you down a canopy encrusted pathway, where and poisonous ivy descends from the branches dangling over the trail, smearing all over you as you pass below. Your skin begins to get blotchy, and itch all over for a short period of time!\n"
+    "text": " Birdsong lures you down a canopy encrusted pathway, where dusty moss and poisonous ivy descends from the branches dangling over the trail, smearing all over you as you pass below. Your skin begins to get blotchy, and itch all over for a short period of time!\n"
   },
   {
     "roll": [13],
@@ -255,7 +255,7 @@
     "roll": [80,89],
     "prize": "9gp",
     "image": "pixiedust",
-    "text": "The artificial light surges, washing over Hallow Mountain Botanical Gardens with a golden glow, causing the sugar-frosted coating of winter to melt from the grass near it's mighty entrance. Birdsong erupts from the shrubbery in glee while buzzing bees surf the open spaces from flower to flower, desperately stirring up pollen. The aloft pollen is swirled into tangible ribbons by frosty pixies, and clatter to the ground for your collection.\n\nKatnia looks relieved when you bring the concentrated pixie dust back to her, bolstering her dwindling supply. Katnia compensates you for your harvest, and gives you a warm embrace!\n\nYou gain 9 gold pieces!"
+    "text": "The artificial light surges, washing over Hollow Mountain Botanical Gardens with a golden glow, causing the sugar-frosted coating of winter to melt from the grass near it's mighty entrance. Birdsong erupts from the shrubbery in glee while buzzing bees surf the open spaces from flower to flower, desperately stirring up pollen. The aloft pollen is swirled into tangible ribbons by frosty pixies, and clatter to the ground for your collection.\n\nKatnia looks relieved when you bring the concentrated pixie dust back to her, bolstering her dwindling supply. Katnia compensates you for your harvest, and gives you a warm embrace!\n\nYou gain 9 gold pieces!"
   },
   {
     "roll": [90,99],
@@ -267,6 +267,6 @@
     "roll": [100],
     "prize": "Staff of Snowcrest Flowers",
     "image": "snowcresttree",
-    "text": "Your day starts like any other within the garden. You arrive on time along with a handful of other volunteers and gather your required tools to harvest vegetation. Something feels different today as you delve deep beneath the mountain, determined to uncover something of use hidden in its thriving depths. \n\nYou so enjoy your work that you fall into a rhythm, and before you know it hours have passed by. You find you've lost track of where you are, as well. \n\nBefore you is a wooden glen, where shadows fear a central tree. Upon approaching, a beam of blue light emits from behind the tree, shining across the clearing and washing over you, chilling your skin and warming your core. A branch from the tree reaches down and snaps off in the cold, falling into your arms.\n\nThe end of the branch withers and curls to a perfect swirl, emitting a small glint of light.\n\nYou found a Staff of Snowcrest Flowers!"
+    "text": "Your day starts like any other within the garden. You arrive on time along with a handful of other volunteers and gather your required tools to harvest vegetation. Something feels different today as you delve deep beneath the mountain, determined to uncover something of use hidden in its thriving depths. \n\nYou so enjoy your work that you fall into a rhythm, and before you know it hours have passed by. You find you've lost track of where you are, as well. \n\nBefore you is a wooden glen, where shadows fear a central tree. Upon approaching, a beam of blue light emits from behind the tree, shining across the clearing and washing over you, chilling your skin and warming your core. A branch from the tree reaches down and snaps off in the cold, falling into your arms.\n\nThe end of the branch withers and curls to a perfect swirl, emitting a small glint of light.\n\nYou found a Staff of Snowcrest Flowers!\nDon't forget to add your new staff to your inventory. If this is a duplicate Staff of Snowcrest Flowers, add 50gp instead!"
   }
 ]}

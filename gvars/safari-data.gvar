@@ -721,7 +721,7 @@
     "code": "dwarfcocka",
     "name": "Dwarf Cockatrice",
     "habitat": "Savannah",
-    "desc": "\"The Dwarf Cockatrice, as its name implies, is the love child between a dwarf and a bird-like reptilian... I am just joking. You should see the look on your face.. Hah! \n\nOften mistaken for an infantile cockatress, The dwarf cockatress is in fact fully mature at a height that rarely exceeds 20 inches. Despite their draconic physiology, These creatures more or less resemble white leg horn chickens in both form and function.\"\n \n-Prathus Dawnroar, Safari Guide",
+    "desc": "\"The Dwarf Cockatrice, as its name implies, is the love child between a dwarf and a bird-like reptilian... I am just joking. You should see the look on your face.. Hah! \n\nOften mistaken for an infantile Cockatrice, The Dwarf Cockatrice is in fact fully mature at a height that rarely exceeds 20 inches. Despite their draconic physiology, These creatures more or less resemble white leg horn chickens in both form and function.\"\n \n-Prathus Dawnroar, Safari Guide",
     "habitat_dc": 3,
     "stealth_dc": 6,
     "ac": 5,
