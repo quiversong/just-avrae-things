@@ -2,7 +2,9 @@ embed
 <drac2>
 # Configuration Variables
 IS_LIVE = False
-VERSION = '2.00'
+VERSION = '2.1'
+
+using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
 
 BETA_CAT_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
 LIVE_CAT_VAR = "05788227-fe82-4006-98f2-5e9ec50d2a7e"
@@ -20,7 +22,26 @@ DAILY_CAP = 6
 RIFT_DIE = get_svar('_research_rdie_')
 RIFT_DIE = 270 if RIFT_DIE == None else int(RIFT_DIE)
 
+ADMIN_USER_IDS = [771997367611949076]
+if get_svar('SEVENTRA_ALIAS_ADMINS') != None:
+    admin_ids = load_json(get_svar('SEVENTRA_ALIAS_ADMINS'))
+    ADMIN_USER_IDS += admin_ids
+
 # Code
+def check_if_it_is_first_research_of_the_day(time_of_first_research_var):
+    is_first_research_of_the_day = False
+    if not time_of_first_research_var in cv:
+        c.set_cvar(time_of_first_research_var, str(time()))
+        is_first_research_of_the_day = True
+    else:
+        time_of_first_research = float(cv[time_of_first_research_var])
+        passed_since_first_time = time_of_first_research % 86400
+        midnight_after_first_time = time_of_first_research + 86400 - passed_since_first_time
+        if time() > midnight_after_first_time:
+            is_first_research_of_the_day = True
+            c.set_cvar(time_of_first_research_var, str(time()))
+    return is_first_research_of_the_day
+
 args = &ARGS&
 pargs = argparse(args)
 c = character()
@@ -46,56 +67,9 @@ R_AREAS_VISITED_VAR = "_r_av_"
 R_IMG_VAR = "_r_img_"
 R_TIME_OF_FIRST_VAR = "_r_tofv_"
 
-daily_activity_control = None
-#! daily_activity_control = devrae_f daily_control_init(#P R_TIME_VAR #P DAILY_CAP) !#
-##### devrae function insert [daily_control_init] #####
-daily_activity_control = None
-__p0__ = R_TIME_VAR
-__p1__ = DAILY_CAP
-# returns current counter and wait time text if any
-_var_name = __p0__
-_daily_limit = __p1__
-_cvars = character().cvars
-
-_now = time()
-if _var_name not in _cvars:
-  __result__ = { "count": 0, "wait_time": None }
-  character().set_cvar(_var_name, f"0:0")
-else:
-  _var_parts = _cvars[_var_name].split(':')
-  _count = int(_var_parts[0])
-  _first_time = float(_var_parts[1])
-  _wait_time = None
-  _is_next_day = False
-
-  if _count > 0 and _first_time != None:
-    _passed_in_day_since_first_time = _first_time % 86400
-    _next_midnight_after_first_time = _first_time + (86400 - _passed_in_day_since_first_time)
-    if _now > _next_midnight_after_first_time:
-      _is_next_day = True
-    elif _count >= _daily_limit:
-      _wait_time = _next_midnight_after_first_time - _now
-      _hours = floor(_wait_time / 3600)
-      _minutes = 0
-      if _hours == 0:
-        _minutes = ceil(_wait_time / 60)
-      else:
-        _minutes = ceil((_wait_time % 3600) / 60)
-      _wait_text = (str(_hours) + ' hours and ' if _hours > 0 else '') + str(_minutes) + ' minutes'
-
-  if _is_next_day:
-    _count = 0
-    __result__ = { "count": _count, "wait_time": None }
-    character().set_cvar(_var_name, f"0:0")
-  elif _count < _daily_limit:
-    __result__ = { "count": _count, "wait_time": None }
-  else:
-    __result__ = { "count": _count, "wait_time": _wait_text }
-
-daily_activity_control = __result__
-##### devrae function end [daily_control_init] #####
-research_count = daily_activity_control["count"]
-wait_time = daily_activity_control["wait_time"]
+daily_data = utils.get_daily_activity_data(R_TIME_VAR, DAILY_CAP)
+research_count = daily_data["count"]
+wait_time = daily_data["wait_time"]
 
 footer = "Don't forget to role-play your research!\n"
 footer += f'There is a limit of {DAILY_CAP} researches per day. You have researched {research_count}x today.'
@@ -120,12 +94,18 @@ if len(args) > 0 and args[0] == "stats":
   return 0
 
 if len(args) > 0 and args[0] == "resetstats":
+  if not ctx.author.id in ADMIN_USER_IDS:
+    err('You are not allowed to do that!')
+    return 1
   c.delete_cvar(R_STATS_VAR)
   t = "Resetting research statistics..."
   return 0
 
 # Reset
 if len(args) > 0 and args[0] == "reset":
+  if not ctx.author.id in ADMIN_USER_IDS:
+    err('You are not allowed to do that!')
+    return 1
   c.delete_cvar(R_TIME_VAR)
   c.delete_cvar(R_STAGE_VAR)
   t = "Resetting research state..."
@@ -147,14 +127,19 @@ areas_visited = load_json(cv[R_AREAS_VISITED_VAR]) if R_AREAS_VISITED_VAR in cv 
 spell_attr = 'INT' if intelligenceMod >= charismaMod else 'CHA'
 spell_mod = charismaMod if spell_attr == 'CHA' else intelligenceMod
 
-in_wrong_stage = current_stage and (len(args) == 0 or (len(args) > 0 and current_stage != args[0]))
+in_expected_stage = current_stage and len(args) > 0 and len(args[0]) >= 2 and current_stage.lower().startswith(args[0].lower())
+
+VALID_ACTIONS = ['start', 'identify', 'catalogue']
+chosen_action = ([a for a in VALID_ACTIONS if len(args) > 0 and len(args[0]) > 1 and a.startswith(args[0].lower())] + [''])[0]
+
+in_wrong_stage = current_stage and (len(args) == 0 or chosen_action != current_stage)
 if in_wrong_stage:
     name = entries[entry_id]['name']
     fields.append(f'Oops! You are already researching \'{name}\'!|Use `!research {current_stage}` to continue.')
     thumb = image
     return 1
 
-if len(args) == 0 or (not current_stage and args[0].lower() != 'start'):
+if len(args) == 0 or (not current_stage and chosen_action != 'start'):
     fields.append(f'Ready to start researching?|Type `!research start` to enter the Foundation Research Center.')
     research_images = [
         'https://cdn.discordapp.com/attachments/827581981452795975/851694263058432040/BookGen.jpeg',
@@ -167,9 +152,7 @@ if len(args) == 0 or (not current_stage and args[0].lower() != 'start'):
     img = research_images[roll(f'1d{len(research_images)}') - 1]
     return 0
 
-action = args[0]
-
-if action == "start":
+if chosen_action == "start":
     if wait_time != None:
         f = f'{c.name} is exhausted from so much research today...|'
         f += f'You have to wait {wait_time} until you can research again.'
@@ -177,38 +160,11 @@ if action == "start":
         fields.append(f)
         return 1
 
-    #! research_count = devrae_f daily_control_increase_counter(#P R_TIME_VAR) !#
-    ##### devrae function insert [daily_control_increase_counter] #####
-    research_count = None
-    __p0__ = R_TIME_VAR
-    # returns current counter and wait time text if any
-    _var_name = __p0__
-    _cvars = character().cvars
-    if not _var_name in _cvars or _cvars[_var_name] == "0:0":
-      _now = time()
-      character().set_cvar(_var_name, f'1:{_now}')
-      __result__ = 1
-    else:
-      _var_parts = _cvars[_var_name].split(':')
-      _count = int(_var_parts[0]) + 1
-      _time = _var_parts[1]
-      character().set_cvar(_var_name, f'{_count}:{_time}')
-      __result__ = _count
-    research_count = __result__
-    ##### devrae function end [daily_control_increase_counter] #####
+    utils.increase_daily_activity_data(R_TIME_VAR)
+    research_count = research_count + 1
     footer = footer.replace(f'{research_count - 1}x today', f'{research_count}x today')
 
-    is_first_research_of_the_day = False
-    if not R_TIME_OF_FIRST_VAR in cv:
-        c.set_cvar(R_TIME_OF_FIRST_VAR, str(time()))
-        is_first_research_of_the_day = True
-    else:
-        time_of_first_research = float(cv[R_TIME_OF_FIRST_VAR])
-        passed_since_first_time = time_of_first_research % 86400
-        midnnight_after_first_time = time_of_first_research + 86400 - passed_since_first_time
-        if time() > midnnight_after_first_time:
-            is_first_research_of_the_day = True
-            c.set_cvar(R_TIME_OF_FIRST_VAR, str(time()))
+    is_first_research_of_the_day = check_if_it_is_first_research_of_the_day(R_TIME_OF_FIRST_VAR)
 
     a_roll = roll("1d100")
     category_chances = [(k, v['chance_cha']) if spell_attr == 'CHA' else (k, v['chance_int']) for k, v in categories.items()]
@@ -288,7 +244,7 @@ category = categories[category_id]
 category_name = category['name']
 add_to_bag = None
 
-if action == "identify":
+if chosen_action == "identify":
     rift_chance_roll = roll(f'1d{RIFT_DIE}')
 
     rift_chance = spell_mod
@@ -348,29 +304,12 @@ if action == "identify":
             add_to_bag = creature['loot']
             stats["s_rifts"] = stats["s_rifts"] + 1 if "s_rifts" in stats else 1
         else:
-            f = 'Failure!|Everything goes dark again...\nAnd when you recover your consciousness, you lay on the ground outside of the Research Chamber, feeling exhausted... Somebody must have intervened... It would seem as research can be more dangerous than you ever could have thought!'
+            f = 'Failure!|Everything goes dark again...\n\n...And when you recover your consciousness, you lay on the ground outside of the Research Chamber, feeling exhausted... Somebody must have intervened... It would seem as research can be more dangerous than you ever could have thought!\n\nAs encountering the Rift makes you exhausted, you have to stop researching for today!'
             fields.append(f)
 
         c.delete_cvar(R_STAGE_VAR)
         footer = footer.replace(f'{research_count}x today', f'{DAILY_CAP}x today')
-        #! devrae_f daily_control_set_to_max(#P R_TIME_VAR #P DAILY_CAP) !#
-        ##### devrae function insert [daily_control_set_to_max] #####
-        __p0__ = R_TIME_VAR
-        __p1__ = DAILY_CAP
-        # sets daily activity control counter to max
-        _var_name = __p0__
-        _max = __p1__
-        _cvars = character().cvars
-        if not _var_name in _cvars or _cvars[_var_name] == "0:0":
-          _now = time()
-          character().set_cvar(_var_name, f'{_max}:{_now}')
-        else:
-          _var_parts = _cvars[_var_name].split(':')
-          _time = _var_parts[1]
-          character().set_cvar(_var_name, f'{_max}:{_time}')
-        __result__ = _max
-
-        ##### devrae function end [daily_control_set_to_max] #####
+        utils.set_daily_activity_count(R_TIME_VAR, DAILY_CAP)
     else:
         skills_by_category = {
             "alchemy": cs.arcana,
@@ -444,7 +383,7 @@ if action == "identify":
             fields.append(f)
             c.delete_cvar(R_STAGE_VAR)
 
-elif action == 'catalogue':
+elif chosen_action == 'catalogue':
     c.delete_cvar(R_STAGE_VAR)
 
     b_bonus_param = ' + '.join(pargs.get('b', default=[''])).strip()
@@ -502,34 +441,7 @@ elif action == 'catalogue':
 c.set_cvar(R_STATS_VAR, dump_json(stats))
 
 if add_to_bag != None:
-  _bag_name = "Research"
-  _content = add_to_bag
-
-  #! devrae_f add_to_bag (#P "Research" #P add_to_bag) !#
-  ##### devrae function insert [add_to_bag] #####
-  __p0__ = "Research"
-  __p1__ = add_to_bag
-  _bag_name = __p0__
-  _content = __p1__
-
-  _cv = character().cvars
-  _bags = load_json(_cv["bags"]) if "bags" in _cv else []
-  _bag_index = [i for i, x in enumerate(_bags) if x[0] == _bag_name]
-  _bag_index = _bag_index[0] if len(_bag_index) > 0 else -1
-  if _bag_index == -1:
-    _bags.append([_bag_name, {}])
-    _bag_index = len(_bags) - 1
-  _bag_content = _bags[_bag_index][1]
-  for _key in _content:
-    if _key in _bag_content:
-      _bag_content[_key] = _bag_content[_key] + _content[_key]
-    else:
-      _bag_content[_key] = _content[_key]
-  _bags[_bag_index] = [_bag_name, _bag_content]
-  character().set_cvar('bags', dump_json(_bags))
-
-  ##### devrae function end [add_to_bag] #####
-
+    utils.add_to_bag("Research", add_to_bag)
 </drac2>
 -title "{{t}}"
 {{f'-image "{img}"' if img else ""}}
