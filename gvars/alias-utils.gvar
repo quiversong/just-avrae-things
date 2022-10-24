@@ -107,6 +107,17 @@ def increase_daily_activity_data(control_var):
         character().set_cvar(control_var, f'{count}:{last_time}')
         return count
 
+def set_daily_activity_count(control_var, value):
+    cvars = character().cvars
+    if not control_var in cvars or cvars[control_var] == "0:0":
+        character().set_cvar(control_var, f'{value}:{time()}')
+    else:
+        var_parts = cvars[control_var].split(':')
+        last_time = var_parts[1]
+        character().set_cvar(control_var, f'{value}:{last_time}')
+    return value
+
+
 def print_table(data, title = None, header = None, column_lengths = None):
     ROW_LENGTH = 23
 
