@@ -1,0 +1,135 @@
+multiline
+!embed <drac2>
+VERSION = '1.0'
+COMMAND = 'rebuild'
+
+using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
+
+title, img, thumb, desc, color, footer = None, None, None, None, None, None
+fields = []
+bottom_fields = []
+additional_commands = []
+
+args = &ARGS&
+pargs = argparse(args)
+c = character()
+c_first_name = c.name.split(' ')[0]
+cv, cs = c.cvars, c.skills
+
+ALIAS_TIME_VAR = '_vln_r_dhc_'
+DAILY_CAP = 2
+
+daily_data = utils.get_daily_activity_data(ALIAS_TIME_VAR, DAILY_CAP)
+alias_performed = daily_data["count"]
+wait_time = daily_data["wait_time"]
+
+ADMIN_USER_IDS = [771997367611949076]
+if get_svar('SEVENTRA_ALIAS_ADMINS') != None:
+    admin_ids = load_json(get_svar('SEVENTRA_ALIAS_ADMINS'))
+    ADMIN_USER_IDS += admin_ids
+
+if len(args) > 0 and args[0] == 'reset':
+    if not ctx.author.id in ADMIN_USER_IDS:
+        err('You are not allowed to do that!')
+        return 1
+    c.delete_cvar(ALIAS_TIME_VAR)
+    fields.append('Resetting time control...|Done!')
+    return 1
+
+img = 'https://cdn.discordapp.com/attachments/1033802689353633852/1060977704641503273/DYtiMbLWkAA7Xlp.jpg'
+
+footer = "Don't forget to role-play your work!"
+footer += f'\nDaily rebuild work count: {alias_performed}/{DAILY_CAP}'
+footer += "\n" + f'Seventra: Exodus of Heroes | Valinor Rebuild v{VERSION}'
+
+INSTRUCTIONS = "To assist the city and its labour force, roll an ability check adding your Proficiency modifier. If you are proficient with Mason's Tools you may roll with Advantage.\n\nFor every increment of 5 from your check your character adds 1 building point to the construction. Each building point is worth 1 gold which is added to your coins pouch.\n\nIf you roll a critical fail (natural 1), regardless of your modifiers, you set the project back and gain no build points and no reward. Furthermore, The project loses 1 build point.\n\nFor a Critical Success (natural 20), you gain key insights into masonry. Gain enough insight this way and you gain proficiency with Mason's Tools!"
+
+ABILITIES = ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma']
+
+title = f'{c_first_name} wants to help rebuild Valinor!'
+
+if combat() == None:
+    fields.append('Oops, there was an error!|It looks like you are running this command on a channel that is not setup for it. Please contact Upper Support or the Dragonspeaker team.')
+    return 1
+
+if alias_performed >= DAILY_CAP:
+    f = 'You have contributed to the rebuild of Valinor today...|'
+    f += f'Come back tomorrow?! Time to reset: {wait_time}'
+    fields.append(f)
+    return 1
+
+if len(args) == 0:
+    fields.append(f"Oops!|You need to specify an ability to use. Example: `!{COMMAND} str`\n\nAny ability you choose works, and if you have proficiency with mason's tools you can roll with advantage!\nBe creative when role-playing how your chosen ability helps in the rebuild process!")
+    return 1
+
+chosen_ability = ([a for a in ABILITIES if len(args) > 0 and a.startswith(args[0].lower())] + [None])[0]
+if chosen_ability == None:
+    fields.append(f"Oops!|Could not find an ability matching '{args[0]}'")
+    return 1
+
+dm = combat().get_combatant('DM')
+
+mod = character().stats.get_mod(chosen_ability)
+has_advantage = pargs.adv() == 1
+d20die = '2d20kh1' if has_advantage else '2d20kl1' if pargs.adv() == -1 else '1d20'
+ability_roll = vroll(f'{d20die} + {mod} [{chosen_ability}] + {proficiencyBonus} [proficiency]')
+is_nat1 = ability_roll.total == 1 + mod + proficiencyBonus
+is_nat20 = ability_roll.total == 20 + mod + proficiencyBonus
+
+points_scored = floor(ability_roll.total / 3)
+
+project_name = dm.get_effect('Project Name').desc.strip()
+project_desc = dm.get_effect('Project Description').desc.strip()
+project_points_effect = dm.get_effect('Project Points').desc
+project_points_needed = int(project_points_effect.split('/')[1])
+project_points = int(project_points_effect.split('/')[0])
+
+is_set_back = is_nat1
+delta = -points_scored if is_set_back else points_scored
+project_points += delta
+
+dm.remove_effect('Project Points')
+dm.add_effect('Project Points', desc = f'{project_points}/{project_points_needed}')
+
+f = f'{project_name}|*{project_desc}*'
+f += f'\n\n**{chosen_ability.title()} Roll:** {ability_roll.full}'
+fields.append(f)
+
+coins_earned = points_scored if not is_set_back else 0
+if coins_earned > 0:
+    utils.add_coins({ 'gp': coins_earned })
+
+if is_set_back:
+    fields.append(f'Oh no!|You rolled a natural 1 and ended up setting the project back!')
+else:
+    fields.append(f'Congratulations!|You contributed to {project_name} by adding {points_scored} to the amount of work needed for this project!')
+
+
+fields.append(f'Results|Project Points: {project_points}/{project_points_needed} (' + ('+' if delta >= 0 else '') + f'{delta})' + (f'\nCoins added to your bag: {coins_earned}gp' if coins_earned > 0 else ''))
+
+if is_nat20:
+    CVAR_NAME = '_vln_r_isn_'
+    insights_earned = int(cv[CVAR_NAME]) if CVAR_NAME in cv else 0
+    insights_earned += 1
+    character().set_cvar(CVAR_NAME, insights_earned)
+    fields.append(f'Nicely done!|By rolling a natural 20, you have gained insights in Masonry. Earn enough, and you can gain proficiency with Mason\'s Tools!\n')
+
+if project_points >= project_points_needed:
+    fields.append(f'__***IMPRESSIVE WORK!***__|With contributions from you and other citizens, the project ***{project_name}*** is now complete!\n\nPing `@Chief Guide` to have the project completion finalized and a new project started!')
+
+new_alias_performed = utils.increase_daily_activity_data(ALIAS_TIME_VAR)
+if new_alias_performed >= alias_performed:
+    footer = footer.replace(f'{alias_performed}/', f'{new_alias_performed}/')
+
+img = 'https://cdn.discordapp.com/attachments/1033802689353633852/1060977704859615262/stone-wall.jpg'
+img = 'https://cdn.discordapp.com/attachments/855908840633270282/1060987681896661012/dbslg5m-22ff3e04-9736-4326-9119-c29a0e2143e3.jpg'
+</drac2>
+-title "{{title}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-desc "{desc}"' if desc else ""}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
+{{''.join(['-f "' + field + '"\n' for field in bottom_fields]) if len(bottom_fields) > 0 else ''}}
+{{'\n'.join(additional_commands)}}

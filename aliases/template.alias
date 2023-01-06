@@ -1,0 +1,22 @@
+embed <drac2>
+VERSION = '1.0'
+
+using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
+
+title, img, thumb, desc, color, footer = None, None, None, None, None, None
+fields = []
+
+args = &ARGS&
+pargs = argparse(args)
+c = character()
+c_first_name = c.name.split(' ')[0]
+cv, cs = c.cvars, c.skills
+
+</drac2>
+-title "{{title}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-desc "{desc}"' if desc else ""}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
