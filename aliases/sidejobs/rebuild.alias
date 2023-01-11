@@ -1,7 +1,7 @@
 multiline
 !embed <drac2>
 VERSION = '1.0'
-COMMAND = 'rebuild'
+COMMAND = f'{ctx.prefix}{ctx.alias}'
 
 using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
 
@@ -36,13 +36,33 @@ if len(args) > 0 and args[0] == 'reset':
     fields.append('Resetting time control...|Done!')
     return 1
 
-img = 'https://cdn.discordapp.com/attachments/1033802689353633852/1060977704641503273/DYtiMbLWkAA7Xlp.jpg'
 
 footer = "Don't forget to role-play your work!"
 footer += f'\nDaily rebuild work count: {alias_performed}/{DAILY_CAP}'
-footer += "\n" + f'Seventra: Exodus of Heroes | Valinor Rebuild v{VERSION}'
+footer += "\n" + f'Seventra: Exodus of Heroes | Valinor Rebuild v{VERSION} | {COMMAND} help'
 
-INSTRUCTIONS = "To assist the city and its labour force, roll an ability check adding your Proficiency modifier. If you are proficient with Mason's Tools you may roll with Advantage.\n\nFor every increment of 5 from your check your character adds 1 building point to the construction. Each building point is worth 1 gold which is added to your coins pouch.\n\nIf you roll a critical fail (natural 1), regardless of your modifiers, you set the project back and gain no build points and no reward. Furthermore, The project loses 1 build point.\n\nFor a Critical Success (natural 20), you gain key insights into masonry. Gain enough insight this way and you gain proficiency with Mason's Tools!"
+img = 'https://cdn.discordapp.com/attachments/1033802689353633852/1060977704641503273/DYtiMbLWkAA7Xlp.jpg'
+
+if len(args) == 0 or args[0].lower().strip() == 'help':
+    img = 'https://cdn.discordapp.com/attachments/855908840633270282/1060987681896661012/dbslg5m-22ff3e04-9736-4326-9119-c29a0e2143e3.jpg'
+    title = 'Valinor Reconstruction'
+
+    f = "For too long, the once great city of Valinor been crumbling, with its defenses in disrepair. In response, the project management team has tirelessly drafted plans to build powerful ramparts that extend skyward surrounding the outer core of the city of Valinor. These mighty walls will provide surrounding farm lands and some residential units on the outskirts with much needed protection, serving as the first line of defence against potential marauders and invaders."
+    f = "You too can help Valinor!|"
+    f += "Valinor is looking to recruit those with strong backs, those with Mason experience, and those that have magical abilities to plan, build, labour, and enhance the city, including its outer walls and gates.\n\n"
+    fields.append(f)
+
+    f = f"Using {COMMAND}...|"
+    f += f"To assist the city and its labour force, run `{COMMAND} <ability (e.g.: str, wis)>` to roll an ability check. Your Proficiency modifier is added automatically.\n\n"
+    f += f"If you are proficient with Mason's Tools you may roll with Advantage using `{COMMAND} <ability> adv`\n\n"
+    fields.append(f)
+
+    f = "Rules|"
+    f += "For every increment of 3 from your check your character will add 1 building point to the construction. Each building point is worth 1 gold which will be automatically added to your coins.\n\n"
+    f += "If you roll a critical fail (natural 1), regardless of your modifiers, you set the project back and gain no build points and no reward. Furthermore, the current project loses build points from your blunder.\n\n"
+    f += "On a critical success (natural 20), you gain key insights into masonry, recording 1 point of Masonry training. Gain 20 Masonry training and you become proficient with Mason's Tools. If you are proficient with Mason's Tool, you can gain expertise by accumulating 30 points."
+    fields.append(f)
+    return 0
 
 ABILITIES = ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma']
 
@@ -59,7 +79,7 @@ if alias_performed >= DAILY_CAP:
     return 1
 
 if len(args) == 0:
-    fields.append(f"Oops!|You need to specify an ability to use. Example: `!{COMMAND} str`\n\nAny ability you choose works, and if you have proficiency with mason's tools you can roll with advantage!\nBe creative when role-playing how your chosen ability helps in the rebuild process!")
+    fields.append(f"Oops!|You need to specify an ability to use. Example: `{COMMAND} str`\n\nAny ability you choose works, and if you have proficiency with mason's tools you can roll with advantage!\nBe creative when role-playing how your chosen ability helps in the rebuild process!")
     return 1
 
 chosen_ability = ([a for a in ABILITIES if len(args) > 0 and a.startswith(args[0].lower())] + [None])[0]
