@@ -1,5 +1,5 @@
-multiline
-!embed <drac2>
+embed
+<drac2>
 VERSION = '1.0'
 COMMAND = f'{ctx.prefix}{ctx.alias}'
 
