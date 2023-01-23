@@ -14,7 +14,7 @@ if len(args) == 0 or not args[0].isnumeric():
 slot_level = int(args[0])
 slot_level = 3 if slot_level > 3 else slot_level
 
-create_cc_nx(cc_name, dispType = 'bubble' , maxVal = 1, minVal = 0, reset = 'long')
+c.create_cc_nx(cc_name, dispType = 'bubble' , maxVal = 1, minVal = 0, reset = 'long')
 
 current = sb.get_slots(slot_level)
 smax = sb.get_max_slots(slot_level)
