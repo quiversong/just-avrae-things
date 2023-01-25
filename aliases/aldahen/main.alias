@@ -4,21 +4,23 @@ footer = 'Seventra: Exodus of Heroes | Aldahen Collection v0.1 | !ald help\nCrea
 title = 'The Aldahen Syndicate'
 fields = []
 
+def output_item(item_name, item_codename):
+    o = f'**{item_name}:**\n'
+    o += f'`!{command} {item_codename}`: display information about your {item_name}.\n'
+    return o
+
 output = 'Commands:|'
-
 output += f'`!{command}`: show this text.\n'
+fields.append(output)
 
-output += '\n**Bracelet of the Aldahen:**\n'
-output += f'`!{command} bracelet use`: use one charge of the Bracelet of the Aldahen.\n'
-output += f'`!{command} bracelet curse -t <target1> ... -t <targetN>`: use one charge of the Bracelet of the Aldahen to curse enemies during combat.\n'
+output = 'Faction Items:|\n'
+output += output_item('Bracelet of the Aldahen', 'bracelet')
+output += output_item('Aldahen Boots', 'boots')
+fields.append(output)
 
-output += '\n**Aldahen Boots:**\n'
-output += f'`!{command} boots`: display information about your Aldahen Boots.\n'
-output += f'`!{command} boots use`: use one charge of your Aldahen Boots.\n'
-
-output += '\n**Aldahen Paragon Stone:**\n'
-output += f'`!{command} paragon`: display information about your Aldahen Paragon Stone.\n'
-output += f'`!{command} paragon use`: use the Paragon Stone to recover spell slots.\n'
+output = 'Armanomë Items:|\n'
+output += output_item('Paragon Stone', 'paragon')
+output += output_item("Wanobi's Focus", 'wanobi')
 fields.append(output)
 
 </drac2>
