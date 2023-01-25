@@ -22,6 +22,7 @@ if len(args) == 0 or args[0].lower() != 'use' or len(pargs.get('t')) == 0:
 
     f = "Using the Wanobi's Focus|"
     f += f'`!{command} wanobi use -t <target> -t <target> ...`: to add damage to targets affected by a given damage roll.'
+    fields.append(f)
     return ''
 
 if c.get_cc(CC_NAME) < 1:
