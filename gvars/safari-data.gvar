@@ -23,7 +23,7 @@
     "ac": 10,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987201730909466624/IMG_4056.jpg?width=462&height=676",
     "rewards": {"gp" : 1},
-    "uniqueRewards": {"gp" : 16,
+    "uniqueRewards": {"gp" : 16, 
 "Azurite (10gp)" : 1},
     "unlocks": "rvole",
     "props": "extra_stealth"
@@ -225,8 +225,7 @@
     "uniqueRewards": {"Reeftide Dragon Scale (100gp)" : 1,
 "gp" : 50,
 "Coral Bead" : 1,
-"Safari Exhibit Bead" : 1
-},
+"Safari Exhibit Bead" : 1},
     "unlocks": "",
     "props": ""
   },
@@ -240,7 +239,7 @@
     "ac": 7,
     "img": "https://media.discordapp.net/attachments/855908840633270282/987120020591112282/IMG_4014.jpg",
     "rewards": {"sp" : 5},
-    "uniqueRewards": {"gp" : 5,
+    "uniqueRewards": {"gp" : 5, 
 "Safari Bracelet" : 1},
     "unlocks": "drakefly",
     "props": "starter"
@@ -690,7 +689,7 @@
     "props": ""
   },
   {
-    "code": "danelion",
+    "code": "dandelion",
     "name": "Fleecemane Dandelion",
     "habitat": "Rainforest",
     "desc": "\"Twice the size of normal lions and with resplendent manes of silvery, pappus tufts, we believe Fleecemane Dandilions aim to prowl and protect sites imbued with druidic power deep within the rainforest.\n\nIn Leonin culture, overcoming an ordinary fleecemane lion is widely considered an early step on the road to becoming a true hero. \nRecently, a Dandelion variant of this legendary creature has been spotted in the tall grass of the wilds beyond the Vale.\"\n\n-Boza Stormgroomer",
