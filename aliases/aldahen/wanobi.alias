@@ -32,7 +32,7 @@ if c.get_cc(CC_NAME) < 1:
     fields.append('Oops!|Your Wanobi\'s Focus is all out of charges! Try again after a short rest!')
     return ''
 
-title = f'{c.name} calls on the power of their Wanobi\'s Focus!'
+title = f'{c.name} empowers their ability using the Wanobi\'s Focus!'
 option = args[0].lower()
 
 if not combat() or combat().me == None:

@@ -70,3 +70,4 @@ if payed:
 -thumb https://media.discordapp.net/attachments/819223029409120366/819677454816903168/1DDFE633-2B85-468D-B28D05ADAE7D1AD8_source.png
 -f "{{f"""Your Current Progress {character().cc_str(subject + ' progress')}/{(70 - intelligence)}""" if subject and Times and character().cc_exists(subject + ' progress') else 'If you allready know a language you cannot study it again. Further more if you have already used your downtime you cannot study.'}}"
 -footer "Seventra: Exodus of Heroes | Downtime v2.0 | Made by Self.Anna | !help downtime "
+
