@@ -12,11 +12,13 @@ tembed
 {{List = get_svar('ToolList').split(', ') + get_svar('LangList').split(', ')}}
 
 # fuzzy search
+{{args = &ARGS&}}
 {{a = list("&*&".lower())}}
 {{a = [a[x-1] + a[x] + a[x+1] for x in range(1,len(a)) if x < len(a)-1]}}
 {{b = [[1 for z in a if z in x.lower()] + [0 for z in a if not z in x.lower()] for x in List]}}
 {{c = [sum(x)/(len(List[b.index(x)])-2) for x in b]}}
 {{match = List[c.index(max(c))] if max(c) > 0.3 else False}}
+{{match = "Flute" if args[0].lower().strip() == 'flute' else "Lute" if args[0].lower().strip() == 'lute' else match}}
 {{subject = match if not (match in Tools or match in Langs) else False}}
 {{DT = DowntimeTimes.split(', ')}}
 {{Times = True if len([x for x in DT if (float(x)-time()) > (576000)]) < 7 else False}}
@@ -70,4 +72,3 @@ if payed:
 -thumb https://media.discordapp.net/attachments/819223029409120366/819677454816903168/1DDFE633-2B85-468D-B28D05ADAE7D1AD8_source.png
 -f "{{f"""Your Current Progress {character().cc_str(subject + ' progress')}/{(70 - intelligence)}""" if subject and Times and character().cc_exists(subject + ' progress') else 'If you allready know a language you cannot study it again. Further more if you have already used your downtime you cannot study.'}}"
 -footer "Seventra: Exodus of Heroes | Downtime v2.0 | Made by Self.Anna | !help downtime "
-
