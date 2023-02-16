@@ -50,9 +50,15 @@ if c.spellbook.get_max_slots(1) <= 0:
     return ''
 
 damage_roll = '2d6' if c.spellbook.get_max_slots(8) > 0 else '2d4' if c.spellbook.get_max_slots(6) > 0 else '1d6'
+is_crit = False
+if len(pargs.get('crit')) > 0:
+    is_crit = True
+    damage_roll = '4d6' if damage_roll == '2d6' else '4d4' if damage_roll == '2d4' else '2d6'
 damage_roll += ' [force]'
 roll_result = vroll(damage_roll)
-fields.append(f'Meta|**Damage Roll**: {roll_result.full}' )
+f = 'Meta|**Damage Roll' + (' (CRIT!)' if is_crit else '') + '**: '
+f = f'{f}{roll_result.full}'
+fields.append(f)
 
 me = combat().me
 
