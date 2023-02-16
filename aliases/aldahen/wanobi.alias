@@ -12,14 +12,13 @@ CHARGES = 8
 c.create_cc_nx(CC_NAME, minVal = 0, maxVal = CHARGES, reset = 'short', reset_by = '1d4 + 4')
 title = f"{c.name} wants to use their Wanobi's Focus..."
 
-if len(args) == 0 or args[0].lower() != 'use' or len(pargs.get('t')) == 0:
-    f = "Wanobi's Focus|"
-    f += "Wanobi was an Aldahen warrior who specilized in harming his foes by manipulating the force that surrounds and penetrates all of us, binding the universe together. This glove comes as single piece that you fit either on your left or right hand, but it can't be used at the same time as another magical glove. It's crafted using the knowledge documented by Wanobi, and it holds up to 8 charges.\n\n"
-    f += "Once per turn when you inflict damage on your foe(s) using the hand wearing the glove, or a weapon or arcane focus you are wielding with it, you can use 1 charge to channel the glove's magical force energies and add 1d6 force damage to one damage roll.\n\n"
-    f += "This damage becomes 2d4 when you unlock spell slots of 6th level, and 2d6 when you unlock spell slots of 8th level.\n\n"
-    f += "The glove recovers 1d4+4 charges on a short rest."
-    fields.append(f)
+desc = "Aldahen Wanobi's Focus|"
+desc += "Once per turn when you inflict damage on your foe(s) using the hand wearing this glove, or a weapon or arcane focus you are wielding with it, you can use 1 charge to channel the glove's magical force energies and add 1d6 force damage to one damage roll against one target.\n\n"
+desc += "This damage becomes 2d4 when you unlock spell slots of 6th level, and 2d6 when you unlock spell slots of 8th level.\n\n"
 
+fields.append(desc)
+
+if len(args) == 0 or args[0].lower() != 'use' or len(pargs.get('t')) == 0:
     f = "Using the Wanobi's Focus|"
     f += f'`!{command} wanobi use -t <target> -t <target> ...`: to add damage to targets affected by a given damage roll.'
     fields.append(f)
@@ -40,14 +39,10 @@ if not combat() or combat().me == None:
     fields.append(f'Wanobi\'s Focus|{c.cc_str(CC_NAME)}')
     return ''
 
-target_names = pargs.get('t')
-targets = []
-for t in target_names:
-    targets.append(combat().get_combatant(t))
-    if t == None:
-        fields.append(f'Oops!|Could not find target `{t}`')
-
-if len(targets) != len(target_names):
+target_name = pargs.get('t')[-1]
+target = combat().get_combatant(target_name)
+if target == None:
+    fields.append(f'Oops!|Could not find target `{target_name}`')
     return ''
 
 if c.spellbook.get_max_slots(1) <= 0:
@@ -55,21 +50,19 @@ if c.spellbook.get_max_slots(1) <= 0:
     return ''
 
 damage_roll = '2d6' if c.spellbook.get_max_slots(8) > 0 else '2d4' if c.spellbook.get_max_slots(6) > 0 else '1d6'
-roll_result = roll(damage_roll)
-fields.append(f'Meta|**Damage Roll**: {damage_roll} [force] = `{roll_result}`' )
+damage_roll += ' [force]'
+roll_result = vroll(damage_roll)
+fields.append(f'Meta|**Damage Roll**: {roll_result.full}' )
 
 me = combat().me
 
-health_strings = []
-for target in targets:
-    target.damage(f'{roll_result} [force]')
-    health_strings.append(f'{target.name}: {target.hp_str()}')
+target.damage(f'{roll_result.total} [force]')
+health_string = f'{target.name}: {target.hp_str()}'
 
 c.mod_cc(CC_NAME, -1)
 fields.append(f'Wanobi\'s Focus|{c.cc_str(CC_NAME)}')
 
-fields.append('Affected Targets|' + '\n'.join(health_strings))
-
+footer = health_string + '\n' + footer
 </drac2>
 -title "{{title}}"
 -thumb https://cdn.discordapp.com/attachments/855908840633270282/1067903548303622215/eb65432514d8927f12c386a0673913ec.jpeg
