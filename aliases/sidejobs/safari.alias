@@ -1,7 +1,7 @@
 embed
 <drac2>
 # Configuration Variables
-VERSION = '1.0.1'
+VERSION = '1.1'
 
 using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
 
@@ -52,6 +52,32 @@ def add_and_format_rewards(title, rewards):
             formatted += f'`{fqty}x {reward}`\n'
     return formatted
 
+def convert_stats(stats, stats_var):
+    keys = list(stats.keys())
+    if 'capt' in stats[keys[0]]:
+        return stats
+    new_stats = {}
+    for key in keys:
+        new_stats[key] = get_stats_template()
+        new_stats[key]['capt'] = stats[key]['captures']
+        new_stats[key]['fail'] = stats[key]['failures']
+        new_stats[key]['nature_s'] = stats[key]['nature_successes']
+        new_stats[key]['percept_s'] = stats[key]['perception_successes']
+        new_stats[key]['attack_s'] = stats[key]['attack_successes']
+    character().set_cvar(stats_var, dump_json(new_stats))
+    return new_stats
+
+
+def get_stats_template():
+    return {
+        'capt': 0,
+        'fail': 0,
+        'nature_s': 0,
+        'percept_s': 0,
+        'attack_s': 0
+    }
+
+
 ADMIN_USER_IDS = [771997367611949076]
 if get_svar('SEVENTRA_ALIAS_ADMINS') != None:
     admin_ids = load_json(get_svar('SEVENTRA_ALIAS_ADMINS'))
@@ -72,13 +98,6 @@ sl, fl = "**Success!**", "**Failure!**"
 fields = []
 commands = []
 
-EMPTY_STATS = {
-    'captures': 0,
-    'failures': 0,
-    'nature_successes': 0,
-    'perception_successes': 0,
-    'attack_successes': 0
-}
 SAFARI_ICON = 'https://cdn.discordapp.com/attachments/855908840633270282/1016422111365046332/8b4f7cf7629cb03a44c4d7a659acdedf.jpeg'
 
 daily_data = utils.get_daily_activity_data(TIME_VAR, DAILY_CAP)
@@ -108,6 +127,7 @@ if len(args) > 0 and args[0] == 'resetlog':
 
 all_beasts = load_json(get_gvar(DATA_VAR))["beasts"]
 global_stats = load_json(cv[STATS_VAR]) if STATS_VAR in cv else {}
+global_stats = convert_stats(global_stats, STATS_VAR)
 
 if len(args) >= 2 and args[0] == 'desc':
     title = 'Nephix Safari Beasts'
@@ -138,10 +158,10 @@ if len(args) > 0 and args[0] == 'list':
         if 'starter' in beast['props'] or beast['code'] in global_stats:
             habitat = beast['habitat'].strip()
             habitats.append(habitat) if not habitat in habitats else None
-            stats = global_stats[beast['code']] if beast['code'] in global_stats else EMPTY_STATS
+            stats = global_stats[beast['code']] if beast['code'] in global_stats else get_stats_template()
             if not habitat in data_per_habitat:
                 data_per_habitat[habitat] = []
-            data_per_habitat[habitat].append([beast['code'], f"{stats['captures']}/{stats['failures']}"])
+            data_per_habitat[habitat].append([beast['code'], f"{stats['capt']}/{stats['fail']}"])
 
     habitats.sort()
     for habitat in habitats:
@@ -241,17 +261,17 @@ f += attack_success_text if attack_success else attack_failure_text
 fields.append(f)
 
 if not beast['code'] in global_stats:
-    global_stats[beast['code']] = EMPTY_STATS.copy()
+    global_stats[beast['code']] = get_stats_template().copy()
 stats = global_stats[beast['code']]
 
 img = beast['img']
 thumb = image
 
 if safari_success:
-    stats['captures'] += 1
-    stats['nature_successes'] += 1 if nature_success else 0
-    stats['perception_successes'] += 1 if perception_success else 0
-    stats['attack_successes'] += 1 if attack_success else 0
+    stats['capt'] += 1
+    stats['nature_s'] += 1 if nature_success else 0
+    stats['percept_s'] += 1 if perception_success else 0
+    stats['attack_s'] += 1 if attack_success else 0
 
     f = f'__***{c.name.upper()} WINS!***__|'
     f += f'Congratulations! You have successfully captured the {beast["name"]}!'
@@ -266,7 +286,7 @@ if safari_success:
                 if unlocked_beast == None:
                     err(f"Could not find matching beast to unlock. This is an alias internal error. Please contact the server's Dragonspeakers.\n`Beast code: {beast['code']}`")
                 unlocked_codes.append(f'* `{unlocked_code}`: {unlocked_beast["name"]} @ the {unlocked_beast["habitat"]}.')
-                global_stats[unlocked_code] = EMPTY_STATS.copy()
+                global_stats[unlocked_code] = get_stats_template().copy()
 
         if len(unlocked_codes) > 0:
             f = 'You can now attempt to capture new beasts!|'
@@ -276,7 +296,7 @@ if safari_success:
     f = add_and_format_rewards('You gained these rewards:|\n', beast['rewards'])
     fields.append(f)
 
-    if stats['captures'] == 1:
+    if stats['capt'] == 1:
         f = add_and_format_rewards('You also gained these one-time rewards:|\n', beast['uniqueRewards'])
         fields.append(f)
 else:
@@ -284,7 +304,7 @@ else:
     f += 'Better luck next time!'
     fields.append(f)
 
-    stats['failures'] += 1
+    stats['fail'] += 1
 
 footer = footer.replace(f'remaining today: {DAILY_CAP - activity_count}', f'remaining today: {DAILY_CAP - (activity_count + 1)}')
 

@@ -18,6 +18,9 @@ desc += "This damage becomes 2d4 when you unlock spell slots of 6th level, and 2
 
 fields.append(desc)
 
+thumbimg = "https://cdn.discordapp.com/attachments/855908840633270282/1067903548303622215/eb65432514d8927f12c386a0673913ec.jpeg"
+thumbimg = "https://cdn.discordapp.com/attachments/898586186539479051/1076271819197259916/wanobi.jpg"
+
 if len(args) == 0 or args[0].lower() != 'use' or len(pargs.get('t')) == 0:
     f = "Using the Wanobi's Focus|"
     f += f'`!{command} wanobi use -t <target> -t <target> ...`: to add damage to targets affected by a given damage roll.'
@@ -71,7 +74,7 @@ fields.append(f'Wanobi\'s Focus|{c.cc_str(CC_NAME)}')
 footer = health_string + '\n' + footer
 </drac2>
 -title "{{title}}"
--thumb https://cdn.discordapp.com/attachments/855908840633270282/1067903548303622215/eb65432514d8927f12c386a0673913ec.jpeg
+-thumb "{{thumbimg}}"
 {{''.join(['-f "' + field.replace('"', '\\\"') + '"\n' for field in fields]) if len(fields) > 0 else ''}}
 {{f'-footer "{footer}"' if footer else ""}}
 
