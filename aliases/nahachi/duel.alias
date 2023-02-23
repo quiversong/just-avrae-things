@@ -1,7 +1,7 @@
 embed
 <drac2>
 # Configuration Variables
-VERSION = '2.1'
+VERSION = '2.1.1'
 
 DATA_VAR = "c85742dc-f2e9-4a99-b544-b8f71dd7bed9"
 DAILY_CAP = 2
@@ -141,7 +141,8 @@ args = &ARGS&
 pargs = argparse(args)
 c = character()
 c_first_name = c.name.split(' ')[0]
-cv, cs = c.cvars, c.skills
+cv = c.cvars
+cs = c.skills
 
 title = f'{c_first_name} wants to challenge the warriors of the Kaizen Temple for a duel!'
 img, thumb, desc = None, None, None

@@ -2,7 +2,7 @@ embed
 <drac2>
 # Configuration Variables
 IS_LIVE = True
-VERSION = '1.21.3'
+VERSION = '1.21.4'
 
 BETA_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
 LIVE_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
@@ -16,7 +16,8 @@ DAILY_CAP = 6
 args = &ARGS&
 pargs = argparse(args)
 c = character()
-cv, cs = c.cvars, c.skills
+cv = c.cvars
+cs = c.skills
 
 data_var = LIVE_VAR if IS_LIVE else BETA_VAR
 hunt_daily_cap = DAILY_CAP

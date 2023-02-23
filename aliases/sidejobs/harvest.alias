@@ -1,7 +1,7 @@
 embed
 <drac2>
 # Configuration Variables
-VERSION = '1.0.1'
+VERSION = '1.0.2'
 
 using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
 
@@ -33,7 +33,8 @@ if get_svar('SEVENTRA_ALIAS_ADMINS') != None:
 args = &ARGS&
 pargs = argparse(args)
 c = character()
-cv, cs = c.cvars, c.skills
+cv = c.cvars
+cs = c.skills
 
 title = f"{c.name}'s harvesting at the Hollow Mountain!"
 fields = []

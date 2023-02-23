@@ -18,7 +18,8 @@ DAILY_CAP = 6
 args = &ARGS&
 pargs = argparse(args)
 c = character()
-cv, cs = c.cvars, c.skills
+cv = c.cvars
+cs = c.skills
 
 #data_var = LIVE_VAR if IS_LIVE else BETA_VAR
 hunt_daily_cap = DAILY_CAP
@@ -228,7 +229,7 @@ if p in ACCEPTED_DIFFICULTIES:
     a_roll = roll("1d80")
   else:
     a_roll = roll("1d100")
-    
+
   if not "animal_chance" in biome:
     f = noprey_message
     c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
@@ -265,7 +266,7 @@ if p in ACCEPTED_DIFFICULTIES:
   footer += hvar_before
   stage = f'sneak'
   c.set_cvar(HUNT_STAGE_VAR, f'{anm_id}:{challenge}:{stage}:{attempt_number}:{last_stage}:{result_last}')
-  
+
   if ("commune" in anm and anm["commune"] == True) or is_dragon:
     color = 'f0b330'
     f = f'{c.name} found a ***VERY RARE*** {anm["name"]}!|Do you...\n...try to approach unnoticed? `!hunt sneak`\n...follow it from a distance? `!hunt track`'
@@ -383,7 +384,7 @@ if p == "sneak":
       f2 += f'\n{pursue_text}'
       stage = 'pursue'
       footer += hvar_before
-      c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:{challenge}:{stage}:{attempt_number}:{last_stage}:{result_last}') 
+      c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:{challenge}:{stage}:{attempt_number}:{last_stage}:{result_last}')
     else:
       if "sneak_fail" in anm:
         f2 = anm["sneak_fail"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
@@ -393,7 +394,7 @@ if p == "sneak":
       f2 += 'Better luck next time! Use `!hunt` to try again.'
       footer += hvar_before
       c.delete_cvar(HUNT_STAGE_VAR)
-    
+
 elif p == 'track':
   adv_status = True if pargs.adv() == 1 or result_last == 'injured' else False if pargs.adv() == -1 else None
   s_roll = vroll(cs.survival.d20(base_adv = adv_status))
@@ -441,7 +442,7 @@ elif p == 'track':
       f2 += f'\n{pursue_text}'
       stage = 'pursue'
       footer += hvar_before
-      c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:{challenge}:{stage}:{attempt_number}:{last_stage}:{result_last}') 
+      c.set_cvar(HUNT_STAGE_VAR, f'{prey_id}:{challenge}:{stage}:{attempt_number}:{last_stage}:{result_last}')
     else:
       if "sneak_fail" in anm:
         f2 = anm["sneak_fail"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
@@ -451,14 +452,14 @@ elif p == 'track':
       f2 += 'Better luck next time! Use `!hunt` to try again.'
       footer += hvar_before
       c.delete_cvar(HUNT_STAGE_VAR)
-    
+
 elif p == 'quit':
   t = f'{c.name} quits hunting the {anm_name}!'
   f = f'You lose sight of the {anm_name}.|But you spend some time admiring the beauty of the nature around you.'
   f += '\nIt is magnificent!'
   footer += hvar_before
   c.delete_cvar(HUNT_STAGE_VAR)
-  
+
 elif p == 'commune':
   stage = 'pursue'
   last_stage = 'commune'
@@ -583,7 +584,7 @@ elif p == 'attack':
         f2 = f'The {anm_name} escaped!|Better luck next time...'
         footer += hvar_before
         c.delete_cvar(HUNT_STAGE_VAR)
-    
+
 # elif p == 'tame':
 # if <animal can be tamed>:
 #    if <the player level allows taming this animal CR>

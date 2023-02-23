@@ -16,7 +16,8 @@ DAILY_CAP = 6
 args = &ARGS&
 pargs = argparse(args)
 c = character()
-cv, cs = c.cvars, c.skills
+cv = c.cvars
+cs = c.skills
 
 data_var = LIVE_VAR if IS_LIVE else BETA_VAR
 hunt_daily_cap = DAILY_CAP
@@ -416,7 +417,7 @@ elif p == 'attack':
     else:
       thumb = image
       if injured:
-        stage_value = f'{prey_id}:pursue' 
+        stage_value = f'{prey_id}:pursue'
         stage_value += f':{this_attack_hp_results}'
         f2 = f'{c.name} injured {anm_name}, do you ...?\n... stalk it: `!hunt sneak`\n... follow the trail: `!hunt track`'
         f2 += f'\n... look for a different animal? `!hunt quit`'

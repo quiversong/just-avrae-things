@@ -1,7 +1,7 @@
 embed
 <drac2>
 # Configuration Variables
-VERSION = '2.1'
+VERSION = '2.1.1'
 
 DATA_VAR_1 = "96111624-7e94-46f7-b32e-f0c2d6c52b13"
 DATA_VAR_2 = "dd5538b0-aab8-4ac0-a82c-5f08aa8cf42b"
@@ -116,7 +116,8 @@ if get_svar('SEVENTRA_ALIAS_ADMINS') != None:
 args = &ARGS&
 pargs = argparse(args)
 c = character()
-cv, cs = c.cvars, c.skills
+cv  = c.cvars
+cs = c.skills
 
 title = f'{c.name} hears the many rumors that spread through Seventra...'
 sl, fl = "**Success!**", "**Failure!**"

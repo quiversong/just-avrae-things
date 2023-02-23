@@ -6,7 +6,8 @@ var_name = "_drm_vars_"
 args = &ARGS&
 pargs = argparse(args)
 c = character()
-cv, cs = c.cvars, c.skills
+cv = c.cvars
+cs = c.skills
 t, f, f2, f3, footer, thumb, img = None, None, None, None, None, None, None
 dino_img = 'https://cdn.discordapp.com/attachments/855908840633270282/1017185197848010792/dinorace_1.jpeg'
 

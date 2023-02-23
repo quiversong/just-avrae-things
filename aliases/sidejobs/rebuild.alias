@@ -14,7 +14,8 @@ args = &ARGS&
 pargs = argparse(args)
 c = character()
 c_first_name = c.name.split(' ')[0]
-cv, cs = c.cvars, c.skills
+cv = c.cvars
+cs = c.skills
 
 ALIAS_TIME_VAR = '_vln_r_dhc_'
 DAILY_CAP = 2

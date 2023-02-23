@@ -1,7 +1,7 @@
 tembed
 <drac2>
 # Configuration Variables
-VERSION = '1.1'
+VERSION = '1.1.1'
 
 FISH_VAR = "836c9cc0-faa2-4880-8986-6b240ced9a66"
 TRINKETS_VAR = "fbd058bc-7c49-46f7-af3f-c018a88443dc"
@@ -13,7 +13,8 @@ DEFAULT_TRINKETS_CHANCE = 20
 args = &ARGS&
 pargs = argparse(args)
 c = character()
-cv, cs = c.cvars, c.skills
+cv = c.cvars
+cs = c.skills
 
 title, desc, img, thumb, color, footer = None, None, None, None, None, None
 fields = []
