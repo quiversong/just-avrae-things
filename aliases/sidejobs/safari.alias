@@ -1,7 +1,7 @@
 embed
 <drac2>
 # Configuration Variables
-VERSION = '1.1.1'
+VERSION = '1.1.2'
 
 using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
 
@@ -54,7 +54,7 @@ def add_and_format_rewards(title, rewards):
 
 def convert_stats(stats, stats_var):
     keys = list(stats.keys())
-    if 'capt' in stats[keys[0]]:
+    if len(stats) == 0 or 'capt' in stats[keys[0]]:
         return stats
     new_stats = {}
     for key in keys:
