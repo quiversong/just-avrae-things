@@ -1,0 +1,46 @@
+tame embed
+<drac2>
+using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
+
+args = &ARGS&
+beast_name = args[0] if len(args) > 0 else None
+cr = args[1] if len(args) > 1 else None
+
+cc_name = "Tame Progress"
+cc_exists = character().cc_exists(cc_name)
+
+title = f"{character().name} is taming a mount."
+footer = "Seventra: Exodus of Heroes | Downtime v2.0 | !help downtime"
+f = []
+thumb = "https://media.discordapp.net/attachments/790441224179941377/1094055195945734174/image.png"
+
+if not cc_exists and (beast_name is None or cr is None):
+    f.append("Oops|Please provide the beast's name and CR when running this alias for the first time.\nExample: `!tame \"Elk\" 1/4`.")
+    return 1
+else:
+    if not cc_exists:
+        cr = 0.125 if cr == '1/8' else 0.25 if cr == '1/4' else 0.5 if cr == '1/2' else float(cr)
+        max_value = 60 - character().skills.animalHandling.value + int(ceil(cr * 5))
+        character().create_cc(cc_name, initial_value=0, maxVal=max_value, desc=f"Taming of {beast_name}")
+        f.append(f"New Beast Registered|You have started taming a beast with CR {cr}...")
+
+    cc_value = character().get_cc(cc_name)
+    cc_max = character().get_cc_max(cc_name)
+    beast_name = character().cc(cc_name).desc.replace('Taming of ', '')
+    add_n = 'n' if beast_name.lower()[0] in 'aeiou' else ''
+    title = f"{character().name} is taming a{add_n} {beast_name}."
+
+    utils.add_coins({ 'gp': -5 })
+    character().mod_cc(cc_name, 1)
+    new_cc_value = character().get_cc(cc_name)
+    f.append(f"Tame Progress|{character().name} pays 5gp for all the space and tools needed to train their mount. This process uses your one downtime activity for the day.\n\nThe price of taming has been automatically deducted from your `!coins`.")
+    f.append(f"Current Progress|Tame Progress: {new_cc_value}/{cc_max}")
+
+    if new_cc_value >= cc_max:
+        character().delete_cc(cc_name)
+        f.append(f"Congratulations|You have successfully tamed the {beast_name}. Don't forget to purchase an Exotic Saddle (60gp) to ride your new mount!")
+</drac2>
+-title "{{title}}"
+{{''.join(['-f "' + field.replace('"', '\\\"') + '"\n' for field in f]) if len(f) > 0 else ''}}
+{{f'-footer "{footer}"' if footer else ""}}
+-thumb "{{thumb}}"
