@@ -1,0 +1,103 @@
+multiline <drac2>
+VERSION = '1.0'
+
+using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
+
+title, img, thumb, desc, color, footer = None, None, None, None, None, None
+fields = []
+
+args = &ARGS&
+pargs = argparse(args)
+c = character()
+c_first_name = c.name.split(' ')[0]
+cv = c.cvars
+cs = c.skills
+
+def generate_effect_desc(hp_value):
+    return f'A summoned Spectral Warrior seeks redemption, following you and aiding you on your battles.\n - Spectral Warrior HP: {hp_value}/15'
+
+def do_summon(pargs):
+    if combat() == None:
+        return '!echo This command only works during combat!'
+    if not('t' in pargs):
+        return '!echo You need to specify who the summoned Spectral Warrior will follow.\nUse `!crown summon -t <target>`'
+    cmd = ''
+    for t in pargs.get('t'):
+        cmd += f'!init effect {t} "Spectral Warrior" -desc "{generate_effect_desc(15)}" -attack "10|2d6 + 3 [necrotic]|A Spectral Warrior attacks with their Spectral Weapon!"\n'
+    return cmd
+
+def do_protect(args):
+    if len(args) < 3:
+        return '!echo Please specify the attack and damage rolls of the attack.\nUse `!crown protect <attack roll> <damage dealt>`'
+
+    if combat() == None or combat().me == None:
+        return '!echo Your active character needs to be in combat for this command to work!'
+
+    effect = ([e for e in combat().me.effects if e.name == 'Spectral Warrior'] + [None])[0]
+
+    if effect == None:
+        return '!echo It looks like you have no Spectral Warrior following you! Make sure one is summoned first!'
+
+    current_hp = int(effect.desc.split('Spectral Warrior HP: ')[1].split('/')[0])
+    if current_hp <= 0:
+        return '!echo It looks like the Spectral Warrior that was following you is no longer here!'
+
+    result = roll('1d20')
+    title = 'You call upon a Spectral Warrior for protection!'
+    fields.append(f'Meta|**D20 Roll:** 1d20 = `{result}`')
+    fields.append('Effect|When you are targeted by an attack against their AC, you may roll 1d20. If the result of the roll is 11 or higher, that attack targets their Spectral Warrior following you instead.')
+
+    if result < 11:
+        fields.append('Result|The Spectral Warrior does not defend you this time!')
+    else:
+        attack_roll = int(args[1])
+        damage_dealt = int(args[2])
+        pre = 'Result|The Spectral Warrior interferes in the attack, protecting you from taking damage from it!'
+        if attack_roll < 15:
+            fields.append(pre + ' The attack does not hit the Spectral Warrior, and you are both unscathed!')
+        else:
+            new_hp = current_hp - damage_dealt
+            if new_hp <= 0:
+                combat().me.remove_effect('Spectral Warrior')
+                fields.append(pre + f' The attack hits the Spectral Warrior, protecting you, but dissolving the Spectral Warrior\\\'s form!\n\n*Spectral Warrior removed from {combat().me.name}*')
+            else:
+                combat().me.remove_effect('Spectral Warrior')
+                combat().me.add_effect('Spectral Warrior', desc = generate_effect_desc(new_hp), attacks = [{
+                    "attack": {
+                        "_v": 2,
+                        "name": "Spectral Warrior",
+                        "automation": [{
+                            "type": "target",
+                            "target": "each",
+                            "effects": [{
+                                "type": "attack",
+                                "hit": [{"type": "damage", "damage": "2d6 + 3 [necrotic]"}],
+                                "miss": [],
+                                "attackBonus": 10
+                            }]
+                        }]
+                    }}])
+                fields.append(pre + f' The attack hits the Spectral Warrior, protecting you!\n\n*Spectral Warrior HP: {new_hp}/15*')
+
+    embed_data = {'title': title, 'fields': fields, 'thumb': thumb}
+
+    return utils.build_embed(**embed_data)
+
+if len(args) > 0:
+    if args[0] == 'summon':
+        return do_summon(pargs)
+    elif args[0] == 'protect':
+        return do_protect(args)
+    elif args[0] == 'atttack':
+        pass
+
+title = 'The Crown of the Damned'
+fields.append("Crown of the Damned How-To|This command provides aid in using the Seventra homebrew item The Crown of the Damned.\nPlease see `!item crown of the damned` for more information on the item.")
+fields.append("Summoning Spectral Warriors|As the bearer of the cursed crown, use `!crown summon -t <target>`")
+fields.append("Using the Protectiong feature|As a followed creature, use `!crown protect <attack roll> <damage dealt>` after an attack hits you.")
+fields.append("Using the Onslaught feature|When a Spectral Warrior is following you, a new attack will be added to your attack list.\nTo use it, just use `!a \\\"Spectral Warrior\\\" -t <target>`")
+thumb = 'https://media.discordapp.net/attachments/790441224179941377/1109164462386196500/il_794xN.1713587348_3scu.jpg'
+
+embed_data = {'title': title, 'fields': fields, 'thumb': thumb}
+return utils.build_embed(**embed_data)
+</drac2>
