@@ -157,3 +157,12 @@ def print_table(data, title = None, header = None, column_lengths = None):
     f += '```\n\n'
     result.append(f)
     return result
+
+def build_embed(title, fields, footer = None, desc = None):
+    cmd = f"!embed -title '{title}'"
+    cmd += ' ' + ''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''
+    if footer != None:
+        cmd += f" -footer '{footer}'"
+    if desc != None:
+        desc += f" -desc '{desc}'"
+    return cmd
