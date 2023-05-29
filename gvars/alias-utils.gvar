@@ -158,9 +158,13 @@ def print_table(data, title = None, header = None, column_lengths = None):
     result.append(f)
     return result
 
-def build_embed(title, fields, footer = None, desc = None):
+def build_embed(title, fields, thumb = None, image = None, footer = None, desc = None):
     cmd = f"!embed -title '{title}'"
     cmd += ' ' + ''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''
+    if thumb != None:
+        cmd += f" -thumb '{thumb}'"
+    if image != None:
+        cmd += f" -image '{image}'"
     if footer != None:
         cmd += f" -footer '{footer}'"
     if desc != None:
