@@ -98,7 +98,7 @@ title = 'The Crown of the Damned'
 
 fields.append("Crown of the Damned How-To|This command provides aid in using the Seventra homebrew item The Crown of the Damned.\nPlease see `!item crown of the damned` for more information on the item.")
 fields.append("Summoning Spectral Warriors|- The bearer of the cursed crown uses this to summon Spectral Warriors to follow their companions.\n- Use `!crown summon -t <target>`")
-fields.append("Using the Protectiong feature|- As a companion with a Spectral Warrior follower, when an attack is made against your AC, you may attempt to have the Spectral Warrior interfere, taking the damage on your stead.\n- Use `!crown protect <attack roll> <damage dealt>` after an attack hits you.\n- If the roll is 11 or higher, the attack will target the spirit following you.")
+fields.append("Using the Protection feature|- As a companion with a Spectral Warrior follower, when an attack is made against your AC, you may attempt to have the Spectral Warrior interfere, taking the damage on your stead.\n- Use `!crown protect <attack roll> <damage dealt>` after an attack hits you.\n- If the roll is 11 or higher, the attack will target the spirit following you.")
 fields.append("Using the Onslaught feature|- When a Spectral Warrior is following you and you attack an enemy, you may have, once per turn, the summoned spirit perform an attack against the same target.\n- When a Spectral Warrior is summoned by your side, it will add a special attack to your list of attacks.\n- To use this feature, use `!a \\\"Spectral Warrior\\\" -t <target>`")
 
 thumb = 'https://media.discordapp.net/attachments/790441224179941377/1109164462386196500/il_794xN.1713587348_3scu.jpg'
