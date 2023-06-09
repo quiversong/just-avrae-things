@@ -1,0 +1,31 @@
+echo <drac2>
+VERSION = '1.0'
+
+args = &ARGS&
+pargs = argparse(args)
+c = character()
+
+if len(args) > 0 and args[0].lower().strip() == 'help':
+    return "Use this command to fix your xp log in case its format has been corrupted. Just run `!xplog` to do so! It is advisable to contact a `@Guide` beforehand to make sure nothing gets overwritten."
+
+xplog = c.cvars['xplog']
+
+if xplog[0].strip()[0] == '{':
+    return "Your XP data is properly formatted. If you still have issues, please ping `@Guide`"
+
+lines = xplog.split('\n')
+first_new_entry = True
+newxplog = '{'
+
+for line in lines:
+    line_parts = line.split(':')
+    newxplog += '\n' if first_new_entry else ',\n'
+    newxplog += f'"{line_parts[0].strip()}": "{line_parts[1].strip()}"'
+    first_new_entry = False
+
+newxplog += '\n}'
+
+character().set_cvar('xplog', newxplog)
+
+return "Your XP data has been updated. Please use `!xp log` to validate it. If you still have issues, please ping `@Guide`"
+</drac2>
