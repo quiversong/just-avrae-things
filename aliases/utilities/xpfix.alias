@@ -18,10 +18,11 @@ first_new_entry = True
 newxplog = '{'
 
 for line in lines:
-    line_parts = line.split(':')
-    newxplog += '\n' if first_new_entry else ',\n'
-    newxplog += f'"{line_parts[0].strip()}": "{line_parts[1].strip()}"'
-    first_new_entry = False
+    if ':' in line:
+        line_parts = line.split(':')
+        newxplog += '\n' if first_new_entry else ',\n'
+        newxplog += f'"{line_parts[0].strip()}": "{line_parts[1].strip()}"'
+        first_new_entry = False
 
 newxplog += '\n}'
 
