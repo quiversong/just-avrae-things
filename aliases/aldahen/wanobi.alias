@@ -20,6 +20,7 @@ fields.append(desc)
 
 thumbimg = "https://cdn.discordapp.com/attachments/855908840633270282/1067903548303622215/eb65432514d8927f12c386a0673913ec.jpeg"
 thumbimg = "https://cdn.discordapp.com/attachments/898586186539479051/1076271819197259916/wanobi.jpg"
+thumbimg = "https://cdn.discordapp.com/attachments/855908840633270282/1126525626854166628/focus.jpg"
 
 if len(args) == 0 or args[0].lower() != 'use' or len(pargs.get('t')) == 0:
     f = "Using the Wanobi's Focus|"
