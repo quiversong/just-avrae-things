@@ -1,59 +1,107 @@
+multiline
 <drac2>
+VERSION = '1.0'
+
+using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
+
+title, img, thumb, desc, color, footer = None, None, None, None, None, None
+fields = []
+
 args = &ARGS&
-pargs = argparse(args)
+c = character()
+c_first_name = c.name.split(' ')[0]
+cv = c.cvars
+cs = c.skills
 
-def get_pendings_combatants():
-    pending = []
+def begin_init(args):
+    return "!init begin\n!init add 0 DM -p 1000\n!init add 0 DM2 -p -1000"
+
+def next_round(args):
+    dm = ([c for c in combat().combatants if c.name == 'DM'] + [None])[0]
+    if dm == None:
+        return "echo Oops, a combantant with name DM must be present!"
+    if ctx.author.id != dm.controller:
+        return "echo Oops, only the DM can run this command!"
+
+    message = "A next round is about to start!\n\n"
+    message += "Please take your turn at your earliest convenience, no need to wait for your turn in initiative!\n"
+    message += "Take your turn whenever suits you, __make sure to RP!__\n"
+    message += "Read what the others are doing, maintain continuity!\n\n"
+    message += "When you finished taking your turn, type `!raid next` to signalize that you are done.\n"
+    message += "**Do not type `!init next`**!\n\n"
+
     for c in combat().combatants:
-        if c.name != 'DM':
-            e = c.get_effect("Raid Control")
-            if e == None or not(f"round_complete: {combat().round_num}" in e.desc):
-                pending.append(c)
-    return pending
+        message += f"<@{c.controller}> "
+        effect = ([e for e in c.effects if e.name == 'Raid Status'] + [None])[0]
+        if effect != None:
+            c.remove_effect('Raid Status')
+            c.add_effect('Raid Status', desc = 'Waiting for turn')
 
-def get_all_combatants_in_group_of(combatant):
-    if combatant.group == None:
-        return [combatant]
-    group = combat().get_group(combatant.group)
-    return [c for c in group.combatants]
+    combat().end_round()
+    commands = f"!i move DM2\n"
+    commands += f"!i next\n"
+    commands += f"!echo {message}"
+    return commands
 
-def get_user_combatants(pargs):
-    if 't' in pargs:
-        result = []
-        for cn in pargs.get('t'):
-            c = combat().get_combatant(cn)
-            result = result + get_all_combatants_in_group_of(c)
-        return result
-    else:
-        return get_all_combatants_in_group_of(combat().me)
+def join_init(args):
+    cname = character().name
+    command = 'echo Welcome to An Infernal Promise!!\n'
+    command += f'!init join\n'
+    command += f'!init effect "{cname}" "Raid Status" -desc "Waiting for turn"\n'
+    command += f'!echo Take your turn whenever you are ready, make sure to RP! Type `!raid next` when you are done.\n**Do not type `!init next`**!'
+    return command
 
-if len(args) > 0 and args[0].lower() == "done":
-    if not combat():
-        err("You must be in initiative to do this!")
-    if not combat().me:
-        err("You do not have an active character in iniative!")
-    combatants = get_user_combatants(pargs)
-    out = "multiline\n"
-    for c in combatants:
-        c.add_effect("Raid Control", desc = f"round_complete: {combat().round_num}")
-        out += f"!echo {c.name} finished their turn on round {combat().round_num}.\n"
-    return out
 
-if len(args) > 0 and args[0].lower() == "next":
-    if not combat():
-        err("You must be in initiative to do this!")
+def pass_init(args):
+    combatant = combat().me
+    effect = ([e for e in combatant.effects if e.name == 'Raid Status'] + [None])[0]
+    if effect != None:
+        if 'complete' in effect.desc.lower():
+            return "echo It look like you've already done that! Did you take your turn twice? Ping the DM if you need help."
+        else:
+            combatant.remove_effect('Raid Status')
+    combatant.add_effect('Raid Status', desc = 'Turn on this round complete')
+    return "echo You have finished your turn and will be pinged when the next round starts!"
 
-    p = get_pendings_combatants()
-    if len(p) > 0:
-        msg = "Cannot move to the next round because there are players not yet ready:\n"
-        msg += "\n".join([f"  {c.name}" for c in p])
-        err(msg)
-        return 1
+def ping_waiting(args):
+    message = ' '.join(args[1:len(args)]) + '\n\n'
+    for c in combat().combatants:
+        effect = ([e for e in c.effects if e.name == 'Raid Status'] + [None])[0]
+        if effect != None and 'waiting' in effect.desc.lower():
+            message += f'<@{c.controller}> '
+    return f'!echo {message}'
 
-    for combatant in combat().combatants:
-        combatant.remove_effect("Raid Control")
+def list_waiting(args):
+    message = 'Characters still pending their turn:\n'
+    count = 0
+    for c in combat().combatants:
+        effect = ([e for e in c.effects if e.name == 'Raid Status'] + [None])[0]
+        if effect != None and 'waiting' in effect.desc.lower():
+            message += f'{c.name}\n'
+            count += 1
+    if count == 0:
+        message += 'None!'
+    return f'!echo {message}'
 
-    new_round_num = combat().round_num + 1
-    combat().set_round(new_round_num)
-    return f"echo Starting new raid round... New round number: {new_round_num}"
+if len(args) > 0 and args[0].strip().lower() in ['j', 'join']:
+    return join_init(args)
+
+if len(args) > 0 and args[0].strip().lower() in ['n', 'next']:
+    return pass_init(args)
+
+if len(args) > 0 and args[0].strip().lower() == 'begin':
+    return begin_init(args)
+
+if len(args) > 0 and args[0].strip().lower() in ['nr', 'nextround']:
+    return next_round(args)
+
+if len(args) > 0 and args[0].strip().lower() == 'ping':
+    return ping_waiting(args)
+
+if len(args) > 0 and args[0].strip().lower() == 'list':
+    return list_waiting(args)
+
+return '!echo Use `!raid join` to enter initiative or `!raid next` when you end your turn.'
+
 </drac2>
+

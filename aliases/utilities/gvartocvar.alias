@@ -1,0 +1,11 @@
+echo <drac2>
+args = &ARGS&
+if len(args) < 2:
+    return "Usage: !gvartocvar <gvar-id> <cvar-name>"
+gvar_id = args[0]
+cvar_name = args[1]
+gvar_data = get_gvar(gvar_id)
+character().set_cvar(cvar_name, gvar_data)
+result = f"Global Variables {gvar_id} set to Character Variable {cvar_name}."
+return result
+</drac2>
