@@ -104,4 +104,3 @@ if len(args) > 0 and args[0].strip().lower() == 'list':
 return '!echo Use `!raid join` to enter initiative or `!raid next` when you end your turn.'
 
 </drac2>
-

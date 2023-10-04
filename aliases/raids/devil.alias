@@ -1,0 +1,91 @@
+embed
+<drac2>
+args = &ARGS&
+pargs = argparse(args)
+adv_status = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
+
+pc = combat().me
+
+title = f'{character().name} is fighting Ludwig!'
+fields = []
+thumb = image
+img, desc, color, footer = None, None, None, None
+
+if pc == None:
+    title = 'Oops!'
+    fields.append('There was an error|You have to `!char <character name>` to the character you have in init!')
+    return 1
+
+title = f'{pc.name} is fighting Ludwig!'
+
+save = pc.save('wisdom', adv_status)
+result_roll = roll('1d6')
+dc = 15
+success = save.total >= dc
+success_text = "Success!" if success else "Failure!"
+
+effect = None
+effect_text = '**Effect:** '
+if success:
+    effect_text += 'Take your turn normally!'
+if not success:
+    effects = {
+            1: {
+                'title': 'Penalty (-5) on attack and ability checks',
+                'desc': "Within Ludwig's aura, you have a penalty of -5 on attack rolls and ability checks until the beginning of your next turn.",
+                'effect': {
+                    'to_hit_bonus': -5,
+                    'check_bonus': -5
+                }
+            },
+            2: {
+                'title': 'Damage halved',
+                'desc': "All damage you deal before the beginning of your next turn is halved. This has to be done manually.",
+                'effect': None
+            },
+            3: {
+                'title': 'Forced retreat',
+                'desc': "You must use all your remaining movement to move away from Ludwig. This movement provokes attacks of opportunity.",
+                'effect': None
+            },
+            4: {
+                'title': 'No bonus actions',
+                'desc': "You can't take bonus actions until the beginning of your next turn. If you already took a bonus action this turn, your turn ends here.",
+                'effect': None
+            },
+            5: {
+                'title': 'Halved speed',
+                'desc': "Your speed is halved until the beginning of your next turn.",
+                'effect': None
+            },
+            6: {
+                'title': 'Unaffected by the aura',
+                'desc': "You are unaffected by Ludwig's aura until the beginning of your next turn.",
+                'effect': None
+            }
+    }
+    effect = effects[result_roll]
+    effect_text += effect['title']
+    effect_text += f'\n\n**Description:** {effect["desc"]}'
+
+    if effect['effect'] == None:
+        pc.add_effect(effect['title'], duration = 1, end = True)
+    else:
+        pc.add_effect(effect['title'], duration = 1, end = True, passive_effects = effect['effect'])
+
+meta = f"Meta|**DC:** {dc}"
+if not success:
+    meta += f"\n**Result roll:** 1d6 = `{result_roll}`"
+fields.append(meta)
+
+fields.append(f"{pc.name}|**WIS Save:** {save.full}; {success_text}\n{effect_text}")
+
+
+</drac2>
+-title "{{title}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-desc "{desc}"' if desc else ""}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
