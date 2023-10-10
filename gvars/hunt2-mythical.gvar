@@ -1,0 +1,182 @@
+{"mythical": [
+{
+  "id": "mountain_gorilla",
+  "name": "Mountain Gorilla",
+  "cha": 10,
+  "pp": 6,
+  "prizes": [{"name": "Token of the Mountain", "qt": 4}],
+  "sneak_succ": "The {prey_name} sits and motions for you to join it...",
+  "sneak_fail": "The {prey_name} huffs and climbs into the hills...",
+  "commune_succ": "The {prey_name} shares its lunch with you, and offers a gift...",
+  "commune_fail": "The {prey_name} is not impressed and motions for you to leave...",
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813112147279913/Gorilla.jpg"
+},
+{
+  "id": "white_stag",
+  "name": "White Stag",
+  "cha": 12,
+  "pp": 13,
+  "prizes": [{"name": "Token of the Forest", "qt": 3}],
+  "commune_succ": "The {prey_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
+  "commune_fail": "The {prey_name} seems dissatisfied. It turns and walks away.",
+  "img": "https://cdn.discordapp.com/attachments/820095740679290890/828847218466226176/White-Stag-website.jpeg"
+},
+{
+  "id": "great_white_wolf",
+  "name": "Great White Wolf",
+  "cha": 8,
+  "pp": 13,
+  "prizes": [{"name": "Token of the Forest", "qt": 4}],
+  "sneak_succ": "The {prey_name} appears behind you. It seems you were not the hunter in this scenario, but you don't feel threatened.",
+  "sneak_fail": "The {prey_name} eludes your skills. You are unable to find the trail.",
+  "commune_succ": "The {prey_name} nods to you and lays a gift at your feet. You feel enlightened by the time spent with the creature.",
+  "commune_fail": "The {prey_name} seems dissatisfied. It turns and walks away.",
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829838485346713623/unknown.png"
+},
+{
+  "id": "nurting_dryad",
+  "name": "Nurting Dryad",
+  "cha": 11,
+  "pp": 14,
+  "prizes": [{"name": "Token of the Swamp", "qt": 3}],
+  "commune_succ": "The {prey_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
+  "commune_fail": "The {prey_name} seems dissatisfied. It turns and walks away.",
+  "img": "https://f4.bcbits.com/img/a0177977609_10.jpg"
+},
+{
+  "id": "sacred_wolf",
+  "name": "Sacred Wolf",
+  "cha": 8,
+  "pp": 13,
+  "prizes": [{"name": "Token of the Mountain", "qt": 4}],
+  "sneak_succ": "The {prey_name} appears behind you. It seems you were not the hunter in this scenario, but you don't feel threatened.",
+  "sneak_fail": "The {prey_name} eludes your skills. You are unable to find the trail.",
+  "commune_succ": "The {prey_name} nods to you and lays a gift at your feet. You feel enlightened by the time spent with the creature.",
+  "commune_fail": "The {prey_name} seems dissatisfied. It turns and walks away.",
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829840999785168957/unknown.jpeg"
+},
+{
+  "id": "silk_unicorn",
+  "name": "Silk Unicorn",
+  "cha": 13,
+  "pp": 13,
+  "prizes": [{"name": "Token of the Grassland", "qt": 3}],
+  "commune_succ": "The {prey_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
+  "commune_fail": "The {prey_name} seems dissatisfied. It turns and walks away.",
+  "img": "https://i1.sndcdn.com/avatars-000054377072-xode6v-t500x500.jpg"
+},
+{
+  "id": "divine_pegasus",
+  "name": "Divine Pegasus",
+  "cha": 11,
+  "pp": 13,
+  "prizes": [{"name": "Token of the Mountain", "qt": 4}],
+  "sneak_fail": "The {prey_name} sees your approach and flies away...",
+  "commune_succ": "The {prey_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
+  "commune_fail": "The {prey_name} seems dissatisfied. It turns and flies away.",
+  "img": "https://i.pinimg.com/474x/c5/97/c2/c597c2cd270805d55f4494d3fe87842a.jpg"
+},
+{
+  "id": "elephant_matriarch",
+  "name": "Elephant Matriarch",
+  "cha": 7,
+  "pp": 5,
+  "prizes": [{"name": "Token of the Grassland", "qt": 3}],
+  "commune_succ": "The {prey_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
+  "commune_fail": "The {prey_name} seems dissatisfied. It turns and walks away.",
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812052918534144/Elephant.jpg"
+},
+{
+  "id": "paot_desert",
+  "name": "Pale Oak of the Desert",
+  "cha": 8,
+  "pp": 5,
+  "prizes": [{"name": "Pale Acorn of the Desert", "qt": 1}],
+  "sneak_succ": "The light-colored leaves on the Pale Oak of the Desert stands out in the scenery and catches your eye. You feel drawn to its presence.",
+  "sneak_fail": "Strange... You swear you saw the {prey_name} just a moment ago...",
+  "commune_succ": "The {prey_name} sways against the wind. It seems to acknowledge your presence and rewards you...",
+  "commune_fail": "The {prey_name} stands tall and unmoving. Its majesty leaves an impression on you, but nothing happens...",
+  "img": "https://cdn.discordapp.com/attachments/827581981452795975/829222711741382656/unknown.png"
+},
+{
+  "id": "paot_mountain",
+  "name": "Pale Oak of the Mountain",
+  "cha": 8,
+  "pp": 5,
+  "prizes": [{"name": "Pale Acorn of the Mountain", "qt": 1}],
+  "sneak_succ": "The light-colored leaves on the {prey_name} stands out in the scenery and catches your eye. You feel drawn to its presence.",
+  "sneak_fail": "Strange... You swear you saw the {prey_name} just a moment ago...",
+  "commune_succ": "The {prey_name} sways against the wind. It seems to acknowledge your presence and rewards you...",
+  "commune_fail": "The {prey_name} stands tall and unmoving. Its majesty leaves an impression on you, but nothing happens...",
+  "img": "https://cdn.discordapp.com/attachments/827581981452795975/829222775209066506/cb2e6d77-5829-4d78-a906-9c567ebf26ea_570.png"
+},
+{
+  "id": "paot_forest",
+  "name": "Pale Oak of the Forest",
+  "cha": 8,
+  "pp": 5,
+  "prizes": [{"name": "Pale Acorn of the Forest", "qt": 1}],
+  "sneak_succ": "The light-colored leaves on the {prey_name} stands out in the scenery and catches your eye. You feel drawn to its presence.",
+  "sneak_fail": "Strange... You swear you saw the {prey_name} just a moment ago...",
+  "commune_succ": "The {prey_name} sways against the wind. It seems to acknowledge your presence and rewards you...",
+  "commune_fail": "The {prey_name} stands tall and unmoving. Its majesty leaves an impression on you, but nothing happens...",
+  "img": "https://cdn.discordapp.com/attachments/827581981452795975/829222852644831232/55a68be7799a7c7a918237bd41d79686.png"
+},
+{
+  "id": "paot_grassland",
+  "name": "Pale Oak of the Grassland",
+  "cha": 8,
+  "pp": 5,
+  "prizes": [{"name": "Pale Acorn of the Grassland", "qt": 1}],
+  "sneak_succ": "The light-colored leaves on the {prey_name} stands out in the scenery and catches your eye. You feel drawn to its presence.",
+  "sneak_fail": "Strange... You swear you saw the {prey_name} just a moment ago...",
+  "commune_succ": "The {prey_name} sways against the wind. It seems to acknowledge your presence and rewards you...",
+  "commune_fail": "The {prey_name} stands tall and unmoving. Its majesty leaves an impression on you, but nothing happens...",
+  "img": "https://cdn.discordapp.com/attachments/827581981452795975/829222913848639498/3b8be09287718b976f3c4015a7fe115f.png"
+},
+{
+  "id": "paot_swamp",
+  "name": "Pale Oak of the Swamp",
+  "cha": 8,
+  "pp": 5,
+  "prizes": [{"name": "Pale Acorn of the Swamp", "qt": 1}],
+  "sneak_succ": "The light-colored leaves on the {prey_name} stands out in the scenery and catches your eye. You feel drawn to its presence.",
+  "sneak_fail": "Strange... You swear you saw the {prey_name} just a moment ago...",
+  "commune_succ": "The {prey_name} sways against the wind. It seems to acknowledge your presence and rewards you...",
+  "commune_fail": "The {prey_name} stands tall and unmoving. Its majesty leaves an impression on you, but nothing happens...",
+  "img": "https://cdn.discordapp.com/attachments/827581981452795975/829224074957815808/latest.png"
+},
+{
+  "id": "paot_coastline",
+  "name": "Pale Oak of the Coastline",
+  "cha": 8,
+  "pp": 5,
+  "prizes": [{"name": "Pale Oak of the Coastline", "qt": 1}],
+  "sneak_succ": "The light-colored leaves on the {prey_name} stands out in the scenery and catches your eye. You feel drawn to its presence.",
+  "sneak_fail": "Strange... You swear you saw the {prey_name} just a moment ago...",
+  "commune_succ": "The {prey_name} sways against the wind. It seems to acknowledge your presence and rewards you...",
+  "commune_fail": "The {prey_name} stands tall and unmoving. Its majesty leaves an impression on you, but nothing happens...",
+  "img": "https://cdn.discordapp.com/attachments/827581981452795975/829224656484827136/70cf6ffd8370e4753fd8162d740b7c33.png"
+},
+{
+  "id": "silver_scorpion",
+  "name": "Silver Scorpion",
+  "cha": 7,
+  "pp": 5,
+  "prizes": [{"name": "Token of the Desert", "qt": 3}],
+  "commune_succ": "The {prey_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
+  "commune_fail": "The {prey_name} seems dissatisfied. It turns and walks away.",
+  "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJjyeMO6SUbmo8QJYMG2_mXXPuKDwhApeGAQ&usqp=CAU"
+},
+{
+  "id": "golden_griffon",
+  "name": "Golden Griffon",
+  "cha": 9,
+  "pp": 13,
+  "prizes": [{"name": "Token of the Coast", "qt": 3}],
+  "sneak_fail": "The {prey_name} sees your approach and flies away...",
+  "commune_succ": "The {prey_name} leads you to a Pale Oak. You feel enlightened by the time spent with the creature.",
+  "commune_fail": "The {prey_name} seems dissatisfied. It turns and flies away.",
+  "img": "https://i.pinimg.com/originals/b4/33/c1/b433c15cc6b89ebec1801241931a3371.jpg"
+}
+]}

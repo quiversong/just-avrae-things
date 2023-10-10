@@ -1,0 +1,231 @@
+embed
+<drac2>
+using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
+COMMAND = f'{ctx.prefix}{ctx.alias}'
+
+# Configuration Variables Initialization
+IS_LIVE = True
+VERSION = '2.0'
+
+BETA_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
+LIVE_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
+DRAGON_VAR = "3f0c7f42-7712-4e86-8252-df4782f64c98"
+
+SPECIAL_CREATURE_DIE = 200
+
+DAILY_CAP = 6
+
+# Code
+args = &ARGS&
+pargs = argparse(args)
+c = character()
+cv = c.cvars
+cs = c.skills
+
+DATA_VAR = LIVE_VAR if IS_LIVE else BETA_VAR
+
+output = { 'title': f'{c.name} goes hunting!', 'img': None, 'thumb': None, 'color': '128c2f', 'footer': '', 'fields': [] }
+
+sl, fl = "**Success!**", "**Failure!**"
+
+ALIAS_TIME_VAR = "_h_dhc_"
+ALIAS_STAGE_VAR = "_h_vars"
+ALIAS_STATS_VAR = "_h_st_"
+
+ADMIN_USER_IDS = [771997367611949076]
+if get_svar('SEVENTRA_ALIAS_ADMINS') != None:
+    admin_ids = load_json(get_svar('SEVENTRA_ALIAS_ADMINS'))
+    ADMIN_USER_IDS += admin_ids
+
+daily_data = utils.get_daily_activity_data(ALIAS_TIME_VAR, DAILY_CAP)
+alias_performed_count = daily_data["count"]
+wait_time = daily_data["wait_time"]
+
+output['footer'] = f"You have hunted {alias_performed_count}/{DAILY_CAP} times today. | !hunt help\n"
+output['footer'] += f'Seventra: Exodus of Heroes | Hunt v{VERSION} | !hunt credits'
+
+# Methods
+
+
+def get_prey_data(preys, prey_id):
+    return preys[prey_id] if prey_id in preys else None
+
+def format_prey_name_with_article(prey):
+    prey_name = prey["name"]
+    add_n = "n" if prey_name[0].upper() in "AEIOU" else ""
+    return f'a{add_n} {prey_name}'
+
+def increment_stat(stats, stat_name):
+    stats[stat_name] = stats[stat_name] + 1 if stat_name in stats else 1
+
+def dump_stats(stats):
+    character().set_cvar(HUNT_STATS_VAR, dump_json(stats))
+
+def update_footer_count(output, new_count):
+    output['footer'] = output['footer'].replace(f'{new_count - 1}/', f'{new_count}/')
+
+def print_stats(output, stats):
+    output["title"] = f'{c.name}\'s hunting statistics...'
+    if stats == {}:
+        output['fields'].append(f'You have no statistics!|Go hunt!')
+        return 0
+    stats_list = [key.split('_')[1] + (' successes' if key.startswith('s_') else ' total') +
+        f': {value}' for key, value in stats.items()]
+    output['fields'].append('Your hunt history shows:|' + '\n'.join(stats_list))
+    return 0
+
+def reset_state(output):
+    if not ctx.author.id in ADMIN_USER_IDS:
+        err('You are not allowed to do that!')
+        return 1
+    character().delete_cvar(ALIAS_STAGE_VAR)
+    character().delete_cvar(ALIAS_TIME_VAR)
+    output['title'] = "Resetting hunting state..."
+    output['footer'] = output['footer'].replace(f'{alias_performed_count}/', '0/')
+    return 0
+
+def reset_stats(output):
+    if not ctx.author.id in ADMIN_USER_IDS:
+        err('You are not allowed to do that!')
+        return 1
+    character().delete_cvar(ALIAS_STATS_VAR)
+    output["title"] = "Resetting hunt statistics..."
+    return 0
+
+def set_next_expected_stage(prey_id, stage_code):
+    character().set_cvar(ALIAS_STAGE_VAR, f'{prey_id}:{stage_code}')
+
+def handle_wrong_stage(output, prey_id, expected_stage):
+    prey = get_prey_data(prey_id)
+    prey_label = 'a different prey' if prey == None else format_prey_name_with_article(prey)
+    output['fields'].append(f'Oops! You are already hunting {prey_label}!|Use `!hunt {expected_stage}` to continue.')
+    output['thumb'] = image
+    return 1
+
+def biome_selection_screen(output, biome_codes):
+    b_list_cmd = "  `!hunt " + "`\n  `!hunt ".join(biome_codes) + "`"
+    output['fields'].append(f'Where do you want to go hunting?|Use one of the following:\n{b_list_cmd}')
+    output['thumb'] = image
+    hunt_images = [
+        'https://cdn.discordapp.com/attachments/827581981452795975/830670258897158174/ranger-bow.png',
+        'https://cdn.discordapp.com/attachments/827581981452795975/830676686537228328/colrathisle.png',
+        'https://cdn.discordapp.com/attachments/827581981452795975/830676464062955560/dnd-ranger-5e.png',
+        'https://cdn.discordapp.com/attachments/827581981452795975/830676245288714290/Ranger-1-548x403.png',
+        'https://cdn.discordapp.com/attachments/827581981452795975/830677100431671316/Blue_Bear_Barbarian_and_Cave_Bear.png',
+        'https://cdn.discordapp.com/attachments/827581981452795975/830674739688243220/7934d073b0f81ff62c673d68a2c41709.png',
+        'https://cdn.discordapp.com/attachments/827581981452795975/830674397358325811/sJd_IiQBEXsFPg4dkzonDt7zwFvDOO_sI2_02qRMJGFeBK8RWOOz5XnG-_tBEt_LhHVADSbqctdm9rQfb8A7pQeEh_GJ2ZbtHNd3.png',
+        'https://cdn.discordapp.com/attachments/827581981452795975/830677484688375828/tumblr_nxew19kDvy1qhttpto5_1280.jpeg',
+        'https://cdn.discordapp.com/attachments/827581981452795975/830677489247453204/daujf32-19437d94-de54-4522-9f9b-e7bc985098b9.jpeg',
+        'https://cdn.discordapp.com/attachments/827581981452795975/830677491408437279/pyxbh3nvnur11.jpeg'
+    ]
+    output['img'] = hunt_images[roll(f'1d{len(hunt_images)}') - 1]
+    return 0
+
+
+# Execution
+
+prey_id = None
+expected_stage = None
+last_stage_was_crit = False
+
+if ALIAS_STAGE_VAR in cv:
+    hvars = cv[ALIAS_STAGE_VAR].split(":")
+    prey_id = hvars[0]
+    expected_stage = hvars[1]
+    if len(hvars) > 2 and hvars[2] == 'lastcrit':
+        last_stage_was_crit = True
+
+if not ALIAS_STATS_VAR in cv:
+    stats = {}
+else:
+    stats = load_json(ALIAS_STATS_VAR)
+
+if len(args) > 0 and args[0] == "stats":
+    return print_stats(output, stats)
+
+if len(args) > 0 and args[0] == "reset":
+    return reset_state(output)
+
+if len(args) > 0 and args[0] == "resetstats":
+    return reset_stats(output)
+
+data = load_json(get_gvar(DATA_VAR))
+# TODO dragon_data = load_json(get_gvar(DRAGON_VAR))
+
+biomes = data['biomes']
+biome_codes = [k for k, v in biomes.items()]
+
+preys = data['animals']
+
+in_wrong_stage = expected_stage and (len(args) == 0 or (len(args) > 0 and expected_stage != args[0]))
+quitting_hunt = expected_stage == 'attack' and len(args) > 0 and args[0] == 'quit'
+if (in_wrong_stage and not quitting_hunt):
+    return handle_wrong_stage(output, prey_id, expected_stage)
+
+if (len(args) == 0 or (not expected_stage and args[0] not in biome_codes)):
+    return biome_selection_screen(output, biome_codes)
+
+first_param = args[0]
+
+# From here on, player must still have hunt attempts available
+if alias_performed_count >= DAILY_CAP:
+    f = f'{c.name} is exhausted from so much hunting today...|You have to wait {wait_text} until you can hunt again.'
+    f += '\n(Hunting resets at midnight UTC)'
+    output['fields'].append(f)
+    return 1
+
+
+if first_param in biome_codes:
+    alias_performed_count = utils.increase_daily_activity_data(ALIAS_TIME_VAR)
+    update_footer_count(output, alias_performed_count)
+    increment_stat(stats, 't_hunts')
+
+    biome = biomes[first_param]
+    thumb = biome['img']
+    noprey_message = f'{c.name} could not find any prey.|Better luck next time!'
+
+    if not 'animal_chance' in biome:
+      f = noprey_message
+      dump_stats(stats)
+      return 0
+
+    prey_roll = roll("1d100")
+    biome_preys = [(k, v) for k, v in biome['animal_chance'].items()]
+    prey_id = [k for k, v in biome_preys if (a_roll == v[0] if len(v) == 1 else prey_roll >= v[0] and prey_roll <= v[1])]
+    if len(pray_id) == 0:
+      f = noprey_message
+      dump_stats(stats)
+      return 0
+
+    # TODO handle dragons
+    # is_dragon_roll = roll(f'1d{DRAGON_DIE}')
+    # is_dragon = is_dragon_roll == DRAGON_DIE
+    # if is_dragon:
+    #     dragon_types = dragon_data["biomes"][p]
+    #     dragon_type = dragon_types[roll(f'1d{len(dragon_types)}') - 1]
+    #     commune_or_battle = 'commune' if roll('1d2') == 1 else 'battle'
+    #     anm_id = f'dragon-{dragon_type}-{commune_or_battle}'
+    #     anm = dragon_data["dragons"][anm_id]
+    # else:
+    prey_id = prey_id[0]
+    prey = preys[prey_id]
+
+    set_next_expected_stage(prey_id, 'sneak')
+
+    # TODO handle dragons and mythical creatures
+    # if ("commune" in anm and anm["commune"] == True) or is_dragon:
+    #     color = 'f0b330'
+    #     f = f'{c.name} found a ***VERY RARE*** {anm["name"]}!|Use `!hunt sneak` to try to approach it without being noticed.'
+    # else:
+    f = f'{c.name} found {format_prey_name_with_article(prey)} in the {biome["name"]}!|Use `!hunt sneak` to try and get the jump on it.'
+    dump_stats(stats)
+    return 0
+
+dump_stats(stats)
+</drac2>
+-title "{{output['title']}}"
+{{f'-image "{output["img"]}"' if output["img"] else ""}}
+{{f'-thumb "{output["thumb"]}"' if output["thumb"] else ""}}
+{{f'-color "{output["color"]}"' if output["color"] else ""}}
+{{f'-footer "{output["footer"]}"' if output["footer"] else ""}}
+{{''.join(['-f "' + field + '"\n' for field in output['fields']]) if len(output['fields']) > 0 else ''}}
