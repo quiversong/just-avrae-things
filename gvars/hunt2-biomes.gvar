@@ -1,0 +1,157 @@
+{"biomes": [
+{
+"id": "desert"
+"name": "Desert"
+"animals": {
+  "iguana": [1, 3],
+  "horned_lizard": [4, 8],
+  "scorpion": [9, 13],
+  "hare": [14, 15],
+  "rattlesnake": [16, 19],
+  "giant_wolf_spider": [20, 27],
+  "stirge": [28, 36],
+  "coyote": [37, 44],
+  "bobcat": [45, 48],
+  "wild_camel": [49, 56],
+  "rust_monster": [57, 65],
+  "deer": [66, 68],
+  "hyena": [69, 78],
+  "basilisk": [79, 81],
+  "turkey_vulture": [82, 89],
+  "hawk": [90, 93],
+  "mountain_lion": [94, 97],
+  "chimera": [98, 100]
+}},
+{
+"id": "mountain"
+"name": "Mountain"
+"animals": {
+  "horned_lizard": [1, 8],
+  "rabbit": [9, 16],
+  "rattlesnake": [17, 24],
+  "giant_wolf_spider": [25, 32],
+  "wolverine": [33, 39],
+  "falcon": [40, 44],
+  "mountain_fox": [45, 47],
+  "wyvern": [48, 53],
+  "deer": [54, 61],
+  "wolf": [62, 64],
+  "turkey_vulture": [65, 70],
+  "hawk": [71, 75],
+  "cockatrice": [76, 78],
+  "snow_leopard": [79, 81],
+  "mountain_goat": [82, 86],
+  "wild_yak": [87, 89],
+  "mountain_lion": [90, 91],
+  "eagle": [92, 93],
+  "elk": [94, 96],
+  "injured_roc": [97, 98],
+  "griffon": [99, 99],
+  "manticore": [100, 100]
+}},
+{
+"id": "forest"
+"name": "Forest"
+"animals": {
+  "frog": [1, 7],
+  "raccoon": [8, 13],
+  "bat": [14, 17],
+  "river_otter": [18, 23],
+  "badger": [24, 29],
+  "rabbit": [30, 38],
+  "beaver": [39, 48],
+  "giant_wolf_spider": [49, 52],
+  "coyote": [53, 55],
+  "bobcat": [56, 58],
+  "red_fox": [59, 61],
+  "deer": [62, 70],
+  "wild_boar": [71, 75],
+  "wolf": [76, 79],
+  "hawk": [80, 83],
+  "owl": [84, 86],
+  "tiger": [87, 88],
+  "mountain_lion": [89, 90],
+  "owlbear": [91, 92],
+  "black_bear": [93, 95],
+  "brown_bear": [96, 98],
+  "behir": [99, 100]
+}},
+{
+"id": "grassland"
+"name": "Grassland"
+"animals": {
+  "frog": [1, 6],
+  "raccoon": [7, 12],
+  "turtle": [13, 18],
+  "duck": [19, 24],
+  "river_otter": [25, 30],
+  "badger": [31, 36],
+  "rabbit": [37, 45],
+  "rattlesnake": [46, 49],
+  "black-footed_ferret": [50, 54],
+  "coyote": [55, 57],
+  "bobcat": [58, 60],
+  "red_fox": [61, 63],
+  "hyena": [64, 66],
+  "wolf": [67, 70],
+  "hawk": [71, 74],
+  "leopard": [75, 78],
+  "bison": [79, 85],
+  "lion": [86, 90],
+  "elk": [91, 92],
+  "ostritch": [93, 95],
+  "owlbear": [96, 97],
+  "rhino": [98, 98],
+  "gorgon": [99, 99],
+  "chimera": [100, 100]
+}},
+{
+"id": "swamp"
+"name": "Swamp"
+"animals": {
+  "iguana": [1, 4],
+  "frog": [5, 8],
+  "turtle": [9, 14],
+  "duck": [15, 20],
+  "river_otter": [21, 24],
+  "rattlesnake": [25, 28],
+  "beaver": [29, 33],
+  "stirge": [34, 40],
+  "stirge": [41, 47],
+  "coyote": [48, 52],
+  "bobcat": [53, 57],
+  "capybara": [58, 66],
+  "anaconda": [67, 75],
+  "alligator": [76, 82],
+  "hawk": [83, 88],
+  "crocodile": [89, 93],
+  "bald_eagle": [94, 97],
+  "hydra": [98, 100]
+}},
+{
+"id": "coastline"
+"name": "Coastline"
+"animals": {
+  "crab": [1, 7],
+  "iguana": [8, 13],
+  "bat": [14, 17],
+  "sea_otter": [18, 24],
+  "shelduck": [25, 32],
+  "seal": [33, 40],
+  "falcon": [41, 44],
+  "coyote": [45, 47],
+  "bobcat": [48, 50],
+  "sea_turtle": [51, 57],
+  "pelican": [58, 63],
+  "alligator": [64, 70],
+  "wolf": [71, 73],
+  "basilisk": [74, 78],
+  "crocodile": [79, 84],
+  "hawk": [85, 87],
+  "bald_eagle": [88, 90],
+  "eagle": [91, 93],
+  "brown_bear": [94, 97],
+  "griffon": [98, 99],
+  "manticore": [100, 100]
+}}
+]}

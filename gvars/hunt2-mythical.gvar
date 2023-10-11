@@ -87,7 +87,7 @@
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812052918534144/Elephant.jpg"
 },
 {
-  "id": "paot_desert",
+  "id": "poot_desert",
   "name": "Pale Oak of the Desert",
   "cha": 8,
   "pp": 5,
@@ -99,7 +99,7 @@
   "img": "https://cdn.discordapp.com/attachments/827581981452795975/829222711741382656/unknown.png"
 },
 {
-  "id": "paot_mountain",
+  "id": "poot_mountain",
   "name": "Pale Oak of the Mountain",
   "cha": 8,
   "pp": 5,
@@ -111,7 +111,7 @@
   "img": "https://cdn.discordapp.com/attachments/827581981452795975/829222775209066506/cb2e6d77-5829-4d78-a906-9c567ebf26ea_570.png"
 },
 {
-  "id": "paot_forest",
+  "id": "poot_forest",
   "name": "Pale Oak of the Forest",
   "cha": 8,
   "pp": 5,
@@ -123,7 +123,7 @@
   "img": "https://cdn.discordapp.com/attachments/827581981452795975/829222852644831232/55a68be7799a7c7a918237bd41d79686.png"
 },
 {
-  "id": "paot_grassland",
+  "id": "poot_grassland",
   "name": "Pale Oak of the Grassland",
   "cha": 8,
   "pp": 5,
@@ -135,7 +135,7 @@
   "img": "https://cdn.discordapp.com/attachments/827581981452795975/829222913848639498/3b8be09287718b976f3c4015a7fe115f.png"
 },
 {
-  "id": "paot_swamp",
+  "id": "poot_swamp",
   "name": "Pale Oak of the Swamp",
   "cha": 8,
   "pp": 5,
@@ -147,7 +147,7 @@
   "img": "https://cdn.discordapp.com/attachments/827581981452795975/829224074957815808/latest.png"
 },
 {
-  "id": "paot_coastline",
+  "id": "poot_coastline",
   "name": "Pale Oak of the Coastline",
   "cha": 8,
   "pp": 5,
