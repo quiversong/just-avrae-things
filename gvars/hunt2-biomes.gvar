@@ -21,7 +21,17 @@
   "hawk": [90, 93],
   "mountain_lion": [94, 97],
   "chimera": [98, 100]
-}},
+},
+"mythical": [
+"silver_scorpion",
+"elephant_matriarch",
+"mountain_gorilla",
+"poot_desert",
+],
+"dragons": [
+"battle_red_dragon",
+"a_red_dragon",
+"battle_",
 {
 "id": "mountain"
 "name": "Mountain"
@@ -49,6 +59,16 @@
   "griffon": [99, 99],
   "manticore": [100, 100]
 }},
+"mythical": [
+"mountain_gorilla",
+"sacred_wolf",
+"divine_pegasus",
+"poot_mountain",
+],
+"dragons": [
+"red_dragon",
+"white_dragon",
+]},
 {
 "id": "forest"
 "name": "Forest"
@@ -76,6 +96,16 @@
   "brown_bear": [96, 98],
   "behir": [99, 100]
 }},
+"mythical": [
+"white_stag",
+"white_stag",
+"great_white_wolf",
+"poot_forest",
+],
+"dragons": [
+"green_dragon",
+"black_dragon",
+]},
 {
 "id": "grassland"
 "name": "Grassland"
@@ -105,6 +135,16 @@
   "gorgon": [99, 99],
   "chimera": [100, 100]
 }},
+"mythical": [
+"silk_unicorn",
+"elephant_matriarch",
+"divine_pegasus",
+"poot_grassland",
+],
+"dragons": [
+"blue_dragon",
+"white_dragon",
+]},
 {
 "id": "swamp"
 "name": "Swamp"
@@ -128,6 +168,16 @@
   "bald_eagle": [94, 97],
   "hydra": [98, 100]
 }},
+"mythical": [
+"nurting_dryad",
+"nurting_dryad",
+"silver_scorpion",
+"poot_swamp",
+],
+"dragons": [
+"green_dragon",
+"black_dragon",
+]},
 {
 "id": "coastline"
 "name": "Coastline"
@@ -153,5 +203,15 @@
   "brown_bear": [94, 97],
   "griffon": [98, 99],
   "manticore": [100, 100]
-}}
+}},
+"mythical": [
+"golden_griffon",
+"golden_griffon",
+"sacred_wolf",
+"poot_coastline",
+],
+"dragons": [
+"blue_dragon",
+"white_dragon",
+]}"
 ]}
