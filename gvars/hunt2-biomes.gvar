@@ -29,9 +29,11 @@
 "poot_desert",
 ],
 "dragons": [
-"battle_red_dragon",
-"a_red_dragon",
-"battle_",
+"young_red_dragon",
+"ancient_red_dragon",
+"young_green_dragon",
+"ancient_green_dragon",
+]},
 {
 "id": "mountain"
 "name": "Mountain"
@@ -63,11 +65,13 @@
 "mountain_gorilla",
 "sacred_wolf",
 "divine_pegasus",
-"poot_mountain",
+"poot_mountain"
 ],
 "dragons": [
-"red_dragon",
-"white_dragon",
+"young_red_dragon",
+"ancient_red_dragon",
+"young_white_dragon",
+"ancient_white_dragon"
 ]},
 {
 "id": "forest"
@@ -100,11 +104,13 @@
 "white_stag",
 "white_stag",
 "great_white_wolf",
-"poot_forest",
+"poot_forest"
 ],
 "dragons": [
-"green_dragon",
-"black_dragon",
+"young_green_dragon",
+"ancient_green_dragon",
+"young_black_dragon",
+"ancient_black_dragon"
 ]},
 {
 "id": "grassland"
@@ -139,11 +145,13 @@
 "silk_unicorn",
 "elephant_matriarch",
 "divine_pegasus",
-"poot_grassland",
+"poot_grassland"
 ],
 "dragons": [
-"blue_dragon",
-"white_dragon",
+"young_blue_dragon",
+"ancient_blue_dragon",
+"young_white_dragon",
+"ancient_white_dragon"
 ]},
 {
 "id": "swamp"
@@ -172,11 +180,13 @@
 "nurting_dryad",
 "nurting_dryad",
 "silver_scorpion",
-"poot_swamp",
+"poot_swamp"
 ],
 "dragons": [
-"green_dragon",
-"black_dragon",
+"young_green_dragon",
+"ancient_green_dragon",
+"young_black_dragon",
+"ancient_black_dragon"
 ]},
 {
 "id": "coastline"
@@ -208,10 +218,12 @@
 "golden_griffon",
 "golden_griffon",
 "sacred_wolf",
-"poot_coastline",
+"poot_coastline"
 ],
 "dragons": [
-"blue_dragon",
-"white_dragon",
-]}"
+"young_blue_dragon",
+"ancient_blue_dragon",
+"young_white_dragon",
+"ancient_white_dragon"
+]}
 ]}

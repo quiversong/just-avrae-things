@@ -7,9 +7,18 @@ COMMAND = f'{ctx.prefix}{ctx.alias}'
 IS_LIVE = True
 VERSION = '2.0'
 
-BETA_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
-LIVE_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
-DRAGON_VAR = "3f0c7f42-7712-4e86-8252-df4782f64c98"
+VARIABLES = {
+    'BIOMES': '7c5af688-854b-416a-90bb-6715de8f46e2',
+    'ANIMALS': '1da1ff53-8bbf-485a-a474-ccbebf11a096',
+    'MYTHICAL': '7cca9364-ec2c-4d86-9128-2b4b638083c8',
+    'DRAGONS': '88cc76ed-a068-4d8c-89c9-56bd8ca621e2'
+}
+
+PREY_TYPES = {
+    'ANIMAL': 1,
+    'MYTHICAL': 2,
+    'DRAGON': 3
+}
 
 SPECIAL_CREATURE_DIE = 200
 
@@ -22,11 +31,9 @@ c = character()
 cv = c.cvars
 cs = c.skills
 
-DATA_VAR = LIVE_VAR if IS_LIVE else BETA_VAR
-
 output = { 'title': f'{c.name} goes hunting!', 'img': None, 'thumb': None, 'color': '128c2f', 'footer': '', 'fields': [] }
 
-sl, fl = "**Success!**", "**Failure!**"
+SL, FL = "**Success!**", "**Failure!**"
 
 ALIAS_TIME_VAR = "_h_dhc_"
 ALIAS_STAGE_VAR = "_h_vars"
@@ -40,6 +47,7 @@ if get_svar('SEVENTRA_ALIAS_ADMINS') != None:
 daily_data = utils.get_daily_activity_data(ALIAS_TIME_VAR, DAILY_CAP)
 alias_performed_count = daily_data["count"]
 wait_time = daily_data["wait_time"]
+wait_text = daily_data["wait_text"]
 
 output['footer'] = f"You have hunted {alias_performed_count}/{DAILY_CAP} times today. | !hunt help\n"
 output['footer'] += f'Seventra: Exodus of Heroes | Hunt v{VERSION} | !hunt credits'
@@ -59,7 +67,7 @@ def increment_stat(stats, stat_name):
     stats[stat_name] = stats[stat_name] + 1 if stat_name in stats else 1
 
 def dump_stats(stats):
-    character().set_cvar(HUNT_STATS_VAR, dump_json(stats))
+    character().set_cvar(ALIAS_STATS_VAR, dump_json(stats))
 
 def update_footer_count(output, new_count):
     output['footer'] = output['footer'].replace(f'{new_count - 1}/', f'{new_count}/')
@@ -92,14 +100,25 @@ def reset_stats(output):
     output["title"] = "Resetting hunt statistics..."
     return 0
 
-def set_next_expected_stage(prey_id, stage_code):
-    character().set_cvar(ALIAS_STAGE_VAR, f'{prey_id}:{stage_code}')
+def set_next_expected_stage(prey_id, stage_code, prey_type):
+    character().set_cvar(ALIAS_STAGE_VAR, f'{prey_id}:{stage_code}:{prey_type}')
 
 def handle_wrong_stage(output, prey_id, expected_stage):
     prey = get_prey_data(prey_id)
     prey_label = 'a different prey' if prey == None else format_prey_name_with_article(prey)
     output['fields'].append(f'Oops! You are already hunting {prey_label}!|Use `!hunt {expected_stage}` to continue.')
     output['thumb'] = image
+    return 1
+
+def handle_no_attepts_left(output, wait_text, alias_performed_count, attempts_tried = 1):
+    f = ''
+    if attempts_tried == 1:
+        f += f'{c.name} is exhausted from so much hunting today...|You have to wait {wait_text} until you can hunt again.'
+    else:
+        f += f'{c.name} is trying to hunt {attempts_tried} more, but you can only do {DAILY_CAP - alias_performed_count}... |You have to wait {wait_text} until you can hunt again.\n'
+        f += 'Or use `!hunt <biome>` to hunt just once if you still have attempts left.'
+    f += '\n(Hunting resets at midnight UTC)'
+    output['fields'].append(f)
     return 1
 
 def biome_selection_screen(output, biome_codes):
@@ -122,18 +141,11 @@ def biome_selection_screen(output, biome_codes):
     return 0
 
 
-# Execution
+# Execution Variables
 
 prey_id = None
 expected_stage = None
 last_stage_was_crit = False
-
-if ALIAS_STAGE_VAR in cv:
-    hvars = cv[ALIAS_STAGE_VAR].split(":")
-    prey_id = hvars[0]
-    expected_stage = hvars[1]
-    if len(hvars) > 2 and hvars[2] == 'lastcrit':
-        last_stage_was_crit = True
 
 if not ALIAS_STATS_VAR in cv:
     stats = {}
@@ -149,13 +161,29 @@ if len(args) > 0 and args[0] == "reset":
 if len(args) > 0 and args[0] == "resetstats":
     return reset_stats(output)
 
-data = load_json(get_gvar(DATA_VAR))
-# TODO dragon_data = load_json(get_gvar(DRAGON_VAR))
+biomes = load_json(get_gvar(VARIABLES.BIOMES))['biomes']
+biome_codes = [b['id'] for b in biomes]
 
-biomes = data['biomes']
-biome_codes = [k for k, v in biomes.items()]
+first_param = args[0]
 
-preys = data['animals']
+ALL_DATA = {
+    'BIOMES': biomes,
+    'BIOME_CODES': biome_codes,
+    'ANIMALS': load_json(get_gvar(VARIABLES.ANIMALS))['animals'],
+    'DRAGONS': load_json(get_gvar(VARIABLES.DRAGONS))['dragons'],
+    'MYTHICAL': load_json(get_gvar(VARIABLES.MYTHICAL))['mythical']
+}
+
+# From here on, player must still have hunt attempts available
+if alias_performed_count >= DAILY_CAP:
+    return handle_no_attepts_left(output, wait_text, alias_performed_count)
+
+if ALIAS_STAGE_VAR in cv:
+    hvars = cv[ALIAS_STAGE_VAR].split(":")
+    prey_id = hvars[0]
+    expected_stage = hvars[1]
+    if len(hvars) > 2 and hvars[2] == 'lastcrit':
+        last_stage_was_crit = True
 
 in_wrong_stage = expected_stage and (len(args) == 0 or (len(args) > 0 and expected_stage != args[0]))
 quitting_hunt = expected_stage == 'attack' and len(args) > 0 and args[0] == 'quit'
@@ -165,61 +193,107 @@ if (in_wrong_stage and not quitting_hunt):
 if (len(args) == 0 or (not expected_stage and args[0] not in biome_codes)):
     return biome_selection_screen(output, biome_codes)
 
-first_param = args[0]
 
-# From here on, player must still have hunt attempts available
-if alias_performed_count >= DAILY_CAP:
-    f = f'{c.name} is exhausted from so much hunting today...|You have to wait {wait_text} until you can hunt again.'
-    f += '\n(Hunting resets at midnight UTC)'
-    output['fields'].append(f)
-    return 1
+# Execution Methods
+def create_state(name, run, params, is_last = False):
+    return {
+        'name': name,
+        'params': params,
+        'is_last': is_last,
+        'run': run
+    }
 
-
-if first_param in biome_codes:
-    alias_performed_count = utils.increase_daily_activity_data(ALIAS_TIME_VAR)
-    update_footer_count(output, alias_performed_count)
+def do_explore_biome(stats, output, biome_id):
     increment_stat(stats, 't_hunts')
 
-    biome = biomes[first_param]
+    biome = ALL_DATA.BIOMES[biome_id]
+
+    # try to find a dragon or mythical creature
+    special_prey_roll = roll(f'1d{DAILY_CAP * 31}')
+    prey_type = PREY_TYPES.ANIMAL
+    if special_prey_roll == 1:
+        prey_type = PREY_TYPES.MYTHICAL
+    if special_prey_roll == 2:
+        prey_type = PREY_TYPES.DRAGON
+
+    if prey_type == PREY_TYPES.ANIMAL:
+        prey_roll = roll('1d100')
+        biome_animals = [(k, v) for k, v in biome['animals'].items()]
+
+        prey_id = [k for k, v in biome_animals if (a_roll == v[0] if len(v) == 1 else prey_roll >= v[0] and prey_roll <= v[1])]
+        prey = ALL_DATA.ANIMALS[prey_id]
+    else:
+        prey_list = DATA.DRAGONS if prey_type == PREY_TYPES.DRAGON else DATA.MYTHICAL if prey_type == PREY_TYPES.MYTHICAL
+
+        prey = randchoice(prey_list)
+        prey_id = prey['id']
+
+    return {
+        'prey_type': prey_type,
+        'prey_id': prey_id,
+        'prey': prey,
+        'biome': biome
+    }
+
+def do_sneak(stats, output):
+    output = params['output']
+    prey_id = params['prey_id']
+
+    animal = DATA.ANIMALS[prey_id]
+    animal_name = animal["name"]
+
+    adv_status = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
+
+    stealth_roll = vroll(character().skills.stealth.d20(base_adv = adv_status))
+    success = stealth_roll.total > animal["pp"]
+
+    params.output.title = f'{c.name} tries to sneak on their prey!'
+    f = f'{c.name} closes on the {animal_name}...|**Stealth roll:** {stealth_roll.full}\n{SL if success else FL}'
+    if success:
+        thumb = animal["img"]
+        increment_stat(stats, 's_sneak')
+        f = f'The {anm_name} has not seen you!|Now use `!hunt attack` or `!hunt attack [weapon]` to attack your prey!'
+        f += "\nAlternatively use `!hunt quit` if you would rather not hunt this prey."
+        output.fields.append(f)
+
+        return create_state('attack', do_attack, { 'output': output, 'prey_id': prey_id, 'prey_type': PREY_TYPES.ANIMAL })
+    else:
+      thumb = image
+      if "sneak_fail" in animal:
+          f2 = anm["sneak_fail"].replace('{prey_name}', animal_name)
+      else:
+          f2 = f'You lost sight of the {animal_name}...'
+      f2 += '\n' if '|' in f2 else '|'
+      f2 += 'Better luck next time! Use `!hunt` to try again.'
+      c.delete_cvar(HUNT_STAGE_VAR)
+
+# Begin Execution
+
+# Begin new hunt
+if not('quick' in params) and first_param in biome_codes:
+    alias_performed_count = utils.increase_daily_activity_data(ALIAS_TIME_VAR)
+    update_footer_count(output, alias_performed_count)
+
     thumb = biome['img']
-    noprey_message = f'{c.name} could not find any prey.|Better luck next time!'
 
-    if not 'animal_chance' in biome:
-      f = noprey_message
-      dump_stats(stats)
-      return 0
+    biome_id = first_param
+    result = do_explore_biome(stats, output, biome_id)
 
-    prey_roll = roll("1d100")
-    biome_preys = [(k, v) for k, v in biome['animal_chance'].items()]
-    prey_id = [k for k, v in biome_preys if (a_roll == v[0] if len(v) == 1 else prey_roll >= v[0] and prey_roll <= v[1])]
-    if len(pray_id) == 0:
-      f = noprey_message
-      dump_stats(stats)
-      return 0
+    if result['prey_type'] == PREY_TYPES.ANIMAL:
+        f = f'{c.name} found a{format_prey_name_with_article(prey["name"])} in the {biome["name"]}!|Use `!hunt sneak` to try and get the jump on it.'
+        output.fields.append(f)
+    else:
+        f = f'{c.name} found a ***VERY RARE*** {prey["name"]}!|Use `!hunt sneak` to try to approach it without being noticed.'
+        output.fields.append(f)
+        color = 'f0b330'
 
-    # TODO handle dragons
-    # is_dragon_roll = roll(f'1d{DRAGON_DIE}')
-    # is_dragon = is_dragon_roll == DRAGON_DIE
-    # if is_dragon:
-    #     dragon_types = dragon_data["biomes"][p]
-    #     dragon_type = dragon_types[roll(f'1d{len(dragon_types)}') - 1]
-    #     commune_or_battle = 'commune' if roll('1d2') == 1 else 'battle'
-    #     anm_id = f'dragon-{dragon_type}-{commune_or_battle}'
-    #     anm = dragon_data["dragons"][anm_id]
-    # else:
-    prey_id = prey_id[0]
-    prey = preys[prey_id]
-
-    set_next_expected_stage(prey_id, 'sneak')
-
-    # TODO handle dragons and mythical creatures
-    # if ("commune" in anm and anm["commune"] == True) or is_dragon:
-    #     color = 'f0b330'
-    #     f = f'{c.name} found a ***VERY RARE*** {anm["name"]}!|Use `!hunt sneak` to try to approach it without being noticed.'
-    # else:
-    f = f'{c.name} found {format_prey_name_with_article(prey)} in the {biome["name"]}!|Use `!hunt sneak` to try and get the jump on it.'
+    set_next_expected_stage(prey_id, 'sneak', prey_type)
     dump_stats(stats)
     return 0
+
+
+if first_param == 'sneak':
+    do_sneak(stats, output)
 
 dump_stats(stats)
 </drac2>
