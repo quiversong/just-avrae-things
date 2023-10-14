@@ -20,7 +20,8 @@ PREY_TYPES = {
     'DRAGON': 3
 }
 
-SPECIAL_CREATURE_DIE = 200
+CAMPFIRE_IMAGE = 'https://cdn.discordapp.com/attachments/827581981452795975/827949160514191400/unknown.png'
+GOLDEN_COLOR = 'f0b330'
 
 DAILY_CAP = 6
 
@@ -61,6 +62,26 @@ def get_prey_data(prey_type, prey_id):
 def get_biome_data(biome_id):
     return ([b for b in DATA.BIOMES if b['id'] == biome_id] + [None])[0]
 
+def parse_prizes_for(prey):
+    prizes = {}
+    if 'rations' in prey and prey['rations'] > 0:
+        prizes['Rations'] = prey['rations']
+    if 'prizes' in prey:
+      for prize in prey['prizes']:
+        prizes[prize['name']] = prize['qt']
+    return prizes
+
+def format_prizes_for(prey):
+    prize_list = ''
+    if 'rations' in prey and prey['rations'] > 0:
+        prize_list += f'{prey["rations"]}x Rations, '
+    if 'prizes' in prey:
+      for prize in prey['prizes']:
+        prize_name, prize_qt = prize['name'], prize['qt']
+        prize_list += f'{prize_qt}x {prize_name}, '
+    prize_list = prize_list[:len(prize_list) - 2]
+    return prize_list
+
 def format_prey_name_with_article(prey_name):
     add_n = "n" if prey_name[0].upper() in "AEIOU" else ""
     return f'a{add_n} {prey_name}'
@@ -69,6 +90,7 @@ def increment_stat(stats, stat_name):
     stats[stat_name] = stats[stat_name] + 1 if stat_name in stats else 1
 
 def dump_stats(stats):
+    stats.pop('t_dmg') if 't_dmg' in stats else None
     character().set_cvar(ALIAS_STATS_VAR, dump_json(stats))
 
 def update_footer_count(output, new_count):
@@ -102,8 +124,8 @@ def reset_stats(output):
     output["title"] = "Resetting hunt statistics..."
     return 0
 
-def set_next_expected_stage(stage_code, prey_type, prey_id):
-    character().set_cvar(ALIAS_STAGE_VAR, f'{prey_id}:{stage_code}:{prey_type}')
+def set_next_expected_stage(stage_code, prey_type, prey_id, did_crit = False):
+    character().set_cvar(ALIAS_STAGE_VAR, f'{prey_id}:{stage_code}:{prey_type}:{"lastcrit" if did_crit else ""}')
 
 def clear_expected_stage():
     character().delete_cvar(ALIAS_STAGE_VAR)
@@ -201,7 +223,7 @@ def do_explore_biome(stats, output, biome):
         prey = randchoice(prey_list)
         prey_id = prey['id']
 
-        output['color'] = 'f0b330'
+        output['color'] = GOLDEN_COLOR
         f = f'{character().name} found a ***VERY RARE*** {prey["name"]}!|Can you approach it without being noticed?'
         output.fields.append(f)
 
@@ -250,8 +272,112 @@ def do_sneak(stats, output, prey):
 
     return {
         'success': success,
-        'next_stage': 'commune' if ('commune' in prey and prey['commune']) else 'attack'
+        'next_stage': ('commune' if ('commune' in prey and prey['commune']) else 'attack') if success else None
     }
+
+def do_attack(stats, output, prey, weapon_name):
+    c = character()
+    weapon = utils.get_pc_weapon(weapon_name)
+
+    weapon_mod = weapon['a_bonus'] if weapon else (proficiencyBonus + dexterityMod)
+    attack_bonus = '+'.join(pargs.get('b', default=[''])).strip()
+
+    attack_die = '2d20kh1' if pargs.adv() == 1 else '2d20kl1' if pargs.adv() == -1 else '1d20'
+    attack_die = f'{attack_die} + {weapon_mod}'
+    attack_die = f'{attack_die} + {attack_bonus}' if attack_bonus != '' else attack_die
+
+    attack_roll = vroll(attack_die)
+    is_crit = attack_roll.result.crit == 1
+
+    attack_success = is_crit or attack_roll.total >= prey['ac']
+
+    output['title'] = f'{c.name} attacks their prey{" with their " + weapon["name"] if weapon != None else ""}!'
+
+    f = f'Was {c.name} able to kill the {prey["name"]}?|**Attack roll:** {attack_roll.full}\n'
+    f += '**Miss!**' if not attack_success else '**Critical Hit!**' if is_crit else '**Success!**'
+    output.fields.append(f)
+
+    if attack_success:
+        increment_stat(stats, 's_attack')
+        output['thumb'] = prey['img']
+        f = ''
+        if is_crit:
+            f = f'{c.name} hit a critical hit killing the {prey["name"]} on the spot!'
+        else:
+            f = f'{c.name} manages to kill the {prey["name"]}.'
+        f += '|Can you clean your prize and collect the good?'
+        output.fields.append(f)
+    else:
+        output['thumb'] = image
+        output.fields.append(f'The {prey["name"]} managed to escape your attack and flee...|Better luck next time!')
+
+    return {
+        'success': attack_success,
+        'did_crit': is_crit,
+        'next_stage': 'clean' if attack_success else None
+    }
+
+def do_clean(stats, output, prey, all_bags = None):
+    c = character()
+    output['title'] = f'{c.name} attempts to clean their hunting prize!'
+
+    adv_status = True if last_stage_was_crit else None
+    survival_roll = vroll(c.skills.survival.d20(base_adv = adv_status))
+    success = survival_roll.total >= prey['cleanDC']
+
+    f = f'{c.name} cleans and extracts the goods from the {prey["name"]}...|**Survival roll:** {survival_roll.full}\n{SL if success else FL}'
+    output.fields.append(f)
+
+    if success:
+        output['img'] = prey["img"]
+        increment_stat(stats, 's_clean')
+
+        prizes = parse_prizes_for(prey)
+        prizes_list = format_prizes_for(prey)
+
+        utils.add_to_bag('Hunting', prizes, all_bags)
+        output.fields.append(f'You gained: {prizes_list}.|They have been added to your "Hunting" bag!')
+    else:
+        output['thumb'] = CAMPFIRE_IMAGE
+        output.fields.append(f'You ended up wasting the prey you caught...|Better luck next time!')
+
+def do_commune(stats, output, prey, all_bags = None):
+    if (not 'commune' in prey) or prey['commune'] == False or (not 'cha' in prey):
+        output.fields.append('!hunt script rolled a 1 and failed flat on its head! Please report to a Server Administrator.')
+        return 1
+
+    c = character()
+    ah_roll = vroll(c.skills.animalHandling.d20())
+    success = ah_roll.total >= prey['cha']
+
+    output['title'] = f'{c.name} tries to commune with the {prey["name"]}...'
+    output.fields.append(f'{c.name} approaches the {prey["name"]}...|**Animal Handling roll:** {ah_roll.full}\n{SL if succ else FL}')
+
+    if success:
+        increment_stat(stats, 's_commune')
+        output['img'] = prey['img']
+
+        prizes = parse_prizes_for(prey)
+        prizes_list = format_prizes_for(prey)
+
+        if 'commune_succ' in prey:
+            f = prey['commune_succ'].replace('{char_name}', c.name).replace('{prey_name}', prey['name'])
+        else:
+            f = f'The {prey["name"]} runs away, but the experience enlightens you...'
+        f += '\n' if '|' in f else '|'
+        f += f'You gained: {prizes_list}.\nThey have been added to your "Hunting" bag!'
+
+        utils.add_to_bag('Hunting', prizes, all_bags)
+        output.fields.append(f)
+    else:
+        output['thumb'] = prey['img']
+        if 'commune_fail' in prey:
+            f = prey['commune_fail'].replace('{char_name}', c.name).replace('{prey_name}', prey['name'])
+        else:
+            f = f'The {prey_name} ran away unexpectedly!'
+        f += '\n' if '|' in f else '|'
+        f += "Better luck next time!"
+        output.fields.append(f)
 
 # Begin Execution
 
@@ -314,11 +440,10 @@ if first_param == 'sneak':
         f = f'This hunt is not over yet...|'
         if result['next_stage'] == 'commune':
             f += f'Use `!hunt commune` to try to commune with the {prey["name"]}.'
-            set_next_expected_stage('commune', prey_type, prey_id)
         else:
             f += 'Use `!hunt attack` or `!hunt attack [weapon]` to attack your prey!\nAlternatively, use `!hunt quit` if you would rather not harm this prey.'
-            set_next_expected_stage('attack', prey_type, prey_id)
         output.fields.append(f)
+        set_next_expected_stage(result['next_stage'], prey_type, prey_id)
     else:
         output.fields.append('Better luck next time!|You can use `!hunt` to try again.')
         clear_expected_stage()
@@ -330,6 +455,30 @@ if first_param == 'quit':
     output['title'] = f'{character().name} quits hunting the {prey["name"]}!'
     f = f'You lose sight of the {prey["name"]}.|But you spend some time admiring the beauty of the nature around you.'
     f += '\nIt is magnificent!'
+    clear_expected_stage()
+    dump_stats(stats)
+    return 0
+
+if first_param == 'attack':
+    weapon_name = args[1].lower() if (len(args) > 1 and len(args[1]) >= 3 and args[1] not in ["adv", "dis", "-b", "-d"]) else None
+    result = do_attack(stats, output, prey, weapon_name)
+
+    if result['success']:
+        output.fields.append('This hunt is not over yet...|Use `!hunt clean` to try to clean your kill.')
+        set_next_expected_stage(result['next_stage'], prey_type, prey_id, result['did_crit'])
+    else:
+        clear_expected_stage()
+    dump_stats(stats)
+    return 0
+
+if first_param == 'clean':
+    result = do_clean(stats, output, prey)
+    clear_expected_stage()
+    dump_stats(stats)
+    return 0
+
+if first_param == 'commune':
+    result = do_commune(stats, output, prey)
     clear_expected_stage()
     dump_stats(stats)
     return 0
