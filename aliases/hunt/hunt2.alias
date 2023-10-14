@@ -138,7 +138,7 @@ def handle_wrong_stage(output, prey_type, prey_id, expected_stage):
     output['thumb'] = image
     return 1
 
-def handle_no_attepts_left(output, wait_text, alias_performed_count, attempts_tried = 1):
+def handle_no_attempts_left(output, wait_text, alias_performed_count, attempts_tried = 1):
     f = ''
     if attempts_tried == 1:
         f += f'{character().name} is exhausted from so much hunting today...|You have to wait {wait_text} until you can hunt again.'
@@ -415,7 +415,7 @@ first_param = args[0]
 
 # From here on, player must still have hunt attempts available
 if alias_performed_count >= DAILY_CAP:
-    return handle_no_attepts_left(output, wait_text, alias_performed_count)
+    return handle_no_attempts_left(output, wait_text, alias_performed_count)
 
 
 if ('quick' in pargs) and first_param in biome_codes:
