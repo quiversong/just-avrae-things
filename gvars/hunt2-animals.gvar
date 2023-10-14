@@ -2,7 +2,7 @@
 {
   "id": "crab",
   "name": "Crab",
-  "ac": 6,
+  "ac": 7,
   "hp": 1,
   "pp": 5,
   "commune": false,
@@ -12,7 +12,7 @@
 {
   "id": "horned_lizard",
   "name": "Horned Lizard",
-  "ac": 9,
+  "ac": 10,
   "hp": 1,
   "pp": 10,
   "commune": false,
@@ -22,7 +22,7 @@
 {
   "id": "frog",
   "name": "Frog",
-  "ac": 6,
+  "ac": 7,
   "hp": 1,
   "pp": 10,
   "commune": false,
@@ -32,7 +32,7 @@
 {
   "id": "iguana",
   "name": "Iguana",
-  "ac": 10,
+  "ac": 11,
   "hp": 2,
   "pp": 9,
   "commune": false,
@@ -42,7 +42,7 @@
 {
   "id": "raccoon",
   "name": "Raccoon",
-  "ac": 10,
+  "ac": 11,
   "hp": 2,
   "pp": 7,
   "commune": false,
@@ -53,7 +53,7 @@
 {
   "id": "bat",
   "name": "Bat",
-  "ac": 9,
+  "ac": 10,
   "hp": 1,
   "pp": 6,
   "commune": false,
@@ -65,7 +65,7 @@
 {
   "id": "duck",
   "name": "Duck",
-  "ac": 4,
+  "ac": 5,
   "hp": 1,
   "pp": 10,
   "commune": false,
@@ -77,7 +77,7 @@
 {
   "id": "turtle",
   "name": "Turtle",
-  "ac": 6,
+  "ac": 7,
   "hp": 3,
   "pp": 4,
   "commune": false,
@@ -88,7 +88,7 @@
 {
   "id": "hare",
   "name": "Hare",
-  "ac": 8,
+  "ac": 9,
   "hp": 1,
   "pp": 8,
   "commune": false,
@@ -99,7 +99,7 @@
 {
   "id": "rabbit",
   "name": "Rabbit",
-  "ac": 8,
+  "ac": 9,
   "hp": 1,
   "pp": 8,
   "commune": false,
@@ -110,7 +110,7 @@
 {
   "id": "shelduck",
   "name": "Shelduck",
-  "ac": 4,
+  "ac": 5,
   "hp": 2,
   "pp": 10,
   "commune": false,
@@ -122,7 +122,7 @@
 {
   "id": "black-footed_ferret",
   "name": "Black-footed Ferret",
-  "ac": 9,
+  "ac": 10,
   "hp": 1,
   "pp": 10,
   "commune": false,
@@ -133,7 +133,7 @@
 {
   "id": "falcon",
   "name": "Falcon",
-  "ac": 9,
+  "ac": 10,
   "hp": 1,
   "pp": 10,
   "commune": false,
@@ -145,7 +145,7 @@
 {
   "id": "stirge",
   "name": "Stirge",
-  "ac": 11,
+  "ac": 12,
   "hp": 2,
   "pp": 9,
   "commune": false,
@@ -157,7 +157,7 @@
 {
   "id": "scorpion",
   "name": "Scorpion",
-  "ac": 8,
+  "ac": 9,
   "hp": 1,
   "pp": 8,
   "commune": false,
@@ -168,7 +168,7 @@
 {
   "id": "pelican",
   "name": "Pelican",
-  "ac": 10,
+  "ac": 11,
   "hp": 4,
   "pp": 9,
   "commune": false,
@@ -180,7 +180,7 @@
 {
   "id": "red_fox",
   "name": "Red Fox",
-  "ac": 10,
+  "ac": 11,
   "hp": 4,
   "pp": 12,
   "commune": false,
@@ -191,7 +191,7 @@
 {
   "id": "mountain_fox",
   "name": "Mountain Fox",
-  "ac": 11,
+  "ac": 12,
   "hp": 3,
   "pp": 12,
   "commune": false,
@@ -202,7 +202,7 @@
 {
   "id": "beaver",
   "name": "Beaver",
-  "ac": 10,
+  "ac": 11,
   "hp": 4,
   "pp": 12,
   "commune": false,
@@ -213,7 +213,7 @@
 {
   "id": "hawk",
   "name": "Hawk",
-  "ac": 9,
+  "ac": 10,
   "hp": 1,
   "pp": 10,
   "commune": false,
@@ -225,7 +225,7 @@
 {
   "id": "turkey_vulture",
   "name": "Turkey Vulture",
-  "ac": 7,
+  "ac": 8,
   "hp": 2,
   "pp": 11,
   "commune": false,
@@ -237,7 +237,7 @@
 {
   "id": "owl",
   "name": "Owl",
-  "ac": 9,
+  "ac": 10,
   "hp": 1,
   "pp": 10,
   "commune": false,
@@ -249,7 +249,7 @@
 {
   "id": "bald_eagle",
   "name": "Bald Eagle",
-  "ac": 10,
+  "ac": 11,
   "hp": 8,
   "pp": 14,
   "commune": false,
@@ -261,7 +261,7 @@
 {
   "id": "sea_otter",
   "name": "Sea Otter",
-  "ac": 8,
+  "ac": 9,
   "hp": 3,
   "pp": 11,
   "commune": false,
@@ -272,7 +272,7 @@
 {
   "id": "river_otter",
   "name": "River Otter",
-  "ac": 8,
+  "ac": 9,
   "hp": 3,
   "pp": 10,
   "commune": false,
@@ -283,7 +283,7 @@
 {
   "id": "badger",
   "name": "Badger",
-  "ac": 10,
+  "ac": 11,
   "hp": 3,
   "pp": 12,
   "commune": false,
@@ -294,7 +294,7 @@
 {
   "id": "rattlesnake",
   "name": "Rattlesnake",
-  "ac": 11,
+  "ac": 12,
   "hp": 3,
   "pp": 12,
   "commune": false,
@@ -305,7 +305,7 @@
 {
   "id": "coyote",
   "name": "Coyote",
-  "ac": 11,
+  "ac": 12,
   "hp": 3,
   "pp": 12,
   "commune": false,
@@ -316,7 +316,7 @@
 {
   "id": "seal",
   "name": "Seal",
-  "ac": 10,
+  "ac": 11,
   "hp": 5,
   "pp": 4,
   "commune": false,
@@ -327,7 +327,7 @@
 {
   "id": "eagle",
   "name": "Eagle",
-  "ac": 11,
+  "ac": 12,
   "hp": 5,
   "pp": 13,
   "commune": false,
@@ -339,7 +339,7 @@
 {
   "id": "bobcat",
   "name": "Bobcat",
-  "ac": 11,
+  "ac": 12,
   "hp": 5,
   "pp": 14,
   "commune": false,
@@ -350,7 +350,7 @@
 {
   "id": "ostritch",
   "name": "Ostritch",
-  "ac": 13,
+  "ac": 14,
   "hp": 10,
   "pp": 13,
   "commune": false,
@@ -361,7 +361,7 @@
 {
   "id": "giant_wolf_spider",
   "name": "Giant Wolf Spider",
-  "ac": 13,
+  "ac": 14,
   "hp": 6,
   "pp": 13,
   "commune": false,
@@ -372,7 +372,7 @@
 {
   "id": "wolverine",
   "name": "Wolverine",
-  "ac": 11,
+  "ac": 12,
   "hp": 5,
   "pp": 8,
   "commune": false,
@@ -383,7 +383,7 @@
 {
   "id": "wild_camel",
   "name": "Wild Camel",
-  "ac": 9,
+  "ac": 10,
   "hp": 5,
   "pp": 6,
   "commune": false,
@@ -394,7 +394,7 @@
 {
   "id": "rust_monster",
   "name": "Rust Monster",
-  "ac": 12,
+  "ac": 13,
   "hp": 10,
   "pp": 11,
   "commune": false,
@@ -405,7 +405,7 @@
 {
   "id": "wyvern",
   "name": "Wyvern",
-  "ac": 13,
+  "ac": 14,
   "hp": 12,
   "pp": 13,
   "commune": false,
@@ -417,7 +417,7 @@
 {
   "id": "anaconda",
   "name": "Anaconda",
-  "ac": 9,
+  "ac": 10,
   "hp": 5,
   "pp": 12,
   "commune": false,
@@ -428,7 +428,7 @@
 {
   "id": "capybara",
   "name": "Capybara",
-  "ac": 10,
+  "ac": 11,
   "hp": 4,
   "pp": 8,
   "commune": false,
@@ -439,7 +439,7 @@
 {
   "id": "hyena",
   "name": "Hyena",
-  "ac": 11,
+  "ac": 12,
   "hp": 5,
   "pp": 12,
   "commune": false,
@@ -450,7 +450,7 @@
 {
   "id": "wolf",
   "name": "Wolf",
-  "ac": 13,
+  "ac": 14,
   "hp": 5,
   "pp": 14,
   "commune": false,
@@ -461,7 +461,7 @@
 {
   "id": "wild_boar",
   "name": "Wild Boar",
-  "ac": 11,
+  "ac": 12,
   "hp": 7,
   "pp": 9,
   "commune": false,
@@ -472,7 +472,7 @@
 {
   "id": "deer",
   "name": "Deer",
-  "ac": 10,
+  "ac": 11,
   "hp": 4,
   "pp": 12,
   "commune": false,
@@ -483,7 +483,7 @@
 {
   "id": "sea_turtle",
   "name": "Sea Turtle",
-  "ac": 10,
+  "ac": 11,
   "hp": 2,
   "pp": 2,
   "commune": false,
@@ -494,7 +494,7 @@
 {
   "id": "alligator",
   "name": "Alligator",
-  "ac": 12,
+  "ac": 13,
   "hp": 10,
   "pp": 13,
   "commune": false,
@@ -505,7 +505,7 @@
 {
   "id": "basilisk",
   "name": "Basilisk",
-  "ac": 12,
+  "ac": 13,
   "hp": 13,
   "pp": 10,
   "commune": false,
@@ -516,7 +516,7 @@
 {
   "id": "crocodile",
   "name": "Crocodile",
-  "ac": 13,
+  "ac": 14,
   "hp": 12,
   "pp": 12,
   "commune": false,
@@ -527,7 +527,7 @@
 {
   "id": "snow_leopard",
   "name": "Snow Leopard",
-  "ac": 12,
+  "ac": 13,
   "hp": 9,
   "pp": 15,
   "commune": false,
@@ -538,7 +538,7 @@
 {
   "id": "mountain_goat",
   "name": "Mountain Goat",
-  "ac": 12,
+  "ac": 13,
   "hp": 7,
   "pp": 10,
   "commune": false,
@@ -549,7 +549,7 @@
 {
   "id": "wild_yak",
   "name": "Wild Yak",
-  "ac": 12,
+  "ac": 13,
   "hp": 6,
   "pp": 6,
   "commune": false,
@@ -560,7 +560,7 @@
 {
   "id": "injured_roc",
   "name": "Injured Roc",
-  "ac": 12,
+  "ac": 13,
   "hp": 12,
   "pp": 11,
   "commune": false,
@@ -572,7 +572,7 @@
 {
   "id": "cockatrice",
   "name": "Cockatrice",
-  "ac": 11,
+  "ac": 12,
   "hp": 27,
   "pp": 11,
   "commune": false,
@@ -584,7 +584,7 @@
 {
   "id": "griffon",
   "name": "Griffon",
-  "ac": 12,
+  "ac": 13,
   "hp": 30,
   "pp": 15,
   "commune": false,
@@ -596,7 +596,7 @@
 {
   "id": "bison",
   "name": "Bison",
-  "ac": 11,
+  "ac": 12,
   "hp": 7,
   "pp": 10,
   "commune": false,
@@ -607,7 +607,7 @@
 {
   "id": "elk",
   "name": "Elk",
-  "ac": 10,
+  "ac": 11,
   "hp": 10,
   "pp": 10,
   "commune": false,
@@ -618,7 +618,7 @@
 {
   "id": "leopard",
   "name": "Leopard",
-  "ac": 13,
+  "ac": 14,
   "hp": 12,
   "pp": 14,
   "commune": false,
@@ -629,7 +629,7 @@
 {
   "id": "owlbear",
   "name": "Owlbear",
-  "ac": 13,
+  "ac": 19,
   "hp": 10,
   "pp": 13,
   "commune": false,
@@ -640,7 +640,7 @@
 {
   "id": "mountain_lion",
   "name": "Mountain Lion",
-  "ac": 12,
+  "ac": 16,
   "hp": 12,
   "pp": 14,
   "commune": false,
@@ -651,7 +651,7 @@
 {
   "id": "tiger",
   "name": "Tiger",
-  "ac": 12,
+  "ac": 18,
   "hp": 12,
   "pp": 13,
   "commune": false,
@@ -662,7 +662,7 @@
 {
   "id": "black_bear",
   "name": "Black Bear",
-  "ac": 12,
+  "ac": 18,
   "hp": 10,
   "pp": 13,
   "commune": false,
@@ -673,7 +673,7 @@
 {
   "id": "brown_bear",
   "name": "Brown Bear",
-  "ac": 11,
+  "ac": 18,
   "hp": 12,
   "pp": 13,
   "commune": false,
@@ -684,7 +684,7 @@
 {
   "id": "gorgon",
   "name": "Gorgon",
-  "ac": 19,
+  "ac": 22,
   "hp": 20,
   "pp": 6,
   "commune": false,
@@ -695,7 +695,7 @@
 {
   "id": "lion",
   "name": "Lion",
-  "ac": 12,
+  "ac": 21,
   "hp": 26,
   "pp": 13,
   "commune": false,
@@ -706,7 +706,7 @@
 {
   "id": "rhino",
   "name": "Rhino",
-  "ac": 14,
+  "ac": 15,
   "hp": 13,
   "pp": 4,
   "commune": false,
@@ -717,7 +717,7 @@
 {
   "id": "chimera",
   "name": "Chimera",
-  "ac": 12,
+  "ac": 50,
   "hp": 40,
   "pp": 8,
   "commune": false,
@@ -729,7 +729,7 @@
 {
   "id": "manticore",
   "name": "Manticore",
-  "ac": 14,
+  "ac": 50,
   "hp": 68,
   "pp": 11,
   "commune": false,
@@ -741,7 +741,7 @@
 {
   "id": "behir",
   "name": "Behir",
-  "ac": 17,
+  "ac": 50,
   "hp": 168,
   "pp": 4,
   "commune": false,
@@ -752,7 +752,7 @@
 {
   "id": "hydra",
   "name": "Hydra",
-  "ac": 13,
+  "ac": 50,
   "hp": 150,
   "pp": 4,
   "commune": false,
