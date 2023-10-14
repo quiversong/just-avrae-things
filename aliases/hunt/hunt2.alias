@@ -286,17 +286,19 @@ if alias_performed_count >= DAILY_CAP:
     return handle_no_attepts_left(output, wait_text, alias_performed_count)
 
 
-if ('quick' in params) and first_param in biome_codes:
+if ('quick' in pargs) and first_param in biome_codes:
     pass
 
 
 # Begin new hunt
-if not('quick' in params) and first_param in biome_codes:
+if not('quick' in pargs) and first_param in biome_codes:
     alias_performed_count = utils.increase_daily_activity_data(ALIAS_TIME_VAR)
     update_footer_count(output, alias_performed_count)
-    thumb = biome['img']
 
     biome_id = first_param
+    biome = [b for b in biomes if b['id'] == biome_id][0]
+
+    thumb = biome['img']
     result = do_explore_biome(stats, output, biome_id)
 
     output.fields.append(f'This hunt is not over yet...|Use `!hunt sneak` to continue.')
