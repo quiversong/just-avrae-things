@@ -15,9 +15,9 @@ VARIABLES = {
 }
 
 PREY_TYPES = {
-    'ANIMAL': 1,
-    'MYTHICAL': 2,
-    'DRAGON': 3
+    'ANIMAL': 'pta',
+    'MYTHICAL': 'ptm',
+    'DRAGON': 'ptd'
 }
 
 CAMPFIRE_IMAGE = 'https://cdn.discordapp.com/attachments/827581981452795975/827949160514191400/unknown.png'
@@ -51,16 +51,17 @@ output['footer'] += f'Seventra: Exodus of Heroes | Hunt v{VERSION} | !hunt credi
 
 # Methods
 
+def get_in_list_by_id(collection, item_id):
+    return ([x for x in collection if x['id'] == item_id] + [None])[0]
 
 def get_prey_data(prey_type, prey_id):
-    if prey_type == PREY_TYPES.MYTHICAL:
-        return DATA.MYTHICAL[prey_id]
-    if prey_type == PREY_TYPES.DRAGON:
-        return DATA.DRAGONS[prey_id]
-    return ([a for a in DATA.ANIMALS if a['id'] == prey_id] + [None])[0]
+    collection = DATA.MYTHICAL if prey_type == PREY_TYPES.MYTHICAL \
+            else DATA.DRAGONS if prey_type == PREY_TYPES.DRAGON \
+            else DATA.ANIMALS
+    return get_in_list_by_id(collection, prey_id)
 
 def get_biome_data(biome_id):
-    return ([b for b in DATA.BIOMES if b['id'] == biome_id] + [None])[0]
+    return get_in_list_by_id(DATA.BIOMES, biome_id)
 
 def parse_prizes_for(prey):
     prizes = {}
@@ -246,11 +247,15 @@ def do_sneak(stats, output, prey):
     output.fields.append(f)
 
     f = ''
+    is_commune_target = 'commune' in prey and prey['commune']
+    if is_commune_target:
+        output['color'] = GOLDEN_COLOR
+
     if success:
         increment_stat(stats, 's_sneak')
         output['thumb'] = prey['img']
 
-        if 'commune' in prey and prey['commune']:
+        if is_commune_target:
             if 'sneak_succ' in prey:
                 f += prey['sneak_succ'].replace('{char_name}', c.name).replace('{prey_name}', prey['name'])
             else:
@@ -275,7 +280,7 @@ def do_sneak(stats, output, prey):
         'next_stage': ('commune' if ('commune' in prey and prey['commune']) else 'attack') if success else None
     }
 
-def do_attack(stats, output, prey, weapon_name):
+def do_attack(stats, output, prey, weapon_name = None):
     c = character()
     weapon = utils.get_pc_weapon(weapon_name)
 
@@ -350,8 +355,9 @@ def do_commune(stats, output, prey, all_bags = None):
     ah_roll = vroll(c.skills.animalHandling.d20())
     success = ah_roll.total >= prey['cha']
 
+    output['color'] = GOLDEN_COLOR
     output['title'] = f'{c.name} tries to commune with the {prey["name"]}...'
-    output.fields.append(f'{c.name} approaches the {prey["name"]}...|**Animal Handling roll:** {ah_roll.full}\n{SL if succ else FL}')
+    output.fields.append(f'{c.name} approaches the {prey["name"]}...|**Animal Handling roll:** {ah_roll.full}\n{SL if success else FL}')
 
     if success:
         increment_stat(stats, 's_commune')
@@ -413,8 +419,25 @@ if alias_performed_count >= DAILY_CAP:
 
 
 if ('quick' in pargs) and first_param in biome_codes:
-    pass
+    count = DAILY_CAP - alias_performed_count
+    biome_id = first_param
+    biome = get_biome_data(biome_id)
+    all_bags = load_json(character().cvars['bags'])
 
+    for _ in range(0, count):
+        result = do_explore_biome(stats, output, biome)
+        prey = get_prey_data(result['prey_type'], result['prey_id'])
+
+        result = do_sneak(stats, output, prey)
+        if result['next_stage'] == 'attack':
+            result = do_attack(stats, output, prey)
+            if result['success']:
+                result = do_clean(stats, output, prey, all_bags)
+        elif result['next_stage'] == 'commune':
+            result = do_commune(stats, output, prey, all_bags)
+
+    dump_stats(stats)
+    return 0
 
 # Begin new hunt
 if not('quick' in pargs) and first_param in biome_codes:
