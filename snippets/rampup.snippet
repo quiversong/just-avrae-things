@@ -1,0 +1,18 @@
+rampup <drac2>
+    CC_NAME = "Ramp-Up Ring"
+    CC_CRIT = "Ramp-Up Ring Crit Threshold"
+    if character().cc_exists(CC_NAME) and character().cc_exists(CC_CRIT):
+        cc_string = character().cc_str(CC_NAME)
+        criton = character().get_cc(CC_CRIT)
+
+        f = f"__**Ramp-Up Ring**__|While this ring has 3 charges, you gain a +3 bonus to damage rolls from weapon attacks, and the minimum number you have to roll on a d20 to score a critical hit with a weapon attack is reduced by 1 (for a total of `{criton}`).\n**Ramp-Up Ring:**\n{cc_string}"
+
+        if character().get_cc(CC_NAME) == 3:
+            f += f"\n**Ramp-Up Ring bonuses applied:**\n- +3 bonus to damage rolls.\n- Critical hits on a `{criton}` or higher."
+            return f' -f "{f}" -d 3 -criton {criton}'
+        else:
+            return f' -f "{f}"'
+    else:
+        f = "__**Ramp-Up Ring**__|Please ensure you have the custom counters `Ramp-Up Ring` (min = 0, max = 3), and `Ramp-Up Ring Crit Threshold` (configuration of the new crit threshold when the ring is active) to use the Ramp-Up Ring."
+        return f' -f "{f}"'
+</drac2>
