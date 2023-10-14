@@ -392,7 +392,7 @@ if ('quick' in pargs) and first_param in biome_codes:
 
         if result['next_stage'] == 'attack':
             result = do_attack(stats, prey_type, prey)
-            f += '\n' + format_roll_result('Attack', result['roll'], result['success']) + ('Crit!' if result['is_crit'] else '')
+            f += '\n' + format_roll_result('Attack', result['roll'], result['success']) + (' **Crit!**' if result['is_crit'] else '')
             if result['success']:
                 result = do_clean(stats, prey, all_bags)
                 f += '\n' + format_roll_result('Survival', result['roll'], result['success'])
