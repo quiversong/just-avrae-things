@@ -43,15 +43,21 @@ def add_vsheet_feature_if_not_existent(vsheet_variable_name, vsheet_variable_tit
     return False
 
 def get_pc_weapon(weapon_label):
+    if weapon_label == None or weapon_label == '':
+        return None
+
     weapon_str = [a for a in character().attacks
       if str(a).lower().split(':')[0].strip().replace('*', '').startswith(weapon_label)
     ]
 
     if len(weapon_str) > 0:
         weapon_str = str(weapon_str[0])
+        damage_substring = weapon_str.split('Hit:')[1].strip()
+        damage_substring = damage_substring[0:damage_substring.rindex(']') + 1]
         return {
           'name': weapon_str.split(':')[0].strip().replace('**', ''),
-          'a_bonus': int(weapon_str.split('Attack:')[1].strip().split(' ')[0])
+          'a_bonus': int(weapon_str.split('Attack:')[1].strip().split(' ')[0]),
+          'd_die': damage_substring
         }
     else:
         return None
