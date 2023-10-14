@@ -272,7 +272,8 @@ def do_attack(stats, prey, weapon_name = None):
     return {
         'success': attack_success,
         'roll': attack_roll,
-        'did_crit': is_crit,
+        'is_crit': is_crit,
+        'weapon': weapon,
         'next_stage': 'clean' if attack_success else None
     }
 
@@ -449,25 +450,27 @@ if first_param == 'quit':
 
 if first_param == 'attack':
     c = character()
-    output['title'] = f'{c.name} attacks their prey{" with their " + weapon["name"] if weapon != None else ""}!'
 
     weapon_name = args[1].lower() if (len(args) > 1 and len(args[1]) >= 3 and args[1] not in ["adv", "dis", "-b", "-d"]) else None
     result = do_attack(stats, prey, weapon_name)
+    weapon = result['weapon']
+
+    output['title'] = f'{c.name} attacks their prey{" with their " + weapon["name"] if weapon != None else ""}!'
 
     f = f'Was {c.name} able to kill the {prey["name"]}?|**Attack roll:** {result["roll"].full}\n'
-    f += '**Miss!**' if not result['success'] else '**Critical Hit!**' if result['did_crit'] else '**Success!**'
+    f += '**Miss!**' if not result['success'] else '**Critical Hit!**' if result['is_crit'] else '**Success!**'
     output.fields.append(f)
 
     if result['success']:
         output['thumb'] = prey['img']
-        if is_crit:
+        if result['is_crit']:
             f = f'{c.name} hit a critical hit killing the {prey["name"]} on the spot!'
         else:
             f = f'{c.name} manages to kill the {prey["name"]}.'
         f += '|Can you clean your prize and collect the good?'
         output.fields.append(f)
         output.fields.append('This hunt is not over yet...|Use `!hunt clean` to try to clean your kill.')
-        set_next_expected_stage(result['next_stage'], prey_type, prey_id, result['did_crit'])
+        set_next_expected_stage(result['next_stage'], prey_type, prey_id, result['is_crit'])
     else:
         output['thumb'] = image
         output.fields.append(f'The {prey["name"]} managed to escape your attack and flee...|Better luck next time!')
@@ -483,7 +486,7 @@ if first_param == 'clean':
     result = do_clean(stats, output, prey)
 
     f = f'{c.name} cleans and extracts the goods from the {prey["name"]}...|'
-    f += f'**Survival roll:** {result["roll"].full}\n{SL if success else FL}'
+    f += f'**Survival roll:** {result["roll"].full}\n{SL if result["success"] else FL}'
     output.fields.append(f)
 
     if result['success']:

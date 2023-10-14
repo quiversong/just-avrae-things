@@ -580,7 +580,7 @@
   "clean_dc": 13,
   "commune": false,
   "rations": 4,
-  "prizes": [{"name": "Snow Leopard Pelt (25gp)", "qt": 1},{"name": "Snow Leapoard Claw (2sp)", "qt": 4}],
+  "prizes": [{"name": "Snow Leopard Pelt (25gp)", "qt": 1},{"name": "Snow Leopard Claw (2sp)", "qt": 4}],
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813196160106537/SnowLeopard.jpg"
 },
 {
