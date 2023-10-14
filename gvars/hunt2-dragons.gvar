@@ -58,8 +58,8 @@
   "rations": 0,
   "clean_dc": 99,
   "prizes": [{"name": "Red Dragon Scale", "qt": 1}],
-  "commune_succ": "The {prey_name} seems pleased with your hunting skills. It offers you a boon in the form of one of its scales.",
-  "commune_fail": "The {prey_name} easily tracks your inane attempt to speak with it, and you gather a sense of boredom. It flies off, leaving you coughing up dust.",
+  "commune_succ": "The {prey_name} seems pleased with your hunting skills.|It offers you a boon in the form of one of its scales.",
+  "commune_fail": "The {prey_name} easily tracks your inane attempt to speak with it...|You gather a sense of boredom. It flies off, leaving you coughing up dust.",
   "img": "https://media.discordapp.net/attachments/832440929855995914/895669184518823976/image0.jpg"
 },
 {
@@ -71,8 +71,8 @@
   "rations": 0,
   "clean_dc": 99,
   "prizes": [{"name": "Green Dragon Scale", "qt": 1}],
-  "commune_succ": "The {prey_name} seems pleased with your hunting skills. It offers you a boon in the form of one of its scales.",
-  "commune_fail": "The {prey_name} easily tracks your inane attempt to speak with it, and you gather a sense of boredom. It flies off, leaving you coughing up dust.",
+  "commune_succ": "The {prey_name} seems pleased with your hunting skills.|It offers you a boon in the form of one of its scales.",
+  "commune_fail": "The {prey_name} easily tracks your inane attempt to speak with it...|You gather a sense of boredom. It flies off, leaving you coughing up dust.",
   "img": "https://cdn.discordapp.com/attachments/832440929855995914/895796754920898580/Screenshots_2021-10-07-16-15-54.png"
 },
 {
@@ -84,8 +84,8 @@
   "rations": 0,
   "clean_dc": 99,
   "prizes": [{"name": "Black Dragon Scale", "qt": 1}],
-  "commune_succ": "The {prey_name} seems pleased with your hunting skills. It offers you a boon in the form of one of its scales.",
-  "commune_fail": "The {prey_name} easily tracks your inane attempt to speak with it, and you gather a sense of boredom. It flies off, leaving you coughing up dust.",
+  "commune_succ": "The {prey_name} seems pleased with your hunting skills.|It offers you a boon in the form of one of its scales.",
+  "commune_fail": "The {prey_name} easily tracks your inane attempt to speak with it...|You gather a sense of boredom. It flies off, leaving you coughing up dust.",
   "img": "https://static.wikia.nocookie.net/elderdragonsaga/images/d/d0/Dulath.jpg/revision/latest/scale-to-width-down/788?cb=20191216212753"
 },
 {
@@ -97,8 +97,8 @@
   "rations": 0,
   "clean_dc": 99,
   "prizes": [{"name": "Blue Dragon Scale", "qt": 1}],
-  "commune_succ": "The {prey_name} seems pleased with your hunting skills. It offers you a boon in the form of one of its scales.",
-  "commune_fail": "The {prey_name} easily tracks your inane attempt to speak with it, and you gather a sense of boredom. It flies off, leaving you coughing up dust.",
+  "commune_succ": "The {prey_name} seems pleased with your hunting skills.|It offers you a boon in the form of one of its scales.",
+  "commune_fail": "The {prey_name} easily tracks your inane attempt to speak with it...|You gather a sense of boredom. It flies off, leaving you coughing up dust.",
   "img": "https://cdn.discordapp.com/attachments/832440929855995914/895798875602968617/Screenshot_20211007-1621532.png"
 },
 {
@@ -110,8 +110,8 @@
   "rations": 0,
   "clean_dc": 99,
   "prizes": [{"name": "White Dragon Scale", "qt": 1}],
-  "commune_succ": "The {prey_name} seems pleased with your hunting skills. It offers you a boon in the form of one of its scales.",
-  "commune_fail": "The {prey_name} easily tracks your inane attempt to speak with it, and you gather a sense of boredom. It flies off, leaving you coughing up dust.",
+  "commune_succ": "The {prey_name} seems pleased with your hunting skills.|It offers you a boon in the form of one of its scales.",
+  "commune_fail": "The {prey_name} easily tracks your inane attempt to speak with it...|You gather a sense of boredom. It flies off, leaving you coughing up dust.",
   "img": "https://cdn.discordapp.com/attachments/832440929855995914/895800292057178203/Screenshots_2021-10-07-16-28-09.png"
 }
 ]}
