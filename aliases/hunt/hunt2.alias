@@ -163,8 +163,6 @@ if len(args) > 0 and args[0] == "resetstats":
 biomes = load_json(get_gvar(VARIABLES.BIOMES))['biomes']
 biome_codes = [b['id'] for b in biomes]
 
-first_param = args[0]
-
 ALL_DATA = {
     'BIOMES': biomes,
     'BIOME_CODES': biome_codes,
@@ -257,10 +255,6 @@ def do_sneak(stats, output, prey):
 
 # Begin Execution
 
-# From here on, player must still have hunt attempts available
-if alias_performed_count >= DAILY_CAP:
-    return handle_no_attepts_left(output, wait_text, alias_performed_count)
-
 # read stage variable
 prey = None
 prey_id = None
@@ -284,6 +278,13 @@ if (in_wrong_stage and not quitting_hunt):
 
 if (len(args) == 0 or (not expected_stage and args[0] not in biome_codes)):
     return biome_selection_screen(output, biome_codes)
+
+first_param = args[0]
+
+# From here on, player must still have hunt attempts available
+if alias_performed_count >= DAILY_CAP:
+    return handle_no_attepts_left(output, wait_text, alias_performed_count)
+
 
 if ('quick' in params) and first_param in biome_codes:
     pass
