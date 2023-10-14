@@ -33,7 +33,7 @@ output = { 'title': f'{character().name} goes hunting!', 'img': None, 'thumb': N
 SL, FL = "**Success!**", "**Failure!**"
 
 ALIAS_TIME_VAR = "_h_dhc_"
-ALIAS_STAGE_VAR = "_h_vars"
+ALIAS_STAGE_VAR = "_h_vars_"
 ALIAS_STATS_VAR = "_h_st_"
 
 ADMIN_USER_IDS = [771997367611949076]
@@ -54,12 +54,14 @@ output['footer'] += f'Seventra: Exodus of Heroes | Hunt v{VERSION} | !hunt credi
 def get_prey_data(prey_type, prey_id):
     if prey_type == PREY_TYPES.MYTHICAL:
         return DATA.MYTHICAL[prey_id]
-    if prey_type == PREY_TYPES.DRAGONS:
+    if prey_type == PREY_TYPES.DRAGON:
         return DATA.DRAGONS[prey_id]
-    return DATA.ANIMALS[prey_id] if prey_id in DATA.ANIMALS else None
+    return ([a for a in DATA.ANIMALS if a['id'] == prey_id] + [None])[0]
 
-def format_prey_name_with_article(prey):
-    prey_name = prey["name"]
+def get_biome_data(biome_id):
+    return ([b for b in DATA.BIOMES if b['id'] == biome_id] + [None])[0]
+
+def format_prey_name_with_article(prey_name):
     add_n = "n" if prey_name[0].upper() in "AEIOU" else ""
     return f'a{add_n} {prey_name}'
 
@@ -108,7 +110,7 @@ def clear_expected_stage():
 
 def handle_wrong_stage(output, prey_type, prey_id, expected_stage):
     prey = get_prey_data(prey_type, prey_id)
-    prey_label = 'a different prey' if prey == None else format_prey_name_with_article(prey)
+    prey_label = 'a different prey' if prey == None else format_prey_name_with_article(prey['name'])
     output['fields'].append(f'Oops! You are already hunting {prey_label}!|Use `!hunt {expected_stage}` to continue.')
     output['thumb'] = image
     return 1
@@ -146,10 +148,10 @@ def biome_selection_screen(output, biome_codes):
 
 # Execution Variables
 
-if not ALIAS_STATS_VAR in character().cvars:
+if (not ALIAS_STATS_VAR in character().cvars) or character().cvars[ALIAS_STATS_VAR] == '':
     stats = {}
 else:
-    stats = load_json(ALIAS_STATS_VAR)
+    stats = load_json(character().cvars[ALIAS_STATS_VAR])
 
 if len(args) > 0 and args[0] == "stats":
     return print_stats(output, stats)
@@ -163,7 +165,7 @@ if len(args) > 0 and args[0] == "resetstats":
 biomes = load_json(get_gvar(VARIABLES.BIOMES))['biomes']
 biome_codes = [b['id'] for b in biomes]
 
-ALL_DATA = {
+DATA = {
     'BIOMES': biomes,
     'BIOME_CODES': biome_codes,
     'ANIMALS': load_json(get_gvar(VARIABLES.ANIMALS))['animals'],
@@ -173,10 +175,8 @@ ALL_DATA = {
 
 
 # Execution Methods
-def do_explore_biome(stats, output, biome_id):
+def do_explore_biome(stats, output, biome):
     increment_stat(stats, 't_hunts')
-
-    biome = ALL_DATA.BIOMES[biome_id]
 
     # try to find a dragon or mythical creature
     special_prey_roll = roll(f'1d{DAILY_CAP * 31}')
@@ -190,10 +190,10 @@ def do_explore_biome(stats, output, biome_id):
         prey_roll = roll('1d100')
         biome_animals = [(k, v) for k, v in biome['animals'].items()]
 
-        prey_id = [k for k, v in biome_animals if (a_roll == v[0] if len(v) == 1 else prey_roll >= v[0] and prey_roll <= v[1])]
-        prey = ALL_DATA.ANIMALS[prey_id]
+        prey_id = [k for k, v in biome_animals if (a_roll == v[0] if len(v) == 1 else prey_roll >= v[0] and prey_roll <= v[1])][0]
+        prey = get_prey_data(prey_type, prey_id)
 
-        f = f'{character().name} found {format_prey_name_with_article(prey["name"])} in the {biome["name"]}!Can you get the jump on it?'
+        f = f'{character().name} found {format_prey_name_with_article(prey["name"])} in the {biome["name"]}!|Can you get the jump on it?'
         output.fields.append(f)
     else:
         prey_list = DATA.DRAGONS if prey_type == PREY_TYPES.DRAGON else DATA.MYTHICAL if prey_type == PREY_TYPES.MYTHICAL else None
@@ -201,7 +201,7 @@ def do_explore_biome(stats, output, biome_id):
         prey = randchoice(prey_list)
         prey_id = prey['id']
 
-        color = 'f0b330'
+        output['color'] = 'f0b330'
         f = f'{character().name} found a ***VERY RARE*** {prey["name"]}!|Can you approach it without being noticed?'
         output.fields.append(f)
 
@@ -219,14 +219,14 @@ def do_sneak(stats, output, prey):
     stealth_roll = vroll(c.skills.stealth.d20(base_adv = adv_status))
     success = stealth_roll.total > prey['pp']
 
-    output.title = f'{c.name} tries to sneak on their prey!'
-    f = f'{c.name} closes on the {prey["name"]}...|**Stealth roll:** {stealth_roll.full}\n{SL if succ else FL}'
+    output['title'] = f'{c.name} tries to sneak on their prey!'
+    f = f'{c.name} closes on the {prey["name"]}...|**Stealth roll:** {stealth_roll.full}\n{SL if success else FL}'
     output.fields.append(f)
 
     f = ''
     if success:
         increment_stat(stats, 's_sneak')
-        output.thumb = prey['img']
+        output['thumb'] = prey['img']
 
         if 'commune' in prey and prey['commune']:
             if 'sneak_succ' in prey:
@@ -238,7 +238,7 @@ def do_sneak(stats, output, prey):
         else:
             f += f'The {prey["name"]} has not seen you!|Can you take it down?'
     else:
-        output.thumb = image
+        output['thumb'] = image
         if 'sneak_fail' in prey:
             f += prey['sneak_fail'].replace('{char_name}', c.name).replace('{prey_name}', prey['name'])
         else:
@@ -250,7 +250,7 @@ def do_sneak(stats, output, prey):
 
     return {
         'success': success,
-        'next_stage': 'commune' if 'commune' in prey else 'attack'
+        'next_stage': 'commune' if ('commune' in prey and prey['commune']) else 'attack'
     }
 
 # Begin Execution
@@ -263,7 +263,7 @@ expected_stage = None
 last_stage_was_crit = False
 
 if ALIAS_STAGE_VAR in character().cvars:
-    hvars = cv[ALIAS_STAGE_VAR].split(":")
+    hvars = character().cvars[ALIAS_STAGE_VAR].split(":")
     prey_id = hvars[0]
     expected_stage = hvars[1]
     prey_type = hvars[2]
@@ -296,11 +296,11 @@ if not('quick' in pargs) and first_param in biome_codes:
     update_footer_count(output, alias_performed_count)
 
     biome_id = first_param
-    biome = [b for b in biomes if b['id'] == biome_id][0]
+    biome = get_biome_data(biome_id)
 
-    thumb = biome['img']
-    result = do_explore_biome(stats, output, biome_id)
+    result = do_explore_biome(stats, output, biome)
 
+    output['thumb'] = biome['img']
     output.fields.append(f'This hunt is not over yet...|Use `!hunt sneak` to continue.')
 
     set_next_expected_stage(result['next_stage'], result['prey_type'], result['prey_id'])
@@ -312,12 +312,12 @@ if first_param == 'sneak':
 
     if result['success']:
         f = f'This hunt is not over yet...|'
-        if result['next_stage'] == 'attack':
-            f += 'Use `!hunt attack` or `!hunt attack [weapon]` to attack your prey!\nAlternatively, use `!hunt quit` if you would rather not harm this prey.'
-            set_next_expected_stage('attack', prey_type, prey_id)
-        else:
+        if result['next_stage'] == 'commune':
             f += f'Use `!hunt commune` to try to commune with the {prey["name"]}.'
             set_next_expected_stage('commune', prey_type, prey_id)
+        else:
+            f += 'Use `!hunt attack` or `!hunt attack [weapon]` to attack your prey!\nAlternatively, use `!hunt quit` if you would rather not harm this prey.'
+            set_next_expected_stage('attack', prey_type, prey_id)
         output.fields.append(f)
     else:
         output.fields.append('Better luck next time!|You can use `!hunt` to try again.')
@@ -327,7 +327,7 @@ if first_param == 'sneak':
     return 0
 
 if first_param == 'quit':
-    output.title = f'{character().name} quits hunting the {prey["name"]}!'
+    output['title'] = f'{character().name} quits hunting the {prey["name"]}!'
     f = f'You lose sight of the {prey["name"]}.|But you spend some time admiring the beauty of the nature around you.'
     f += '\nIt is magnificent!'
     clear_expected_stage()
