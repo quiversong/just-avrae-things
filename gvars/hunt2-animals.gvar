@@ -204,7 +204,7 @@
   "rations": 2,
   "prizes": [{"name": "Fox Pelt (1gp)", "qt": 1},{"name": "Fox Tail (8sp)", "qt": 1}],
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811476017053736/Fox.jpeg"
-}, "
+},
 {
   "id": "mountain_fox",
   "name": "Mountain Fox",
