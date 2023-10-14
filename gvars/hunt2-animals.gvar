@@ -40,17 +40,6 @@
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829807898195918864/Iguana.jpg"
 },
 {
-  "id": "scorpion",
-  "name": "Scorpion",
-  "ac": 8,
-  "hp": 1,
-  "pp": 8,
-  "commune": false,
-  "rations": 2,
-  "prizes": [{"name": "Venom Gland (1gp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829810842227965972/Scorpion.jpg"
-},
-{
   "id": "raccoon",
   "name": "Raccoon",
   "ac": 10,
@@ -72,61 +61,6 @@
   "prizes": [{"name": "Bat Wing (1sp)", "qt": 2}],
   "sneak_fail": "The {prey_name} sees your approach and flies away...",
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829807347697319976/Bat.jpg"
-},
-{
-  "id": "sea_otter",
-  "name": "Sea Otter",
-  "ac": 8,
-  "hp": 3,
-  "pp": 11,
-  "commune": false,
-  "rations": 2,
-  "prizes": [{"name": "Otter Pelt (3gp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829808112084713482/SeaOtter.jpg"
-},
-{
-  "id": "hare",
-  "name": "Hare",
-  "ac": 8,
-  "hp": 1,
-  "pp": 8,
-  "commune": false,
-  "rations": 2,
-  "prizes": [{"name": "Rabbit Pelt (2sp)", "qt": 1},{"name": "Rabbit's Foot (1sp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829810586657095710/Hare.jpg"
-},
-{
-  "id": "rabbit",
-  "name": "Rabbit",
-  "ac": 8,
-  "hp": 1,
-  "pp": 8,
-  "commune": false,
-  "rations": 2,
-  "prizes": [{"name": "Rabbit Pelt (2sp)", "qt": 1},{"name": "Rabbit's Foot (1sp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/827581981452795975/827944537053724712/unknown.png"
-},
-{
-  "id": "river_otter",
-  "name": "River Otter",
-  "ac": 8,
-  "hp": 3,
-  "pp": 10,
-  "commune": false,
-  "rations": 2,
-  "prizes": [{"name": "Otter Pelt (3gp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829814092852232282/Otter.jpg"
-},
-{
-  "id": "badger",
-  "name": "Badger",
-  "ac": 10,
-  "hp": 3,
-  "pp": 12,
-  "commune": false,
-  "rations": 2,
-  "prizes": [{"name": "Badger Pelt (3gp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811259603681280/Badger.jpg"
 },
 {
   "id": "duck",
@@ -152,6 +86,28 @@
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829814222325022760/Turtle.jpg"
 },
 {
+  "id": "hare",
+  "name": "Hare",
+  "ac": 8,
+  "hp": 1,
+  "pp": 8,
+  "commune": false,
+  "rations": 2,
+  "prizes": [{"name": "Rabbit Pelt (2sp)", "qt": 1},{"name": "Rabbit's Foot (1sp)", "qt": 1}],
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829810586657095710/Hare.jpg"
+},
+{
+  "id": "rabbit",
+  "name": "Rabbit",
+  "ac": 8,
+  "hp": 1,
+  "pp": 8,
+  "commune": false,
+  "rations": 2,
+  "prizes": [{"name": "Rabbit Pelt (2sp)", "qt": 1},{"name": "Rabbit's Foot (1sp)", "qt": 1}],
+  "img": "https://cdn.discordapp.com/attachments/827581981452795975/827944537053724712/unknown.png"
+},
+{
   "id": "shelduck",
   "name": "Shelduck",
   "ac": 4,
@@ -162,61 +118,6 @@
   "prizes": [{"name": "Small Feathers (1sp)", "qt": 4}],
   "sneak_fail": "The {prey_name} sees your approach and flies away...",
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829808237469499397/Shelduck.jpg"
-},
-{
-  "id": "rattlesnake",
-  "name": "Rattlesnake",
-  "ac": 11,
-  "hp": 3,
-  "pp": 12,
-  "commune": false,
-  "rations": 2,
-  "prizes": [{"name": "Venom Gland (1gp)", "qt": 4}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811105379385394/Snake.jpg"
-},
-{
-  "id": "seal",
-  "name": "Seal",
-  "ac": 10,
-  "hp": 5,
-  "pp": 4,
-  "commune": false,
-  "rations": 4,
-  "prizes": [{"name": "Seal Hide (5gp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829808073904095252/Seal.jpeg"
-},
-{
-  "id": "beaver",
-  "name": "Beaver",
-  "ac": 10,
-  "hp": 4,
-  "pp": 12,
-  "commune": false,
-  "rations": 4,
-  "prizes": [{"name": "Beaver Pelt (2gp)", "qt": 1},{"name": "Beaver Tail (3sp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813839138390016/Beaver.jpg"
-},
-{
-  "id": "giant_wolf_spider",
-  "name": "Giant Wolf Spider",
-  "ac": 13,
-  "hp": 6,
-  "pp": 13,
-  "commune": false,
-  "rations": 6,
-  "prizes": [{"name": "Venom Gland (1gp)", "qt": 6}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811548699492402/GiantSpider.jpg"
-},
-{
-  "id": "wolverine",
-  "name": "Wolverine",
-  "ac": 11,
-  "hp": 5,
-  "pp": 8,
-  "commune": false,
-  "rations": 4,
-  "prizes": [{"name": "Wolverine Pelt (7gp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813466579468298/Wolverine.jpg"
 },
 {
   "id": "black-footed_ferret",
@@ -254,6 +155,29 @@
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829837518337736734/unknown.png"
 },
 {
+  "id": "scorpion",
+  "name": "Scorpion",
+  "ac": 8,
+  "hp": 1,
+  "pp": 8,
+  "commune": false,
+  "rations": 2,
+  "prizes": [{"name": "Venom Gland (1gp)", "qt": 1}],
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829810842227965972/Scorpion.jpg"
+},
+{
+  "id": "pelican",
+  "name": "Pelican",
+  "ac": 10,
+  "hp": 4,
+  "pp": 9,
+  "commune": false,
+  "rations": 2,
+  "prizes": [{"name": "Large Feathers (3sp)", "qt": 4}],
+  "sneak_fail": "The {prey_name} sees your approach and flies away...",
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829808035023159337/Pelican.jpg"
+},
+{
   "id": "red_fox",
   "name": "Red Fox",
   "ac": 10,
@@ -265,15 +189,118 @@
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811476017053736/Fox.jpeg"
 },
 {
-  "id": "bobcat",
-  "name": "Bobcat",
+  "id": "mountain_fox",
+  "name": "Mountain Fox",
   "ac": 11,
-  "hp": 5,
-  "pp": 14,
+  "hp": 3,
+  "pp": 12,
+  "commune": false,
+  "rations": 2,
+  "prizes": [{"name": "Fox Pelt (1gp)", "qt": 1},{"name": "Fox Tail (8sp)", "qt": 1}],
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813410098446356/Tibet_Fox.jpg"
+},
+{
+  "id": "beaver",
+  "name": "Beaver",
+  "ac": 10,
+  "hp": 4,
+  "pp": 12,
   "commune": false,
   "rations": 4,
-  "prizes": [{"name": "Bobcat Pelt (5gp)", "qt": 1},{"name": "Bobcat Claw (1sp)", "qt": 4}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829810465021493268/BobCat.jpg"
+  "prizes": [{"name": "Beaver Pelt (2gp)", "qt": 1},{"name": "Beaver Tail (3sp)", "qt": 1}],
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813839138390016/Beaver.jpg"
+},
+{
+  "id": "hawk",
+  "name": "Hawk",
+  "ac": 9,
+  "hp": 1,
+  "pp": 10,
+  "commune": false,
+  "rations": 2,
+  "prizes": [{"name": "Large Feathers (3sp)", "qt": 8}],
+  "sneak_fail": "The {prey_name} sees your approach and flies away...",
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811728836722718/Hawk.jpg"
+},
+{
+  "id": "turkey_vulture",
+  "name": "Turkey Vulture",
+  "ac": 7,
+  "hp": 2,
+  "pp": 11,
+  "commune": false,
+  "rations": 4,
+  "prizes": [{"name": "Large Feathers (3sp)", "qt": 8}],
+  "sneak_fail": "The {prey_name} sees your approach and flies away...",
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811150283472896/Vulture.jpg"
+},
+{
+  "id": "owl",
+  "name": "Owl",
+  "ac": 9,
+  "hp": 1,
+  "pp": 10,
+  "commune": false,
+  "rations": 2,
+  "prizes": [{"name": "Large Feathers (3sp)", "qt": 10}],
+  "sneak_fail": "The {prey_name} sees your approach and flies away...",
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811763746701372/Owl.jpg"
+},
+{
+  "id": "bald_eagle",
+  "name": "Bald Eagle",
+  "ac": 10,
+  "hp": 8,
+  "pp": 14,
+  "commune": false,
+  "rations": 6,
+  "prizes": [{"name": "Large Feathers (3sp)", "qt": 10}],
+  "sneak_fail": "The {prey_name} sees your approach and flies away...",
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813806925479946/BaldEagle.jpg"
+},
+{
+  "id": "sea_otter",
+  "name": "Sea Otter",
+  "ac": 8,
+  "hp": 3,
+  "pp": 11,
+  "commune": false,
+  "rations": 2,
+  "prizes": [{"name": "Otter Pelt (3gp)", "qt": 1}],
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829808112084713482/SeaOtter.jpg"
+},
+{
+  "id": "river_otter",
+  "name": "River Otter",
+  "ac": 8,
+  "hp": 3,
+  "pp": 10,
+  "commune": false,
+  "rations": 2,
+  "prizes": [{"name": "Otter Pelt (3gp)", "qt": 1}],
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829814092852232282/Otter.jpg"
+},
+{
+  "id": "badger",
+  "name": "Badger",
+  "ac": 10,
+  "hp": 3,
+  "pp": 12,
+  "commune": false,
+  "rations": 2,
+  "prizes": [{"name": "Badger Pelt (3gp)", "qt": 1}],
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811259603681280/Badger.jpg"
+},
+{
+  "id": "rattlesnake",
+  "name": "Rattlesnake",
+  "ac": 11,
+  "hp": 3,
+  "pp": 12,
+  "commune": false,
+  "rations": 2,
+  "prizes": [{"name": "Venom Gland (1gp)", "qt": 4}],
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811105379385394/Snake.jpg"
 },
 {
   "id": "coyote",
@@ -287,15 +314,71 @@
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829810552560943125/Coyote.jpg"
 },
 {
-  "id": "mountain_fox",
-  "name": "Mountain Fox",
-  "ac": 11,
-  "hp": 3,
-  "pp": 12,
+  "id": "seal",
+  "name": "Seal",
+  "ac": 10,
+  "hp": 5,
+  "pp": 4,
   "commune": false,
-  "rations": 2,
-  "prizes": [{"name": "Fox Pelt (1gp)", "qt": 1},{"name": "Fox Tail (8sp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813410098446356/Tibet_Fox.jpg"
+  "rations": 4,
+  "prizes": [{"name": "Seal Hide (5gp)", "qt": 1}],
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829808073904095252/Seal.jpeg"
+},
+{
+  "id": "eagle",
+  "name": "Eagle",
+  "ac": 11,
+  "hp": 5,
+  "pp": 13,
+  "commune": false,
+  "rations": 4,
+  "prizes": [{"name": "Large Feathers (3sp)", "qt": 18}],
+  "sneak_fail": "The {prey_name} sees your approach and flies away...",
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812942161051668/Eagle.jpg"
+},
+{
+  "id": "bobcat",
+  "name": "Bobcat",
+  "ac": 11,
+  "hp": 5,
+  "pp": 14,
+  "commune": false,
+  "rations": 4,
+  "prizes": [{"name": "Bobcat Pelt (5gp)", "qt": 1},{"name": "Bobcat Claw (1sp)", "qt": 4}],
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829810465021493268/BobCat.jpg"
+},
+{
+  "id": "ostritch",
+  "name": "Ostritch",
+  "ac": 13,
+  "hp": 10,
+  "pp": 13,
+  "commune": false,
+  "rations": 6,
+  "prizes": [{"name": "Large Feathers (3sp)", "qt": 20}],
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812424634400788/ostrich.jpg"
+},
+{
+  "id": "giant_wolf_spider",
+  "name": "Giant Wolf Spider",
+  "ac": 13,
+  "hp": 6,
+  "pp": 13,
+  "commune": false,
+  "rations": 6,
+  "prizes": [{"name": "Venom Gland (1gp)", "qt": 6}],
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811548699492402/GiantSpider.jpg"
+},
+{
+  "id": "wolverine",
+  "name": "Wolverine",
+  "ac": 11,
+  "hp": 5,
+  "pp": 8,
+  "commune": false,
+  "rations": 4,
+  "prizes": [{"name": "Wolverine Pelt (7gp)", "qt": 1}],
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813466579468298/Wolverine.jpg"
 },
 {
   "id": "wild_camel",
@@ -354,51 +437,6 @@
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813932804931584/Capybara.jpg"
 },
 {
-  "id": "deer",
-  "name": "Deer",
-  "ac": 10,
-  "hp": 4,
-  "pp": 12,
-  "commune": false,
-  "rations": 8,
-  "prizes": [{"name": "Deer Pelt (10gp)", "qt": 1},{"name": "Deer Antler (1gp)", "qt": 2}],
-  "img": "https://cdn.discordapp.com/attachments/827581981452795975/827952699965964308/whitetail-deer-painting-fall-flame-crista-forest.jpeg"
-},
-{
-  "id": "pelican",
-  "name": "Pelican",
-  "ac": 10,
-  "hp": 4,
-  "pp": 9,
-  "commune": false,
-  "rations": 2,
-  "prizes": [{"name": "Large Feathers (3sp)", "qt": 4}],
-  "sneak_fail": "The {prey_name} sees your approach and flies away...",
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829808035023159337/Pelican.jpg"
-},
-{
-  "id": "sea_turtle",
-  "name": "Sea Turtle",
-  "ac": 10,
-  "hp": 2,
-  "pp": 2,
-  "commune": false,
-  "rations": 4,
-  "prizes": [{"name": "Large Turtle Shell (12gp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829808172172574740/SeaTurtle.jpeg"
-},
-{
-  "id": "alligator",
-  "name": "Alligator",
-  "ac": 12,
-  "hp": 10,
-  "pp": 13,
-  "commune": false,
-  "rations": 10,
-  "prizes": [{"name": "Gator Hide (12gp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813627477426256/Alligator.jpg"
-},
-{
   "id": "hyena",
   "name": "Hyena",
   "ac": 11,
@@ -432,6 +470,39 @@
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811365828100137/Boar.jpg"
 },
 {
+  "id": "deer",
+  "name": "Deer",
+  "ac": 10,
+  "hp": 4,
+  "pp": 12,
+  "commune": false,
+  "rations": 8,
+  "prizes": [{"name": "Deer Pelt (10gp)", "qt": 1},{"name": "Deer Antler (1gp)", "qt": 2}],
+  "img": "https://cdn.discordapp.com/attachments/827581981452795975/827952699965964308/whitetail-deer-painting-fall-flame-crista-forest.jpeg"
+},
+{
+  "id": "sea_turtle",
+  "name": "Sea Turtle",
+  "ac": 10,
+  "hp": 2,
+  "pp": 2,
+  "commune": false,
+  "rations": 4,
+  "prizes": [{"name": "Large Turtle Shell (12gp)", "qt": 1}],
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829808172172574740/SeaTurtle.jpeg"
+},
+{
+  "id": "alligator",
+  "name": "Alligator",
+  "ac": 12,
+  "hp": 10,
+  "pp": 13,
+  "commune": false,
+  "rations": 10,
+  "prizes": [{"name": "Gator Hide (12gp)", "qt": 1}],
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813627477426256/Alligator.jpg"
+},
+{
   "id": "basilisk",
   "name": "Basilisk",
   "ac": 12,
@@ -452,66 +523,6 @@
   "rations": 6,
   "prizes": [{"name": "Gator Hide (12gp)", "qt": 2}],
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829807499762335794/Crocodile.jpg"
-},
-{
-  "id": "hawk",
-  "name": "Hawk",
-  "ac": 9,
-  "hp": 1,
-  "pp": 10,
-  "commune": false,
-  "rations": 2,
-  "prizes": [{"name": "Large Feathers (3sp)", "qt": 8}],
-  "sneak_fail": "The {prey_name} sees your approach and flies away...",
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811728836722718/Hawk.jpg"
-},
-{
-  "id": "turkey_vulture",
-  "name": "Turkey Vulture",
-  "ac": 7,
-  "hp": 2,
-  "pp": 11,
-  "commune": false,
-  "rations": 4,
-  "prizes": [{"name": "Large Feathers (3sp)", "qt": 8}],
-  "sneak_fail": "The {prey_name} sees your approach and flies away...",
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811150283472896/Vulture.jpg"
-},
-{
-  "id": "cockatrice",
-  "name": "Cockatrice",
-  "ac": 11,
-  "hp": 27,
-  "pp": 11,
-  "commune": false,
-  "rations": 5,
-  "prizes": [{"name": "Cockatrice Wing (15gp)", "qt": 2}],
-  "sneak_fail": "The {prey_name} sees your approach and flies away...",
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812876021596170/Cockatrice.jpeg"
-},
-{
-  "id": "owl",
-  "name": "Owl",
-  "ac": 9,
-  "hp": 1,
-  "pp": 10,
-  "commune": false,
-  "rations": 2,
-  "prizes": [{"name": "Large Feathers (3sp)", "qt": 10}],
-  "sneak_fail": "The {prey_name} sees your approach and flies away...",
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811763746701372/Owl.jpg"
-},
-{
-  "id": "bald_eagle",
-  "name": "Bald Eagle",
-  "ac": 10,
-  "hp": 8,
-  "pp": 14,
-  "commune": false,
-  "rations": 6,
-  "prizes": [{"name": "Large Feathers (3sp)", "qt": 10}],
-  "sneak_fail": "The {prey_name} sees your approach and flies away...",
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813806925479946/BaldEagle.jpg"
 },
 {
   "id": "snow_leopard",
@@ -547,26 +558,40 @@
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813531917418496/Yak.jpg"
 },
 {
-  "id": "tiger",
-  "name": "Tiger",
+  "id": "injured_roc",
+  "name": "Injured Roc",
   "ac": 12,
   "hp": 12,
-  "pp": 13,
+  "pp": 11,
   "commune": false,
-  "rations": 2,
-  "prizes": [{"name": "Tiger Pelt (26gp)", "qt": 1},{"name": "Tiger Claw (5gp)", "qt": 4}],
-  "img": "https://cdn.discordapp.com/attachments/827581981452795975/827944055169875978/unknown.png"
+  "rations": 3,
+  "prizes": [{"name": "Large Feathers (3sp)", "qt": 16},{"name": "Roc Claw (4gp)", "qt": 6}],
+  "sneak_fail": "The {prey_name} sees your approach and flies away...",
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813148466544721/Roc.jpeg"
 },
 {
-  "id": "leopard",
-  "name": "Leopard",
-  "ac": 13,
-  "hp": 12,
-  "pp": 14,
+  "id": "cockatrice",
+  "name": "Cockatrice",
+  "ac": 11,
+  "hp": 27,
+  "pp": 11,
   "commune": false,
-  "rations": 8,
-  "prizes": [{"name": "Leopard Pelt (40gp)", "qt": 1},{"name": "Leopard Claw (2sp)", "qt": 4}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812276881653760/Leopard.jpg"
+  "rations": 5,
+  "prizes": [{"name": "Cockatrice Wing (15gp)", "qt": 2}],
+  "sneak_fail": "The {prey_name} sees your approach and flies away...",
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812876021596170/Cockatrice.jpeg"
+},
+{
+  "id": "griffon",
+  "name": "Griffon",
+  "ac": 12,
+  "hp": 30,
+  "pp": 15,
+  "commune": false,
+  "rations": 12,
+  "prizes": [{"name": "Large Feathers (3sp)", "qt": 20},{"name": "Griffon Claw (15gp)", "qt": 2}],
+  "sneak_fail": "The {prey_name} sees your approach and flies away...",
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829807857263968296/Griffon.jpg"
 },
 {
   "id": "bison",
@@ -580,40 +605,6 @@
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811972408344656/Bison.jpeg"
 },
 {
-  "id": "mountain_lion",
-  "name": "Mountain Lion",
-  "ac": 12,
-  "hp": 12,
-  "pp": 14,
-  "commune": false,
-  "rations": 6,
-  "prizes": [{"name": "Cougar Pelt (45gp)", "qt": 1},{"name": "Cougar Claw (2sp)", "qt": 4}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829810701975027752/MoutainLion.jpg"
-},
-{
-  "id": "eagle",
-  "name": "Eagle",
-  "ac": 11,
-  "hp": 5,
-  "pp": 13,
-  "commune": false,
-  "rations": 4,
-  "prizes": [{"name": "Large Feathers (3sp)", "qt": 18}],
-  "sneak_fail": "The {prey_name} sees your approach and flies away...",
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812942161051668/Eagle.jpg"
-},
-{
-  "id": "lion",
-  "name": "Lion",
-  "ac": 12,
-  "hp": 26,
-  "pp": 13,
-  "commune": false,
-  "rations": 10,
-  "prizes": [{"name": "Lion Pelt (50gp)", "qt": 1},{"name": "Lion Claw (2gp)", "qt": 4}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812307831947337/Lion.jpg"
-},
-{
   "id": "elk",
   "name": "Elk",
   "ac": 10,
@@ -621,19 +612,19 @@
   "pp": 10,
   "commune": false,
   "rations": 8,
-  "prizes": [{"name": "Elk Pelt (20gp)", "qt": 1},{"name": "Elk Antler (20gp)", "qt": 2}],
+  "prizes": [{"name": "Elk Pelt (20gp)", "qt": 1},{"name": "Elk Antler (20gp)", "qt": 1}],
   "img": "https://cdn.discordapp.com/attachments/827581981452795975/827944154789183508/unknown.png"
 },
 {
-  "id": "ostritch",
-  "name": "Ostritch",
+  "id": "leopard",
+  "name": "Leopard",
   "ac": 13,
-  "hp": 10,
-  "pp": 13,
+  "hp": 12,
+  "pp": 14,
   "commune": false,
-  "rations": 6,
-  "prizes": [{"name": "Large Feathers (3sp)", "qt": 20}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812424634400788/ostrich.jpg"
+  "rations": 8,
+  "prizes": [{"name": "Leopard Pelt (40gp)", "qt": 1},{"name": "Leopard Claw (2sp)", "qt": 4}],
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812276881653760/Leopard.jpg"
 },
 {
   "id": "owlbear",
@@ -645,6 +636,28 @@
   "rations": 8,
   "prizes": [{"name": "Owlbear Claw (5gp)", "qt": 8},{"name": "Large Feathers (3sp)", "qt": 8}],
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812465344577546/Owlbear.jpg"
+},
+{
+  "id": "mountain_lion",
+  "name": "Mountain Lion",
+  "ac": 12,
+  "hp": 12,
+  "pp": 14,
+  "commune": false,
+  "rations": 6,
+  "prizes": [{"name": "Cougar Pelt (45gp)", "qt": 1},{"name": "Cougar Claw (2sp)", "qt": 4}],
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829810701975027752/MoutainLion.jpg"
+},
+{
+  "id": "tiger",
+  "name": "Tiger",
+  "ac": 12,
+  "hp": 12,
+  "pp": 13,
+  "commune": false,
+  "rations": 2,
+  "prizes": [{"name": "Tiger Pelt (26gp)", "qt": 1},{"name": "Tiger Claw (5gp)", "qt": 4}],
+  "img": "https://cdn.discordapp.com/attachments/827581981452795975/827944055169875978/unknown.png"
 },
 {
   "id": "black_bear",
@@ -669,16 +682,26 @@
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812834639675402/BrownBear.jpg"
 },
 {
-  "id": "injured_roc",
-  "name": "Injured Roc",
-  "ac": 12,
-  "hp": 12,
-  "pp": 11,
+  "id": "gorgon",
+  "name": "Gorgon",
+  "ac": 19,
+  "hp": 20,
+  "pp": 6,
   "commune": false,
-  "rations": 3,
-  "prizes": [{"name": "Large Feathers (3sp)", "qt": 16},{"name": "Roc Claw (4gp)", "qt": 6}],
-  "sneak_fail": "The {prey_name} sees your approach and flies away...",
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813148466544721/Roc.jpeg"
+  "rations": 8,
+  "prizes": [{"name": "Gorgon Horn (50gp)", "qt": 1}],
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812098552561734/Gorgon.jpeg"
+},
+{
+  "id": "lion",
+  "name": "Lion",
+  "ac": 12,
+  "hp": 26,
+  "pp": 13,
+  "commune": false,
+  "rations": 10,
+  "prizes": [{"name": "Lion Pelt (50gp)", "qt": 1},{"name": "Lion Claw (2gp)", "qt": 4}],
+  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812307831947337/Lion.jpg"
 },
 {
   "id": "rhino",
@@ -692,29 +715,6 @@
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812572508913735/Rhino.png"
 },
 {
-  "id": "gorgon",
-  "name": "Gorgon",
-  "ac": 19,
-  "hp": 20,
-  "pp": 6,
-  "commune": false,
-  "rations": 8,
-  "prizes": [{"name": "Gorgon Horn (50gp)", "qt": 2}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812098552561734/Gorgon.jpeg"
-},
-{
-  "id": "griffon",
-  "name": "Griffon",
-  "ac": 12,
-  "hp": 30,
-  "pp": 15,
-  "commune": false,
-  "rations": 12,
-  "prizes": [{"name": "Large Feathers (3sp)", "qt": 20},{"name": "Griffon Claw (15gp)", "qt": 4}],
-  "sneak_fail": "The {prey_name} sees your approach and flies away...",
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829807857263968296/Griffon.jpg"
-},
-{
   "id": "chimera",
   "name": "Chimera",
   "ac": 12,
@@ -722,7 +722,7 @@
   "pp": 8,
   "commune": false,
   "rations": 14,
-  "prizes": [{"name": "Chimera Parts (20gp)", "qt": 6},{"name": "Venom Gland (1gp)", "qt": 12}],
+  "prizes": [{"name": "Chimera Parts (20gp)", "qt": 4},{"name": "Venom Gland (1gp)", "qt": 12}],
   "sneak_fail": "The {prey_name} sees your approach and flies away...",
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812014632140830/Chimera.png"
 },
@@ -734,7 +734,7 @@
   "pp": 11,
   "commune": false,
   "rations": 12,
-  "prizes": [{"name": "Venom Gland (1gp)", "qt": 100},{"name": "Manticore Pelt (45gp)", "qt": 1}],
+  "prizes": [{"name": "Venom Gland (1gp)", "qt": 60},{"name": "Manticore Pelt (45gp)", "qt": 1}],
   "sneak_fail": "The {prey_name} sees your approach and flies away...",
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829807947516739604/Manticore.jpg"
 },
@@ -746,7 +746,7 @@
   "pp": 4,
   "commune": false,
   "rations": 40,
-  "prizes": [{"name": "Behir Head (150gp)", "qt": 1},{"name": "Behir Claw (2gp)", "qt": 48}],
+  "prizes": [{"name": "Behir Head (150gp)", "qt": 1},{"name": "Behir Claw (2gp)", "qt": 14}],
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811338804461578/Behir.jpeg"
 },
 {
@@ -757,7 +757,7 @@
   "pp": 4,
   "commune": false,
   "rations": 14,
-  "prizes": [{"name": "Hydra Hide (180gp)", "qt": 1},{"name": "Hydra Head (30gp)", "qt": 5}],
+  "prizes": [{"name": "Hydra Hide (180gp)", "qt": 1},{"name": "Hydra Head (30gp)", "qt": 3}],
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829814051873226762/Hydra.jpeg"
 }
 ]}
