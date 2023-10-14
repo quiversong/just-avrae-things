@@ -104,7 +104,8 @@ def dump_stats(stats):
     character().set_cvar(ALIAS_STATS_VAR, dump_json(stats))
 
 def update_footer_count(output, new_count):
-    output['footer'] = output['footer'].replace(f'{new_count - 1}/', f'{new_count}/')
+    current_count = output['footer'].split('/')[0].split(' ')[-1]
+    output['footer'] = output['footer'].replace(f'{current_count}/', f'{new_count}/')
 
 def print_stats(output, stats):
     output["title"] = f'{character().name}\'s hunting statistics...'
@@ -218,8 +219,7 @@ def do_explore_biome(stats, biome):
     prey_type = PREY_TYPES.ANIMAL
     if special_prey_roll == 1:
         prey_type = PREY_TYPES.MYTHICAL
-    # TODO fix
-    if special_prey_roll >= 2:
+    if special_prey_roll == 2:
         prey_type = PREY_TYPES.DRAGON
 
     if prey_type == PREY_TYPES.ANIMAL:
@@ -243,7 +243,7 @@ def do_explore_biome(stats, biome):
 
 def do_sneak(stats, prey):
     adv_status = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
-    stealth_roll = vroll(c.skills.stealth.d20(base_adv = adv_status))
+    stealth_roll = vroll(character().skills.stealth.d20(base_adv = adv_status))
     success = stealth_roll.total > prey['pp']
 
     if success:
@@ -282,9 +282,9 @@ def do_attack(stats, prey_type, prey, weapon_name = None):
         'next_stage': 'clean' if attack_success else None
     }
 
-def do_clean(stats, output, prey, all_bags = None):
+def do_clean(stats, prey, all_bags = None):
     adv_status = True if last_stage_was_crit else None
-    survival_roll = vroll(c.skills.survival.d20(base_adv = adv_status))
+    survival_roll = vroll(character().skills.survival.d20(base_adv = adv_status))
 
     success = survival_roll.total >= prey['clean_dc']
 
@@ -301,16 +301,16 @@ def do_clean(stats, output, prey, all_bags = None):
         'prizes_list': prizes_list if success else None
     }
 
-def do_commune(stats, output, prey, all_bags = None):
+def do_commune(stats, prey, all_bags = None):
     if (not 'commune' in prey) or prey['commune'] == False or (not 'cha' in prey):
-        output.fields.append('!hunt script rolled a 1 and failed flat on its head! Please report to a Server Administrator.')
+        err('!hunt script rolled a 1 and failed flat on its head! Please report to a Server Administrator.')
         return 1
 
     if ctx.author.id in ADMIN_USER_IDS and 'hb' in pargs:
         roll_bonus = '+ '.join(pargs.get('hb', default=[''])).strip()
     else:
         roll_bonus = ''
-    ah_roll = vroll(c.skills.animalHandling.d20() + roll_bonus)
+    ah_roll = vroll(character().skills.animalHandling.d20() + roll_bonus)
     success = ah_roll.total >= prey['cha']
 
     if success:
@@ -366,21 +366,41 @@ if alias_performed_count >= DAILY_CAP:
 
 if ('quick' in pargs) and first_param in biome_codes:
     count = DAILY_CAP - alias_performed_count
+    alias_performed_count = utils.increase_daily_activity_data(ALIAS_TIME_VAR, count)
+    update_footer_count(output, alias_performed_count)
+
     biome_id = first_param
     biome = get_biome_data(biome_id)
     all_bags = load_json(character().cvars['bags'])
 
-    for _ in range(0, count):
-        result = do_explore_biome(stats, output, biome)
-        prey = get_prey_data(result['prey_type'], result['prey_id'])
+    def format_roll_result(roll_name, roll, success):
+        return f'**{roll_name} roll:** {roll.full}...{SL if success else FL}'
 
-        result = do_sneak(stats, output, prey)
+    for _ in range(0, count):
+        f = ''
+
+        result = do_explore_biome(stats, biome)
+        prey = result['prey']
+        prey_type = result['prey_type']
+
+        formatted_prey_name = f'a VERY RARE {prey["name"]}' if result['is_special_prey'] \
+                else format_prey_name_with_article(prey['name'])
+        f += f'You found {formatted_prey_name} in the {biome["name"]}...|'
+
+        result = do_sneak(stats, prey)
+        f += format_roll_result('Stealth', result['roll'], result['success'])
+
         if result['next_stage'] == 'attack':
-            result = do_attack(stats, output, prey)
+            result = do_attack(stats, prey_type, prey)
+            f += '\n' + format_roll_result('Attack', result['roll'], result['success']) + ('Crit!' if result['is_crit'] else '')
             if result['success']:
-                result = do_clean(stats, output, prey, all_bags)
+                result = do_clean(stats, prey, all_bags)
+                f += '\n' + format_roll_result('Survival', result['roll'], result['success'])
         elif result['next_stage'] == 'commune':
-            result = do_commune(stats, output, prey, all_bags)
+            result = do_commune(stats, prey, all_bags)
+            f += '\n' + format_roll_result('Animal Handling', result['roll'], result['success'])
+
+        output.fields.append(f)
 
     dump_stats(stats)
     return 0
@@ -492,7 +512,7 @@ if first_param == 'clean':
     c = character()
     output['title'] = f'{c.name} attempts to clean their hunting prize!'
 
-    result = do_clean(stats, output, prey)
+    result = do_clean(stats, prey)
 
     f = f'{c.name} cleans and extracts the goods from the {prey["name"]}...|'
     f += f'**Survival roll:** {result["roll"].full}\n{SL if result["success"] else FL}'
@@ -513,7 +533,7 @@ if first_param == 'commune':
     c = character()
     output['title'] = f'{c.name} tries to commune with the {prey["name"]}...'
 
-    result = do_commune(stats, output, prey)
+    result = do_commune(stats, prey)
 
     f = f'{c.name} approaches the {prey["name"]}...|'
     f += f'**Animal Handling roll:** {result["roll"].full}\n{SL if result["success"] else FL}'

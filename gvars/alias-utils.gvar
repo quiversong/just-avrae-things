@@ -105,11 +105,11 @@ def get_daily_activity_data(control_var, daily_cap):
 def increase_daily_activity_data(control_var, by = 1):
     cvars = character().cvars
     if not control_var in cvars or cvars[control_var] == "0:0":
-        character().set_cvar(control_var, f'1:{time()}')
-        return 1
+        character().set_cvar(control_var, f'by:{time()}')
+        return by
     else:
         var_parts = cvars[control_var].split(':')
-        count, last_time = int(var_parts[0]) + 1, var_parts[1]
+        count, last_time = int(var_parts[0]) + by, var_parts[1]
         character().set_cvar(control_var, f'{count}:{last_time}')
         return count
 
