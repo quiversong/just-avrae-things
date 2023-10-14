@@ -26,13 +26,13 @@
 "silver_scorpion",
 "elephant_matriarch",
 "mountain_gorilla",
-"poot_desert",
+"poot_desert"
 ],
 "dragons": [
 "young_red_dragon",
 "ancient_red_dragon",
 "young_green_dragon",
-"ancient_green_dragon",
+"ancient_green_dragon"
 ]},
 {
 "id": "mountain",
