@@ -2,7 +2,7 @@
 {
   "id": "mountain_gorilla",
   "name": "Mountain Gorilla",
-  "cha": 10,
+  "cha": 11,
   "pp": 6,
   "commune": true,
   "prizes": [{"name": "Token of the Mountain", "qt": 4}],
@@ -15,7 +15,7 @@
 {
   "id": "white_stag",
   "name": "White Stag",
-  "cha": 12,
+  "cha": 13,
   "pp": 13,
   "commune": true,
   "prizes": [{"name": "Token of the Forest", "qt": 3}],
@@ -26,7 +26,7 @@
 {
   "id": "great_white_wolf",
   "name": "Great White Wolf",
-  "cha": 8,
+  "cha": 9,
   "pp": 13,
   "commune": true,
   "prizes": [{"name": "Token of the Forest", "qt": 4}],
@@ -39,7 +39,7 @@
 {
   "id": "nurting_dryad",
   "name": "Nurting Dryad",
-  "cha": 11,
+  "cha": 12,
   "pp": 14,
   "commune": true,
   "prizes": [{"name": "Token of the Swamp", "qt": 3}],
@@ -50,7 +50,7 @@
 {
   "id": "sacred_wolf",
   "name": "Sacred Wolf",
-  "cha": 8,
+  "cha": 9,
   "pp": 13,
   "commune": true,
   "prizes": [{"name": "Token of the Mountain", "qt": 4}],
@@ -63,7 +63,7 @@
 {
   "id": "silk_unicorn",
   "name": "Silk Unicorn",
-  "cha": 13,
+  "cha": 14,
   "pp": 13,
   "commune": true,
   "prizes": [{"name": "Token of the Grassland", "qt": 3}],
@@ -74,7 +74,7 @@
 {
   "id": "divine_pegasus",
   "name": "Divine Pegasus",
-  "cha": 11,
+  "cha": 12,
   "pp": 13,
   "commune": true,
   "prizes": [{"name": "Token of the Mountain", "qt": 4}],
@@ -86,7 +86,7 @@
 {
   "id": "elephant_matriarch",
   "name": "Elephant Matriarch",
-  "cha": 7,
+  "cha": 8,
   "pp": 5,
   "commune": true,
   "prizes": [{"name": "Token of the Grassland", "qt": 3}],
@@ -97,7 +97,7 @@
 {
   "id": "poot_desert",
   "name": "Pale Oak of the Desert",
-  "cha": 8,
+  "cha": 9,
   "pp": 5,
   "commune": true,
   "prizes": [{"name": "Pale Acorn of the Desert", "qt": 1}],
@@ -110,7 +110,7 @@
 {
   "id": "poot_mountain",
   "name": "Pale Oak of the Mountain",
-  "cha": 8,
+  "cha": 9,
   "pp": 5,
   "commune": true,
   "prizes": [{"name": "Pale Acorn of the Mountain", "qt": 1}],
@@ -123,7 +123,7 @@
 {
   "id": "poot_forest",
   "name": "Pale Oak of the Forest",
-  "cha": 8,
+  "cha": 9,
   "pp": 5,
   "commune": true,
   "prizes": [{"name": "Pale Acorn of the Forest", "qt": 1}],
@@ -136,7 +136,7 @@
 {
   "id": "poot_grassland",
   "name": "Pale Oak of the Grassland",
-  "cha": 8,
+  "cha": 9,
   "pp": 5,
   "commune": true,
   "prizes": [{"name": "Pale Acorn of the Grassland", "qt": 1}],
@@ -149,7 +149,7 @@
 {
   "id": "poot_swamp",
   "name": "Pale Oak of the Swamp",
-  "cha": 8,
+  "cha": 9,
   "pp": 5,
   "commune": true,
   "prizes": [{"name": "Pale Acorn of the Swamp", "qt": 1}],
@@ -162,7 +162,7 @@
 {
   "id": "poot_coastline",
   "name": "Pale Oak of the Coastline",
-  "cha": 8,
+  "cha": 9,
   "pp": 5,
   "commune": true,
   "prizes": [{"name": "Pale Acorn of the Coastline", "qt": 1}],
@@ -175,7 +175,7 @@
 {
   "id": "silver_scorpion",
   "name": "Silver Scorpion",
-  "cha": 7,
+  "cha": 8,
   "pp": 5,
   "commune": true,
   "prizes": [{"name": "Token of the Desert", "qt": 3}],
@@ -186,7 +186,7 @@
 {
   "id": "golden_griffon",
   "name": "Golden Griffon",
-  "cha": 9,
+  "cha": 10,
   "pp": 13,
   "commune": true,
   "prizes": [{"name": "Token of the Coast", "qt": 3}],
