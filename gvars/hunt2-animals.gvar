@@ -502,7 +502,7 @@
 {
   "id": "wild_boar",
   "name": "Wild Boar",
-  "ac": 12,
+  "ac": 15,
   "hp": 7,
   "pp": 9,
   "clean_dc": 12,
@@ -514,7 +514,7 @@
 {
   "id": "deer",
   "name": "Deer",
-  "ac": 11,
+  "ac": 15,
   "hp": 4,
   "pp": 12,
   "clean_dc": 11,
@@ -526,7 +526,7 @@
 {
   "id": "sea_turtle",
   "name": "Sea Turtle",
-  "ac": 11,
+  "ac": 15,
   "hp": 2,
   "pp": 2,
   "clean_dc": 11,
@@ -574,7 +574,7 @@
 {
   "id": "snow_leopard",
   "name": "Snow Leopard",
-  "ac": 13,
+  "ac": 16,
   "hp": 9,
   "pp": 15,
   "clean_dc": 13,
@@ -586,7 +586,7 @@
 {
   "id": "mountain_goat",
   "name": "Mountain Goat",
-  "ac": 13,
+  "ac": 17,
   "hp": 7,
   "pp": 10,
   "clean_dc": 13,
@@ -598,7 +598,7 @@
 {
   "id": "wild_yak",
   "name": "Wild Yak",
-  "ac": 13,
+  "ac": 18,
   "hp": 6,
   "pp": 6,
   "clean_dc": 13,
@@ -610,7 +610,7 @@
 {
   "id": "injured_roc",
   "name": "Injured Roc",
-  "ac": 13,
+  "ac": 18,
   "hp": 12,
   "pp": 11,
   "clean_dc": 13,
@@ -623,7 +623,7 @@
 {
   "id": "cockatrice",
   "name": "Cockatrice",
-  "ac": 12,
+  "ac": 18,
   "hp": 27,
   "pp": 11,
   "clean_dc": 12,
@@ -636,7 +636,7 @@
 {
   "id": "griffon",
   "name": "Griffon",
-  "ac": 13,
+  "ac": 19,
   "hp": 30,
   "pp": 15,
   "clean_dc": 13,
@@ -649,7 +649,7 @@
 {
   "id": "bison",
   "name": "Bison",
-  "ac": 12,
+  "ac": 18,
   "hp": 7,
   "pp": 10,
   "clean_dc": 12,
@@ -661,7 +661,7 @@
 {
   "id": "elk",
   "name": "Elk",
-  "ac": 11,
+  "ac": 16,
   "hp": 10,
   "pp": 10,
   "clean_dc": 11,
@@ -673,7 +673,7 @@
 {
   "id": "leopard",
   "name": "Leopard",
-  "ac": 14,
+  "ac": 19,
   "hp": 12,
   "pp": 14,
   "clean_dc": 14,
@@ -685,7 +685,7 @@
 {
   "id": "owlbear",
   "name": "Owlbear",
-  "ac": 19,
+  "ac": 20,
   "hp": 10,
   "pp": 13,
   "clean_dc": 19,
@@ -697,7 +697,7 @@
 {
   "id": "mountain_lion",
   "name": "Mountain Lion",
-  "ac": 16,
+  "ac": 18,
   "hp": 12,
   "pp": 14,
   "clean_dc": 16,
@@ -775,7 +775,7 @@
   "clean_dc": 17,
   "commune": false,
   "rations": 6,
-  "prizes": [{"name": "Rhino Hide (45gp)", "qt": 1},{"name": "Rhino Horn (30gp)", "qt": 1}],
+  "prizes": [{"name": "Rhino Hide (25gp)", "qt": 1},{"name": "Rhino Horn (30gp)", "qt": 1}],
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812572508913735/Rhino.png"
 },
 {
@@ -787,7 +787,7 @@
   "clean_dc": 13,
   "commune": false,
   "rations": 14,
-  "prizes": [{"name": "Chimera Parts (20gp)", "qt": 4},{"name": "Venom Gland (1gp)", "qt": 12}],
+  "prizes": [{"name": "Chimera Parts (15gp)", "qt": 4},{"name": "Venom Gland (1gp)", "qt": 12}],
   "sneak_fail": "The {prey_name} sees your approach and flies away...",
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812014632140830/Chimera.png"
 },
@@ -813,7 +813,7 @@
   "clean_dc": 18,
   "commune": false,
   "rations": 40,
-  "prizes": [{"name": "Behir Head (150gp)", "qt": 1},{"name": "Behir Claw (2gp)", "qt": 14}],
+  "prizes": [{"name": "Behir Head (120gp)", "qt": 1},{"name": "Behir Claw (2gp)", "qt": 14}],
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811338804461578/Behir.jpeg"
 },
 {
@@ -825,7 +825,7 @@
   "clean_dc": 14,
   "commune": false,
   "rations": 14,
-  "prizes": [{"name": "Hydra Hide (180gp)", "qt": 1},{"name": "Hydra Head (30gp)", "qt": 3}],
+  "prizes": [{"name": "Hydra Hide (150gp)", "qt": 1},{"name": "Hydra Head (30gp)", "qt": 2}],
   "img": "https://cdn.discordapp.com/attachments/829536903140343828/829814051873226762/Hydra.jpeg"
 }
 ]}
