@@ -428,6 +428,7 @@ if ('quick' in pargs) and first_param in biome_codes:
     if special_creature_found:
         output['color'] = GOLDEN_COLOR
 
+    output['thumb'] = image
     output['desc'] = f'*Exploring the {biome["name"]} environment...*'
     output['img'] = randchoice(BIOME_FOOTER_IMAGES[biome_id])
     dump_stats(stats)
