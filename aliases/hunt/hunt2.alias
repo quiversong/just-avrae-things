@@ -470,6 +470,8 @@ if ('quick' in pargs) and first_param in biome_codes:
 
 # Begin new hunt
 if not('quick' in pargs) and first_param in biome_codes:
+    c = character()
+
     alias_performed_count = utils.increase_daily_activity_data(ALIAS_TIME_VAR)
     update_footer_count(output, alias_performed_count)
 
@@ -478,25 +480,15 @@ if not('quick' in pargs) and first_param in biome_codes:
 
     result = do_explore_biome(stats, biome)
     prey = result['prey']
+    prey_type = result['prey_type']
 
     if result['is_special_prey']:
-        f = f'{character().name} found a ***VERY RARE*** {prey["name"]}!|Can you approach it without being noticed?'
+        f = f'{c.name} found a ***VERY RARE*** {prey["name"]}!|Can you approach it without being noticed?'
         output.fields.append(f)
         output['color'] = GOLDEN_COLOR
     else:
-        f = f'{character().name} found {format_prey_name_with_article(prey["name"])} in the {biome["name"]}!|Can you get the jump on it?'
+        f = f'{c.name} found {format_prey_name_with_article(prey["name"])} in the {biome["name"]}!|Can you get the jump on it?'
         output.fields.append(f)
-
-    output['thumb'] = biome['img']
-    output.fields.append(f'This hunt is not over yet...|Use `!hunt sneak` to continue.')
-
-    set_next_expected_stage(result['next_stage'], result['prey_type'], result['prey_id'])
-    dump_stats(stats)
-    return 0
-
-if first_param == 'sneak':
-    c = character()
-    output['title'] = f'{c.name} tries to sneak on their prey!'
 
     result = do_sneak(stats, prey)
 
@@ -520,11 +512,12 @@ if first_param == 'sneak':
             output.fields.append(f)
 
         output['thumb'] = prey['img']
-        set_next_expected_stage(result['next_stage'], prey_type, prey_id)
+        output['img'] = randchoice(BIOME_FOOTER_IMAGES[biome_id])
+        set_next_expected_stage(result['next_stage'], prey_type, prey['id'])
     else:
         f = format_prey_result_message(prey, 'sneak_fail', f'You lost sight of the {prey["name"]}...')
+        f += 'Better luck next time! You can use `!hunt` to try again.'
         output.fields.append(f)
-        output.fields.append('Better luck next time!|You can use `!hunt` to try again.')
 
         output['thumb'] = image
         clear_expected_stage()
