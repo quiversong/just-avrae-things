@@ -23,13 +23,45 @@ PREY_TYPES = {
 CAMPFIRE_IMAGE = 'https://cdn.discordapp.com/attachments/827581981452795975/827949160514191400/unknown.png'
 GOLDEN_COLOR = 'f0b330'
 
+BIOME_IMAGES = {
+    'desert': [
+        "https://cdn.discordapp.com/attachments/855908840633270282/1162968665986191491/desert4.jpg",
+        "https://cdn.discordapp.com/attachments/855908840633270282/1162968666439172178/desert5.jpg",
+        "https://cdn.discordapp.com/attachments/855908840633270282/1162968666720182332/desert6.jpg",
+        "https://cdn.discordapp.com/attachments/855908840633270282/1162968667047329874/desert7.jpg"
+    ],
+    'mountain': [
+        "https://cdn.discordapp.com/attachments/855908840633270282/1162954002347069620/mountains4.jpg",
+        "https://cdn.discordapp.com/attachments/855908840633270282/1162954002716180530/mountains3.jpg",
+        "https://cdn.discordapp.com/attachments/855908840633270282/1162954003383062538/mountains2.jpg",
+        "https://cdn.discordapp.com/attachments/855908840633270282/1162954003773137016/mountains1.jpg"
+    ],
+    'forest': [
+        "https://cdn.discordapp.com/attachments/855908840633270282/1162972035140554873/forest1.jpg",
+        "https://cdn.discordapp.com/attachments/855908840633270282/1162972035383820329/forest2.jpg",
+        "https://cdn.discordapp.com/attachments/855908840633270282/1162972035694215288/forest3.jpg",
+        "https://cdn.discordapp.com/attachments/855908840633270282/1162972035971026984/forest4.jpg"
+    ],
+    'grassland': [],
+    'swamp': [],
+    'coastline': []
+}
+
 DAILY_CAP = 6
 
 # Code
 args = &ARGS&
 pargs = argparse(args)
 
-output = { 'title': f'{character().name} goes hunting!', 'img': None, 'thumb': None, 'color': '128c2f', 'footer': '', 'fields': [] }
+output = {
+    'title': f'{character().name} goes hunting!',
+    'color': '128c2f',
+    'desc': None,
+    'img': None,
+    'thumb': None,
+    'footer': '',
+    'fields': []
+}
 
 SL, FL = "**Success!**", "**Failure!**"
 
@@ -73,15 +105,15 @@ def parse_prizes_for(prey):
     return prizes
 
 def format_prizes_for(prey):
-    prize_list = ''
+    prizes_list = ''
     if 'rations' in prey and prey['rations'] > 0:
-        prize_list += f'{prey["rations"]}x Rations, '
+        prizes_list += f'{prey["rations"]}x Rations, '
     if 'prizes' in prey:
       for prize in prey['prizes']:
         prize_name, prize_qt = prize['name'], prize['qt']
-        prize_list += f'{prize_qt}x {prize_name}, '
-    prize_list = prize_list[:len(prize_list) - 2]
-    return prize_list
+        prizes_list += f'{prize_qt}x {prize_name}, '
+    prizes_list = prizes_list[:len(prizes_list) - 2]
+    return prizes_list
 
 def format_prey_name_with_article(prey_name):
     add_n = "n" if prey_name[0].upper() in "AEIOU" else ""
@@ -374,7 +406,10 @@ if ('quick' in pargs) and first_param in biome_codes:
     all_bags = load_json(character().cvars['bags'])
 
     def format_roll_result(roll_name, roll, success):
-        return f'**{roll_name} roll:** {roll.full}...{SL if success else FL}'
+        return f'{":white_check_mark:" if success else ":x:"} {roll_name} roll: {roll.full}'
+
+    rewards_gained = False
+    special_creature_found = False
 
     for _ in range(0, count):
         f = ''
@@ -385,7 +420,7 @@ if ('quick' in pargs) and first_param in biome_codes:
 
         formatted_prey_name = f'a VERY RARE {prey["name"]}' if result['is_special_prey'] \
                 else format_prey_name_with_article(prey['name'])
-        f += f'You found {formatted_prey_name} in the {biome["name"]}...|'
+        f += f'You found {formatted_prey_name}...|'
 
         result = do_sneak(stats, prey)
         f += format_roll_result('Stealth', result['roll'], result['success'])
@@ -397,11 +432,26 @@ if ('quick' in pargs) and first_param in biome_codes:
                 result = do_clean(stats, prey, all_bags)
                 f += '\n' + format_roll_result('Survival', result['roll'], result['success'])
         elif result['next_stage'] == 'commune':
+            special_creature_found = True
             result = do_commune(stats, prey, all_bags)
             f += '\n' + format_roll_result('Animal Handling', result['roll'], result['success'])
 
+        if 'prizes_list' in result and result['prizes_list'] != None:
+            f += f'\n:coin: *{result["prizes_list"]}*'
+            rewards_gained = True
+
         output.fields.append(f)
 
+    if rewards_gained:
+        output.fields.append('A plentiful day!|Your rewards have been added to your "Hunting" bag.')
+    else:
+        output.fields.append('A meager day...|Better luck next time!')
+
+    if special_creature_found:
+        output['color'] = GOLDEN_COLOR
+
+    output['desc'] = f'*Exploring the {biome["name"]} environment...*'
+    output['img'] = randchoice(BIOME_IMAGES[biome_id])
     dump_stats(stats)
     return 0
 
@@ -558,6 +608,7 @@ dump_stats(stats)
 </drac2>
 -title "{{output['title']}}"
 {{f'-image "{output["img"]}"' if output["img"] else ""}}
+{{f'-desc "{output["desc"]}"' if output["desc"] else ""}}
 {{f'-thumb "{output["thumb"]}"' if output["thumb"] else ""}}
 {{f'-color "{output["color"]}"' if output["color"] else ""}}
 {{f'-footer "{output["footer"]}"' if output["footer"] else ""}}
