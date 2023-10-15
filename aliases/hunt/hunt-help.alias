@@ -1,0 +1,60 @@
+tembed
+<drac2>
+t = "<name> wants to learn about Hunting!"
+VERSION = 2.0
+thumb = image
+img = None
+color = '128c2f'
+footer = f'Seventra: Exodus of Heroes | Hunt v{VERSION} | !hunt credits'
+fields = []
+
+f = f'**Welcome to hunting! (`!hunt`)**\ncreated by and for members of **Seventra: Exodus of Heroes**!\n*See `!hunt credits` for more.*'
+f += f'\n\nUse hunting to collect rations, pelts, claws, and other hunting prizes.\nCommune with ***VERY RARE*** creatures and receive special tokens.\nHunt by searching, sneaking, attacking, and cleaning animals in different regions.\nStatblocks of creatures are modified for a balanced hunting experience for any player.\n'
+
+f = f'**__How does this work?__**\n\n**1. Region `!hunt`:** List all region options.\n> Permissible options will be listed in the city or travel dice channel pins.\n> Your Dungeon Master can tell you which region you can hunt in during a quest.'
+fields.append(f)
+
+f = f'**2. Search `!hunt forest`:** Hunt in the forest.\n> A d100 is rolled, which determines the creature you find and sneak upon.\n> A stealth check is rolled against the creature\'s passive perception settings.\n'
+fields.append(f)
+
+f = f'**3a. Attacks `!hunt attack`:** Make a single ranged or melee weapon attack against the creature\'s AC.\n> The default attack is based on a simple weapon like a longbow or axe: 1d20 + (Higher of DexMod or StrMod) + ProficiencyBonus\n> A natural 20 on your attack grants an instant kill, regardless of prey.\n> Choose your own attacks with `!hunt attack <weapon> [args]`\n> __Allowed:__ Features which modify the hit (`-b [#]`) of a weapon attack without expending a spell slot, charges, or similar resource.\n> __Not Allowed:__ Spells or cantrips which are spell attacks, either ranged or touch.\n> As of v2, damage is not rolled or counted. Hitting a creature is enough to kill them.'
+f += f'\n**3b. Clean `!hunt clean`:** Collect your prize.\n> A survival check is made against the creature\'s cleaning DC setting.\n> If you scored a natural 20 on the attack, advantage is automatically applied to this check.'
+fields.append(f)
+
+f = f'**4. Commune `!hunt commune`:** Commune with Nature.\n> An Animal Handling check is made against the creature\'s charisma setting.\n> Pale Oaks, Beasts of the Pale Oak, Dragons, and more may reward you.\n> If you receive a Token or Pale Acorn of the Wilderness (there are many types), you qualify to join the OPO, ping `@OPO Support`.\n> If you receive a Dragon Scale (there are many colors), the Temple of the Scaled Gods might reward you.'
+fields.append(f)
+
+f = f'**5. Quit `!hunt quit`:** End the Hunt.\n> You can end any hunt during the attack phase if, for example, it is a creature you would rather not harm. A hunt you quit still counts as one of your hunts for the day.'
+fields.append(f)
+
+f = f'**__Quick Hunting__**\n\nYou can use `!hunt <biome> quick` to perform a quick hunt.\nThis command will roll all dice for all your hunts for the day with a single command! With this command, you can not choose to quit hunting some creatures, nor specify a custom attack. Also, your chances to find special commune creatures or dragons is slightly lower when doing quick hunt.'
+fields.append(f)
+
+f = f'**__FAQ about Hunting__**\n\n**Can I Use Spells?**\nNo. Spells and cantrips are not permitted in hunting. This decision is for economic balance and infrastructure maintenance purposes.\n'
+fields.append(f)
+
+f = f'**How much can I hunt?**\nHunting is limited to 6 times per 24-hours on the server. The counter resets at 00:00 UTC, after which you can hunt 6 more times in the 24-hour window.\n'
+fields.append(f)
+
+f = f'**Can I research and hunt on the same day?**\nYes. Research (`!research`) is another Seventra Alias which shares a limit counter with hunt. You can hunt and/or research a total of 6 times in the 24-hour window.\n'
+fields.append(f)
+
+f = f'**Why can I not...?**\n- Add my snippet: The hunt alias is built completely new. Each available snippet is manually programmed into this alias.\n- Accepted snippets are `-b [#]`,`-d [#]`,`adv`, and `dis`\n- Cast a spell: Hunt is a major component of Seventra\'s economic opportunities, and is balanced for fair participation for levels 1-20 of various classes.\n'
+fields.append(f)
+
+f = f'**What can I do with my hunt rewards?**\n- Pelts and prizes are automatically added to your Hunting bag. You can open your bag with `!bag \"Hunting\"`.\n- Items can be sold for half the cost listed. Use `!cashin -h` to sell all your qualifying hunting prizes.\n- Tokens and other commune items have a special purpose in the Order of the Pale Oak.\n- You can trade your hunt rewards to other players in the Downtime Trade channel.\n'
+fields.append(f)
+
+f = f'**How well have I done in my hunting career?**\n- Use `!hunt stats` to see your character\'s hunt statistics\n- This feature records hunt statistics since April 19th, 2021\n- Stats are connected to your character. Your stats as a player are not combined.\n'
+fields.append(f)
+
+f = f'**I have more questions...**\nPing @Guide for questions about the hunt alias. We will continue to update this help guide for future use.\n'
+fields.append(f)
+
+</drac2>
+-title "{{t}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
