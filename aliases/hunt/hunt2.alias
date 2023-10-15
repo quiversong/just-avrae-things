@@ -582,10 +582,12 @@ if first_param == 'clean':
     output.fields.append(f)
 
     if result['success']:
+        output['thumb'] = image
         output['img'] = prey['img']
         output.fields.append(f'You gained: {result["prizes_list"]}.|They have been added to your "Hunting" bag!')
     else:
-        output['thumb'] = CAMPFIRE_IMAGE
+        output['thumb'] = image
+        output['img'] = CAMPFIRE_IMAGE
         output.fields.append(f'You ended up wasting the prey you caught...|Better luck next time!')
 
     clear_expected_stage()
@@ -604,11 +606,13 @@ if first_param == 'commune':
 
     if result['success']:
         output['img'] = prey['img']
+        output['thumb'] = image
         f = format_prey_result_message(prey, 'commune_succ', f'The {prey["name"]} runs away, but the experience enlightens you...')
         f += f'You gained: {result["prizes_list"]}.\nThey have been added to your "Hunting" bag!'
         output.fields.append(f)
     else:
         output['thumb'] = prey['img']
+        output['img'] = CAMPFIRE_IMAGE
         f = format_prey_result_message(prey, 'commune_fail', f'The {prey["name"]} ran away unexpectedly!')
         f += 'Better luck next time!'
         output.fields.append(f)
