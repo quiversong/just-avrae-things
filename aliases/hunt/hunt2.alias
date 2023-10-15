@@ -257,11 +257,11 @@ DATA = {
 
 
 # Execution Methods
-def do_explore_biome(stats, biome):
+def do_explore_biome(stats, biome, quick_mode = False):
     increment_stat(stats, 't_hunts')
 
     # try to find a dragon or mythical creature
-    special_prey_roll = roll(f'1d{DAILY_CAP * 31}')
+    special_prey_roll = roll(f'1d{ceil(DAILY_CAP * 31 * (1.75 if quick_mode else 1))}')
     prey_type = PREY_TYPES.ANIMAL
     if special_prey_roll == 1:
         prey_type = PREY_TYPES.MYTHICAL
@@ -427,7 +427,7 @@ if ('quick' in pargs) and first_param in biome_codes:
     for _ in range(0, count):
         f = ''
 
-        result = do_explore_biome(stats, biome)
+        result = do_explore_biome(stats, biome, True)
         prey = result['prey']
         prey_type = result['prey_type']
 
