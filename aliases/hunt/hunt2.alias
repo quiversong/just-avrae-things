@@ -268,7 +268,8 @@ def do_sneak(stats, prey):
 def do_attack(stats, prey_type, prey, weapon_name = None):
     weapon = utils.get_pc_weapon(weapon_name)
 
-    weapon_mod = weapon['a_bonus'] if weapon else (proficiencyBonus + dexterityMod)
+    default_mod = dexterityMod if dexterityMod >= strengthMod else strengthMod
+    weapon_mod = weapon['a_bonus'] if weapon else (proficiencyBonus + default_mod)
     attack_bonus = '+'.join(pargs.get('b', default=[''])).strip()
 
     attack_die = f'2d20kh1 + {weapon_mod}'
