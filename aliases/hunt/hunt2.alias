@@ -11,7 +11,8 @@ VARIABLES = {
     'BIOMES': '7c5af688-854b-416a-90bb-6715de8f46e2',
     'ANIMALS': '1da1ff53-8bbf-485a-a474-ccbebf11a096',
     'MYTHICAL': '7cca9364-ec2c-4d86-9128-2b4b638083c8',
-    'DRAGONS': '88cc76ed-a068-4d8c-89c9-56bd8ca621e2'
+    'DRAGONS': '88cc76ed-a068-4d8c-89c9-56bd8ca621e2',
+    'BIOME_IMAGES': '0988c12e-a17d-48be-823f-b94c61f27291'
 }
 
 PREY_TYPES = {
@@ -20,46 +21,9 @@ PREY_TYPES = {
     'DRAGON': 'ptd'
 }
 
+BIOME_FOOTER_IMAGES = load_json(get_gvar(VARIABLES.BIOME_IMAGES))
 GOLDEN_COLOR = 'f0b330'
 CAMPFIRE_IMAGE = 'https://cdn.discordapp.com/attachments/855908840633270282/1162984794326581338/camp.jpg?ex=653decfe&is=652b77fe&hm=b427c87d74f88e4cc44732266269e94018883c3b5d8d0bf1f839d6e1870afa2c&'
-BIOME_FOOTER_IMAGES = {
-    'desert': [
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162968665986191491/desert4.jpg",
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162968666439172178/desert5.jpg",
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162968666720182332/desert6.jpg",
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162968667047329874/desert7.jpg"
-    ],
-    'mountain': [
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162954002347069620/mountains4.jpg",
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162954002716180530/mountains3.jpg",
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162954003383062538/mountains2.jpg",
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162954003773137016/mountains1.jpg"
-    ],
-    'forest': [
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162972035140554873/forest1.jpg",
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162972035383820329/forest2.jpg",
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162972035694215288/forest3.jpg",
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162972035971026984/forest4.jpg"
-    ],
-    'grassland': [
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162974439806349332/grassland1.jpg",
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162974440070586438/grassland2.jpg",
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162974440372588624/grassland3.jpg",
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162974440620048438/grassland4.jpg"
-    ],
-    'swamp': [
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162983311631712306/swamp1.jpg",
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162983312579625100/swamp2.jpg",
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162983312160206919/swamp3.jpg",
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162983311921139732/swamp4.jpg"
-    ],
-    'coastline': [
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162984355346534480/coastline1.jpg",
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162984355593982024/coastline2.jpg",
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162984355900170305/coastline3.jpg",
-        "https://cdn.discordapp.com/attachments/855908840633270282/1162984356185378897/coastline4.jpg"
-    ]
-}
 
 DAILY_CAP = 6
 
