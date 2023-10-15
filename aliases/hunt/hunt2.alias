@@ -419,7 +419,7 @@ if ('quick' in pargs) and first_param in biome_codes:
     all_bags = load_json(character().cvars['bags'])
 
     def format_roll_result(roll_name, roll, success):
-        return f'{":white_check_mark:" if success else ":x:"} {roll_name} roll: {roll.full}'
+        return f'{":white_check_mark:" if success else ":x:"} {roll_name}: {roll.full}'
 
     rewards_gained = False
     special_creature_found = False
