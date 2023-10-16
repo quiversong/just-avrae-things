@@ -237,9 +237,9 @@ def do_explore_biome(stats, biome, quick_mode = False):
         prey_id = [k for k, v in biome_animals if (a_roll == v[0] if len(v) == 1 else prey_roll >= v[0] and prey_roll <= v[1])][0]
         prey = get_prey_data(prey_type, prey_id)
     else:
-        prey_list = DATA.DRAGONS if prey_type == PREY_TYPES.DRAGON else DATA.MYTHICAL if prey_type == PREY_TYPES.MYTHICAL else None
-        prey = randchoice(prey_list)
-        prey_id = prey['id']
+        prey_list = biome['dragons'] if prey_type == PREY_TYPES.DRAGON else biome['mythical'] if prey_type == PREY_TYPES.MYTHICAL else None
+        prey_id = randchoice(prey_list)
+        prey = get_prey_data(prey_type, prey_id)
 
     return {
         'prey_type': prey_type,
