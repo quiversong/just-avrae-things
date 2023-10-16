@@ -277,7 +277,7 @@ def do_attack(stats, prey_type, prey, weapon_name = None):
     attack_roll = vroll(attack_die)
     is_crit = attack_roll.result.crit == 1
 
-    attack_success = (is_crit or (is_admin() and 'hb' in pargs)) if prey_type == PREY_TYPES.DRAGON \
+    attack_success = (is_crit or (is_admin() and 'hb' in pargs)) if (not 'ac' in prey) \
             else (is_crit or attack_roll.total >= prey['ac'])
 
     if attack_success:
