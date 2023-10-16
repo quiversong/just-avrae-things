@@ -115,7 +115,7 @@ cv = c.cvars
 
 t = f'{c.name} wants to cash-in and sell their goods!'
 footer = 'Don\'t forget to role-play your transaction!\n'
-footer += 'Seventra: Exodus of Heroes | Cash-in your goods! v2.1.1\n'
+footer += 'Seventra: Exodus of Heroes | Cash-in your goods! v2.2.1\n'
 footer += '!cashin [-f (fish)] [-h (hunt)] [-n (rations)] [-t (foundation tokens)] [-r (relics)]\n[-o (opo wilderness tokens)] [-d (dragonscale tokens)]'
 
 fields = []
