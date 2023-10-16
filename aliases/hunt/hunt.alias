@@ -1,412 +1,591 @@
 embed
 <drac2>
-# Configuration Variables
-IS_LIVE = True
-VERSION = '1.21.4'
+using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
+COMMAND = f'{ctx.prefix}{ctx.alias}'
 
-BETA_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
-LIVE_VAR = "73c3a5c7-b789-4dcd-a154-a01b58bf1b8a"
+# Configuration Variables Initialization
+VERSION = '2.0'
 
-DRAGON_DIE = 101
-DRAGON_VAR = "3f0c7f42-7712-4e86-8252-df4782f64c98"
+VARIABLES = {
+    'BIOMES': '7c5af688-854b-416a-90bb-6715de8f46e2',
+    'ANIMALS': '1da1ff53-8bbf-485a-a474-ccbebf11a096',
+    'MYTHICAL': '7cca9364-ec2c-4d86-9128-2b4b638083c8',
+    'DRAGONS': '88cc76ed-a068-4d8c-89c9-56bd8ca621e2',
+    'BIOME_IMAGES': '0988c12e-a17d-48be-823f-b94c61f27291'
+}
+
+PREY_TYPES = {
+    'ANIMAL': 'pta',
+    'MYTHICAL': 'ptm',
+    'DRAGON': 'ptd'
+}
+
+BIOME_FOOTER_IMAGES = load_json(get_gvar(VARIABLES.BIOME_IMAGES))
+GOLDEN_COLOR = 'f0b330'
+CAMPFIRE_IMAGE = 'https://cdn.discordapp.com/attachments/855908840633270282/1162984794326581338/camp.jpg?ex=653decfe&is=652b77fe&hm=b427c87d74f88e4cc44732266269e94018883c3b5d8d0bf1f839d6e1870afa2c&'
 
 DAILY_CAP = 6
 
 # Code
 args = &ARGS&
 pargs = argparse(args)
-c = character()
-cv = c.cvars
-cs = c.skills
 
-data_var = LIVE_VAR if IS_LIVE else BETA_VAR
-hunt_daily_cap = DAILY_CAP
+output = {
+    'title': f'{character().name} goes hunting!',
+    'color': '128c2f',
+    'desc': None,
+    'img': None,
+    'thumb': None,
+    'footer': '',
+    'fields': []
+}
 
-t = f'{c.name} goes hunting!'
-f, f2, color = None, None, '128c2f'
+SL, FL = "**Success!**", "**Failure!**"
 
-img = None
-thumb = None
-sl, fl = "**Success!**", "**Failure!**"
+ALIAS_TIME_VAR = "_h_dhc_"
+ALIAS_STAGE_VAR = "_h_vars_"
+ALIAS_STATS_VAR = "_h_st_"
 
-hunt_count = 0
-first_hunt_time = None
-wait_time = None
-wait_text = None
+ADMIN_USER_IDS = [771997367611949076]
+if get_svar('SEVENTRA_ALIAS_ADMINS') != None:
+    admin_ids = load_json(get_svar('SEVENTRA_ALIAS_ADMINS'))
+    ADMIN_USER_IDS += admin_ids
 
-HUNT_TIME_VAR = "_h_dhc_"
-HUNT_STAGE_VAR = "_h_vars"
-HUNT_STATS_VAR = "_h_st_"
+daily_data = utils.get_daily_activity_data(ALIAS_TIME_VAR, DAILY_CAP)
+alias_performed_count = daily_data["count"]
+wait_text = daily_data["wait_time"]
 
-if HUNT_TIME_VAR in cv:
-  var_parts = cv[HUNT_TIME_VAR].split(':')
-  hunt_count = int(var_parts[0])
-  first_hunt_time = float(var_parts[1])
+output['footer'] = f"You have hunted {alias_performed_count}/{DAILY_CAP} times today. | !hunt help\n"
+output['footer'] += f'Seventra: Exodus of Heroes | Hunt v{VERSION} | !hunt credits'
 
-  now = time()
-  if hunt_count > 0 and first_hunt_time != None:
-    passed_in_day_of_first_hunt = first_hunt_time % 86400
-    next_midnight_after_first_hunt = first_hunt_time + (86400 - passed_in_day_of_first_hunt)
-    if now > next_midnight_after_first_hunt:
-      c.delete_cvar(HUNT_TIME_VAR)
-      hunt_count, first_hunt_time = 0, None
-    elif hunt_count >= hunt_daily_cap:
-      wait_time = next_midnight_after_first_hunt - now
-      hours = floor(wait_time / 3600)
-      minutes = 0
-      if hours == 0:
-        minutes = ceil(wait_time / 60)
-      else:
-        minutes = ceil((wait_time % 3600) / 60)
-      wait_text = (str(hours) + ' hours and ' if hours > 0 else '') + str(minutes) + ' minutes'
+# Methods
 
-footer = f"You have hunted {hunt_count}/{hunt_daily_cap} times today. | !hunt help\n"
-footer += f'Seventra: Exodus of Heroes | Hunt v{VERSION} | !hunt credits'
+def get_in_list_by_id(collection, item_id):
+    return ([x for x in collection if x['id'] == item_id] + [None])[0]
 
-hvars, pid, stage = None, None, None
-last_stage_was_crit = False
-if HUNT_STAGE_VAR in cv:
-  hvars = cv[HUNT_STAGE_VAR].split(":")
-  pid = hvars[0]
-  stage = hvars[1]
-  if len(hvars) > 2 and hvars[2] == 'lastcrit':
-      last_stage_was_crit = True
+def get_prey_data(prey_type, prey_id):
+    collection = DATA.MYTHICAL if prey_type == PREY_TYPES.MYTHICAL \
+            else DATA.DRAGONS if prey_type == PREY_TYPES.DRAGON \
+            else DATA.ANIMALS
+    return get_in_list_by_id(collection, prey_id)
 
-if not HUNT_STATS_VAR in cv:
-  stats = {}
-  c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
+def get_biome_data(biome_id):
+    return get_in_list_by_id(DATA.BIOMES, biome_id)
+
+def parse_prizes_for(prey):
+    prizes = {}
+    if 'rations' in prey and prey['rations'] > 0:
+        prizes['Rations'] = prey['rations']
+    if 'prizes' in prey:
+      for prize in prey['prizes']:
+        prizes[prize['name']] = prize['qt']
+    return prizes
+
+def format_prizes_for(prey):
+    prizes_list = ''
+    if 'rations' in prey and prey['rations'] > 0:
+        prizes_list += f'{prey["rations"]}x Rations, '
+    if 'prizes' in prey:
+      for prize in prey['prizes']:
+        prize_name, prize_qt = prize['name'], prize['qt']
+        prizes_list += f'{prize_qt}x {prize_name}, '
+    prizes_list = prizes_list[:len(prizes_list) - 2]
+    return prizes_list
+
+def format_prey_name_with_article(prey_name):
+    add_n = "n" if prey_name[0].upper() in "AEIOU" else ""
+    return f'a{add_n} {prey_name}'
+
+def format_prey_result_message(prey, message_key, default_message):
+    f = ''
+    if message_key in prey:
+        f += prey[message_key].replace('{char_name}', character().name).replace('{prey_name}', prey['name'])
+    else:
+        f += default_message
+    f += '\n' if '|' in f else '|'
+    return f
+
+def increment_stat(stats, stat_name):
+    stats[stat_name] = stats[stat_name] + 1 if stat_name in stats else 1
+
+def dump_stats(stats):
+    stats.pop('t_dmg') if 't_dmg' in stats else None
+    character().set_cvar(ALIAS_STATS_VAR, dump_json(stats))
+
+def update_footer_count(output, new_count):
+    current_count = output['footer'].split('/')[0].split(' ')[-1]
+    output['footer'] = output['footer'].replace(f'{current_count}/', f'{new_count}/')
+
+def print_stats(output, stats):
+    output["title"] = f'{character().name}\'s hunting statistics...'
+    if stats == {}:
+        output['fields'].append(f'You have no statistics!|Go hunt!')
+        return 0
+    stats_list = [key.split('_')[1] + (' successes' if key.startswith('s_') else ' total') +
+        f': {value}' for key, value in stats.items()]
+    output['fields'].append('Your hunt history shows:|' + '\n'.join(stats_list))
+    return 0
+
+def is_admin():
+    return ctx.author.id in ADMIN_USER_IDS
+
+def reset_state(output):
+    if not is_admin():
+        err('You are not allowed to do that!')
+        return 1
+    character().delete_cvar(ALIAS_STAGE_VAR)
+    character().delete_cvar(ALIAS_TIME_VAR)
+    output['title'] = "Resetting hunting state..."
+    output['footer'] = output['footer'].replace(f'{alias_performed_count}/', '0/')
+    return 0
+
+def reset_stats(output):
+    if not is_admin():
+        err('You are not allowed to do that!')
+        return 1
+    character().delete_cvar(ALIAS_STATS_VAR)
+    output["title"] = "Resetting hunt statistics..."
+    return 0
+
+def set_next_expected_stage(stage_code, prey_type, prey_id, did_crit = False):
+    character().set_cvar(ALIAS_STAGE_VAR, f'{prey_id}:{stage_code}:{prey_type}:{"lastcrit" if did_crit else ""}')
+
+def clear_expected_stage():
+    character().delete_cvar(ALIAS_STAGE_VAR)
+
+def handle_wrong_stage(output, prey_type, prey_id, expected_stage):
+    prey = get_prey_data(prey_type, prey_id)
+    prey_label = 'a different prey' if prey == None else format_prey_name_with_article(prey['name'])
+    output['fields'].append(f'Oops! You are already hunting {prey_label}!|Use `!hunt {expected_stage}` to continue.')
+    output['thumb'] = image
+    return 1
+
+def handle_no_attempts_left(output, wait_text, alias_performed_count, attempts_tried = 1):
+    f = ''
+    if attempts_tried == 1:
+        f += f'{character().name} is exhausted from so much hunting today...|You have to wait {wait_text} until you can hunt again.'
+    else:
+        f += f'{character().name} is trying to hunt {attempts_tried} more, but you can only do {DAILY_CAP - alias_performed_count}... |You have to wait {wait_text} until you can hunt again.\n'
+        f += 'Or use `!hunt <biome>` to hunt just once if you still have attempts left.'
+    f += '\n(Hunting resets at midnight UTC)'
+    output['fields'].append(f)
+    return 1
+
+def biome_selection_screen(output, biome_codes):
+    b_list_cmd = "  `!hunt " + "`\n  `!hunt ".join(biome_codes) + "`"
+    output['fields'].append(f'Where do you want to go hunting?|Use one of the following:\n{b_list_cmd}')
+    output['thumb'] = image
+    hunt_images = [
+        'https://cdn.discordapp.com/attachments/827581981452795975/830670258897158174/ranger-bow.png',
+        'https://cdn.discordapp.com/attachments/827581981452795975/830676686537228328/colrathisle.png',
+        'https://cdn.discordapp.com/attachments/827581981452795975/830676464062955560/dnd-ranger-5e.png',
+        'https://cdn.discordapp.com/attachments/827581981452795975/830676245288714290/Ranger-1-548x403.png',
+        'https://cdn.discordapp.com/attachments/827581981452795975/830677100431671316/Blue_Bear_Barbarian_and_Cave_Bear.png',
+        'https://cdn.discordapp.com/attachments/827581981452795975/830674739688243220/7934d073b0f81ff62c673d68a2c41709.png',
+        'https://cdn.discordapp.com/attachments/827581981452795975/830674397358325811/sJd_IiQBEXsFPg4dkzonDt7zwFvDOO_sI2_02qRMJGFeBK8RWOOz5XnG-_tBEt_LhHVADSbqctdm9rQfb8A7pQeEh_GJ2ZbtHNd3.png',
+        'https://cdn.discordapp.com/attachments/827581981452795975/830677484688375828/tumblr_nxew19kDvy1qhttpto5_1280.jpeg',
+        'https://cdn.discordapp.com/attachments/827581981452795975/830677489247453204/daujf32-19437d94-de54-4522-9f9b-e7bc985098b9.jpeg',
+        'https://cdn.discordapp.com/attachments/827581981452795975/830677491408437279/pyxbh3nvnur11.jpeg'
+    ]
+    output['img'] = hunt_images[roll(f'1d{len(hunt_images)}') - 1]
+    return 0
+
+
+# Execution Variables
+
+if (not ALIAS_STATS_VAR in character().cvars) or character().cvars[ALIAS_STATS_VAR] == '':
+    stats = {}
 else:
-  stats = load_json(cv["_h_st_"])
+    stats = load_json(character().cvars[ALIAS_STATS_VAR])
 
 if len(args) > 0 and args[0] == "stats":
-  t = f'{c.name}\'s hunting statistics...'
-  if stats == {}:
-    f = f'You have no statistics!|Go hunt!'
-    return 0
-  stats_list = [key.split('_')[1] + (' successes' if key.startswith('s_') else ' total') +
-      f': {value}' for key, value in stats.items()]
-  f = 'Your hunt history shows:|' + '\n'.join(stats_list)
-  return 0
+    return print_stats(output, stats)
 
 if len(args) > 0 and args[0] == "reset":
-  c.delete_cvar(HUNT_STAGE_VAR)
-  c.delete_cvar(HUNT_TIME_VAR)
-  t = "Resetting hunting state..."
-  footer = footer.replace(f'{hunt_count}/', '0/')
-  return 0
+    return reset_state(output)
 
 if len(args) > 0 and args[0] == "resetstats":
-  c.delete_cvar(HUNT_STATS_VAR)
-  t = "Resetting hunt statistics..."
-  return 0
+    return reset_stats(output)
 
-data = load_json(get_gvar(data_var))
-dragon_data = load_json(get_gvar(DRAGON_VAR))
+biomes = load_json(get_gvar(VARIABLES.BIOMES))['biomes']
+biome_codes = [b['id'] for b in biomes]
 
-biomes = data["biomes"]
-b_ids = [k for k, v in biomes.items()]
+DATA = {
+    'BIOMES': biomes,
+    'BIOME_CODES': biome_codes,
+    'ANIMALS': load_json(get_gvar(VARIABLES.ANIMALS))['animals'],
+    'DRAGONS': load_json(get_gvar(VARIABLES.DRAGONS))['dragons'],
+    'MYTHICAL': load_json(get_gvar(VARIABLES.MYTHICAL))['mythical']
+}
 
-animals = data["animals"]
 
-in_wrong_stage = stage and (len(args) == 0 or (len(args) > 0 and stage != args[0]))
-quitting_hunt = stage == 'attack' and len(args) > 0 and args[0] == 'quit'
+# Execution Methods
+def do_explore_biome(stats, biome, quick_mode = False):
+    increment_stat(stats, 't_hunts')
+
+    # try to find a dragon or mythical creature
+    special_prey_roll = roll(f'1d{ceil(DAILY_CAP * 31 * (1.75 if quick_mode else 1))}')
+    prey_type = PREY_TYPES.ANIMAL
+    if special_prey_roll == 1:
+        prey_type = PREY_TYPES.MYTHICAL
+    if special_prey_roll == 2:
+        prey_type = PREY_TYPES.DRAGON
+
+    if prey_type == PREY_TYPES.ANIMAL:
+        prey_roll = roll('1d100')
+        biome_animals = [(k, v) for k, v in biome['animals'].items()]
+        prey_id = [k for k, v in biome_animals if (a_roll == v[0] if len(v) == 1 else prey_roll >= v[0] and prey_roll <= v[1])][0]
+        prey = get_prey_data(prey_type, prey_id)
+    else:
+        prey_list = DATA.DRAGONS if prey_type == PREY_TYPES.DRAGON else DATA.MYTHICAL if prey_type == PREY_TYPES.MYTHICAL else None
+        prey = randchoice(prey_list)
+        prey_id = prey['id']
+
+    return {
+        'prey_type': prey_type,
+        'prey_id': prey_id,
+        'prey': prey,
+        'biome': biome,
+        'next_stage': 'sneak',
+        'is_special_prey': prey_type != PREY_TYPES.ANIMAL
+    }
+
+def do_sneak(stats, prey):
+    adv_status = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
+    stealth_roll = vroll(character().skills.stealth.d20(base_adv = adv_status))
+    success = stealth_roll.total > prey['pp']
+
+    if success:
+        increment_stat(stats, 's_sneak')
+
+    return {
+        'success': success,
+        'roll': stealth_roll,
+        'next_stage': ('commune' if ('commune' in prey and prey['commune']) else 'attack') if success else None
+    }
+
+def do_attack(stats, prey_type, prey, weapon_name = None):
+    weapon = utils.get_pc_weapon(weapon_name)
+
+    default_mod = dexterityMod if dexterityMod >= strengthMod else strengthMod
+    weapon_mod = weapon['a_bonus'] if weapon else (proficiencyBonus + default_mod)
+    attack_bonus = '+'.join(pargs.get('b', default=[''])).strip()
+
+    attack_die = f'2d20kh1 + {weapon_mod}'
+    attack_die = f'{attack_die} + {attack_bonus}' if attack_bonus != '' else attack_die
+
+    attack_roll = vroll(attack_die)
+    is_crit = attack_roll.result.crit == 1
+
+    attack_success = (is_crit or (is_admin() and 'hb' in pargs)) if prey_type == PREY_TYPES.DRAGON \
+            else (is_crit or attack_roll.total >= prey['ac'])
+
+    if attack_success:
+        increment_stat(stats, 's_attack')
+
+    return {
+        'success': attack_success,
+        'roll': attack_roll,
+        'is_crit': is_crit,
+        'weapon': weapon,
+        'next_stage': 'clean' if attack_success else None
+    }
+
+def do_clean(stats, prey, use_adv, all_bags = None):
+    adv_status = True if use_adv else None
+    survival_roll = vroll(character().skills.survival.d20(base_adv = adv_status))
+
+    success = survival_roll.total >= prey['clean_dc']
+
+    if success:
+        increment_stat(stats, 's_clean')
+
+        prizes = parse_prizes_for(prey)
+        prizes_list = format_prizes_for(prey)
+
+        utils.add_to_bag('Hunting', prizes, all_bags)
+    return {
+        'success': success,
+        'roll': survival_roll,
+        'prizes_list': prizes_list if success else None
+    }
+
+def do_commune(stats, prey, all_bags = None):
+    if (not 'commune' in prey) or prey['commune'] == False or (not 'cha' in prey):
+        err('!hunt script rolled a 1 and failed flat on its head! Please report to a Server Administrator.')
+        return 1
+
+    if ctx.author.id in ADMIN_USER_IDS and 'hb' in pargs:
+        roll_bonus = '+ '.join(pargs.get('hb', default=[''])).strip()
+    else:
+        roll_bonus = ''
+    ah_roll = vroll(character().skills.animalHandling.d20() + roll_bonus)
+    success = ah_roll.total >= prey['cha']
+
+    if success:
+        increment_stat(stats, 's_commune')
+
+        prizes = parse_prizes_for(prey)
+        prizes_list = format_prizes_for(prey)
+
+        utils.add_to_bag('Hunting', prizes, all_bags)
+
+    return {
+        'success': success,
+        'roll': ah_roll,
+        'prizes_list': prizes_list if success else None
+    }
+
+# Begin Execution
+
+# read stage variable
+prey = None
+prey_id = None
+prey_type = None
+expected_stage = None
+last_stage_was_crit = False
+
+if ALIAS_STAGE_VAR in character().cvars:
+    hvars = character().cvars[ALIAS_STAGE_VAR].split(":")
+    prey_id = hvars[0]
+    expected_stage = hvars[1]
+    prey_type = hvars[2]
+
+    prey = get_prey_data(prey_type, prey_id)
+    if 'commune' in prey and prey['commune']:
+        output['color'] = GOLDEN_COLOR
+
+    if len(hvars) > 3 and hvars[3] == 'lastcrit':
+        last_stage_was_crit = True
+
+in_wrong_stage = expected_stage and (len(args) == 0 or (len(args) > 0 and expected_stage != args[0]))
+quitting_hunt = expected_stage == 'attack' and len(args) > 0 and args[0] == 'quit'
 if (in_wrong_stage and not quitting_hunt):
-  animal_label = 'a different prey'
-  animal = animals[pid] if pid in animals \
-          else dragon_data['dragons'][pid] if pid in dragon_data['dragons'] \
-          else None
-  if animal != None:
-    anm_name = animal["name"]
-    add_n = "n" if anm_name[0].upper() in "AEIOU" else ""
-    animal_label = f'a{add_n} {anm_name}'
-  f = f'Oops! You are already hunting {animal_label}!|Use `!hunt {stage}` to continue.'
-  thumb = image
-  return 1
+    return handle_wrong_stage(output, prey_type, prey_id, expected_stage)
 
-if (len(args) == 0 or (not stage and args[0] not in b_ids)):
-  b_list_cmd = "  `!hunt " + "`\n  `!hunt ".join(b_ids) + "`"
-  f = f'Where do you want to go hunting?|Use one of the following:\n{b_list_cmd}'
-  thumb = image
-  hunt_images = [
-    'https://cdn.discordapp.com/attachments/827581981452795975/830670258897158174/ranger-bow.png',
-    'https://cdn.discordapp.com/attachments/827581981452795975/830676686537228328/colrathisle.png',
-    'https://cdn.discordapp.com/attachments/827581981452795975/830676464062955560/dnd-ranger-5e.png',
-    'https://cdn.discordapp.com/attachments/827581981452795975/830676245288714290/Ranger-1-548x403.png',
-    'https://cdn.discordapp.com/attachments/827581981452795975/830677100431671316/Blue_Bear_Barbarian_and_Cave_Bear.png',
-    'https://cdn.discordapp.com/attachments/827581981452795975/830674739688243220/7934d073b0f81ff62c673d68a2c41709.png',
-    'https://cdn.discordapp.com/attachments/827581981452795975/830674397358325811/sJd_IiQBEXsFPg4dkzonDt7zwFvDOO_sI2_02qRMJGFeBK8RWOOz5XnG-_tBEt_LhHVADSbqctdm9rQfb8A7pQeEh_GJ2ZbtHNd3.png',
-    'https://cdn.discordapp.com/attachments/827581981452795975/830677484688375828/tumblr_nxew19kDvy1qhttpto5_1280.jpeg',
-    'https://cdn.discordapp.com/attachments/827581981452795975/830677489247453204/daujf32-19437d94-de54-4522-9f9b-e7bc985098b9.jpeg',
-    'https://cdn.discordapp.com/attachments/827581981452795975/830677491408437279/pyxbh3nvnur11.jpeg'
-  ]
-  img = hunt_images[roll(f'1d{len(hunt_images)}') - 1]
-  return 0
+if (len(args) == 0 or (not expected_stage and args[0] not in biome_codes)):
+    return biome_selection_screen(output, biome_codes)
 
-p = args[0]
+first_param = args[0]
 
-if p in b_ids:
-  if wait_time != None:
-    f = f'{c.name} is exhausted from so much hunting today...|You have to wait {wait_text} until you can hunt again.'
-    f += '\n(Hunting resets at midnight UTC)'
-    return 1
+if ('quick' in pargs) and first_param in biome_codes:
+    if alias_performed_count >= DAILY_CAP:
+        return handle_no_attempts_left(output, wait_text, alias_performed_count)
 
-  hunt_count += 1
-  stats["t_hunts"] = stats["t_hunts"] + 1 if "t_hunts" in stats else 1
+    count = DAILY_CAP - alias_performed_count
+    alias_performed_count = utils.increase_daily_activity_data(ALIAS_TIME_VAR, count)
+    update_footer_count(output, alias_performed_count)
 
-  first_hunt_time = time() if hunt_count == 1 else first_hunt_time
-  c.set_cvar(HUNT_TIME_VAR, f'{hunt_count}:{first_hunt_time}')
-  footer = footer.replace(f'{hunt_count - 1}/', f'{hunt_count}/')
+    biome_id = first_param
+    biome = get_biome_data(biome_id)
+    all_bags = load_json(character().cvars['bags'])
 
-  b = biomes[p]
-  thumb = b["img"]
-  noprey_message = f'{c.name} could not find any prey.|Better luck next time!'
+    def format_roll_result(roll_name, roll, success):
+        return f'{":white_check_mark:" if success else ":x:"} {roll_name}: {roll.full}'
 
-  a_roll = roll("1d100")
-  if not "animal_chance" in b:
-    f = noprey_message
-    c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
+    rewards_gained = False
+    special_creature_found = False
+
+    for _ in range(0, count):
+        f = ''
+
+        result = do_explore_biome(stats, biome, True)
+        prey = result['prey']
+        prey_type = result['prey_type']
+
+        formatted_prey_name = f'a VERY RARE {prey["name"]}' if result['is_special_prey'] \
+                else format_prey_name_with_article(prey['name'])
+        f += f'***You found {formatted_prey_name}...***|'
+
+        result = do_sneak(stats, prey)
+        f += format_roll_result('Stealth', result['roll'], result['success'])
+
+        if result['next_stage'] == 'attack':
+            result = do_attack(stats, prey_type, prey)
+            f += '\n' + format_roll_result('Attack', result['roll'], result['success']) + (' **Crit!**' if result['is_crit'] else '')
+            if result['success']:
+                result = do_clean(stats, prey, result['is_crit'], all_bags)
+                f += '\n' + format_roll_result('Clean (survival)', result['roll'], result['success'])
+        elif result['next_stage'] == 'commune':
+            special_creature_found = True
+            result = do_commune(stats, prey, all_bags)
+            f += '\n' + format_roll_result('Commune (animal handling)', result['roll'], result['success'])
+
+        if 'prizes_list' in result and result['prizes_list'] != None:
+            f += f'\n:coin: *{result["prizes_list"]}*'
+            rewards_gained = True
+
+        output.fields.append(f)
+
+    if rewards_gained:
+        output.fields.append('A plentiful day!|Your rewards have been added to your "Hunting" bag.')
+    else:
+        output.fields.append('A meager day...|Better luck next time!')
+
+    if special_creature_found:
+        output['color'] = GOLDEN_COLOR
+
+    output['thumb'] = image
+    output['desc'] = f'*Exploring the {biome["name"]} environment...*'
+    output['img'] = randchoice(BIOME_FOOTER_IMAGES[biome_id])
+    dump_stats(stats)
     return 0
 
-  b_anms = [(k, v) for k, v in b["animal_chance"].items()]
-  anm_id = [k for k, v in b_anms if (a_roll == v[0] if len(v) == 1 else a_roll >= v[0] and a_roll <= v[1])]
-  if len(anm_id) == 0:
-    f = noprey_message
-    c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
+# Begin new hunt
+if not('quick' in pargs) and first_param in biome_codes:
+    if alias_performed_count >= DAILY_CAP:
+        return handle_no_attempts_left(output, wait_text, alias_performed_count)
+
+    c = character()
+
+    alias_performed_count = utils.increase_daily_activity_data(ALIAS_TIME_VAR)
+    update_footer_count(output, alias_performed_count)
+
+    biome_id = first_param
+    biome = get_biome_data(biome_id)
+
+    result = do_explore_biome(stats, biome)
+    prey = result['prey']
+    prey_type = result['prey_type']
+
+    if result['is_special_prey']:
+        f = f'{c.name} found a ***VERY RARE*** {prey["name"]}!|Can you approach it without being noticed?'
+        output.fields.append(f)
+        output['color'] = GOLDEN_COLOR
+    else:
+        f = f'{c.name} found {format_prey_name_with_article(prey["name"])} in the {biome["name"]}!|Can you get the jump on it?'
+        output.fields.append(f)
+
+    result = do_sneak(stats, prey)
+
+    f = f'{c.name} closes on the {prey["name"]}...|**Stealth roll:** {result["roll"].full}'
+    f += f'\n{SL if result["success"] else FL}'
+    output.fields.append(f)
+
+    is_commune_target = result['next_stage'] == 'commune'
+    if result['success']:
+        if is_commune_target:
+            f = format_prey_result_message(prey, 'sneak_succ', f'The {prey["name"]} has seen you, but they do not seem scared.')
+            f += f'Will the {prey["name"]} accept your approach?'
+            output.fields.append(f)
+            f = f'This hunt is not over yet...|Use `!hunt commune` to try to commune with the {prey["name"]}.'
+            output.fields.append(f)
+        else:
+            f = f'The {prey["name"]} has not seen you!|Can you take it down?'
+            output.fields.append(f)
+            f = 'This hunt is not over yet...|Use `!hunt attack` or `!hunt attack [weapon]` to attack your prey!'
+            f += '\nAlternatively, use `!hunt quit` if you would rather not harm this prey.'
+            output.fields.append(f)
+
+        output['thumb'] = prey['img']
+        output['img'] = randchoice(BIOME_FOOTER_IMAGES[biome_id])
+        set_next_expected_stage(result['next_stage'], prey_type, prey['id'])
+    else:
+        f = format_prey_result_message(prey, 'sneak_fail', f'You lost sight of the {prey["name"]}...')
+        f += 'Better luck next time! You can use `!hunt` to try again.'
+        output.fields.append(f)
+
+        output['thumb'] = image
+        clear_expected_stage()
+
+    dump_stats(stats)
     return 0
 
-  is_dragon_roll = roll(f'1d{DRAGON_DIE}')
-  is_dragon = is_dragon_roll == DRAGON_DIE
-  if is_dragon:
-    dragon_types = dragon_data["biomes"][p]
-    dragon_type = dragon_types[roll(f'1d{len(dragon_types)}') - 1]
-    commune_or_battle = 'commune' if roll('1d2') == 1 else 'battle'
-    anm_id = f'dragon-{dragon_type}-{commune_or_battle}'
-    anm = dragon_data["dragons"][anm_id]
-  else:
-    anm_id = anm_id[0]
-    anm = animals[anm_id]
+if first_param == 'quit':
+    output['title'] = f'{character().name} quits hunting the {prey["name"]}!'
+    f = f'You lose sight of the {prey["name"]}.|But you spend some time admiring the beauty of the nature around you.'
+    f += '\nIt is magnificent!'
+    clear_expected_stage()
+    dump_stats(stats)
+    return 0
 
-  add_n = "n" if anm["name"][0] in "AEIOU" else ""
-  c.set_cvar(HUNT_STAGE_VAR, f'{anm_id}:sneak')
+if first_param == 'attack':
+    c = character()
 
-  if ("commune" in anm and anm["commune"] == True) or is_dragon:
-    color = 'f0b330'
-    f = f'{c.name} found a ***VERY RARE*** {anm["name"]}!|Use `!hunt sneak` to try to approach it without being noticed.'
-  else:
-    f = f'{c.name} found a{add_n} {anm["name"]} in the {b["name"]}!|Use `!hunt sneak` to try and get the jump on it.'
-  c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
-  return 0
+    weapon_name = args[1].lower() if (len(args) > 1 and len(args[1]) >= 3 and args[1] not in ["adv", "dis", "-b", "-d"]) else None
+    result = do_attack(stats, prey_type, prey, weapon_name)
+    weapon = result['weapon']
 
-anm = dragon_data["dragons"][pid] if pid.startswith('dragon-') else animals[pid]
-anm_name = anm["name"]
+    output['title'] = f'{c.name} attacks their prey{" with their " + weapon["name"] if weapon != None else ""}!'
 
-add_to_bag = None
+    f = f'Was {c.name} able to kill the {prey["name"]}?|**Attack roll:** {result["roll"].full}\n'
+    f += '**Miss!**' if not result['success'] else '**Critical Hit!**' if result['is_crit'] else '**Success!**'
+    output.fields.append(f)
 
-if "commune" in anm and anm["commune"] == True:
-  color = 'f0b330'
-
-if p == "sneak":
-  adv_status = True if pargs.adv() == 1 else False if pargs.adv() == -1 else None
-  s_roll = vroll(cs.stealth.d20(base_adv = adv_status))
-  succ = s_roll.total > anm["pp"]
-  t = f'{c.name} tries to sneak on their prey!'
-  f = f'{c.name} closes on the {anm_name}...|**Stealth roll:** {s_roll.full}\n{sl if succ else fl}'
-  if succ:
-    thumb = anm["img"]
-    stats["s_sneak"] = stats["s_sneak"] + 1 if "s_sneak" in stats else 1
-    if "commune" in anm and anm["commune"] == True:
-      if "sneak_succ" in anm:
-        f2 = anm["sneak_succ"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
-      else:
-        f2 = f'The {anm_name} has seen you, but they do not seem scared.'
-      f2 += '\n' if '|' in f2 else '|'
-      f2 += f'Use `!hunt commune` to try to commune with the {anm_name}.'
-      c.set_cvar(HUNT_STAGE_VAR, f'{pid}:commune')
+    if result['success']:
+        output['thumb'] = prey['img']
+        if result['is_crit']:
+            f = f'{c.name} hit a critical hit killing the {prey["name"]} on the spot!'
+        else:
+            f = f'{c.name} manages to kill the {prey["name"]}.'
+        f += '|Can you clean your prize and collect the good?'
+        output.fields.append(f)
+        output.fields.append('This hunt is not over yet...|Use `!hunt clean` to try to clean your kill.')
+        set_next_expected_stage(result['next_stage'], prey_type, prey_id, result['is_crit'])
     else:
-      f2 = f'The {anm_name} has not seen you!|Now use `!hunt attack` or `!hunt attack [weapon]` to attack your prey!'
-      f2 += "\nAlternatively use `!hunt quit` if you would rather not hunt this prey."
-      c.set_cvar(HUNT_STAGE_VAR, f'{pid}:attack')
-  else:
-    thumb = image
-    if "sneak_fail" in anm:
-      f2 = anm["sneak_fail"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
+        output['thumb'] = image
+        output.fields.append(f'The {prey["name"]} managed to escape your attack and flee...|Better luck next time!')
+        clear_expected_stage()
+
+    dump_stats(stats)
+    return 0
+
+if first_param == 'clean':
+    c = character()
+    output['title'] = f'{c.name} attempts to clean their hunting prize!'
+
+    result = do_clean(stats, prey, last_stage_was_crit)
+
+    f = f'{c.name} cleans and extracts the goods from the {prey["name"]}...|'
+    f += f'**Survival roll:** {result["roll"].full}\n{SL if result["success"] else FL}'
+    output.fields.append(f)
+
+    if result['success']:
+        output['thumb'] = image
+        output['img'] = prey['img']
+        output.fields.append(f'You gained: {result["prizes_list"]}.|They have been added to your "Hunting" bag!')
     else:
-      f2 = f'You lost sight of the {anm_name}...'
-    f2 += '\n' if '|' in f2 else '|'
-    f2 += 'Better luck next time! Use `!hunt` to try again.'
-    c.delete_cvar(HUNT_STAGE_VAR)
+        output['thumb'] = image
+        output['img'] = CAMPFIRE_IMAGE
+        output.fields.append(f'You ended up wasting the prey you caught...|Better luck next time!')
 
-elif p == 'quit':
-  t = f'{c.name} quits hunting the {anm_name}!'
-  f = f'You lose sight of the {anm_name}.|But you spend some time admiring the beauty of the nature around you.'
-  f += '\nIt is magnificent!'
-  c.delete_cvar(HUNT_STAGE_VAR)
+    clear_expected_stage()
+    dump_stats(stats)
+    return 0
 
-elif p == 'commune':
-  if not "commune" in anm or anm["commune"] == False:
-    f = "!hunt script rolled a 1 and failed flat on its head! Please report to a Server Administrator."
-    return 1
-  c.delete_cvar(HUNT_STAGE_VAR)
-  s_roll = vroll(cs.animalHandling.d20())
-  succ = s_roll.total > anm["cha"]
-  t = f'{c.name} tries to commune with the {anm_name}...'
-  f = f'{c.name} approaches the {anm_name}...|**Animal Handling roll:** {s_roll.full}\n{sl if succ else fl}'
-  if succ:
-    stats["s_commune"] = stats["s_commune"] + 1 if "s_commune" in stats else 1
-    img = anm["img"]
-    add_to_bag = {}
-    prize_list = ''
-    if "prizes" in anm:
-      for prize in anm["prizes"]:
-        prize_n, prize_qt = prize["name"], prize["qt"]
-        add_to_bag[prize_n] = prize_qt
-        prize_list += f'{prize_qt}x {prize_n}, '
-    prize_list = prize_list[:len(prize_list) - 2]
+if first_param == 'commune':
+    c = character()
+    output['title'] = f'{c.name} tries to commune with the {prey["name"]}...'
 
-    if "commune_succ" in anm:
-      f2 = anm["commune_succ"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
+    result = do_commune(stats, prey)
+
+    f = f'{c.name} approaches the {prey["name"]}...|'
+    f += f'**Animal Handling roll:** {result["roll"].full}\n{SL if result["success"] else FL}'
+    output.fields.append(f)
+
+    if result['success']:
+        output['img'] = prey['img']
+        output['thumb'] = image
+        f = format_prey_result_message(prey, 'commune_succ', f'The {prey["name"]} runs away, but the experience enlightens you...')
+        f += f'You gained: {result["prizes_list"]}.\nThey have been added to your "Hunting" bag!'
+        output.fields.append(f)
     else:
-      f2 = f'The {anm_name} runs away, but the experience enlightens you...'
-    f2 += '\n' if '|' in f2 else '|'
-    f2 += "You gained: " + prize_list + '.\nThey have been added to your "Hunting" bag!'
+        output['thumb'] = prey['img']
+        output['img'] = CAMPFIRE_IMAGE
+        f = format_prey_result_message(prey, 'commune_fail', f'The {prey["name"]} ran away unexpectedly!')
+        f += 'Better luck next time!'
+        output.fields.append(f)
 
-  else:
-    thumb = anm["img"]
-    if "commune_fail" in anm:
-      f2 = anm["commune_fail"].replace('{char_name}', c.name).replace('{anm_name}', anm_name)
-    else:
-      f2 = f'The {anm_name} ran away unexpectedly!'
-    f2 += '\n' if '|' in f2 else '|'
-    f2 += "Better luck next time! Use `!hunt` to try again."
+    clear_expected_stage()
+    dump_stats(stats)
+    return 0
 
-elif p == 'attack':
-  weapon = None
-  if len(args) > 1 and len(args[1]) >= 3 and args[1] not in ["adv", "dis", "-b", "-d"]:
-    weapon_arg = args[1].lower()
-    weapon_str = [a for a in c.attacks
-      if str(a).lower().split(':')[0].strip().replace('*', '').startswith(weapon_arg)
-    ]
-    if len(weapon_str) > 0:
-      weapon_str = str(weapon_str[0])
-      damage_substring = weapon_str.split('Hit:')[1].strip()
-      damage_substring = damage_substring[0:damage_substring.rindex(']') + 1]
-      weapon = {
-        'name': weapon_str.split(':')[0].strip(),
-        'a_bonus': int(weapon_str.split('Attack:')[1].strip().split(' ')[0]),
-        'd_die': damage_substring
-      }
-
-  a_bonus_param = '+'.join(pargs.get('b', default=[''])).strip()
-  a_mod = weapon['a_bonus'] if weapon != None else dexterityMod + proficiencyBonus
-  a_die = '2d20kh1' if pargs.adv() == 1 else '2d20kl1' if pargs.adv() == -1 else '1d20'
-  a_die = f'{a_die} + {a_mod}'
-  a_die = f'{a_die} + {a_bonus_param}' if a_bonus_param != '' else a_die
-  a_roll = vroll(a_die)
-  crit = a_roll.result.crit == 1
-
-  d_bonus_param = '+'.join(pargs.get('d', default=[''])).strip()
-  d_die = weapon["d_die"] if weapon != None else f'1d8+{dexterityMod}'
-  d_die = f'{d_die}+{d_bonus_param}' if d_bonus_param != '' else d_die
-  d_roll = vroll(d_die)
-
-  a_hit = crit or a_roll.total > anm["ac"]
-  dead = crit or (a_hit and d_roll.total > anm["hp"])
-  injured = a_hit and not dead
-  damage_dealt = d_roll.total if a_hit and not crit else anm["hp"] if crit else 0
-
-  t = f'{c.name} attacks their prey{" with their " + weapon["name"] if weapon != None else ""}!'
-
-  dmg_l = "\n**Miss!**" if not a_hit else "\n**Critical Hit!**" if crit else "\n" + (sl if dead else "**Hit!**" if injured else fl)
-
-  f = f'Was {c.name} able to kill the {anm_name}?|**Attack roll:** {a_roll.full}{dmg_l}'
-  if a_hit:
-    stats["t_dmg"] = stats["t_dmg"] + damage_dealt if "t_dmg" in stats else damage_dealt
-
-  if dead:
-    stats["s_attack"] = stats["s_attack"] + 1 if "s_attack" in stats else 1
-    thumb = anm["img"]
-    stage_value = f'{pid}:clean'
-    stage_value += ':lastcrit' if crit else ''
-    c.set_cvar(HUNT_STAGE_VAR, stage_value)
-    if crit:
-      f2 = f'{c.name} hit a critical hit killing the {anm_name} on the spot!'
-    else:
-      f2 = f'{c.name} manages to kill the {anm_name}.'
-    f2 += '|Use `!hunt clean` to clean your prize and collect the goods!'
-  else:
-    thumb = image
-    if injured:
-      f2 = f'{c.name} injured {anm_name}, but it escaped...|Better luck next time!'
-    else:
-      f2 = f'The {anm_name} managed to escape your attack and flee...|Better luck next time!'
-    c.delete_cvar(HUNT_STAGE_VAR)
-
-elif p == 'clean':
-  c.delete_cvar(HUNT_STAGE_VAR)
-  t = f'{c.name} attempts to clean their hunting prize!'
-  adv_status = True if last_stage_was_crit else None
-  s_roll = vroll(cs.survival.d20(base_adv = adv_status))
-  succ = s_roll.total > anm["ac"]
-  f = f'{c.name} cleans and extracts the goods from the {anm_name}...|**Survival roll:** {s_roll.full}\n{sl if succ else fl}'
-  if succ:
-    img = anm["img"]
-    stats["s_clean"] = stats["s_clean"] + 1 if "s_clean" in stats else 1
-    add_to_bag = {}
-    prize_list = ''
-    if "rations" in anm and anm["rations"] > 0:
-      rations = anm["rations"]
-      add_to_bag["Rations"] = rations
-      prize_list += f'{rations}x Rations, '
-    if "prizes" in anm:
-      for prize in anm["prizes"]:
-        prize_n, prize_qt = prize["name"], prize["qt"]
-        add_to_bag[prize_n] = prize_qt
-        prize_list += f'{prize_qt}x {prize_n}, '
-    prize_list = prize_list[:len(prize_list) - 2]
-
-    f2 = f'You gained: {prize_list}.|They have been added to your "Hunting" bag!'
-  else:
-    thumb = data["images"]["campfire"]
-    f2 = f'You ended up wasting the prey you caught...|Better luck next time!'
-
-
-c.set_cvar(HUNT_STATS_VAR, dump_json(stats))
-
-if add_to_bag != None:
-  _bag_name = "Hunting"
-  _content = add_to_bag
-
-  #! devrae_f add_to_bag (#P "Hunting" #P add_to_bag) !#
-  ##### devrae function insert [add_to_bag] #####
-  __p0__ = "Hunting"
-  __p1__ = add_to_bag
-  _bag_name = __p0__
-  _content = __p1__
-
-  _cv = character().cvars
-  _bags = load_json(_cv["bags"]) if "bags" in _cv else []
-  _bag_index = [i for i, x in enumerate(_bags) if x[0] == _bag_name]
-  _bag_index = _bag_index[0] if len(_bag_index) > 0 else -1
-  if _bag_index == -1:
-    _bags.append([_bag_name, {}])
-    _bag_index = len(_bags) - 1
-  _bag_content = _bags[_bag_index][1]
-  for _key in _content:
-    if _key in _bag_content:
-      _bag_content[_key] = _bag_content[_key] + _content[_key]
-    else:
-      _bag_content[_key] = _content[_key]
-  _bags[_bag_index] = [_bag_name, _bag_content]
-  character().set_cvar('bags', dump_json(_bags))
-
-  ##### devrae function end [add_to_bag] #####
-
-
+dump_stats(stats)
 </drac2>
--title "{{t}}"
-{{f'-image "{img}"' if img else ""}}
-{{f'-thumb "{thumb}"' if thumb else ""}}
-{{f'-f "{f}"' if f else ""}}
-{{f'-f "{f2}"' if f2 else ""}}
-{{f'-color "{color}"' if color else ""}}
-{{f'-footer "{footer}"' if footer else ""}}
+-title "{{output['title']}}"
+{{f'-image "{output["img"]}"' if output["img"] else ""}}
+{{f'-desc "{output["desc"]}"' if output["desc"] else ""}}
+{{f'-thumb "{output["thumb"]}"' if output["thumb"] else ""}}
+{{f'-color "{output["color"]}"' if output["color"] else ""}}
+{{f'-footer "{output["footer"]}"' if output["footer"] else ""}}
+{{''.join(['-f "' + field + '"\n' for field in output['fields']]) if len(output['fields']) > 0 else ''}}
