@@ -203,7 +203,9 @@ if sold_something:
     replace_bags_content(bags_new_content, all_bags)
     modify_coins(net_total_dict, all_bags)
 
-    fields.append(f'Well done!|{formatted_net_total} have been added to your Coin Pouch')
+    f = 'Well done! The coins have been added to your Coin Pouch:|'
+    f += f'{character().coinpurse.compact_str()} (+ {formatted_net_total})'
+    fields.append(f)
 </drac2>
 -title "{{t}}"
 {{f'-image "{img}"' if img else ""}}
