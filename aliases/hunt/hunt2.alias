@@ -369,12 +369,10 @@ if (len(args) == 0 or (not expected_stage and args[0] not in biome_codes)):
 
 first_param = args[0]
 
-# From here on, player must still have hunt attempts available
-if alias_performed_count >= DAILY_CAP:
-    return handle_no_attempts_left(output, wait_text, alias_performed_count)
-
-
 if ('quick' in pargs) and first_param in biome_codes:
+    if alias_performed_count >= DAILY_CAP:
+        return handle_no_attempts_left(output, wait_text, alias_performed_count)
+
     count = DAILY_CAP - alias_performed_count
     alias_performed_count = utils.increase_daily_activity_data(ALIAS_TIME_VAR, count)
     update_footer_count(output, alias_performed_count)
@@ -436,6 +434,9 @@ if ('quick' in pargs) and first_param in biome_codes:
 
 # Begin new hunt
 if not('quick' in pargs) and first_param in biome_codes:
+    if alias_performed_count >= DAILY_CAP:
+        return handle_no_attempts_left(output, wait_text, alias_performed_count)
+
     c = character()
 
     alias_performed_count = utils.increase_daily_activity_data(ALIAS_TIME_VAR)
