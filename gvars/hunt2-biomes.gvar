@@ -30,9 +30,9 @@
 "poot_desert"
 ],
 "dragons": [
-"young_red_dragon",
+"red_dragon_wyrmling",
 "ancient_red_dragon",
-"young_green_dragon",
+"green_dragon_wyrmling",
 "ancient_green_dragon"
 ]},
 {
@@ -69,9 +69,9 @@
 "poot_mountain"
 ],
 "dragons": [
-"young_red_dragon",
+"red_dragon_wyrmling",
 "ancient_red_dragon",
-"young_white_dragon",
+"white_dragon_wyrmling",
 "ancient_white_dragon"
 ]},
 {
@@ -109,9 +109,9 @@
 "poot_forest"
 ],
 "dragons": [
-"young_green_dragon",
+"green_dragon_wyrmling",
 "ancient_green_dragon",
-"young_black_dragon",
+"black_dragon_wyrmling",
 "ancient_black_dragon"
 ]},
 {
@@ -151,9 +151,9 @@
 "poot_grassland"
 ],
 "dragons": [
-"young_blue_dragon",
+"blue_dragon_wyrmling",
 "ancient_blue_dragon",
-"young_white_dragon",
+"white_dragon_wyrmling",
 "ancient_white_dragon"
 ]},
 {
@@ -186,9 +186,9 @@
 "poot_swamp"
 ],
 "dragons": [
-"young_green_dragon",
+"green_dragon_wyrmling",
 "ancient_green_dragon",
-"young_black_dragon",
+"black_dragon_wyrmling",
 "ancient_black_dragon"
 ]},
 {
@@ -225,9 +225,9 @@
 "poot_coastline"
 ],
 "dragons": [
-"young_blue_dragon",
+"blue_dragon_wyrmling",
 "ancient_blue_dragon",
-"young_white_dragon",
+"white_dragon_wyrmling",
 "ancient_white_dragon"
 ]}
 ]}

@@ -1,8 +1,9 @@
 {"dragons": [
 {
-  "id": "young_red_dragon",
-  "name": "Young Red Dragon",
+  "id": "red_dragon_wyrmling",
+  "name": "Red Dragon Wyrmling",
   "pp": 4,
+  "ac": 26,
   "commune": false,
   "rations": 4,
   "clean_dc": 13,
@@ -10,9 +11,10 @@
   "img": "https://media.discordapp.net/attachments/832440929855995914/895669190835470356/image0.jpg"
 },
 {
-  "id": "young_green_dragon",
-  "name": "Young Green Dragon",
+  "id": "green_dragon_wyrmling",
+  "name": "Green Dragon Wyrmling",
   "pp": 4,
+  "ac": 25,
   "commune": false,
   "rations": 4,
   "clean_dc": 13,
@@ -20,9 +22,10 @@
   "img": "https://media.discordapp.net/attachments/832440929855995914/895669175744360448/image0.jpg"
 },
 {
-  "id": "young_black_dragon",
-  "name": "Young Black Dragon",
+  "id": "black_dragon_wyrmling",
+  "name": "Black Dragon Wyrmling",
   "pp": 4,
+  "ac": 26,
   "commune": false,
   "rations": 4,
   "clean_dc": 13,
@@ -30,9 +33,10 @@
   "img": "https://media.discordapp.net/attachments/832440929855995914/895687706447843359/07744639ac03971905769519c36368c1.jpg"
 },
 {
-  "id": "young_blue_dragon",
-  "name": "Young Blue Dragon",
+  "id": "blue_dragon_wyrmling",
+  "name": "Blue Dragon Wyrmling",
   "pp": 4,
+  "ac": 25,
   "commune": false,
   "rations": 4,
   "clean_dc": 13,
@@ -40,9 +44,10 @@
   "img": "https://media.discordapp.net/attachments/832440929855995914/895669163241123920/image0.jpg"
 },
 {
-  "id": "young_white_dragon",
-  "name": "Young White Dragon",
+  "id": "white_dragon_wyrmling",
+  "name": "White Dragon Wyrmling",
   "pp": 4,
+  "ac": 25,
   "commune": false,
   "rations": 4,
   "clean_dc": 13,
