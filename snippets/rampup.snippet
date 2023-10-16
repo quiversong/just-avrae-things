@@ -1,9 +1,9 @@
 rampup <drac2>
     CC_NAME = "Ramp-Up Ring"
-    CC_CRIT = "Ramp-Up Ring Crit Threshold"
-    if character().cc_exists(CC_NAME) and character().cc_exists(CC_CRIT):
+    CVAR_CRIT = "rampup_ring_crit"
+    if character().cc_exists(CC_NAME) and CVAR_CRIT in character().cvars:
         cc_string = character().cc_str(CC_NAME)
-        criton = character().get_cc(CC_CRIT)
+        criton = character().cvars[CVAR_CRIT]
 
         f = f"__**Ramp-Up Ring**__|While this ring has 3 charges, you gain a +3 bonus to damage rolls from weapon attacks, and the minimum number you have to roll on a d20 to score a critical hit with a weapon attack is reduced by 1 (for a total of `{criton}`).\n**Ramp-Up Ring:**\n{cc_string}"
 
@@ -13,6 +13,6 @@ rampup <drac2>
         else:
             return f' -f "{f}"'
     else:
-        f = "__**Ramp-Up Ring**__|Please ensure you have the custom counters `Ramp-Up Ring` (min = 0, max = 3), and `Ramp-Up Ring Crit Threshold` (configuration of the new crit threshold when the ring is active) to use the Ramp-Up Ring."
+        f = "__**Ramp-Up Ring**__|Please ensure you have the custom counter for the Ramp-Up Ring: `Ramp-Up Ring` (min = 0, max = 3), and a CVAR to configure your critical threshold when the ring is active: `!cvar rampup_ring_crit <value>`"
         return f' -f "{f}"'
 </drac2>
