@@ -197,23 +197,18 @@ DATA = {
 }
 
 # Execution Methods
-def do_start_research(stats, quick_mode = False):
+def do_start_research(stats):
     increment_stat(stats, 't_researches')
-
-    # chance of rift
-    # TODO
 
     spell_roll = int(roll('1d500'))
     spell_chances = [(k, v) for k, v in DATA.SPELL_CHANCES.items()]
     spell_id = [k for k, v in spell_chances if (spell_roll >= int(v[0]) and spell_roll <= int(v[1]))][0]
     spell = get_spell_data(spell_id)
 
-
     return {
         'spell_id': spell_id,
         'spell': spell,
-        'next_stage': 'identify',
-        'is_rift': False
+        'next_stage': 'identify'
     }
 
 def do_arcana(stats, spell):
@@ -227,16 +222,20 @@ def do_arcana(stats, spell):
         'next_stage': 'identify'
     }
 
+def do_identify(stats, spell, quick_mode = False):
+    RIFT_THRESHOLD = 0
+    rift_roll = roll(f'1d{ceil(DAILY_CAP * 31 * (1.75 if quick_mode else 1))}')
+    is_rift = rift_roll <= RIFT_THRESHOLD
 
-def do_identify(stats, spell, include_roll_mods = True):
     spell_mod = get_spell_mod()
     dice_expr = f'1d20 + {proficiencyBonus}' + \
-            (' [proficiency]' if include_roll_mods else '') + \
+            ('' if quick_mode else ' [proficiency]') + \
             f' + {spell_mod["mod"]}' + \
-            (f' [{spell_mod["name"]}]' if include_roll_mods else '')
+            ('' if quick_mode else f' [{spell_mod["name"]}]')
 
     identify_roll = vroll(dice_expr)
-    success = identify_roll.total > spell['ability_dc']
+    dc = 10 if is_rift else spell['ability_dc']
+    success = identify_roll.total >= dc
     is_crit = identify_roll.result.crit == 1
 
     if success:
@@ -246,7 +245,8 @@ def do_identify(stats, spell, include_roll_mods = True):
         'success': success,
         'roll': identify_roll,
         'is_crit': is_crit,
-        'next_stage': 'concentrate'
+        'is_rift': is_rift,
+        'next_stage': 'closerift' if is_rift else 'concentrate'
     }
 
 def do_concentrate(stats, spell, last_stage_was_crit = False):
@@ -291,6 +291,10 @@ if ALIAS_STAGE_VAR in character().cvars:
     spell_id = hvars[0]
     expected_stage = hvars[1]
 
+    # Handles legacy research data
+    if len(spell_id) >= 2 and spell_id[0] == 'R' and spell_id[1] in '0123456789':
+        character().delete_cvar(ALIAS_STAGE_VAR)
+
     spell = get_spell_data(spell_id)
 
     # TODO if rift
@@ -326,7 +330,7 @@ if ('quick' in pargs) and chosen_action == 'start':
     for _ in range(0, count):
         f = ''
 
-        result = do_start_research(stats, True)
+        result = do_start_research(stats)
         spell = result['spell']
 
         format_spell_desc(spell, True)
@@ -336,7 +340,7 @@ if ('quick' in pargs) and chosen_action == 'start':
         f += format_roll_result('Arcana', result['roll'], result['success'])
 
         if result['success']:
-            result = do_identify(stats, spell, False)
+            result = do_identify(stats, spell, True)
             f += '\n' + format_roll_result('Identify', result['roll'], result['success'])
             f += f'\n:sparkles: *Spell: {spell["name"]}*' if result['success'] else ''
 
