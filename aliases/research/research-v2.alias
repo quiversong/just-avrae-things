@@ -1,0 +1,472 @@
+embed
+<drac2>
+using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
+COMMAND = f'{ctx.prefix}{ctx.alias}'
+
+# Configuration Variables Initialization
+VERSION = '2.0.1'
+
+VALID_STAGES = ['start', 'identify', 'concentrate']
+RESEARCH_IMAGES = [
+    'https://cdn.discordapp.com/attachments/827581981452795975/851694263058432040/BookGen.jpeg',
+    'https://cdn.discordapp.com/attachments/827581981452795975/851694419753041960/d8294928b89f344318e248ee809853c8.jpeg',
+    'https://cdn.discordapp.com/attachments/827581981452795975/851694727874478090/the_library_of_babel_by_owen_c-d3gvei32.jpeg',
+    'https://cdn.discordapp.com/attachments/827581981452795975/851694928282779668/Library.jpeg',
+    'https://cdn.discordapp.com/attachments/827581981452795975/851695083829198889/d0beea47-7fd5-4af9-b514-efd8838c5378-candlekeep-mysteries-_-key-art_-artist-credit_-clint-cear...jpg',
+    'https://cdn.discordapp.com/attachments/827581981452795975/851695815604437013/226.png'
+]
+
+VARIABLES = {
+    'SPELLS': '3fba6613-da96-42fd-9225-e59f007a7bcf',
+    'SPELL_CHANCES': 'c1f250bd-ef46-4474-9667-9b9bd29d96f2'
+}
+
+GOLDEN_COLOR = 'f0b330'
+
+DAILY_CAP = 6
+
+# Code
+args = &ARGS&
+pargs = argparse(args)
+
+output = {
+    'title': f'{character().name} is researching Magic!',
+    'color': '128c2f',
+    'desc': None,
+    'img': None,
+    'thumb': None,
+    'footer': '',
+    'fields': []
+}
+
+SL, FL = "**Success!**", "**Failure!**"
+
+ALIAS_TIME_VAR = "_h_dhc_"
+ALIAS_STAGE_VAR = "_r_sc_"
+ALIAS_STATS_VAR = "_r_st_"
+
+ADMIN_USER_IDS = [771997367611949076]
+if get_svar('SEVENTRA_ALIAS_ADMINS') != None:
+    admin_ids = load_json(get_svar('SEVENTRA_ALIAS_ADMINS'))
+    ADMIN_USER_IDS += admin_ids
+
+daily_data = utils.get_daily_activity_data(ALIAS_TIME_VAR, DAILY_CAP)
+alias_performed_count = daily_data["count"]
+wait_text = daily_data["wait_time"]
+
+output['footer'] = f"You have researched {alias_performed_count}/{DAILY_CAP} times today. | {COMMAND} help\n"
+output['footer'] += f'Seventra: Exodus of Heroes | Research v{VERSION} | {COMMAND} credits'
+
+# Methods
+
+def get_in_list_by_id(collection, item_id):
+    return ([x for x in collection if x['id'] == item_id] + [None])[0]
+
+def get_spell_data(spell_id):
+    return get_in_list_by_id(DATA.SPELLS, spell_id)
+
+def get_spell_mod():
+    if intelligenceMod >= charismaMod and intelligenceMod >= wisdomMod:
+        return { 'mod': intelligenceMod, 'name': 'intelligence' }
+    elif charismaMod >= wisdomMod:
+        return { 'mod': charismaMod, 'name': 'charisma' }
+    else:
+        return { 'mod': wisdomMod, 'name': 'wisdom' }
+
+def parse_prizes_for(spell):
+    prizes = {}
+    if 'tokens' in spell and spell['tokens'] > 0:
+        prizes['Arcane Token (5sp)'] = spell['tokens']
+    if 'prizes' in spell:
+      for prize in spell['prizes']:
+        prizes[prize['name']] = prize['qt']
+    return prizes
+
+def format_spell_desc(spell, include_article = False):
+    level = spell['level']
+    desc = f'level {level} {spell["school"]} spell' if level > 0 else f'{spell["school"]} cantrip'
+    if include_article:
+        add_n = "n" if desc[0].upper() in "AEIOU" else ""
+        return f'a{add_n} {desc}'
+    return desc
+
+def format_prizes_for(spell):
+    prizes_list = ''
+    if 'tokens' in spell and spell['tokens'] > 0:
+        prizes_list += f'{spell["tokens"]}x Arcane Token (5sp), '
+    if 'prizes' in spell:
+      for prize in spell['prizes']:
+        prize_name, prize_qt = prize['name'], prize['qt']
+        prizes_list += f'{prize_qt}x {prize_name}, '
+    prizes_list = prizes_list[:len(prizes_list) - 2]
+    return prizes_list
+
+def increment_stat(stats, stat_name):
+    stats[stat_name] = stats[stat_name] + 1 if stat_name in stats else 1
+
+def dump_stats(stats):
+    character().set_cvar(ALIAS_STATS_VAR, dump_json(stats))
+
+def update_footer_count(output, new_count):
+    current_count = output['footer'].split('/')[0].split(' ')[-1]
+    output['footer'] = output['footer'].replace(f'{current_count}/', f'{new_count}/')
+
+def print_stats(output, stats):
+    output["title"] = f'{character().name}\'s research statistics...'
+    if stats == {}:
+        output['fields'].append(f'You have no statistics!|Go research!')
+        return 0
+    stats_list = [key.split('_')[1] + (' successes' if key.startswith('s_') else ' total') +
+        f': {value}' for key, value in stats.items()]
+    output['fields'].append('Your research history shows:|' + '\n'.join(stats_list))
+    return 0
+
+def is_admin():
+    return ctx.author.id in ADMIN_USER_IDS
+
+def reset_state(output):
+    if not is_admin():
+        err('You are not allowed to do that!')
+        return 1
+    character().delete_cvar(ALIAS_STAGE_VAR)
+    character().delete_cvar(ALIAS_TIME_VAR)
+    output['title'] = "Resetting research state..."
+    output['footer'] = output['footer'].replace(f'{alias_performed_count}/', '0/')
+    return 0
+
+def reset_stats(output):
+    if not is_admin():
+        err('You are not allowed to do that!')
+        return 1
+    character().delete_cvar(ALIAS_STATS_VAR)
+    output["title"] = "Resetting research statistics..."
+    return 0
+
+def set_next_expected_stage(stage_code, spell_id, did_crit = False):
+    character().set_cvar(ALIAS_STAGE_VAR, f'{spell_id}:{stage_code}::{"lastcrit" if did_crit else ""}')
+
+def clear_expected_stage():
+    character().delete_cvar(ALIAS_STAGE_VAR)
+
+def handle_wrong_stage(output, spell_id, expected_stage):
+    spell = get_spell_data(spell_id)
+    spell_label = 'a different spell' if spell == None else spell['name']
+    output['fields'].append(f'Oops! You are already aiding in the research of {spell_label}!|Use `{COMMAND} {expected_stage}` to continue.')
+    output['thumb'] = image
+    return 1
+
+def handle_no_attempts_left(output, wait_text, alias_performed_count, attempts_tried = 1):
+    f = ''
+    if attempts_tried == 1:
+        f += f'{character().name} is exhausted today...|You have to wait {wait_text} until you can research again.'
+    else:
+        f += f'{character().name} is trying to research {attempts_tried} more, but you can only do {DAILY_CAP - alias_performed_count}... |You have to wait {wait_text} until you can research again.\n'
+        f += f'Or use `{COMMAND} start` to research just once if you still have attempts left.'
+    f += '\n(Research resets at midnight UTC)'
+    output['fields'].append(f)
+    return 1
+
+def research_splash_screen(output):
+    output['fields'].append(f'Ready to start researching?|Type `!research start` to enter an Aldahen Research Center.')
+    output['img'] = randchoice(RESEARCH_IMAGES)
+    return 0
+
+
+# Execution Variables
+
+if (not ALIAS_STATS_VAR in character().cvars) or character().cvars[ALIAS_STATS_VAR] == '':
+    stats = {}
+else:
+    stats = load_json(character().cvars[ALIAS_STATS_VAR])
+
+if len(args) > 0 and args[0] == "stats":
+    return print_stats(output, stats)
+
+if len(args) > 0 and args[0] == "reset":
+    return reset_state(output)
+
+if len(args) > 0 and args[0] == "resetstats":
+    return reset_stats(output)
+
+spells = load_json(get_gvar(VARIABLES.SPELLS))['spells']
+spell_chances = load_json(get_gvar(VARIABLES.SPELL_CHANCES))['spells'][0]['chance']
+
+DATA = {
+    'SPELLS': spells,
+    'SPELL_CHANCES': spell_chances
+}
+
+# Execution Methods
+def do_start_research(stats, quick_mode = False):
+    increment_stat(stats, 't_researches')
+
+    # chance of rift
+    # TODO
+
+    spell_roll = int(roll('1d500'))
+    spell_chances = [(k, v) for k, v in DATA.SPELL_CHANCES.items()]
+    spell_id = [k for k, v in spell_chances if (spell_roll >= int(v[0]) and spell_roll <= int(v[1]))][0]
+    spell = get_spell_data(spell_id)
+
+
+    return {
+        'spell_id': spell_id,
+        'spell': spell,
+        'next_stage': 'identify',
+        'is_rift': False
+    }
+
+def do_arcana(stats, spell):
+    arcana_roll = vroll(character().skills.arcana.d20())
+    success = arcana_roll.total >= spell['arcana_dc']
+    if success:
+        increment_stat(stats, 's_arcana')
+    return {
+        'success': success,
+        'roll': arcana_roll,
+        'next_stage': 'identify'
+    }
+
+
+def do_identify(stats, spell, include_roll_mods = True):
+    spell_mod = get_spell_mod()
+    dice_expr = f'1d20 + {proficiencyBonus}' + \
+            (' [proficiency]' if include_roll_mods else '') + \
+            f' + {spell_mod["mod"]}' + \
+            (f' [{spell_mod["name"]}]' if include_roll_mods else '')
+
+    identify_roll = vroll(dice_expr)
+    success = identify_roll.total > spell['ability_dc']
+    is_crit = identify_roll.result.crit == 1
+
+    if success:
+        increment_stat(stats, 's_identify')
+
+    return {
+        'success': success,
+        'roll': identify_roll,
+        'is_crit': is_crit,
+        'next_stage': 'concentrate'
+    }
+
+def do_concentrate(stats, spell, last_stage_was_crit = False):
+    b_bonus_param = ' + '.join(pargs.get('b', default=[''])).strip()
+
+    auto_adv = True if ('wc' in pargs or 'em' in pargs) else False
+
+    if 'bs' in pargs:
+        b_bonus_param = str(intelligenceMod)
+
+    adv_status = True if pargs.adv() == 1 or auto_adv else False if pargs.adv() == -1 else None
+    dice = character().saves.get('con').d20(base_adv = adv_status)
+    dice = f'{dice} + {b_bonus_param}' if b_bonus_param != '' else dice
+    concentration_roll = vroll(dice)
+    success = concentration_roll.total >= spell['conc_dc']
+
+    if success:
+        increment_stat(stats, 's_concentrate')
+
+        prizes = parse_prizes_for(spell)
+        prizes_list = format_prizes_for(spell)
+
+        utils.add_to_bag('Research', prizes)
+
+    return {
+        'success': success,
+        'roll': concentration_roll,
+        'prizes_list': prizes_list if success else None
+    }
+
+
+# Begin Execution
+
+# read stage variable
+spell = None
+spell_id = None
+expected_stage = None
+last_stage_was_crit = False
+
+if ALIAS_STAGE_VAR in character().cvars:
+    hvars = character().cvars[ALIAS_STAGE_VAR].split(":")
+    spell_id = hvars[0]
+    expected_stage = hvars[1]
+
+    spell = get_spell_data(spell_id)
+
+    # TODO if rift
+    # output['color'] = GOLDEN_COLOR
+
+    if len(hvars) > 3 and hvars[3] == 'lastcrit':
+        last_stage_was_crit = True
+
+chosen_action = ([a for a in VALID_STAGES if len(args) > 0 and len(args[0]) > 1 and a.startswith(args[0].lower())] + [''])[0]
+
+in_wrong_stage = expected_stage and (len(args) == 0 or (len(args) > 0 and expected_stage != chosen_action))
+if in_wrong_stage:
+    return handle_wrong_stage(output, spell_id, expected_stage)
+
+if (len(args) == 0 or (not expected_stage and not chosen_action in ['start', None])):
+    return research_splash_screen(output)
+
+if ('quick' in pargs) and chosen_action == 'start':
+    if alias_performed_count >= DAILY_CAP:
+        return handle_no_attempts_left(output, wait_text, alias_performed_count)
+
+    count = DAILY_CAP - alias_performed_count
+    alias_performed_count = utils.increase_daily_activity_data(ALIAS_TIME_VAR, count)
+    update_footer_count(output, alias_performed_count)
+
+    def format_roll_result(roll_name, roll, success):
+        return f'{":white_check_mark:" if success else ":x:"} {roll_name}: {roll.full}'
+
+    rewards_gained = False
+    spell_img = None
+    all_bags = load_json(character().cvars['bags'])
+
+    for _ in range(0, count):
+        f = ''
+
+        result = do_start_research(stats, True)
+        spell = result['spell']
+
+        format_spell_desc(spell, True)
+        f += f'***You are studying {format_spell_desc(spell, True)}...***|'
+
+        result = do_arcana(stats, spell)
+        f += format_roll_result('Arcana', result['roll'], result['success'])
+
+        if result['success']:
+            result = do_identify(stats, spell, False)
+            f += '\n' + format_roll_result('Identify', result['roll'], result['success'])
+            f += f'\n:sparkles: *Spell: {spell["name"]}*' if result['success'] else ''
+
+            if result['success']:
+                result = do_concentrate(stats, spell, result['is_crit'])
+                f += '\n' + format_roll_result('Concentration', result['roll'], result['success'])
+
+                if result['success']:
+                    spell_img = spell['img']
+
+        if 'prizes_list' in result and result['prizes_list'] != None:
+            f += f'\n:coin: *{result["prizes_list"]}*'
+            rewards_gained = True
+
+        output.fields.append(f)
+
+    if rewards_gained:
+        output.fields.append('A productive day!|Your rewards have been added to your "Research" bag.')
+    else:
+        output.fields.append('A difficult day...|Maybe there are other students you can join. Better luck next time!')
+
+    output['thumb'] = image
+    output['img'] = spell_img if spell_img != None else randchoice(RESEARCH_IMAGES)
+    dump_stats(stats)
+    return 0
+
+# Begin new research
+if not('quick' in pargs) and chosen_action == 'start':
+    if alias_performed_count >= DAILY_CAP:
+        return handle_no_attempts_left(output, wait_text, alias_performed_count)
+
+    c = character()
+
+    alias_performed_count = utils.increase_daily_activity_data(ALIAS_TIME_VAR)
+    update_footer_count(output, alias_performed_count)
+
+    result = do_start_research(stats)
+    spell = result['spell']
+
+    result = do_arcana(stats, spell)
+
+    f = f'{c.name} is helping Aldahen mages with their arcane studies!|Are you proficient enough to join their spell research?'
+    f += f'\n**Arcana roll:** {result["roll"].full}'
+    f += f'\n{SL if result["success"] else FL}'
+    output.fields.append(f)
+
+    higher_spell = spell['level'] > 0 and character().spellbook.get_max_slots(spell['level']) == 0
+
+    if result['success']:
+        f = f'Your arcane powers are in synchrony with the other students...|'
+        f += f'The subject spell seems to be **{format_spell_desc(spell, True)}**.'
+
+        if higher_spell:
+            f += f' Perhaps you can help these powerful mages figure out this higher level spell? But first, can you identify what spell it is?'
+        else:
+            f += f' Are you able to identify the spell so you can help the mages with their studies?'
+        f += f'\n\nUse **`{COMMAND} identify`** to attempt to identify it!'
+        output.fields.append(f)
+
+        output['img'] = randchoice(RESEARCH_IMAGES)
+        set_next_expected_stage(result['next_stage'], spell['id'])
+    else:
+        f = 'Your arcana proficiency was not enough to join this research group...|'
+        f += f'Better luck next time! You can use `{COMMAND}` to try again.'
+        output.fields.append(f)
+        clear_expected_stage()
+
+    output['thumb'] = image
+    dump_stats(stats)
+    return 0
+
+if chosen_action == 'identify':
+    c = character()
+
+    result = do_identify(stats, spell)
+
+    output['title'] = f'{c.name} tries to identify a spell...'
+
+    f = f'Is {c.name} able to identify this {format_spell_desc(spell)}?|**Identify roll:** {result["roll"].full}'
+    f += f'\n{SL if result["success"] else FL}'
+    output.fields.append(f)
+
+    # TODO consider user spell slot level max on text
+    if result['success']:
+        if result['is_crit']:
+            f = f'**CRIT!** {c.name} instantly and easily identifies this spell!'
+        else:
+            f = f'{c.name} successfully identifies this spell!'
+        f += f'|:sparkles: *Spell: {spell["name"]}*'
+        output.fields.append(f)
+        output.fields.append(f'Can you concentrate on this spell...|...while the students analyze its effects?\nUse `{COMMAND} concentrate` to attempt!')
+        set_next_expected_stage(result['next_stage'], spell_id, result['is_crit'])
+
+        output['img'] = spell['img']
+    else:
+        output.fields.append(f'{c.name} was not able to identify what spell this was...|Better luck next time!')
+        clear_expected_stage()
+
+        output['thumb'] = image
+
+    dump_stats(stats)
+    return 0
+
+if chosen_action == 'concentrate':
+    c = character()
+    output['title'] = f'{c.name} attempts to concentrate on {spell["name"]}!'
+
+    result = do_concentrate(stats, spell, last_stage_was_crit)
+
+    f = f'Is {c.name} able to hold concentration on {spell["name"]}?|'
+    f += f'**Concentration check:** {result["roll"].full}\n{SL if result["success"] else FL}'
+    output.fields.append(f)
+
+    if result['success']:
+        output['img'] = spell['img']
+        output.fields.append(f'You gained: {result["prizes_list"]}.|They have been added to your "Research" bag!')
+    else:
+        output['img'] = randchoice(RESEARCH_IMAGES)
+        output.fields.append(f'You lost concentration and your group was not able to fully learn about this spell...|Better luck next time!')
+
+    clear_expected_stage()
+    dump_stats(stats)
+    return 0
+
+dump_stats(stats)
+</drac2>
+-title "{{output['title']}}"
+{{f'-image "{output["img"]}"' if output["img"] else ""}}
+{{f'-desc "{output["desc"]}"' if output["desc"] else ""}}
+{{f'-thumb "{output["thumb"]}"' if output["thumb"] else ""}}
+{{f'-color "{output["color"]}"' if output["color"] else ""}}
+{{f'-footer "{output["footer"]}"' if output["footer"] else ""}}
+{{''.join(['-f "' + field + '"\n' for field in output['fields']]) if len(output['fields']) > 0 else ''}}

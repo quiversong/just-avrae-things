@@ -234,7 +234,7 @@ def do_explore_biome(stats, biome, quick_mode = False):
     if prey_type == PREY_TYPES.ANIMAL:
         prey_roll = roll('1d100')
         biome_animals = [(k, v) for k, v in biome['animals'].items()]
-        prey_id = [k for k, v in biome_animals if (a_roll == v[0] if len(v) == 1 else prey_roll >= v[0] and prey_roll <= v[1])][0]
+        prey_id = [k for k, v in biome_animals if (prey_roll == v[0] if len(v) == 1 else prey_roll >= v[0] and prey_roll <= v[1])][0]
         prey = get_prey_data(prey_type, prey_id)
     else:
         prey_list = biome['dragons'] if prey_type == PREY_TYPES.DRAGON else biome['mythical'] if prey_type == PREY_TYPES.MYTHICAL else None
