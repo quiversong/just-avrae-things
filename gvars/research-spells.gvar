@@ -494,7 +494,7 @@
   "conc_dc": 2,
   "tokens": 12,
   "prizes": [{"name": "Stamp [Alchemy] (4gp)", "qt": 2}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829808172172574740/SeaTurtle.jpeg"
+  "img": "https://cdn.discordapp.com/attachments/855908840633270282/1183571196508393572/spell-3-beaconofhope.jpeg?ex=6588d192&is=65765c92&hm=c50126eec3b4ea59baf92de1a278dda1a4a7f2415a1775502f97cd4ecf2f1aba&"
 },
 {
   "id": "call_lightning",
@@ -506,7 +506,7 @@
   "conc_dc": 10,
   "tokens": 1,
   "prizes": [{"name": "Stamp [Magical Artifact] (16gp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813627477426256/Alligator.jpg"
+  "img": "https://cdn.discordapp.com/attachments/855908840633270282/1183571162425471036/spell-3-calllightning.jpeg?ex=6588d18a&is=65765c8a&hm=b6fc4e6224ce41ed81de2f4e6538b790c43443a7dd055b1816d9e4eaf0e43b7e&"
 },
 {
   "id": "conjure_animals",
@@ -518,7 +518,7 @@
   "conc_dc": 13,
   "tokens": 6,
   "prizes": [{"name": "Stamp [Magical Artifact] (16gp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829810392946442240/Basilisk.jpeg"
+  "img": "https://cdn.discordapp.com/attachments/855908840633270282/1183571162714873946/spell-3-conjureanimals.jpeg?ex=6588d18a&is=65765c8a&hm=a4f231a4f5d7ab3d399c07b9a45b2b7a187d8456998eccc33bb0b7cc0cd55c05&"
 },
 {
   "id": "fireball",
@@ -530,7 +530,7 @@
   "conc_dc": 12,
   "tokens": 6,
   "prizes": [{"name": "Stamp [Magical Artifact] (16gp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829807499762335794/Crocodile.jpg"
+  "img": "https://cdn.discordapp.com/attachments/855908840633270282/1183571163025248342/spell-3-fireball.jpeg?ex=6588d18a&is=65765c8a&hm=78a1dab76207bf631f22908ea7fada08f7ce043f2cea4603d8e7a5113f5a155e&"
 },
 {
   "id": "haste",
@@ -542,7 +542,7 @@
   "conc_dc": 9,
   "tokens": 1,
   "prizes": [{"name": "Stamp [Magical Artifact] (16gp)", "qt": 1},{"name": "Stamp [Scroll] (8gp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813196160106537/SnowLeopard.jpg"
+  "img": "https://cdn.discordapp.com/attachments/855908840633270282/1183571163327246346/spell-3-haste.jpeg?ex=6588d18b&is=65765c8b&hm=1fcda0f2ac74f43d6b9acd76e1aaf3381999fa4bfc8c1392a8d07cb7fc299069&"
 },
 {
   "id": "hypnotic_pattern",
@@ -554,7 +554,7 @@
   "conc_dc": 7,
   "tokens": 4,
   "prizes": [{"name": "Stamp [Magical Artifact] (16gp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813058447998976/Goat.png"
+  "img": "https://cdn.discordapp.com/attachments/855908840633270282/1183571163641815221/spell-3-hypnoticpattern.jpeg?ex=6588d18b&is=65765c8b&hm=b6abcca88302d7a00d70cf307fdfcb14b34441b7ed1734bbe87f660317b0ab9f&"
 },
 {
   "id": "revivify",
@@ -566,7 +566,7 @@
   "conc_dc": 6,
   "tokens": 2,
   "prizes": [{"name": "Stamp [Magical Artifact] (16gp)", "qt": 1},{"name": "Stamp [Alchemy] (4gp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813531917418496/Yak.jpg"
+  "img": "https://cdn.discordapp.com/attachments/855908840633270282/1183571164103184465/spell-3-revivify.jpeg?ex=6588d18b&is=65765c8b&hm=b17883075c6adc88fb75fa6e9dba9ba20ec691f0440d4b925f79a409e99496b5&"
 },
 {
   "id": "spirit_guardians",
@@ -578,7 +578,7 @@
   "conc_dc": 12,
   "tokens": 5,
   "prizes": [{"name": "Stamp [Magical Artifact] (16gp)", "qt": 1},{"name": "Stamp [Alchemy] (4gp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829813148466544721/Roc.jpeg"
+  "img": "https://cdn.discordapp.com/attachments/855908840633270282/1183571164405182545/spell-3-spiritguardians.jpeg?ex=6588d18b&is=65765c8b&hm=5aff8a4afc0b78393ef6e782616e8a6b916054f0daebf161c2c996bbad0ac612&"
 },
 {
   "id": "banishment",
@@ -590,7 +590,7 @@
   "conc_dc": 27,
   "tokens": 5,
   "prizes": [{"name": "Stamp [Magical Artifact] (16gp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812876021596170/Cockatrice.jpeg"
+  "img": "https://cdn.discordapp.com/attachments/855908840633270282/1183571164702974033/spell-4-banishment.jpeg?ex=6588d18b&is=65765c8b&hm=57763384ce45142f0664c7c94e53412d071f9e99fdb2047565e7d45955088c43&"
 },
 {
   "id": "conjure_woodland_beings",
@@ -602,7 +602,7 @@
   "conc_dc": 30,
   "tokens": 6,
   "prizes": [{"name": "Stamp [Magical Artifact] (16gp)", "qt": 1},{"name": "Stamp [Scroll] (8gp)", "qt": 1}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829807857263968296/Griffon.jpg"
+  "img": "https://cdn.discordapp.com/attachments/855908840633270282/1183571165034319882/spell-4-conjurewoodlandbeings.jpeg?ex=6588d18b&is=65765c8b&hm=c49be09d2cc4c3f8b510de6e72cd99c5b2e483514fe696d29ee7a8cac6abcd50&"
 },
 {
   "id": "death_ward",
@@ -614,7 +614,7 @@
   "conc_dc": 7,
   "tokens": 2,
   "prizes": [{"name": "Stamp [Magical Artifact] (16gp)", "qt": 2}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829811972408344656/Bison.jpeg"
+  "img": "https://cdn.discordapp.com/attachments/855908840633270282/1183571165336318003/spell-4-deathward.jpeg?ex=6588d18b&is=65765c8b&hm=0e0e7dce972b3f3bc0d1a67fb8eedf72ec64afe209d37f1e971fbc659ae5cbaa&"
 },
 {
   "id": "polymorph",
@@ -626,7 +626,7 @@
   "conc_dc": 10,
   "tokens": 2,
   "prizes": [{"name": "Stamp [Magical Artifact] (16gp)", "qt": 2}],
-  "img": "https://cdn.discordapp.com/attachments/827581981452795975/827944154789183508/unknown.png"
+  "img": "https://cdn.discordapp.com/attachments/855908840633270282/1183571195136847902/spell-4-polymorph.jpeg?ex=6588d192&is=65765c92&hm=dda53eaf354c07391aa637ce96c00d734dbbb1c3317261648b3ac163f6baa113&"
 },
 {
   "id": "animate_objects",
@@ -637,7 +637,7 @@
   "ability_dc": 14,
   "conc_dc": 12,
   "tokens": 70,
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812276881653760/Leopard.jpg"
+  "img": "https://cdn.discordapp.com/attachments/855908840633270282/1183571195455623188/spell-5-animateobjects.jpeg?ex=6588d192&is=65765c92&hm=8ad5cce5cf7994618e84325cd3bf000366e70fdcbd338e398d6ba79ebe8d2fbc&"
 },
 {
   "id": "greater_restoration",
@@ -649,7 +649,7 @@
   "conc_dc": 10,
   "tokens": 6,
   "prizes": [{"name": "Stamp [Scroll] (8gp)", "qt": 2},{"name": "Stamp [Alchemy] (4gp)", "qt": 2}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829812465344577546/Owlbear.jpg"
+  "img": "https://cdn.discordapp.com/attachments/855908840633270282/1183571195774373908/spell-5-greaterrestoration.jpeg?ex=6588d192&is=65765c92&hm=c6a60473e8bc18dff8285233169cc8599630b3892ef380e42d8b2dc46b247735&"
 },
 {
   "id": "wrath_of_nature",
@@ -661,7 +661,7 @@
   "conc_dc": 12,
   "tokens": 14,
   "prizes": [{"name": "Stamp [Magical Artifact] (16gp)", "qt": 2}],
-  "img": "https://cdn.discordapp.com/attachments/829536903140343828/829810701975027752/MoutainLion.jpg"
+  "img": "https://cdn.discordapp.com/attachments/855908840633270282/1183571196181229708/spell-5-wrathofnature.jpeg?ex=6588d192&is=65765c92&hm=158e5e83f756b5fc1a64b5d26a403cffd00a0f922af277f2a2d23f23bbdde239&"
 },
 {
   "id": "chain_lightning",
