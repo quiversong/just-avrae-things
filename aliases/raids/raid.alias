@@ -45,7 +45,7 @@ def next_round(args):
 
 def join_init(args):
     cname = character().name
-    command = 'echo Welcome to An Infernal Promise!!\n'
+    command = 'echo Welcome to A New Seventra Raid!!\n'
     command += f'!init join\n'
     command += f'!init effect "{cname}" "Raid Status" -desc "Waiting for turn"\n'
     command += f'!echo Take your turn whenever you are ready, make sure to RP! Type `!raid next` when you are done.\n**Do not type `!init next`**!'
@@ -65,10 +65,14 @@ def pass_init(args):
 
 def ping_waiting(args):
     message = ' '.join(args[1:len(args)]) + '\n\n'
+    controllers = []
     for c in combat().combatants:
-        effect = ([e for e in c.effects if e.name == 'Raid Status'] + [None])[0]
-        if effect != None and 'waiting' in effect.desc.lower():
-            message += f'<@{c.controller}> '
+        if c.name != 'DM' and c.name != 'DM2':
+            effect = ([e for e in c.effects if e.name == 'Raid Status'] + [None])[0]
+            if effect == None or (effect != None and 'waiting' in effect.desc.lower()):
+                if not(c.controller in controllers):
+                    controllers.append(c.controller)
+                    message += f'<@{c.controller}> '
     return f'!echo {message}'
 
 def list_waiting(args):
