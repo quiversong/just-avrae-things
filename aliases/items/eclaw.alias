@@ -1,0 +1,40 @@
+embed
+<drac2>
+VERSION = '1.0'
+
+using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
+
+args = &ARGS&
+pargs = argparse(args)
+color = 'a835f0'
+fields = []
+t = f'{character().name} uses their Eldritch Maul!'
+
+img = None
+thumb = image
+sl, fl = "**Success!**", "**Failure!**"
+
+if combat() == None or combat().me == None:
+    fields.append('Oops!|The effects of Eldritch Maul are too fleeting to use out of combat! Make sure you are in combat and that you have the correct !char selected.')
+    return 1
+
+combatant = combat().me
+character().create_cc_nx('Eldritch Maul', 0, 1, 'long', 'bubble')
+
+if character().get_cc('Eldritch Maul') == 0:
+    fields.append('Oops!You do not have any more uses of Eldritch Maul today!')
+    return 1
+
+desc = 'Melee attacks with a weapon or an unarmed strike can reach a target up to 15 feet away from you, as inky tendrils launch toward the target. In addition, melee attacks deal an extra 1d6 force damage on a hit.'
+combatant.add_effect('Eldritch Maul', duration = 10, desc = desc, passive_effects = { "damage_bonus": "1d6[force]" })
+
+fields.append(f'Eldritch Maul Activated!|{desc}\n\nDamage bonus will be added to attacks automatically!')
+footer = 'Items Collection: Eldritch Claw Tattoo - Eldritch Maul | Created by quiversong#2772'
+
+</drac2>
+-title "{{t}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
