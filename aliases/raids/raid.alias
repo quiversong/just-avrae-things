@@ -30,8 +30,11 @@ def next_round(args):
     message += "When you finished taking your turn, type `!raid next` to signalize that you are done.\n"
     message += "**Do not type `!init next`**!\n\n"
 
+    controllers = []
     for c in combat().combatants:
-        message += f"<@{c.controller}> "
+        if not(c.controller in controllers):
+            controllers.append(c.controller)
+            message += f"<@{c.controller}> "
         effect = ([e for e in c.effects if e.name == 'Raid Status'] + [None])[0]
         if effect != None:
             c.remove_effect('Raid Status')
