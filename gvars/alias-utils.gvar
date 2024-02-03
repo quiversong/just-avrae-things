@@ -178,3 +178,32 @@ def build_embed(title, fields, thumb = None, image = None, footer = None, desc =
     if desc != None:
         desc += f" -desc '{desc}'"
     return cmd
+
+def format_date_time(unix_time):
+    def is_leap(year):
+      return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)
+    days = unix_time / (24 * 60 * 60)
+    year = 1970
+    while days >= 365:
+        if is_leap(year):
+            if days >= 366:
+                days -= 366
+        else:
+            days -= 365
+        year += 1
+    days_in_months = [31, 29 if is_leap(year) else 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    month = 0
+    while days > days_in_months[month]:
+        days -= days_in_months[month]
+        month += 1
+    extra_time = unix_time % (24 * 60 * 60)
+    hours = extra_time / 3600
+    minutes = extra_time % 3600 / 60
+
+    month = month + 1
+    days = floor(days + 1)
+    hours = floor(hours)
+    minutes = floor(minutes)
+
+    return f"{year}/{month}/{days} {hours}:{minutes} (UTC)"
+
