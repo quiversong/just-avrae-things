@@ -1,6 +1,5 @@
 embed <drac2>
 using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
-
 VERSION = '1.0'
 IMG = 'https://media.discordapp.net/attachments/855908840633270282/1203224707881504798/DnD-Town-Market-Place-Forum-Header.jpg'
 
@@ -13,12 +12,19 @@ output = {
     'footer': f'!mg - {VERSION}'
 }
 
-f = "Need help from the Merchant's Guild?|"
-f += "Commands available:\n"
-f += "`!mg paydues`: to pay your weekly dues.\n"
-f += "`!mg ranks`: to view all ranks available.\n"
-f += "`!mg status`: to see your membership status, current rank, and total contributions to the faction.\n"
-f += "\nTo use your faction benefits, add `mgbonus` to a downtime check you perform. You can gain that bonus once per IRL day."
+RANKS = [
+    ['Initiate', 0, '1d4'],
+    ['Rank 1', 50, '1d4 + 1'],
+    ['Rank 2', 120, '1d6'],
+    ['Rank 3', 250, '1d6 + 1'],
+    ['Rank 4', 520, '1d6 + 2'],
+    ['Rank 5', 1040, '1d8 + 2']
+]
+
+f = "Merchant's Guild Ranks|"
+for r in RANKS:
+    f += f"{r[0]}: {r[1]}gp contributed in fees. Downtime bonus: {r[2]}\n"
+f += "\n*Contributions are limited to once per IRL week."
 output['fields'].append(f)
 
 output['img'] = IMG

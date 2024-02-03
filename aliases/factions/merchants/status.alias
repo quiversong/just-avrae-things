@@ -1,0 +1,63 @@
+embed <drac2>
+using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
+VERSION = '1.0'
+
+args = &ARGS&
+pargs = argparse(args)
+VAR = "__mm__pdt__"
+ACC_VAR = "__mm__accp__"
+IMG = 'https://media.discordapp.net/attachments/855908840633270282/1203224707881504798/DnD-Town-Market-Place-Forum-Header.jpg'
+
+COST = 15
+RANKS = [
+    ['Initiate', 0, '1d4'],
+    ['Rank 1', 50, '1d4 + 1'],
+    ['Rank 2', 120, '1d6'],
+    ['Rank 3', 250, '1d6 + 1'],
+    ['Rank 4', 520, '1d6 + 2'],
+    ['Rank 5', 1040, '1d8 + 2']
+]
+
+output = {
+    'title': "Seventra Merchants' Guild",
+    'fields': [],
+    'footer': f"Seventra Merchant's Guild - {VERSION} - !mg"
+}
+
+output['img'] = IMG
+
+ch = character()
+if not VAR in ch.cvars or not ACC_VAR in ch.cvars:
+    output['fields'].append("Membership Not Found!|It looks like you do not have a membership with the Merchant's Guild!")
+    return 1
+
+now = time()
+expiry_time = float(ch.cvars[VAR])
+contributed_amount = int(ch.cvars[ACC_VAR])
+membership_active = now < expiry_time
+current_rank = RANKS[0]
+
+for r in RANKS:
+    if contributed_amount >= r[1]:
+        current_rank = r
+
+if membership_active:
+    f = f"Membership Status|Your membership is active until **{utils.format_date_time(expiry_time)}**"
+    output['fields'].append(f)
+else:
+    f = f"Membership Status|Your membership expired on **{utils.format_date_time(expiry_time)}**"
+    output['fields'].append(f)
+
+f = f"Contributions|You have contributed a total of {contributed_amount} to the Guild."
+output['fields'].append(f)
+
+f = f"Rank|Your current rank is {current_rank[0]} and you gain a daily bonus of `{current_rank[2]}` to your downtime rolls."
+output['fields'].append(f)
+</drac2>
+-title "{{output['title']}}"
+{{f'-image "{output["img"]}"' if 'img' in output else ""}}
+{{f'-desc "{output["desc"]}"' if 'desc' in output else ""}}
+{{f'-thumb "{output["thumb"]}"' if 'thumb' in output else ""}}
+{{f'-color "{output["color"]}"' if 'color' in output else ""}}
+{{f'-footer "{output["footer"]}"' if 'footer' in output else ""}}
+{{''.join(['-f "' + field + '"\n' for field in output['fields']]) if len(output['fields']) > 0 else ''}}
