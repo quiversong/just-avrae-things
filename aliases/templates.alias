@@ -1,0 +1,45 @@
+embed <drac2>
+VERSION = '1.0'
+
+using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
+
+title, img, thumb, desc, color, footer = None, None, None, None, None, None
+fields = []
+
+args = &ARGS&
+pargs = argparse(args)
+c = character()
+c_first_name = c.name.split(' ')[0]
+cv = c.cvars
+cs = c.skills
+
+</drac2>
+-title "{{title}}"
+{{f'-image "{img}"' if img else ""}}
+{{f'-thumb "{thumb}"' if thumb else ""}}
+{{f'-desc "{desc}"' if desc else ""}}
+{{f'-color "{color}"' if color else ""}}
+{{f'-footer "{footer}"' if footer else ""}}
+{{''.join(['-f "' + field + '"\n' for field in fields]) if len(fields) > 0 else ''}}
+
+embed <drac2>
+using(utils = "efdbdcfa-1fe0-4976-bde0-04c368545d3d")
+VERSION = '1.0'
+
+args = &ARGS&
+pargs = argparse(args)
+
+output = {
+    'title': "Seventra Merchants' Guild"
+    'fiels': [],
+    'footer': f'!mg - {VERSION}'
+}
+
+</drac2>
+-title "{{output['title']}}"
+{{f'-image "{output["img"]}"' if output["img"] else ""}}
+{{f'-desc "{output["desc"]}"' if output["desc"] else ""}}
+{{f'-thumb "{output["thumb"]}"' if output["thumb"] else ""}}
+{{f'-color "{output["color"]}"' if output["color"] else ""}}
+{{f'-footer "{output["footer"]}"' if output["footer"] else ""}}
+{{''.join(['-f "' + field + '"\n' for field in output['fields']]) if len(output['fields']) > 0 else ''}}
