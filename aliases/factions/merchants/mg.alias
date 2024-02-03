@@ -10,7 +10,7 @@ pargs = argparse(args)
 output = {
     'title': "Seventra Merchants' Guild",
     'fields': [],
-    'footer': f'!mg - {VERSION}'
+    'footer': f"Seventra Merchant's Guild - {VERSION} - !mg"
 }
 
 f = "Need help from the Merchant's Guild?|"
